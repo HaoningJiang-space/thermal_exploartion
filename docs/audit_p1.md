@@ -13,3 +13,5 @@ DRAM 近似缺少 tRRD/tFAW、周期级 ACT/PRE/Row conflict scheduler。Mesh �
 HiTS 原方程残差、互易性及 direct 一致性验证数值求解，不验证封装材料、功率或硬件成本。此次不修改 HiTS。
 
 Compute–Memory Fabric 分支正式关闭。修正对照旨在明确既有证据边界，不能据此恢复该分支。
+
+已完成重跑和公共 CSV 复核，见 [修正结果](../results/audit-p1-2026-10-09/findings.md)。

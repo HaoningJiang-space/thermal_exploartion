@@ -59,3 +59,5 @@ v 为一次 column 命令传输的有效字节。每个 Bank Group 的必要上�
 
 运行：`python -m thermal_exploration.memory_audit --output outputs/memory-audit`。
 HiTS CPU 校核仍在原 Linux 环境执行，HiTS 源码不变。
+
+已完成的示例结果和全部证据见 [审计报告](../results/memory-audit-2026-10-09/findings.md)。

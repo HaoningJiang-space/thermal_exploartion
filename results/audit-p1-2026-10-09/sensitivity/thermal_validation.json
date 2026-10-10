@@ -1,0 +1,974 @@
+[
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "fbcd85691dbf61bafe09b83fca32e33d77ea15a86e93b2c40b5b07318719e9c4",
+    "hits_max_residual": 7.772543336270854e-12,
+    "hits_vs_direct_max_abs_k_per_w": 8.413270080609436e-13,
+    "max_original_residual": 2.8679281172117044e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.8134999999999986,
+        0.6784999999999968
+      ],
+      [
+        0.6784999999999987,
+        0.6784999999999968
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7459999999999977,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "vertical_scale=0.1"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "7b16e1e1f866d3979ce7afd4a7a7f48a0101165588543190988dfaea44736f51",
+    "hits_max_residual": 5.2945465289758245e-12,
+    "hits_vs_direct_max_abs_k_per_w": 6.20503648463e-13,
+    "max_original_residual": 2.1958823648304815e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.6919999999999994,
+        0.6784999999999973
+      ],
+      [
+        0.6784999999999994,
+        0.6784999999999973
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6852499999999984,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "vertical_scale=1.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "4ed78b99fe8a2705efda08d0d8ecb5aab015c5deeb9ea4fe4ebeda9b81a3a06f",
+    "hits_max_residual": 3.0113729839423455e-12,
+    "hits_vs_direct_max_abs_k_per_w": 4.4997339188057595e-13,
+    "max_original_residual": 1.349836908914881e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.6798499999999776,
+        0.6784999999999606
+      ],
+      [
+        0.6784999999999776,
+        0.6784999999999607
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6791749999999691,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "vertical_scale=10.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "7b16e1e1f866d3979ce7afd4a7a7f48a0101165588543190988dfaea44736f51",
+    "hits_max_residual": 5.2945465289758245e-12,
+    "hits_vs_direct_max_abs_k_per_w": 6.20503648463e-13,
+    "max_original_residual": 2.1958823648304815e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.6919999999999994,
+        0.6784999999999973
+      ],
+      [
+        0.6784999999999994,
+        0.6784999999999973
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6852499999999984,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "mesh_link_tb_s=0.0625"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "7b16e1e1f866d3979ce7afd4a7a7f48a0101165588543190988dfaea44736f51",
+    "hits_max_residual": 5.2945465289758245e-12,
+    "hits_vs_direct_max_abs_k_per_w": 6.20503648463e-13,
+    "max_original_residual": 2.1958823648304815e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.6919999999999994,
+        0.6784999999999973
+      ],
+      [
+        0.6784999999999994,
+        0.6784999999999973
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6852499999999984,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "mesh_link_tb_s=0.25"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "7b16e1e1f866d3979ce7afd4a7a7f48a0101165588543190988dfaea44736f51",
+    "hits_max_residual": 5.2945465289758245e-12,
+    "hits_vs_direct_max_abs_k_per_w": 6.20503648463e-13,
+    "max_original_residual": 2.1958823648304815e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.6919999999999994,
+        0.6784999999999973
+      ],
+      [
+        0.6784999999999994,
+        0.6784999999999973
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6852499999999984,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "mesh_link_tb_s=1.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "7b16e1e1f866d3979ce7afd4a7a7f48a0101165588543190988dfaea44736f51",
+    "hits_max_residual": 5.2945465289758245e-12,
+    "hits_vs_direct_max_abs_k_per_w": 6.20503648463e-13,
+    "max_original_residual": 2.1958823648304815e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.6919999999999994,
+        0.6784999999999973
+      ],
+      [
+        0.6784999999999994,
+        0.6784999999999973
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6852499999999984,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "mesh_pj_per_byte_hop=0.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "7b16e1e1f866d3979ce7afd4a7a7f48a0101165588543190988dfaea44736f51",
+    "hits_max_residual": 5.2945465289758245e-12,
+    "hits_vs_direct_max_abs_k_per_w": 6.20503648463e-13,
+    "max_original_residual": 2.1958823648304815e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.6919999999999994,
+        0.6784999999999973
+      ],
+      [
+        0.6784999999999994,
+        0.6784999999999973
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6852499999999984,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "mesh_pj_per_byte_hop=0.5"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "7b16e1e1f866d3979ce7afd4a7a7f48a0101165588543190988dfaea44736f51",
+    "hits_max_residual": 5.2945465289758245e-12,
+    "hits_vs_direct_max_abs_k_per_w": 6.20503648463e-13,
+    "max_original_residual": 2.1958823648304815e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.6919999999999994,
+        0.6784999999999973
+      ],
+      [
+        0.6784999999999994,
+        0.6784999999999973
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6852499999999984,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "mesh_pj_per_byte_hop=2.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "7b16e1e1f866d3979ce7afd4a7a7f48a0101165588543190988dfaea44736f51",
+    "hits_max_residual": 5.2945465289758245e-12,
+    "hits_vs_direct_max_abs_k_per_w": 6.20503648463e-13,
+    "max_original_residual": 2.1958823648304815e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.6919999999999994,
+        0.6784999999999973
+      ],
+      [
+        0.6784999999999994,
+        0.6784999999999973
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6852499999999984,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "fabric_area_fraction=0.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "7b16e1e1f866d3979ce7afd4a7a7f48a0101165588543190988dfaea44736f51",
+    "hits_max_residual": 5.2945465289758245e-12,
+    "hits_vs_direct_max_abs_k_per_w": 6.20503648463e-13,
+    "max_original_residual": 2.1958823648304815e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.6919999999999994,
+        0.6784999999999973
+      ],
+      [
+        0.6784999999999994,
+        0.6784999999999973
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6852499999999984,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "fabric_area_fraction=0.03"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "7b16e1e1f866d3979ce7afd4a7a7f48a0101165588543190988dfaea44736f51",
+    "hits_max_residual": 5.2945465289758245e-12,
+    "hits_vs_direct_max_abs_k_per_w": 6.20503648463e-13,
+    "max_original_residual": 2.1958823648304815e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.6919999999999994,
+        0.6784999999999973
+      ],
+      [
+        0.6784999999999994,
+        0.6784999999999973
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6852499999999984,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "fabric_area_fraction=0.1"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "7b16e1e1f866d3979ce7afd4a7a7f48a0101165588543190988dfaea44736f51",
+    "hits_max_residual": 5.2945465289758245e-12,
+    "hits_vs_direct_max_abs_k_per_w": 6.20503648463e-13,
+    "max_original_residual": 2.1958823648304815e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.6919999999999994,
+        0.6784999999999973
+      ],
+      [
+        0.6784999999999994,
+        0.6784999999999973
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6852499999999984,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "dram_pj_per_byte=3.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "7b16e1e1f866d3979ce7afd4a7a7f48a0101165588543190988dfaea44736f51",
+    "hits_max_residual": 5.2945465289758245e-12,
+    "hits_vs_direct_max_abs_k_per_w": 6.20503648463e-13,
+    "max_original_residual": 2.1958823648304815e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.6919999999999994,
+        0.6784999999999973
+      ],
+      [
+        0.6784999999999994,
+        0.6784999999999973
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6852499999999984,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "dram_pj_per_byte=12.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "7b16e1e1f866d3979ce7afd4a7a7f48a0101165588543190988dfaea44736f51",
+    "hits_max_residual": 5.2945465289758245e-12,
+    "hits_vs_direct_max_abs_k_per_w": 6.20503648463e-13,
+    "max_original_residual": 2.1958823648304815e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.6919999999999994,
+        0.6784999999999973
+      ],
+      [
+        0.6784999999999994,
+        0.6784999999999973
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6852499999999984,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "dram_pj_per_byte=24.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "7b16e1e1f866d3979ce7afd4a7a7f48a0101165588543190988dfaea44736f51",
+    "hits_max_residual": 5.2945465289758245e-12,
+    "hits_vs_direct_max_abs_k_per_w": 6.20503648463e-13,
+    "max_original_residual": 2.1958823648304815e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.6919999999999994,
+        0.6784999999999973
+      ],
+      [
+        0.6784999999999994,
+        0.6784999999999973
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6852499999999984,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "cooling_gradient=0.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "b36ea2ea7d7d9668ef4c63e7d183acaf822fd1dfe002755d1b6cd377bce3aebb",
+    "hits_max_residual": 9.485636281171415e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.0100253966527362e-11,
+    "max_original_residual": 3.4028335704761048e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7013288972074176,
+        0.6878288972074157
+      ],
+      [
+        0.687828897207417,
+        0.6878288972074155
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6945788972074167,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "cooling_gradient=0.3"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "4a3d52048e456b666326b2fd94294d708d6ef27bf13918a6c1f223e8e19d5ce2",
+    "hits_max_residual": 7.416397908403094e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.2767009671676988e-11,
+    "max_original_residual": 3.1289693058766943e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7311829638814182,
+        0.717682963881416
+      ],
+      [
+        0.7176829638814156,
+        0.7176829638814148
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7244329638814171,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "uniform",
+    "variant": "cooling_gradient=0.6"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "43140350d2a79629cf8d6a845c1a6345fe03821999f920a39ae1db3ec8b55517",
+    "hits_max_residual": 9.930465379552327e-12,
+    "hits_vs_direct_max_abs_k_per_w": 2.8557212150559508e-11,
+    "max_original_residual": 5.1310067306076235e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.8526850373354457,
+        0.7176850373355059
+      ],
+      [
+        0.7176850373353504,
+        0.7176850373354418
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7851850373354758,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "vertical_scale=0.1"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "4a3d52048e456b666326b2fd94294d708d6ef27bf13918a6c1f223e8e19d5ce2",
+    "hits_max_residual": 7.416397908403094e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.2767009671676988e-11,
+    "max_original_residual": 3.1289693058766943e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7311829638814182,
+        0.717682963881416
+      ],
+      [
+        0.7176829638814156,
+        0.7176829638814148
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7244329638814171,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "vertical_scale=1.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "c7cbc98b4b2c6d3c0ca7d2b46e1a1bc4b9136d3452ce1429ce32f06f735f6466",
+    "hits_max_residual": 9.509315266997972e-12,
+    "hits_vs_direct_max_abs_k_per_w": 2.7348401321347637e-11,
+    "max_original_residual": 4.242384221697648e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7190327551459225,
+        0.7176827551459766
+      ],
+      [
+        0.7176827551459279,
+        0.7176827551459808
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7183577551459495,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "vertical_scale=10.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "4a3d52048e456b666326b2fd94294d708d6ef27bf13918a6c1f223e8e19d5ce2",
+    "hits_max_residual": 7.416397908403094e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.2767009671676988e-11,
+    "max_original_residual": 3.1289693058766943e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7311829638814182,
+        0.717682963881416
+      ],
+      [
+        0.7176829638814156,
+        0.7176829638814148
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7244329638814171,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "mesh_link_tb_s=0.0625"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "4a3d52048e456b666326b2fd94294d708d6ef27bf13918a6c1f223e8e19d5ce2",
+    "hits_max_residual": 7.416397908403094e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.2767009671676988e-11,
+    "max_original_residual": 3.1289693058766943e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7311829638814182,
+        0.717682963881416
+      ],
+      [
+        0.7176829638814156,
+        0.7176829638814148
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7244329638814171,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "mesh_link_tb_s=0.25"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "4a3d52048e456b666326b2fd94294d708d6ef27bf13918a6c1f223e8e19d5ce2",
+    "hits_max_residual": 7.416397908403094e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.2767009671676988e-11,
+    "max_original_residual": 3.1289693058766943e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7311829638814182,
+        0.717682963881416
+      ],
+      [
+        0.7176829638814156,
+        0.7176829638814148
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7244329638814171,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "mesh_link_tb_s=1.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "4a3d52048e456b666326b2fd94294d708d6ef27bf13918a6c1f223e8e19d5ce2",
+    "hits_max_residual": 7.416397908403094e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.2767009671676988e-11,
+    "max_original_residual": 3.1289693058766943e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7311829638814182,
+        0.717682963881416
+      ],
+      [
+        0.7176829638814156,
+        0.7176829638814148
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7244329638814171,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "mesh_pj_per_byte_hop=0.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "4a3d52048e456b666326b2fd94294d708d6ef27bf13918a6c1f223e8e19d5ce2",
+    "hits_max_residual": 7.416397908403094e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.2767009671676988e-11,
+    "max_original_residual": 3.1289693058766943e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7311829638814182,
+        0.717682963881416
+      ],
+      [
+        0.7176829638814156,
+        0.7176829638814148
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7244329638814171,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "mesh_pj_per_byte_hop=0.5"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "4a3d52048e456b666326b2fd94294d708d6ef27bf13918a6c1f223e8e19d5ce2",
+    "hits_max_residual": 7.416397908403094e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.2767009671676988e-11,
+    "max_original_residual": 3.1289693058766943e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7311829638814182,
+        0.717682963881416
+      ],
+      [
+        0.7176829638814156,
+        0.7176829638814148
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7244329638814171,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "mesh_pj_per_byte_hop=2.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "4a3d52048e456b666326b2fd94294d708d6ef27bf13918a6c1f223e8e19d5ce2",
+    "hits_max_residual": 7.416397908403094e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.2767009671676988e-11,
+    "max_original_residual": 3.1289693058766943e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7311829638814182,
+        0.717682963881416
+      ],
+      [
+        0.7176829638814156,
+        0.7176829638814148
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7244329638814171,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "fabric_area_fraction=0.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "4a3d52048e456b666326b2fd94294d708d6ef27bf13918a6c1f223e8e19d5ce2",
+    "hits_max_residual": 7.416397908403094e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.2767009671676988e-11,
+    "max_original_residual": 3.1289693058766943e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7311829638814182,
+        0.717682963881416
+      ],
+      [
+        0.7176829638814156,
+        0.7176829638814148
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7244329638814171,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "fabric_area_fraction=0.03"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "4a3d52048e456b666326b2fd94294d708d6ef27bf13918a6c1f223e8e19d5ce2",
+    "hits_max_residual": 7.416397908403094e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.2767009671676988e-11,
+    "max_original_residual": 3.1289693058766943e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7311829638814182,
+        0.717682963881416
+      ],
+      [
+        0.7176829638814156,
+        0.7176829638814148
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7244329638814171,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "fabric_area_fraction=0.1"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "4a3d52048e456b666326b2fd94294d708d6ef27bf13918a6c1f223e8e19d5ce2",
+    "hits_max_residual": 7.416397908403094e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.2767009671676988e-11,
+    "max_original_residual": 3.1289693058766943e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7311829638814182,
+        0.717682963881416
+      ],
+      [
+        0.7176829638814156,
+        0.7176829638814148
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7244329638814171,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "dram_pj_per_byte=3.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "4a3d52048e456b666326b2fd94294d708d6ef27bf13918a6c1f223e8e19d5ce2",
+    "hits_max_residual": 7.416397908403094e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.2767009671676988e-11,
+    "max_original_residual": 3.1289693058766943e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7311829638814182,
+        0.717682963881416
+      ],
+      [
+        0.7176829638814156,
+        0.7176829638814148
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7244329638814171,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "dram_pj_per_byte=12.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "4a3d52048e456b666326b2fd94294d708d6ef27bf13918a6c1f223e8e19d5ce2",
+    "hits_max_residual": 7.416397908403094e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.2767009671676988e-11,
+    "max_original_residual": 3.1289693058766943e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7311829638814182,
+        0.717682963881416
+      ],
+      [
+        0.7176829638814156,
+        0.7176829638814148
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7244329638814171,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "dram_pj_per_byte=24.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "7b16e1e1f866d3979ce7afd4a7a7f48a0101165588543190988dfaea44736f51",
+    "hits_max_residual": 5.2945465289758245e-12,
+    "hits_vs_direct_max_abs_k_per_w": 6.20503648463e-13,
+    "max_original_residual": 2.1958823648304815e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.6919999999999994,
+        0.6784999999999973
+      ],
+      [
+        0.6784999999999994,
+        0.6784999999999973
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6852499999999984,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "cooling_gradient=0.0"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "b36ea2ea7d7d9668ef4c63e7d183acaf822fd1dfe002755d1b6cd377bce3aebb",
+    "hits_max_residual": 9.485636281171415e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.0100253966527362e-11,
+    "max_original_residual": 3.4028335704761048e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7013288972074176,
+        0.6878288972074157
+      ],
+      [
+        0.687828897207417,
+        0.6878288972074155
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.6945788972074167,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "cooling_gradient=0.3"
+  },
+  {
+    "backend": "hits",
+    "nodes": 48,
+    "equation_sha256": "4a3d52048e456b666326b2fd94294d708d6ef27bf13918a6c1f223e8e19d5ce2",
+    "hits_max_residual": 7.416397908403094e-12,
+    "hits_vs_direct_max_abs_k_per_w": 1.2767009671676988e-11,
+    "max_original_residual": 3.1289693058766943e-12,
+    "global_layer_resistance_k_per_w": [
+      [
+        0.7311829638814182,
+        0.717682963881416
+      ],
+      [
+        0.7176829638814156,
+        0.7176829638814148
+      ]
+    ],
+    "global_scalar_resistance_k_per_w": 0.7244329638814171,
+    "thermal_controls": {
+      "0": "T0",
+      "1": "T1_scalar",
+      "3": "T1_layer",
+      "2": "T2"
+    },
+    "scenario": "gradient_uniform",
+    "variant": "cooling_gradient=0.6"
+  }
+]

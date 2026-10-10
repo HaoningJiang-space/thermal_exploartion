@@ -1,0 +1,31 @@
+{
+  "schema_version": 2,
+  "thermal_controls": {
+    "0": "T0",
+    "1": "T1_scalar",
+    "3": "T1_layer",
+    "2": "T2"
+  },
+  "source_commit": "a69116b57cc80d5f3a332c7179f2115722286f45",
+  "source_dirty": false,
+  "python": "3.10.12 (main, Jul 29 2024, 16:56:48) [GCC 11.4.0]",
+  "platform": "Linux-6.8.0-40-generic-x86_64-with-glibc2.35",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "invocation": [
+    "python",
+    "-m",
+    "thermal_exploration.run",
+    "--thermal-backend",
+    "hits",
+    "--output",
+    "../audit-p1-pilot-a69116b"
+  ],
+  "started_utc": "2026-10-10T05:38:53.052103+00:00",
+  "config_sha256": "978ae2f3300d3724dbf3328a4bec410252d5d3abaf20ee17b1c21bd2789ae259",
+  "elapsed_s": 5.689203977584839,
+  "suite": "pilot",
+  "thermal_backend": "hits",
+  "model_scope": "uncalibrated, chip-scale, linear steady-state divisible-work relaxation",
+  "hits_commit": "c7f94d533cb663c2f098880e5ab333da9d83ff17"
+}

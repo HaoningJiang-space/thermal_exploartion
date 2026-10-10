@@ -102,3 +102,9 @@ G2 已完成：648 个设计点、864 个 LP。当前模型中，Shared 布局�
 P1 审计修正见 [docs/audit_p1.md](docs/audit_p1.md)。旧归档保留原始标量 T1 和旧标签，不能据此归因水平空间热机制。
 
 新阶段设计与运行：[HB–DRAM 内部必要上限审计](docs/memory_audit.md)。
+
+已完成 [P1 修正与逐点复现](results/audit-p1-2026-10-09/findings.md)：旧数值保持一致，58 个旧 B_candidate 全为固定布局信号，修正后 Gate 通过数为 0。
+
+[HB–DRAM 小型必要上限审计](results/memory-audit-2026-10-09/findings.md) 已完成 192 点、384 个 LP，35 项回归通过。
+满行/充分 Bank 并行的示例主要受热预算限制；小粒度示例受已知 ACT/PRE/domain 速率限制。
+这些是未校准的解析上限，尚未发现普通 Mapping/Tracker/SALP 之后仍未解决的 HB 特有瓶颈。

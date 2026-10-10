@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "source_commit": "a69116b57cc80d5f3a332c7179f2115722286f45",
+  "source_clean": true,
+  "local_regressions_passed": 29,
+  "linux_regressions_passed": 29,
+  "experiment_exit_code": 0,
+  "pilot_design_points": 240,
+  "sensitivity_design_points": 2880,
+  "g2_design_points": 864,
+  "total_lp_solves": 10512,
+  "architecture_gate_passes": 0,
+  "g2_migration_design_points": 288,
+  "g2_positive_migration_design_points": 0,
+  "g2_max_common_layout_time_loss": 0.012312537241644828,
+  "g2_max_constraint_violation": 3.25630536424093e-10,
+  "legacy_comparison": "replay_verification.json",
+  "figures_visually_checked": true,
+  "raw_archive_sha256": "1fe44868e8cd8e854a128240d9d1c41ab89d385ba1c860a7e91828b2d3daac71",
+  "claim_scope": "numerical replay and corrected controls; no physical calibration or complete execution semantics",
+  "public_credential_and_personal_path_scan": "PASS",
+  "git_diff_check_exit_code": 0
+}

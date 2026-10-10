@@ -1,0 +1,16 @@
+[
+  {
+    "backend": "independent modal linear-RC audit",
+    "minimum_time_constant_s": 0.00014906712842361393,
+    "maximum_time_constant_s": 0.895212023040975,
+    "modal_operator_relative_residual": 1.7689836662857645e-15,
+    "scenario": "uniform"
+  },
+  {
+    "backend": "independent modal linear-RC audit",
+    "minimum_time_constant_s": 0.00014906712842350484,
+    "maximum_time_constant_s": 0.9741721537268069,
+    "modal_operator_relative_residual": 1.4953982870201195e-15,
+    "scenario": "gradient"
+  }
+]

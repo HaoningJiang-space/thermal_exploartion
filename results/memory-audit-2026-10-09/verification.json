@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "source_commit": "effa961270b7aebd8832b21fcda2bf4dd1aed3bc",
+  "source_clean": true,
+  "local_regressions_passed": 35,
+  "linux_regressions_passed": 35,
+  "experiment_exit_code": 0,
+  "design_points": 192,
+  "lp_solves": 384,
+  "hits_unit_source_solves": 32,
+  "hits_max_original_relative_residual": 7.416397908403094e-12,
+  "hits_vs_direct_max_response_difference_k_per_w": 1.2767009671676988e-11,
+  "max_original_lp_violation": 1.4210854715202004e-13,
+  "act_pre_and_byte_power_accounting_verified": true,
+  "figures_visually_checked": true,
+  "raw_archive_sha256": "1a448757cca8e16d8f8346b4d7ff8299ccf95e6da061465380ce5e661cb4d783",
+  "new_HB_specific_bottleneck_established": false,
+  "scope": "illustrative necessary rate ceilings coupled to uncalibrated steady Local LP; no command-level simulation",
+  "public_credential_and_personal_path_scan": "PASS",
+  "git_diff_check_exit_code": 0
+}

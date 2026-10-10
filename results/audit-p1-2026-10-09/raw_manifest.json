@@ -1,0 +1,28 @@
+{
+  "pilot": {
+    "config.json": "2ca54e65944a542a7ad77df368824b9d96a6d2d77dc9c59b56392d712e3b0dcf",
+    "provenance.json": "b2d9191acae80c19678bb673882aa6fecbeb8816e91f4f8bbe36227b1c4860aa",
+    "report.md": "103a6d5b023cad67d18a9673b00605b7fbfb8a7d674749df56071d3e6a8b4954",
+    "results.csv": "79c2669fea24b4eef565718f4150d7de8a217f750e98d7035148540d15a6d8d0",
+    "results.json": "ea231bd902643ec90bca3d263aa2489edacdcdbe727b9f82ee312782aa426e51",
+    "summary.json": "80637854989e50144dc952527275d943534ea9f24a10b15dd512a725ac018bcd",
+    "temperature_batch1_gemv.png": "19d0e5e16b094c6a92c73a3c39e8894e937661e31960cd3d83f112ff273a041a",
+    "temperature_batch32_gemm.png": "0d9ae2729d43ba82faf2150ffa5430ced2e254f38b380b5ddb8294203ea04200",
+    "thermal_validation.json": "7a329b89dd9abfd2b4c03cb49670a0d385e5e5ab5ab2301d21c191d5d6de3486",
+    "throughput.png": "ea9d3245418f56012cd453d99a1fb2e58b9157bb4a03a5bfda2b818dbce19d23",
+    "optimized_design_points": 240,
+    "lp_solves": 720
+  },
+  "sensitivity": {
+    "config.json": "2ca54e65944a542a7ad77df368824b9d96a6d2d77dc9c59b56392d712e3b0dcf",
+    "provenance.json": "e768b7bff6c798371bdf854e1b6403f122d3704a325de294f03896cb50832a0f",
+    "report.md": "de2678a61a2cceaf75c928aeeeaea335ad3e26d0db244e4902f6ede5f1651d67",
+    "results.csv": "ee2495d220900a55ac595ae11920977b037b16aad000fa97dffe0a8d24e84791",
+    "results.json": "1d0cc12ad6fc9ee49565570a8f4edb22e1869ad094aed1c2ff1a6c61ceac75ae",
+    "sensitivity.png": "9151c9e098fe20aaa0cd28d823ebc43928f57367b68b326fbcd15481daaa62bf",
+    "summary.json": "dee6b9be012fad7193d73dfd17381d0d24c0d503b40ba6643554db36dc5e834f",
+    "thermal_validation.json": "2d218a60e13b8876b9f94358596d1996764a023ce6ed7d73ae7dba7bfae9d207",
+    "optimized_design_points": 2880,
+    "lp_solves": 8640
+  }
+}

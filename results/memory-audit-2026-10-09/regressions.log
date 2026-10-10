@@ -1,0 +1,40 @@
+test_each_layer_temperature_limit_is_enforced (test_controls.LayerControl) ... ok
+test_g2_shared_layer_control_respects_both_limits (test_controls.LayerControl) ... ok
+test_no_lateral_information_but_layers_remain_distinct (test_controls.LayerControl) ... ok
+test_uniform_layer_power_matches_spatial_layer_means (test_controls.LayerControl) ... ok
+test_fixed_layout_and_ideal_cost_oracles_cannot_pass (test_controls.PlacementGate) ... ok
+test_free_layout_net_cost_and_complete_controls_are_required (test_controls.PlacementGate) ... ok
+test_layer_control_rejects_general_gain (test_controls.PlacementGate) ... ok
+test_pilot_summary_uses_free_results_and_layer_interaction (test_controls.PlacementGate) ... ok
+test_explicit_internal_cap_replaces_legacy_serial_penalty (test_memory_audit.NecessaryMemoryBounds) ... ok
+test_row_locality_and_bank_spreading_address_different_limits (test_memory_audit.NecessaryMemoryBounds) ... ok
+test_separate_act_pre_and_byte_energy_accounting (test_memory_audit.NecessaryMemoryBounds) ... ok
+test_subarray_oracle_does_not_multiply_shared_activation_or_io (test_memory_audit.NecessaryMemoryBounds) ... ok
+test_units_and_four_activation_window (test_memory_audit.NecessaryMemoryBounds) ... ok
+test_unphysical_row_utilization_rejected (test_memory_audit.NecessaryMemoryBounds) ... ok
+test_conservation_and_reciprocity (test_model.PhysicsAndFairness) ... ok
+test_hb_peak_does_not_create_power_for_unused_bandwidth (test_model.PhysicsAndFairness) ... ok
+test_littles_law_queue_bounds_useful_bandwidth (test_model.PhysicsAndFairness) ... ok
+test_matched_baselines_and_routing (test_model.PhysicsAndFairness) ... ok
+test_relaxations_cannot_reduce_optimum (test_model.PhysicsAndFairness) ... ok
+test_row_activation_has_energy_and_bandwidth_cost (test_model.PhysicsAndFairness) ... ok
+test_uniform_control_has_no_ideal_ownership_gain (test_model.PhysicsAndFairness) ... ok
+test_work_and_data_completion (test_model.PhysicsAndFairness) ... ok
+test_zero_remote_link_capacity_reduces_to_matched_local (test_model.PhysicsAndFairness) ... ok
+test_forced_disjoint_layouts_move_one_full_tensor_each_direction (test_multiphase.SharedPlacementGate) ... ok
+test_identical_phase_layout_has_no_shared_placement_penalty (test_multiphase.SharedPlacementGate) ... ok
+test_incompatible_weights_and_insufficient_capacity_rejected (test_multiphase.SharedPlacementGate) ... ok
+test_migration_charges_both_periodic_transitions_and_io (test_multiphase.SharedPlacementGate) ... ok
+test_oracle_reproduces_single_kernel_rate_bounds (test_multiphase.SharedPlacementGate) ... ok
+test_relaxation_ordering_for_both_thermal_regimes (test_multiphase.SharedPlacementGate) ... ok
+test_repetition_scaling_cannot_drop_decode_work (test_multiphase.SharedPlacementGate) ... ok
+test_shared_layout_and_exact_completed_work (test_multiphase.SharedPlacementGate) ... ok
+test_constant_power_cycle_equals_steady_temperature (test_periodic.PeriodicClosure) ... ok
+test_modal_propagator_matches_independent_matrix_exponential (test_periodic.PeriodicClosure) ... ok
+test_pacing_preserves_dynamic_energy_and_meets_peak_limit (test_periodic.PeriodicClosure) ... ok
+test_periodic_closure_and_mean_energy_balance (test_periodic.PeriodicClosure) ... ok
+
+----------------------------------------------------------------------
+Ran 35 tests in 0.461s
+
+OK

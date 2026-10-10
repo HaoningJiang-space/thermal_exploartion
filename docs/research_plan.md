@@ -35,7 +35,7 @@ A：所有理想候选均无明显收益，保留 Local。
 B 候选：T0/T1 近似无收益，T2 明显受益，而且 Free placement、付费开销与热参数范围下仍成立。
 C/混合：收益来自固定布局、负载偏斜、Bank conflict 或普通共享，重新定位问题。
 
-## 第二阶段：物理及执行校准
+## 旧第二阶段方案记录：物理及执行校准（未进入）
 
 第一阶段通过筛选后，再构建密集网格并进行 HiTS 原方程资格检查和独立 native thermal 对照。
 HiTS 可继续作为求解器；HotSpot/3D-ICE 或经验证的几何组装器提供物理 A/M/b。
@@ -47,9 +47,12 @@ HiTS 可继续作为求解器；HotSpot/3D-ICE 或经验证的几何组装器提
 对比 Voxel request grouping、Tasa bandwidth sharing、Helios data placement 的等资源变体。
 连接拓扑改变若不能战胜这些软件/已有硬件机制，就不应继续提出专门新 Fabric。
 
-## 第三阶段：有限局部重构硬件
+## 旧第三阶段方案记录：有限局部重构硬件（已终止）
 
 仅当校准后 B 稳定存在，才探索小组内可重构 Memory Service Fabric。
 需对综合面积、线长/频率、仲裁延迟、能量、Row locality 和跨区 partial-sum traffic 做收费。
 真正 wafer-scale WoW 要独立定义横向距离、跨区域冷却边界与封装结构，
 不能从本实验 20×20 mm 芯片参数外推。
+
+当前 HB-native Memory Organization 的小型必要上限分析见 [设计](memory_audit.md) 和 [结果](../results/memory-audit-2026-10-09/findings.md)。
+尚未建立进入新存储硬件设计的证据。

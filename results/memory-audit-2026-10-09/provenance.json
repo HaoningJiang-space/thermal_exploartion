@@ -1,0 +1,26 @@
+{
+  "source_commit": "effa961270b7aebd8832b21fcda2bf4dd1aed3bc",
+  "source_dirty": false,
+  "thermal_backend": "hits",
+  "design_points": 192,
+  "python": "3.10.12 (main, Jul 29 2024, 16:56:48) [GCC 11.4.0]",
+  "platform": "Linux-6.8.0-40-generic-x86_64-with-glibc2.35",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "invocation": [
+    "python",
+    "-m",
+    "thermal_exploration.memory_audit",
+    "--thermal-backend",
+    "hits",
+    "--output",
+    "../memory-audit-effa961"
+  ],
+  "started_utc": "2026-10-10T05:45:25.660098+00:00",
+  "config_sha256": "cabbf0796dbc53e8d5936c271fc70af50912a1250038e6fb8215c9ba775b4a1b",
+  "base_config_sha256": "978ae2f3300d3724dbf3328a4bec410252d5d3abaf20ee17b1c21bd2789ae259",
+  "elapsed_s": 1.0176427364349365,
+  "scope": "necessary rate ceilings + uncalibrated Local LP, no command schedule or new architecture",
+  "lp_solves": 384,
+  "hits_commit": "c7f94d533cb663c2f098880e5ab333da9d83ff17"
+}

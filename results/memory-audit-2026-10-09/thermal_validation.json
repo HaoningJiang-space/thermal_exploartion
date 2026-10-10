@@ -1,0 +1,25 @@
+{
+  "backend": "hits",
+  "nodes": 48,
+  "equation_sha256": "4a3d52048e456b666326b2fd94294d708d6ef27bf13918a6c1f223e8e19d5ce2",
+  "hits_max_residual": 7.416397908403094e-12,
+  "hits_vs_direct_max_abs_k_per_w": 1.2767009671676988e-11,
+  "max_original_residual": 3.1289693058766943e-12,
+  "global_layer_resistance_k_per_w": [
+    [
+      0.7311829638814182,
+      0.717682963881416
+    ],
+    [
+      0.7176829638814156,
+      0.7176829638814148
+    ]
+  ],
+  "global_scalar_resistance_k_per_w": 0.7244329638814171,
+  "thermal_controls": {
+    "0": "T0",
+    "1": "T1_scalar",
+    "3": "T1_layer",
+    "2": "T2"
+  }
+}
