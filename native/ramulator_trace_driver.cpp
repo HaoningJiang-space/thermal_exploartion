@@ -5,6 +5,8 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <queue>
+#include <set>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -15,6 +17,8 @@
 #include "ramulator/base/param.h"
 #include "ramulator/frontend/i_frontend.h"
 #include "ramulator/memory_system/i_memory_system.h"
+#include "ramulator/controller/controller_base.h"
+#include "ramulator/controller/plugin/i_controller_plugin.h"
 
 namespace Ramulator {
 // External's default core count is one; controller per-source arrays must have
@@ -27,6 +31,25 @@ class TraceConsumerFrontEnd : public IFrontEnd, public Implementation {
   bool is_finished() override {return false;}
   int get_num_cores() override {return 16;}
 };
+
+class TransactionTrace : public IControllerPlugin, public Implementation {
+  RAMULATOR_REGISTER_IMPLEMENTATION(IControllerPlugin,TransactionTrace,"TransactionTrace")
+  std::string path; std::ofstream output; ControllerBase* ctrl=nullptr;
+ public:
+  void init() override {RAMULATOR_PARSE_PARAM(path,std::string,"path").required();}
+  void setup(IFrontEnd*,IMemorySystem*) override {
+    ctrl=cast_parent<ControllerBase>();output.open(path);
+    output<<"clock,command,transaction_id,source";
+    for(const auto& name:ctrl->m_device.m_spec->level_names)output<<","<<name;
+    output<<"\n";
+  }
+  void on_issue(const Request& req) override {
+    output<<ctrl->m_clk<<","<<ctrl->m_device.m_spec->command_names[req.command]<<","<<req.ingress_id<<","<<req.source_id;
+    for(auto v:req.addr_vec)output<<","<<v;
+    output<<"\n";
+  }
+  void finalize() override {output.close();}
+};
 }
 
 struct Work {
@@ -37,9 +60,12 @@ struct Work {
 
 int main(int argc,char** argv) {
  try {
-  if(argc!=6)throw std::runtime_error("config.json requests.tsv out-prefix outstanding-limit consumer-FLOP/tile/tick");
+  if(argc!=6 && argc!=8)throw std::runtime_error("config.json requests.tsv out-prefix outstanding-limit consumer-FLOP/tile/tick [HB-bytes/channel/tick terminal-idle-ticks]");
   const int limit=std::stoi(argv[4]);const double rate=std::stod(argv[5]);
   if(limit<=0||!std::isfinite(rate)||rate<=0)throw std::runtime_error("invalid integration controls");
+  const double hb_rate=argc==8?std::stod(argv[6]):0;
+  const long long idle=argc==8?std::stoll(argv[7]):0;
+  if(hb_rate<0||idle<0)throw std::runtime_error("invalid HB or idle budget");
   std::ifstream input(argv[2]);std::string line;std::vector<Work> works;
   while(std::getline(input,line)) {
    Work w;std::istringstream s(line);int n;
@@ -47,7 +73,7 @@ int main(int argc,char** argv) {
    w.vec.resize(7);for(auto& v:w.vec)if(!(s>>v))throw std::runtime_error("invalid address vector");
    if(!(s>>n)||n<0)throw std::runtime_error("invalid dependency count");
    for(int i=0;i<n;i++){int d;if(!(s>>d)||d<0||d>=w.id)throw std::runtime_error("invalid dependency");w.deps.push_back(d);}
-   if(w.id!=int(works.size())||w.source<0||w.source>=16||w.bytes!=32||w.ready<0||w.flops<0)
+   if(w.id!=int(works.size())||w.source<0||w.source>=16||w.bytes<=0||w.ready<0||w.flops<0)
     throw std::runtime_error("invalid request id/source/size/time/work");
    works.push_back(w);
   }
@@ -56,42 +82,57 @@ int main(int argc,char** argv) {
   auto* frontend=Ramulator::Factory::create_frontend(cfg);
   auto* memory=Ramulator::Factory::create_memory_system(cfg);
   frontend->connect_memory_system(memory);memory->connect_frontend(frontend);
-  if(memory->get_tx_bytes()!=32)throw std::runtime_error("unexpected DRAM transaction size");
+  for(const auto& w:works)if(w.bytes>memory->get_tx_bytes())throw std::runtime_error("request exceeds DRAM transaction size");
   std::string prefix(argv[3]);std::ofstream samples(prefix+"-cycles.csv");
-  samples<<"clock,outstanding,returned_waiting_consumer,eligible_unissued,state\n";
+  samples<<"clock,outstanding,returned_waiting_consumer,eligible_examined,state\n";
   std::map<std::string,long long> states;std::vector<long long> tile_finish(16,0);
+  std::vector<double> hb_finish(16,0);
+  std::set<int> unissued,returned_waiting;
+  for(const auto& w:works)unissued.insert(w.id);
+  using Completion=std::pair<long long,int>;
+  std::priority_queue<Completion,std::vector<Completion>,std::greater<Completion>> completions;
   long long clk=0,active=0,done=0,accepted=0,returned=0,total_bytes=0,total_flops=0;
   long long queue_sum=0,queue_max=0,consumer_active_ticks=0,rejected=0;
   for(;clk<10000000;clk++) {
-   for(auto& w:works)if(w.finish>=0&&w.finish<=clk&&w.consumed<0){w.consumed=w.finish;done++;active--;}
+   while(!completions.empty()&&completions.top().first<=clk){
+    auto [time,id]=completions.top();completions.pop();auto& w=works[id];
+    if(w.consumed>=0)throw std::runtime_error("duplicate consumption");
+    w.consumed=time;done++;active--;returned_waiting.erase(id);
+   }
    if(done==int(works.size()))break;
-   int eligible=0,sent=0,waiting_consumer=0;bool reject=false;
-   for(auto& w:works){
-    if(w.completed>=0&&w.consumed<0)waiting_consumer++;
-    if(w.accepted>=0||w.ready>clk)continue;
+   int eligible=0,sent=0,waiting_consumer=returned_waiting.size();bool reject=false;
+   for(auto it=unissued.begin();it!=unissued.end();){
+    auto& w=works[*it];++it;
+    if(w.ready>clk)continue;
     bool deps=true;for(int d:w.deps)if(works[d].consumed<0){deps=false;break;}
     if(!deps)continue;eligible++;
-    if(active>=limit||sent>=16)continue;
+    if(active>=limit||sent>=16)break;
     Ramulator::Request req(w.vec,Ramulator::Request::Type::Read);
-    req.addr=w.address;req.source_id=w.source;req.size_bytes=w.bytes;
+    req.addr=w.address;req.source_id=w.source;req.size_bytes=w.bytes;req.ingress_id=w.id;
     const int rid=w.id;
     req.callback=[&,rid](Ramulator::Request& r){
       auto& x=works[rid];
+      if(r.ingress_id!=rid)throw std::runtime_error("transaction identity changed in controller");
       if(x.completed>=0||x.accepted<0)throw std::runtime_error("duplicate or unaccepted completion");
       x.completed=clk+1;x.depart=r.depart;
       if(x.depart>x.completed)throw std::runtime_error("callback precedes response readiness");
+      if(hb_rate>0){
+        int channel=x.vec[0];hb_finish[channel]=std::max(double(x.completed),hb_finish[channel])+x.bytes/hb_rate;
+        x.completed=static_cast<long long>(std::ceil(hb_finish[channel]));
+      }
       auto duration=static_cast<long long>(std::ceil(x.flops/rate));
       x.finish=std::max(x.completed,tile_finish[x.source])+duration;
       tile_finish[x.source]=x.finish;consumer_active_ticks+=duration;
+      completions.emplace(x.finish,rid);returned_waiting.insert(rid);
       returned++;total_bytes+=x.bytes;total_flops+=x.flops;
     };
-    if(memory->send(req)){w.accepted=clk;accepted++;active++;sent++;}
+    if(memory->send(req)){w.accepted=clk;accepted++;active++;sent++;unissued.erase(w.id);}
     else{reject=true;rejected++;}
    }
    std::string state;
-   if(eligible==0 && accepted<int(works.size()))state="dependency_or_release_wait";
-   else if(active>=limit && waiting_consumer>0)state="consumer_buffer_backpressure";
+   if(active>=limit && waiting_consumer>0)state="consumer_or_HB_buffer_backpressure";
    else if(active>=limit)state="inflight_capacity_full";
+   else if(eligible==0 && accepted<int(works.size()))state="dependency_or_release_wait";
    else if(reject)state="controller_reject";
    else state="service_or_return_progress";
    states[state]++;queue_sum+=active;queue_max=std::max(queue_max,active);
@@ -104,12 +145,14 @@ int main(int argc,char** argv) {
     if(w.completed<=w.accepted||w.consumed<w.completed)throw std::runtime_error("noncausal request");
     for(int d:w.deps)if(w.accepted<works[d].consumed)throw std::runtime_error("dependency violated");
   }
+  const auto execution_ticks=clk;
+  for(long long i=0;i<idle;i++)memory->tick();
   memory->update_stats_recursive();std::ofstream stats(prefix+"-stats.yaml");memory->print_stats(stats);
   memory->finalize();frontend->finalize();
   std::ofstream ev(prefix+"-events.csv");ev<<"id,accepted,completed,depart,consumed,source,address,size,useful_flops\n";
   for(const auto& w:works)ev<<w.id<<","<<w.accepted<<","<<w.completed<<","<<w.depart<<","<<w.consumed<<","<<w.source<<","<<w.address<<","<<w.bytes<<","<<w.flops<<"\n";
   std::ofstream report(prefix+"-driver.json");
-  report<<"{\"ticks\":"<<clk<<",\"accepted\":"<<accepted<<",\"returned\":"<<returned
+  report<<"{\"ticks\":"<<execution_ticks<<",\"terminal_idle_ticks\":"<<idle<<",\"accepted\":"<<accepted<<",\"returned\":"<<returned
         <<",\"consumed\":"<<done<<",\"useful_bytes\":"<<total_bytes<<",\"useful_flops\":"<<total_flops
         <<",\"outstanding_max\":"<<queue_max<<",\"outstanding_sum\":"<<queue_sum
         <<",\"consumer_active_tile_ticks\":"<<consumer_active_ticks<<",\"controller_send_rejects\":"<<rejected

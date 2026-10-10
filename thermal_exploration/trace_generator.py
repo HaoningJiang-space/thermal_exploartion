@@ -79,8 +79,8 @@ def validate_trace(req):
                 useful_flops=sum(r["useful_flops"] for r in req))
 
 
-def write_trace(req,out):
-    validate_trace(req);out=Path(out)
+def write_trace(req,out,validator=validate_trace):
+    validator(req);out=Path(out)
     (out/"requests.json").write_text(json.dumps(req,indent=2)+"\n")
     # Simple integer-only native interchange. The JSON preserves semantic fields.
     with (out/"requests.tsv").open("w") as f:

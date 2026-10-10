@@ -14,6 +14,7 @@ class MemoryService:
     energy_pj_per_useful_byte: float
     activations_per_useful_byte: float
     model_kind: str
+    logic_energy_pj_per_useful_byte: float = 0.0
 
 
 def memory_service_model(hw, kernel):
@@ -35,4 +36,7 @@ def memory_service_model(hw, kernel):
         raise ValueError("Memory peak, internal service rate, and latency must be positive and finite")
     if energy < 0 or not math.isfinite(energy) or acts < 0:
         raise ValueError("Invalid DRAM energy or row activity")
-    return MemoryService(bank_bw, latency, energy, acts, kind)
+    logic_energy=hw.get("logic_memory_pj_per_byte",0.0)
+    if not math.isfinite(logic_energy) or logic_energy<0:
+        raise ValueError("Invalid logic-side memory energy")
+    return MemoryService(bank_bw, latency, energy, acts, kind,logic_energy)

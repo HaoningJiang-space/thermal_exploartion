@@ -56,12 +56,12 @@ def native_build(root,out):
     return exe
 
 
-def device_and_config(case):
+def device_and_config(case,refresh=True):
     import ramulator
     dram=ramulator.dram.HBM3(org_preset="HBM3_16Gb_8hi",timing_preset="HBM3_6400Mbps")
     controller=ramulator.controller.HBM34(
         dram=dram,scheduler=ramulator.scheduler.FRFCFSRowHit(),
-        refresh_manager=ramulator.refresh_manager.AllBank(),
+        refresh_manager=ramulator.refresh_manager.AllBank() if refresh else ramulator.refresh_manager.NoRefresh(),
         row_policy=ramulator.row_policy.Open(),
         addr_mapper=ramulator.addr_mapper.PassThroughAddrMapper(),
         read_buffer_size=128,write_buffer_size=64,
@@ -69,11 +69,13 @@ def device_and_config(case):
     memory=ramulator.memory_system.GenericDRAM(clock_ratio=1,
         channel_mapper=ramulator.channel_mapper.PassThroughChannelMapper(),controllers=[controller])
     config={"frontend":{"impl":"TraceConsumer","clock_ratio":1},"memory_system":memory.to_config()}
+    config["memory_system"]["controllers"][0]["controller_plugins"].append(
+        {"impl":"TransactionTrace","path":str(case/"transaction-commands.csv")})
     return dram,config
 
 
-def validate_events(req,events,driver):
-    counts=validate_trace(req)
+def validate_events(req,events,driver,validator=validate_trace):
+    counts=validator(req)
     if len(events)!=len(req) or {int(e["id"]) for e in events}!=set(range(len(req))):
         raise ValueError("Lost/duplicate request completion")
     by_id={int(e["id"]):e for e in events}
@@ -93,11 +95,17 @@ def validate_events(req,events,driver):
     return counts
 
 
-def command_replay(dram,req,events,commands,ticks):
+def command_replay(dram,req,events,commands,ticks,transaction_commands=None):
     # Independent DRAM state instance, same upstream model. This catches illegal
     # issued traces; it is not validation against an independent physical model.
     from tests.device_timings.harness import DeviceUnderTest
     dut=DeviceUnderTest(dram)
+    if transaction_commands is not None:
+        if len(transaction_commands)!=len(commands):raise ValueError("Transaction and physical command traces differ")
+        for a,b in zip(commands,transaction_commands):
+            if any(a[k]!=b[k] for k in ("clock","command","source",*dut.level_names)):
+                raise ValueError("Transaction tag is attached to the wrong physical command")
+            a["transaction_id"]=int(b["transaction_id"])
     by_clk=defaultdict(list)
     for command in commands:by_clk[int(command["clock"])].append(command)
     accepted=defaultdict(list);completed=defaultdict(list);ev={int(e["id"]):e for e in events}
@@ -131,9 +139,16 @@ def command_replay(dram,req,events,commands,ticks):
                 for key in list(open_rows):
                     if key[:2]==bank[:2]:open_rows.pop(key)
             if name in ("RD","RDA"):
-                matches=[i for i in pending if i not in issued and req[i]["addr_vec"]==vec]
-                if len(matches)!=1:raise ValueError("Column command cannot be attributed uniquely to a request")
-                rid=matches[0];issued.add(rid);command_matches.append(dict(id=rid,column_clock=clk))
+                if "transaction_id" in command:
+                    rid=command["transaction_id"]
+                    if rid not in pending or rid in issued or req[rid]["addr_vec"]!=vec or req[rid]["source_tile"]!=int(command["source"]):
+                        raise ValueError("Column transaction id is not a pending matching request")
+                else:
+                    # Compatibility for already archived unique-address traces.
+                    matches=[i for i in pending if i not in issued and req[i]["addr_vec"]==vec]
+                    if len(matches)!=1:raise ValueError("An ambiguous legacy trace needs end-to-end transaction ids")
+                    rid=matches[0]
+                issued.add(rid);command_matches.append(dict(id=rid,column_clock=clk))
         open_ticks+=len(open_rows)
         pending.difference_update(completed[clk])
     if len(issued)!=len(req) or pending or sum(observations.values())!=ticks:
@@ -148,23 +163,24 @@ def command_replay(dram,req,events,commands,ticks):
                 scope="independent state replay of the same Ramulator device; observations are not additive causal performance losses")
 
 
-def run_case(exe,out,name,req,queue=64,consumer_rate=32):
+def run_case(exe,out,name,req,queue=64,consumer_rate=32,refresh=True):
     import yaml
     case=out/name;case.mkdir();write_trace(req,case)
-    dram,config=device_and_config(case)
+    dram,config=device_and_config(case,refresh)
     (case/"config.json").write_text(json.dumps(config,indent=2)+"\n")
     with (case/"execution.log").open("w") as log:
         subprocess.run([str(exe),str(case/"config.json"),str(case/"requests.tsv"),str(case/"run"),str(queue),str(consumer_rate)],
                        stdout=log,stderr=log,check=True)
     events=read_csv(case/"run-events.csv");driver=json.loads((case/"run-driver.json").read_text())
     counts=validate_events(req,events,driver)
-    replay=command_replay(dram,req,events,read_csv(case/"commands.csv.ch0"),driver["ticks"])
+    replay=command_replay(dram,req,events,read_csv(case/"commands.csv.ch0"),driver["ticks"],read_csv(case/"transaction-commands.csv"))
     # Nominal half-CK is 0.3125 ns. Upstream stores 312 ps for statistics;
     # command tick counts are unchanged. Keep both conventions explicit.
     tick_ns=replay["time_unit_ns"];time_ns=driver["ticks"]*tick_ns
     stats=yaml.safe_load((case/"run-stats.yaml").read_text())
     result=dict(name=name,profile="isolated_upstream_HBM3_16Gb_8hi_6400Mbps",thermal_condition="T0",
         controls=dict(outstanding_limit=queue,consumer_flops_per_tile_per_tick=consumer_rate,
+                      refresh_enabled=refresh,
                       tiles=16,status="Assumed integration controls; not a calibrated NPU"),
         work=counts,driver=driver,command_validation=replay,controller_statistics=stats,
         elapsed_ns=time_ns,useful_bandwidth_gb_s=counts["read_bytes"]/time_ns,

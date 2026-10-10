@@ -50,7 +50,7 @@ def kernel(workload, tiling):
     b, m, k, e = [workload[key] for key in ["batch", "m", "k", "element_bytes"]]
     operations = 2*b*m*k
     # One weight read and one input/output transfer; ideal shared-input broadcast.
-    byte_count = e*(m*k+b*k+b*m)
+    byte_count = e*(m*k+b*k+(0 if workload.get("output_resident_in_logic",False) else b*m))
     return {"flops": operations, "bytes": byte_count, "intensity": operations/byte_count,
             "chunk_bytes": tiling["chunk_bytes"], "row_miss_fraction": tiling["row_miss_fraction"]}
 
@@ -94,6 +94,7 @@ def optimize(cfg, h, global_h, workload, tiling, fabric, thermal_mode,
         voltage = hw["voltage_floor_fraction"]+(1-hw["voltage_floor_fraction"])*f
         power[i,c] += hw["logic_pj_per_flop"]*voltage**2
         power[n+j,c] += dram_pj_byte/intensity
+        power[j,c] += memory.logic_energy_pj_per_useful_byte/intensity
         if fabric.paid:
             for edge in path:
                 link_load[link_idx[edge],c] += 1/intensity

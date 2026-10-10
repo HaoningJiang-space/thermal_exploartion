@@ -58,6 +58,7 @@ def service_block(cfg, workload, tiling, fabric):
         voltage=hw["voltage_floor_fraction"]+(1-hw["voltage_floor_fraction"])*f
         power[i,c]=hw["logic_pj_per_flop"]*voltage**2
         power[n+j,c]=dram_energy/intensity
+        power[j,c]+=memory.logic_energy_pj_per_useful_byte/intensity
         if fabric.paid:
             for edge in path:
                 link_load[link_idx[edge],c]=1/intensity

@@ -117,10 +117,25 @@ def power_inventory(profile):
                 dram_detailed_reference_from_stack_minus_logic_w=stack-r["logic_body_w"],
                 dram_relative_error_vs_detailed=pdram/(stack-r["logic_body_w"])-1,
                 component_coefficients={k:None for k in ("ACT","PRE","SRAM","NoC","Controller","Vector","Background","CUA_periphery","Logic_memory_periphery")},
-                status="aggregate anchor checks only; unresolved activity/scope; no workload coefficients fitted")
+                evidence_level="L0_reference_accounting_consistency",
+                independent_power_validation=False,
+                status="Same-paper aggregate arithmetic only; unresolved activity/scope; no workload coefficients fitted")
 
 
-def require_prediction_ready(profile):
+def require_prediction_ready(profile,mode="reference_reproduction"):
+    if mode=="architecture_exploration":
+        if profile.get("profile_kind")!="architecture_exploration_assumed" or not profile.get("policy",{}).get("conditional_exploration_allowed"):
+            raise IncompleteCalibration("Architecture exploration requires its own sourced assumption contract")
+        if not all(profile["fairness"].values()):raise ValueError("Missing fair resource/cost control")
+        for name,p in profile["parameters"].items():
+            if p["classification"] not in ("Paper-reported","Reasonably assumed","Idealized") or not p["basis"]:
+                raise ValueError("Unclassified exploration parameter: "+name)
+            if not isinstance(p["value"],(int,float)) or not math.isfinite(p["value"]):
+                raise ValueError("Unknown/nonfinite exploration parameter: "+name)
+            if p["range"] is not None and not p["range"][0]<=p["value"]<=p["range"][1]:
+                raise ValueError("Default outside frozen assumption interval")
+        return
+    if mode!="reference_reproduction":raise ValueError("Unknown prediction mode")
     if not profile["calibration_policy"]["performance_prediction_allowed"] or profile["unresolved_inputs"]:
         raise IncompleteCalibration("Stratum reference cannot be used for performance/thermal predictions until unresolved inputs are calibrated")
 
