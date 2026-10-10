@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "label": "uncalibrated_chip_scale_screening",
+  "grid": 4,
+  "thermal": {
+    "ambient_c": 25.0,
+    "logic_limit_c": 85.0,
+    "dram_limit_c": 85.0,
+    "tile_pitch_m": 0.005,
+    "logic_thickness_m": 0.00005,
+    "dram_thickness_m": 0.00003,
+    "lid_thickness_m": 0.001,
+    "silicon_k_w_mk": 100.0,
+    "lid_k_w_mk": 400.0,
+    "bond_thickness_m": 0.00001,
+    "bond_k_w_mk": 2.0,
+    "tim_thickness_m": 0.0001,
+    "tim_k_w_mk": 5.0,
+    "convection_w_m2k": 4000.0,
+    "cooling_gradient": 0.0,
+    "vertical_scale": 1.0
+  },
+  "hardware": {
+    "tile_peak_tflops": 16.0,
+    "bank_group_peak_tb_s": 1.0,
+    "independent_banks_per_group": 32,
+    "row_miss_penalty_ns": 45.0,
+    "read_latency_ns": 50.0,
+    "outstanding_per_tile": 512,
+    "transaction_bytes": 256,
+    "sram_bytes_per_tile": 1048576,
+    "logic_static_w": 0.5,
+    "dram_static_w": 0.3,
+    "logic_pj_per_flop": 1.2,
+    "dram_pj_per_byte": 12.0,
+    "activation_nj": 8.0,
+    "dvfs_fractions": [0.25, 0.5, 0.75, 1.0],
+    "voltage_floor_fraction": 0.65,
+    "placement_max_fraction": 0.125,
+    "mesh_link_tb_s": 0.25,
+    "mesh_hop_latency_ns": 2.0,
+    "mesh_pj_per_byte_hop": 0.5,
+    "fabric_area_fraction": 0.03,
+    "fabric_static_w_per_tile": 0.05
+  },
+  "workloads": [
+    {"name": "batch1_gemv", "batch": 1, "m": 4096, "k": 4096, "element_bytes": 2},
+    {"name": "batch32_gemm", "batch": 32, "m": 4096, "k": 4096, "element_bytes": 2}
+  ],
+  "tilings": [
+    {"name": "chunk2k", "chunk_bytes": 2048, "row_miss_fraction": 1.0},
+    {"name": "chunk8k", "chunk_bytes": 8192, "row_miss_fraction": 1.0},
+    {"name": "chunk8k_tracker_bound", "chunk_bytes": 8192, "row_miss_fraction": 0.25}
+  ]
+}

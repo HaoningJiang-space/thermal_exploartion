@@ -1,0 +1,79 @@
+# thermal_exploartion
+
+**When Does Compute–Memory Locality Become Suboptimal in Hybrid-Bonded 3D Accelerators?**
+
+研究目标是检验空间热耦合是否改变 Compute–Memory 物理连接的最优性。
+先做可证伪的小实验，结果允许支持 Local，也允许说明收益主要来自普通负载均衡。
+
+当前实现是 **chip-scale、未校准、稳态上界筛选模型**：20×20 mm 的 Logic/DRAM/spreader，
+16 Compute Tiles + 16 Bank Groups，Batch-1 GEMV 与 Batch-32 GEMM。
+它不是完整 Transformer 仿真器，也不是 wafer-scale 的 WoW 性能模型。
+
+## 运行
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
+python -m unittest discover -s tests -v
+python -m thermal_exploration.run --output outputs/pilot-scipy
+```
+
+HiTS 路径采用其公开 `HiTS` API 的 CPU GMRES，独立比较每个单位功率响应与 SciPy direct solve，
+同时检查原方程残差。32 个有源区域分别激励，得到完整空间响应矩阵 H。
+HiTS 是求解器；本项目负责几何、边界条件和物理方程的组装。通过残差检查不等于物理参数已校准。
+
+```bash
+git clone https://github.com/HaoningJiang-space/HiTS.git external/HiTS
+git -C external/HiTS checkout c7f94d533cb663c2f098880e5ab333da9d83ff17
+PYTHONPATH="$PWD/external/HiTS${PYTHONPATH:+:$PYTHONPATH}" \
+  python -m thermal_exploration.run --thermal-backend hits --output outputs/pilot-hits
+PYTHONPATH="$PWD/external/HiTS${PYTHONPATH:+:$PYTHONPATH}" \
+  python -m thermal_exploration.run --thermal-backend hits --suite sensitivity \
+  --output outputs/sensitivity-hits
+```
+
+HiTS 的 GPU 路径有额外安装与资格要求，见其 README。小型 CPU 路径不需要构建 native CUDA kernels。
+所有输出目录必须是新目录，避免覆盖旧实验。
+
+## 对照矩阵
+
+每种工作负载 × 3 个热条件 × 5 个连接选项 × 2 个数据放置选项，分别重新优化。
+pilot 包含均匀分布、中心负载偏斜、冷却梯度三个场景，总计 180 个设计点；
+每个设计点枚举相同的 3 个访存 chunk/row-miss 选项，内部求解 540 个 LP。
+
+| 维度 | 选项 |
+|---|---|
+| Thermal-0 | 无温度约束；仍保持计算、Bank、请求队列和链路限制 |
+| Thermal-1 | 从同一物理模型提取单一全局 R，只考虑总功率 |
+| Thermal-2 | Logic 和 DRAM 各区域均约束 `T = Tamb + H P` |
+| Local | Compute i 只由 Bank Group i 服务 |
+| Neighbor ideal | 理想零开销，相邻 Manhattan distance ≤1 可访问 |
+| Global ideal | 理想零开销，全局服务，上界 |
+| Mesh paid | XY 路由；有限链路带宽、逐跳延迟、链路能量、面积与静态功率 |
+| Local matched | 与 Mesh paid 相同的路由面积及静态功率预算，关闭远端服务 |
+| Fixed placement | 固定 Bank demand，检验对数据布局敏感的收益 |
+| Free placement | 每个方案重新优化静态 Bank 数据份额，含相同容量份额上限 |
+
+Mesh paid 与 Local matched 比较，使计算资源、SRAM、Bank、预留面积预算一致。
+Mesh paid 与原始 Local 的比较另行保留，便于判断净收益是否足够支付新增硬件。
+SRAM、Compute 总量、Controller 数量和请求跟踪能力不进行资源池化。
+DVFS 离散点允许连续时间共享，因此这个 LP 是稳态调度的放松上界。
+
+## 观察与停止条件
+
+`summary.json` 同时记录 T0/T1/T2 speedup、`speedup_T2 / speedup_T1`、
+Resource Ownership Loss 和 Local Spatial Penalty。比值交互不等于唯一的因果损失分解。
+均匀模型是负对照：没有负载差异和冷却差异时应当观察不到凭空产生的理想共享收益。
+
+- 理想连接在 Free placement 后仍没有收益：停止该配置的连接结构探索。
+- 收益只在 Fixed placement 存在：优先研究 Mapping/data placement。
+- 理想连接有效，付费连接失效：停止该开销区间的硬件方案。
+- T0/T1 无优势，T2 有稳定净收益：仅列为 B 候选，需要物理校准、瞬态和真实轨迹复核。
+
+敏感性套件逐项扫描热耦合、冷却梯度、DRAM 能量、链路带宽/能量及面积。
+不挑选最佳参数，不删除负结果。全部原始证据保存在输出目录，精选结果见 `results/`。
+
+研究设计：[docs/research_plan.md](docs/research_plan.md)；
+文献核对：[docs/literature.md](docs/literature.md)；
+模型方程与局限：[docs/model.md](docs/model.md)。
