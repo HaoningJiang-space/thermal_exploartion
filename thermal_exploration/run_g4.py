@@ -5,6 +5,7 @@ import csv
 from datetime import datetime,timezone
 import hashlib
 import json
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -14,6 +15,31 @@ from .trace_generator import (gemv,row_conflict,streaming,validate_trace,
                              verify_gemv_consumption,write_trace)
 
 RAMULATOR_COMMIT="c6c7a5de0cef35935d6fad7369e6271406798865"
+
+
+def generated_cpp_tokens(source):
+    """Ignore only comments, whitespace and include ordering in codegen output."""
+    includes=sorted(re.findall(r'^#include\s+([^\n]+)',source,re.M))
+    source=re.sub(r'^#include[^\n]*','',source,flags=re.M)
+    pattern=r'"(?:\\.|[^"\\])*"|//[^\n]*|/\*[\s\S]*?\*/|[A-Za-z_][A-Za-z_0-9]*|\d+(?:\.\d+)?|::|->|==|!=|<=|>=|&&|\|\||[^\s]'
+    tokens=[t for t in re.findall(pattern,source) if not t.startswith(('//','/*'))]
+    return includes,tokens
+
+
+def verify_upstream(root):
+    changed=subprocess.check_output(["git","-C",str(root),"diff","HEAD","--name-only"],text=True).splitlines()
+    accepted=[]
+    for name in changed:
+        if not name.startswith("src/ramulator/dram/impl/") or not name.endswith(".cpp"):
+            raise ValueError("Unexpected upstream source change")
+        original=subprocess.check_output(["git","-C",str(root),"show","HEAD:"+name],text=True)
+        generated=(root/name).read_text()
+        if "AUTO-GENERATED" not in original[:500] or generated_cpp_tokens(original)!=generated_cpp_tokens(generated):
+            raise ValueError("Upstream codegen changed executable tokens")
+        accepted.append(dict(path=name,head_sha256=hashlib.sha256(original.encode()).hexdigest(),
+                             build_sha256=hashlib.sha256(generated.encode()).hexdigest()))
+    return dict(codegen_format_changes=accepted,
+                policy="Only generated C++ with identical tokens and include set; no timing/organization/command changes")
 
 
 def read_csv(path):
@@ -185,8 +211,7 @@ def main():
     args=parser.parse_args();root=Path(args.ramulator_root).resolve();out=Path(args.output).resolve()
     upstream=subprocess.check_output(["git","-C",str(root),"rev-parse","HEAD"],text=True).strip()
     if upstream!=RAMULATOR_COMMIT:raise SystemExit("Use the frozen Ramulator commit")
-    if subprocess.check_output(["git","-C",str(root),"diff","HEAD","--"],text=True).strip():
-        raise SystemExit("Do not silently change the upstream model")
+    upstream_build=verify_upstream(root)
     if out.exists():raise SystemExit("Choose a new directory; preserve failed runs")
     out.mkdir(parents=True);sys.path[:0]=[str(root/"python"),str(root)]
     exe=native_build(root,out)
@@ -205,7 +230,7 @@ def main():
     (out/"summary.json").write_text(json.dumps(report,indent=2,allow_nan=False)+"\n")
     (out/"provenance.json").write_text(json.dumps(dict(source_commit=revision(),
         source_dirty=bool(subprocess.check_output(["git","status","--porcelain"],text=True).strip()),
-        ramulator_commit=upstream,python=sys.version,started_utc=datetime.now(timezone.utc).isoformat(),
+        ramulator_commit=upstream,upstream_build_verification=upstream_build,python=sys.version,started_utc=datetime.now(timezone.utc).isoformat(),
         native_adapter_sha256=hashlib.sha256((Path(__file__).resolve().parents[1]/"native/ramulator_trace_driver.cpp").read_bytes()).hexdigest(),
         invocation="python -m thermal_exploration.run_g4 --ramulator-root <pinned-upstream> --output <new-dir>"),indent=2)+"\n")
     plot(results,out)

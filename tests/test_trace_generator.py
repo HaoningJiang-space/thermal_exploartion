@@ -2,10 +2,16 @@ import copy
 import unittest
 from thermal_exploration.trace_generator import (gemv,hbm3_address,inverse_hbm3_address,
     row_conflict,streaming,validate_trace,verify_gemv_consumption)
-from thermal_exploration.run_g4 import validate_events
+from thermal_exploration.run_g4 import generated_cpp_tokens,validate_events
 
 
 class AddressedTraces(unittest.TestCase):
+    def test_codegen_guard_allows_formatting_but_rejects_timing_changes(self):
+        a='#include "a.h"\n#include "b.h"\nint nFAW=24; // original\n'
+        b='#include "b.h"\n#include "a.h"\nint nFAW = 24; /* generated */\n'
+        self.assertEqual(generated_cpp_tokens(a),generated_cpp_tokens(b))
+        self.assertNotEqual(generated_cpp_tokens(a),generated_cpp_tokens(b.replace('24','25')))
+
     def test_mapping_is_bijective_and_has_full_bank_row_geometry(self):
         addresses=list(range(0,64*1024*2,32))+[2**20,2**30-32]
         vectors=[hbm3_address(a) for a in addresses]
