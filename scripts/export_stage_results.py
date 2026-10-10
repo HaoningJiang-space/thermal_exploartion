@@ -68,6 +68,16 @@ def main():
     fig.suptitle('Full structural Decode: known baselines and critical-stage attribution');fig.tight_layout()
     for ext in ('png','pdf'):fig.savefig(out/('architecture_bottlenecks.'+ext),dpi=180)
     plt.close(fig)
+    fig,ax=plt.subplots(figsize=(10,4.3))
+    capacities={'Useful MAC':('mac',128e12),'HB delivered':('hb',32e12),
+                'SRAM reads':('sram_read',16e12),'SRAM writes':('sram_write',16*.512e12)}
+    for i,(label,(kind,rate)) in enumerate(capacities.items()):
+        vals=[100*best[s]['activity'].get(kind,0)/(best[s]['time_us']*1e-6*rate) for s in scenarios]
+        ax.bar(x+(i-1.5)*.2,vals,.2,label=label)
+    ax.set_xticks(x,scenarios,rotation=35,ha='right');ax.set_ylabel('Whole-run work / peak service (%)');ax.legend(ncol=4,fontsize=8)
+    ax.set_title('Aggregate demand; not instantaneous occupancy or DRAM Row-hit measurement');fig.tight_layout()
+    for ext in ('png','pdf'):fig.savefig(out/('physical_resource_demand.'+ext),dpi=180)
+    plt.close(fig)
     # State windows are constructive bounds from the chosen sequential DAG,
     # not measured SRAM lease histories or minimal communication lower bounds.
     lifetimes=[];kernel_bounds=[]
