@@ -168,4 +168,5 @@ def scaling_example(side, vertical_bytes_cycle=64, link_bytes_cycle=32, crossing
     vertical=side**2*vertical_bytes_cycle; cut=side*link_bytes_cycle
     return dict(side=side,vertical_bytes_cycle=vertical,one_direction_cut_bytes_cycle=cut,
                 crossing_demand_bytes_cycle=vertical*crossing_fraction,cut_pressure=vertical*crossing_fraction/cut,
-                capacity_ratio=vertical/cut,critical_crossing_fraction=cut/vertical)
+                capacity_ratio=vertical/cut,critical_crossing_fraction=cut/vertical,
+                fraction_scope="Traffic in one selected cut direction; not the sum of two full-duplex directions")

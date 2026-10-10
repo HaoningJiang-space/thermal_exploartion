@@ -1,0 +1,15 @@
+{
+  "status": "CAPACITY_SCREEN_ONLY",
+  "research_status": "CHECK_KNOWN_DATAFLOW_AND_TIMED_COMMUNICATION",
+  "hardware_status": "NOT_ASSESSED",
+  "scope": "Necessary bounds/byte-hop accounting; no actual NoC stalls, speedup, thermal closure or novelty claim",
+  "ownership_scope": "Finite known partitions/tree directions only; not an unrestricted ownership oracle",
+  "next_requirement": "Remaining signal after known mapping/collectives, then bounded-buffer causal execution and costs",
+  "observations": {
+    "wide_row_xy_capacity_pressure": true,
+    "known_partition_removes_that_capacity_condition": true,
+    "measured_execution_speedup": false,
+    "new_noc_hardware_supported": false
+  },
+  "interpretation": "Research signal for dataflow/traffic and future dependency verification. No claim that the optimistic known-partition bound is achievable."
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "side": 4,
+    "vertical_bytes_cycle": 1024,
+    "one_direction_cut_bytes_cycle": 128,
+    "crossing_demand_bytes_cycle": 102.4,
+    "cut_pressure": 0.8,
+    "capacity_ratio": 8.0,
+    "critical_crossing_fraction": 0.125,
+    "fraction_scope": "Traffic in one selected cut direction; not the sum of two full-duplex directions"
+  },
+  {
+    "side": 8,
+    "vertical_bytes_cycle": 4096,
+    "one_direction_cut_bytes_cycle": 256,
+    "crossing_demand_bytes_cycle": 409.6,
+    "cut_pressure": 1.6,
+    "capacity_ratio": 16.0,
+    "critical_crossing_fraction": 0.0625,
+    "fraction_scope": "Traffic in one selected cut direction; not the sum of two full-duplex directions"
+  },
+  {
+    "side": 16,
+    "vertical_bytes_cycle": 16384,
+    "one_direction_cut_bytes_cycle": 512,
+    "crossing_demand_bytes_cycle": 1638.4,
+    "cut_pressure": 3.2,
+    "capacity_ratio": 32.0,
+    "critical_crossing_fraction": 0.03125,
+    "fraction_scope": "Traffic in one selected cut direction; not the sum of two full-duplex directions"
+  }
+]

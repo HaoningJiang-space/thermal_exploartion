@@ -1,0 +1,85 @@
+{
+  "files": [
+    {
+      "file": "all-options.json",
+      "bytes": 86698,
+      "sha256": "a586fbaefb47a3a9cf6df47facbc0b65d5499314303a4871cfd035ec5540b73a"
+    },
+    {
+      "file": "all-points.csv",
+      "bytes": 124109,
+      "sha256": "581f344a6feed67eb59b5c6ac958f88e6ed983ec70ff0eda1e1a5db8d0c71a34"
+    },
+    {
+      "file": "all-points.json",
+      "bytes": 2066321,
+      "sha256": "a8bf703703976402ff8cf454cdd301fa3e8f77a19a684e0c5f246b7cba919423"
+    },
+    {
+      "file": "bottleneck-switches.json",
+      "bytes": 2480,
+      "sha256": "1e28f40770a112d7306b248b78f1d743ac9b8b42b655a023982e79d79a3b481f"
+    },
+    {
+      "file": "corrections.md",
+      "bytes": 742,
+      "sha256": "ae6f8bf5254a09879aa347184a7655dc425292b5e9346dddfc1a949b9066ebf2"
+    },
+    {
+      "file": "cut_traffic.pdf",
+      "bytes": 17780,
+      "sha256": "3c09f18323020efc65cb47d2bde769c8aff241b92af5ba95446737e8d6217601"
+    },
+    {
+      "file": "cut_traffic.png",
+      "bytes": 126398,
+      "sha256": "ee496a14e9a26578eaa885efac98d2778a0cf8f47d32e4bbea0500f5069ffc93"
+    },
+    {
+      "file": "findings.md",
+      "bytes": 8148,
+      "sha256": "746a008888d1a6a15626d559dc017ea5ebebe6e351cecb2cf4348eb6a1c6176e"
+    },
+    {
+      "file": "gate.json",
+      "bytes": 862,
+      "sha256": "dfd8d78ebb9026feabde1bc9f3103cf48c9a8e7ca6600e2857125a31e3b43669"
+    },
+    {
+      "file": "horizontal_capacity.pdf",
+      "bytes": 28082,
+      "sha256": "825485e24be350d0057a5e7d74a01c8b571ebb92628ccb6021d3194920b107c1"
+    },
+    {
+      "file": "horizontal_capacity.png",
+      "bytes": 151219,
+      "sha256": "30e64499d305e7db484f0468cb21f9b2905444196698c343066984cec39ea975"
+    },
+    {
+      "file": "postprocess-provenance.json",
+      "bytes": 446,
+      "sha256": "8755832c977c17b41170341e9185df5476be346c2a72a8f1914d8be73c38a66d"
+    },
+    {
+      "file": "profile.json",
+      "bytes": 1433,
+      "sha256": "298de336084946e3acf0db48ea47dba3825d4582bd52a5dcc74844b007bf5b57"
+    },
+    {
+      "file": "provenance.json",
+      "bytes": 370,
+      "sha256": "1627a1dac65d84e2e4a8f6f743e9af6735d81a9f39cdf9c5695406a97137f794"
+    },
+    {
+      "file": "routed-flows.csv",
+      "bytes": 3593671,
+      "sha256": "f840d23e86b2317825a5ff5d7f10efd00b46fa09e5ef2d1583a48a2a029906c2"
+    },
+    {
+      "file": "scaling-example.json",
+      "bytes": 1031,
+      "sha256": "8ef230fa248a9eedc0ec0f894ec20b9143ac78e63be457a26d212c8df7bb8039"
+    }
+  ],
+  "scope": "All finite cases, capacity points and complete routed-flow accounting; no timed NoC execution"
+}

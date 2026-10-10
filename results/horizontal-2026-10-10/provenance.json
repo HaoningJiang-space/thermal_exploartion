@@ -1,0 +1,9 @@
+{
+  "source_commit": "02affcc533b194314e23a84e884472ed4a2365e5",
+  "source_dirty": false,
+  "timestamp_utc": "2026-10-10T15:10:39.631982+00:00",
+  "input_evidence": "results/d1-2026-10-10/command-cases.csv",
+  "new_ramulator_execution": false,
+  "thermal_execution": false,
+  "scope": "Mode B assumed chip-scale capacity screen; no timed NoC or new command execution"
+}

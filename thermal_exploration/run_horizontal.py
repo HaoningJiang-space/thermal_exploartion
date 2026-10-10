@@ -38,8 +38,9 @@ def figures(out, points):
     for ext in ("png","pdf"): fig.savefig(out/f"horizontal_capacity.{ext}",dpi=180)
     plt.close(fig)
     selected=[r for r in points if r["hb_tb_s"]==32 and r["link_gb_s"]==32 and r["control"]=="baseline"]
+    selected += [r for r in points if r["case"]=="wide_b32" and r["hb_tb_s"]==32 and r["link_gb_s"]==32 and r["control"]=="best_tested_ownership"]
     fig,axes=plt.subplots(1,2,figsize=(12,4.8))
-    labels=[r["case"] for r in selected]
+    labels=[r["case"] if r["control"]=="baseline" else "wide_b32_column_control" for r in selected]
     for ax,axis in zip(axes,("x","y")):
         bottom=[0.]*len(selected)
         for kind,color in zip(KINDS,("#267b9b","#bf8547","#8b93b0","#71a58a")):

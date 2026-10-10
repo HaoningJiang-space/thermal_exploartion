@@ -22,6 +22,11 @@ Oracle相对该代理剩余仅0.83%。Row-cycle新硬件分支关闭；并修正
 判断规则与各分支范围见 [Research Go / Hardware Go](docs/research_decisions.md)。Thermal最优性反转只约束声称该机制的研究。
 这些不是完整SALP或Stratum器件复现，独立功率校准仍未完成。
 
+[H1横向通信审计](results/horizontal-2026-10-10/findings.md)已完成Broadcast/Reduction/Redistribution/All-to-all交通与逐方向割集账目。
+宽矩阵Batch32的固定行切分容量上界为43.69TFLOP/s，已有列切分上界回到128TFLOP/s，byte-hop减少87.5%。
+这是条件性容量证据，不是实测speedup；支持继续通信/依赖研究，尚未评估新硬件Go。
+全部切分与负结果保留，不以无限NoC作为付费实现，不将chip-scale算术例子当作wafer-scale验证。
+
 新任务书与不可校准项见 [Grounded HB–DRAM Validation](docs/grounded_validation.md)。
 [Stratum Hardware Contract](configs/platforms/stratum_micro2025.json) 与旧 pilot 完全隔离，未知值保持 null。
 G1、G2、Memory Audit 已共用 DRAM Service Model；现有解析扫描保留作历史证据。

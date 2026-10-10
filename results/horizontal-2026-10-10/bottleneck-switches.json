@@ -1,0 +1,82 @@
+[
+  {
+    "case": "square_b1",
+    "traffic_kinds": [
+      "Broadcast"
+    ],
+    "link_can_dominate_frozen_capacity_model": false,
+    "hb_link_equal_tb_s": 174.76266666666666,
+    "required_link_gb_s_at_hb32": 4.870439560439561,
+    "note": "Necessary-capacity switch only; not timed execution attribution"
+  },
+  {
+    "case": "square_b32",
+    "traffic_kinds": [
+      "Broadcast"
+    ],
+    "link_can_dominate_frozen_capacity_model": false,
+    "hb_link_equal_tb_s": 5.461333333333333,
+    "required_link_gb_s_at_hb32": 23.4375,
+    "note": "Necessary-capacity switch only; not timed execution attribution"
+  },
+  {
+    "case": "wide_b1",
+    "traffic_kinds": [
+      "Broadcast"
+    ],
+    "link_can_dominate_frozen_capacity_model": false,
+    "hb_link_equal_tb_s": 43.690666666666665,
+    "required_link_gb_s_at_hb32": 19.481758241758243,
+    "note": "Necessary-capacity switch only; not timed execution attribution"
+  },
+  {
+    "case": "wide_b32",
+    "traffic_kinds": [
+      "Broadcast"
+    ],
+    "link_can_dominate_frozen_capacity_model": true,
+    "hb_link_equal_tb_s": 1.3653333333333333,
+    "required_link_gb_s_at_hb32": 93.75,
+    "note": "Necessary-capacity switch only; not timed execution attribution"
+  },
+  {
+    "case": "tall_b1",
+    "traffic_kinds": [
+      "Broadcast"
+    ],
+    "link_can_dominate_frozen_capacity_model": false,
+    "hb_link_equal_tb_s": 699.0506666666666,
+    "required_link_gb_s_at_hb32": 1.2176098901098902,
+    "note": "Necessary-capacity switch only; not timed execution attribution"
+  },
+  {
+    "case": "tall_b32",
+    "traffic_kinds": [
+      "Broadcast"
+    ],
+    "link_can_dominate_frozen_capacity_model": false,
+    "hb_link_equal_tb_s": 21.845333333333333,
+    "required_link_gb_s_at_hb32": 5.859375,
+    "note": "Necessary-capacity switch only; not timed execution attribution"
+  },
+  {
+    "case": "redistribution",
+    "traffic_kinds": [
+      "Redistribution"
+    ],
+    "link_can_dominate_frozen_capacity_model": true,
+    "hb_link_equal_tb_s": 0.5119999999999999,
+    "required_link_gb_s_at_hb32": 1662.44336996337,
+    "note": "Necessary-capacity switch only; not timed execution attribution"
+  },
+  {
+    "case": "moe_cohort",
+    "traffic_kinds": [
+      "All-to-all"
+    ],
+    "link_can_dominate_frozen_capacity_model": false,
+    "hb_link_equal_tb_s": 65.53599999999999,
+    "required_link_gb_s_at_hb32": 1.9531250000000002,
+    "note": "Necessary-capacity switch only; not timed execution attribution"
+  }
+]

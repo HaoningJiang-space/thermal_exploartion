@@ -1,0 +1,3944 @@
+[
+  {
+    "case": "square_b1",
+    "option": 0,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 245760,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 61440
+  },
+  {
+    "case": "square_b1",
+    "option": 1,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 245760,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 61440
+  },
+  {
+    "case": "square_b1",
+    "option": 2,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 245760,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 61440
+  },
+  {
+    "case": "square_b1",
+    "option": 3,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 245760,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 61440
+  },
+  {
+    "case": "square_b1",
+    "option": 4,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 24576,
+      "Reduction": 114688,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 28672
+  },
+  {
+    "case": "square_b1",
+    "option": 5,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 32768,
+      "Reduction": 114688,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 28672
+  },
+  {
+    "case": "square_b1",
+    "option": 6,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 8192,
+      "Reduction": 135168,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 28672
+  },
+  {
+    "case": "square_b1",
+    "option": 7,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 8192,
+      "Reduction": 196608,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 28672
+  },
+  {
+    "case": "square_b1",
+    "option": 8,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 34816,
+      "Reduction": 49152,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 12288
+  },
+  {
+    "case": "square_b1",
+    "option": 9,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 65536,
+      "Reduction": 49152,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 12288
+  },
+  {
+    "case": "square_b1",
+    "option": 10,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 24576,
+      "Reduction": 69632,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 12288
+  },
+  {
+    "case": "square_b1",
+    "option": 11,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 24576,
+      "Reduction": 131072,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 12288
+  },
+  {
+    "case": "square_b1",
+    "option": 12,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 67584,
+      "Reduction": 16384,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 4096
+  },
+  {
+    "case": "square_b1",
+    "option": 13,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 98304,
+      "Reduction": 16384,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 4096
+  },
+  {
+    "case": "square_b1",
+    "option": 14,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 57344,
+      "Reduction": 49152,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 4096
+  },
+  {
+    "case": "square_b1",
+    "option": 15,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 57344,
+      "Reduction": 65536,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 4096
+  },
+  {
+    "case": "square_b1",
+    "option": 16,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 122880,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "square_b1",
+    "option": 17,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 122880,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "square_b1",
+    "option": 18,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 122880,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "square_b1",
+    "option": 19,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 8192,
+      "output_bytes": 8192,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 122880,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "square_b32",
+    "option": 0,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 7864320,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 1966080
+  },
+  {
+    "case": "square_b32",
+    "option": 1,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 7864320,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 1966080
+  },
+  {
+    "case": "square_b32",
+    "option": 2,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 7864320,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 1966080
+  },
+  {
+    "case": "square_b32",
+    "option": 3,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 7864320,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 1966080
+  },
+  {
+    "case": "square_b32",
+    "option": 4,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 786432,
+      "Reduction": 3670016,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 917504
+  },
+  {
+    "case": "square_b32",
+    "option": 5,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 1048576,
+      "Reduction": 3670016,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 917504
+  },
+  {
+    "case": "square_b32",
+    "option": 6,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 262144,
+      "Reduction": 4325376,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 917504
+  },
+  {
+    "case": "square_b32",
+    "option": 7,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 262144,
+      "Reduction": 6291456,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 917504
+  },
+  {
+    "case": "square_b32",
+    "option": 8,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 1114112,
+      "Reduction": 1572864,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 393216
+  },
+  {
+    "case": "square_b32",
+    "option": 9,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 2097152,
+      "Reduction": 1572864,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 393216
+  },
+  {
+    "case": "square_b32",
+    "option": 10,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 786432,
+      "Reduction": 2228224,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 393216
+  },
+  {
+    "case": "square_b32",
+    "option": 11,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 786432,
+      "Reduction": 4194304,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 393216
+  },
+  {
+    "case": "square_b32",
+    "option": 12,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 2162688,
+      "Reduction": 524288,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 131072
+  },
+  {
+    "case": "square_b32",
+    "option": 13,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 3145728,
+      "Reduction": 524288,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 131072
+  },
+  {
+    "case": "square_b32",
+    "option": 14,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 1835008,
+      "Reduction": 1572864,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 131072
+  },
+  {
+    "case": "square_b32",
+    "option": 15,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 1835008,
+      "Reduction": 2097152,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 131072
+  },
+  {
+    "case": "square_b32",
+    "option": 16,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 3932160,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "square_b32",
+    "option": 17,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 3932160,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "square_b32",
+    "option": 18,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 3932160,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "square_b32",
+    "option": 19,
+    "work": {
+      "m": 4096,
+      "n": 4096,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 3932160,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "wide_b1",
+    "option": 0,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 61440,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 15360
+  },
+  {
+    "case": "wide_b1",
+    "option": 1,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 61440,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 15360
+  },
+  {
+    "case": "wide_b1",
+    "option": 2,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 61440,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 15360
+  },
+  {
+    "case": "wide_b1",
+    "option": 3,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 61440,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 15360
+  },
+  {
+    "case": "wide_b1",
+    "option": 4,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 98304,
+      "Reduction": 28672,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 7168
+  },
+  {
+    "case": "wide_b1",
+    "option": 5,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 131072,
+      "Reduction": 28672,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 7168
+  },
+  {
+    "case": "wide_b1",
+    "option": 6,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 32768,
+      "Reduction": 33792,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 7168
+  },
+  {
+    "case": "wide_b1",
+    "option": 7,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 32768,
+      "Reduction": 49152,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 7168
+  },
+  {
+    "case": "wide_b1",
+    "option": 8,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 139264,
+      "Reduction": 12288,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 3072
+  },
+  {
+    "case": "wide_b1",
+    "option": 9,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 262144,
+      "Reduction": 12288,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 3072
+  },
+  {
+    "case": "wide_b1",
+    "option": 10,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 98304,
+      "Reduction": 17408,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 3072
+  },
+  {
+    "case": "wide_b1",
+    "option": 11,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 98304,
+      "Reduction": 32768,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 3072
+  },
+  {
+    "case": "wide_b1",
+    "option": 12,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 270336,
+      "Reduction": 4096,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 1024
+  },
+  {
+    "case": "wide_b1",
+    "option": 13,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 393216,
+      "Reduction": 4096,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 1024
+  },
+  {
+    "case": "wide_b1",
+    "option": 14,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 229376,
+      "Reduction": 12288,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 1024
+  },
+  {
+    "case": "wide_b1",
+    "option": 15,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 229376,
+      "Reduction": 16384,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 1024
+  },
+  {
+    "case": "wide_b1",
+    "option": 16,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 491520,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "wide_b1",
+    "option": 17,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 491520,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "wide_b1",
+    "option": 18,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 491520,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "wide_b1",
+    "option": 19,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 32768,
+      "output_bytes": 2048,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 491520,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "wide_b32",
+    "option": 0,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 1966080,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 491520
+  },
+  {
+    "case": "wide_b32",
+    "option": 1,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 1966080,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 491520
+  },
+  {
+    "case": "wide_b32",
+    "option": 2,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 1966080,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 491520
+  },
+  {
+    "case": "wide_b32",
+    "option": 3,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 1966080,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 491520
+  },
+  {
+    "case": "wide_b32",
+    "option": 4,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 3145728,
+      "Reduction": 917504,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 229376
+  },
+  {
+    "case": "wide_b32",
+    "option": 5,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 4194304,
+      "Reduction": 917504,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 229376
+  },
+  {
+    "case": "wide_b32",
+    "option": 6,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 1048576,
+      "Reduction": 1081344,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 229376
+  },
+  {
+    "case": "wide_b32",
+    "option": 7,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 1048576,
+      "Reduction": 1572864,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 229376
+  },
+  {
+    "case": "wide_b32",
+    "option": 8,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 4456448,
+      "Reduction": 393216,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 98304
+  },
+  {
+    "case": "wide_b32",
+    "option": 9,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 8388608,
+      "Reduction": 393216,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 98304
+  },
+  {
+    "case": "wide_b32",
+    "option": 10,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 3145728,
+      "Reduction": 557056,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 98304
+  },
+  {
+    "case": "wide_b32",
+    "option": 11,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 3145728,
+      "Reduction": 1048576,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 98304
+  },
+  {
+    "case": "wide_b32",
+    "option": 12,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 8650752,
+      "Reduction": 131072,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 32768
+  },
+  {
+    "case": "wide_b32",
+    "option": 13,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 12582912,
+      "Reduction": 131072,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 32768
+  },
+  {
+    "case": "wide_b32",
+    "option": 14,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 7340032,
+      "Reduction": 393216,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 32768
+  },
+  {
+    "case": "wide_b32",
+    "option": 15,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 7340032,
+      "Reduction": 524288,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 32768
+  },
+  {
+    "case": "wide_b32",
+    "option": 16,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 15728640,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "wide_b32",
+    "option": 17,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 15728640,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "wide_b32",
+    "option": 18,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 15728640,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "wide_b32",
+    "option": 19,
+    "work": {
+      "m": 1024,
+      "n": 16384,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 1048576,
+      "output_bytes": 65536,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 15728640,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "tall_b1",
+    "option": 0,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 983040,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 245760
+  },
+  {
+    "case": "tall_b1",
+    "option": 1,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 983040,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 245760
+  },
+  {
+    "case": "tall_b1",
+    "option": 2,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 983040,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 245760
+  },
+  {
+    "case": "tall_b1",
+    "option": 3,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 983040,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 245760
+  },
+  {
+    "case": "tall_b1",
+    "option": 4,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 6144,
+      "Reduction": 458752,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 114688
+  },
+  {
+    "case": "tall_b1",
+    "option": 5,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 8192,
+      "Reduction": 458752,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 114688
+  },
+  {
+    "case": "tall_b1",
+    "option": 6,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 2048,
+      "Reduction": 540672,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 114688
+  },
+  {
+    "case": "tall_b1",
+    "option": 7,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 2048,
+      "Reduction": 786432,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 114688
+  },
+  {
+    "case": "tall_b1",
+    "option": 8,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 8704,
+      "Reduction": 196608,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 49152
+  },
+  {
+    "case": "tall_b1",
+    "option": 9,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 16384,
+      "Reduction": 196608,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 49152
+  },
+  {
+    "case": "tall_b1",
+    "option": 10,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 6144,
+      "Reduction": 278528,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 49152
+  },
+  {
+    "case": "tall_b1",
+    "option": 11,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 6144,
+      "Reduction": 524288,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 49152
+  },
+  {
+    "case": "tall_b1",
+    "option": 12,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 16896,
+      "Reduction": 65536,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 16384
+  },
+  {
+    "case": "tall_b1",
+    "option": 13,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 24576,
+      "Reduction": 65536,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 16384
+  },
+  {
+    "case": "tall_b1",
+    "option": 14,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 14336,
+      "Reduction": 196608,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 16384
+  },
+  {
+    "case": "tall_b1",
+    "option": 15,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 14336,
+      "Reduction": 262144,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 16384
+  },
+  {
+    "case": "tall_b1",
+    "option": 16,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 30720,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "tall_b1",
+    "option": 17,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 30720,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "tall_b1",
+    "option": 18,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 30720,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "tall_b1",
+    "option": 19,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 1,
+      "weight_bytes": 33554432,
+      "mac_flops": 33554432,
+      "input_bytes": 2048,
+      "output_bytes": 32768,
+      "metric_work": 33554432,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 30720,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "tall_b32",
+    "option": 0,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 31457280,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 7864320
+  },
+  {
+    "case": "tall_b32",
+    "option": 1,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 31457280,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 7864320
+  },
+  {
+    "case": "tall_b32",
+    "option": 2,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 31457280,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 7864320
+  },
+  {
+    "case": "tall_b32",
+    "option": 3,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 1,
+      "column_parts": 16,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 31457280,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 7864320
+  },
+  {
+    "case": "tall_b32",
+    "option": 4,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 196608,
+      "Reduction": 14680064,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 3670016
+  },
+  {
+    "case": "tall_b32",
+    "option": 5,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 262144,
+      "Reduction": 14680064,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 3670016
+  },
+  {
+    "case": "tall_b32",
+    "option": 6,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 65536,
+      "Reduction": 17301504,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 3670016
+  },
+  {
+    "case": "tall_b32",
+    "option": 7,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 2,
+      "column_parts": 8,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 65536,
+      "Reduction": 25165824,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 3670016
+  },
+  {
+    "case": "tall_b32",
+    "option": 8,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 278528,
+      "Reduction": 6291456,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 1572864
+  },
+  {
+    "case": "tall_b32",
+    "option": 9,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 524288,
+      "Reduction": 6291456,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 1572864
+  },
+  {
+    "case": "tall_b32",
+    "option": 10,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 196608,
+      "Reduction": 8912896,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 1572864
+  },
+  {
+    "case": "tall_b32",
+    "option": 11,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 4,
+      "column_parts": 4,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 196608,
+      "Reduction": 16777216,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 1572864
+  },
+  {
+    "case": "tall_b32",
+    "option": 12,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 540672,
+      "Reduction": 2097152,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 524288
+  },
+  {
+    "case": "tall_b32",
+    "option": 13,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 786432,
+      "Reduction": 2097152,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 524288
+  },
+  {
+    "case": "tall_b32",
+    "option": 14,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 458752,
+      "Reduction": 6291456,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 524288
+  },
+  {
+    "case": "tall_b32",
+    "option": 15,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 8,
+      "column_parts": 2,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 458752,
+      "Reduction": 8388608,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 524288
+  },
+  {
+    "case": "tall_b32",
+    "option": 16,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "row",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 983040,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "tall_b32",
+    "option": 17,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "row",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 983040,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "tall_b32",
+    "option": 18,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "column",
+      "tree_order": "xy"
+    },
+    "byte_hops": {
+      "Broadcast": 983040,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "tall_b32",
+    "option": 19,
+    "work": {
+      "m": 16384,
+      "n": 1024,
+      "batch": 32,
+      "weight_bytes": 33554432,
+      "mac_flops": 1073741824,
+      "input_bytes": 65536,
+      "output_bytes": 1048576,
+      "metric_work": 1073741824,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "row_parts": 16,
+      "column_parts": 1,
+      "orientation": "column",
+      "tree_order": "yx"
+    },
+    "byte_hops": {
+      "Broadcast": 983040,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "redistribution",
+    "option": 0,
+    "work": {
+      "weight_bytes": 262144,
+      "mac_flops": 0,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 262144,
+      "metric": "GB/s upper bound",
+      "metric_scale": 1000000000.0
+    },
+    "partition": {
+      "aligned": false
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 655360,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "redistribution",
+    "option": 1,
+    "work": {
+      "weight_bytes": 262144,
+      "mac_flops": 0,
+      "input_bytes": 262144,
+      "output_bytes": 262144,
+      "metric_work": 262144,
+      "metric": "GB/s upper bound",
+      "metric_scale": 1000000000.0
+    },
+    "partition": {
+      "aligned": true
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 0
+    },
+    "vector_ops": 0
+  },
+  {
+    "case": "moe_cohort",
+    "option": 0,
+    "work": {
+      "weight_bytes": 1073741824,
+      "mac_flops": 34359738368,
+      "input_bytes": 2097152,
+      "output_bytes": 2097152,
+      "assignments": 512,
+      "logical_dispatch_bytes": 4194304,
+      "logical_combine_bytes": 4194304,
+      "metric_work": 34359738368,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "expert_shift": 0
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 20971520
+    },
+    "vector_ops": 1048576
+  },
+  {
+    "case": "moe_cohort",
+    "option": 1,
+    "work": {
+      "weight_bytes": 1073741824,
+      "mac_flops": 34359738368,
+      "input_bytes": 2097152,
+      "output_bytes": 2097152,
+      "assignments": 512,
+      "logical_dispatch_bytes": 4194304,
+      "logical_combine_bytes": 4194304,
+      "metric_work": 34359738368,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "expert_shift": 1
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 20971520
+    },
+    "vector_ops": 1048576
+  },
+  {
+    "case": "moe_cohort",
+    "option": 2,
+    "work": {
+      "weight_bytes": 1073741824,
+      "mac_flops": 34359738368,
+      "input_bytes": 2097152,
+      "output_bytes": 2097152,
+      "assignments": 512,
+      "logical_dispatch_bytes": 4194304,
+      "logical_combine_bytes": 4194304,
+      "metric_work": 34359738368,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "expert_shift": 2
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 20971520
+    },
+    "vector_ops": 1048576
+  },
+  {
+    "case": "moe_cohort",
+    "option": 3,
+    "work": {
+      "weight_bytes": 1073741824,
+      "mac_flops": 34359738368,
+      "input_bytes": 2097152,
+      "output_bytes": 2097152,
+      "assignments": 512,
+      "logical_dispatch_bytes": 4194304,
+      "logical_combine_bytes": 4194304,
+      "metric_work": 34359738368,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "expert_shift": 3
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 20971520
+    },
+    "vector_ops": 1048576
+  },
+  {
+    "case": "moe_cohort",
+    "option": 4,
+    "work": {
+      "weight_bytes": 1073741824,
+      "mac_flops": 34359738368,
+      "input_bytes": 2097152,
+      "output_bytes": 2097152,
+      "assignments": 512,
+      "logical_dispatch_bytes": 4194304,
+      "logical_combine_bytes": 4194304,
+      "metric_work": 34359738368,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "expert_shift": 4
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 20971520
+    },
+    "vector_ops": 1048576
+  },
+  {
+    "case": "moe_cohort",
+    "option": 5,
+    "work": {
+      "weight_bytes": 1073741824,
+      "mac_flops": 34359738368,
+      "input_bytes": 2097152,
+      "output_bytes": 2097152,
+      "assignments": 512,
+      "logical_dispatch_bytes": 4194304,
+      "logical_combine_bytes": 4194304,
+      "metric_work": 34359738368,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "expert_shift": 5
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 20971520
+    },
+    "vector_ops": 1048576
+  },
+  {
+    "case": "moe_cohort",
+    "option": 6,
+    "work": {
+      "weight_bytes": 1073741824,
+      "mac_flops": 34359738368,
+      "input_bytes": 2097152,
+      "output_bytes": 2097152,
+      "assignments": 512,
+      "logical_dispatch_bytes": 4194304,
+      "logical_combine_bytes": 4194304,
+      "metric_work": 34359738368,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "expert_shift": 6
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 20971520
+    },
+    "vector_ops": 1048576
+  },
+  {
+    "case": "moe_cohort",
+    "option": 7,
+    "work": {
+      "weight_bytes": 1073741824,
+      "mac_flops": 34359738368,
+      "input_bytes": 2097152,
+      "output_bytes": 2097152,
+      "assignments": 512,
+      "logical_dispatch_bytes": 4194304,
+      "logical_combine_bytes": 4194304,
+      "metric_work": 34359738368,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "expert_shift": 7
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 20971520
+    },
+    "vector_ops": 1048576
+  },
+  {
+    "case": "moe_cohort",
+    "option": 8,
+    "work": {
+      "weight_bytes": 1073741824,
+      "mac_flops": 34359738368,
+      "input_bytes": 2097152,
+      "output_bytes": 2097152,
+      "assignments": 512,
+      "logical_dispatch_bytes": 4194304,
+      "logical_combine_bytes": 4194304,
+      "metric_work": 34359738368,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "expert_shift": 8
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 20971520
+    },
+    "vector_ops": 1048576
+  },
+  {
+    "case": "moe_cohort",
+    "option": 9,
+    "work": {
+      "weight_bytes": 1073741824,
+      "mac_flops": 34359738368,
+      "input_bytes": 2097152,
+      "output_bytes": 2097152,
+      "assignments": 512,
+      "logical_dispatch_bytes": 4194304,
+      "logical_combine_bytes": 4194304,
+      "metric_work": 34359738368,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "expert_shift": 9
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 20971520
+    },
+    "vector_ops": 1048576
+  },
+  {
+    "case": "moe_cohort",
+    "option": 10,
+    "work": {
+      "weight_bytes": 1073741824,
+      "mac_flops": 34359738368,
+      "input_bytes": 2097152,
+      "output_bytes": 2097152,
+      "assignments": 512,
+      "logical_dispatch_bytes": 4194304,
+      "logical_combine_bytes": 4194304,
+      "metric_work": 34359738368,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "expert_shift": 10
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 20971520
+    },
+    "vector_ops": 1048576
+  },
+  {
+    "case": "moe_cohort",
+    "option": 11,
+    "work": {
+      "weight_bytes": 1073741824,
+      "mac_flops": 34359738368,
+      "input_bytes": 2097152,
+      "output_bytes": 2097152,
+      "assignments": 512,
+      "logical_dispatch_bytes": 4194304,
+      "logical_combine_bytes": 4194304,
+      "metric_work": 34359738368,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "expert_shift": 11
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 20971520
+    },
+    "vector_ops": 1048576
+  },
+  {
+    "case": "moe_cohort",
+    "option": 12,
+    "work": {
+      "weight_bytes": 1073741824,
+      "mac_flops": 34359738368,
+      "input_bytes": 2097152,
+      "output_bytes": 2097152,
+      "assignments": 512,
+      "logical_dispatch_bytes": 4194304,
+      "logical_combine_bytes": 4194304,
+      "metric_work": 34359738368,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "expert_shift": 12
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 20971520
+    },
+    "vector_ops": 1048576
+  },
+  {
+    "case": "moe_cohort",
+    "option": 13,
+    "work": {
+      "weight_bytes": 1073741824,
+      "mac_flops": 34359738368,
+      "input_bytes": 2097152,
+      "output_bytes": 2097152,
+      "assignments": 512,
+      "logical_dispatch_bytes": 4194304,
+      "logical_combine_bytes": 4194304,
+      "metric_work": 34359738368,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "expert_shift": 13
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 20971520
+    },
+    "vector_ops": 1048576
+  },
+  {
+    "case": "moe_cohort",
+    "option": 14,
+    "work": {
+      "weight_bytes": 1073741824,
+      "mac_flops": 34359738368,
+      "input_bytes": 2097152,
+      "output_bytes": 2097152,
+      "assignments": 512,
+      "logical_dispatch_bytes": 4194304,
+      "logical_combine_bytes": 4194304,
+      "metric_work": 34359738368,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "expert_shift": 14
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 20971520
+    },
+    "vector_ops": 1048576
+  },
+  {
+    "case": "moe_cohort",
+    "option": 15,
+    "work": {
+      "weight_bytes": 1073741824,
+      "mac_flops": 34359738368,
+      "input_bytes": 2097152,
+      "output_bytes": 2097152,
+      "assignments": 512,
+      "logical_dispatch_bytes": 4194304,
+      "logical_combine_bytes": 4194304,
+      "metric_work": 34359738368,
+      "metric": "TFLOP/s upper bound",
+      "metric_scale": 1000000000000.0
+    },
+    "partition": {
+      "expert_shift": 15
+    },
+    "byte_hops": {
+      "Broadcast": 0,
+      "Reduction": 0,
+      "Redistribution": 0,
+      "All-to-all": 20971520
+    },
+    "vector_ops": 1048576
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "side": 4,
+  "tiles": 16,
+  "logic_area_mm2": 121,
+  "logic_reference_footprint_mm2": 76.55,
+  "additional_reserved_noc_area_mm2": 3,
+  "dram_capacity_bytes": 34359738368,
+  "fast_tier_capacity_bytes": 4294967296,
+  "sram_bytes": 37748736,
+  "mac_tflops": 128,
+  "vector_gadd_s_per_tile": 64,
+  "link_gb_s_per_direction": 32,
+  "hb_tb_s": [
+    1,
+    4,
+    16,
+    32
+  ],
+  "link_sensitivity_gb_s": [
+    16,
+    64
+  ],
+  "dram_full_row_tb_s": 26.59909391941392,
+  "service_anchor_scope": "Assumed delivery cap anchored in D1; the measured steady rate is not a proven maximum over other traces/controllers",
+  "dram_evidence_sha256": "60bdba5b5565e2ccea2bf5c0cfa774092af3dc5732a4a79561b4666e6b6ac4f9",
+  "classification": "Mode B assumed chip-scale capacity screen; no timed NoC or new command execution",
+  "noc_hop_energy_pj_byte": 1,
+  "noc_energy_scope": "Assumed traffic accounting only; no thermal feedback",
+  "assumptions": [
+    "Optimistic full-row service ceiling, not guaranteed operator delivery",
+    "Canonical distributed input/output; static local W layouts, no migration",
+    "Ideal spatial MAC utilization; SRAM port and buffering limits unmodelled",
+    "Full-duplex links, no router/arbitration/latency or task-dependency timing",
+    "In-compute-Tile reduction, FP32 partials and FP16 input/output",
+    "HB/link capacity changes are isolation counterfactuals, not manufacturable configurations"
+  ]
+}

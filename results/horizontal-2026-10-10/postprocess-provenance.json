@@ -1,0 +1,7 @@
+{
+  "traffic_run_source": "02affcc533b194314e23a84e884472ed4a2365e5",
+  "plot_script_git_blob": "838c5a1915d40c4eb46485e0a48dec4024aab5cc",
+  "changes": "Plot adds known column-control reduction; density example clarifies one-direction fraction; underlying capacity points and flows unchanged",
+  "execution_rerun": false,
+  "derived_gate_and_switches": "Interpretation from unchanged all-points; no new execution or capacity-point evaluation"
+}
