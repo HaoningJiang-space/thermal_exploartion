@@ -53,10 +53,15 @@ class Graph:
         # Fixed bank/ACT-domain/column resources. D1's observed 26.599TB/s
         # is a guard on the fastest streaming service, not a device calibration.
         service=min(26.599/16*1000*.25,16*4096/rc)
-        mem=self.add('dram',tile,bytes_,memory_deps,('dram',tile),max(1,ceil(bytes_/service)),'memory',tier)
-        hb=self.add('hb',tile,bytes_,(mem,),ticks=ceil(bytes_/500),stage='memory',tier=tier)
-        write=hb if stream else self.add('sram_write',tile,bytes_,(hb,),('write',tile),ceil(bytes_/128),'memory',tier)
-        ready=[write,*deps]
+        pieces=[];ready=list(deps)
+        # Independently returned32KiB packets can overlap stages; a64KiB
+        # compute block does not force an artificial single-flight return.
+        for offset in range(0,bytes_,32768):
+            size=min(32768,bytes_-offset)
+            mem=self.add('dram',tile,size,memory_deps,('dram',tile),max(1,ceil(size/service)),'memory',tier)
+            hb=self.add('hb',tile,size,(mem,),ticks=ceil(size/500),stage='memory',tier=tier)
+            write=hb if stream else self.add('sram_write',tile,size,(hb,),('write',tile),ceil(size/128),'memory',tier)
+            pieces.append((mem,write,size));ready.append(write)
         if parent is not None:ready.append(parent)
         read_bytes=0 if stream else bytes_
         # Input/partial accesses remain charged even on the known FIFO path.
@@ -66,8 +71,9 @@ class Graph:
         end=mac
         if vec_ops:end=self.add('vector',tile,vec_ops,(mac,),('vector',tile),ceil(vec_ops/16),stage,tier)
         end=self.add('sram_write',tile,2048,(end,),('write',tile),16,stage,tier)
-        self.lease(mem,write,('return',tile),bytes_)
-        self.lease(mem,mac if stream else read,('weight_fifo' if stream else 'weight',tile),bytes_)
+        for mem,write,size in pieces:
+            self.lease(mem,write,('return',tile),size)
+            self.lease(mem,mac if stream else read,('weight_fifo' if stream else 'weight',tile),size)
         return end
 
     def transfer(self,source,target,bytes_,deps,stage='communication'):
@@ -156,7 +162,7 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
     queues=defaultdict(list);events=[];busy={};used=Counter();high=Counter();owners=defaultdict(set)
     release=defaultdict(list);last_release={};done=np.full(n,-1,dtype=np.int64);start=done.copy();parents=[None]*n
     wait=Counter();last_resource={};clock=0;completed=0;activity=Counter();per_tile=defaultdict(Counter)
-    caps={'weight':524288,'weight_fifo':65536,'return':65536,'receive':65536,'workspace':1048576,
+    caps={'weight':524288,'weight_fifo':262144,'return':65536,'receive':65536,'workspace':1048576,
           'router0':4096,'router1':4096,'router2':4096,'router3':4096,'transmit':65536,'output':262144}
     def cap(key):return 2**50 if mode=='ideal_buffer' else caps[key[0]]
     priority={'join':0,'sram_write':1,'sram_read':2,'vector':3,'mac':4,'link':5,'hb':6,'dram':7}
@@ -303,39 +309,42 @@ def attention(batch=1,context=8192,stream=False):
     return g
 
 
-def moe(batch=32,skew=1.2,seed=20261010,stream=False):
+def moe(batch=32,skew=1.2,seed=20261010,stream=False,tensor_parts=4):
     g=Graph();experts=80;d,h=2048,8192;topk=2
+    if tensor_parts not in (1,4,16):raise ValueError('Unknown EP/TP combination')
     rng=np.random.default_rng(seed);prob=np.arange(1,experts+1,dtype=float)**(-skew);prob/=prob.sum()
     routing=[rng.choice(experts,topk,replace=False,p=prob).tolist() for _ in range(batch)]
     counts=Counter(e for selected in routing for e in selected);expert_finish={};physical_weight_bytes=0;groups=[]
     resident=experts*4*d*h;slots=4*2**30//(4*d*h)
     # Known expected popularity, not the future sampled route, determines
     # static fast-tier placement and an offline load-balanced expert assignment.
-    loads=[0.]*16;owner={}
+    clusters=16//tensor_parts;loads=[0.]*clusters;owner={}
     for e in range(experts):
-        tile=min(range(16),key=lambda t:(loads[t],t));owner[e]=tile;loads[tile]+=prob[e]
-    dispatched=[g.broadcast(t%16,sorted({owner[e] for e in es}),d*2,(),'dispatch') for t,es in enumerate(routing)]
+        cluster=min(range(clusters),key=lambda t:(loads[t],t));owner[e]=list(range(cluster*tensor_parts,(cluster+1)*tensor_parts));loads[cluster]+=prob[e]
+    dispatched=[g.broadcast(t%16,sorted({tile for e in es for tile in owner[e]}),d*2,(),'dispatch') for t,es in enumerate(routing)]
     for e,count in sorted(counts.items(),key=lambda z:(-prob[z[0]],z[0])):
-        tile=owner[e];tier=0 if e<slots else 1+(e-slots)%7
+        tier=0 if e<slots else 1+(e-slots)%7
         tokens=[t for t,es in enumerate(routing) if e in es]
         # Known token batching keeps private intermediate SRAM finite. Weight
         # re-reads for additional microbatches are charged, not free reuse.
         for begin in range(0,count,16):
             selected=tokens[begin:begin+16];local_count=len(selected)
-            dispatch=[dispatched[t][tile] for t in selected]
-            entry=g.join((),'expert_workspace');prev=None
-            for layer in range(2):
-                for chunk in range(512):
-                    prev=g.memory_compute(tile,65536,65536*local_count,(*dispatch,entry),prev,tier,
-                        h*local_count*5 if layer==0 and chunk==511 else 0,'expert_up' if layer==0 else 'expert_down',stream,(entry,))
-            g.lease(entry,prev,('workspace',tile),local_count*(d*2+h*4+d*4))
+            partials={}
+            for tile in owner[e]:
+                dispatch=[dispatched[t][tile] for t in selected]
+                entry=g.join((),'expert_workspace');prev=None
+                for layer in range(2):
+                    for chunk in range(512//tensor_parts):
+                        prev=g.memory_compute(tile,65536,65536*local_count,(*dispatch,entry),prev,tier,
+                            h//tensor_parts*local_count*5 if layer==0 and chunk==512//tensor_parts-1 else 0,'expert_up' if layer==0 else 'expert_down',stream,(entry,))
+                g.lease(entry,prev,('workspace',tile),local_count*(d*2+h//tensor_parts*4+d*4))
+                partials[tile]=prev;groups.append((prev,tile,selected))
             physical_weight_bytes+=4*d*h
-            groups.append((prev,tile,selected))
-            for token in selected:expert_finish[token,e]=prev
+            for token in selected:expert_finish[token,e]=partials
     outputs=[]
     for token,es in enumerate(routing):
         root=token%16
-        arrivals=[g.transfer(owner[e],root,d*4,(expert_finish[token,e],),'combine') for e in es]
+        arrivals=[g.collective(root,expert_finish[token,e],d*4,'combine') for e in es]
         merge=g.add('vector',root,d*3,arrivals,('vector',root),ceil(d*3/16),'combine')
         outputs.append(g.add('mac',root,2*d*128,(merge,),('mac',root),ceil(2*d*128/2000),'next_operator'))
     for finish,tile,selected in groups:
@@ -343,7 +352,7 @@ def moe(batch=32,skew=1.2,seed=20261010,stream=False):
         g.lease(finish,retired,('output',tile),len(selected)*d*4)
     active_bytes=len(counts)*4*d*h
     g.output=outputs;g.meta=dict(family='MoE',batch=batch,experts=experts,d=d,h=h,topk=topk,seed=seed,skew=skew,
-        routing=routing,expert_counts=dict(counts),expert_owners=owner,weight_bytes=physical_weight_bytes,unique_active_weight_bytes=active_bytes,
+        routing=routing,expert_counts=dict(counts),expert_owners=owner,tensor_parts=tensor_parts,weight_bytes=physical_weight_bytes,unique_active_weight_bytes=active_bytes,
         resident_weight_bytes=resident,fast_capacity_bytes=4*2**30,mac_flops=4*d*h*batch*topk+2*d*128*batch,
         tokens=batch,baseline='Static popularity placement/load-balanced ownership; expert weight reuse, asynchronous dispatch and expert-granular combine',
         routing_evidence='Assumed weighted-without-replacement probability trace, not an observed model route')

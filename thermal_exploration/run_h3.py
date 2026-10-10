@@ -18,6 +18,8 @@ WORKLOADS={
     'moe_uniform_b32':('moe',dict(batch=32,skew=0.)),
     'moe_zipf_b32':('moe',dict(batch=32,skew=1.2)),
     'moe_zipf_b128':('moe',dict(batch=128,skew=1.2)),
+    'moe_zipf_ep_b32':('moe',dict(batch=32,skew=1.2,tensor_parts=1)),
+    'moe_zipf_tp16_b32':('moe',dict(batch=32,skew=1.2,tensor_parts=16)),
 }
 MODES=('baseline','ideal_memory','infinite_noc','ideal_buffer','direct_stream','ideal_collective')
 
