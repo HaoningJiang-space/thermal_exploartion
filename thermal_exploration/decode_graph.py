@@ -159,7 +159,7 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
     for node in g.nodes:
         remaining.append(len(node.deps))
         for dep in node.deps:children[dep].append(node.id)
-    queues=defaultdict(list);events=[];busy={};used=Counter();high=Counter();owners=defaultdict(set)
+    queues=defaultdict(list);events=[];busy={};used=Counter();private_used=Counter();high=Counter();owners=defaultdict(set)
     release=defaultdict(list);last_release={};done=np.full(n,-1,dtype=np.int64);start=done.copy();parents=[None]*n
     wait=Counter();last_resource={};clock=0;completed=0;activity=Counter();per_tile=defaultdict(Counter)
     caps={'weight':524288,'weight_fifo':262144,'return':65536,'receive':65536,'workspace':1048576,
@@ -175,7 +175,7 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
         while events and events[0][0]<=clock:
             time,i=heapq.heappop(events);done[i]=time;completed+=1
             for key,amount,owner in release.pop(i,[]):
-                used[key]-=amount;owners[key].remove(owner);last_release[key]=(i,time)
+                used[key]-=amount;private_used[key[1]]-=amount;owners[key].remove(owner);last_release[key]=(i,time)
             for child in children[i]:
                 remaining[child]-=1
                 if remaining[child]==0:enqueue(child)
@@ -213,8 +213,8 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
                 # it is not implemented by secretly dropping compute work.
                 finish=clock+duration;busy[key]=finish;last_resource[key]=i
                 for k,a,last in node.leases:
-                    used[k]+=a;high[k]=max(high[k],used[k]);owners[k].add(i);release[last].append((k,a,i))
-                if mode!='ideal_buffer' and any(sum(v for (_,tile),v in used.items() if tile==t)+262144>2359296 for t in range(16)):
+                    used[k]+=a;private_used[k[1]]+=a;high[k]=max(high[k],used[k]);owners[k].add(i);release[last].append((k,a,i))
+                if mode!='ideal_buffer' and max(private_used.values(),default=0)+262144>2359296:
                     raise ValueError('Combined private SRAM budget exceeded')
                 heapq.heappush(events,(finish,i))
                 activity[node.kind]+=node.work;per_tile[node.tile][node.kind]+=node.work
