@@ -19,6 +19,7 @@
 #include "ramulator/memory_system/i_memory_system.h"
 #include "ramulator/controller/controller_base.h"
 #include "ramulator/controller/plugin/i_controller_plugin.h"
+#include "tier_timing_plugin.h"
 
 namespace Ramulator {
 // External's default core count is one; controller per-source arrays must have
