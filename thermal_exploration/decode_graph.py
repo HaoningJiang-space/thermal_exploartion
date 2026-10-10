@@ -301,9 +301,9 @@ def attention(batch=1,context=8192,stream=False):
         for owner in (root,root+1):
             delivery=g.transfer(root,owner,batch*2*dim*2,(merge,),'output')
             # A following local projection consumes the actual returned shard.
-            outputs.append(g.add('mac',owner,batch*2*dim*128,(delivery,),('mac',owner),ceil(batch*2*dim*128/2000),'next_operator'))
+            outputs.append(g.add('mac',owner,2*batch*2*dim*128,(delivery,),('mac',owner),ceil(2*batch*2*dim*128/2000),'next_operator'))
     g.output=outputs;g.meta=dict(family='Attention',batch=batch,context=context,query_heads=hq,kv_heads=hkv,head_dim=dim,
-        weight_bytes=kv_bytes,mac_flops=4*batch*context*hq*dim+batch*4096*128,
+        weight_bytes=kv_bytes,mac_flops=4*batch*context*hq*dim+2*batch*4096*128,
         baseline='Online softmax plus split-KV; merge max/logsumexp/output, no score-matrix materialization',tokens=batch,
         resident_kv_bytes=kv_bytes,fast_capacity_bytes=4*2**30)
     return g
@@ -318,12 +318,20 @@ def moe(batch=32,skew=1.2,seed=20261010,stream=False,tensor_parts=4):
     resident=experts*4*d*h;slots=4*2**30//(4*d*h)
     # Known expected popularity, not the future sampled route, determines
     # static fast-tier placement and an offline load-balanced expert assignment.
-    clusters=16//tensor_parts;loads=[0.]*clusters;owner={}
+    clusters=16//tensor_parts;loads=[0.]*clusters;owner={};resident_count=[0]*clusters
     for e in range(experts):
-        cluster=min(range(clusters),key=lambda t:(loads[t],t));owner[e]=list(range(cluster*tensor_parts,(cluster+1)*tensor_parts));loads[cluster]+=prob[e]
+        cluster=min((c for c in range(clusters) if resident_count[c]<experts//clusters),key=lambda t:(loads[t],t))
+        owner[e]=list(range(cluster*tensor_parts,(cluster+1)*tensor_parts));loads[cluster]+=prob[e];resident_count[cluster]+=1
+    # Fast capacity is256MiB in EACH physical channel region, not a freely
+    # pooled4GiB. Static placement must respect local tier capacities.
+    expert_tiers={};tier_count=[0]*clusters
+    for e in range(experts):
+        cluster=owner[e][0]//tensor_parts;local_rank=tier_count[cluster];tier_count[cluster]+=1
+        local_fast=slots//clusters
+        expert_tiers[e]=0 if local_rank<local_fast else min(7,1+(local_rank-local_fast)//max(1,local_fast))
     dispatched=[g.broadcast(t%16,sorted({tile for e in es for tile in owner[e]}),d*2,(),'dispatch') for t,es in enumerate(routing)]
     for e,count in sorted(counts.items(),key=lambda z:(-prob[z[0]],z[0])):
-        tier=0 if e<slots else 1+(e-slots)%7
+        tier=expert_tiers[e]
         tokens=[t for t,es in enumerate(routing) if e in es]
         # Known token batching keeps private intermediate SRAM finite. Weight
         # re-reads for additional microbatches are charged, not free reuse.
@@ -352,7 +360,8 @@ def moe(batch=32,skew=1.2,seed=20261010,stream=False,tensor_parts=4):
         g.lease(finish,retired,('output',tile),len(selected)*d*4)
     active_bytes=len(counts)*4*d*h
     g.output=outputs;g.meta=dict(family='MoE',batch=batch,experts=experts,d=d,h=h,topk=topk,seed=seed,skew=skew,
-        routing=routing,expert_counts=dict(counts),expert_owners=owner,tensor_parts=tensor_parts,weight_bytes=physical_weight_bytes,unique_active_weight_bytes=active_bytes,
+        routing=routing,expert_counts=dict(counts),expert_owners=owner,expert_tiers=expert_tiers,tensor_parts=tensor_parts,
+        weight_bytes=physical_weight_bytes,unique_active_weight_bytes=active_bytes,
         resident_weight_bytes=resident,fast_capacity_bytes=4*2**30,mac_flops=4*d*h*batch*topk+2*d*128*batch,
         tokens=batch,baseline='Static popularity placement/load-balanced ownership; expert weight reuse, asynchronous dispatch and expert-granular combine',
         routing_evidence='Assumed weighted-without-replacement probability trace, not an observed model route')

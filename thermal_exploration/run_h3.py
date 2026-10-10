@@ -37,10 +37,17 @@ def main():
     if previous:
         (out/'reuse-provenance.json').write_text(json.dumps(dict(parent_source_commit=parent_source,
             basis='Only execution bookkeeping optimized; immutable parent points and event digests reused; new points have their own source commit'),indent=2)+'\n')
-    def reuse(name,variant):
+    def reuse(name,variant,meta):
         path=previous/(name+'-'+variant+'.json') if previous else None
         if path is None or not path.exists():return False
-        result=json.loads(path.read_text());result['source_commit']=parent_source
+        result=json.loads(path.read_text())
+        if result['meta']!=json.loads(json.dumps(meta)):
+            print(name,variant,'NOT REUSED: changed workload contract',flush=True);return False
+        if 'events_file' in result and hashlib.sha256((previous/result['events_file']).read_bytes()).hexdigest()!=result['events_sha256']:
+            raise ValueError('Corrupt parent event artifact')
+        inherited=parent_source
+        if (previous/'reuse-provenance.json').exists():inherited=json.loads((previous/'reuse-provenance.json').read_text())['parent_source_commit']
+        result['source_commit']=result.get('source_commit',inherited)
         for file in (path,previous/result['events_file'] if 'events_file' in result else None):
             if file is not None:os.link(file,out/file.name)
         summaries.append(result);print(name,variant,'REUSED',result['time_us'],flush=True);return True
@@ -54,7 +61,7 @@ def main():
             # not labelled a newly proposed HB architecture.
             for mode in (MODES if not stream else (*MODES,'known_fusion')):
                 variant=('known_fifo_' if stream else 'sram_')+mode
-                if reuse(name,variant):continue
+                if reuse(name,variant,g.meta):continue
                 r=execute(g,mode);events=r.pop('events')
                 path=out/(name+'-'+variant+'.jsonl.gz')
                 with gzip.open(path,'wt') as f:
@@ -66,7 +73,7 @@ def main():
             # Three bounded, declared sensitivities of the known baseline.
             if stream:
                 for sensitivity,ports,links in (('ports_half',.5,1.),('ports_double',2.,1.),('links_half',1.,.5)):
-                    if reuse(name,'known_fifo_'+sensitivity):continue
+                    if reuse(name,'known_fifo_'+sensitivity,g.meta):continue
                     r=execute(g,'baseline',sram_scale=ports,link_scale=links);r.pop('events')
                     result=dict(workload=name,variant='known_fifo_'+sensitivity,source_commit=revision(),meta=g.meta,**r)
                     (out/(name+'-'+result['variant']+'.json')).write_text(json.dumps(result,indent=2)+'\n');summaries.append(result)

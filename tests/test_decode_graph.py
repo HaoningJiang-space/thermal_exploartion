@@ -31,5 +31,12 @@ class DecodeGraphTests(unittest.TestCase):
     def test_invalid_dependency_rejected(self):
         with self.assertRaises(ValueError):Graph().add('mac',0,1,(0,),ticks=1)
 
+    def test_fast_tier_capacity_per_physical_region(self):
+        g=moe(2,tensor_parts=4);used={}
+        for expert,tiles in g.meta['expert_owners'].items():
+            tier=g.meta['expert_tiers'][expert]
+            for tile in tiles:used[tile,tier]=used.get((tile,tier),0)+4*2048*8192//4
+        self.assertTrue(all(b<=4*2**30//16 for b in used.values()))
+
 
 if __name__=='__main__':unittest.main()
