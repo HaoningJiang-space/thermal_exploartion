@@ -1,0 +1,505 @@
+scenario,layer,state,from_tick,through_tick,chosen_live_window_us,scope
+llama_b1_c2k,0,Residual input,248,74325,18.51925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,0,Normalized FFN input,18761,74325,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,0,Projection partial,15882,17728,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,1,Residual input,74571,148648,18.51925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,1,Normalized FFN input,93084,148648,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,1,Projection partial,90205,92051,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,2,Residual input,148894,223015,18.53025,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,2,Normalized FFN input,167429,223015,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,2,Projection partial,164550,166396,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,3,Residual input,223261,299094,18.95825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,3,Normalized FFN input,242140,299094,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,3,Projection partial,239261,241107,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,4,Residual input,299340,375173,18.95825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,4,Normalized FFN input,318219,375173,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,4,Projection partial,315340,317186,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,5,Residual input,375419,451252,18.95825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,5,Normalized FFN input,394298,451252,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,5,Projection partial,391419,393265,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,6,Residual input,451498,527331,18.95825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,6,Normalized FFN input,470377,527331,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,6,Projection partial,467498,469344,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,7,Residual input,527577,605785,19.552,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,7,Normalized FFN input,547440,605785,14.58625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,7,Projection partial,544561,546407,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,8,Residual input,606031,686904,20.21825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,8,Normalized FFN input,625894,686904,15.2525,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,8,Projection partial,623015,624861,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,9,Residual input,687150,768023,20.21825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,9,Normalized FFN input,707013,768023,15.2525,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,9,Projection partial,704134,705980,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,10,Residual input,768269,842346,18.51925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,10,Normalized FFN input,786782,842346,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,10,Projection partial,783903,785749,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,11,Residual input,842592,916669,18.51925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,11,Normalized FFN input,861105,916669,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,11,Projection partial,858226,860072,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,12,Residual input,916915,990992,18.51925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,12,Normalized FFN input,935428,990992,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,12,Projection partial,932549,934395,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,13,Residual input,991238,1065315,18.51925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,13,Normalized FFN input,1009751,1065315,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,13,Projection partial,1006872,1008718,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,14,Residual input,1065561,1139638,18.51925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,14,Normalized FFN input,1084074,1139638,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,14,Projection partial,1081195,1083041,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,15,Residual input,1139884,1213961,18.51925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,15,Normalized FFN input,1158397,1213961,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,15,Projection partial,1155518,1157364,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,16,Residual input,1214207,1288284,18.51925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,16,Normalized FFN input,1232720,1288284,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,16,Projection partial,1229841,1231687,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,17,Residual input,1288530,1362624,18.523500000000002,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,17,Normalized FFN input,1307054,1362624,13.8925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,17,Projection partial,1304175,1306021,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,18,Residual input,1362870,1436991,18.53025,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,18,Normalized FFN input,1381405,1436991,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,18,Projection partial,1378526,1380372,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,19,Residual input,1437237,1511358,18.53025,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,19,Normalized FFN input,1455772,1511358,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,19,Projection partial,1452893,1454739,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,20,Residual input,1511604,1585725,18.53025,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,20,Normalized FFN input,1530139,1585725,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,20,Projection partial,1527260,1529106,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,21,Residual input,1585971,1660092,18.53025,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,21,Normalized FFN input,1604506,1660092,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,21,Projection partial,1601627,1603473,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,22,Residual input,1660338,1734459,18.53025,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,22,Normalized FFN input,1678873,1734459,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,22,Projection partial,1675994,1677840,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,23,Residual input,1734705,1808826,18.53025,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,23,Normalized FFN input,1753240,1808826,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,23,Projection partial,1750361,1752207,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,24,Residual input,1809072,1883193,18.53025,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,24,Normalized FFN input,1827607,1883193,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,24,Projection partial,1824728,1826574,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,25,Residual input,1883439,1957560,18.53025,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,25,Normalized FFN input,1901974,1957560,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,25,Projection partial,1899095,1900941,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,26,Residual input,1957806,2032467,18.66525,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,26,Normalized FFN input,1976421,2032467,14.0115,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,26,Projection partial,1973542,1975388,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,27,Residual input,2032713,2108546,18.95825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,27,Normalized FFN input,2051592,2108546,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,27,Projection partial,2048713,2050559,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,28,Residual input,2108792,2184625,18.95825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,28,Normalized FFN input,2127671,2184625,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,28,Projection partial,2124792,2126638,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,29,Residual input,2184871,2260704,18.95825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,29,Normalized FFN input,2203750,2260704,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,29,Projection partial,2200871,2202717,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,30,Residual input,2260950,2336783,18.95825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,30,Normalized FFN input,2279829,2336783,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,30,Projection partial,2276950,2278796,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,31,Residual input,2337029,2412862,18.95825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,31,Normalized FFN input,2355908,2412862,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c2k,31,Projection partial,2353029,2354875,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,0,Residual input,248,96341,24.02325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,0,Normalized FFN input,40777,96341,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,0,Projection partial,37898,39744,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,1,Residual input,96587,192680,24.02325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,1,Normalized FFN input,137116,192680,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,1,Projection partial,134237,136083,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,2,Residual input,192926,289063,24.03425,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,2,Normalized FFN input,233477,289063,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,2,Projection partial,230598,232444,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,3,Residual input,289309,387158,24.46225,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,3,Normalized FFN input,330204,387158,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,3,Projection partial,327325,329171,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,4,Residual input,387404,485253,24.46225,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,4,Normalized FFN input,428299,485253,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,4,Projection partial,425420,427266,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,5,Residual input,485499,583348,24.46225,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,5,Normalized FFN input,526394,583348,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,5,Projection partial,523515,525361,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,6,Residual input,583594,681443,24.46225,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,6,Normalized FFN input,624489,681443,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,6,Projection partial,621610,623456,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,7,Residual input,681689,781913,25.056,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,7,Normalized FFN input,723568,781913,14.58625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,7,Projection partial,720689,722535,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,8,Residual input,782159,885048,25.72225,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,8,Normalized FFN input,824038,885048,15.2525,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,8,Projection partial,821159,823005,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,9,Residual input,885294,988183,25.72225,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,9,Normalized FFN input,927173,988183,15.2525,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,9,Projection partial,924294,926140,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,10,Residual input,988429,1084522,24.02325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,10,Normalized FFN input,1028958,1084522,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,10,Projection partial,1026079,1027925,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,11,Residual input,1084768,1180861,24.02325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,11,Normalized FFN input,1125297,1180861,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,11,Projection partial,1122418,1124264,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,12,Residual input,1181107,1277200,24.02325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,12,Normalized FFN input,1221636,1277200,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,12,Projection partial,1218757,1220603,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,13,Residual input,1277446,1373539,24.02325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,13,Normalized FFN input,1317975,1373539,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,13,Projection partial,1315096,1316942,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,14,Residual input,1373785,1469878,24.02325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,14,Normalized FFN input,1414314,1469878,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,14,Projection partial,1411435,1413281,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,15,Residual input,1470124,1566217,24.02325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,15,Normalized FFN input,1510653,1566217,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,15,Projection partial,1507774,1509620,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,16,Residual input,1566463,1662556,24.02325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,16,Normalized FFN input,1606992,1662556,13.891,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,16,Projection partial,1604113,1605959,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,17,Residual input,1662802,1758912,24.0275,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,17,Normalized FFN input,1703342,1758912,13.8925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,17,Projection partial,1700463,1702309,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,18,Residual input,1759158,1855295,24.03425,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,18,Normalized FFN input,1799709,1855295,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,18,Projection partial,1796830,1798676,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,19,Residual input,1855541,1951678,24.03425,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,19,Normalized FFN input,1896092,1951678,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,19,Projection partial,1893213,1895059,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,20,Residual input,1951924,2048061,24.03425,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,20,Normalized FFN input,1992475,2048061,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,20,Projection partial,1989596,1991442,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,21,Residual input,2048307,2144444,24.03425,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,21,Normalized FFN input,2088858,2144444,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,21,Projection partial,2085979,2087825,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,22,Residual input,2144690,2240827,24.03425,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,22,Normalized FFN input,2185241,2240827,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,22,Projection partial,2182362,2184208,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,23,Residual input,2241073,2337210,24.03425,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,23,Normalized FFN input,2281624,2337210,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,23,Projection partial,2278745,2280591,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,24,Residual input,2337456,2433593,24.03425,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,24,Normalized FFN input,2378007,2433593,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,24,Projection partial,2375128,2376974,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,25,Residual input,2433839,2529976,24.03425,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,25,Normalized FFN input,2474390,2529976,13.8965,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,25,Projection partial,2471511,2473357,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,26,Residual input,2530222,2626899,24.16925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,26,Normalized FFN input,2570853,2626899,14.0115,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,26,Projection partial,2567974,2569820,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,27,Residual input,2627145,2724994,24.46225,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,27,Normalized FFN input,2668040,2724994,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,27,Projection partial,2665161,2667007,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,28,Residual input,2725240,2823089,24.46225,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,28,Normalized FFN input,2766135,2823089,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,28,Projection partial,2763256,2765102,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,29,Residual input,2823335,2921184,24.46225,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,29,Normalized FFN input,2864230,2921184,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,29,Projection partial,2861351,2863197,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,30,Residual input,2921430,3019279,24.46225,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,30,Normalized FFN input,2962325,3019279,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,30,Projection partial,2959446,2961292,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,31,Residual input,3019525,3117374,24.46225,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,31,Normalized FFN input,3060420,3117374,14.2385,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b1_c32k,31,Projection partial,3057541,3059387,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,0,Residual input,551,114104,28.38825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,0,Normalized FFN input,52220,114104,15.471,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,0,Projection partial,42081,48535,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,1,Residual input,114650,228203,28.38825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,1,Normalized FFN input,166319,228203,15.471,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,1,Projection partial,156180,162634,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,2,Residual input,228749,342346,28.399250000000002,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,2,Normalized FFN input,280440,342346,15.4765,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,2,Projection partial,270301,276755,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,3,Residual input,342892,458201,28.82725,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,3,Normalized FFN input,394927,458201,15.8185,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,3,Projection partial,384788,391242,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,4,Residual input,458747,574056,28.82725,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,4,Normalized FFN input,510782,574056,15.8185,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,4,Projection partial,500643,507097,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,5,Residual input,574602,689911,28.82725,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,5,Normalized FFN input,626637,689911,15.8185,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,5,Projection partial,616498,622952,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,6,Residual input,690457,805766,28.82725,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,6,Normalized FFN input,742492,805766,15.8185,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,6,Projection partial,732353,738807,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,7,Residual input,806312,923998,29.4215,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,7,Normalized FFN input,859331,923998,16.16675,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,7,Projection partial,849192,855646,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,8,Residual input,924544,1044893,30.08725,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,8,Normalized FFN input,977563,1044893,16.8325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,8,Projection partial,967424,973878,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,9,Residual input,1045439,1165788,30.08725,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,9,Normalized FFN input,1098458,1165788,16.8325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,9,Projection partial,1088319,1094773,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,10,Residual input,1166334,1279887,28.38825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,10,Normalized FFN input,1218003,1279887,15.471,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,10,Projection partial,1207864,1214318,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,11,Residual input,1280433,1393986,28.38825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,11,Normalized FFN input,1332102,1393986,15.471,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,11,Projection partial,1321963,1328417,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,12,Residual input,1394532,1508085,28.38825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,12,Normalized FFN input,1446201,1508085,15.471,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,12,Projection partial,1436062,1442516,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,13,Residual input,1508631,1622184,28.38825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,13,Normalized FFN input,1560300,1622184,15.471,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,13,Projection partial,1550161,1556615,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,14,Residual input,1622730,1736283,28.38825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,14,Normalized FFN input,1674399,1736283,15.471,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,14,Projection partial,1664260,1670714,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,15,Residual input,1736829,1850382,28.38825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,15,Normalized FFN input,1788498,1850382,15.471,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,15,Projection partial,1778359,1784813,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,16,Residual input,1850928,1964481,28.38825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,16,Normalized FFN input,1902597,1964481,15.471,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,16,Projection partial,1892458,1898912,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,17,Residual input,1965027,2078594,28.391750000000002,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,17,Normalized FFN input,2016707,2078594,15.47175,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,17,Projection partial,2006568,2013022,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,18,Residual input,2079140,2192737,28.399250000000002,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,18,Normalized FFN input,2130831,2192737,15.4765,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,18,Projection partial,2120692,2127146,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,19,Residual input,2193283,2306880,28.399250000000002,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,19,Normalized FFN input,2244974,2306880,15.4765,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,19,Projection partial,2234835,2241289,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,20,Residual input,2307426,2421023,28.399250000000002,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,20,Normalized FFN input,2359117,2421023,15.4765,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,20,Projection partial,2348978,2355432,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,21,Residual input,2421569,2535166,28.399250000000002,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,21,Normalized FFN input,2473260,2535166,15.4765,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,21,Projection partial,2463121,2469575,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,22,Residual input,2535712,2649309,28.399250000000002,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,22,Normalized FFN input,2587403,2649309,15.4765,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,22,Projection partial,2577264,2583718,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,23,Residual input,2649855,2763452,28.399250000000002,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,23,Normalized FFN input,2701546,2763452,15.4765,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,23,Projection partial,2691407,2697861,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,24,Residual input,2763998,2877595,28.399250000000002,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,24,Normalized FFN input,2815689,2877595,15.4765,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,24,Projection partial,2805550,2812004,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,25,Residual input,2878141,2991738,28.399250000000002,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,25,Normalized FFN input,2929832,2991738,15.4765,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,25,Projection partial,2919693,2926147,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,26,Residual input,2992284,3106433,28.53725,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,26,Normalized FFN input,3044067,3106433,15.5915,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,26,Projection partial,3033928,3040382,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,27,Residual input,3106979,3222288,28.82725,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,27,Normalized FFN input,3159014,3222288,15.8185,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,27,Projection partial,3148875,3155329,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,28,Residual input,3222834,3338143,28.82725,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,28,Normalized FFN input,3274869,3338143,15.8185,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,28,Projection partial,3264730,3271184,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,29,Residual input,3338689,3453998,28.82725,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,29,Normalized FFN input,3390724,3453998,15.8185,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,29,Projection partial,3380585,3387039,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,30,Residual input,3454544,3569853,28.82725,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,30,Normalized FFN input,3506579,3569853,15.8185,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,30,Projection partial,3496440,3502894,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,31,Residual input,3570399,3685708,28.82725,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,31,Normalized FFN input,3622434,3685708,15.8185,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+llama_b4_c8k,31,Projection partial,3612295,3618749,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,0,Residual input,201,35922,8.930250000000001,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,0,Normalized FFN input,11113,35922,6.20225,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,0,Projection partial,9435,10512,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,1,Residual input,36122,71465,8.83575,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,1,Normalized FFN input,47034,71465,6.10775,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,1,Projection partial,45356,46433,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,2,Residual input,71665,107008,8.83575,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,2,Normalized FFN input,82577,107008,6.10775,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,2,Projection partial,80899,81976,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,3,Residual input,107208,143349,9.03525,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,3,Normalized FFN input,118120,143349,6.30725,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,3,Projection partial,116442,117519,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,4,Residual input,143549,179336,8.94675,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,4,Normalized FFN input,154461,179336,6.21875,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,4,Projection partial,152783,153860,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,5,Residual input,179536,215191,8.91375,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,5,Normalized FFN input,190448,215191,6.1857500000000005,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,5,Projection partial,188770,189847,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,6,Residual input,215391,250956,8.89125,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,6,Normalized FFN input,226303,250956,6.163250000000001,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,6,Projection partial,224625,225702,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,7,Residual input,251156,287099,8.98575,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,7,Normalized FFN input,262068,287099,6.25775,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,7,Projection partial,260390,261467,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,8,Residual input,287299,322954,8.91375,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,8,Normalized FFN input,298211,322954,6.1857500000000005,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,8,Projection partial,296533,297610,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,9,Residual input,323154,358653,8.87475,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,9,Normalized FFN input,334066,358653,6.14675,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,9,Projection partial,332388,333465,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,10,Residual input,358853,394796,8.98575,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,10,Normalized FFN input,369765,394796,6.25775,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,10,Projection partial,368087,369164,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,11,Residual input,394996,430429,8.85825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,11,Normalized FFN input,405908,430429,6.13025,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,11,Projection partial,404230,405307,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,12,Residual input,430629,465950,8.83025,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,12,Normalized FFN input,441541,465950,6.10225,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,12,Projection partial,439863,440940,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,13,Residual input,466150,501493,8.83575,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,13,Normalized FFN input,477062,501493,6.10775,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,13,Projection partial,475384,476461,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,14,Residual input,501693,538252,9.13975,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,14,Normalized FFN input,512605,538252,6.4117500000000005,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,14,Projection partial,510927,512004,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,15,Residual input,538452,573795,8.83575,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,15,Normalized FFN input,549364,573795,6.10775,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,15,Projection partial,547686,548763,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,16,Residual input,573995,609716,8.930250000000001,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,16,Normalized FFN input,584907,609716,6.20225,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,16,Projection partial,583229,584306,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,17,Residual input,609916,645415,8.87475,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,17,Normalized FFN input,620828,645415,6.14675,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,17,Projection partial,619150,620227,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,18,Residual input,645615,681336,8.930250000000001,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,18,Normalized FFN input,656527,681336,6.20225,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,18,Projection partial,654849,655926,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,19,Residual input,681536,717677,9.03525,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,19,Normalized FFN input,692448,717677,6.30725,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,19,Projection partial,690770,691847,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,20,Residual input,717877,753532,8.91375,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,20,Normalized FFN input,728789,753532,6.1857500000000005,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,20,Projection partial,727111,728188,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,21,Residual input,753732,789519,8.94675,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,21,Normalized FFN input,764644,789519,6.21875,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,21,Projection partial,762966,764043,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,22,Residual input,789719,825440,8.930250000000001,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,22,Normalized FFN input,800631,825440,6.20225,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,22,Projection partial,798953,800030,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,23,Residual input,825640,861493,8.96325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,23,Normalized FFN input,836552,861493,6.23525,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b1_c2k,23,Projection partial,834874,835951,0.26925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,0,Residual input,250,71983,17.93325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,0,Normalized FFN input,31851,71983,10.033,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,0,Projection partial,28972,30818,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,1,Residual input,72231,146737,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,1,Normalized FFN input,103832,146737,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,1,Projection partial,100953,102799,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,2,Residual input,146985,218718,17.93325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,2,Normalized FFN input,178586,218718,10.033,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,2,Projection partial,175707,177553,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,3,Residual input,218966,293472,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,3,Normalized FFN input,250567,293472,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,3,Projection partial,247688,249534,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,4,Residual input,293720,368226,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,4,Normalized FFN input,325321,368226,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,4,Projection partial,322442,324288,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,5,Residual input,368474,442980,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,5,Normalized FFN input,400075,442980,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,5,Projection partial,397196,399042,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,6,Residual input,443228,517734,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,6,Normalized FFN input,474829,517734,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,6,Projection partial,471950,473796,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,7,Residual input,517982,592488,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,7,Normalized FFN input,549583,592488,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,7,Projection partial,546704,548550,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,8,Residual input,592736,667242,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,8,Normalized FFN input,624337,667242,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,8,Projection partial,621458,623304,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,9,Residual input,667490,741996,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,9,Normalized FFN input,699091,741996,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,9,Projection partial,696212,698058,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,10,Residual input,742244,816750,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,10,Normalized FFN input,773845,816750,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,10,Projection partial,770966,772812,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,11,Residual input,816998,888731,17.93325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,11,Normalized FFN input,848599,888731,10.033,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,11,Projection partial,845720,847566,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,12,Residual input,888979,963485,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,12,Normalized FFN input,920580,963485,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,12,Projection partial,917701,919547,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,13,Residual input,963733,1035466,17.93325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,13,Normalized FFN input,995334,1035466,10.033,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,13,Projection partial,992455,994301,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,14,Residual input,1035714,1107447,17.93325,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,14,Normalized FFN input,1067315,1107447,10.033,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,14,Projection partial,1064436,1066282,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,15,Residual input,1107695,1182201,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,15,Normalized FFN input,1139296,1182201,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,15,Projection partial,1136417,1138263,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,16,Residual input,1182449,1256955,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,16,Normalized FFN input,1214050,1256955,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,16,Projection partial,1211171,1213017,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,17,Residual input,1257203,1331709,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,17,Normalized FFN input,1288804,1331709,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,17,Projection partial,1285925,1287771,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,18,Residual input,1331957,1406463,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,18,Normalized FFN input,1363558,1406463,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,18,Projection partial,1360679,1362525,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,19,Residual input,1406711,1481217,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,19,Normalized FFN input,1438312,1481217,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,19,Projection partial,1435433,1437279,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,20,Residual input,1481465,1555971,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,20,Normalized FFN input,1513066,1555971,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,20,Projection partial,1510187,1512033,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,21,Residual input,1556219,1630725,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,21,Normalized FFN input,1587820,1630725,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,21,Projection partial,1584941,1586787,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,22,Residual input,1630973,1705479,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,22,Normalized FFN input,1662574,1705479,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,22,Projection partial,1659695,1661541,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,23,Residual input,1705727,1780233,18.6265,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,23,Normalized FFN input,1737328,1780233,10.72625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b2_c8k,23,Projection partial,1734449,1736295,0.4615,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,0,Residual input,577,158853,39.569,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,0,Normalized FFN input,45552,158853,28.32525,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,0,Projection partial,35389,41843,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,1,Residual input,159425,279791,30.0915,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,1,Normalized FFN input,204400,279791,18.84775,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,1,Projection partial,194237,200691,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,2,Residual input,280363,414355,33.498,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,2,Normalized FFN input,325338,414355,22.25425,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,2,Projection partial,315175,321629,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,3,Residual input,414927,561065,36.5345,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,3,Normalized FFN input,459902,561065,25.29075,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,3,Projection partial,449739,456193,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,4,Residual input,561637,722277,40.160000000000004,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,4,Normalized FFN input,606612,722277,28.91625,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,4,Projection partial,596449,602903,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,5,Residual input,722849,875039,38.0475,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,5,Normalized FFN input,767824,875039,26.80375,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,5,Projection partial,757661,764115,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,6,Residual input,875611,1039604,40.99825,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,6,Normalized FFN input,920586,1039604,29.7545,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,6,Projection partial,910423,916877,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,7,Residual input,1040176,1188710,37.1335,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,7,Normalized FFN input,1085151,1188710,25.88975,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,7,Projection partial,1074988,1081442,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,8,Residual input,1189282,1341177,37.97375,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,8,Normalized FFN input,1234257,1341177,26.73,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,8,Projection partial,1224094,1230548,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,9,Residual input,1341749,1493939,38.0475,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,9,Normalized FFN input,1386724,1493939,26.80375,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,9,Projection partial,1376561,1383015,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,10,Residual input,1494511,1652411,39.475,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,10,Normalized FFN input,1539486,1652411,28.23125,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,10,Projection partial,1529323,1535777,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,11,Residual input,1652983,1793054,35.01775,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,11,Normalized FFN input,1697958,1793054,23.774,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,11,Projection partial,1687795,1694249,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,12,Residual input,1793626,1920102,31.619,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,12,Normalized FFN input,1838601,1920102,20.37525,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,12,Projection partial,1828438,1834892,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,13,Residual input,1920674,2039252,29.6445,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,13,Normalized FFN input,1965649,2039252,18.40075,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,13,Projection partial,1955486,1961940,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,14,Residual input,2039824,2182941,35.77925,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,14,Normalized FFN input,2084799,2182941,24.5355,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,14,Projection partial,2074636,2081090,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,15,Residual input,2183513,2329684,36.54275,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,15,Normalized FFN input,2228488,2329684,25.299,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,15,Projection partial,2218325,2224779,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,16,Residual input,2330256,2491193,40.23425,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,16,Normalized FFN input,2375231,2491193,28.9905,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,16,Projection partial,2365068,2371522,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,17,Residual input,2491765,2646662,38.72425,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,17,Normalized FFN input,2536740,2646662,27.4805,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,17,Projection partial,2526577,2533031,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,18,Residual input,2647234,2805134,39.475,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,18,Normalized FFN input,2692209,2805134,28.23125,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,18,Projection partial,2682046,2688500,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,19,Residual input,2805706,2963606,39.475,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,19,Normalized FFN input,2850681,2963606,28.23125,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,19,Projection partial,2840518,2846972,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,20,Residual input,2964178,3116053,37.96875,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,20,Normalized FFN input,3009153,3116053,26.725,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,20,Projection partial,2998990,3005444,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,21,Residual input,3116625,3280289,40.916000000000004,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,21,Normalized FFN input,3161600,3280289,29.672250000000002,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,21,Projection partial,3151437,3157891,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,22,Residual input,3280861,3438776,39.47875,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,22,Normalized FFN input,3325836,3438776,28.235,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,22,Projection partial,3315673,3322127,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,23,Residual input,3439348,3591184,37.959,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,23,Normalized FFN input,3484323,3591184,26.71525,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime
+qwen_b8_c2k,23,Projection partial,3474160,3480614,1.6135,Chosen DAG residency window; no claim of measured or irreducible minimum lifetime

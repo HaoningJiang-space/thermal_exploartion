@@ -1,0 +1,47 @@
+{
+  "source_commit": "2b836268ee8307ef83dc9c7c918b71f81c8a7835",
+  "backend": "hits",
+  "area_mm2": 121,
+  "dram_bytes": 34359738368,
+  "sram_bytes": 37748736,
+  "temperature_limit_c": 85,
+  "coefficients": {
+    "mac_pj_flop": 0.302,
+    "vector_pj_op": 0.1,
+    "sram_pj_byte": 0.15,
+    "noc_pj_byte_hop": 0.5,
+    "fifo_and_steering_pj_byte": 0.1,
+    "fifo_steering_area_mm2": 0.8,
+    "fifo_steering_static_w": 0.08
+  },
+  "scenarios": {
+    "default": [
+      1.0,
+      0.3
+    ],
+    "energy_low": [
+      0.8,
+      0.3
+    ],
+    "energy_high": [
+      1.2,
+      0.3
+    ],
+    "cooling_strong": [
+      1.0,
+      0.2
+    ],
+    "cooling_weak": [
+      1.0,
+      0.6
+    ]
+  },
+  "assumptions": [
+    "Memory3.432pJ/B aggregate includesHB; no independent command energy calibration",
+    "Equivalent30um DRAM thermal layer; tier thermal depths unresolved",
+    "Memory logic heat fraction.48; bounded.3/.7 controls",
+    "Active rates fixed; idle bins inserted for duty-cycle pacing; checkpoint/geometry assumptions remain uncalibrated",
+    "Unknown refresh/leakage temperature feedback disabled",
+    "128/256 energy-bin and4/8 spatial convergence checks are numerical, not device validation"
+  ]
+}

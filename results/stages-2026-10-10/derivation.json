@@ -1,0 +1,6 @@
+{
+  "source_execution_commit": "dd9d434",
+  "transform_commit": "ade83074d53e43b75fbdb74ea1653bfc9310b7e7",
+  "justification": "Normalized FFN input already replicated, immutable through router;64KiB reserved input/metadata storage; serial-phase translation",
+  "scope": "Constructive existing-software schedule from complete immutable source trace; no new hardware or ideal NoC"
+}

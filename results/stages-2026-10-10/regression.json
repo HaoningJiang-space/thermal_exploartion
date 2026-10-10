@@ -1,0 +1,9 @@
+{
+  "executable_model_test_source": "2b83626",
+  "later_change": "ede14d2/f3eccf8 change figure export only",
+  "command": "python -m unittest discover -s tests -v",
+  "tests": 101,
+  "status": "PASS",
+  "scope": "Numerical/implementation regression; not device validation",
+  "final_publication_checks": "Repeated101-model regression after the source-provenance/qualification CLI fixes; direct H2 archive crossover also re-executed with identical latency errors"
+}

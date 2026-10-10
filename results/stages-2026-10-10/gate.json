@@ -1,0 +1,20 @@
+{
+  "stage1": "PASS_MATCHED_CASES_LIMITED_SCOPE",
+  "stage2": "COMPLETE_STRUCTURAL_CONDITIONAL",
+  "stage3": "RESEARCH_GO_HARDWARE_NOT_JUSTIFIED",
+  "stage4": "COMPLETE_CONDITIONAL_EVENT_THERMAL_EVALUATION",
+  "new_hardware_candidates": 0,
+  "rtl": "NOT_STARTED: unsupported by remaining evidence",
+  "complete_model_inference_measured": false,
+  "target_qwen_routing_captured": false,
+  "baselines": "Implemented named existing mechanisms, not complete SET/SoMa/ATLAS/HDA reproductions",
+  "stop_conditions": [
+    "No new Fabric/Peripheral/Row-cycle design",
+    "No forced novel hardware after classic input reuse and head grouping",
+    "No oracle labeled paid implementation"
+  ],
+  "next_evidence": "Optimize known collective/producer-consumer overlap in Llama B4 and validate actual target MoE routing before attributing residual to hardware",
+  "qualification": "Three frozen same-contract Wide GEMM cases within10%; ATLAS official AE subcase executed; full structural models remain conditional",
+  "figure_export_source_commit": "f3eccf8",
+  "remaining_limit": "Conservative operator/layer barriers; global SET/SoMa scheduling not fully implemented. Stage3 is lack of demonstrated hardware necessity, not proof that all 3D alternatives are inferior."
+}

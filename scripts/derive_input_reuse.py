@@ -65,7 +65,8 @@ def main():
         result['tokens_s']=result['tokens']/(result['time_us']*1e-6)
         summaries.append(result)
     (out/'summary.json').write_text(json.dumps(summaries,indent=2)+'\n')
-    (out/'derivation.json').write_text(json.dumps(dict(source_execution_commit='dd9d434',transform_commit=sha,
+    parent_commit=json.loads((src/'contract.json').read_text())['source_commit']
+    (out/'derivation.json').write_text(json.dumps(dict(source_execution_commit=parent_commit,transform_commit=sha,
         justification='Normalized FFN input already replicated, immutable through router;64KiB reserved input/metadata storage; serial-phase translation',
         scope='Constructive existing-software schedule from complete immutable source trace; no new hardware or ideal NoC'),indent=2)+'\n')
     print('Derived',len(summaries),'complete schedules; source unchanged')

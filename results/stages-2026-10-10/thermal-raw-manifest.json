@@ -1,0 +1,29 @@
+[
+  {
+    "file": "contract.tar.gz",
+    "bytes": 161672,
+    "sha256": "bab128988b47a1396252ea2f1a39aa1b611f70317a84505de9e4fd3ef7c9b707",
+    "entries": [
+      {
+        "name": "contract/contract.json",
+        "bytes": 1215,
+        "sha256": "df3874bfe583f31c99aa08f9762d4f7094bc7881051e6baafa4ae3d8ae515918"
+      },
+      {
+        "name": "contract/convergence.json",
+        "bytes": 56282,
+        "sha256": "84d34cf993ebd8a112086e458cd6beeb9b36562be3303de26d5ec258b7ac2ef8"
+      },
+      {
+        "name": "contract/partial.json",
+        "bytes": 625072,
+        "sha256": "8ee57b6956f5773419676731955bb8fb8e23e367ae3bc785c3d4832c0ba9880c"
+      },
+      {
+        "name": "contract/summary.json",
+        "bytes": 625072,
+        "sha256": "8ee57b6956f5773419676731955bb8fb8e23e367ae3bc785c3d4832c0ba9880c"
+      }
+    ]
+  }
+]

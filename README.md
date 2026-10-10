@@ -4,9 +4,16 @@
 
 当前里程碑为 **Simulator Qualification → Architecture Characterization → 条件性 Architecture Discovery → Thermal Evaluation**。
 任务与证据边界见 [Stage 1–4 实验合同](docs/stage1_stage4.md)。
+**[Stage 1–4 正式报告、全部结果与图表](results/stages-2026-10-10/findings.md)已完成并归档。**
+H2–H3三个同合同案例误差均在10%内；实际复现一个ATLAS官方AE子案例。
+六组完整模型结构化Decode各128步，60个执行对照、135个事件热评价点均保留。
+默认最强已有方案约1544–8552模型tokens/s；这是合理假设下的结构化执行率，不是实测Serving吞吐。
+Qwen路由为有标签的公开Qwen2投影，8192之后的128步明确采用Context扩展假设。
+Stage 3未批准新硬件：已知输入复用、头分组KV与有限流式供数解释主要收益，不重启Fabric、Peripheral或Row-cycle RTL。
+原始事件和逐文件摘要见[公开Release](https://github.com/HaoningJiang-space/thermal_exploartion/releases/tag/stages-execution-2026-10-10)。
 [H2 正式结果](results/h2-2026-10-10/findings.md) 已归档：优化列切分模型吞吐124.23TFLOP/s，
 相对128TFLOP/s计算上限的剩余收益不超过3.04%，不支持孤立Wide GEMM的新硬件。
-H3原有FFN/Attention/MoE为合成子图，子图等效Token率不代表完整LLM Decode。
+旧H3的FFN/Attention/MoE合成子图保留为机制记录；本轮完整模型使用独立的层级执行器，不能混用两者的Token率。
 
 **研究决策：Compute–Memory Fabric 分支正式关闭；Thermal-aware Mapping 保留为基线。**
 已完成 [D1/D2判别实验](docs/d1_d2.md)：关闭已知Row-cycle信号，再检验多Tier数据返回与任务依赖。

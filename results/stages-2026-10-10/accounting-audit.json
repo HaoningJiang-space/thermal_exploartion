@@ -1,0 +1,80 @@
+{
+  "completed_runs": 60,
+  "steps_per_run": 128,
+  "total_model_steps": 7680,
+  "thermal_points": 135,
+  "distinct_scenarios": 6,
+  "all_capacity_feasible": true,
+  "all_macro_critical_paths_close": true,
+  "useful_mac_work": "Independently verified each step by model_contract.expected_mac_flops",
+  "aggregate_dynamic_energy_closure": "Verified by event_energy for every thermal input",
+  "fastest_known_t0": {
+    "llama_b1_c2k": {
+      "baseline": "B3_3d_placement",
+      "tokens_s": 1544.0906396646387
+    },
+    "llama_b1_c32k": {
+      "baseline": "B3_3d_placement",
+      "tokens_s": 1213.6599858729978
+    },
+    "llama_b4_c8k": {
+      "baseline": "B3_3d_placement",
+      "tokens_s": 4129.253905758038
+    },
+    "qwen_b1_c2k": {
+      "baseline": "B3_3d_placement",
+      "tokens_s": 4144.420088781249
+    },
+    "qwen_b2_c8k": {
+      "baseline": "B2_stream_fusion",
+      "tokens_s": 4304.740699109563
+    },
+    "qwen_b8_c2k": {
+      "baseline": "B2_stream_fusion",
+      "tokens_s": 8551.964018563467
+    }
+  },
+  "matched_counterfactuals": {
+    "ideal_memory": {
+      "llama_b1_c2k": 244.81667831353366,
+      "llama_b1_c32k": 141.33238142310577,
+      "llama_b4_c8k": 15.99405958792508,
+      "qwen_b1_c2k": 210.7023863398753,
+      "qwen_b2_c8k": 178.35533161685368,
+      "qwen_b8_c2k": 68.49431033116974
+    },
+    "infinite_noc": {
+      "llama_b1_c2k": 5.257166864644391,
+      "llama_b1_c32k": 4.086179072330665,
+      "llama_b4_c8k": 13.157193854665072,
+      "qwen_b1_c2k": 7.12293333751397,
+      "qwen_b2_c8k": 5.684446668656373,
+      "qwen_b8_c2k": 9.955028848974724
+    },
+    "ideal_buffer": {
+      "llama_b1_c2k": 0.0,
+      "llama_b1_c32k": 0.0,
+      "llama_b4_c8k": 0.0,
+      "qwen_b1_c2k": 0.0,
+      "qwen_b2_c8k": 0.0,
+      "qwen_b8_c2k": 0.0
+    },
+    "ideal_collective": {
+      "llama_b1_c2k": 3.1535537707079397,
+      "llama_b1_c32k": 2.4620875328760894,
+      "llama_b4_c8k": 7.0045781086981895,
+      "qwen_b1_c2k": 4.785267031791718,
+      "qwen_b2_c8k": 3.49417064027977,
+      "qwen_b8_c2k": 5.486819669243204
+    },
+    "direct_producer_stream": {
+      "llama_b1_c2k": 0.4140956885479552,
+      "llama_b1_c32k": 0.3251923133705592,
+      "llama_b4_c8k": 1.1150654660597725,
+      "qwen_b1_c2k": 1.1453284101363703,
+      "qwen_b2_c8k": 1.176872288036268,
+      "qwen_b8_c2k": 2.3773249689498233
+    }
+  },
+  "evidence_scope": "Structural full-model execution; conditional finite resources; no numerical model-weight execution or independent full-inference validation"
+}

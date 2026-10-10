@@ -48,7 +48,8 @@ def compare(case, detail,refined=False):
         raise ValueError('Cross-fidelity workload mismatch')
     for node in g.nodes:
         if node.kind=='mac' and node.work==0: raise ValueError('Empty useful task')
-    expected_link_bytes = detail['noc_byte_hops']
+    expected_link_bytes = detail.get('byte_hops',detail.get('noc_byte_hops'))
+    if expected_link_bytes is None:raise ValueError('H2 detail has no NoC byte-hop ledger')
     actual_link_bytes = activity.get('link',0)
     error = r['time_us']/detail['time_us']-1
     windows = {}
@@ -64,3 +65,19 @@ def compare(case, detail,refined=False):
         same_total_private_capacity=True,persistent_input_partial_output_charged=True,identical_router_fidelity=False, output_ownership=g.meta['output_ownership'],
         abstraction_difference=g.meta['difference'], critical_path=r['critical_path'],
         scope='Qualification experiment; no fitting, no claim that finite staging granularity is identical')
+
+
+def main():
+    import argparse,json
+    from pathlib import Path
+    from .run import revision
+    ap=argparse.ArgumentParser();ap.add_argument('--h2',required=True);ap.add_argument('--output',required=True);ap.add_argument('--legacy-packets',action='store_true');a=ap.parse_args()
+    out=Path(a.output)
+    if out.exists():raise ValueError('Never overwrite qualification evidence')
+    detailed={r['name']:r for r in json.loads(Path(a.h2).read_text()) if r['status']=='PASS'}
+    rows=[compare(name,detailed[name],not a.legacy_packets) for name in ('row_blocked_k','column_blocked_m','2d_blocked_k')]
+    out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(dict(source_commit=revision(),records=rows,scope='Matched frozen tensors only; no fitting'),indent=2)+'\n')
+    for r in rows:print(r['case'],r['latency_relative_error'],r['ten_percent_latency_target_met'])
+
+
+if __name__=='__main__':main()

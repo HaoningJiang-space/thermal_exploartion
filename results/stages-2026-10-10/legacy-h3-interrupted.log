@@ -1,0 +1,116 @@
+ffn_b1 sram_baseline REUSED 2.4170000000000003
+ffn_b1 sram_ideal_memory REUSED 2.38275
+ffn_b1 sram_infinite_noc REUSED 2.2735
+ffn_b1 sram_ideal_buffer REUSED 2.4170000000000003
+ffn_b1 sram_direct_stream REUSED 2.351
+ffn_b1 sram_ideal_collective REUSED 2.27525
+ffn_b1 known_fifo_baseline REUSED 0.8555
+ffn_b1 known_fifo_ideal_memory REUSED 0.51325
+ffn_b1 known_fifo_infinite_noc REUSED 0.71375
+ffn_b1 known_fifo_ideal_buffer REUSED 0.8555
+ffn_b1 known_fifo_direct_stream REUSED 0.8495
+ffn_b1 known_fifo_ideal_collective REUSED 0.71375
+ffn_b1 known_fifo_known_fusion REUSED 0.8495
+ffn_b1 known_fifo_ports_half REUSED 0.87625
+ffn_b1 known_fifo_ports_double REUSED 0.849
+ffn_b1 known_fifo_links_half REUSED 1.0255
+ffn_b32 sram_baseline REUSED 12.76625
+ffn_b32 sram_ideal_memory REUSED 12.784
+ffn_b32 sram_infinite_noc REUSED 8.4195
+ffn_b32 sram_ideal_buffer REUSED 11.776
+ffn_b32 sram_direct_stream REUSED 12.670250000000001
+ffn_b32 sram_ideal_collective REUSED 10.20025
+ffn_b32 known_fifo_baseline REUSED 11.574
+ffn_b32 known_fifo_ideal_memory REUSED 11.574
+ffn_b32 known_fifo_infinite_noc REUSED 6.604
+ffn_b32 known_fifo_ideal_buffer REUSED 10.64
+ffn_b32 known_fifo_direct_stream REUSED 11.478
+ffn_b32 known_fifo_ideal_collective REUSED 8.858
+ffn_b32 known_fifo_known_fusion REUSED 11.478
+ffn_b32 known_fifo_ports_half REUSED 12.030000000000001
+ffn_b32 known_fifo_ports_double REUSED 11.404
+ffn_b32 known_fifo_links_half REUSED 17.808
+attention_b1_l8k sram_baseline NOT REUSED: changed workload contract
+attention_b1_l8k sram_baseline 5.92075
+attention_b1_l8k sram_ideal_memory NOT REUSED: changed workload contract
+attention_b1_l8k sram_ideal_memory 6.18975
+attention_b1_l8k sram_infinite_noc NOT REUSED: changed workload contract
+attention_b1_l8k sram_infinite_noc 5.83575
+attention_b1_l8k sram_ideal_buffer NOT REUSED: changed workload contract
+attention_b1_l8k sram_ideal_buffer 6.025
+attention_b1_l8k sram_direct_stream NOT REUSED: changed workload contract
+attention_b1_l8k sram_direct_stream 5.7547500000000005
+attention_b1_l8k sram_ideal_collective NOT REUSED: changed workload contract
+attention_b1_l8k sram_ideal_collective 5.85375
+attention_b1_l8k known_fifo_baseline NOT REUSED: changed workload contract
+attention_b1_l8k known_fifo_baseline 2.97375
+attention_b1_l8k known_fifo_ideal_memory NOT REUSED: changed workload contract
+attention_b1_l8k known_fifo_ideal_memory 2.91775
+attention_b1_l8k known_fifo_infinite_noc NOT REUSED: changed workload contract
+attention_b1_l8k known_fifo_infinite_noc 2.88875
+attention_b1_l8k known_fifo_ideal_buffer NOT REUSED: changed workload contract
+attention_b1_l8k known_fifo_ideal_buffer 2.97375
+attention_b1_l8k known_fifo_direct_stream NOT REUSED: changed workload contract
+attention_b1_l8k known_fifo_direct_stream 2.78175
+attention_b1_l8k known_fifo_ideal_collective NOT REUSED: changed workload contract
+attention_b1_l8k known_fifo_ideal_collective 2.90675
+attention_b1_l8k known_fifo_known_fusion NOT REUSED: changed workload contract
+attention_b1_l8k known_fifo_known_fusion 2.78175
+attention_b1_l8k known_fifo_ports_half NOT REUSED: changed workload contract
+attention_b1_l8k known_fifo_ports_half 3.17375
+attention_b1_l8k known_fifo_ports_double NOT REUSED: changed workload contract
+attention_b1_l8k known_fifo_ports_double 2.874
+attention_b1_l8k known_fifo_links_half NOT REUSED: changed workload contract
+attention_b1_l8k known_fifo_links_half 3.05875
+attention_b16_l128k sram_baseline NOT REUSED: changed workload contract
+attention_b16_l128k sram_baseline 1411.88875
+attention_b16_l128k sram_ideal_memory NOT REUSED: changed workload contract
+attention_b16_l128k sram_ideal_memory 1623.67225
+attention_b16_l128k sram_infinite_noc NOT REUSED: changed workload contract
+attention_b16_l128k sram_infinite_noc 1410.57075
+attention_b16_l128k sram_ideal_buffer NOT REUSED: changed workload contract
+attention_b16_l128k sram_ideal_buffer 1485.3955
+attention_b16_l128k sram_direct_stream NOT REUSED: changed workload contract
+attention_b16_l128k sram_direct_stream 1362.76275
+attention_b16_l128k sram_ideal_collective NOT REUSED: changed workload contract
+attention_b16_l128k sram_ideal_collective 1410.83075
+attention_b16_l128k known_fifo_baseline NOT REUSED: changed workload contract
+attention_b16_l128k known_fifo_baseline 716.73625
+attention_b16_l128k known_fifo_ideal_memory NOT REUSED: changed workload contract
+attention_b16_l128k known_fifo_ideal_memory 716.68025
+attention_b16_l128k known_fifo_infinite_noc NOT REUSED: changed workload contract
+attention_b16_l128k known_fifo_infinite_noc 715.4182500000001
+attention_b16_l128k known_fifo_ideal_buffer NOT REUSED: changed workload contract
+attention_b16_l128k known_fifo_ideal_buffer 716.66425
+attention_b16_l128k known_fifo_direct_stream NOT REUSED: changed workload contract
+attention_b16_l128k known_fifo_direct_stream 667.58425
+attention_b16_l128k known_fifo_ideal_collective NOT REUSED: changed workload contract
+attention_b16_l128k known_fifo_ideal_collective 715.67825
+attention_b16_l128k known_fifo_known_fusion NOT REUSED: changed workload contract
+attention_b16_l128k known_fifo_known_fusion 667.58425
+attention_b16_l128k known_fifo_ports_half NOT REUSED: changed workload contract
+attention_b16_l128k known_fifo_ports_half 765.97725
+attention_b16_l128k known_fifo_ports_double NOT REUSED: changed workload contract
+attention_b16_l128k known_fifo_ports_double 692.11575
+attention_b16_l128k known_fifo_links_half NOT REUSED: changed workload contract
+attention_b16_l128k known_fifo_links_half 718.05425
+moe_uniform_b32 sram_baseline NOT REUSED: changed workload contract
+moe_uniform_b32 sram_baseline 412.023
+moe_uniform_b32 sram_ideal_memory NOT REUSED: changed workload contract
+moe_uniform_b32 sram_ideal_memory 412.54225
+moe_uniform_b32 sram_infinite_noc NOT REUSED: changed workload contract
+moe_uniform_b32 sram_infinite_noc 407.18975
+moe_uniform_b32 sram_ideal_buffer 410.582
+moe_uniform_b32 sram_direct_stream 399.677
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/Projects<run-root>/source-h3-18adac9/thermal_exploration/run_h3.py", line 87, in <module>
+    if __name__=='__main__':main()
+  File "/Projects<run-root>/source-h3-18adac9/thermal_exploration/run_h3.py", line 65, in main
+    r=execute(g,mode);events=r.pop('events')
+  File "/Projects<run-root>/source-h3-18adac9/thermal_exploration/decode_graph.py", line 224, in execute
+    elif completed<n:raise ValueError('Deadlock: finite credits/dependencies cannot progress')
+ValueError: Deadlock: finite credits/dependencies cannot progress

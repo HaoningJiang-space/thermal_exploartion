@@ -3,6 +3,10 @@
 研究对象是HB改变Memory、Compute、Communication物理成本后，资源边界与执行组织是否合理。
 模型和LLM是证据工具；所有计算位于Logic，DRAM在上方。无PIM、Power Delivery或多机扩展。
 
+本合同的正式执行、失败修正、全模型容量、60个执行点、135个热评价点与Stage 3决策已归档于
+[Stage 1–4结果](../results/stages-2026-10-10/findings.md)。
+H4保持条件性：本轮没有证明需要新硬件，因此交付有依据的暂缓决策，不凭Oracle制造架构候选。
+
 |Stage|冻结任务|完成证据|停止条件|
 |---|---|---|---|
 |1 Qualification|H2完整有限资源案例、H2–H3同合同交叉、ATLAS官方Artifact子案例|工作量/字节/容量/输出归属一致，误差与失真机制公开|资格不通过的模型只能报告条件性筛选|
@@ -14,7 +18,8 @@
 容量按第128次Decode之后的KV增长检查。Qwen原始max_position_embeddings为8192；8192+128场景须标明超出发布配置边界，不能无声扩大。
 Llama采用三投影SiLU-gated MLP；Qwen采用60 routed/top4及等价4个小专家宽度的shared MLP，不能继续使用80/top2代理。
 
-B0局部Tiled；B1经典Tensor Parallelism/Megatron配对/Split-KV；B2既有prefetch、双缓冲、流式融合；B3可适配的3D-aware placement/TP–EP。
+B0局部cached Tiled；B1经典Tensor Parallelism/Megatron配对/头分组Split-KV；B2 kernel内请求预取、有限双缓冲/register fusion；B3静态3D-aware placement/TP–EP控制。
+跨operator的全局SET/SoMa式prefetch和collective重叠尚未完整实现，保守barrier是公开模型边界，不可据此证明新硬件必需。
 **机制代理不等于完整复现SET/SoMa/ATLAS/HDA-MoE**。必须列出已实现与未实现机制，不将Oracle当B3。
 公开路由必须匹配模型/专家数/top-k；跨模型路由仅能作为有标签的迁移敏感性。
 

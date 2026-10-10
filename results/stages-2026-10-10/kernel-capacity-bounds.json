@@ -1,0 +1,7 @@
+{
+  "maximum_response_bytes": 65536,
+  "maximum_live_weight_bytes": 262144,
+  "response_limit_bytes": 65536,
+  "private_storage_bytes": 2359296,
+  "scope": "Constructive finite kernel slot reservation maxima; first complete-model step of best known baseline; other steps accounting remains in raw traces"
+}

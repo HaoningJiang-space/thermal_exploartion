@@ -1,0 +1,671 @@
+[
+  {
+    "file": "llama_b1_c2k.tar.gz",
+    "bytes": 39665209,
+    "sha256": "b5397095e9168e9beb4e75d1e05632f23f6cd8fc8835d6c9c3b40c87c60de3b4",
+    "entries": [
+      {
+        "name": "llama_b1_c2k/B0_local-none-uniform.json",
+        "bytes": 1966748,
+        "sha256": "6169d3ffe255a006e17fdcfb1e564d31e42ad96d0d7532de22e3a81ee070d7fb"
+      },
+      {
+        "name": "llama_b1_c2k/B0_local-none-uniform.jsonl.gz",
+        "bytes": 9212638,
+        "sha256": "1c8aa8e4bd260211d23ee42a735536173f03a6241028809f85f7247fb0a99cd1"
+      },
+      {
+        "name": "llama_b1_c2k/B1_dataflow-none-uniform.json",
+        "bytes": 1966767,
+        "sha256": "3750a82bc748ce62b91b8ebdcbaea55701988f4283ac823174492d477c6da3ed"
+      },
+      {
+        "name": "llama_b1_c2k/B1_dataflow-none-uniform.jsonl.gz",
+        "bytes": 8659917,
+        "sha256": "b705cdbd1f120ecefe90e5a99cba8e9a1a2dd409cbedfccee102925a412674c8"
+      },
+      {
+        "name": "llama_b1_c2k/B2_stream_fusion-none-uniform.json",
+        "bytes": 1965931,
+        "sha256": "7a306322834a69c1a766fe70c9bcbb1e7ba890a504ab73cc6972a47ce6436bb4"
+      },
+      {
+        "name": "llama_b1_c2k/B2_stream_fusion-none-uniform.jsonl.gz",
+        "bytes": 8173052,
+        "sha256": "c21255a5539f042c1d3e9cc780d0926f5b4c3472625e5ff1478c27bc47ac6d87"
+      },
+      {
+        "name": "llama_b1_c2k/B3_3d_placement-direct_producer_stream-uniform.json",
+        "bytes": 485287,
+        "sha256": "0eabc2e687fbd1a68395c84798c3d5a24f76656ee014936ac6a481af45706206"
+      },
+      {
+        "name": "llama_b1_c2k/B3_3d_placement-direct_producer_stream-uniform.jsonl.gz",
+        "bytes": 8141275,
+        "sha256": "f5069dac35551f495f32b4507fd4c11c1141c5e54a029dc58678e7491fd8c548"
+      },
+      {
+        "name": "llama_b1_c2k/B3_3d_placement-ideal_buffer-uniform.json",
+        "bytes": 485027,
+        "sha256": "9496c73f90ef42202f6026c03fc52c13e38c7cd2679d9fc0e0deb4d13ebaca2a"
+      },
+      {
+        "name": "llama_b1_c2k/B3_3d_placement-ideal_buffer-uniform.jsonl.gz",
+        "bytes": 8438595,
+        "sha256": "b80e82c06b729d3f60c77d3698f1095e1946954f6dd51238de06a913ee999e1b"
+      },
+      {
+        "name": "llama_b1_c2k/B3_3d_placement-ideal_collective-uniform.json",
+        "bytes": 484923,
+        "sha256": "2cadcc87ce40b9752d65d42a8dffb505b6f735a7b710e52ba43c1c4767032b89"
+      },
+      {
+        "name": "llama_b1_c2k/B3_3d_placement-ideal_collective-uniform.jsonl.gz",
+        "bytes": 8303162,
+        "sha256": "503aab7e1c19937460224a6fd408186a3c1be33f019c5a6a5a806d264c07e8dc"
+      },
+      {
+        "name": "llama_b1_c2k/B3_3d_placement-ideal_memory-uniform.json",
+        "bytes": 488586,
+        "sha256": "08d1ea0cccc49513c0fc3235019849f6e28e1ba8e3ee10efe4ae2b3a7464460f"
+      },
+      {
+        "name": "llama_b1_c2k/B3_3d_placement-ideal_memory-uniform.jsonl.gz",
+        "bytes": 8141285,
+        "sha256": "9e2f09876848fdf7eb21cc8dc8f0360dde39edbd31277e4d58ca1a417f1a4349"
+      },
+      {
+        "name": "llama_b1_c2k/B3_3d_placement-infinite_noc-uniform.json",
+        "bytes": 485306,
+        "sha256": "2fd6f5456422917e3afe98de7324bc08784ff9e79616e5ff84b92e9dc53adb5f"
+      },
+      {
+        "name": "llama_b1_c2k/B3_3d_placement-infinite_noc-uniform.jsonl.gz",
+        "bytes": 8294535,
+        "sha256": "f5422384efe24084d200981be9ac7acd5f92dae5c57b75515faabb9b22e5be82"
+      },
+      {
+        "name": "llama_b1_c2k/B3_3d_placement-none-uniform.json",
+        "bytes": 485011,
+        "sha256": "1e9b80c6449a4de6b96e99dd5dd61a835c64e9b073b692961c30dced41c07a6c"
+      },
+      {
+        "name": "llama_b1_c2k/B3_3d_placement-none-uniform.jsonl.gz",
+        "bytes": 8275601,
+        "sha256": "ad0eccfbf5ff38adaf5c7a51d5a13784a63f8e47b74624a5139dfeda24a9e377"
+      }
+    ]
+  },
+  {
+    "file": "llama_b1_c32k.tar.gz",
+    "bytes": 40002295,
+    "sha256": "a75581c078a585c4f203ce77577e14ef14b79f46046e028257957441e7ce2b86",
+    "entries": [
+      {
+        "name": "llama_b1_c32k/B0_local-none-uniform.json",
+        "bytes": 1967608,
+        "sha256": "c9665c98ca8c4b738560f91329c1c1e4cd915fa897a511e2b0e9dce751f3fe9f"
+      },
+      {
+        "name": "llama_b1_c32k/B0_local-none-uniform.jsonl.gz",
+        "bytes": 9231812,
+        "sha256": "9228acdd77a54cdeca7389d3b9982b6f106df7ef42c8d5a47edce97f59e86a02"
+      },
+      {
+        "name": "llama_b1_c32k/B1_dataflow-none-uniform.json",
+        "bytes": 1967478,
+        "sha256": "5d1a89cae86d8adf4b61c5ebfb7f66e05a8fe385cc9da43afc2a6e7512493136"
+      },
+      {
+        "name": "llama_b1_c32k/B1_dataflow-none-uniform.jsonl.gz",
+        "bytes": 8685841,
+        "sha256": "dd41049d17737563e4f27d9e37158e71369cc1164d58fb6459344ac1190d818a"
+      },
+      {
+        "name": "llama_b1_c32k/B2_stream_fusion-none-uniform.json",
+        "bytes": 1967268,
+        "sha256": "2deaf1c02edc493406725782bfa4c63a579cd0817e391d20bf8f2f119f39dcad"
+      },
+      {
+        "name": "llama_b1_c32k/B2_stream_fusion-none-uniform.jsonl.gz",
+        "bytes": 8197778,
+        "sha256": "12cfda4eb375f466061918a3f21ce394d4afa98fb84c86c2f2446d56af67866c"
+      },
+      {
+        "name": "llama_b1_c32k/B3_3d_placement-direct_producer_stream-uniform.json",
+        "bytes": 486740,
+        "sha256": "32c7f886e8cf3dfa01c248365c636f91aebb2cbdb6e9c7f11c5e05855590c09c"
+      },
+      {
+        "name": "llama_b1_c32k/B3_3d_placement-direct_producer_stream-uniform.jsonl.gz",
+        "bytes": 8170785,
+        "sha256": "f5cb66a2c5ff1765ad0896239dc3e1db267091db7b87cbd294e16408a01f88b6"
+      },
+      {
+        "name": "llama_b1_c32k/B3_3d_placement-ideal_buffer-uniform.json",
+        "bytes": 486497,
+        "sha256": "3c8a5cc442cfac218b93ee4b01f0626d5c9be713e4f47cf79aa8be30aac0ee02"
+      },
+      {
+        "name": "llama_b1_c32k/B3_3d_placement-ideal_buffer-uniform.jsonl.gz",
+        "bytes": 8470229,
+        "sha256": "7198f71819f887047f879e1790c993cac9d01b5d957c2ed7486fa1c71fd0e398"
+      },
+      {
+        "name": "llama_b1_c32k/B3_3d_placement-ideal_collective-uniform.json",
+        "bytes": 486432,
+        "sha256": "dd9795916846737c9acd46c8122b6cd6b3d9bc2a734e072ab4a5574957cc1b82"
+      },
+      {
+        "name": "llama_b1_c32k/B3_3d_placement-ideal_collective-uniform.jsonl.gz",
+        "bytes": 8328037,
+        "sha256": "cc327f20160a10d90506ff9facc91899d7d3264c60b45257c0b9cadbc026eb6a"
+      },
+      {
+        "name": "llama_b1_c32k/B3_3d_placement-ideal_memory-uniform.json",
+        "bytes": 490060,
+        "sha256": "35686fce00aa3c7acc52a92a9fe43260716fe298c69fdd59ceadf26b7e6e4494"
+      },
+      {
+        "name": "llama_b1_c32k/B3_3d_placement-ideal_memory-uniform.jsonl.gz",
+        "bytes": 8174697,
+        "sha256": "2bf87afb9d37f7ec353d5b5b7e2c172286d102937cff03c9b91a41f0c0ce42bd"
+      },
+      {
+        "name": "llama_b1_c32k/B3_3d_placement-infinite_noc-uniform.json",
+        "bytes": 486480,
+        "sha256": "6ec00d4fe8839194a563f7ba774fad796abbc30f82308adfe89719a8e047b6a0"
+      },
+      {
+        "name": "llama_b1_c32k/B3_3d_placement-infinite_noc-uniform.jsonl.gz",
+        "bytes": 8324377,
+        "sha256": "00a6df49c3a31f48dca10f736564ef9b48131e9870dbd95b04346f0c10c9d0e3"
+      },
+      {
+        "name": "llama_b1_c32k/B3_3d_placement-none-uniform.json",
+        "bytes": 486481,
+        "sha256": "c46d5b6ff5b1f8997fe983b9d0125cea0ad4cf50603e38e9bd902cc908a47d8d"
+      },
+      {
+        "name": "llama_b1_c32k/B3_3d_placement-none-uniform.jsonl.gz",
+        "bytes": 8301673,
+        "sha256": "9fa4bc0af62209a0a8c662a16ebf52fcde4d3a6fa382a88a4e32436d92b10492"
+      }
+    ]
+  },
+  {
+    "file": "llama_b4_c8k.tar.gz",
+    "bytes": 42103226,
+    "sha256": "858b36fe3c31a052f3aa6d56b85ccf5041458ec9d81aaabf482c4b7d4d0e4e89",
+    "entries": [
+      {
+        "name": "llama_b4_c8k/B0_local-none-uniform.json",
+        "bytes": 1968058,
+        "sha256": "84df7a0411b7811980ed6eaf111a4b1a306d81a20d54151757bfb4397c672f2e"
+      },
+      {
+        "name": "llama_b4_c8k/B0_local-none-uniform.jsonl.gz",
+        "bytes": 9488721,
+        "sha256": "ad71e33c9f52b3b350a207f7f604f3c2de8bdfeb0f427ef2c162574865b4fa3b"
+      },
+      {
+        "name": "llama_b4_c8k/B1_dataflow-none-uniform.json",
+        "bytes": 1967766,
+        "sha256": "50bfc46bcbfd836d1688687399afcc5bf6e05e00d32d6803b456c689d30af1c2"
+      },
+      {
+        "name": "llama_b4_c8k/B1_dataflow-none-uniform.jsonl.gz",
+        "bytes": 8897294,
+        "sha256": "dc79f7a1341228f2f04cbe632b557dd8954a4e5ec26ed2bc43735ed1ad91980f"
+      },
+      {
+        "name": "llama_b4_c8k/B2_stream_fusion-none-uniform.json",
+        "bytes": 1967209,
+        "sha256": "d1dae7e7eb6bef49e9b120cdc4e8243aa94881dc824edc3f938202c0d467b1f9"
+      },
+      {
+        "name": "llama_b4_c8k/B2_stream_fusion-none-uniform.jsonl.gz",
+        "bytes": 8383413,
+        "sha256": "92166b24bdd2fecb6d9fa61a548d0576234aa621f5574489bd7fb2716e00a427"
+      },
+      {
+        "name": "llama_b4_c8k/B3_3d_placement-direct_producer_stream-uniform.json",
+        "bytes": 486556,
+        "sha256": "020aaedb2ed17d3858f78cdc9b388c39593543fb24d1e8d39e2e498c56439a91"
+      },
+      {
+        "name": "llama_b4_c8k/B3_3d_placement-direct_producer_stream-uniform.jsonl.gz",
+        "bytes": 8297794,
+        "sha256": "e2f0988a7d83d1dee98a80b2be7d4a9a0286e8efcb1aa750c09c25cf14a2f4a7"
+      },
+      {
+        "name": "llama_b4_c8k/B3_3d_placement-ideal_buffer-uniform.json",
+        "bytes": 486765,
+        "sha256": "263e74b96e4872b2abff7b7e64a8984af0bb2a60a249d8de6cac4f5bb90655f9"
+      },
+      {
+        "name": "llama_b4_c8k/B3_3d_placement-ideal_buffer-uniform.jsonl.gz",
+        "bytes": 8686141,
+        "sha256": "9ddc651718c5ba8df9009e65e7eaeba5ec757836ac9ab69d656dc027176e868f"
+      },
+      {
+        "name": "llama_b4_c8k/B3_3d_placement-ideal_collective-uniform.json",
+        "bytes": 486704,
+        "sha256": "a4f1a67ccab2a5788a4f73bb7d6c322973029254de3b61568d4767152629dabe"
+      },
+      {
+        "name": "llama_b4_c8k/B3_3d_placement-ideal_collective-uniform.jsonl.gz",
+        "bytes": 8531395,
+        "sha256": "960de4bacaf55bebeb398ba6e4073828600b3e821e7427780ab83658038ed821"
+      },
+      {
+        "name": "llama_b4_c8k/B3_3d_placement-ideal_memory-uniform.json",
+        "bytes": 490355,
+        "sha256": "0979a59c8f634b59fea3702fab4af564e87821989184a9ae94327716f11d21bf"
+      },
+      {
+        "name": "llama_b4_c8k/B3_3d_placement-ideal_memory-uniform.jsonl.gz",
+        "bytes": 8441726,
+        "sha256": "3acf9cb681979b06fd940c5153dea9b2f9a0791453ed40aa50026c08b9e4c882"
+      },
+      {
+        "name": "llama_b4_c8k/B3_3d_placement-infinite_noc-uniform.json",
+        "bytes": 486801,
+        "sha256": "475bd48caa5e2cca1bdcc5a1f9ae83989db90cda8060253e6cab2783733df9a6"
+      },
+      {
+        "name": "llama_b4_c8k/B3_3d_placement-infinite_noc-uniform.jsonl.gz",
+        "bytes": 8520143,
+        "sha256": "1fb78a214361d467a4f90fa2cee63b69f485ee3ecc8c1c8e302d5aa03086b10a"
+      },
+      {
+        "name": "llama_b4_c8k/B3_3d_placement-none-uniform.json",
+        "bytes": 486749,
+        "sha256": "b8e7ac3e34ac0dc0410f31f67436e858b6aed6609899ec2df18f85eff9eef2b4"
+      },
+      {
+        "name": "llama_b4_c8k/B3_3d_placement-none-uniform.jsonl.gz",
+        "bytes": 8513004,
+        "sha256": "05491e1c71acdf505fd13dd91f0915a81282f74548636b5d7cf2e8808e674831"
+      }
+    ]
+  },
+  {
+    "file": "qwen_b1_c2k.tar.gz",
+    "bytes": 65057895,
+    "sha256": "1159ac91a730077eccdd011bb51c473f7cdc82e7ded9a4b68512af56dacd8a35",
+    "entries": [
+      {
+        "name": "qwen_b1_c2k/B0_local-none-public_projected.json",
+        "bytes": 35718421,
+        "sha256": "bffabb811ee77a1524af7a1766cdf25937b3979737d4be3d05937dbd0c3675ef"
+      },
+      {
+        "name": "qwen_b1_c2k/B0_local-none-public_projected.jsonl.gz",
+        "bytes": 10181575,
+        "sha256": "1c243b61a2cc5039fda4658cfdc7708b670582da7139a3f9f5894723141e46fa"
+      },
+      {
+        "name": "qwen_b1_c2k/B1_dataflow-none-public_projected.json",
+        "bytes": 35718187,
+        "sha256": "99c21bb43311c3a01da1a0f4bacd6f4f4dce0743cfada6b5c548552fd16cb75d"
+      },
+      {
+        "name": "qwen_b1_c2k/B1_dataflow-none-public_projected.jsonl.gz",
+        "bytes": 9772727,
+        "sha256": "b7b4236a08296b9c27e7157e3e120df8adc05f81854ba46f09d3b377d2c187a8"
+      },
+      {
+        "name": "qwen_b1_c2k/B2_stream_fusion-none-public_projected.json",
+        "bytes": 35717625,
+        "sha256": "08afa17fd5cc4ca93e14db6d6f4b7285f80d7f62c574f276a49b18d04533d39c"
+      },
+      {
+        "name": "qwen_b1_c2k/B2_stream_fusion-none-public_projected.jsonl.gz",
+        "bytes": 9135973,
+        "sha256": "b252a3a92ece01f53b1d1bece73f48a7a0c893cd599248f2e81e2e82a5def3e7"
+      },
+      {
+        "name": "qwen_b1_c2k/B3_3d_placement-direct_producer_stream-public_projected.json",
+        "bytes": 6554344,
+        "sha256": "de2be5409e8a1cbbe54e18e0339c4bab60785ea05336ee63f55e3134cf350896"
+      },
+      {
+        "name": "qwen_b1_c2k/B3_3d_placement-direct_producer_stream-public_projected.jsonl.gz",
+        "bytes": 9317414,
+        "sha256": "adb4c380453d26ee0fb27d7455dbcca83da9577306f24a0b79333ad0b8c57f56"
+      },
+      {
+        "name": "qwen_b1_c2k/B3_3d_placement-ideal_buffer-public_projected.json",
+        "bytes": 6554142,
+        "sha256": "7a443d54aa7337c1821dce3c7fdc00aa93dde70bc3b8dce63474699111855361"
+      },
+      {
+        "name": "qwen_b1_c2k/B3_3d_placement-ideal_buffer-public_projected.jsonl.gz",
+        "bytes": 9572139,
+        "sha256": "7eaeeb61dc4ad39ffa872b33b3c7d0c5f873209335c0a386bad9f0154b4d1d27"
+      },
+      {
+        "name": "qwen_b1_c2k/B3_3d_placement-ideal_collective-public_projected.json",
+        "bytes": 6554195,
+        "sha256": "6b5f71bfb0a125bfe7268edea663602bf5e40c65adc7521b1fafa5b2b39ddb4d"
+      },
+      {
+        "name": "qwen_b1_c2k/B3_3d_placement-ideal_collective-public_projected.jsonl.gz",
+        "bytes": 9447048,
+        "sha256": "50a78904b418c86bea6c3d56abb83e4be32ed241a2f6b8c3c47f1e7f312dceb3"
+      },
+      {
+        "name": "qwen_b1_c2k/B3_3d_placement-ideal_memory-public_projected.json",
+        "bytes": 6557386,
+        "sha256": "2867b04c42e25164358b685fef7678427f729bc181ed136334af52b9b6bb797a"
+      },
+      {
+        "name": "qwen_b1_c2k/B3_3d_placement-ideal_memory-public_projected.jsonl.gz",
+        "bytes": 9111100,
+        "sha256": "0656df62edabf34202caca85f5967aa5fe8e6cca53c113790415e7e41fd2c672"
+      },
+      {
+        "name": "qwen_b1_c2k/B3_3d_placement-infinite_noc-public_projected.json",
+        "bytes": 6554091,
+        "sha256": "c7d235f5939722655e51a9ca5f1509ddd96ff4253ee763b090982122693950d2"
+      },
+      {
+        "name": "qwen_b1_c2k/B3_3d_placement-infinite_noc-public_projected.jsonl.gz",
+        "bytes": 9427433,
+        "sha256": "e56fb2729e1a87d2d0c52d28eea7eda9ced8c6aed2fab4f11ca6038b50702bf0"
+      },
+      {
+        "name": "qwen_b1_c2k/B3_3d_placement-none-public_projected-tp4.json",
+        "bytes": 2197475,
+        "sha256": "9274e5243854437d0fc92b0b7c2e5574dd07bb8e2419b93cd486c3d13a547d00"
+      },
+      {
+        "name": "qwen_b1_c2k/B3_3d_placement-none-public_projected-tp4.jsonl.gz",
+        "bytes": 9546842,
+        "sha256": "a1b6fb2f7a83c3439fc51659d8c4a145868bf26bb6bf2c57a33746acc3072bf4"
+      },
+      {
+        "name": "qwen_b1_c2k/B3_3d_placement-none-public_projected.json",
+        "bytes": 6554126,
+        "sha256": "2ecf0605b2df81a12e76b941cef38484c65f66741550e73ff26fa74a64b9ca62"
+      },
+      {
+        "name": "qwen_b1_c2k/B3_3d_placement-none-public_projected.jsonl.gz",
+        "bytes": 9454175,
+        "sha256": "2f0b7d9105ac174f2c0c06027e6622a808a039f92cdf0383e8ee647958a959e8"
+      },
+      {
+        "name": "qwen_b1_c2k/B3_3d_placement-none-uniform.json",
+        "bytes": 6554048,
+        "sha256": "999c057232801e53e26c45ba415be5addc64a20005bc431103b7940c89ca2032"
+      },
+      {
+        "name": "qwen_b1_c2k/B3_3d_placement-none-uniform.jsonl.gz",
+        "bytes": 9461062,
+        "sha256": "f7ff364de8e16428e11a296d187b734c8fc172cf312b3484099c4b860b50b295"
+      }
+    ]
+  },
+  {
+    "file": "qwen_b2_c8k.tar.gz",
+    "bytes": 79801122,
+    "sha256": "7208c1007fffac25867c2fe635ddbac08668486e116d589054eca300e012b1ea",
+    "entries": [
+      {
+        "name": "qwen_b2_c8k/B0_local-none-public_projected.json",
+        "bytes": 35722472,
+        "sha256": "7f9fddf1e69852d1949c48c866af26050f0389d2229a6af6b53aa77904d72392"
+      },
+      {
+        "name": "qwen_b2_c8k/B0_local-none-public_projected.jsonl.gz",
+        "bytes": 11788706,
+        "sha256": "7832ebceac4dd2221d543058b9238d63b59f81774ce543d5e89652501fe6abb9"
+      },
+      {
+        "name": "qwen_b2_c8k/B1_dataflow-none-public_projected.json",
+        "bytes": 35722305,
+        "sha256": "28cb33ae2b51720ab2ec90c27155398bbe6ae58f9cea082145b5acdbc0d15568"
+      },
+      {
+        "name": "qwen_b2_c8k/B1_dataflow-none-public_projected.jsonl.gz",
+        "bytes": 11367885,
+        "sha256": "7af15bc5067370991379b30aadfc9c11b703646271453efc0c9d53f8dafcfb83"
+      },
+      {
+        "name": "qwen_b2_c8k/B2_stream_fusion-none-public_projected.json",
+        "bytes": 35721884,
+        "sha256": "5acee17129aa3b1ddb011e7c3882445d3c80eaff49b4d3897414aa9868e63e06"
+      },
+      {
+        "name": "qwen_b2_c8k/B2_stream_fusion-none-public_projected.jsonl.gz",
+        "bytes": 10584413,
+        "sha256": "884044e5a96bdf6c4920718d6f084cdcc2116924974b70efb17368c1722b79e4"
+      },
+      {
+        "name": "qwen_b2_c8k/B3_3d_placement-direct_producer_stream-public_projected.json",
+        "bytes": 6555829,
+        "sha256": "375465604276e16a88a5f2b3c55a690e70500ee3c438a69c00bc15e1380315bc"
+      },
+      {
+        "name": "qwen_b2_c8k/B3_3d_placement-direct_producer_stream-public_projected.jsonl.gz",
+        "bytes": 10581924,
+        "sha256": "4828de2e83b0287b40ee402e3a7230bb9d5dd094e6c08cf33aef00bb8dd10a89"
+      },
+      {
+        "name": "qwen_b2_c8k/B3_3d_placement-ideal_buffer-public_projected.json",
+        "bytes": 6556034,
+        "sha256": "ad4cbe1dbe810ea39947b8e68a5ecbed1e3605820052a733a50ab0a58cb1ab13"
+      },
+      {
+        "name": "qwen_b2_c8k/B3_3d_placement-ideal_buffer-public_projected.jsonl.gz",
+        "bytes": 10936237,
+        "sha256": "47eaecfba16b104f6ca0c40c6d8988cd08c2981c152baf52fbff0b48b2033dff"
+      },
+      {
+        "name": "qwen_b2_c8k/B3_3d_placement-ideal_collective-public_projected.json",
+        "bytes": 6555966,
+        "sha256": "6f7cb2b45c177975fe15e0bf3ef364208d133ab0cdac9ac67c6404f4621e61b4"
+      },
+      {
+        "name": "qwen_b2_c8k/B3_3d_placement-ideal_collective-public_projected.jsonl.gz",
+        "bytes": 10758955,
+        "sha256": "23cbac4864067314e01d54c70df72832f7eb2b0ac6b54da472120cd20d4ec5d5"
+      },
+      {
+        "name": "qwen_b2_c8k/B3_3d_placement-ideal_memory-public_projected.json",
+        "bytes": 6559140,
+        "sha256": "838163dbd8ea5fc38c46d8d6036213b7da06b24354c2602484784af1a4aacc4a"
+      },
+      {
+        "name": "qwen_b2_c8k/B3_3d_placement-ideal_memory-public_projected.jsonl.gz",
+        "bytes": 10597751,
+        "sha256": "3c0e80aae63f66e03ac89e0d34c661864c4a0fbb1ceff05bca70786e8cb849c5"
+      },
+      {
+        "name": "qwen_b2_c8k/B3_3d_placement-infinite_noc-public_projected.json",
+        "bytes": 6555773,
+        "sha256": "0f5535c533863322134171ce3eee7b33b2566c79199882b3f036cffada7a8301"
+      },
+      {
+        "name": "qwen_b2_c8k/B3_3d_placement-infinite_noc-public_projected.jsonl.gz",
+        "bytes": 10755175,
+        "sha256": "fc4b388ed9fc5712c48bf346b1b84039c6485489672de305382a1a4a11e279e9"
+      },
+      {
+        "name": "qwen_b2_c8k/B3_3d_placement-none-public_projected-tp4.json",
+        "bytes": 2199034,
+        "sha256": "1636ea55e54d8239736f4aa1c367c08a2a7534891625a6834c64f7ee2d037622"
+      },
+      {
+        "name": "qwen_b2_c8k/B3_3d_placement-none-public_projected-tp4.jsonl.gz",
+        "bytes": 10622307,
+        "sha256": "58cee0fcd217da1dcd86d1ad15d6f0837519c8281abf7d5d79c103709ec565ba"
+      },
+      {
+        "name": "qwen_b2_c8k/B3_3d_placement-none-public_projected.json",
+        "bytes": 6556018,
+        "sha256": "a69eeaf221a7e5838c3df040645b7987d23adaae2f35f3e74e014c1cb1134c04"
+      },
+      {
+        "name": "qwen_b2_c8k/B3_3d_placement-none-public_projected.jsonl.gz",
+        "bytes": 10759756,
+        "sha256": "5dbf741154a0bc069bf956ae58d3fbdc5a132d0a601464f9796458b643447254"
+      },
+      {
+        "name": "qwen_b2_c8k/B3_3d_placement-none-uniform.json",
+        "bytes": 6555946,
+        "sha256": "1af574079cca65a15f116cd427c082f8a99f6570aad4c1dd62704ce0cb6e77d2"
+      },
+      {
+        "name": "qwen_b2_c8k/B3_3d_placement-none-uniform.jsonl.gz",
+        "bytes": 10321689,
+        "sha256": "a99fa561cf493a389536eb94c7c0d12616df0f053159b15c86b880d8d723f6ff"
+      }
+    ]
+  },
+  {
+    "file": "qwen_b8_c2k.tar.gz",
+    "bytes": 112717758,
+    "sha256": "0efa3457024aa6d0472f5ced4a4661823614271075dfbe7e08232992d9444f23",
+    "entries": [
+      {
+        "name": "qwen_b8_c2k/B0_local-none-public_projected.json",
+        "bytes": 35723460,
+        "sha256": "42361615061b7252c4c7d9fdbe782138cccb2c81969c98010d7e43f135531528"
+      },
+      {
+        "name": "qwen_b8_c2k/B0_local-none-public_projected.jsonl.gz",
+        "bytes": 15730446,
+        "sha256": "876ec0b3c63cba8b8a333d1589a989b446b4ea3280c16dea1a6f7638c9f2de77"
+      },
+      {
+        "name": "qwen_b8_c2k/B1_dataflow-none-public_projected.json",
+        "bytes": 35723020,
+        "sha256": "4624d9512125b56a2f0a62e6400dfa9af00aa05c3a393390be97d5fe7d64101b"
+      },
+      {
+        "name": "qwen_b8_c2k/B1_dataflow-none-public_projected.jsonl.gz",
+        "bytes": 15262465,
+        "sha256": "cca722eb0545b25e57fea7eac6bf62fb2c7e2faf99f75e2a6a770278c1560870"
+      },
+      {
+        "name": "qwen_b8_c2k/B2_stream_fusion-none-public_projected.json",
+        "bytes": 35726106,
+        "sha256": "5b21dcfb2beb6aef15500464603e7519febd78059dfdd9040c2e205b1f40f6e9"
+      },
+      {
+        "name": "qwen_b8_c2k/B2_stream_fusion-none-public_projected.jsonl.gz",
+        "bytes": 14153844,
+        "sha256": "aa5d43339b2b2df6852789cf18f32ee3435f6e787741ba545e36bdcd9c86ed19"
+      },
+      {
+        "name": "qwen_b8_c2k/B3_3d_placement-direct_producer_stream-public_projected.json",
+        "bytes": 6560234,
+        "sha256": "d485a697a02a57bfb267d74179ba27b4034c0e7dcf8c2d3350ca9e85ba9014f4"
+      },
+      {
+        "name": "qwen_b8_c2k/B3_3d_placement-direct_producer_stream-public_projected.jsonl.gz",
+        "bytes": 14025393,
+        "sha256": "39be9d21787f79f2d7f745e90ead9b3307817a7d6b6583897442c93f9afde7b3"
+      },
+      {
+        "name": "qwen_b8_c2k/B3_3d_placement-ideal_buffer-public_projected.json",
+        "bytes": 6560293,
+        "sha256": "9426ec475cae630cf80d8cd4fb34493aeb823f1a313b19411ca56c20b2fd221e"
+      },
+      {
+        "name": "qwen_b8_c2k/B3_3d_placement-ideal_buffer-public_projected.jsonl.gz",
+        "bytes": 14631042,
+        "sha256": "6a60f75c12847cff9777a60d6f2d664e31496921116522a418ff81b432648b81"
+      },
+      {
+        "name": "qwen_b8_c2k/B3_3d_placement-ideal_collective-public_projected.json",
+        "bytes": 6560226,
+        "sha256": "d6f30c726968163c193ddc146ad801aa3b053b1d1a89a6b006dd98c3fe22e9b7"
+      },
+      {
+        "name": "qwen_b8_c2k/B3_3d_placement-ideal_collective-public_projected.jsonl.gz",
+        "bytes": 14358559,
+        "sha256": "42e744e4f76314c2bc7362abf75d6f4f690c1be14c2144ecf5504fbb1eb85f0d"
+      },
+      {
+        "name": "qwen_b8_c2k/B3_3d_placement-ideal_memory-public_projected.json",
+        "bytes": 6559985,
+        "sha256": "aecff9743300cfe485e8b0ba9f45043a95e23fcc2617a5495b921ff0d15625ef"
+      },
+      {
+        "name": "qwen_b8_c2k/B3_3d_placement-ideal_memory-public_projected.jsonl.gz",
+        "bytes": 14199889,
+        "sha256": "30e10c5ccb173a48a7991c9bf8841756fcc62f4837be85df93f59ab9bff794b6"
+      },
+      {
+        "name": "qwen_b8_c2k/B3_3d_placement-infinite_noc-public_projected.json",
+        "bytes": 6560145,
+        "sha256": "52e973475a912ea7681b533d42b10b7cfc4b01da041f3e2c53de75824cf03344"
+      },
+      {
+        "name": "qwen_b8_c2k/B3_3d_placement-infinite_noc-public_projected.jsonl.gz",
+        "bytes": 14377648,
+        "sha256": "4505c869aa57467a4eab328618369a4194be8f7bfcc3ad46f11750e1687735eb"
+      },
+      {
+        "name": "qwen_b8_c2k/B3_3d_placement-none-public_projected-tp4.json",
+        "bytes": 2203459,
+        "sha256": "a7eae4f4baded92245106b2fbfa79b6cd1fdb684ec3d3c263ccd5165b5848790"
+      },
+      {
+        "name": "qwen_b8_c2k/B3_3d_placement-none-public_projected-tp4.jsonl.gz",
+        "bytes": 13918445,
+        "sha256": "18dfa096821d98285984ae7ed2362a683c6fb8153914e498c736cde4a346c127"
+      },
+      {
+        "name": "qwen_b8_c2k/B3_3d_placement-none-public_projected.json",
+        "bytes": 6560276,
+        "sha256": "12206a987e8f34277e8f0ce72b570d551e673338017f4ecc3c7e4a9fc469e469"
+      },
+      {
+        "name": "qwen_b8_c2k/B3_3d_placement-none-public_projected.jsonl.gz",
+        "bytes": 14349661,
+        "sha256": "3c8c6fe0bcf83c8f6178558a9b6a685edb47e6d95c47254f12d6e9fabe8e410c"
+      },
+      {
+        "name": "qwen_b8_c2k/B3_3d_placement-none-uniform.json",
+        "bytes": 6560177,
+        "sha256": "a1b031f87abd72144f999c05fabadf77f54d74dbc8ed4feadba3fba20d05c696"
+      },
+      {
+        "name": "qwen_b8_c2k/B3_3d_placement-none-uniform.jsonl.gz",
+        "bytes": 13043613,
+        "sha256": "25609cddb4cf70590cf695a0e7e3801219f190ec56494271390c8124af4ce235"
+      }
+    ]
+  },
+  {
+    "file": "contract.tar.gz",
+    "bytes": 18343,
+    "sha256": "26aa6ebfe6d7b7327a58b15b5d542259fb8bf58e6a95756ee1658adc5e6a02eb",
+    "entries": [
+      {
+        "name": "contract/admissions.json",
+        "bytes": 4840,
+        "sha256": "fd6552414d93ea62a913de6dfa4404d6665ac4f03e7b333a663ff6f4d49cba9c"
+      },
+      {
+        "name": "contract/contract.json",
+        "bytes": 2698,
+        "sha256": "fe70f28704411f80273f51c8282906eed764ad5339ad1b34e58dc3386ba69650"
+      },
+      {
+        "name": "contract/partial.json",
+        "bytes": 146972,
+        "sha256": "8d78a2e540dd109dd4c3a07ec56ac7cd59b6f5a629d2bb00bb7dde10ab8a258b"
+      },
+      {
+        "name": "contract/summary.json",
+        "bytes": 146972,
+        "sha256": "8d78a2e540dd109dd4c3a07ec56ac7cd59b6f5a629d2bb00bb7dde10ab8a258b"
+      }
+    ]
+  }
+]

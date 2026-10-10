@@ -1,0 +1,88 @@
+{
+  "source_commit": "dd9d434667a547dfa3151d3f819c9831e5c9bab7",
+  "source_dirty": false,
+  "scenarios": {
+    "llama_b1_c2k": [
+      "llama31_8b",
+      1,
+      2048
+    ],
+    "llama_b1_c32k": [
+      "llama31_8b",
+      1,
+      32768
+    ],
+    "llama_b4_c8k": [
+      "llama31_8b",
+      4,
+      8192
+    ],
+    "qwen_b1_c2k": [
+      "qwen15_moe",
+      1,
+      2048
+    ],
+    "qwen_b2_c8k": [
+      "qwen15_moe",
+      2,
+      8192
+    ],
+    "qwen_b8_c2k": [
+      "qwen15_moe",
+      8,
+      2048
+    ]
+  },
+  "steps": 128,
+  "baselines": [
+    "B0_local",
+    "B1_dataflow",
+    "B2_stream_fusion",
+    "B3_3d_placement"
+  ],
+  "oracles": [
+    "none",
+    "ideal_memory",
+    "infinite_noc",
+    "ideal_buffer",
+    "ideal_collective",
+    "direct_producer_stream"
+  ],
+  "area_mm2": 121,
+  "dram_bytes": 34359738368,
+  "sram_bytes": 37748736,
+  "peak_tflops": 128,
+  "hb_tb_s": 32,
+  "noc_link_gb_s": 32,
+  "temperature_limit_c": 85,
+  "route_source": {
+    "source_repo": "https://github.com/PKU-SEC-Lab/HDA-MoE-TCAD26",
+    "source_commit": "56ea3725b2c621d4aea248f16345c34f5e06b8ed",
+    "source_file": "expert_trace/qwen/experts_reasoning_qwen.json",
+    "source_sha256": "b0e0ab9e7fd24debf0371eb13a77d57e310191d962feebc9a9591a9487e070d1",
+    "source_shape": {
+      "layers": 28,
+      "experts": 64,
+      "topk": 8
+    },
+    "projection": "first24 layers; drop IDs60\u201363; retain first4 surviving selections; contiguous records; no modulo remap",
+    "training_records": 256,
+    "scope": "Public Qwen2 trace projected as an explicitly assumed Qwen1.5-shaped route sensitivity; NOT a Qwen1.5 model capture",
+    "model_matched_capture": false,
+    "steps": 128,
+    "max_batch": 8
+  },
+  "assumptions": [
+    "D1 streaming guard26.599TB/s plus tier bank-cycle bounds",
+    "Independent256MiB physical tier/region capacities",
+    "B2/B3 known bounded ingress FIFO and registered partials:0.8mm2/0.08W charged, same compute and36MiB",
+    "Conservative operator/layer barriers; no claimed optimal SET/SoMa global schedule",
+    "No DRAM command traces in full-model hierarchy",
+    "Complete causal layer/step order; no autoregressive speculation",
+    "B1\u2013B3 use grouped-head KV plus bounded split-KV; associative(m,l,o) merge, no plain-sum softmax",
+    "Qwen router61 scalar outputs are reduced before top-k; local expert weighting costs TP-dependent vector work",
+    "Final partials/materialized tensors are charged and1MiB expert workspace checked",
+    "Memory returns1024B with64KiB credits, separate32KiB compute blocks; fluid sub-tick HB serialization",
+    "Context-extension flag is an architectural assumption, not validated inference quality"
+  ]
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "file": "stages-original.tar",
+    "bytes": 379412480,
+    "sha256": "5e29572b5cef6f3f6a11fe7915e283615d74cd207fac26c28b0ffee005fad53f",
+    "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/stages-execution-2026-10-10/stages-original.tar",
+    "verification": "Nested-file scan including decompressed traces; GitHub asset digest and size matched"
+  },
+  {
+    "file": "stages-derived.tar",
+    "bytes": 373186560,
+    "sha256": "cd5affbae951d58b8636c3e30ec2a6ccd03243f10a845c6395632aaf1363b332",
+    "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/stages-execution-2026-10-10/stages-derived.tar",
+    "verification": "Nested-file scan including decompressed traces; GitHub asset digest and size matched"
+  },
+  {
+    "file": "stages-decode.tar",
+    "bytes": 3942400,
+    "sha256": "622d3164c86547c730f5bdf69c32b14d036dc223050e3017be2cdd168aa5652b",
+    "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/stages-execution-2026-10-10/stages-decode.tar",
+    "verification": "Nested-file scan including decompressed traces; GitHub asset digest and size matched"
+  },
+  {
+    "file": "stages-thermal.tar",
+    "bytes": 174080,
+    "sha256": "a3d58d60070e0cbe564acecd91bb6a6149b3534fb3194a4bace91002d7f9661b",
+    "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/stages-execution-2026-10-10/stages-thermal.tar",
+    "verification": "Nested-file scan including decompressed traces; GitHub asset digest and size matched"
+  }
+]
