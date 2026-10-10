@@ -72,7 +72,7 @@ def merge_spans(items):
 
 
 @lru_cache(maxsize=8192)
-def tile_pipeline(parts,batch,stream,oracle='none',chunk=32768,ports=1.,useful_bytes=None):
+def tile_pipeline(parts,batch,stream,oracle='none',chunk=32768,ports=1.,useful_bytes=None,packet_bytes=1024,keep_events=True):
     """Finite32KiB blocks,64KiB response and512/256KiB weight/FIFO credits.
 
     MAC operand/accumulator service overlaps MAC arithmetic, unlike old H3.
@@ -83,7 +83,8 @@ def tile_pipeline(parts,batch,stream,oracle='none',chunk=32768,ports=1.,useful_b
     if chunk>65536 or min(batch,ports)<=0:raise ValueError('Invalid streaming contract')
     mem_free=hb_free=mac_free=0; slots=8 if stream else 16
     if oracle=='ideal_buffer':slots=2**20
-    weights=defaultdict(int);returned=defaultdict(int);return_slots=2**20 if oracle=='ideal_buffer' else 2;events=[];index=0
+    if packet_bytes not in (1024,4096,32768) or packet_bytes>chunk:raise ValueError('Invalid memory packet granularity')
+    weights=defaultdict(int);returned=defaultdict(int);return_slots=2**20 if oracle=='ideal_buffer' else 65536//packet_bytes;events=[];index=0;packet_index=0
     total=sum(size for _,size in parts)
     useful=total if useful_bytes is None else useful_bytes
     processed=0
@@ -92,11 +93,8 @@ def tile_pipeline(parts,batch,stream,oracle='none',chunk=32768,ports=1.,useful_b
         rate=min(26.599/16*1000*TICK_NS,16*4096/rc)
         latency=ceil((2.29+20.59*tier/7+4.)/TICK_NS)
         for offset in range(0,size,chunk):
-            count=min(chunk,size-offset);weight_slot=index%slots;return_slot=index%return_slots
-            begin=max(mem_free,weights[weight_slot],returned[return_slot]);duration=ceil(count/rate)
-            if oracle=='ideal_memory':duration=latency=0
-            mem_free=begin+duration;available=mem_free+latency
-            events.append(('dram',begin,available,count,tier))
+            count=min(chunk,size-offset);weight_slot=index%slots
+            if oracle=='ideal_memory':latency=0
             # A32x512 MAC microtile; partials remain registered on the known
             # stream/fusion path. Cache path reads/writes FP32 partial blocks.
             flops=((processed+count)*useful*batch)//total-(processed*useful*batch)//total
@@ -109,13 +107,25 @@ def tile_pipeline(parts,batch,stream,oracle='none',chunk=32768,ports=1.,useful_b
             reserved_write=write_bytes/compute
             write_rate=128*ports-reserved_write
             if write_rate<=0 and not stream:raise ValueError('No bandwidth remains for memory copies')
-            hb_begin=max(available,hb_free)
-            hb_duration=ceil(count/500) if stream else max(ceil(count/500),ceil(count/write_rate))
-            if oracle=='ideal_memory':hb_duration=0
-            hb_end=hb_begin+hb_duration;hb_free=hb_end;returned[return_slot]=hb_end
-            events.append(('hb',hb_begin,hb_end,count,tier))
-            if not stream:events.append(('sram_write',hb_begin,hb_end,count,tier))
-            mac_begin=max(hb_end,mac_free);mac_end=mac_begin+compute;mac_free=mac_end
+            cumulative=0
+            for part_offset in range(0,count,packet_bytes):
+                part=min(packet_bytes,count-part_offset);return_slot=packet_index%return_slots
+                begin=max(mem_free,weights[weight_slot],returned[return_slot])
+                duration=ceil((cumulative+part)/rate)-ceil(cumulative/rate);cumulative+=part
+                if oracle=='ideal_memory':duration=0
+                mem_free=begin+duration;available=mem_free+latency
+                events.append(('dram',begin,available,part,tier))
+                hb_begin=max(available,hb_free)
+                # Fluid sub-tick serialization preserves500B/tick across
+                # adjacent1024B returns; rounding EACH packet to3 ticks would
+                # manufacture a21.85TB/s HB ceiling. MAC starts on whole ticks.
+                hb_duration=part/500 if stream else max(part/500,part/write_rate)
+                if oracle=='ideal_memory':hb_duration=0
+                hb_end=hb_begin+hb_duration;hb_free=hb_end;returned[return_slot]=hb_end
+                events.append(('hb',hb_begin,hb_end,part,tier))
+                if not stream:events.append(('sram_write',hb_begin,hb_end,part,tier))
+                packet_index+=1
+            mac_begin=ceil(max(hb_end,mac_free));mac_end=mac_begin+compute;mac_free=mac_end
             events.append(('mac',mac_begin,mac_end,flops,tier))
             events.append(('sram_read',mac_begin,mac_end,read_bytes,tier))
             if write_bytes:events.append(('sram_write',mac_begin,mac_end,write_bytes,tier))
@@ -123,9 +133,9 @@ def tile_pipeline(parts,batch,stream,oracle='none',chunk=32768,ports=1.,useful_b
     if sum(e[3] for e in events if e[0]=='dram')!=total or sum(e[3] for e in events if e[0]=='mac')!=useful*batch:
         raise ValueError('Streaming byte/FLOP conservation')
     activity=dict(Counter({kind:sum(e[3] for e in events if e[0]==kind) for kind in ('dram','hb','mac','sram_read','sram_write')}))
-    return dict(ticks=mac_free,events=tuple(events),dram_bytes=total,mac_flops=useful*batch,activity=activity,
+    return dict(ticks=mac_free,events=tuple(events) if keep_events else (),dram_bytes=total,mac_flops=useful*batch,activity=activity,
         dram_last_tick=max(e[2] for e in events if e[0]=='dram'),hb_last_tick=max(e[2] for e in events if e[0]=='hb'),
-        max_response_bytes=min(index,2)*chunk,max_live_weight_bytes=min(index,slots)*chunk)
+        memory_packet_bytes=packet_bytes,max_response_bytes=min(packet_index,return_slots)*packet_bytes,max_live_weight_bytes=min(index,slots)*chunk)
 
 
 @lru_cache(maxsize=2048)
@@ -144,6 +154,12 @@ def collective(batch,width,kind,oracle='none'):
         g.output=roots
     mode='infinite_noc' if oracle=='infinite_noc' else 'ideal_collective' if oracle=='ideal_collective' else 'baseline'
     return execute(g,mode)
+
+
+@lru_cache(maxsize=128)
+def kv_gather(update,owner,oracle):
+    g=Graph();g.output=[g.transfer(t,owner,ceil(update/16),(),stage='kv_update') for t in range(16)]
+    return execute(g,'infinite_noc' if oracle=='infinite_noc' else 'baseline')
 
 
 class LayerExecution:
@@ -170,7 +186,7 @@ class LayerExecution:
         for name_ in names:
             owners=self.layout['tensors'][name_]
             for tile in owners:useful[tile]+=self.tensor_bytes[name_]//len(owners)
-        results={tile:tile_pipeline(spans,batch,stream,self.oracle,useful_bytes=useful[tile]) for tile,spans in parts.items()}
+        results={tile:tile_pipeline(spans,batch,stream,self.oracle,useful_bytes=useful[tile],keep_events=False) for tile,spans in parts.items()}
         elapsed=max(r['ticks'] for r in results.values());activity={str(tile):r['activity'] for tile,r in results.items()}
         # Exact event windows are nested in the operator. A macro phase is
         # never interpreted as serial DRAM+HB+MAC times.
@@ -203,8 +219,7 @@ class LayerExecution:
         update=batch*kv*hd*4
         # Sequence-striped KV: gather the newly projected K/V shards at the
         # position owner, rather than pretending every region owns this row.
-        g=Graph();arrivals=[g.transfer(t,context%16,ceil(update/16),(),stage='kv_update') for t in range(16)];g.output=arrivals
-        gathered=execute(g,'infinite_noc' if self.oracle=='infinite_noc' else 'baseline')
+        gathered=kv_gather(update,context%16,self.oracle)
         self.phase(p+'kv_update_delivery',gathered['ticks'],gathered['per_tile_activity'],'communication/synchronization')
         self.phase(p+'kv_update',ceil(update/128),{str(context%16):dict(sram_read=update,hb=update,dram_write=update)},'KV update')
         # Complete GQA K/V read and QK/PV work; score matrices never reside in
@@ -223,7 +238,7 @@ class LayerExecution:
             if excess:sizes[-1]=(sizes[-1][0],sizes[-1][1]-excess)
             parts[tile]=tuple((t,n) for t,n in sizes if n)
         # Query-head reuse factor is hq/kv, separate from batch already in KV.
-        r={t:tile_pipeline(s,hq//kv,self.baseline in BASELINES[2:],self.oracle,useful_bytes=useful_per_tile[t]) for t,s in parts.items()}
+        r={t:tile_pipeline(s,hq//kv,self.baseline in BASELINES[2:],self.oracle,useful_bytes=useful_per_tile[t],keep_events=False) for t,s in parts.items()}
         duration=max(x['ticks'] for x in r.values());useful_flops=4*batch*(context+1)*hq*hd
         activity={str(t):dict(dram=physical_per_tile[t],hb=physical_per_tile[t],mac=useful_per_tile[t]*hq//kv,vector=5*batch*((context+1+15-t)//16)*hq,
             sram_read=x['activity']['sram_read'],sram_write=x['activity']['sram_write']) for t,x in r.items()}

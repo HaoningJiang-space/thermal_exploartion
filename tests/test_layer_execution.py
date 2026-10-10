@@ -19,6 +19,14 @@ class LayerExecutionTests(unittest.TestCase):
         self.assertGreater(slow['ticks'],r['ticks'])
         self.assertLessEqual(r['max_response_bytes'],65536)
         self.assertLessEqual(r['max_live_weight_bytes'],524288)
+    def test_independent_return_granularity(self):
+        coarse=tile_pipeline(((0,4*2**20),),1,True,packet_bytes=32768,keep_events=False)
+        coarse_ideal=tile_pipeline(((0,4*2**20),),1,True,'ideal_buffer',packet_bytes=32768,keep_events=False)
+        fine=tile_pipeline(((0,4*2**20),),1,True,packet_bytes=1024,keep_events=False)
+        fine_ideal=tile_pipeline(((0,4*2**20),),1,True,'ideal_buffer',packet_bytes=1024,keep_events=False)
+        self.assertGreater(coarse['ticks']/coarse_ideal['ticks'],1.05)
+        self.assertEqual(fine['ticks'],fine_ideal['ticks'])
+        self.assertEqual(fine['dram_bytes'],coarse['dram_bytes'])
     def test_global_and_regional_residency(self):
         c=load_model('qwen15_moe');a=capacity(c,8,2048);l=resident_layout(c,a,'B3_3d_placement',tp=4)
         self.assertTrue(all(x<=256*2**20 for row in l['used_bytes'] for x in row))

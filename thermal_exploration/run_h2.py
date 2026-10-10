@@ -177,7 +177,7 @@ def validate(case, model, dram):
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--ramulator-root',required=True);ap.add_argument('--output',required=True)
-    ap.add_argument('--smoke',action='store_true');ap.add_argument('--cases',nargs='+',choices=CASES,default=list(CASES));a=ap.parse_args()
+    ap.add_argument('--shape',nargs=3,type=int,metavar=('M','N','BATCH'));ap.add_argument('--smoke',action='store_true');ap.add_argument('--cases',nargs='+',choices=CASES,default=list(CASES));a=ap.parse_args()
     root=Path(a.ramulator_root).resolve();out=Path(a.output).resolve()
     if out.exists():raise ValueError('Never overwrite experimental evidence')
     if subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'],text=True).strip()!=RAMULATOR_COMMIT:raise ValueError('Wrong Ramulator snapshot')
@@ -186,7 +186,7 @@ def main():
         ramulator_commit=RAMULATOR_COMMIT,upstream=verified,started=datetime.now(timezone.utc).isoformat(),smoke=a.smoke),indent=2)+'\n')
     exe=native_build(root,out);results=[]
     for name in a.cases:
-        case=out/name;case.mkdir();model=build(CASES[name],*( (64,1024,8) if a.smoke else (1024,16384,32)))
+        case=out/name;case.mkdir();model=build(CASES[name],*(a.shape or ((64,1024,8) if a.smoke else (1024,16384,32))))
         write_contract(model,case);dram,cfg=hb_trace.ramulator_config(root,case,2,refresh=True)
         (case/'config.json').write_text(json.dumps(cfg,indent=2)+'\n')
         with (case/'execution.log').open('w') as log:subprocess.run([str(exe),str(case/'config.json'),str(case),str(case/'run')],stdout=log,stderr=log,check=True)

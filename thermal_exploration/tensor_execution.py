@@ -32,7 +32,7 @@ CASES.update({
 
 def hardware(settings,m=1024,n=16384,batch=32):
     p,q=settings['rows'],settings['columns']
-    if p*q!=16 or min(m,n,batch,p,q)<1 or m%16 or n%16 or batch%8:
+    if p*q!=16 or min(m,n,batch,p,q)<1 or m%16 or n%16 or (m//16*batch*4)%32:
         raise ValueError('Invalid tensor/hardware partition')
     ml,nl=m//p,n//q;mb,kb=min(32,ml),min(128,nl)
     if ml%mb or nl%kb:raise ValueError('Nonintegral MAC blocks')
