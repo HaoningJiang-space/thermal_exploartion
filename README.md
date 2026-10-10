@@ -8,6 +8,11 @@ Peripheral 与 Compute 的面积交换，以及 T0/T1_layer/T2 下的持续性�
 采用 [Stratum-inspired、带来源与假设区间的配置](configs/exploration/hb_npu_v1.json)。
 Mode A 严格复现与 Mode B 条件性探索分别管理；尚未校准的器件参数不再禁止全部架构探索。
 
+[Memory Service Granularity 结果与两张图](results/organization-2026-10-10/findings.md) 已完成。
+默认 Shared-area 下 GEMM偏好K16、Mixed偏好K32，GEMV在K≥32供数基本饱和。
+20个有限情景未发现T1_layer→T2的显著最优组织反转；行周期理想放松约11.44%收益在T0/T2相同。
+因此不推进新的Peripheral组织或RTL，先把该信号留给SALP/FGDRAM等已有机制对照。
+
 新任务书与不可校准项见 [Grounded HB–DRAM Validation](docs/grounded_validation.md)。
 [Stratum Hardware Contract](configs/platforms/stratum_micro2025.json) 与旧 pilot 完全隔离，未知值保持 null。
 G1、G2、Memory Audit 已共用 DRAM Service Model；现有解析扫描保留作历史证据。
@@ -25,7 +30,7 @@ Stratum Logic 功率组成仍有 6.51% 未解释差异，HB/cooling 和命令域
 在本次扫描范围内，未得到足够强的 B 证据。
 完整解读和图表见 [首轮实验报告](results/2026-10-09/findings.md)。
 
-当前实现是 **chip-scale、未校准、稳态上界筛选模型**：20×20 mm 的 Logic/DRAM/spreader，
+历史 G1/G2 pilot 是 **chip-scale、未校准、稳态上界筛选模型**：20×20 mm 的 Logic/DRAM/spreader，
 16 Compute Tiles + 16 Bank Groups，Batch-1 GEMV 与 Batch-32 GEMM。
 它不是完整 Transformer 仿真器，也不是 wafer-scale 的 WoW 性能模型。
 

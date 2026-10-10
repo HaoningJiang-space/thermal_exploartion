@@ -1,0 +1,251 @@
+{
+  "reference_accounting": {
+    "mac_at_reported_peak_w": 38.656,
+    "mac_at_topology_peak_w": 39.583744,
+    "figure_compute_group_w": 35.84344,
+    "figure_logic_memory_communication_group_w": 6.79291,
+    "figure_dram_group_w": 101.89365,
+    "mac_plus_figure_memory_communication_w": 45.44891,
+    "logic_reference_w": 42.67,
+    "logic_absolute_error_w": 2.778909999999996,
+    "logic_relative_error": 0.06512561518631355,
+    "figure_logic_group_sum_w": 42.63635000000001,
+    "dram_aggregate_energy_ratio_pj_per_byte": 3.432,
+    "dram_aggregate_at_reference_bandwidth_w": 104.12688,
+    "dram_approx_reference_w": 104.0,
+    "dram_relative_error_vs_approx": 0.0012199999999999989,
+    "dram_detailed_reference_from_stack_minus_logic_w": 101.86,
+    "dram_relative_error_vs_detailed": 0.02225485961123108,
+    "component_coefficients": {
+      "ACT": null,
+      "PRE": null,
+      "SRAM": null,
+      "NoC": null,
+      "Controller": null,
+      "Vector": null,
+      "Background": null,
+      "CUA_periphery": null,
+      "Logic_memory_periphery": null
+    },
+    "evidence_level": "L0_reference_accounting_consistency",
+    "independent_power_validation": false,
+    "status": "Same-paper aggregate arithmetic only; unresolved activity/scope; no workload coefficients fitted"
+  },
+  "activity_ratio_if_Figure_compute_were_MAC_only": 0.92724130794702,
+  "activity_ratio_status": "conditional arithmetic only; Figure15 group scope unresolved; paper says full tensor-core utilization",
+  "topology_peak_tflops": 131.072,
+  "identifiability": {
+    "observations": 1,
+    "unknown_coefficients": [
+      "ACT",
+      "PRE",
+      "RD/WR",
+      "background",
+      "refresh"
+    ],
+    "normalized_observation_rank": 1,
+    "nullity": 4,
+    "status": "Unidentified; no independent Stratum command-power measurements; no coefficients fitted"
+  },
+  "critical_ACT_bounds": [
+    {
+      "paths": 1,
+      "target_tb_s": 8.0,
+      "maximum_tFAW_ns_for_ACT_domain_bound": 32.768,
+      "maximum_tRRD_ns_for_ACT_domain_bound": 8.192,
+      "minimum_useful_bytes_per_ACT_for_bank_bound": 1080.0,
+      "scope": "necessary no-refresh bounds, fixed domain assumptions; not achieved throughput"
+    },
+    {
+      "paths": 1,
+      "target_tb_s": 16.0,
+      "maximum_tFAW_ns_for_ACT_domain_bound": 16.384,
+      "maximum_tRRD_ns_for_ACT_domain_bound": 4.096,
+      "minimum_useful_bytes_per_ACT_for_bank_bound": 2160.0,
+      "scope": "necessary no-refresh bounds, fixed domain assumptions; not achieved throughput"
+    },
+    {
+      "paths": 1,
+      "target_tb_s": 30.3407407407,
+      "maximum_tFAW_ns_for_ACT_domain_bound": 8.640000000011602,
+      "maximum_tRRD_ns_for_ACT_domain_bound": 2.1600000000029005,
+      "minimum_useful_bytes_per_ACT_for_bank_bound": 4095.9999999945003,
+      "scope": "necessary no-refresh bounds, fixed domain assumptions; not achieved throughput"
+    },
+    {
+      "paths": 1,
+      "target_tb_s": 32.0,
+      "maximum_tFAW_ns_for_ACT_domain_bound": 8.192,
+      "maximum_tRRD_ns_for_ACT_domain_bound": 2.048,
+      "minimum_useful_bytes_per_ACT_for_bank_bound": 4320.0,
+      "scope": "necessary no-refresh bounds, fixed domain assumptions; not achieved throughput"
+    },
+    {
+      "paths": 2,
+      "target_tb_s": 8.0,
+      "maximum_tFAW_ns_for_ACT_domain_bound": 65.536,
+      "maximum_tRRD_ns_for_ACT_domain_bound": 16.384,
+      "minimum_useful_bytes_per_ACT_for_bank_bound": 1080.0,
+      "scope": "necessary no-refresh bounds, fixed domain assumptions; not achieved throughput"
+    },
+    {
+      "paths": 2,
+      "target_tb_s": 16.0,
+      "maximum_tFAW_ns_for_ACT_domain_bound": 32.768,
+      "maximum_tRRD_ns_for_ACT_domain_bound": 8.192,
+      "minimum_useful_bytes_per_ACT_for_bank_bound": 2160.0,
+      "scope": "necessary no-refresh bounds, fixed domain assumptions; not achieved throughput"
+    },
+    {
+      "paths": 2,
+      "target_tb_s": 30.3407407407,
+      "maximum_tFAW_ns_for_ACT_domain_bound": 17.280000000023204,
+      "maximum_tRRD_ns_for_ACT_domain_bound": 4.320000000005801,
+      "minimum_useful_bytes_per_ACT_for_bank_bound": 4095.9999999945003,
+      "scope": "necessary no-refresh bounds, fixed domain assumptions; not achieved throughput"
+    },
+    {
+      "paths": 2,
+      "target_tb_s": 32.0,
+      "maximum_tFAW_ns_for_ACT_domain_bound": 16.384,
+      "maximum_tRRD_ns_for_ACT_domain_bound": 4.096,
+      "minimum_useful_bytes_per_ACT_for_bank_bound": 4320.0,
+      "scope": "necessary no-refresh bounds, fixed domain assumptions; not achieved throughput"
+    },
+    {
+      "paths": 4,
+      "target_tb_s": 8.0,
+      "maximum_tFAW_ns_for_ACT_domain_bound": 131.072,
+      "maximum_tRRD_ns_for_ACT_domain_bound": 32.768,
+      "minimum_useful_bytes_per_ACT_for_bank_bound": 1080.0,
+      "scope": "necessary no-refresh bounds, fixed domain assumptions; not achieved throughput"
+    },
+    {
+      "paths": 4,
+      "target_tb_s": 16.0,
+      "maximum_tFAW_ns_for_ACT_domain_bound": 65.536,
+      "maximum_tRRD_ns_for_ACT_domain_bound": 16.384,
+      "minimum_useful_bytes_per_ACT_for_bank_bound": 2160.0,
+      "scope": "necessary no-refresh bounds, fixed domain assumptions; not achieved throughput"
+    },
+    {
+      "paths": 4,
+      "target_tb_s": 30.3407407407,
+      "maximum_tFAW_ns_for_ACT_domain_bound": 34.56000000004641,
+      "maximum_tRRD_ns_for_ACT_domain_bound": 8.640000000011602,
+      "minimum_useful_bytes_per_ACT_for_bank_bound": 4095.9999999945003,
+      "scope": "necessary no-refresh bounds, fixed domain assumptions; not achieved throughput"
+    },
+    {
+      "paths": 4,
+      "target_tb_s": 32.0,
+      "maximum_tFAW_ns_for_ACT_domain_bound": 32.768,
+      "maximum_tRRD_ns_for_ACT_domain_bound": 8.192,
+      "minimum_useful_bytes_per_ACT_for_bank_bound": 4320.0,
+      "scope": "necessary no-refresh bounds, fixed domain assumptions; not achieved throughput"
+    },
+    {
+      "paths": 8,
+      "target_tb_s": 8.0,
+      "maximum_tFAW_ns_for_ACT_domain_bound": 262.144,
+      "maximum_tRRD_ns_for_ACT_domain_bound": 65.536,
+      "minimum_useful_bytes_per_ACT_for_bank_bound": 1080.0,
+      "scope": "necessary no-refresh bounds, fixed domain assumptions; not achieved throughput"
+    },
+    {
+      "paths": 8,
+      "target_tb_s": 16.0,
+      "maximum_tFAW_ns_for_ACT_domain_bound": 131.072,
+      "maximum_tRRD_ns_for_ACT_domain_bound": 32.768,
+      "minimum_useful_bytes_per_ACT_for_bank_bound": 2160.0,
+      "scope": "necessary no-refresh bounds, fixed domain assumptions; not achieved throughput"
+    },
+    {
+      "paths": 8,
+      "target_tb_s": 30.3407407407,
+      "maximum_tFAW_ns_for_ACT_domain_bound": 69.12000000009282,
+      "maximum_tRRD_ns_for_ACT_domain_bound": 17.280000000023204,
+      "minimum_useful_bytes_per_ACT_for_bank_bound": 4095.9999999945003,
+      "scope": "necessary no-refresh bounds, fixed domain assumptions; not achieved throughput"
+    },
+    {
+      "paths": 8,
+      "target_tb_s": 32.0,
+      "maximum_tFAW_ns_for_ACT_domain_bound": 65.536,
+      "maximum_tRRD_ns_for_ACT_domain_bound": 16.384,
+      "minimum_useful_bytes_per_ACT_for_bank_bound": 4320.0,
+      "scope": "necessary no-refresh bounds, fixed domain assumptions; not achieved throughput"
+    }
+  ],
+  "cooling_necessary_total_power_upper_w": 200.0,
+  "cooling_scope": "top-only passive steady network; internal resistances further reduce feasibility",
+  "area_controls": [
+    {
+      "paths_per_channel": 1,
+      "allocation": "shared_area",
+      "compute_blocks": 720,
+      "compute_area_mm2": 67.04465400000001,
+      "compute_peak_tflops": 360.0,
+      "compute_static_w": 1.3408930800000003,
+      "additional_periphery_mm2": 0.0,
+      "active_area_mm2": 120.7565548,
+      "die_area_budget_mm2": 121,
+      "hb_grid_area_mm2": 0.32,
+      "area_feasible": true,
+      "periphery_static_w": 1.4800000000000002,
+      "extra_dynamic_fraction": 0.0
+    },
+    {
+      "paths_per_channel": 2,
+      "allocation": "shared_area",
+      "compute_blocks": 640,
+      "compute_area_mm2": 59.595248000000005,
+      "compute_peak_tflops": 320.0,
+      "compute_static_w": 1.1919049600000002,
+      "additional_periphery_mm2": 7.4,
+      "active_area_mm2": 120.7071488,
+      "die_area_budget_mm2": 121,
+      "hb_grid_area_mm2": 0.32,
+      "area_feasible": true,
+      "periphery_static_w": 2.22,
+      "extra_dynamic_fraction": 0.08
+    },
+    {
+      "paths_per_channel": 4,
+      "allocation": "shared_area",
+      "compute_blocks": 480,
+      "compute_area_mm2": 44.696436000000006,
+      "compute_peak_tflops": 240.0,
+      "compute_static_w": 0.8939287200000001,
+      "additional_periphery_mm2": 22.200000000000003,
+      "active_area_mm2": 120.6083368,
+      "die_area_budget_mm2": 121,
+      "hb_grid_area_mm2": 0.32,
+      "area_feasible": true,
+      "periphery_static_w": 3.7,
+      "extra_dynamic_fraction": 0.24
+    },
+    {
+      "paths_per_channel": 8,
+      "allocation": "shared_area",
+      "compute_blocks": 160,
+      "compute_area_mm2": 14.898812000000001,
+      "compute_peak_tflops": 80.0,
+      "compute_static_w": 0.29797624000000006,
+      "additional_periphery_mm2": 51.800000000000004,
+      "active_area_mm2": 120.41071280000001,
+      "die_area_budget_mm2": 121,
+      "hb_grid_area_mm2": 0.32,
+      "area_feasible": true,
+      "periphery_static_w": 6.660000000000001,
+      "extra_dynamic_fraction": 0.56
+    }
+  ],
+  "information_priority": [
+    "ACT and Column sharing domains: partitions must be electrically independent to obtain assumed bandwidth gains",
+    "Peripheral marginal area and switching cost versus compute/RF density: determines area-optimal K",
+    "Cooling and heat-source location: determines whether optimum change is global or spatial",
+    "HB port budget: above fastest-tier bank ceiling, extra interface cannot improve that necessary bound"
+  ],
+  "scope": "Architecture assumptions and critical-value analysis, not device calibration"
+}

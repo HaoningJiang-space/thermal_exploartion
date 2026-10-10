@@ -1,0 +1,7 @@
+{
+  "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/tag/memory-service-2026-10-10",
+  "asset": "organization-command-evidence-2026-10-10.tar",
+  "bytes": 192440320,
+  "sha256": "bae3bd4ccf070e9ca234298bea266e1731f325ec52493e4881c588d8187da390",
+  "contains": "18 complete raw TSV/events/command/cycle/config archives; no redundant request JSON or native binaries"
+}

@@ -100,12 +100,21 @@ def main():
             ax.plot([r['internal_service_tb_s'] for r in group],[r['useful_tflops'] for r in group],alpha=.3,color='black')
             scatter=ax.scatter([r['internal_service_tb_s'] for r in group],[r['useful_tflops'] for r in group],
                 c=[r['periphery_area_mm2'] for r in group],norm=norm,cmap=cmap,marker=marker,s=55,label=scenario)
-            for r in group:ax.annotate(str(r['K']),(r['internal_service_tb_s'],r['useful_tflops']),xytext=(4,4),textcoords='offset points',fontsize=8)
-        ax.set(title=title,xlabel='Multi-refresh internal service (TB/s)',ylim=(0,None));ax.grid(alpha=.2)
+            if scenario=='default':
+                if work=='decode_gemv':
+                    r=group[0];ax.annotate('16',(r['internal_service_tb_s'],r['useful_tflops']),xytext=(4,6),textcoords='offset points',fontsize=8)
+                    r=group[1];ax.annotate('32/64/128',(r['internal_service_tb_s'],r['useful_tflops']),xytext=(23,29),
+                        textcoords='data',fontsize=8,arrowprops=dict(arrowstyle='-',lw=.6))
+                else:
+                    for r in group:
+                        dy=-13 if work==works[2] and r['K']==64 else 6
+                        ax.annotate(str(r['K']),(r['internal_service_tb_s'],r['useful_tflops']),xytext=(5,dy),textcoords='offset points',fontsize=8)
+        ymax=max(r['useful_tflops'] for r in m if (r['allocation'],r['workload'],r['thermal'],r['scenario'])==('shared_area',work,'T2','default'))
+        ax.set(title=title,xlabel='Multi-refresh internal service (TB/s)',xlim=(12,32),ylim=(0,ymax*1.15));ax.grid(alpha=.2)
     axes[0].set_ylabel('T2 effective throughput (TFLOP/s)');axes[2].legend(fontsize=8,loc='lower left')
     fig.subplots_adjust(left=.06,right=.87,top=.83,bottom=.18,wspace=.32)
     ca=fig.add_axes([.9,.2,.016,.55]);fig.colorbar(scatter,cax=ca,label='Peripheral area (mm²)')
-    fig.suptitle('Bandwidth–Area–Thermal tradeoff; labels =K\nTemperature-constrained LP, not chip measurements')
+    fig.suptitle('Bandwidth–Area–Thermal tradeoff; labels =default K\nTemperature-constrained LP, not chip measurements')
     fig.savefig(out/'bandwidth_area_thermal.png',dpi=180);fig.savefig(out/'bandwidth_area_thermal.pdf');plt.close(fig)
     # Full TSV requests, events, both command traces, cycles and configs, per
     # case. Omit redundant verbose request JSON and native binaries. Every

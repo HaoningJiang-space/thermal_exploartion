@@ -1,0 +1,53 @@
+Applicability controls PASS
+stream_p1_HB32 14.724874940170942
+stream_p2_HB32 26.59909391941392
+stream_p4_HB32 26.61649816849817
+stream_p8_HB32 26.608096117216117
+stream_p1_HB16 15.998616656071201
+stream_p2_HB16 15.998616656071201
+stream_p4_HB16 15.998616656071201
+stream_p1_HB8 7.999944051498053
+stream_p2_HB8 7.999944051498053
+stream_p4_HB8 7.999944051498053
+gemv_p1_HB32 16.384
+gemv_p2_HB32 29.264967441860467
+gemv_p4_HB32 29.56097033773862
+gemv_p8_HB32 29.877706824925816
+Thermal/area analysis default
+Thermal/area analysis energy_low
+Thermal/area analysis energy_high
+Thermal/area analysis cooling_strong
+Thermal/area analysis cooling_weak
+Thermal/area analysis logic_memory_share_low
+Thermal/area analysis logic_memory_share_high
+Thermal/area analysis periphery_cost_high
+Thermal/area analysis compute_area_low
+Thermal/area analysis compute_area_high
+Thermal/area analysis logic_energy_low
+Thermal/area analysis logic_energy_high
+Thermal/area analysis HB_16
+Thermal/area analysis HB_8
+{"command_cases": 15, "LP_results": 756, "ideal_results": 15, "area_rejects": 14}
+	Command being timed: "<run-root>/env/bin/python -m thermal_exploration.run_organization --ramulator-root <run-root>/ramulator2-c6c7a5d --thermal-backend hits --output <run-root>/organization-a3fb304"
+	User time (seconds): 303.11
+	System time (seconds): 15.01
+	Percent of CPU this job got: 101%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 5:14.95
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 5343308
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 3
+	Minor (reclaiming a frame) page faults: 8545249
+	Voluntary context switches: 383
+	Involuntary context switches: 1563
+	Swaps: 0
+	File system inputs: 1632
+	File system outputs: 6247032
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

@@ -1,0 +1,22 @@
+[
+  {
+    "source": "4b36e83",
+    "status": "DEBUG_ONLY",
+    "issue": "Short traces did not span refresh epochs; row timing override did not regenerate final nRAS/nRC as intended",
+    "use_for_final_conclusions": false,
+    "preserved": "Original remote outputs remain unchanged"
+  },
+  {
+    "source": "68c7def",
+    "status": "INTERRUPTED",
+    "issue": "Full unissued-request scanning after controller rejection made 1GiB adapter execution unnecessarily slow",
+    "use_for_final_conclusions": false,
+    "record": "interrupted-long-run.log"
+  },
+  {
+    "source": "13a6071",
+    "status": "EXPORT_LAUNCH_ERROR",
+    "issue": "Direct script launch omitted package root from Python import path",
+    "resolution": "Use python -m scripts.export_organization_results; no numerical simulation result changed"
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "mode_B_experiment": "COMPLETED",
+  "reference_reproduction": "NOT_READY",
+  "new_uniform_memory_architecture": "NO_GO",
+  "RTL": "NO_GO",
+  "Compute_Memory_Fabric": "CLOSED",
+  "criteria": {
+    "meaningful_spatial_optimality_reversal": false,
+    "within_optimum_tolerance": 0.01,
+    "largest_best_T2_vs_T1_layer_difference": 0.02097224739092718,
+    "distinct_full_FGDRAM_SALP_DreamRAM_implementation": false,
+    "known_partition_proxy": true,
+    "independent_Stratum_device_validation": false
+  },
+  "ideal_row_retention": {
+    "decode_gain_vs_best_known_proxy": 0.11439684329199507,
+    "mixed_gain_vs_best_known_proxy": 0.10536219599220974,
+    "same_gain_T0_T2": true,
+    "physical_implementation": "UNKNOWN",
+    "status": "Signal for existing row-cycle/subarray comparisons; not new thermal hardware evidence"
+  },
+  "next_step": "No new ports/asymmetric/tier-specific RTL. If continued, compare existing SALP/FGDRAM mechanisms against this row-cycle signal first.",
+  "scope": "20 finite labeled scenarios; uncalibrated internal port surrogate and steady LP, no universal chip conclusion"
+}

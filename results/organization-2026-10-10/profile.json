@@ -1,0 +1,335 @@
+{
+  "schema": 1,
+  "profile_kind": "architecture_exploration_assumed",
+  "profile_id": "stratum_inspired_local_hb_npu_v1",
+  "technology": "HB_DRAM_on_Logic; timing/state surrogate, not Stratum reproduction",
+  "reference_source": "https://arxiv.org/html/2510.05245v1",
+  "prediction_scope": "Conditional architecture model; no claim of independent device calibration",
+  "resources": {
+    "logic_area_mm2": 121,
+    "active_logic_reference_mm2": 76.55,
+    "lv_periphery_reference_mm2": 14.8,
+    "channels": 16,
+    "banks_per_channel": 16,
+    "dram_capacity_bytes": 34359738368,
+    "row_buffer_bytes": 4096,
+    "timing_tiers": 8,
+    "sram_bytes": 37748736,
+    "compute_tiles": 16,
+    "hb_reserved_area_mm2": 1.0,
+    "reference_compute_blocks": 256
+  },
+  "organizations": {
+    "local_shared": 1,
+    "segmented_2": 2,
+    "segmented_4": 4,
+    "segmented_8_area_reject": 8
+  },
+  "parameters": {
+    "logic_peak_tflops": {
+      "value": 128,
+      "unit": "TFLOP/s",
+      "classification": "Paper-reported",
+      "basis": "Nominal throughput; topology rounding difference retained",
+      "source": "https://arxiv.org/html/2510.05245v1",
+      "range": null
+    },
+    "logic_compute_pj_flop": {
+      "value": 0.302,
+      "unit": "pJ/FLOP",
+      "classification": "Paper-reported",
+      "basis": "0.604 pJ/MAC divided by two FLOP/MAC; MAC coefficient only",
+      "source": "https://arxiv.org/html/2510.05245v1",
+      "range": null
+    },
+    "logic_other_dynamic_pj_flop": {
+      "value": 0.03,
+      "unit": "pJ/FLOP",
+      "classification": "Reasonably assumed",
+      "basis": "SRAM/NoC/controller proxy, separate from MAC",
+      "source": null,
+      "range": [
+        0.0,
+        0.08
+      ]
+    },
+    "logic_background_w": {
+      "value": 3.2,
+      "unit": "W/chip",
+      "classification": "Reasonably assumed",
+      "basis": "Shared compute-side background budget",
+      "source": null,
+      "range": [
+        1.6,
+        6.4
+      ]
+    },
+    "dram_background_w": {
+      "value": 4.8,
+      "unit": "W/chip",
+      "classification": "Reasonably assumed",
+      "basis": "Background only; fixed refresh energy and conservative row-reopen costs charged separately",
+      "source": null,
+      "range": [
+        2.4,
+        9.6
+      ]
+    },
+    "access_energy_pj_byte": {
+      "value": 3.432,
+      "unit": "pJ/B",
+      "classification": "Reasonably assumed",
+      "basis": "Use reported aggregate scale as full-row access anchor; not independent device calibration",
+      "source": "https://arxiv.org/html/2510.05245v1",
+      "range": [
+        2.7456,
+        4.1184
+      ]
+    },
+    "activation_share": {
+      "value": 0.2,
+      "unit": "fraction of full-row access energy",
+      "classification": "Reasonably assumed",
+      "basis": "ACT+PRE partition; sum preserves the chosen full-row access energy scale",
+      "source": null,
+      "range": [
+        0.1,
+        0.4
+      ]
+    },
+    "logic_memory_share": {
+      "value": 0.6,
+      "unit": "fraction of transfer energy",
+      "classification": "Reasonably assumed",
+      "basis": "Logic-side low-voltage peripheral/HB share; remainder on memory side",
+      "source": "https://arxiv.org/html/2510.05245v1",
+      "range": [
+        0.3,
+        0.8
+      ]
+    },
+    "replicated_periphery_fraction": {
+      "value": 0.5,
+      "unit": "fraction of 14.8 mm2",
+      "classification": "Reasonably assumed",
+      "basis": "Replicable portion of reported LV peripheral area",
+      "source": "https://arxiv.org/html/2510.05245v1",
+      "range": [
+        0.25,
+        0.75
+      ]
+    },
+    "periphery_static_w_mm2": {
+      "value": 0.1,
+      "unit": "W/mm2",
+      "classification": "Reasonably assumed",
+      "basis": "Area-scaled standby penalty, common to all designs",
+      "source": null,
+      "range": [
+        0.02,
+        0.2
+      ]
+    },
+    "extra_path_dynamic_fraction": {
+      "value": 0.08,
+      "unit": "fraction per added path",
+      "classification": "Reasonably assumed",
+      "basis": "Conservative additional switching/routing overhead on logic-side memory energy",
+      "source": null,
+      "range": [
+        0.0,
+        0.2
+      ]
+    },
+    "tFAW_ns": {
+      "value": 15,
+      "unit": "ns",
+      "classification": "Reasonably assumed",
+      "basis": "Borrow standard HBM3 24 CK x0.625ns for each assumed independent ACT domain",
+      "source": "https://github.com/CMU-SAFARI/ramulator2/blob/c6c7a5de0cef35935d6fad7369e6271406798865/python/ramulator/dram/hbm3.py",
+      "range": [
+        12,
+        30
+      ]
+    },
+    "tRRD_ns": {
+      "value": 2.5,
+      "unit": "ns",
+      "classification": "Reasonably assumed",
+      "basis": "Borrow HBM3 nRRDS=4 CK x0.625ns; scope is an explicit exploration assumption",
+      "source": "https://github.com/CMU-SAFARI/ramulator2/blob/c6c7a5de0cef35935d6fad7369e6271406798865/python/ramulator/dram/hbm3.py",
+      "range": [
+        2.5,
+        5
+      ]
+    },
+    "read_latency_ns": {
+      "value": 15,
+      "unit": "ns",
+      "classification": "Reasonably assumed",
+      "basis": "Conservative analytic transaction occupancy; command latency measured separately",
+      "source": null,
+      "range": [
+        8,
+        30
+      ]
+    },
+    "hb_chip_tb_s": {
+      "value": 32,
+      "unit": "TB/s",
+      "classification": "Reasonably assumed",
+      "basis": "Fixed data connections; internal interface budget, not external HBM DQ",
+      "source": null,
+      "range": [
+        8,
+        32
+      ]
+    },
+    "hb_data_connections": {
+      "value": 256000,
+      "unit": "connections",
+      "classification": "Reasonably assumed",
+      "basis": "1 Gb/s max per data connection yields 32 TB/s",
+      "source": null,
+      "range": [
+        256000,
+        256000
+      ]
+    },
+    "hb_control_power_connections": {
+      "value": 64000,
+      "unit": "connections",
+      "classification": "Reasonably assumed",
+      "basis": "Reserve control and power pads, common to all designs",
+      "source": null,
+      "range": null
+    },
+    "hb_pitch_um": {
+      "value": 1,
+      "unit": "um",
+      "classification": "Reasonably assumed",
+      "basis": "Dense HB grid budget, not a manufactured Stratum padmap",
+      "source": null,
+      "range": [
+        1,
+        2
+      ]
+    },
+    "package_top_resistance_k_w": {
+      "value": 0.3,
+      "unit": "K/W",
+      "classification": "Reasonably assumed",
+      "basis": "Assumed effective liquid-cooled top resistance; HotSpot microfluidic htc=27132 W/m2/K gives 0.305 K/W at 121 mm2. Not a reproduced package.",
+      "source": "https://raw.githubusercontent.com/uvahotspot/HotSpot/master/template.config",
+      "range": [
+        0.1,
+        0.5
+      ]
+    },
+    "bond_areal_resistance_mm2_k_w": {
+      "value": 1,
+      "unit": "mm2 K/W",
+      "classification": "Reasonably assumed",
+      "basis": "Order-of-magnitude hybrid Cu/dielectric interface resistance, sensitivity retained",
+      "source": "https://doi.org/10.1109/ITherm45881.2020.9190392",
+      "range": [
+        0.5,
+        2
+      ]
+    },
+    "cooling_gradient": {
+      "value": 0.1,
+      "unit": "fraction",
+      "classification": "Reasonably assumed",
+      "basis": "Fixed lateral boundary variation, same cooling for every organization",
+      "source": null,
+      "range": [
+        0,
+        0.3
+      ]
+    },
+    "refresh_nj_per_bank": {
+      "value": 2,
+      "unit": "nJ/bank/refresh",
+      "classification": "Reasonably assumed",
+      "basis": "Per-bank refresh proxy, not Stratum measurement; rate fixed at one3900ns interval",
+      "source": null,
+      "range": [
+        1,
+        4
+      ]
+    },
+    "compute_block_reference_mm2": {
+      "value": 23.838099200000002,
+      "unit": "mm2",
+      "classification": "Reasonably assumed",
+      "basis": "Derived from rounded Stratum Figure15 tensor core +matrix RF +row swap RF leaf areas; applied as a linear compute/RF block-area assumption, SRAM unchanged",
+      "source": "https://arxiv.org/html/2510.05245v1",
+      "range": null
+    },
+    "compute_static_w_mm2": {
+      "value": 0.02,
+      "unit": "W/mm2",
+      "classification": "Reasonably assumed",
+      "basis": "Common compute/RF standby density; no temperature leakage fit",
+      "source": null,
+      "range": [
+        0.01,
+        0.05
+      ]
+    },
+    "compute_block_area_scale": {
+      "value": 1.0,
+      "unit": "ratio",
+      "classification": "Reasonably assumed",
+      "basis": "Common compute/RF area density sensitivity; fixed noncompute area and fixed process efficiency",
+      "source": null,
+      "range": [
+        0.75,
+        1.25
+      ]
+    }
+  },
+  "execution_assumptions": {
+    "active_weights_fit_fast_tier": true,
+    "mapping": "channel=output row mod 16; bank interleaving across all local banks; both designs use same policy",
+    "inputs": "Idealized common input broadcast, equal for all designs",
+    "output": "Resident in Logic",
+    "scheduling": "Same FRFCFS RowHit/Open; 512 inflight/compute tile, common row-coherent prefetch; full-row burst trace",
+    "dvfs": "Idealized continuous time sharing of common discrete DVFS points",
+    "thermal": "4x4 two active equivalent layers plus spreader; not eight separate DRAM dies",
+    "known_technique_baseline": "segmented_2 is FGDRAM/SALP-inspired domain partitioning, not a new mechanism or full reproduction",
+    "return_buffer": "512KiB payload/tile plus metadata fits common 2.25MiB SRAM/tile. Lower-HB min-rate approximation assumes burst smoothing; does not simulate temperature-dependent refresh.",
+    "compute_allocation": "Main: remaining area divided into equal counts of PE-equivalent compute/RF blocks across16 tiles. Separate fixed128 TFLOP/s control. SRAM capacity fixed; SRAM/RF port conflicts idealized.",
+    "compute_density_uncertainty": "Area scale0.75..1.25 and other-dynamic energy0..0.08 pJ/FLOP; not a synthesized design."
+  },
+  "fairness": {
+    "same_sram": true,
+    "same_capacity": true,
+    "same_die_area_budget": true,
+    "same_hb_budget": true,
+    "same_cooling_per_scenario": true,
+    "extra_area_and_power_charged": true,
+    "same_compute_technology": true,
+    "compute_area_exchange_charged": true
+  },
+  "policy": {
+    "reference_reproduction_allowed": false,
+    "conditional_exploration_allowed": true,
+    "new_architecture_claim_allowed": false,
+    "ideal_improvement_gate": 0.1,
+    "paid_improvement_gate": 0.05
+  },
+  "thermal_geometry": {
+    "classification": "Reasonably assumed",
+    "source": "https://raw.githubusercontent.com/uvahotspot/HotSpot/master/template.config",
+    "logic_thickness_um": 50,
+    "equivalent_dram_thickness_um": 30,
+    "silicon_k_w_mk": 100,
+    "copper_lid_thickness_mm": 1,
+    "copper_k_w_mk": 400,
+    "tim_thickness_um": 20,
+    "tim_k_w_mk": 4,
+    "basis": "TIM/lid scale from official HotSpot template; equivalent active-layer thicknesses are assumptions, not Mono3D geometry."
+  }
+}
