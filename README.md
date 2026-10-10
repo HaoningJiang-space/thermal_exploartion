@@ -2,7 +2,10 @@
 
 **When Does Compute–Memory Locality Become Suboptimal in Hybrid-Bonded 3D Accelerators?**
 
-研究目标是检验空间热耦合是否改变 Compute–Memory 物理连接的最优性。
+**研究决策：Compute–Memory Fabric 分支正式关闭；Thermal-aware Mapping 保留为基线。**
+当前转入 HB-native Memory Organization 的文献与小型瓶颈审计，不预设新架构。
+
+原研究目标是检验空间热耦合是否改变 Compute–Memory 物理连接的最优性。
 先做可证伪的小实验，结果允许支持 Local，也允许说明收益主要来自普通负载均衡。
 
 首轮已完成 2340 个设计点、7020 个 LP：重新优化数据放置后，默认 GEMM 的理想连接收益
@@ -44,14 +47,15 @@ HiTS 的 GPU 路径有额外安装与资格要求，见其 README。小型 CPU �
 
 ## 对照矩阵
 
-每种工作负载 × 3 个热条件 × 5 个连接选项 × 2 个数据放置选项，分别重新优化。
-pilot 包含均匀分布、中心负载偏斜、冷却梯度三个场景，总计 180 个设计点；
-每个设计点枚举相同的 3 个访存 chunk/row-miss 选项，内部求解 540 个 LP。
+每种工作负载 × 4 个热条件 × 5 个连接选项 × 2 个数据放置选项，分别重新优化。
+pilot 包含均匀分布、中心负载偏斜、冷却梯度三个场景，修正版总计 240 个设计点；
+每个设计点枚举相同的 3 个访存 chunk/row-miss 选项，内部求解 720 个 LP。
 
 | 维度 | 选项 |
 |---|---|
 | Thermal-0 | 无温度约束；仍保持计算、Bank、请求队列和链路限制 |
-| Thermal-1 | 从同一物理模型提取单一全局 R，只考虑总功率 |
+| Thermal-1 scalar（旧对照） | 单一全局 R，丢失两层差异，仅保留用于复现 |
+| Thermal-1 layer（新增） | 同一 H 的 2×2 层平均热阻，保留两层功率来源和独立温度限制，移除横向位置 |
 | Thermal-2 | Logic 和 DRAM 各区域均约束 `T = Tamb + H P` |
 | Local | Compute i 只由 Bank Group i 服务 |
 | Neighbor ideal | 理想零开销，相邻 Manhattan distance ≤1 可访问 |
@@ -68,14 +72,16 @@ DVFS 离散点允许连续时间共享，因此这个 LP 是稳态调度的放�
 
 ## 观察与停止条件
 
-`summary.json` 同时记录 T0/T1/T2 speedup、`speedup_T2 / speedup_T1`、
+`summary.json` 记录 T0/T1_scalar/T1_layer/T2 speedup，空间交互使用 `speedup_T2 / speedup_T1_layer`，以及
 Resource Ownership Loss 和 Local Spatial Penalty。比值交互不等于唯一的因果损失分解。
 均匀模型是负对照：没有负载差异和冷却差异时应当观察不到凭空产生的理想共享收益。
 
 - 理想连接在 Free placement 后仍没有收益：停止该配置的连接结构探索。
 - 收益只在 Fixed placement 存在：优先研究 Mapping/data placement。
 - 理想连接有效，付费连接失效：停止该开销区间的硬件方案。
-- T0/T1 无优势，T2 有稳定净收益：仅列为 B 候选，需要物理校准、瞬态和真实轨迹复核。
+- `fixed_placement_signal` 仅表示固定布局收益；`ideal_upper_bound_signal` 不包含真实连接开销。
+- `architecture_candidate` 要求完整布局对照、优化布局、付费成本、T2 净收益及匹配收益均超过 5%，
+  T0/T1_layer 净收益不超过 1%，T2/T1_layer 交互超过 1%；仍需执行与物理校准。
 
 敏感性套件逐项扫描热耦合、冷却梯度、DRAM 能量、链路带宽/能量及面积。
 不挑选最佳参数，不删除负结果。全部原始证据保存在输出目录，精选结果见 `results/`。
@@ -92,3 +98,5 @@ G2 已完成：648 个设计点、864 个 LP。当前模型中，Shared 布局�
 最高约 2.97%，付费 Mesh 最高约 0.71%；共同布局相对独立 Oracle 的最大时间损失约 1.23%。
 未通过 5% 门槛，因此结束本轮 Compute–Memory Fabric 分支，不推进 RTL。
 详见 [G2 结果与证据](results/g2-2026-10-09/findings.md)。
+
+P1 审计修正见 [docs/audit_p1.md](docs/audit_p1.md)。旧归档保留原始标量 T1 和旧标签，不能据此归因水平空间热机制。

@@ -42,7 +42,7 @@ class PhysicsAndFairness(unittest.TestCase):
                                (b["dram_power_w"]-4.8)*a["tflops"]/b["tflops"],places=7)
 
     def test_uniform_control_has_no_ideal_ownership_gain(self):
-        for mode in range(3):
+        for mode in (0, 1, 3, 2):
             a=self.run_point(mode=mode)
             b=self.run_point(fabric=2,mode=mode)
             self.assertAlmostEqual(a["tflops"],b["tflops"],places=6)

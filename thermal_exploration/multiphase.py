@@ -12,6 +12,7 @@ from scipy import sparse
 from scipy.optimize import linprog
 
 from .model import Fabric, kernel, route
+from .thermal import THERMAL_NAMES, layer_response, thermal_control
 
 
 @dataclass
@@ -75,7 +76,7 @@ def optimize_cycle(cfg, g2, h, gh, repetitions, fabric, thermal_mode,
                    placement="shared", thermal_regime="phase_steady", fixed_layouts=None):
     if placement not in ("independent_oracle","shared","migration"):
         raise ValueError(placement)
-    if thermal_regime not in ("phase_steady","cycle_average") or thermal_mode not in (0,1,2):
+    if thermal_regime not in ("phase_steady","cycle_average"):
         raise ValueError("Invalid thermal model")
     if len(repetitions)!=2 or any(int(r)!=r or r<=0 for r in repetitions):
         raise ValueError("Exactly two phases must each complete positive integer repetitions")
@@ -92,7 +93,7 @@ def optimize_cycle(cfg, g2, h, gh, repetitions, fabric, thermal_mode,
     if cap*n < 1-1e-12:
         raise ValueError("Resident weight exceeds common Bank capacity budget")
     p0=np.r_[np.full(n,hw["logic_static_w"]+fabric.static_w),np.full(n,hw["dram_static_w"])]
-    hm=h if thermal_mode==2 else gh
+    hm=thermal_control(h,gh,thermal_mode)
     allowed=np.r_[np.full(n,tc["logic_limit_c"]-tc["ambient_c"]),np.full(n,tc["dram_limit_c"]-tc["ambient_c"])]
     room=allowed-hm@p0
     if thermal_mode and min(room)<0:
@@ -257,6 +258,7 @@ def optimize_cycle(cfg, g2, h, gh, repetitions, fabric, thermal_mode,
     total_energy=p0*total_time+sum(e@x for e in energy_rows)
     average_power=total_energy/total_time
     return {"fabric":fabric.name,"placement":placement,"thermal_mode":thermal_mode,"thermal_regime":thermal_regime,
+            "thermal_model":THERMAL_NAMES[thermal_mode],
             "cycle_time_s":total_time,"cycles_per_s":1/total_time,
             "useful_tflops":float(work.sum()/total_time),"required_work_tflop":work.tolist(),
             "phases":phase_records,"segments":segments,"migrations":migration_records,
@@ -265,6 +267,7 @@ def optimize_cycle(cfg, g2, h, gh, repetitions, fabric, thermal_mode,
             "lp_solves":lp_solves,
             "average_power_w":average_power.tolist(),
             "average_spatial_temperature_c":(tc["ambient_c"]+h@average_power).tolist(),
+            "average_layer_temperature_c":(tc["ambient_c"]+layer_response(h)@average_power).tolist(),
             "original_constraint_max_violation":violation,"phase_fraction_error":work_error,
             "resident_weight_bytes":g2["resident_weight_bytes"],"bank_capacity_bytes":g2["bank_capacity_bytes"],
             "migration_cost_scope":"serial common DMA mesh; both DRAM endpoints; no startup/arbiter overhead"}

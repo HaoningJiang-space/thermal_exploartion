@@ -12,6 +12,35 @@ from scipy import sparse
 from scipy.sparse.linalg import splu
 
 
+# Keep archived integer identifiers stable; mode 3 is the added two-layer control.
+THERMAL_MODES = (0, 1, 3, 2)
+THERMAL_NAMES = {0: "T0", 1: "T1_scalar", 3: "T1_layer", 2: "T2"}
+
+
+def layer_response(h):
+    """Remove lateral position while retaining source and receiver layers.
+
+    Each constant block is the response of the receiver's mean temperature to
+    one total watt uniformly spread over the source layer. Thus R_rs is the
+    mean of the n*n spatial coefficients, not their sum. Nonuniform source
+    power is deliberately replaced by uniform loading within its layer.
+    """
+    h = np.asarray(h)
+    if h.ndim != 2 or h.shape[0] != h.shape[1] or h.shape[0] % 2:
+        raise ValueError("Expected a square response for two equally sized layers")
+    n = h.shape[0] // 2
+    r = h.reshape(2, n, 2, n).mean(axis=(1, 3))
+    return np.repeat(np.repeat(r, n, axis=0), n, axis=1)
+
+
+def thermal_control(h, scalar_h, mode):
+    if mode not in THERMAL_NAMES:
+        raise ValueError(mode)
+    if mode == 3:
+        return layer_response(h)
+    return h if mode == 2 else scalar_h
+
+
 def assemble(grid: int, cfg: dict) -> sparse.csr_matrix:
     n = grid * grid
     a = np.zeros((3 * n, 3 * n))
@@ -93,12 +122,12 @@ def response(grid: int, cfg: dict, backend: str = "scipy"):
     if np.min(h) < -1e-10 or not np.allclose(h, h.T, atol=1e-8):
         raise RuntimeError("Passive response must be nonnegative and reciprocal")
     # Two-node layer-average model, exactly matched to uniform layer loading.
-    layer_global = np.array([[np.mean(h[r*n:(r+1)*n, s*n:(s+1)*n].sum(axis=1))/n
-                              for s in range(2)] for r in range(2)])
+    layer_global = layer_response(h)[::n, ::n]
     # Thermal-1 is a single scalar R: match the hottest layer's mean response
     # under uniform equal-power sources. It contains no position information.
     scalar_r = float(max(layer_global.sum(axis=1))/2)
     global_h = np.full_like(h, scalar_r)
     record["global_layer_resistance_k_per_w"] = layer_global.tolist()
     record["global_scalar_resistance_k_per_w"] = scalar_r
+    record["thermal_controls"] = {str(k): v for k, v in THERMAL_NAMES.items()}
     return h, global_h, record

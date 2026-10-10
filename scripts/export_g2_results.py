@@ -16,7 +16,7 @@ for name in names:shutil.copyfile(a.source/name,a.destination/name)
 for src in a.source.glob("*.png"):shutil.copyfile(src,a.destination/src.name)
 raw=json.loads((a.source/"results.json").read_text());phases=[];moves=[];audits=[]
 for r in raw:
-    keys={k:r[k] for k in ["scenario","case","thermal_regime","placement","fabric","thermal_mode"]}
+    keys={k:r[k] for k in ["scenario","case","thermal_regime","placement","fabric","thermal_mode","thermal_model"] if k in r}
     n=len(r["average_power_w"] )//2
     for i,phase in enumerate(r["phases"]):
         t=phase["spatial_steady_temperature_c"]

@@ -17,7 +17,8 @@ import numpy as np
 import scipy
 
 from .model import best_tiling, fabric_cases
-from .thermal import response
+from .thermal import THERMAL_MODES, THERMAL_NAMES, response
+from .gate import classify
 
 
 def revision(cwd=None):
@@ -36,33 +37,36 @@ def summarize(rows):
     for key, table in groups.items():
         for b in ["neighbor_ideal","global_ideal","mesh_paid"]:
             a = "local_matched" if b == "mesh_paid" else "local"
-            ratios = [table[(b,m)]["tflops"]/table[(a,m)]["tflops"] for m in range(3)]
+            ratios = {m:table[(b,m)]["tflops"]/table[(a,m)]["tflops"] for m in THERMAL_MODES}
             f_a2 = table[(a,2)]["tflops"]; f_b2 = table[(b,2)]["tflops"]
             # This is an interaction in optimized ratios, not a unique additive attribution.
-            gain = ratios[2]/ratios[1]
+            gain = ratios[2]/ratios[3]
             no_heat_gain = ratios[0]
-            reversal = (ratios[0] <= 1.000001 and ratios[1] <= 1.01 and ratios[2] > 1.05)
-            net_ratios = [table[(b,m)]["tflops"]/table[("local",m)]["tflops"] for m in range(3)]
-            # Area-matched organization gain alone does not establish net hardware value.
-            net_gate = reversal and net_ratios[2] > 1.05
-            if net_gate:
-                screening_class = "B_candidate"
-            elif ratios[0] > 1.01 or ratios[1] > 1.01:
-                screening_class = "C_or_mixed"
-            elif max(ratios) > 1.01:
-                screening_class = "spatial_signal_below_net_gate"
-            else:
-                screening_class = "A_no_material_gain"
+            net_ratios = {m:table[(b,m)]["tflops"]/table[("local",m)]["tflops"] for m in THERMAL_MODES}
+            placement_controls = {p:groups.get((key[0],key[1],p),{}) for p in ("fixed","free")}
+            complete = all(all((f,m) in t for f in (a,b,"local") for m in THERMAL_MODES)
+                           for t in placement_controls.values())
+            gate = classify(placement=key[2], paid=b.endswith("paid"), controls_complete=complete,
+                            net_t0=net_ratios[0], net_t1_layer=net_ratios[3], net_t2=net_ratios[2],
+                            matched_t2=ratios[2])
             summaries.append({"scenario":key[0],"workload":key[1],"placement":key[2],
                               "baseline":a,"candidate":b,
                               "speedup_t0":ratios[0],"speedup_t1":ratios[1],"speedup_t2":ratios[2],
+                              "speedup_t1_layer":ratios[3],
                               "spatial_interaction_ratio":gain,
+                              "scalar_to_layer_interaction_ratio":ratios[3]/ratios[1],
+                              "legacy_t2_over_scalar_t1_ratio":ratios[2]/ratios[1],
                               "resource_ownership_loss_fraction_t2":1-f_a2/f_b2,
-                              "local_spatial_penalty_fraction":1-f_a2/table[(a,1)]["tflops"],
+                              "local_spatial_penalty_fraction":1-f_a2/table[(a,3)]["tflops"],
                               "net_speedup_t0_vs_original_local":net_ratios[0],
                               "net_speedup_t1_vs_original_local":net_ratios[1],
+                              "net_speedup_t1_layer_vs_original_local":net_ratios[3],
                               "net_speedup_t2_vs_original_local":net_ratios[2],
-                              "screening_class":screening_class,
+                              "fixed_t2_net_speedup":(placement_controls["fixed"][(b,2)]["tflops"]/
+                                  placement_controls["fixed"][("local",2)]["tflops"]) if complete else None,
+                              "free_t2_net_speedup":(placement_controls["free"][(b,2)]["tflops"]/
+                                  placement_controls["free"][("local",2)]["tflops"]) if complete else None,
+                              **gate,
                               "no_heat_gain":no_heat_gain})
     return summaries
 
@@ -93,10 +97,10 @@ def plot(rows, summaries, out):
     for ax,key in zip(axs[:,0],groups):
         table = {(r["fabric"],r["thermal_mode"]):r for r in rows
                  if (r["scenario"],r["workload"],r["placement"]) == key}
-        x = np.arange(3)
+        x = np.arange(4)
         for idx,a in enumerate(archs):
-            ax.bar(x+(idx-2)*0.15,[table[(a,m)]["tflops"] for m in range(3)],0.15,label=a)
-        ax.set_xticks(x,["T0: unconstrained","T1: global","T2: spatial"])
+            ax.bar(x+(idx-2)*0.15,[table[(a,m)]["tflops"] for m in THERMAL_MODES],0.15,label=a)
+        ax.set_xticks(x,[THERMAL_NAMES[m] for m in THERMAL_MODES])
         ax.set_ylabel("Sustained TFLOP/s"); ax.set_title(" / ".join(key),fontsize=10)
         ax.grid(axis="y",alpha=0.2)
     axs[0,0].legend(ncol=3, fontsize=8)
@@ -123,16 +127,19 @@ def plot(rows, summaries, out):
 
 def write_report(summaries, out):
     lines = ["# Pilot screening results", "", "These are optimized steady-state model bounds, not measured hardware performance.",
-             "All device/package costs are uncalibrated hypotheses. A B_candidate is a follow-up target, not proof of architectural novelty.", "",
-             "| Scenario | Workload | Placement | Candidate | T0 matched | T1 matched | T2 matched | T2/T1 | T2 net vs Local | Class |",
-             "|---|---|---|---|---:|---:|---:|---:|---:|---|"]
+             "Costs are uncalibrated. Fixed-layout and ideal-connection signals cannot pass the architecture gate.", "",
+             "| Scenario | Workload | Placement | Candidate | T0 matched | T1 scalar | T1 layer | T2 matched | T2/T1 layer | T2 net | Class |",
+             "|---|---|---|---|---:|---:|---:|---:|---:|---:|---|"]
     for s in summaries:
         lines.append(f'| {s["scenario"]} | {s["workload"]} | {s["placement"]} | {s["candidate"]} | '
-                     f'{s["speedup_t0"]:.4f} | {s["speedup_t1"]:.4f} | {s["speedup_t2"]:.4f} | '
+                     f'{s["speedup_t0"]:.4f} | {s["speedup_t1"]:.4f} | {s["speedup_t1_layer"]:.4f} | {s["speedup_t2"]:.4f} | '
                      f'{s["spatial_interaction_ratio"]:.4f} | {s["net_speedup_t2_vs_original_local"]:.4f} | {s["screening_class"]} |')
     lines += ["", "Paid fabric is compared to local_matched (same reserved routing area and idle power).",
               "Ideal fabric is compared to local. Scheduling and DVFS are reoptimized for every cell.",
               "Free placement optimizes resident bank fractions within the same per-bank data-capacity bound.",
+              "Gate requires complete fixed/free controls, optimized free layout, paid costs, >5% net and matched gain,",
+              "T0 and T1_layer net gains <=1%, and T2/T1_layer net interaction >1%. Passing still requires execution/physical validation.",
+              "T1_scalar is retained only for legacy reproduction; T1_layer preserves both layer power sources and limits.",
               "T0/T1 solutions can violate the physical spatial temperature limits; their physical temperatures remain reported.",
               "Both architectures may use the tracker-bound row-miss option; it is an oracle upper bound, not an implementation of Voxel.",
               "", "## Interpretation limits", "",
@@ -182,14 +189,14 @@ def main():
             h,gh,record=response(c["grid"],c["thermal"],args.thermal_backend)
             record.update(scenario=name,variant=variant); thermal_records.append(record)
             label=name if args.suite == "pilot" else name+"/"+variant
-            for workload,placement,fabric,mode in itertools.product(c["workloads"],["fixed","free"],fabric_cases(c["hardware"]),range(3)):
+            for workload,placement,fabric,mode in itertools.product(c["workloads"],["fixed","free"],fabric_cases(c["hardware"]),THERMAL_MODES):
                 r=best_tiling(c,h,gh,workload,fabric,mode,profile,placement)
                 r["scenario"]=label; rows.append(r)
             print(f"Completed {label}: {len(rows)} optimized design points",flush=True)
     summaries=summarize(rows)
     source_commit=revision()
     dirty=subprocess.check_output(["git","status","--porcelain"],text=True).strip() if source_commit != "unknown" else "unknown"
-    provenance={"source_commit":source_commit,"source_dirty":bool(dirty),"python":sys.version,"platform":platform.platform(),
+    provenance={"schema_version":2,"thermal_controls":THERMAL_NAMES,"source_commit":source_commit,"source_dirty":bool(dirty),"python":sys.version,"platform":platform.platform(),
                 "numpy":np.__version__,"scipy":scipy.__version__,
                 "invocation":["python","-m","thermal_exploration.run"]+sys.argv[1:],
                 "started_utc":datetime.fromtimestamp(started,timezone.utc).isoformat(),

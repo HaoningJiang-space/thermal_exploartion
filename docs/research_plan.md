@@ -1,6 +1,9 @@
 # 研究命题与分阶段决策
 
-当前状态：G2 Shared-Placement Gate 已完成，未通过 5% 净收益门槛，当前 Compute–Memory Fabric 分支结束。
+当前状态：G2 Shared-Placement Gate 已完成，未通过 5% 净收益门槛，Compute–Memory Fabric 分支正式关闭。
+不扩大 Fabric 参数空间，不开发 RTL。Thermal-aware Mapping 保留为基线。
+下一步是 HB-native Memory Organization 的文献与瓶颈分析；只有确认旧组织的持续供数损失，
+并排除普通 Mapping、Scheduling 和已有 DRAM 技术后，才讨论新硬件。
 结果见 [G2 报告](../results/g2-2026-10-09/findings.md)。下述进一步校准与硬件设计步骤是条件计划，本轮不执行。
 
 目标：传统资源边界是否在 HB 高带宽和 3D 空间热耦合下成为持续性能限制？
@@ -16,16 +19,16 @@ Compute 可映射至不同 Tile，但不改变 MAC 组织；SRAM 不跨 Tile 池
 
 1. 16 Tiles/16 Bank Groups，两片 active dies 和被动散热层；HB 峰值固定。
 2. Batch-1 GEMV 与 Batch-32 GEMM；每次重新优化访存 chunk、Mapping、DVFS time shares。
-3. 无热限制、全局单一 R、完整空间 H 分别优化。
+3. 无热限制、旧标量 R、保留两层的 T1_layer、完整空间 H 分别优化。
 4. Fixed demand 与可优化数据放置分别比较，防止夸大不能用软件解决的损失。
 5. 均匀布局/冷却负对照，中心 demand 偏斜、非均匀冷却场景同时保留。
 6. 加入 NoC 带宽/延迟/能量/面积，匹配硬件预算，也比较新增开销后的净收益。
 7. 单因素敏感性扫描全部保留。5% 为事先指定的“值得继续校准”筛选门槛，非统计显著性门槛。
 
-比值 `g_m = F_B,m / F_A,m`。`g_2/g_1 > 1` 表示相对收益存在空间模型交互；
-还要检查 g_0、g_1 以及重新放置数据后的 g_2，才能辨别普通负载均衡。
+比值 `g_m = F_B,m / F_A,m`。`g_2/g_1layer > 1` 表示相对收益存在空间模型交互；
+还要检查 g_0、g_1layer 以及重新放置数据后的 g_2，才能辨别普通负载均衡。
 Resource Ownership Loss：`1 - F_A,2/F_B,2`。
-Local Spatial Penalty：`1 - F_A,2/F_A,1`，该数可为负，不能人为截为零。
+Local Spatial Penalty：`1 - F_A,2/F_A,1layer`，该数可为负，不能人为截为零。
 二者不是正交的物理分量，不应简单相加或把所有差值归因于热。
 
 A：所有理想候选均无明显收益，保留 Local。

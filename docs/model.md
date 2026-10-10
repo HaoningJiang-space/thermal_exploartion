@@ -49,7 +49,12 @@ Local：只保留 i=j。Neighbor：保留 Manhattan 距离 ≤1。Global：全�
 `H = A^-1 Q` 的 Logic/DRAM 行用于 Thermal-2 的所有温度限制。
 
 Thermal-1 使用同一 H 在所有区域均匀、Logic/DRAM 等功率条件下最热层平均升温拟合单一 R。
-两层平均 2×2 resistance 也记录到 JSON，供后续全局模型校准分析。
+新增 T1_layer 使用两层平均 2×2 resistance。若每层有 n 个区域，
+`R_rs = sum_ij H[receiver_r_i, source_s_j] / n²`，扩展后的每个 n×n block 全部填 R_rs。
+因此 `DeltaT_r = sum_s R_rs P_s_total`，保留独立 Logic/DRAM 温限。
+它准确匹配每层均匀热源的平均温度，不代表非均匀热源下的热点。
+空间交互改用 T2/T1_layer；T1_scalar→T1_layer 的差异单独记录。
+整数模式 0/1/2 保持旧含义，新增模式 3 = T1_layer；输出同时包含 thermal_model 名称。
 R 固定后，对每个架构使用相同模型。Logic/DRAM 功率比例不同，单一 R 的误差仍需单独评估。
 
 HiTS 为每个单位功率列求解原始 A，不修改矩阵。验证 residual、H 非负及热互易性，
@@ -61,4 +66,5 @@ HiTS 为每个单位功率列求解原始 A，不修改矩阵。验证 residual�
 需要网格收敛、HotSpot/3D-ICE 原生组装对照、真实 HB 介质/接触参数和冷却边界。
 需要真实功率轨迹、DRAM refresh/leakage 温度反馈、温度随时间变化与 DVFS 闭环。
 需要多算子共同的数据容量约束、布局切换成本、NoC arbitration、输出归约与真实 transformer/MoE traces。
-这些未完成前，只能报告本模型内的 A/B/C 筛选，不可宣称普遍 Architecture Design Principle。
+G2 已增加同一权重的共享容量、双向迁移计费与周期 RC 峰值检查，但多 tensor 生命周期和真实执行语义仍未覆盖。
+这些未完成前，只能报告模型内筛选，不可宣称普遍 Architecture Design Principle。

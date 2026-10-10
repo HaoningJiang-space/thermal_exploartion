@@ -19,7 +19,8 @@ import scipy
 from .multiphase import g2_fabrics,optimize_cycle
 from .periodic import PeriodicAudit
 from .run import revision
-from .thermal import response
+from .thermal import THERMAL_MODES, THERMAL_NAMES, response
+from .gate import classify
 
 
 def summarize(rows,g2):
@@ -32,17 +33,25 @@ def summarize(rows,g2):
                 ["neighbor_ideal","global_ideal","neighbor_paid","mesh_paid"]):
             def get(a,m,p=placement,reg=regime):return table[scenario,case,reg,p,a,m]
             baseline="local_matched" if candidate.endswith("paid") else "local"
-            net=[get("local",m)["cycle_time_s"]/get(candidate,m)["cycle_time_s"] for m in range(3)]
-            matched=[get(baseline,m)["cycle_time_s"]/get(candidate,m)["cycle_time_s"] for m in range(3)]
+            net={m:get("local",m)["cycle_time_s"]/get(candidate,m)["cycle_time_s"] for m in THERMAL_MODES}
+            matched={m:get(baseline,m)["cycle_time_s"]/get(candidate,m)["cycle_time_s"] for m in THERMAL_MODES}
+            complete=all((scenario,case,regime,p,a,m) in table for p in ("independent_oracle","shared","migration")
+                         for a in ("local",baseline,candidate) for m in THERMAL_MODES)
+            gate=classify(placement=placement,paid=candidate.endswith("paid"),controls_complete=complete,
+                          net_t0=net[0],net_t1_layer=net[3],net_t2=net[2],matched_t2=matched[2],
+                          speedup_gate=g2["gate"]["net_speedup"],
+                          interaction_gate=g2["gate"]["minimum_spatial_interaction_ratio"])
             summaries.append({"scenario":scenario,"case":case,"thermal_regime":regime,"placement":placement,
                               "candidate":candidate,"matched_baseline":baseline,
                               **{f"net_speedup_t{m}":net[m] for m in range(3)},
                               **{f"matched_speedup_t{m}":matched[m] for m in range(3)},
-                              "spatial_interaction_ratio":net[2]/net[1],
+                              "net_speedup_t1_layer":net[3],"matched_speedup_t1_layer":matched[3],
+                              "spatial_interaction_ratio":net[2]/net[3],
+                              "scalar_to_layer_interaction_ratio":net[3]/net[1],
+                              "legacy_t2_over_scalar_t1_ratio":net[2]/net[1],
                               "local_layout_time_penalty_vs_independent_oracle":get("local",2)["cycle_time_s"]/get("local",2,"independent_oracle")["cycle_time_s"]-1,
                               "candidate_layout_time_penalty_vs_independent_oracle":get(candidate,2)["cycle_time_s"]/get(candidate,2,"independent_oracle")["cycle_time_s"]-1,
-                              "lp_gate_pass":bool(placement!="independent_oracle" and net[2]>g2["gate"]["net_speedup"]
-                                                  and net[2]/net[1]>g2["gate"]["minimum_spatial_interaction_ratio"])})
+                              "lp_gate_pass":gate["architecture_gate_pass"],**gate})
         for placement,candidate in itertools.product(["shared","migration"],["neighbor_ideal","global_ideal","neighbor_paid","mesh_paid"]):
             baseline="local_matched" if candidate.endswith("paid") else "local"
             def best(a):
@@ -108,12 +117,13 @@ def reports(summaries,bounds,out):
     for b in bounds:
         lines.append(f'| {b["scenario"]} | {b["case"]} | {b["placement"]} | {b["candidate"]} | {b["net_periodic_speedup_upper_bound"]:.6f} | {b["cannot_reach_5_percent_in_this_model"]} |')
     lines += ["", "## All LP interactions", "",
-              "| Cooling | Work mix | Thermal regime | Layout | Candidate | T0 net | T1 net | T2 net | T2/T1 | LP gate |",
-              "|---|---|---|---|---|---:|---:|---:|---:|---|"]
+              "T1_scalar is a legacy control. Spatial interaction uses T2/T1_layer; ideal connections and independent layouts cannot pass.",
+              "| Cooling | Work mix | Thermal regime | Layout | Candidate | T0 net | T1 scalar | T1 layer | T2 net | T2/T1 layer | Class |",
+              "|---|---|---|---|---|---:|---:|---:|---:|---:|---|"]
     for s in summaries:
         lines.append(f'| {s["scenario"]} | {s["case"]} | {s["thermal_regime"]} | {s["placement"]} | {s["candidate"]} | '
-                     f'{s["net_speedup_t0"]:.6f} | {s["net_speedup_t1"]:.6f} | {s["net_speedup_t2"]:.6f} | '
-                     f'{s["spatial_interaction_ratio"]:.6f} | {s["lp_gate_pass"]} |')
+                     f'{s["net_speedup_t0"]:.6f} | {s["net_speedup_t1"]:.6f} | {s["net_speedup_t1_layer"]:.6f} | {s["net_speedup_t2"]:.6f} | '
+                     f'{s["spatial_interaction_ratio"]:.6f} | {s["screening_class"]} |')
     (out/"report.md").write_text("\n".join(lines)+"\n")
 
 
@@ -135,7 +145,7 @@ def main():
         audit=PeriodicAudit(cfg,g2["transient"]);periodic_records.append(dict(audit.record,scenario=cooling["name"]))
         n=cfg["grid"]**2
         for case,regime,placement,fabric,mode in itertools.product(cases,["phase_steady","cycle_average"],
-                 ["independent_oracle","shared","migration"],g2_fabrics(cfg["hardware"]),range(3)):
+                 ["independent_oracle","shared","migration"],g2_fabrics(cfg["hardware"]),THERMAL_MODES):
             r=optimize_cycle(cfg,g2,h,gh,case["repetitions"],fabric,mode,placement,regime)
             r.update(scenario=cooling["name"],case=case["name"])
             if mode==2:
@@ -158,7 +168,7 @@ def main():
     with (out/"periodic_bounds.csv").open("w",newline="") as f:
         w=csv.DictWriter(f,fieldnames=list(bounds[0]),lineterminator="\n");w.writeheader();w.writerows(bounds)
     source_commit=revision();dirty=subprocess.check_output(["git","status","--porcelain"],text=True).strip()
-    provenance={"source_commit":source_commit,"source_dirty":bool(dirty),"python":sys.version,"platform":platform.platform(),
+    provenance={"schema_version":2,"thermal_controls":THERMAL_NAMES,"source_commit":source_commit,"source_dirty":bool(dirty),"python":sys.version,"platform":platform.platform(),
                 "numpy":np.__version__,"scipy":scipy.__version__,"thermal_backend":args.thermal_backend,
                 "config_sha256":hashlib.sha256(Path(args.config).read_bytes()).hexdigest(),
                 "base_config_sha256":hashlib.sha256(Path(g2["base_config"]).read_bytes()).hexdigest(),

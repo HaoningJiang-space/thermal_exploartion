@@ -10,6 +10,7 @@ from dataclasses import dataclass
 import numpy as np
 from scipy.optimize import linprog
 from scipy import sparse
+from .thermal import THERMAL_NAMES, layer_response, thermal_control
 
 
 @dataclass(frozen=True)
@@ -65,8 +66,7 @@ def optimize(cfg, h, global_h, workload, tiling, fabric, thermal_mode,
         raise ValueError(placement)
     if not np.isclose(sum(profile), 1) or min(profile) < 0:
         raise ValueError("Demand fractions must be nonnegative and sum to one")
-    if thermal_mode not in (0, 1, 2):
-        raise ValueError(thermal_mode)
+    hm = thermal_control(h, global_h, thermal_mode)
     flows = []
     paths = []
     for i in range(n):
@@ -107,7 +107,6 @@ def optimize(cfg, h, global_h, workload, tiling, fabric, thermal_mode,
     if fabric.paid and links:
         inequalities.append(link_load); budgets.append(np.full(len(links), hw["mesh_link_tb_s"]))
     if thermal_mode:
-        hm = h if thermal_mode == 2 else global_h
         allowed = np.r_[np.full(n, tc["logic_limit_c"]-tc["ambient_c"]),
                         np.full(n, tc["dram_limit_c"]-tc["ambient_c"])]
         room = allowed-hm@p0
@@ -138,6 +137,7 @@ def optimize(cfg, h, global_h, workload, tiling, fabric, thermal_mode,
     p = p0+power@x
     spatial_t = tc["ambient_c"]+h@p
     global_t = tc["ambient_c"]+global_h@p
+    layer_t = tc["ambient_c"]+layer_response(h)@p
     delivered = bank@x
     remote = sum(x[c] for c, path in enumerate(paths) if path)
     act_per_s = delivered*1e12*kr["row_miss_fraction"]/kr["chunk_bytes"]
@@ -146,6 +146,7 @@ def optimize(cfg, h, global_h, workload, tiling, fabric, thermal_mode,
         mapping[i,j] += x[c]
         rates[i,hw["dvfs_fractions"].index(f)] += duty[i,c]*x[c]
     return {"tflops": float(x[-1]), "fabric": fabric.name, "thermal_mode": thermal_mode,
+            "thermal_model": THERMAL_NAMES[thermal_mode],
             "placement": placement, "workload": workload["name"], "tiling": tiling["name"],
             "intensity_flop_byte": intensity, "effective_bank_tb_s": bank_bw,
             "used_bandwidth_tb_s": float(delivered.sum()), "dram_activations_s": float(act_per_s.sum()),
@@ -153,6 +154,7 @@ def optimize(cfg, h, global_h, workload, tiling, fabric, thermal_mode,
             "logic_power_w": float(p[:n].sum()), "dram_power_w": float(p[n:].sum()),
             "logic_peak_c": float(max(spatial_t[:n])), "dram_peak_c": float(max(spatial_t[n:])),
             "global_logic_c": float(global_t[0]), "global_dram_c": float(global_t[n]),
+            "layer_logic_c": float(layer_t[0]), "layer_dram_c": float(layer_t[n]),
             "original_constraint_max_violation": feasibility,
             "bank_fractions": (delivered/delivered.sum()).tolist() if delivered.sum() else [0]*n,
             "power_w": p.tolist(), "temperature_c": spatial_t.tolist(),
