@@ -34,7 +34,7 @@ def bounds(p,paths):
     row=r["row_buffer_bytes"];channels=r["channels"]
     bank=row*r["banks_per_channel"]/rc/1000*channels
     activation=min(paths*row/v["tRRD_ns"],paths*4*row/v["tFAW_ns"])/1000*channels
-    column=paths*1.024*channels  # 1024-byte payload /1 ns per independent path
+    column=min(paths*1.024,2.048)*channels  # common command bus: one1024B RD/0.5ns
     hb=v["hb_data_connections"]*1/8/1000
     if v["hb_chip_tb_s"]>hb:raise ValueError("HB budget exceeds fixed connections at maximum rate")
     return dict(bank_cycle_tb_s=bank,activation_domain_tb_s=activation,column_tb_s=column,
@@ -56,17 +56,20 @@ def lp_config(p,paths,service_tb_s,act_per_byte=None):
     if not cost["area_feasible"]:raise ValueError("Organization exceeds fixed silicon/HB area budget")
     access=v["access_energy_pj_byte"];activation=access*v["activation_share"]
     transfer=access-activation;logic_transfer=transfer*v["logic_memory_share"]
-    if act_per_byte is None:act_per_byte=1/r["row_buffer_bytes"]
+    act_per_byte=1/r["row_buffer_bytes"]
     # Full-row energy partition is an assumption. It does not independently
     # calibrate ACT/PRE. Additional path switching remains a paid cost.
     dram_energy=transfer-logic_transfer+activation*r["row_buffer_bytes"]*act_per_byte
     logic_energy=logic_transfer*(1+cost["extra_dynamic_fraction"])
     hw=dict(tile_peak_tflops=v["logic_peak_tflops"]/16,bank_group_peak_tb_s=v["hb_chip_tb_s"]/16,
         internal_bank_group_ceiling_tb_s=service_tb_s/16,independent_banks_per_group=16,
-        row_miss_penalty_ns=34.56,read_latency_ns=v["read_latency_ns"],outstanding_per_tile=64,
+        row_miss_penalty_ns=34.56,read_latency_ns=v["read_latency_ns"],outstanding_per_tile=512,
         transaction_bytes=1024,sram_bytes_per_tile=r["sram_bytes"]/16,
         logic_static_w=(v["logic_background_w"]+cost["periphery_static_w"])/16,
-        dram_static_w=v["dram_background_w"]/16,
+        # Refresh and its worst-case extra row reopenings are per-time costs,
+        # not coefficients that incorrectly shrink with thermal throttling.
+        dram_static_w=(v["dram_background_w"]+256*v["refresh_nj_per_bank"]/3900+
+                       256*activation*r["row_buffer_bytes"]/1000/3900)/16,
         logic_pj_per_flop=v["logic_compute_pj_flop"]+v["logic_other_dynamic_pj_flop"],
         logic_memory_pj_per_byte=logic_energy,dram_pj_per_byte=dram_energy,activation_nj=0.,
         dvfs_fractions=[.25,.5,.75,1.],voltage_floor_fraction=.65,placement_max_fraction=.125,

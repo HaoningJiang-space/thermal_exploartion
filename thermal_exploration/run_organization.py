@@ -40,16 +40,17 @@ def check_commands(dram,req,events,commands):
                 evidence_level="L1 software execution; assumed device parameters are not measured")
 
 
-def command_case(exe,root,out,name,paths,hb,kind="streaming",refresh=True,ideal=False):
+def command_case(exe,root,out,name,paths,hb,kind="streaming",refresh=True,ideal=False,long=False):
     case=out/name;case.mkdir()
-    req=hb_trace.streaming_trace(paths) if kind=="streaming" else hb_trace.gemv_trace(paths)
+    req=hb_trace.streaming_trace(paths,1048576 if long else 32768) if kind=="streaming" else hb_trace.gemv_trace(paths)
     validator=lambda r:hb_trace.validate(r,paths)
     write_trace(req,case,validator)
     dram,config=hb_trace.ramulator_config(root,case,paths,refresh,ideal)
     (case/"config.json").write_text(json.dumps(config,indent=2)+"\n")
-    # 8 TFLOP/s/tile =2000 FLOP per 0.25ns tick; at most64 inflight/tile.
+    # 8 TFLOP/s/tile =2000 FLOP per 0.25ns tick; 512 inflight/tile,
+    # 512KiB payload buffer/tile fits the same 2.25MiB private SRAM budget.
     with (case/"execution.log").open("w") as log:
-        subprocess.run([str(exe),str(case/"config.json"),str(case/"requests.tsv"),str(case/"run"),"1024","2000",str(hb/16*1000*.25),"0"],stdout=log,stderr=log,check=True)
+        subprocess.run([str(exe),str(case/"config.json"),str(case/"requests.tsv"),str(case/"run"),"8192","2000",str(hb/16*1000*.25),"0"],stdout=log,stderr=log,check=True)
     driver=json.loads((case/"run-driver.json").read_text());events=read_csv(case/"run-events.csv")
     work=validate_events(req,events,driver,validator)
     commands=[]
@@ -60,6 +61,10 @@ def command_case(exe,root,out,name,paths,hb,kind="streaming",refresh=True,ideal=
     # last4096 completed transactions; report full execution separately.
     ordered=sorted(int(e["completed"]) for e in events)
     start,end=ordered[4096],ordered[-4096]
+    if long:
+        period=15600  # 3900ns refresh interval /0.25ns per tick
+        start=period*2;end=(driver["ticks"]//period-1)*period
+        if end-start<period*5:raise ValueError("Steady interval must contain at least five refresh periods")
     count=sum(start<=int(e["completed"])<end for e in events)
     steady=Counter(c["command"] for c in commands if start<=int(c["clock"])<end)
     bytes_=count*hb_trace.TX;rate=bytes_/((end-start)*.25)/1000
@@ -69,6 +74,7 @@ def command_case(exe,root,out,name,paths,hb,kind="streaming",refresh=True,ideal=
     # reopenings caused by refresh. No coefficient is fitted to measured power.
     result=dict(name=name,paths=paths,hb_tb_s=hb,refresh_enabled=refresh,ideal_row_retention=ideal,
         trace_kind=kind,work=work,ticks=driver["ticks"],full_execution_tb_s=full_rate,
+        long_multi_refresh_trace=long,
         steady_window=dict(start_tick=start,end_tick=end,requests=count,bytes=bytes_,duration_ns=(end-start)*.25,
                            useful_tb_s=rate,commands=dict(steady),ACT_per_useful_byte=steady["ACT"]/bytes_),
         warmup_ticks=start,drain_ticks=driver["ticks"]-end,command_validation=validation,
@@ -103,11 +109,11 @@ def main():
     if q1["useful_bandwidth_gb_s"]>=q64["useful_bandwidth_gb_s"]:raise ValueError("Queue control did not constrain service")
     cases=[]
     for hb in (32,16,8):
-        for paths in (1,2,4):cases.append(command_case(exe,root,out,f"stream_p{paths}_HB{hb}",paths,hb))
+        for paths in (1,2,4):cases.append(command_case(exe,root,out,f"stream_p{paths}_HB{hb}",paths,hb,long=hb==32))
     for paths in (1,2,4):cases.append(command_case(exe,root,out,f"gemv_p{paths}_HB32",paths,32,"gemv"))
     # One physical relaxation: shorten row-retention constraint; preserve all
     # other timing/refresh/HB limitations and modeled activity energy.
-    cases.append(command_case(exe,root,out,"ideal_row_retention_p2_HB32",2,32,ideal=True))
+    cases.append(command_case(exe,root,out,"ideal_row_retention_p2_HB32",2,32,ideal=True,long=True))
     lookup={(c["hb_tb_s"],c["paths"]):c for c in cases if c["trace_kind"]=="streaming" and not c["ideal_row_retention"]}
     rows=[];thermal_records=[];rejected=[]
     for name,scenario in scenarios(profile):
@@ -116,11 +122,16 @@ def main():
             cost=organization_cost(scenario,paths)
             if not cost["area_feasible"]:
                 rejected.append(dict(scenario=name,paths=paths,reason="fixed area budget exceeded",**cost));continue
-            service=lookup[(values(scenario)["hb_chip_tb_s"],paths)]["steady_window"]
+            observed=lookup[(32,paths)]["steady_window"]
+            # Lower-interface service is the min of a multi-refresh internal
+            # rate and fixed HB rate, assuming the reserved return buffer
+            # smooths bursts. Short lower-HB traces are separately retained;
+            # they are not mislabeled as sustained multi-refresh measurements.
+            service=observed.copy();service["useful_tb_s"]=min(observed["useful_tb_s"],values(scenario)["hb_chip_tb_s"])
             for workload in (0,1):
                 for mode in (0,3,2):
                     r=solve(scenario,paths,service["useful_tb_s"],h,gh,workload,mode,service["ACT_per_useful_byte"])
-                    r.update(scenario=name,paths=paths,service_evidence="streaming command-derived steady rate",necessary_bounds=bounds(scenario,paths))
+                    r.update(scenario=name,paths=paths,service_evidence="multi-refresh internal rate plus explicit buffered HB min bound",necessary_bounds=bounds(scenario,paths))
                     rows.append(r)
     ideal=next(c for c in cases if c["ideal_row_retention"])["steady_window"]
     h,gh,_=response(4,thermal_config(profile),args.thermal_backend)

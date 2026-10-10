@@ -29,12 +29,10 @@ def gemv_trace(paths):
     # Weights use rows 64..95. All fit the 4 GiB fast tier; placement is the
     # same optimized local interleaving policy for every organization.
     for row in range(4096):
-        previous=None
         for column in range(8):
             deps=list(range(8))
-            if previous is not None:deps.append(previous)
             address=encoded(row%16,(row//16)%16,64+(row//256)*2+column//4,column%4)
-            rid=len(req);req.append(hb_request(rid,address,paths,row%16,deps,1024,"weight"));previous=rid
+            rid=len(req);req.append(hb_request(rid,address,paths,row%16,deps,1024,"weight"))
     return req
 
 
@@ -66,9 +64,13 @@ def ramulator_config(root,out,paths,refresh=True,relax_row_retention=False):
             base.resolve_secondary_timings(t,org)
             t.update(nCCDL=2,nCCDR=2,nRFC=700,nRFCpb=400,nRFMab=700,nRFMpb=400,
                      nREFI=7800,nREFIpb=7800//(16//paths),nRREFD=16)
-            if relax_row_retention:
-                t["nRAS"]=t["nRCDRD"]+8  # keep four 1ns reads after ACT
-                t["nRC"]=t["nRAS"]+t["nRP"]
+        def resolve(self):
+            org,t=super().resolve()
+            # Upstream applies explicit overrides after secondary timing
+            # resolution; reconcile this machine's final values afterwards.
+            if relax_row_retention:t["nRAS"]=t["nRCDRD"]+8
+            t["nRC"]=t["nRAS"]+t["nRP"]
+            return org,t
     from math import ceil
     timing={name:ceil(ns/.5) for name,ns in dict(nRCDRD=2.29,nRCDWR=2.29,nRP=4.77,nRAS=29.79,
         nRRDS=2.5,nRRDL=3.125,nFAW=15.,nCL=4.,nCWL=4.).items()}

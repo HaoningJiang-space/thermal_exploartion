@@ -67,7 +67,7 @@
       "value": 4.8,
       "unit": "W/chip",
       "classification": "Reasonably assumed",
-      "basis": "Background/refresh proxy is not inferred from the 104 W account",
+      "basis": "Background only; fixed refresh energy and conservative row-reopen costs charged separately",
       "source": null,
       "range": [
         2.4,
@@ -246,6 +246,17 @@
         0,
         0.3
       ]
+    },
+    "refresh_nj_per_bank": {
+      "value": 2,
+      "unit": "nJ/bank/refresh",
+      "classification": "Reasonably assumed",
+      "basis": "Per-bank refresh proxy, not Stratum measurement; rate fixed at one3900ns interval",
+      "source": null,
+      "range": [
+        1,
+        4
+      ]
     }
   },
   "execution_assumptions": {
@@ -253,10 +264,11 @@
     "mapping": "channel=output row mod 16; bank interleaving across all local banks; both designs use same policy",
     "inputs": "Idealized common input broadcast, equal for all designs",
     "output": "Resident in Logic",
-    "scheduling": "Same FRFCFS RowHit/Open policy; same 64 outstanding requests per tile budget",
+    "scheduling": "Same FRFCFS RowHit/Open; 512 inflight/compute tile, common row-coherent prefetch; full-row burst trace",
     "dvfs": "Idealized continuous time sharing of common discrete DVFS points",
     "thermal": "4x4 two active equivalent layers plus spreader; not eight separate DRAM dies",
-    "known_technique_baseline": "segmented_2 is FGDRAM/SALP-inspired domain partitioning, not a new mechanism or full reproduction"
+    "known_technique_baseline": "segmented_2 is FGDRAM/SALP-inspired domain partitioning, not a new mechanism or full reproduction",
+    "return_buffer": "512KiB payload/tile plus metadata fits common 2.25MiB SRAM/tile. Lower-HB min-rate approximation assumes burst smoothing; does not simulate temperature-dependent refresh."
   },
   "fairness": {
     "same_compute": true,
