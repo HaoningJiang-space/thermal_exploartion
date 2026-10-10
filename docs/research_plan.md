@@ -1,5 +1,8 @@
 # 研究命题与分阶段决策
 
+当前状态：G2 Shared-Placement Gate 已完成，未通过 5% 净收益门槛，当前 Compute–Memory Fabric 分支结束。
+结果见 [G2 报告](../results/g2-2026-10-09/findings.md)。下述进一步校准与硬件设计步骤是条件计划，本轮不执行。
+
 目标：传统资源边界是否在 HB 高带宽和 3D 空间热耦合下成为持续性能限制？
 核心命题为 **When Does Compute–Memory Locality Become Suboptimal in Hybrid-Bonded 3D Accelerators?**
 不预设非局部连接应当胜出。

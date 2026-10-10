@@ -1,0 +1,27 @@
+{
+  "source_commit": "33a5b231a60f5212bd7746940d62134511e5ef61",
+  "source_dirty": false,
+  "python": "3.10.12 (main, Jul 29 2024, 16:56:48) [GCC 11.4.0]",
+  "platform": "Linux-6.8.0-40-generic-x86_64-with-glibc2.35",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "thermal_backend": "hits",
+  "config_sha256": "5acd3de00909898d4602365bf75b6efa4f9ebaa4dc6fc6ef545e0b4eef11bda0",
+  "base_config_sha256": "978ae2f3300d3724dbf3328a4bec410252d5d3abaf20ee17b1c21bd2789ae259",
+  "invocation": [
+    "python",
+    "-m",
+    "thermal_exploration.run_g2",
+    "--thermal-backend",
+    "hits",
+    "--output",
+    "../g2-33a5b23"
+  ],
+  "started_utc": "2026-10-10T05:10:02.813004+00:00",
+  "elapsed_s": 22.118738651275635,
+  "design_points": 648,
+  "lp_solves": 864,
+  "fixed_phase_work": true,
+  "scope": "uncalibrated chip-scale fixed-work shared-resident-layout gate",
+  "hits_commit": "c7f94d533cb663c2f098880e5ab333da9d83ff17"
+}

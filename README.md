@@ -84,6 +84,11 @@ Resource Ownership Loss 和 Local Spatial Penalty。比值交互不等于唯一�
 文献核对：[docs/literature.md](docs/literature.md)；
 模型方程与局限：[docs/model.md](docs/model.md)。
 
-下一轮只验证 [G2 Shared Data Placement](docs/g2_design.md)。保持同一权重 tensor 的共同容量，
+第二轮只验证 [G2 Shared Data Placement](docs/g2_design.md)。保持同一权重 tensor 的共同容量，
 固定 Prefill/Decode 工作量，对照独立布局 oracle、共同常驻布局与双向迁移计费。
 运行 `python -m thermal_exploration.run_g2 --output outputs/g2`。
+
+G2 已完成：648 个设计点、864 个 LP。当前模型中，Shared 布局下理想 Global 的周期净收益上界
+最高约 2.97%，付费 Mesh 最高约 0.71%；共同布局相对独立 Oracle 的最大时间损失约 1.23%。
+未通过 5% 门槛，因此结束本轮 Compute–Memory Fabric 分支，不推进 RTL。
+详见 [G2 结果与证据](results/g2-2026-10-09/findings.md)。

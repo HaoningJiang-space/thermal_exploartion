@@ -1,0 +1,55 @@
+{
+  "experiment_source_commit": "33a5b231a60f5212bd7746940d62134511e5ef61",
+  "hits_commit": "c7f94d533cb663c2f098880e5ab333da9d83ff17",
+  "source_clean": true,
+  "experiment_exit_code": 0,
+  "regression_command": "python -m unittest discover -s tests -v",
+  "local_regressions": {
+    "passed": 21,
+    "failed": 0,
+    "skipped": 0,
+    "exit_code": 0
+  },
+  "linux_server_regressions": {
+    "passed": 21,
+    "failed": 0,
+    "skipped": 0,
+    "exit_code": 0
+  },
+  "design_points": 648,
+  "lp_solves": 864,
+  "phase_records": 1296,
+  "migration_records": 432,
+  "periodic_audits": 216,
+  "completed_phase_work_verified": true,
+  "shared_layout_and_common_capacity_verified": true,
+  "max_phase_fraction_error": 3.256305294851991e-10,
+  "max_original_lp_constraint_violation": 3.25630536424093e-10,
+  "max_relative_cycle_time_difference_local_scipy_vs_remote_hits_single_case": 2.982836200260408e-12,
+  "thermal_unit_sources_solved": 64,
+  "hits_max_original_relative_residual": 7.416397908403094e-12,
+  "hits_direct_max_difference_k_per_w": 1.2767009671676988e-11,
+  "periodic_max_closure_error_k": 1.8098405510625552e-14,
+  "periodic_max_mean_energy_balance_error_k": 8.100187187665142e-13,
+  "periodic_max_interpolation_gap_c": 2.5079698062313582e-05,
+  "lp_gate_passes": 0,
+  "periodic_net_upper_bounds_over_5_percent": 0,
+  "migration_positive_bytes_design_points": 0,
+  "forced_positive_round_trip_migration_regression": true,
+  "public_credential_and_personal_path_scan": "PASS",
+  "git_diff_check_exit_code": 0,
+  "figures_visually_checked": true,
+  "retained_pre_release_failure": {
+    "local_single_case_plot_selection": 1,
+    "corrected_before_experiment_commit": true,
+    "raw_output_retained_outside_git": true
+  },
+  "excluded_claims": [
+    "physical HB/package calibration",
+    "cycle-accurate NoC or Controller",
+    "measured migration cost",
+    "full transient mapping optimum",
+    "Transformer serving throughput",
+    "wafer-scale optimality"
+  ]
+}
