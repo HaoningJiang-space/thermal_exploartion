@@ -30,10 +30,13 @@ def main():
     ratio=fine/normal;interaction=ratio/uniform
     gate=dict(optimized_over_ordinary_pct=(normal/by['ordinary_striped']['tflops']-1)*100,
         finer_probe_over_optimized_pct=(ratio-1)*100,uniform_finer_probe_gain_pct=(uniform-1)*100,
-        tier_interaction_ratio=interaction,criterion='Remaining probe gain >5%, plus meaningful tier specificity, before proposing an execution unit',
+        tier_interaction_ratio=interaction,criterion='Frozen D2 hardware screen: remaining probe gain >5% and tier interaction >1%; not a universal Research Go criterion',
         status='NO_GO_NEW_EXECUTION_UNIT' if ratio<=1.05 or interaction<=1.01 else 'CONDITIONAL_SIGNAL_REQUIRES_KNOWN_DATAFLOW_AND_COST_CONTROLS',
+        research_status='GO_EXECUTION_ATTRIBUTION_AND_DEPENDENCY_WORKLOAD_SELECTION',
+        research_scope='Retain the placement/prefetch/consumer attribution method; reassess the next workload, without claiming a novel execution unit',
+        policy='Research Go and Hardware Go are separate. Thermal reversal is required only for a claim explicitly about thermal optimality reversal.',
         scope='This fixed6GiB task/dependency model; not a general theorem or a strict optimality upper bound',
-        thermal_closure='Deferred: no G5 unless an unresolved execution signal survives known software/dataflow controls',
+        thermal_closure='Not executed in D2. This gate neither proves a thermal mechanism nor closes HB architecture research.',
         frontier_metric='Task-join last packets only. Quantization changes with task size; not globally unique critical-path bytes.')
     (out/'gate.json').write_text(json.dumps(gate,indent=2)+'\n')
     names=['ordinary_striped','prefetched_striped','mapped_prefetched','fine_streaming_probe','uniform_prefetched','uniform_fine_probe']

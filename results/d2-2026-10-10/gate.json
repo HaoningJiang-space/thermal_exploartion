@@ -3,9 +3,12 @@
   "finer_probe_over_optimized_pct": 0.00020455063804991624,
   "uniform_finer_probe_gain_pct": 0.00020690418576219116,
   "tier_interaction_ratio": 0.9999999764645716,
-  "criterion": "Remaining probe gain >5%, plus meaningful tier specificity, before proposing an execution unit",
+  "criterion": "Frozen D2 hardware screen: remaining probe gain >5% and tier interaction >1%; not a universal Research Go criterion",
   "status": "NO_GO_NEW_EXECUTION_UNIT",
+  "research_status": "GO_EXECUTION_ATTRIBUTION_AND_DEPENDENCY_WORKLOAD_SELECTION",
+  "research_scope": "Retain the placement/prefetch/consumer attribution method; reassess the next workload, without claiming a novel execution unit",
+  "policy": "Research Go and Hardware Go are separate. Thermal reversal is required only for a claim explicitly about thermal optimality reversal.",
   "scope": "This fixed6GiB task/dependency model; not a general theorem or a strict optimality upper bound",
-  "thermal_closure": "Deferred: no G5 unless an unresolved execution signal survives known software/dataflow controls",
+  "thermal_closure": "Not executed in D2. This gate neither proves a thermal mechanism nor closes HB architecture research.",
   "frontier_metric": "Task-join last packets only. Quantization changes with task size; not globally unique critical-path bytes."
 }

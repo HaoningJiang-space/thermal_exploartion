@@ -1,0 +1,13 @@
+{
+  "release": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/tag/d2-multitier-execution-2026-10-10",
+  "file": "d2-command-evidence-2026-10-10.tar",
+  "bytes": 1339494400,
+  "sha256": "c7b72be0a8b11da5704577c20c429663d8eb73d4b9bfbc103332f8c17939b760",
+  "github_asset_id": 628210836,
+  "publication_scan": "PASS; all nested entry SHA256 and protected-content scan",
+  "inspected_uncompressed_bytes": 8398179050,
+  "raw_execution_source": "cb2d961",
+  "raw_export_source": "d3b3c52",
+  "arrival_audit_source": "b3c47d7",
+  "artifact_interpretation": "Immutable execution/evidence bundle; later Research/Hardware decision labels and arrival-bound plot are in main, with no native execution rerun"
+}

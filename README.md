@@ -17,7 +17,9 @@ Mode A 严格复现与 Mode B 条件性探索分别管理；尚未校准的器�
 Oracle相对该代理剩余仅0.83%。Row-cycle新硬件分支关闭；并修正命令驱动ACT/PRE能耗接口。
 [D2结果](results/d2-2026-10-10/findings.md)使用实际访问的5GiB权重+1GiB KV，比较相同硬件上的普通双缓冲、优化执行与更细粒度流式探针。
 布局/执行优化提高28.96%，更细消费相对优化版只有约0.000205%增益，等延迟负对照相同量级。
-当前受控任务模型没有支持新执行单元的证据，维持No-Go。
+优化版距离固定到达序列的完成下界只有3 tick；仅改变消费端的收益上界约0.000307%。
+当前受控任务模型的 **Hardware No-Go** 限于新的输入消费单元；**Research Go** 保留执行归因方法，转向依赖更强的工作负载选择。
+判断规则与各分支范围见 [Research Go / Hardware Go](docs/research_decisions.md)。Thermal最优性反转只约束声称该机制的研究。
 这些不是完整SALP或Stratum器件复现，独立功率校准仍未完成。
 
 新任务书与不可校准项见 [Grounded HB–DRAM Validation](docs/grounded_validation.md)。
@@ -106,6 +108,8 @@ Resource Ownership Loss 和 Local Spatial Penalty。比值交互不等于唯一�
 - `fixed_placement_signal` 仅表示固定布局收益；`ideal_upper_bound_signal` 不包含真实连接开销。
 - `architecture_candidate` 要求完整布局对照、优化布局、付费成本、T2 净收益及匹配收益均超过 5%，
   T0/T1_layer 净收益不超过 1%，T2/T1_layer 交互超过 1%；仍需执行与物理校准。
+
+上述自动标签是历史G1的**空间热连接最优性反转**假设筛选，保持原门槛以便复现；不是所有HB研究的通用准入条件。
 
 敏感性套件逐项扫描热耦合、冷却梯度、DRAM 能量、链路带宽/能量及面积。
 不挑选最佳参数，不删除负结果。全部原始证据保存在输出目录，精选结果见 `results/`。

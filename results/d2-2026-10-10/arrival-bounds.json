@@ -1,0 +1,60 @@
+{
+  "cases": [
+    {
+      "case": "ordinary_striped",
+      "completion_us": 315.21675,
+      "last_byte_us": 315.2085,
+      "fixed_arrival_lower_us": 315.2085,
+      "tail_ns": 8.25,
+      "consumer_only_speedup_upper_pct": 0.002617315205655224
+    },
+    {
+      "case": "prefetched_striped",
+      "completion_us": 309.12075,
+      "last_byte_us": 309.12,
+      "fixed_arrival_lower_us": 309.12,
+      "tail_ns": 0.75,
+      "consumer_only_speedup_upper_pct": 0.00024262422360088465
+    },
+    {
+      "case": "mapped_prefetched",
+      "completion_us": 244.43875,
+      "last_byte_us": 244.43800000000002,
+      "fixed_arrival_lower_us": 244.43800000000002,
+      "tail_ns": 0.75,
+      "consumer_only_speedup_upper_pct": 0.0003068262708794123
+    },
+    {
+      "case": "fine_streaming_probe",
+      "completion_us": 244.43825,
+      "last_byte_us": 244.43800000000002,
+      "fixed_arrival_lower_us": 244.43800000000002,
+      "tail_ns": 0.25,
+      "consumer_only_speedup_upper_pct": 0.00010227542361906927
+    },
+    {
+      "case": "uniform_prefetched",
+      "completion_us": 241.65825,
+      "last_byte_us": 241.6575,
+      "fixed_arrival_lower_us": 241.6575,
+      "tail_ns": 0.75,
+      "consumer_only_speedup_upper_pct": 0.0003103565997308877
+    },
+    {
+      "case": "uniform_fine_probe",
+      "completion_us": 241.65775,
+      "last_byte_us": 241.6575,
+      "fixed_arrival_lower_us": 241.6575,
+      "tail_ns": 0.25,
+      "consumer_only_speedup_upper_pct": 0.00010345219991769738
+    }
+  ],
+  "hb_necessary_lower_us": 201.326592,
+  "mac_necessary_lower_us": 58.720256,
+  "input_sha256": {
+    "summary.json": "a904ec753b54d7d882ff0458a4d3804aacdeeff9fdb982a2fa3a2631a279a052",
+    "arrival-audit.json": "85d05626116f75aba426522e99122a0aca5fced2c9ca75fe8146fb4215b396e0"
+  },
+  "scope": "Conditional consumer-only bounds; not common global scheduling or thermal bounds",
+  "execution_rerun": false
+}
