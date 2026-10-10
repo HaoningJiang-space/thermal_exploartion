@@ -39,14 +39,14 @@ struct RouterQueue {std::deque<Flit> data;int incoming=0;};
 int main(int argc,char** argv){try {
  if(argc!=4)throw std::runtime_error("config.json contract-directory output-prefix");
  std::string dir=argv[2],prefix=argv[3];
- int m,n,batch,pr,pc,mb,kb,wbudget,rbudget,redbudget,window,pbytes,ideal,barrier;
+ int m,n,batch,pr,pc,mb,kb,wbudget,rbudget,redbudget,window,pbytes,ideal,barrier,ideal_memory;
  std::array<int,16> fixed;
  {std::ifstream f(dir+"/resources.tsv");
-  if(!(f>>m>>n>>batch>>pr>>pc>>mb>>kb>>wbudget>>rbudget>>redbudget>>window>>pbytes>>ideal>>barrier))
+  if(!(f>>m>>n>>batch>>pr>>pc>>mb>>kb>>wbudget>>rbudget>>redbudget>>window>>pbytes>>ideal>>barrier>>ideal_memory))
    throw std::runtime_error("Invalid resource contract");
   for(auto& x:fixed)if(!(f>>x))throw std::runtime_error("Missing private SRAM");
  }
- if(pr*pc!=16||wbudget<8192||wbudget>524288||rbudget>wbudget||pbytes%32||window<1)
+ if(pr*pc!=16||wbudget<8192||wbudget>4194304||rbudget>wbudget||pbytes%32||window<1)
   throw std::runtime_error("Unsafe resource configuration");
  std::vector<TensorTask> tasks;std::array<std::vector<int>,16> local;
  {std::ifstream f(dir+"/tasks.tsv");std::string line;while(std::getline(f,line)){
@@ -325,13 +325,16 @@ int main(int argc,char** argv){try {
      if(response.ingress_id!=rid||r.accepted<0||r.depart>=0)throw std::runtime_error("Duplicate/wrong DRAM response");
      r.depart=response.depart;last_dram=std::max(last_dram,r.depart);hb[tile].push_back(rid);returned++;weight_bytes+=1024;
     };
-    if(memory->send(request)){r.accepted=clk;accepted++;response_used[tile]+=1024;unsent[tile].erase(rid);rhigh[tile]=std::max(rhigh[tile],response_used[tile]);}
+    if(ideal_memory||memory->send(request)){
+     r.accepted=clk;accepted++;response_used[tile]+=1024;unsent[tile].erase(rid);rhigh[tile]=std::max(rhigh[tile],response_used[tile]);
+     if(ideal_memory){r.depart=clk+1;last_dram=clk+1;hb[tile].push_back(rid);returned++;weight_bytes+=1024;}
+    }
     else counters["controller_reject"]++;
    }else if(!unsent[tile].empty())counters["response_credit_stall"]++;
    int queued=0;for(int port=0;port<5;port++)for(int vc=0;vc<2;vc++){
     auto& q=fifo[tile][port][vc];if(q.data.size()+q.incoming>8)throw std::runtime_error("Router credit overflow");queued+=q.data.size()+q.incoming;}
    if(std::min({rb[tile],wb[tile],vb[tile],wused[tile],response_used[tile],redused[tile]})<0||wused[tile]>wbudget||response_used[tile]>rbudget||redused[tile]>redbudget||
-      fixed[tile]+65536+wused[tile]+response_used[tile]+redused[tile]>2359296)throw std::runtime_error("Physical resource overflow");
+      fixed[tile]+65536+wused[tile]+response_used[tile]+redused[tile]>(wbudget>524288?16777216:2359296))throw std::runtime_error("Physical resource overflow");
    ports<<clk<<","<<tile<<","<<256-rb[tile]<<","<<128-wb[tile]<<","<<16-vb[tile]<<","<<wused[tile]<<","<<response_used[tile]<<","<<redused[tile]<<","<<queued<<"\n";
   }
   memory->tick();

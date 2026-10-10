@@ -22,6 +22,8 @@ CASES.update({
     'column_reduce64':dict(rows=1,columns=16,layout='blocked',order='m',reduction_packet=64),
     'row_ideal_transport':dict(rows=16,columns=1,layout='blocked',order='k',ideal_noc=True),
     'column_ideal_transport':dict(rows=1,columns=16,layout='blocked',order='m',ideal_noc=True),
+    'column_ideal_memory':dict(rows=1,columns=16,layout='blocked',order='m',ideal_memory=True),
+    'column_ideal_buffer':dict(rows=1,columns=16,layout='blocked',order='m',ideal_buffer=True),
 })
 
 
@@ -40,20 +42,25 @@ def hardware(settings,m=1024,n=16384,batch=32):
         input_elements=nl if lo<=own and own+n//16<=lo+nl else nl+n//16
         static.append(input_elements*batch*2+ml*batch*4+m//16*batch*2+2560)
     weight=settings.get('weight_buffer',524288);response=min(65536,weight)
+    ideal_buffer=settings.get('ideal_buffer',False)
+    if ideal_buffer:weight=4*2**20;response=2*2**20
+    sram=16*2**20 if ideal_buffer else 36*2**20//16
+    red=2**20 if ideal_buffer else 65536
     # Metadata, router FIFOs, fixed inputs/partials/output and all return
     # storage are charged separately. Unused private SRAM is not pooled.
-    if max(static)+weight+response+65536+65536>36*2**20//16:
+    if max(static)+weight+response+red+65536>sram:
         raise ValueError('Private SRAM budget exceeded')
     return dict(m=m,n=n,batch=batch,row_parts=p,column_parts=q,m_block=mb,k_block=kb,
         mac_flops=2*m*n*batch,weight_bytes=m*n*2,input_bytes=n*batch*2,output_bytes=m*batch*2,
         reduction_adds=(q-1)*m*batch,output_casts=m*batch,partial_bytes_per_tile=ml*batch*4,
-        static_sram_per_tile=static,sram_per_tile=36*2**20//16,metadata_reserve=65536,
-        weight_buffer=weight,response_buffer=response,reduce_buffer=65536,prefetch_tasks=32,
+        static_sram_per_tile=static,sram_per_tile=sram,metadata_reserve=65536,
+        weight_buffer=weight,response_buffer=response,reduce_buffer=red,prefetch_tasks=4096 if ideal_buffer else 32,
         packet_bytes=packet,flit_bytes=32,vc_depth_flits=8,virtual_channels=2,
         tick_ns=.25,mac_flops_per_tick=2000,vector_ops_per_tick=16,
         sram_read_bytes_per_tick=256,sram_write_bytes_per_tick=128,
         hb_bytes_per_tile_tick=500,link_serial_ticks=4,link_latency_ticks=8,
         ideal_noc=settings.get('ideal_noc',False),barrier=settings.get('barrier',False),
+        ideal_memory=settings.get('ideal_memory',False),ideal_buffer=ideal_buffer,
         assumptions=['Fast-tier internal timing surrogate, not calibrated Mono3D',
           '128TF peak MAC service, operand/register reuse ideal within a MAC block',
           'Aggregate private-SRAM ports are assumed, explicitly arbitrated each tick',
@@ -132,7 +139,7 @@ def write_contract(model,out):
     out=Path(out);c=model['contract'];(out/'contract.json').write_text(json.dumps(c,indent=2)+'\n')
     with (out/'resources.tsv').open('w') as f:
         keys=('m','n','batch','row_parts','column_parts','m_block','k_block','weight_buffer','response_buffer',
-              'reduce_buffer','prefetch_tasks','packet_bytes','ideal_noc','barrier')
+              'reduce_buffer','prefetch_tasks','packet_bytes','ideal_noc','barrier','ideal_memory')
         f.write(' '.join(str(int(c[k])) for k in keys)+'\n')
         f.write(' '.join(map(str,c['static_sram_per_tile']))+'\n')
     with (out/'tasks.tsv').open('w') as f:

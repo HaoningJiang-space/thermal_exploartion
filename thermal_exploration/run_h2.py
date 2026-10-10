@@ -62,7 +62,10 @@ def validate(case, model, dram):
     def commands(path):
         with path.open() as f: yield from csv.DictReader(f)
     merged = heapq.merge(*(commands(case/f'transaction-commands.ch{ch}.csv') for ch in range(16)),key=lambda x:int(x['clock']))
-    command_validation = check_commands(dram, request_records, events, merged)
+    if c['ideal_memory']:
+        command_validation=check_commands(dram, [], [], merged)
+        command_validation['scope']='Oracle bypasses memory requests; emitted refresh commands only, no DRAM-performance claim'
+    else:command_validation = check_commands(dram, request_records, events, merged)
     input_events = {(r['group'],r['tile']):r for r in rows(case/'run-inputs.csv')}
     for e, t in zip(model['tasks'],tasks):
         ready = input_events[e['input_group'],e['tile']]['last_tick']
