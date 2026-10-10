@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "source": "https://arxiv.org/html/2510.05245v1",
+  "version": "arXiv v1",
+  "workpoints": [
+    {"id": "reported_peak", "location": "Table 3, PDF page 11", "logic_peak_tflops": 128, "activity": "nominal rounded peak", "energy_scope": "not a power measurement"},
+    {"id": "topology_peak", "location": "Table 3, PDF page 11", "logic_peak_tflops": 131.072, "classification": "Derived", "derivation": "16 PU *16 PE *16*16 MAC *1GHz *2 FLOP/MAC", "activity": "topology capacity; not interchangeable with rounded128"},
+    {"id": "mac_energy", "location": "section 6.2.3, PDF page 11", "energy_pj_mac": 0.604, "scope": "MAC energy; full SRAM/NoC/peripheral/leakage scope not established"},
+    {"id": "stack_power_body", "location": "section 6.2.3, PDF page 11", "stack_w": 144.53, "logic_w": 42.67, "condition": "fastest Mono3D tier with full tensor core utilization, paper description", "activity_note": "Not evidence of a measured92.7% MAC activity; exact accounting/switching relationship to per-MAC energy unresolved"},
+    {"id": "figure15_groups", "location": "Figure15, PDF page 11", "compute_fraction": 0.248, "logic_memory_communication_fraction": 0.047, "dram_fraction": 0.705, "precision": "rounded percentages", "component_scope": "Compute group is not independently identified as MAC-only"},
+    {"id": "dram_aggregate", "location": "Table1 and section 6.2.3", "energy_pj_bit": 0.429, "bandwidth_tb_s": 30.34, "approx_power_w": 104, "evidence": "same-paper aggregate arithmetic; not independent command-power observations", "command_energy_split": null},
+    {"id": "internal_bandwidth_discrepancy", "body_max_tb_s": 30.34, "table3_max_tb_s": 34.34, "resolution": "retain discrepancy; do not force fit"}
+  ],
+  "independent_power_observations_available_for_Stratum": false,
+  "free_residual_fit_allowed": false
+}
