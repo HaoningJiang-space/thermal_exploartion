@@ -1,0 +1,14 @@
+{
+  "research_go": true,
+  "hardware_go": false,
+  "scope": "New hardware for the isolated H2-A GEMM under the fixed128TF compute budget",
+  "absolute_compute_capacity_gain_upper_bound": 0.03035569190979004,
+  "matched_fixed_policy_probes": {
+    "column64_ideal_transport": 0.00760666822103051,
+    "column64_ideal_memory": 0.0032500507820434343,
+    "column64_ideal_buffer": 0.0
+  },
+  "successful": 21,
+  "incomplete": 1,
+  "universal_thermal_reversal_requirement": false
+}

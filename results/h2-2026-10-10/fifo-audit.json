@@ -1,0 +1,137 @@
+{
+  "2d_blocked_k": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 151552,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "2d_blocked_m": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 151552,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "2d_local_first": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 151552,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "2d_rowmajor_k": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 151552,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "column_blocked_k": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 61440,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "column_blocked_m": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 61440,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "column_padded_m": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 61440,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "column_rowmajor_m": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 61440,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "row_blocked_k": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 491520,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "row_blocked_m": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 491520,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "row_local_first": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 491520,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "row_rowmajor_k": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 491520,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "column_buffer8k": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 61440,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "column_ideal_buffer": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 61440,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "column_ideal_memory": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 61440,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "column_ideal_transport": {
+    "status": "NOT_APPLICABLE: transport bypass oracle"
+  },
+  "column_reduce64": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 61440,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "row_ideal_transport": {
+    "status": "NOT_APPLICABLE: transport bypass oracle"
+  },
+  "column64_ideal_buffer": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 61440,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "column64_ideal_memory": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 61440,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "column64_ideal_transport": {
+    "status": "NOT_APPLICABLE: transport bypass oracle"
+  }
+}
