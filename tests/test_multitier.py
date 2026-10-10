@@ -22,6 +22,12 @@ class MultiTierContract(unittest.TestCase):
         check.issue('ACT',v,0)
         with self.assertRaises(ValueError):check.issue('RD',v,10)
         with self.assertRaises(ValueError):check.issue('PREpb',v,120)
-        check.issue('RD',v,t['rcd_ticks'][7]);check.issue('PREpb',v,t['ras_ticks'][7])
+        check.issue('RD',v,t['rcd_ticks'][7]+2);check.issue('PREpb',v,t['ras_ticks'][7]+2)
         with self.assertRaises(ValueError):check.issue('ACT',[0,0,0,0,0,0,0],t['rc_ticks'][7]-1)
         check.issue('ACT',[0,0,0,0,0,0,0],t['rc_ticks'][7])
+
+    def test_refresh_wildcard_does_not_skip_slow_restoration(self):
+        c=TierLegality();v=[0,1,0,0,0,7*4096,0];c.issue('ACT',v,0)
+        wildcard=[0,-1,-1,-1,-1,-1,-1]
+        with self.assertRaises(ValueError):c.issue('PREab',wildcard,122)
+        c.issue('PREab',wildcard,tier_timings()['ras_ticks'][7]+2)

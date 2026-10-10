@@ -1,0 +1,10 @@
+{
+  "excluded_runs": [
+    {
+      "run": "d2-smoke-9fd6376",
+      "status": "Failed independent extra timing check; no D2 performance result used",
+      "correction": "Account for multi-cycle command beginning/end offsets. Extend slow deadlines with ACT duration offset; PRE-to-ACT checker uses upstream offset."
+    }
+  ],
+  "export_correction": "None timing-only energy evidence handled as fixed, not a command-energy dictionary."
+}

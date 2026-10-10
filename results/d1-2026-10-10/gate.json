@@ -1,0 +1,10 @@
+{
+  "status": "NO_GO_NEW_ROW_CYCLE_HARDWARE",
+  "scope": "Fixed K32 full-row assumed internal model",
+  "overlap_restoration_ns": 30,
+  "overlap_gain_pct": 10.591292314403255,
+  "overlap_fraction_of_oracle_increment": 0.9199738690184547,
+  "oracle_residual_over_overlap_pct": 0.8330754766381787,
+  "oracle_residual_over_margin20_pct": 0.381498507179745,
+  "caution": "Mechanism proxies, not complete SALP or reliability-qualified Mono3D timing; no independent command-energy calibration"
+}

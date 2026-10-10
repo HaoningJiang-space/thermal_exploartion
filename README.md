@@ -3,8 +3,8 @@
 **Thermal-Constrained Memory Service Organization in Hybrid-Bonded 3D Accelerators**
 
 **研究决策：Compute–Memory Fabric 分支正式关闭；Thermal-aware Mapping 保留为基线。**
-当前执行 [Mode B 架构实验](docs/architecture_exploration.md)：研究独立 Memory Service Units 的数量、
-Peripheral 与 Compute 的面积交换，以及 T0/T1_layer/T2 下的持续性能。
+当前执行 [D1/D2判别实验](docs/d1_d2.md)：先关闭已知Row-cycle机制，再检验多Tier数据返回与任务依赖。
+不扩大Peripheral DSE；[Mode B 架构探索](docs/architecture_exploration.md)允许明确、相互一致的假设。
 采用 [Stratum-inspired、带来源与假设区间的配置](configs/exploration/hb_npu_v1.json)。
 Mode A 严格复现与 Mode B 条件性探索分别管理；尚未校准的器件参数不再禁止全部架构探索。
 
@@ -12,6 +12,11 @@ Mode A 严格复现与 Mode B 条件性探索分别管理；尚未校准的器�
 默认 Shared-area 下 GEMM偏好K16、Mixed偏好K32，GEMV在K≥32供数基本饱和。
 20个有限情景未发现T1_layer→T2的显著最优组织反转；行周期理想放松约11.44%收益在T0/T2相同。
 因此不推进新的Peripheral组织或RTL，先把该信号留给SALP/FGDRAM等已有机制对照。
+
+[D1结果](results/d1-2026-10-10/findings.md)已完成：保留30ns行恢复的双Subarray重叠代理恢复旧Oracle增量约92%，
+Oracle相对该代理剩余仅0.83%。Row-cycle新硬件分支关闭；并修正命令驱动ACT/PRE能耗接口。
+D2使用实际访问的5GiB权重+1GiB KV，比较相同硬件上的普通双缓冲、优化执行与更细粒度流式探针。
+这些不是完整SALP或Stratum器件复现，独立功率校准仍未完成。
 
 新任务书与不可校准项见 [Grounded HB–DRAM Validation](docs/grounded_validation.md)。
 [Stratum Hardware Contract](configs/platforms/stratum_micro2025.json) 与旧 pilot 完全隔离，未知值保持 null。

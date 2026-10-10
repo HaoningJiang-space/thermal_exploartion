@@ -33,7 +33,11 @@ class TierTiming : public IControllerPlugin, public Implementation {
     if(tier<0||tier>=8)throw std::runtime_error("Row outside timing-tier capacity");
     auto* bank=d.m_bank_nodes[d.get_flat_bank_id(req.addr_vec)];
     auto extend=[&](const std::string& name,int delay){if(s.has_command(name)){
-      auto id=s.get_command_id(name);bank->m_cmd_ready_clk[id]=std::max(bank->m_cmd_ready_clk[id],ctrl->m_clk+delay);}};
+      auto id=s.get_command_id(name);
+      // Like upstream codegen: timings are between command-receipt endings;
+      // traces timestamp their beginnings. ACT occupies two CK, RD/PRE one.
+      int offset=s.command_cycles[req.command]-s.command_cycles[id];
+      bank->m_cmd_ready_clk[id]=std::max(bank->m_cmd_ready_clk[id],ctrl->m_clk+delay+offset);}};
     for(auto name:{"RD","RDA","WR","WRA"})extend(name,rcd[tier]);
     for(auto name:{"PREpb","PREab"})extend(name,ras[tier]);
     for(auto name:{"ACT","REFab","REFpb"})extend(name,rc[tier]);

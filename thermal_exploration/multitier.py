@@ -67,22 +67,22 @@ class TierLegality:
     def __init__(self,uniform=False):self.t=tier_timings(uniform);self.banks={}
     def issue(self,name,vec,clk):
         key=tuple(vec[:5]);tier=vec[5]//4096
-        if not 0<=tier<8:raise ValueError('Tier capacity')
         if name=='PREab' or name=='REFab':
             for k,s in self.banks.items():
-                if k[:2]==key[:2] and s.get('open') is not None:
+                if all(v==-1 or v==k[i] for i,v in enumerate(key[:2])) and s.get('open') is not None:
                     needed=self.t['ras_ticks' if name=='PREab' else 'rc_ticks'][s['tier']]
-                    if clk<s['act']+needed:raise ValueError('All-bank operation before tier restoration')
+                    if clk<s['act']+needed+2:raise ValueError('All-bank operation before tier restoration')
                     if name=='PREab':s.update(open=None,pre=clk)
             return
+        if name in ('ACT','RD','RDA','WR','WRA') and not 0<=tier<8:raise ValueError('Tier capacity')
         s=self.banks.setdefault(key,dict(open=None,act=-10000,pre=-10000,tier=0))
         if name=='ACT':
-            if s['open'] is not None or clk<s['pre']+20 or clk<s['act']+self.t['rc_ticks'][s['tier']]:
+            if s['open'] is not None or clk<s['pre']+18 or clk<s['act']+self.t['rc_ticks'][s['tier']]:
                 raise ValueError('Bank/Tier row-cycle violation')
             s.update(open=vec[5],act=clk,tier=tier)
         elif name in ('RD','RDA','WR','WRA'):
-            if s['open']!=vec[5] or clk<s['act']+self.t['rcd_ticks'][s['tier']]:raise ValueError('Tier activation-to-column violation')
+            if s['open']!=vec[5] or clk<s['act']+self.t['rcd_ticks'][s['tier']]+2:raise ValueError('Tier activation-to-column violation')
             if name in ('RDA','WRA'):raise ValueError('Auto-precharge not supported by D2 checker')
         elif name=='PREpb':
-            if s['open'] is not None and clk<s['act']+self.t['ras_ticks'][s['tier']]:raise ValueError('Tier restoration violation')
+            if s['open'] is not None and clk<s['act']+self.t['ras_ticks'][s['tier']]+2:raise ValueError('Tier restoration violation')
             s.update(open=None,pre=clk)
