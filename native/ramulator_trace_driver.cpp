@@ -86,6 +86,7 @@ int main(int argc,char** argv) {
   std::string prefix(argv[3]);std::ofstream samples(prefix+"-cycles.csv");
   samples<<"clock,outstanding,returned_waiting_consumer,eligible_examined,state\n";
   std::map<std::string,long long> states;std::vector<long long> tile_finish(16,0);
+  std::vector<int> tile_outstanding(16,0);
   std::vector<double> hb_finish(16,0);
   std::set<int> returned_waiting;
   std::vector<std::set<int>> ready_by_channel(16);
@@ -105,7 +106,7 @@ int main(int argc,char** argv) {
    while(!completions.empty()&&completions.top().first<=clk){
     auto [time,id]=completions.top();completions.pop();auto& w=works[id];
     if(w.consumed>=0)throw std::runtime_error("duplicate consumption");
-    w.consumed=time;done++;active--;returned_waiting.erase(id);
+    w.consumed=time;done++;active--;tile_outstanding[w.source]--;returned_waiting.erase(id);
     for(int successor:dependents[id])if(--unresolved[successor]==0)
       releases.emplace(std::max(works[successor].ready,clk),successor);
    }
@@ -122,6 +123,7 @@ int main(int argc,char** argv) {
     int channel=(clk+attempt)%16;
     if(blocked[channel]||ready_by_channel[channel].empty())continue;
     auto& w=works[*ready_by_channel[channel].begin()];eligible++;
+    if(hb_rate>0&&tile_outstanding[w.source]>=limit/16){blocked[channel]=true;continue;}
     Ramulator::Request req(w.vec,Ramulator::Request::Type::Read);
     req.addr=w.address;req.source_id=w.source;req.size_bytes=w.bytes;req.ingress_id=w.id;
     const int rid=w.id;
@@ -141,7 +143,7 @@ int main(int argc,char** argv) {
       completions.emplace(x.finish,rid);returned_waiting.insert(rid);
       returned++;total_bytes+=x.bytes;total_flops+=x.flops;
     };
-    if(memory->send(req)){w.accepted=clk;accepted++;active++;sent++;ready_by_channel[channel].erase(w.id);}
+    if(memory->send(req)){w.accepted=clk;accepted++;active++;tile_outstanding[w.source]++;sent++;ready_by_channel[channel].erase(w.id);}
     else{reject=true;rejected++;blocked[channel]=true;}
    }
    std::string state;
