@@ -83,9 +83,62 @@ class Graph:
             end=self.add('sram_write',target,size,(end,),('write',target),ceil(size/128),stage)
             self.lease(first,links[0][0],('transmit',source),size)
             for index,(link,node) in enumerate(links):
-                self.lease(link,links[index+1][0] if index+1<len(links) else end,('router',node),size)
+                previous=self.nodes[link].resource[1]
+                direction=0 if previous==node-1 else 1 if previous==node+1 else 2 if previous==node-4 else 3
+                self.lease(link,links[index+1][0] if index+1<len(links) else end,('router'+str(direction),node),size)
             self.lease(first,end,('receive',target),size);packets.append(end)
         return self.join(packets,stage)
+
+    def broadcast(self,source,targets,bytes_,deps=(),stage='input'):
+        """Known XY multicast: one shared prefix, not16 duplicate unicasts."""
+        edges={e for target in targets for e in route(source,target)}
+        children=defaultdict(list)
+        for a,b in sorted(edges):children[a].append(b)
+        output=defaultdict(list)
+        for offset in range(0,bytes_,4096):
+            size=min(4096,bytes_-offset)
+            read=self.add('sram_read',source,size,deps,('read',source),ceil(size/256),stage)
+            def visit(node,before):
+                local=[]
+                if node in targets and node!=source:
+                    write=self.add('sram_write',node,size,(before,),('write',node),ceil(size/128),stage)
+                    self.lease(read,write,('receive',node),size);output[node].append(write);local.append(write)
+                for target in children[node]:
+                    link=self.add('link',node,size,(before,),('link',node,target),ceil(size/8)+8,stage)
+                    local.append(link);last=visit(target,link)
+                    direction=0 if node==target-1 else 1 if node==target+1 else 2 if node==target-4 else 3
+                    self.lease(link,last,('router'+str(direction),target),size)
+                return self.join(local or (before,),stage)
+            rootlast=visit(source,read);self.lease(read,rootlast,('transmit',source),size)
+        result={t:self.join(output[t],stage) for t in targets if t!=source}
+        if source in targets:result[source]=self.join(deps,stage)
+        return result
+
+    def collective(self,root,producers,bytes_,stage='ffn_reduce'):
+        """FP32 tree partials, ordinary tile vectors and same SRAM/links."""
+        edges={e for source in producers for e in route(root,source)};children=defaultdict(list)
+        for a,b in sorted(edges):children[a].append(b)
+        outputs=[]
+        for offset in range(0,bytes_,4096):
+            size=min(4096,bytes_-offset)
+            def visit(node):
+                contributions=[];incoming=[]
+                if node in producers:contributions.append(producers[node])
+                for child in children[node]:
+                    partial=visit(child)
+                    read=self.add('sram_read',child,size,(partial,),('read',child),ceil(size/256),stage)
+                    self.lease(partial,read,('output',child),size)
+                    link=self.add('link',child,size,(read,),('link',child,node),ceil(size/8)+8,stage)
+                    write=self.add('sram_write',node,size,(link,),('write',node),ceil(size/128),stage)
+                    self.lease(read,link,('transmit',child),size);self.lease(link,write,('receive',node),size)
+                    contributions.append(write);incoming.append(link)
+                read=self.add('sram_read',node,size*len(contributions),contributions,('read',node),ceil(size*len(contributions)/256),stage)
+                for link in incoming:self.lease(link,read,('output',node),size)
+                ops=(len(contributions)-1)*size//4
+                vector=self.add('vector',node,ops,(read,),('vector',node),ceil(ops/16),stage)
+                return self.add('sram_write',node,size,(vector,),('write',node),ceil(size/128),stage)
+            outputs.append(visit(root))
+        return self.join(outputs,stage)
 
 
 def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
@@ -104,7 +157,7 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
     release=defaultdict(list);last_release={};done=np.full(n,-1,dtype=np.int64);start=done.copy();parents=[None]*n
     wait=Counter();last_resource={};clock=0;completed=0;activity=Counter();per_tile=defaultdict(Counter)
     caps={'weight':524288,'weight_fifo':65536,'return':65536,'receive':65536,'workspace':1048576,
-          'router':16384,'transmit':65536,'output':262144}
+          'router0':4096,'router1':4096,'router2':4096,'router3':4096,'transmit':65536,'output':262144}
     def cap(key):return 2**50 if mode=='ideal_buffer' else caps[key[0]]
     priority={'join':0,'sram_write':1,'sram_read':2,'vector':3,'mac':4,'link':5,'hb':6,'dram':7}
     def enqueue(i):heapq.heappush(queues[g.nodes[i].resource],(priority[g.nodes[i].kind],i))
@@ -193,9 +246,10 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
 
 def ffn(batch=1,stream=False):
     g=Graph();d,h=1024,4096;hidden=[]
+    shared=[g.broadcast(source,list(range(16)),d//16*batch*2,(),'input') for source in range(16)]
     # Megatron paired output/input split; no intermediate all-gather.
     for tile in range(16):
-        inputs=[g.transfer(source,tile,d//16*batch*2,(), 'input') for source in range(16)]
+        inputs=[mapping[tile] for mapping in shared]
         prev=None
         for _ in range(8):prev=g.memory_compute(tile,65536,65536*batch,inputs,prev,stage='up',stream=stream)
         act=g.add('vector',tile,h//16*batch*5,(prev,),('vector',tile),ceil(h//16*batch*5/16),'gelu');hidden.append(act)
@@ -206,9 +260,7 @@ def ffn(batch=1,stream=False):
         down.append(prev)
     outputs=[]
     for root in range(16):
-        arrivals=[g.transfer(tile,root,d//16*batch*4,(down[tile],),'ffn_reduce') for tile in range(16)]
-        ops=15*d//16*batch
-        outputs.append(g.add('vector',root,ops,arrivals,('vector',root),ceil(ops/16),'ffn_reduce'))
+        outputs.append(g.collective(root,dict(enumerate(down)),d//16*batch*4,'ffn_reduce'))
     g.output=outputs;g.meta=dict(family='FFN',batch=batch,d=d,h=h,weight_bytes=16*2*8*65536,
         mac_flops=4*d*h*batch,baseline='Megatron paired output/input split; shard-local GELU',tokens=batch)
     return g
@@ -262,6 +314,7 @@ def moe(batch=32,skew=1.2,seed=20261010,stream=False):
     loads=[0.]*16;owner={}
     for e in range(experts):
         tile=min(range(16),key=lambda t:(loads[t],t));owner[e]=tile;loads[tile]+=prob[e]
+    dispatched=[g.broadcast(t%16,sorted({owner[e] for e in es}),d*2,(),'dispatch') for t,es in enumerate(routing)]
     for e,count in sorted(counts.items(),key=lambda z:(-prob[z[0]],z[0])):
         tile=owner[e];tier=0 if e<slots else 1+(e-slots)%7
         tokens=[t for t,es in enumerate(routing) if e in es]
@@ -269,7 +322,7 @@ def moe(batch=32,skew=1.2,seed=20261010,stream=False):
         # re-reads for additional microbatches are charged, not free reuse.
         for begin in range(0,count,16):
             selected=tokens[begin:begin+16];local_count=len(selected)
-            dispatch=[g.transfer(t%16,tile,d*2,(),'dispatch') for t in selected]
+            dispatch=[dispatched[t][tile] for t in selected]
             entry=g.join((),'expert_workspace');prev=None
             for layer in range(2):
                 for chunk in range(512):
