@@ -56,6 +56,8 @@ HiTS单位响应最大残差约9.92e-12，与direct最大差5.74e-12 K/W。
 
 [全部84点](all-points.csv)、[七组命令汇总](command-cases.csv)、[完整LP结果](summary.json)、
 [停止判据](gate.json)、[原始执行版本](provenance.json)保留所有预设点与负结果。
+[完整原始命令证据Release](https://github.com/HaoningJiang-space/thermal_exploartion/releases/tag/d1-known-mechanisms-2026-10-10)（204 MB），
+[逐文件哈希](raw-manifest.json)与[发布包SHA256](release-artifact.json)已核对GitHub资产digest。
 运行：`python -m thermal_exploration.run_d1 --ramulator-root <pinned-root> --thermal-backend hits --output <fresh-output>`。
 导出：`python scripts/export_d1_results.py --input <output> --output <fresh-archive> --raw`。
 

@@ -1,0 +1,11 @@
+{
+  "release": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/tag/d1-known-mechanisms-2026-10-10",
+  "file": "d1-command-evidence-2026-10-10.tar",
+  "bytes": 204247040,
+  "sha256": "01a7262d4c035d65791fdbe4c01e03cd5c6e74c78d299d65f95bae977d12b9b3",
+  "github_asset_id": 628146464,
+  "publication_scan": "PASS; all nested entry SHA256 and protected-content scan",
+  "inspected_uncompressed_bytes": 1239364667,
+  "source_commit": "6d3fa03",
+  "export_commit": "cb2d961"
+}
