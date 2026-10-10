@@ -3,10 +3,10 @@ from __future__ import annotations
 import argparse
 import copy
 import csv
+from datetime import datetime, timezone
 import hashlib
 import itertools
 import json
-import os
 from pathlib import Path
 import platform
 import subprocess
@@ -16,7 +16,7 @@ import time
 import numpy as np
 import scipy
 
-from .model import Fabric, best_tiling, fabric_cases
+from .model import best_tiling, fabric_cases
 from .thermal import response
 
 
@@ -42,14 +42,27 @@ def summarize(rows):
             gain = ratios[2]/ratios[1]
             no_heat_gain = ratios[0]
             reversal = (ratios[0] <= 1.000001 and ratios[1] <= 1.01 and ratios[2] > 1.05)
+            net_ratios = [table[(b,m)]["tflops"]/table[("local",m)]["tflops"] for m in range(3)]
+            # Area-matched organization gain alone does not establish net hardware value.
+            net_gate = reversal and net_ratios[2] > 1.05
+            if net_gate:
+                screening_class = "B_candidate"
+            elif ratios[0] > 1.01 or ratios[1] > 1.01:
+                screening_class = "C_or_mixed"
+            elif max(ratios) > 1.01:
+                screening_class = "spatial_signal_below_net_gate"
+            else:
+                screening_class = "A_no_material_gain"
             summaries.append({"scenario":key[0],"workload":key[1],"placement":key[2],
                               "baseline":a,"candidate":b,
                               "speedup_t0":ratios[0],"speedup_t1":ratios[1],"speedup_t2":ratios[2],
                               "spatial_interaction_ratio":gain,
                               "resource_ownership_loss_fraction_t2":1-f_a2/f_b2,
                               "local_spatial_penalty_fraction":1-f_a2/table[(a,1)]["tflops"],
-                              "screening_class":("B_candidate" if reversal else
-                                                  "C_or_mixed" if max(ratios) > 1.01 else "A_no_material_gain"),
+                              "net_speedup_t0_vs_original_local":net_ratios[0],
+                              "net_speedup_t1_vs_original_local":net_ratios[1],
+                              "net_speedup_t2_vs_original_local":net_ratios[2],
+                              "screening_class":screening_class,
                               "no_heat_gain":no_heat_gain})
     return summaries
 
@@ -68,9 +81,9 @@ def plot(rows, summaries, out):
             for candidate in ("global_ideal","mesh_paid"):
                 table={s["scenario"]:s for s in summaries if s["placement"] == "free"
                        and s["workload"] == work and s["candidate"] == candidate}
-                ax.plot([table[label]["speedup_t2"] for label in labels],range(len(labels)),"o-",label=candidate)
+                ax.plot([table[label]["net_speedup_t2_vs_original_local"] for label in labels],range(len(labels)),"o-",label=candidate)
             ax.axvline(1,color="gray",lw=1);ax.axvline(1.05,color="gray",ls="--",lw=1)
-            ax.set_title(work);ax.set_xlabel("T2 speedup with reoptimized data placement");ax.legend()
+            ax.set_title(work);ax.set_xlabel("Net T2 speedup vs original Local (free placement)");ax.legend()
             ax.grid(alpha=0.2)
         axs[0,0].set_yticks(range(len(labels)),labels,fontsize=8)
         fig.tight_layout();fig.savefig(out/"sensitivity.png",dpi=160);plt.close(fig)
@@ -111,12 +124,12 @@ def plot(rows, summaries, out):
 def write_report(summaries, out):
     lines = ["# Pilot screening results", "", "These are optimized steady-state model bounds, not measured hardware performance.",
              "All device/package costs are uncalibrated hypotheses. A B_candidate is a follow-up target, not proof of architectural novelty.", "",
-             "| Scenario | Workload | Placement | Candidate | T0 speedup | T1 speedup | T2 speedup | T2/T1 interaction | Class |",
-             "|---|---|---|---|---:|---:|---:|---:|---|"]
+             "| Scenario | Workload | Placement | Candidate | T0 matched | T1 matched | T2 matched | T2/T1 | T2 net vs Local | Class |",
+             "|---|---|---|---|---:|---:|---:|---:|---:|---|"]
     for s in summaries:
         lines.append(f'| {s["scenario"]} | {s["workload"]} | {s["placement"]} | {s["candidate"]} | '
                      f'{s["speedup_t0"]:.4f} | {s["speedup_t1"]:.4f} | {s["speedup_t2"]:.4f} | '
-                     f'{s["spatial_interaction_ratio"]:.4f} | {s["screening_class"]} |')
+                     f'{s["spatial_interaction_ratio"]:.4f} | {s["net_speedup_t2_vs_original_local"]:.4f} | {s["screening_class"]} |')
     lines += ["", "Paid fabric is compared to local_matched (same reserved routing area and idle power).",
               "Ideal fabric is compared to local. Scheduling and DVFS are reoptimized for every cell.",
               "Free placement optimizes resident bank fractions within the same per-bank data-capacity bound.",
@@ -177,7 +190,9 @@ def main():
     source_commit=revision()
     dirty=subprocess.check_output(["git","status","--porcelain"],text=True).strip() if source_commit != "unknown" else "unknown"
     provenance={"source_commit":source_commit,"source_dirty":bool(dirty),"python":sys.version,"platform":platform.platform(),
-                "numpy":np.__version__,"scipy":scipy.__version__,"argv":sys.argv,
+                "numpy":np.__version__,"scipy":scipy.__version__,
+                "invocation":["python","-m","thermal_exploration.run"]+sys.argv[1:],
+                "started_utc":datetime.fromtimestamp(started,timezone.utc).isoformat(),
                 "config_sha256":hashlib.sha256(Path(args.config).read_bytes()).hexdigest(),
                 "elapsed_s":time.time()-started,"suite":args.suite,"thermal_backend":args.thermal_backend,
                 "model_scope":"uncalibrated, chip-scale, linear steady-state divisible-work relaxation"}
