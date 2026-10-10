@@ -47,6 +47,13 @@ class StratumReferenceGate(unittest.TestCase):
         self.assertGreater(b["minimum_ACT_to_column_delay_ns"],a["minimum_ACT_to_column_delay_ns"])
         self.assertGreater(b["necessary_inflight_requests_at_ceiling_for_256b"],a["necessary_inflight_requests_at_ceiling_for_256b"])
 
+    def test_active_bank_and_useful_row_reductions_tighten_the_bound(self):
+        full=tier_bound(self.profile,0)
+        one=tier_bound(self.profile,0,busy_banks=1)
+        partial=tier_bound(self.profile,0,useful_bytes=256)
+        self.assertAlmostEqual(one["bank_only_full_row_ceiling_tb_s"]*256,full["bank_only_full_row_ceiling_tb_s"])
+        self.assertAlmostEqual(partial["bank_only_full_row_ceiling_tb_s"]*16,full["bank_only_full_row_ceiling_tb_s"])
+
     def test_area_leaves_close_without_parent_double_counting(self):
         a=area_inventory(self.profile)
         self.assertAlmostEqual(sum(r["area_mm2"] for r in a["leaves"]),76.55)

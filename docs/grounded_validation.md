@@ -86,3 +86,27 @@ python -m thermal_exploration.calibrate --output outputs/g3-reference
 ```
 
 共享服务的 48 项 G1/G2 单阶段退化检查在旧筛选机器上完成，仅用于入口一致性回归，不作为 Stratum 校准。
+
+在 Linux 构建固定的 Ramulator 后运行最小 G4（依赖其 Python 和 C++ 产物，主项目不捆绑它）：
+
+```bash
+git clone https://github.com/CMU-SAFARI/ramulator2.git external/ramulator2
+git -C external/ramulator2 checkout c6c7a5de0cef35935d6fad7369e6271406798865
+# 按上游 README 安装构建依赖，并在独立 build 目录运行 build.sh。
+PYTHONPATH="$PWD/external/ramulator2/python:$PWD/external/ramulator2" \
+  python -m pytest external/ramulator2/tests/device_timings/test_hbm3.py \
+  external/ramulator2/tests/controller_scheduling \
+  external/ramulator2/tests/latency_throughput/test_fast.py -k HBM3
+python -m thermal_exploration.run_g4 --ramulator-root external/ramulator2 --output outputs/g4-command
+```
+
+独立 one-channel HBM3 对照使用 2 pseudochannels ×2 SID ×4 bank groups ×4 banks，
+32 B transaction、1024 B bank row、FR-FCFS RowHit、Open row policy、AllBank refresh、128-entry read queue。
+派生 bank-interleaved 地址映射与所有已解析命令约束存入每次运行的 config.json。
+16 个 consumer 是集成控制量，不是已校准的 Stratum NPU。
+默认 64 inflight entries、32 FLOP/tile/tick；另保存 queue=1 和 consumer=0.25 的负向控制。
+GEMV 的输出留在 Logic；输入广播、SRAM 端口、归约和阵列时序尚未校准，不把这条轨迹当成真实 NPU 持续性能。
+
+上游构建会重生成 C++；只接受相同 token 和 include 集合的格式变化，并记录文件 hashes。
+官方 fast 性能检查会打印偏差但没有自动断言 5% 门槛，因此报告单独核对偏差，不能用 pytest 的通过数替代性能验收。
+0.625 ns CK 对应 nominal 0.3125 ns/tick；上游统计存储整数 312 ps，两个时间约定分别保留。

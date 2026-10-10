@@ -47,3 +47,15 @@ Voxel 已处理相邻核心 row 请求进度，DeepStack 已考虑 partial-row t
 
 Compute–Memory Fabric 关闭的直接依据仍是本模型 G1/G2 的不足 5% 收益，历史重叠进一步削弱动机。
 HB-native Memory Organization 目前仅进入文献与瓶颈分析，没有已确认的新机制。
+
+## G3/G4 的追加优先基线
+
+| 工作 | 已核对的一手内容 | 不能声称的新颖性 |
+|---|---|---|
+| [Fine-Grained DRAM, MICRO 2017](https://research.nvidia.com/publication/2017-10_fine-grained-dram-energy-efficient-dram-extreme-bandwidth-systems) | 带本地 I/O 的 grains，减少共享长通路；等容量/带宽比较 | 增加局部 I/O、细分 DRAM 服务单元已有直接先例 |
+| [DreamRAM, DATE 2026](https://arxiv.org/html/2512.12106v1) / [源码](https://github.com/harvard-acc/dreamram) | MAT/subarray/bank/peripheral/routing 的面积、延迟、能耗、带宽模型；partial page 与 subarray parallelism；HBM3/HBM2E 参考 | DRAM 组织 DSE 和普通并行化本身不足以形成贡献；其常规 DRAM 参数不可直接搬入 Mono3D |
+| [Ramulator 2.1](https://github.com/CMU-SAFARI/ramulator2/tree/c6c7a5de0cef35935d6fad7369e6271406798865) | 标准 HBM3 命令、控制器与 device/controller/latency-throughput 验证流程 | 复用已验证基础，不能把独立重放同一器件模型说成真实器件校准 |
+
+Stratum 的完整参数与不可校准项见 [Hardware Contract](../configs/platforms/stratum_micro2025.json)。
+SNAKE 的 800 MHz /24 TB/s /62 W 是另一工作点；Voxel 的 256-core 组织是另一平台。
+它们不进入 Stratum profile 的默认数字。
