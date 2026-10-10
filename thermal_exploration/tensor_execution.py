@@ -24,6 +24,9 @@ CASES.update({
     'column_ideal_transport':dict(rows=1,columns=16,layout='blocked',order='m',ideal_noc=True),
     'column_ideal_memory':dict(rows=1,columns=16,layout='blocked',order='m',ideal_memory=True),
     'column_ideal_buffer':dict(rows=1,columns=16,layout='blocked',order='m',ideal_buffer=True),
+    'column64_ideal_transport':dict(rows=1,columns=16,layout='blocked',order='m',reduction_packet=64,ideal_noc=True),
+    'column64_ideal_memory':dict(rows=1,columns=16,layout='blocked',order='m',reduction_packet=64,ideal_memory=True),
+    'column64_ideal_buffer':dict(rows=1,columns=16,layout='blocked',order='m',reduction_packet=64,ideal_buffer=True),
 })
 
 
