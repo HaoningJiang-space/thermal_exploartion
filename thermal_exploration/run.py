@@ -204,7 +204,7 @@ def main():
         (out/file).write_text(json.dumps(data,indent=2,allow_nan=False)+"\n")
     fields=[k for k,v in rows[0].items() if not isinstance(v,(list,dict))]
     with (out/"results.csv").open("w",newline="") as f:
-        w=csv.DictWriter(f,fieldnames=fields,extrasaction="ignore");w.writeheader();w.writerows(rows)
+        w=csv.DictWriter(f,fieldnames=fields,extrasaction="ignore",lineterminator="\n");w.writeheader();w.writerows(rows)
     write_report(summaries,out)
     plot(rows,summaries,out)
     print(json.dumps({"output":str(out),"design_points":len(rows),"status":"PASS","elapsed_s":time.time()-started}))

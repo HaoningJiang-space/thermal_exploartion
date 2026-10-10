@@ -81,6 +81,20 @@ class PhysicsAndFairness(unittest.TestCase):
         eb=(b["dram_power_w"]-4.8)/b["used_bandwidth_tb_s"]
         self.assertGreater(ea,eb)
 
+    def test_zero_remote_link_capacity_reduces_to_matched_local(self):
+        c=copy.deepcopy(self.cfg);c["hardware"]["mesh_link_tb_s"]=0.0
+        c["thermal"]["cooling_gradient"]=0.6
+        a=self.run_point(c,fabric=3,placement="free")
+        b=self.run_point(c,fabric=4,placement="free")
+        self.assertAlmostEqual(a["remote_fraction"],0.0,places=9)
+        self.assertAlmostEqual(a["tflops"],b["tflops"],places=6)
+
+    def test_littles_law_queue_bounds_useful_bandwidth(self):
+        c=copy.deepcopy(self.cfg);c["hardware"]["outstanding_per_tile"]=1
+        r=self.run_point(c,mode=0)
+        upper=16*256/(50*1000)
+        self.assertAlmostEqual(r["used_bandwidth_tb_s"],upper,places=8)
+
 
 if __name__ == "__main__":
     unittest.main()

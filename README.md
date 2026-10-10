@@ -5,6 +5,11 @@
 研究目标是检验空间热耦合是否改变 Compute–Memory 物理连接的最优性。
 先做可证伪的小实验，结果允许支持 Local，也允许说明收益主要来自普通负载均衡。
 
+首轮已完成 2340 个设计点、7020 个 LP：重新优化数据放置后，默认 GEMM 的理想连接收益
+从约 16.44% 缩至 2.54%，加入 Fabric 开销后的净收益仅约 0.22%。
+在本次扫描范围内，未得到足够强的 B 证据。
+完整解读和图表见 [首轮实验报告](results/2026-10-09/findings.md)。
+
 当前实现是 **chip-scale、未校准、稳态上界筛选模型**：20×20 mm 的 Logic/DRAM/spreader，
 16 Compute Tiles + 16 Bank Groups，Batch-1 GEMV 与 Batch-32 GEMM。
 它不是完整 Transformer 仿真器，也不是 wafer-scale 的 WoW 性能模型。
@@ -33,6 +38,7 @@ PYTHONPATH="$PWD/external/HiTS${PYTHONPATH:+:$PYTHONPATH}" \
   --output outputs/sensitivity-hits
 ```
 
+HiTS 是单独管理的依赖，使用上述路径需要该仓库的访问权限；公开的本项目默认 SciPy 路径可独立运行。
 HiTS 的 GPU 路径有额外安装与资格要求，见其 README。小型 CPU 路径不需要构建 native CUDA kernels。
 所有输出目录必须是新目录，避免覆盖旧实验。
 

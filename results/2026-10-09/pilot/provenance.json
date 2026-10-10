@@ -1,0 +1,24 @@
+{
+  "source_commit": "2913b2c0884743c748785979319da86f4e92a07c",
+  "source_dirty": false,
+  "python": "3.10.12 (main, Jul 29 2024, 16:56:48) [GCC 11.4.0]",
+  "platform": "Linux-6.8.0-40-generic-x86_64-with-glibc2.35",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "invocation": [
+    "python",
+    "-m",
+    "thermal_exploration.run",
+    "--thermal-backend",
+    "hits",
+    "--output",
+    "../pilot-2913b2c"
+  ],
+  "started_utc": "2026-10-10T03:51:45.764625+00:00",
+  "config_sha256": "978ae2f3300d3724dbf3328a4bec410252d5d3abaf20ee17b1c21bd2789ae259",
+  "elapsed_s": 4.676688194274902,
+  "suite": "pilot",
+  "thermal_backend": "hits",
+  "model_scope": "uncalibrated, chip-scale, linear steady-state divisible-work relaxation",
+  "hits_commit": "c7f94d533cb663c2f098880e5ab333da9d83ff17"
+}
