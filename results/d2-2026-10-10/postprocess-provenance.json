@@ -1,0 +1,7 @@
+{
+  "raw_execution_source": "cb2d961",
+  "raw_archive_export_source": "d3b3c52",
+  "arrival_audit_and_corrected_plot_source": "b3c47d7",
+  "numeric_rerun": false,
+  "change": "Derived occupancy/MAC distinctions and exact byte-arrival fingerprints; native requests and commands unchanged"
+}

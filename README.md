@@ -1,9 +1,9 @@
 # thermal_exploartion
 
-**Thermal-Constrained Memory Service Organization in Hybrid-Bonded 3D Accelerators**
+**Hybrid-Bonded 3D Architecture Exploration**
 
 **研究决策：Compute–Memory Fabric 分支正式关闭；Thermal-aware Mapping 保留为基线。**
-当前执行 [D1/D2判别实验](docs/d1_d2.md)：先关闭已知Row-cycle机制，再检验多Tier数据返回与任务依赖。
+已完成 [D1/D2判别实验](docs/d1_d2.md)：关闭已知Row-cycle信号，再检验多Tier数据返回与任务依赖。
 不扩大Peripheral DSE；[Mode B 架构探索](docs/architecture_exploration.md)允许明确、相互一致的假设。
 采用 [Stratum-inspired、带来源与假设区间的配置](configs/exploration/hb_npu_v1.json)。
 Mode A 严格复现与 Mode B 条件性探索分别管理；尚未校准的器件参数不再禁止全部架构探索。
@@ -15,7 +15,9 @@ Mode A 严格复现与 Mode B 条件性探索分别管理；尚未校准的器�
 
 [D1结果](results/d1-2026-10-10/findings.md)已完成：保留30ns行恢复的双Subarray重叠代理恢复旧Oracle增量约92%，
 Oracle相对该代理剩余仅0.83%。Row-cycle新硬件分支关闭；并修正命令驱动ACT/PRE能耗接口。
-D2使用实际访问的5GiB权重+1GiB KV，比较相同硬件上的普通双缓冲、优化执行与更细粒度流式探针。
+[D2结果](results/d2-2026-10-10/findings.md)使用实际访问的5GiB权重+1GiB KV，比较相同硬件上的普通双缓冲、优化执行与更细粒度流式探针。
+布局/执行优化提高28.96%，更细消费相对优化版只有约0.000205%增益，等延迟负对照相同量级。
+当前受控任务模型没有支持新执行单元的证据，维持No-Go。
 这些不是完整SALP或Stratum器件复现，独立功率校准仍未完成。
 
 新任务书与不可校准项见 [Grounded HB–DRAM Validation](docs/grounded_validation.md)。

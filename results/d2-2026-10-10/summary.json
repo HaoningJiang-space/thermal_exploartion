@@ -1,0 +1,760 @@
+{
+  "cases": [
+    {
+      "name": "ordinary_striped",
+      "settings": {
+        "task_bytes": 65536,
+        "mapping": "striped",
+        "ordered": 1,
+        "buffer_bytes": 131072,
+        "uniform": false
+      },
+      "workload": {
+        "kv_bytes": 1073741824,
+        "weight_bytes": 5368709120,
+        "total_bytes": 6442450944,
+        "useful_flops": 7516192768,
+        "requests": 6291456,
+        "kv_tasks": 16384,
+        "tasks": 98304,
+        "quantum": 65536,
+        "rows_per_bank": 6144,
+        "capacity_bytes": 34359738368,
+        "fast_tier_capacity_bytes": 4294967296,
+        "sram_bytes_per_tile": 2359296,
+        "available_prefetch_bytes_per_tile": 524288,
+        "scope": "10 FP16 32768x8192 expert projections (5GiB) after a 1GiB KV reduction; trace-level dependency/work model, no numerical LLM accuracy claim"
+      },
+      "driver": {
+        "ticks": 1260867,
+        "accepted": 6291456,
+        "returned": 6291456,
+        "tasks": 98304,
+        "completed_tasks": 98304,
+        "useful_bytes": 6442450944,
+        "useful_flops": 7516192768,
+        "kv_barrier_tick": 211794,
+        "task_bytes": 65536,
+        "buffer_budget_bytes_per_tile": 131072,
+        "buffer_high_water_bytes": 131072,
+        "controller_send_rejects": 0,
+        "tile_cycle_partition": {
+          "compute_busy": 3784704,
+          "missing_critical_data": 16389168
+        }
+      },
+      "validation": "PASS: base state/timing, tier deadlines, request ids, task joins, dependencies, compute serialization and SRAM",
+      "commands": {
+        "ACT": 1580816,
+        "RD": 6291456,
+        "PREpb": 1563152,
+        "PREab": 2560,
+        "REFab": 2560
+      },
+      "tier_ACT_counts": {
+        "0": 197136,
+        "2": 197376,
+        "1": 197120,
+        "3": 197520,
+        "4": 197552,
+        "6": 197968,
+        "5": 197792,
+        "7": 198352
+      },
+      "tier_read_counts": {
+        "0": 786432,
+        "2": 786432,
+        "1": 786432,
+        "3": 786432,
+        "4": 786432,
+        "5": 786432,
+        "6": 786432,
+        "7": 786432
+      },
+      "mean_delivery_latency_ns_by_tier": {
+        "0": 59.869873046875,
+        "1": 52.27237447102865,
+        "2": 46.8604482014974,
+        "3": 44.92500305175781,
+        "4": 46.657145182291664,
+        "5": 50.70227559407552,
+        "6": 57.444061279296875,
+        "7": 69.28749084472656
+      },
+      "full_workload_tb_s": 20.438161817225765,
+      "effective_tflops": 23.844522120096727,
+      "hb_utilization": 0.6386925567883052,
+      "consumer_frontier_bytes": 100663296,
+      "task_start_causes": {
+        "critical_input_return": 98304
+      },
+      "critical_path_scope": "Last packet of data-dominated task joins; excludes controller-resource causal chains, so not exact global critical-path data movement",
+      "timing": {
+        "rcd_ticks": [
+          10,
+          16,
+          24,
+          34,
+          46,
+          60,
+          75,
+          92
+        ],
+        "ras_ticks": [
+          120,
+          126,
+          134,
+          144,
+          156,
+          170,
+          185,
+          202
+        ],
+        "rc_ticks": [
+          140,
+          146,
+          154,
+          164,
+          176,
+          190,
+          205,
+          222
+        ]
+      },
+      "command_duration_ticks": {
+        "ACT": 3,
+        "PREpb": 1,
+        "PREab": 1,
+        "RD": 2,
+        "WR": 2,
+        "RDA": 2,
+        "WRA": 2,
+        "REFab": 1,
+        "REFpb": 1,
+        "RFMab": 1,
+        "RFMpb": 1
+      },
+      "scope": "T0 assumed tier-aware internal model. Known prefetch/partial-sum streaming, not new hardware or physical device calibration"
+    },
+    {
+      "name": "mapped_prefetched",
+      "settings": {
+        "task_bytes": 4096,
+        "mapping": "compact",
+        "ordered": 0,
+        "buffer_bytes": 524288,
+        "uniform": false
+      },
+      "workload": {
+        "kv_bytes": 1073741824,
+        "weight_bytes": 5368709120,
+        "total_bytes": 6442450944,
+        "useful_flops": 7516192768,
+        "requests": 6291456,
+        "kv_tasks": 262144,
+        "tasks": 1572864,
+        "quantum": 4096,
+        "rows_per_bank": 6144,
+        "capacity_bytes": 34359738368,
+        "fast_tier_capacity_bytes": 4294967296,
+        "sram_bytes_per_tile": 2359296,
+        "available_prefetch_bytes_per_tile": 524288,
+        "scope": "10 FP16 32768x8192 expert projections (5GiB) after a 1GiB KV reduction; trace-level dependency/work model, no numerical LLM accuracy claim"
+      },
+      "driver": {
+        "ticks": 977755,
+        "accepted": 6291456,
+        "returned": 6291456,
+        "tasks": 1572864,
+        "completed_tasks": 1572864,
+        "useful_bytes": 6442450944,
+        "useful_flops": 7516192768,
+        "kv_barrier_tick": 161091,
+        "task_bytes": 4096,
+        "buffer_budget_bytes_per_tile": 524288,
+        "buffer_high_water_bytes": 524288,
+        "controller_send_rejects": 9343328,
+        "tile_cycle_partition": {
+          "compute_busy": 4972192,
+          "missing_critical_data": 10671888
+        }
+      },
+      "validation": "PASS: base state/timing, tier deadlines, request ids, task joins, dependencies, compute serialization and SRAM",
+      "commands": {
+        "ACT": 1576496,
+        "RD": 6291456,
+        "PREpb": 1562288,
+        "PREab": 1984,
+        "REFab": 1984
+      },
+      "tier_ACT_counts": {
+        "0": 1050576,
+        "1": 525920
+      },
+      "tier_read_counts": {
+        "0": 4194304,
+        "1": 2097152
+      },
+      "mean_delivery_latency_ns_by_tier": {
+        "0": 85.35190677642822,
+        "1": 88.10556983947754
+      },
+      "full_workload_tb_s": 26.356095111761125,
+      "effective_tflops": 30.74877763038798,
+      "hb_utilization": 0.8236279722425351,
+      "consumer_frontier_bytes": 1333641216,
+      "task_start_causes": {
+        "critical_input_return": 1302384,
+        "tile_compute": 266400,
+        "dependency": 4080
+      },
+      "critical_path_scope": "Last packet of data-dominated task joins; excludes controller-resource causal chains, so not exact global critical-path data movement",
+      "timing": {
+        "rcd_ticks": [
+          10,
+          16,
+          24,
+          34,
+          46,
+          60,
+          75,
+          92
+        ],
+        "ras_ticks": [
+          120,
+          126,
+          134,
+          144,
+          156,
+          170,
+          185,
+          202
+        ],
+        "rc_ticks": [
+          140,
+          146,
+          154,
+          164,
+          176,
+          190,
+          205,
+          222
+        ]
+      },
+      "command_duration_ticks": {
+        "ACT": 3,
+        "PREpb": 1,
+        "PREab": 1,
+        "RD": 2,
+        "WR": 2,
+        "RDA": 2,
+        "WRA": 2,
+        "REFab": 1,
+        "REFpb": 1,
+        "RFMab": 1,
+        "RFMpb": 1
+      },
+      "scope": "T0 assumed tier-aware internal model. Known prefetch/partial-sum streaming, not new hardware or physical device calibration"
+    },
+    {
+      "name": "fine_streaming_probe",
+      "settings": {
+        "task_bytes": 1024,
+        "mapping": "compact",
+        "ordered": 0,
+        "buffer_bytes": 524288,
+        "uniform": false
+      },
+      "workload": {
+        "kv_bytes": 1073741824,
+        "weight_bytes": 5368709120,
+        "total_bytes": 6442450944,
+        "useful_flops": 7516192768,
+        "requests": 6291456,
+        "kv_tasks": 1048576,
+        "tasks": 6291456,
+        "quantum": 1024,
+        "rows_per_bank": 6144,
+        "capacity_bytes": 34359738368,
+        "fast_tier_capacity_bytes": 4294967296,
+        "sram_bytes_per_tile": 2359296,
+        "available_prefetch_bytes_per_tile": 524288,
+        "scope": "10 FP16 32768x8192 expert projections (5GiB) after a 1GiB KV reduction; trace-level dependency/work model, no numerical LLM accuracy claim"
+      },
+      "driver": {
+        "ticks": 977753,
+        "accepted": 6291456,
+        "returned": 6291456,
+        "tasks": 6291456,
+        "completed_tasks": 6291456,
+        "useful_bytes": 6442450944,
+        "useful_flops": 7516192768,
+        "kv_barrier_tick": 161088,
+        "task_bytes": 1024,
+        "buffer_budget_bytes_per_tile": 524288,
+        "buffer_high_water_bytes": 524288,
+        "controller_send_rejects": 9343328,
+        "tile_cycle_partition": {
+          "compute_busy": 6865696,
+          "missing_critical_data": 8778352
+        }
+      },
+      "validation": "PASS: base state/timing, tier deadlines, request ids, task joins, dependencies, compute serialization and SRAM",
+      "commands": {
+        "ACT": 1576496,
+        "RD": 6291456,
+        "PREpb": 1562288,
+        "PREab": 1984,
+        "REFab": 1984
+      },
+      "tier_ACT_counts": {
+        "0": 1050576,
+        "1": 525920
+      },
+      "tier_read_counts": {
+        "0": 4194304,
+        "1": 2097152
+      },
+      "mean_delivery_latency_ns_by_tier": {
+        "0": 85.35190677642822,
+        "1": 88.10556983947754
+      },
+      "full_workload_tb_s": 26.35614902332184,
+      "effective_tflops": 30.748840527208813,
+      "hb_utilization": 0.8236296569788075,
+      "consumer_frontier_bytes": 5894897664,
+      "task_start_causes": {
+        "critical_input_return": 5756736,
+        "dependency": 528304,
+        "tile_compute": 6416
+      },
+      "critical_path_scope": "Last packet of data-dominated task joins; excludes controller-resource causal chains, so not exact global critical-path data movement",
+      "timing": {
+        "rcd_ticks": [
+          10,
+          16,
+          24,
+          34,
+          46,
+          60,
+          75,
+          92
+        ],
+        "ras_ticks": [
+          120,
+          126,
+          134,
+          144,
+          156,
+          170,
+          185,
+          202
+        ],
+        "rc_ticks": [
+          140,
+          146,
+          154,
+          164,
+          176,
+          190,
+          205,
+          222
+        ]
+      },
+      "command_duration_ticks": {
+        "ACT": 3,
+        "PREpb": 1,
+        "PREab": 1,
+        "RD": 2,
+        "WR": 2,
+        "RDA": 2,
+        "WRA": 2,
+        "REFab": 1,
+        "REFpb": 1,
+        "RFMab": 1,
+        "RFMpb": 1
+      },
+      "scope": "T0 assumed tier-aware internal model. Known prefetch/partial-sum streaming, not new hardware or physical device calibration"
+    },
+    {
+      "name": "prefetched_striped",
+      "settings": {
+        "task_bytes": 4096,
+        "mapping": "striped",
+        "ordered": 0,
+        "buffer_bytes": 524288,
+        "uniform": false
+      },
+      "workload": {
+        "kv_bytes": 1073741824,
+        "weight_bytes": 5368709120,
+        "total_bytes": 6442450944,
+        "useful_flops": 7516192768,
+        "requests": 6291456,
+        "kv_tasks": 262144,
+        "tasks": 1572864,
+        "quantum": 4096,
+        "rows_per_bank": 6144,
+        "capacity_bytes": 34359738368,
+        "fast_tier_capacity_bytes": 4294967296,
+        "sram_bytes_per_tile": 2359296,
+        "available_prefetch_bytes_per_tile": 524288,
+        "scope": "10 FP16 32768x8192 expert projections (5GiB) after a 1GiB KV reduction; trace-level dependency/work model, no numerical LLM accuracy claim"
+      },
+      "driver": {
+        "ticks": 1236483,
+        "accepted": 6291456,
+        "returned": 6291456,
+        "tasks": 1572864,
+        "completed_tasks": 1572864,
+        "useful_bytes": 6442450944,
+        "useful_flops": 7516192768,
+        "kv_barrier_tick": 205756,
+        "task_bytes": 4096,
+        "buffer_budget_bytes_per_tile": 524288,
+        "buffer_high_water_bytes": 524288,
+        "controller_send_rejects": 13485088,
+        "tile_cycle_partition": {
+          "compute_busy": 4682176,
+          "missing_critical_data": 15101552
+        }
+      },
+      "validation": "PASS: base state/timing, tier deadlines, request ids, task joins, dependencies, compute serialization and SRAM",
+      "commands": {
+        "ACT": 1580528,
+        "RD": 6291456,
+        "PREpb": 1562304,
+        "PREab": 2528,
+        "REFab": 2528
+      },
+      "tier_ACT_counts": {
+        "0": 196960,
+        "2": 197520,
+        "1": 197040,
+        "3": 197376,
+        "4": 197504,
+        "6": 198112,
+        "5": 197856,
+        "7": 198160
+      },
+      "tier_read_counts": {
+        "0": 786432,
+        "2": 786432,
+        "1": 786432,
+        "3": 786432,
+        "4": 786432,
+        "5": 786432,
+        "6": 786432,
+        "7": 786432
+      },
+      "mean_delivery_latency_ns_by_tier": {
+        "0": 116.12646993001302,
+        "1": 108.56691487630208,
+        "2": 103.39217631022136,
+        "3": 100.69507853190105,
+        "4": 101.39787292480469,
+        "5": 106.08167521158855,
+        "6": 112.87138366699219,
+        "7": 125.40114847819011
+      },
+      "full_workload_tb_s": 20.84121154597354,
+      "effective_tflops": 24.314746803635796,
+      "hb_utilization": 0.6512878608116731,
+      "consumer_frontier_bytes": 1045217280,
+      "task_start_causes": {
+        "critical_input_return": 1020720,
+        "tile_compute": 221744,
+        "dependency": 330400
+      },
+      "critical_path_scope": "Last packet of data-dominated task joins; excludes controller-resource causal chains, so not exact global critical-path data movement",
+      "timing": {
+        "rcd_ticks": [
+          10,
+          16,
+          24,
+          34,
+          46,
+          60,
+          75,
+          92
+        ],
+        "ras_ticks": [
+          120,
+          126,
+          134,
+          144,
+          156,
+          170,
+          185,
+          202
+        ],
+        "rc_ticks": [
+          140,
+          146,
+          154,
+          164,
+          176,
+          190,
+          205,
+          222
+        ]
+      },
+      "command_duration_ticks": {
+        "ACT": 3,
+        "PREpb": 1,
+        "PREab": 1,
+        "RD": 2,
+        "WR": 2,
+        "RDA": 2,
+        "WRA": 2,
+        "REFab": 1,
+        "REFpb": 1,
+        "RFMab": 1,
+        "RFMpb": 1
+      },
+      "scope": "T0 assumed tier-aware internal model. Known prefetch/partial-sum streaming, not new hardware or physical device calibration"
+    },
+    {
+      "name": "uniform_prefetched",
+      "settings": {
+        "task_bytes": 4096,
+        "mapping": "compact",
+        "ordered": 0,
+        "buffer_bytes": 524288,
+        "uniform": true
+      },
+      "workload": {
+        "kv_bytes": 1073741824,
+        "weight_bytes": 5368709120,
+        "total_bytes": 6442450944,
+        "useful_flops": 7516192768,
+        "requests": 6291456,
+        "kv_tasks": 262144,
+        "tasks": 1572864,
+        "quantum": 4096,
+        "rows_per_bank": 6144,
+        "capacity_bytes": 34359738368,
+        "fast_tier_capacity_bytes": 4294967296,
+        "sram_bytes_per_tile": 2359296,
+        "available_prefetch_bytes_per_tile": 524288,
+        "scope": "10 FP16 32768x8192 expert projections (5GiB) after a 1GiB KV reduction; trace-level dependency/work model, no numerical LLM accuracy claim"
+      },
+      "driver": {
+        "ticks": 966633,
+        "accepted": 6291456,
+        "returned": 6291456,
+        "tasks": 1572864,
+        "completed_tasks": 1572864,
+        "useful_bytes": 6442450944,
+        "useful_flops": 7516192768,
+        "kv_barrier_tick": 161091,
+        "task_bytes": 4096,
+        "buffer_budget_bytes_per_tile": 524288,
+        "buffer_high_water_bytes": 524288,
+        "controller_send_rejects": 9165696,
+        "tile_cycle_partition": {
+          "compute_busy": 4943168,
+          "missing_critical_data": 10522960
+        }
+      },
+      "validation": "PASS: base state/timing, tier deadlines, request ids, task joins, dependencies, compute serialization and SRAM",
+      "commands": {
+        "ACT": 1575824,
+        "RD": 6291456,
+        "PREpb": 1562144,
+        "PREab": 1952,
+        "REFab": 1952
+      },
+      "tier_ACT_counts": {
+        "0": 1050576,
+        "1": 525248
+      },
+      "tier_read_counts": {
+        "0": 4194304,
+        "1": 2097152
+      },
+      "mean_delivery_latency_ns_by_tier": {
+        "0": 85.35191822052002,
+        "1": 85.03831672668457
+      },
+      "full_workload_tb_s": 26.65934617998765,
+      "effective_tflops": 31.102570543318922,
+      "hb_utilization": 0.8331045681246141,
+      "consumer_frontier_bytes": 1304150016,
+      "task_start_causes": {
+        "critical_input_return": 1273584,
+        "tile_compute": 292848,
+        "dependency": 6432
+      },
+      "critical_path_scope": "Last packet of data-dominated task joins; excludes controller-resource causal chains, so not exact global critical-path data movement",
+      "timing": {
+        "rcd_ticks": [
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10
+        ],
+        "ras_ticks": [
+          120,
+          120,
+          120,
+          120,
+          120,
+          120,
+          120,
+          120
+        ],
+        "rc_ticks": [
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140
+        ]
+      },
+      "command_duration_ticks": {
+        "ACT": 3,
+        "PREpb": 1,
+        "PREab": 1,
+        "RD": 2,
+        "WR": 2,
+        "RDA": 2,
+        "WRA": 2,
+        "REFab": 1,
+        "REFpb": 1,
+        "RFMab": 1,
+        "RFMpb": 1
+      },
+      "scope": "T0 assumed tier-aware internal model. Known prefetch/partial-sum streaming, not new hardware or physical device calibration"
+    },
+    {
+      "name": "uniform_fine_probe",
+      "settings": {
+        "task_bytes": 1024,
+        "mapping": "compact",
+        "ordered": 0,
+        "buffer_bytes": 524288,
+        "uniform": true
+      },
+      "workload": {
+        "kv_bytes": 1073741824,
+        "weight_bytes": 5368709120,
+        "total_bytes": 6442450944,
+        "useful_flops": 7516192768,
+        "requests": 6291456,
+        "kv_tasks": 1048576,
+        "tasks": 6291456,
+        "quantum": 1024,
+        "rows_per_bank": 6144,
+        "capacity_bytes": 34359738368,
+        "fast_tier_capacity_bytes": 4294967296,
+        "sram_bytes_per_tile": 2359296,
+        "available_prefetch_bytes_per_tile": 524288,
+        "scope": "10 FP16 32768x8192 expert projections (5GiB) after a 1GiB KV reduction; trace-level dependency/work model, no numerical LLM accuracy claim"
+      },
+      "driver": {
+        "ticks": 966631,
+        "accepted": 6291456,
+        "returned": 6291456,
+        "tasks": 6291456,
+        "completed_tasks": 6291456,
+        "useful_bytes": 6442450944,
+        "useful_flops": 7516192768,
+        "kv_barrier_tick": 161088,
+        "task_bytes": 1024,
+        "buffer_budget_bytes_per_tile": 524288,
+        "buffer_high_water_bytes": 524288,
+        "controller_send_rejects": 9165696,
+        "tile_cycle_partition": {
+          "compute_busy": 6865696,
+          "missing_critical_data": 8600400
+        }
+      },
+      "validation": "PASS: base state/timing, tier deadlines, request ids, task joins, dependencies, compute serialization and SRAM",
+      "commands": {
+        "ACT": 1575824,
+        "RD": 6291456,
+        "PREpb": 1562144,
+        "PREab": 1952,
+        "REFab": 1952
+      },
+      "tier_ACT_counts": {
+        "0": 1050576,
+        "1": 525248
+      },
+      "tier_read_counts": {
+        "0": 4194304,
+        "1": 2097152
+      },
+      "mean_delivery_latency_ns_by_tier": {
+        "0": 85.35191822052002,
+        "1": 85.03831672668457
+      },
+      "full_workload_tb_s": 26.659401339290795,
+      "effective_tflops": 31.10263489583926,
+      "hb_utilization": 0.8331062918528374,
+      "consumer_frontier_bytes": 5817516032,
+      "task_start_causes": {
+        "critical_input_return": 5681168,
+        "dependency": 600928,
+        "tile_compute": 9360
+      },
+      "critical_path_scope": "Last packet of data-dominated task joins; excludes controller-resource causal chains, so not exact global critical-path data movement",
+      "timing": {
+        "rcd_ticks": [
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10
+        ],
+        "ras_ticks": [
+          120,
+          120,
+          120,
+          120,
+          120,
+          120,
+          120,
+          120
+        ],
+        "rc_ticks": [
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140,
+          140
+        ]
+      },
+      "command_duration_ticks": {
+        "ACT": 3,
+        "PREpb": 1,
+        "PREab": 1,
+        "RD": 2,
+        "WR": 2,
+        "RDA": 2,
+        "WRA": 2,
+        "REFab": 1,
+        "REFpb": 1,
+        "RFMab": 1,
+        "RFMpb": 1
+      },
+      "scope": "T0 assumed tier-aware internal model. Known prefetch/partial-sum streaming, not new hardware or physical device calibration"
+    }
+  ],
+  "smoke": false,
+  "thermal_feedback": "Not enabled: first discriminate execution loss at T0"
+}
