@@ -1,0 +1,63 @@
+{
+  "experiment_source_commit": "2913b2c0884743c748785979319da86f4e92a07c",
+  "regression_source_commit": "ad25f7aed5d7027b96dec63da3c6d115e1560db1",
+  "hits_commit": "c7f94d533cb663c2f098880e5ab333da9d83ff17",
+  "experiment_exit_codes": {
+    "pilot": 0,
+    "sensitivity": 0
+  },
+  "regressions": {
+    "command": "python -m unittest discover -s tests -v",
+    "local": {
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0
+    },
+    "linux_server": {
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0
+    }
+  },
+  "git_diff_check": {
+    "local": 0,
+    "linux_server": 0
+  },
+  "compileall": {
+    "local": 0,
+    "linux_server": 0
+  },
+  "thermal_validation": {
+    "backend": "HiTS CPU GMRES",
+    "source_columns_solved": 1248,
+    "maximum_relative_original_equation_residual": 9.930465379552327e-12,
+    "maximum_difference_vs_sparse_direct_k_per_w": 2.8557212150559508e-11
+  },
+  "independent_local_scipy_vs_remote_hits_max_relative_throughput_difference": 6.864637708563336e-12,
+  "results_audit": {
+    "pilot_design_points": 180,
+    "sensitivity_design_points": 2160,
+    "lp_solves": 7020,
+    "original_lp_constraints_within_1e_minus_6": true,
+    "experiment_source_clean": true,
+    "free_placement_B_candidates": 0
+  },
+  "public_release_checks": {
+    "credential_file_content_absent_from_tracked_files": true,
+    "credential_file_content_absent_from_git_patch_history": true,
+    "personal_absolute_paths_absent": true
+  },
+  "excluded_checks": [
+    "native HotSpot/3D-ICE physical calibration",
+    "CUDA benchmarks",
+    "transient thermal closure",
+    "wafer-scale qualification"
+  ],
+  "artifact_notes": [
+    "Curated CSV uses LF; raw_manifest records unmodified original file hashes.",
+    "Figures were visually checked.",
+    "CPU response verification is numerical, not device/package calibration."
+  ]
+}

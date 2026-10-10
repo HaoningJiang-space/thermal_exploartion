@@ -10,7 +10,8 @@
 代码版本：`2913b2c`；HiTS 版本：`c7f94d533cb663c2f098880e5ab333da9d83ff17`。
 在用户指定的实验服务器完成；服务器没有检测到 NVIDIA GPU，使用 HiTS CPU GMRES。
 源代码从已推送的 Git commit 通过 bundle 同步到干净、隔离的 checkout，计算输出存放在源码目录外。
-GitHub 仓库为私有 `HaoningJiang-space/thermal_exploartion`。
+GitHub 仓库为 **public** `HaoningJiang-space/thermal_exploartion`。
+发布前检查了全部追踪文件和 Git patch history，未包含登录文件中的账号、地址或密码；原始运行日志保留在源码之外。
 
 16 Tiles + 16 Bank Groups，Logic 下/DRAM 上，再接被动散热层。
 HB 峰值总带宽 16 TB/s；Compute 总峰值 256 TFLOP/s；每 Tile 私有 SRAM 1 MiB。
@@ -75,7 +76,8 @@ HiTS 提取所有单位功率响应，每列经过其原方程 acceptance。
 与 SciPy sparse direct response 的最大绝对差约 `2.86e-11 K/W`。
 这些是数值一致性证据，不能验证封装、功率或架构参数的真实性。
 
-实验版本的 7 项回归在本地和远端通过；新增两项队列/零链路容量边界回归已在本地通过，远端最终复核待完成。
+实验版本的 7 项回归在本地和远端通过；新增两项队列/零链路容量边界回归后，最终 9 项在本地和远端全部通过。
+完整命令、版本、exit codes 和未执行项见 [verification.json](verification.json)。
 源代码通过 `git diff --check`。未运行 native HotSpot/3D-ICE 或 CUDA thermal benchmark；本任务也没有提出 GPU 加速性能结论。
 
 - [Pilot 全表](pilot/report.md)、[标量结果](pilot/results.csv)、[运行版本](pilot/provenance.json)
