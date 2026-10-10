@@ -92,6 +92,7 @@ def evaluate(r,energy,ledger,p,cooling,scale=1.,backend='scipy',bins=64,grid=4):
         logic_mean_w=float(mean[:n].sum()),dram_mean_w=float(mean[n:].sum()),power_cooling_necessary_bound_w=60/cooling,
         t1_layer_steady_peak_c=float(layer_steady.max()),t2_steady_peak_c=float(spatial_steady.max()),cold_token_sampled_peak_c=cold_peak(audit,segments),
         periodic_logic_peak_c=paced['paced']['logic_peak_upper_c'],periodic_dram_peak_c=paced['paced']['dram_peak_upper_c'],
+        node_peak_upper_c=paced['paced']['node_peak_upper_c'],mean_power_w=mean.tolist(),
         unpaced_periodic_peak_c=max(paced['unpaced']['logic_peak_upper_c'],paced['unpaced']['dram_peak_upper_c']),
         area_mm2=active_area,sram_bytes=36*2**20,energy_ledger_j=ledger,energy_scale=scale,cooling_top_k_w=cooling,grid=grid,bins=bins,
         thermal_numerical=numerical,periodic=audit.record,energy_balance_error_k=paced['paced']['mean_energy_balance_error_k'],
