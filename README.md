@@ -83,3 +83,7 @@ Resource Ownership Loss 和 Local Spatial Penalty。比值交互不等于唯一�
 研究设计：[docs/research_plan.md](docs/research_plan.md)；
 文献核对：[docs/literature.md](docs/literature.md)；
 模型方程与局限：[docs/model.md](docs/model.md)。
+
+下一轮只验证 [G2 Shared Data Placement](docs/g2_design.md)。保持同一权重 tensor 的共同容量，
+固定 Prefill/Decode 工作量，对照独立布局 oracle、共同常驻布局与双向迁移计费。
+运行 `python -m thermal_exploration.run_g2 --output outputs/g2`。

@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "base_config": "configs/pilot.json",
+  "label": "G2_multi_phase_shared_placement_gate",
+  "tiling": "chunk8k_tracker_bound",
+  "resident_weight_bytes": 33554432,
+  "bank_capacity_bytes": 4194304,
+  "phase_cases": [
+    {"name": "prefill32_decode1", "repetitions": [1, 1]},
+    {"name": "prefill32_decode32", "repetitions": [1, 32]},
+    {"name": "prefill32_decode128", "repetitions": [1, 128]}
+  ],
+  "phases": ["batch32_gemm", "batch1_gemv"],
+  "cooling_cases": [
+    {"name": "uniform", "gradient": 0.0},
+    {"name": "gradient", "gradient": 0.6}
+  ],
+  "migration": {
+    "link_tb_s": 0.25,
+    "hop_latency_ns": 2.0,
+    "outstanding_per_bank": 512,
+    "transaction_bytes": 256,
+    "pj_per_byte_hop": 0.5,
+    "dram_read_pj_per_byte": 12.0,
+    "dram_write_pj_per_byte": 12.0,
+    "chunk_bytes": 8192,
+    "row_miss_fraction": 0.25,
+    "activation_nj": 8.0
+  },
+  "transient": {
+    "silicon_volumetric_capacity_j_m3k": 1630000.0,
+    "lid_volumetric_capacity_j_m3k": 3450000.0,
+    "samples_per_segment": 129
+  },
+  "gate": {
+    "net_speedup": 1.05,
+    "minimum_spatial_interaction_ratio": 1.01
+  }
+}
