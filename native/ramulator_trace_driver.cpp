@@ -87,10 +87,18 @@ int main(int argc,char** argv) {
   samples<<"clock,outstanding,returned_waiting_consumer,eligible_examined,state\n";
   std::map<std::string,long long> states;std::vector<long long> tile_finish(16,0);
   std::vector<double> hb_finish(16,0);
-  std::set<int> unissued,returned_waiting;
-  for(const auto& w:works)unissued.insert(w.id);
+  std::set<int> returned_waiting;
+  std::vector<std::set<int>> ready_by_channel(16);
+  std::vector<int> unresolved(works.size(),0);
+  std::vector<std::vector<int>> dependents(works.size());
   using Completion=std::pair<long long,int>;
   std::priority_queue<Completion,std::vector<Completion>,std::greater<Completion>> completions;
+  std::priority_queue<Completion,std::vector<Completion>,std::greater<Completion>> releases;
+  for(const auto& w:works){
+    unresolved[w.id]=w.deps.size();
+    for(int d:w.deps)dependents[d].push_back(w.id);
+    if(w.deps.empty())releases.emplace(w.ready,w.id);
+  }
   long long clk=0,active=0,done=0,accepted=0,returned=0,total_bytes=0,total_flops=0;
   long long queue_sum=0,queue_max=0,consumer_active_ticks=0,rejected=0;
   for(;clk<10000000;clk++) {
@@ -98,15 +106,22 @@ int main(int argc,char** argv) {
     auto [time,id]=completions.top();completions.pop();auto& w=works[id];
     if(w.consumed>=0)throw std::runtime_error("duplicate consumption");
     w.consumed=time;done++;active--;returned_waiting.erase(id);
+    for(int successor:dependents[id])if(--unresolved[successor]==0)
+      releases.emplace(std::max(works[successor].ready,clk),successor);
    }
    if(done==int(works.size()))break;
+   while(!releases.empty()&&releases.top().first<=clk){
+    auto [time,id]=releases.top();releases.pop();ready_by_channel[works[id].vec[0]].insert(id);
+   }
    int eligible=0,sent=0,waiting_consumer=returned_waiting.size();bool reject=false;
-   for(auto it=unissued.begin();it!=unissued.end();){
-    auto& w=works[*it];++it;
-    if(w.ready>clk)continue;
-    bool deps=true;for(int d:w.deps)if(works[d].consumed<0){deps=false;break;}
-    if(!deps)continue;eligible++;
-    if(active>=limit||sent>=16)break;
+   // One candidate per channel per round, rotating the first channel each
+   // tick. A rejected channel is retried next tick rather than scanning all
+   // future requests. Dependency completion releases identities exactly once.
+   bool blocked[16]={};
+   for(int attempt=0;attempt<256&&active<limit&&sent<16;attempt++){
+    int channel=(clk+attempt)%16;
+    if(blocked[channel]||ready_by_channel[channel].empty())continue;
+    auto& w=works[*ready_by_channel[channel].begin()];eligible++;
     Ramulator::Request req(w.vec,Ramulator::Request::Type::Read);
     req.addr=w.address;req.source_id=w.source;req.size_bytes=w.bytes;req.ingress_id=w.id;
     const int rid=w.id;
@@ -126,8 +141,8 @@ int main(int argc,char** argv) {
       completions.emplace(x.finish,rid);returned_waiting.insert(rid);
       returned++;total_bytes+=x.bytes;total_flops+=x.flops;
     };
-    if(memory->send(req)){w.accepted=clk;accepted++;active++;sent++;unissued.erase(w.id);}
-    else{reject=true;rejected++;}
+    if(memory->send(req)){w.accepted=clk;accepted++;active++;sent++;ready_by_channel[channel].erase(w.id);}
+    else{reject=true;rejected++;blocked[channel]=true;}
    }
    std::string state;
    if(active>=limit && waiting_consumer>0)state="consumer_or_HB_buffer_backpressure";

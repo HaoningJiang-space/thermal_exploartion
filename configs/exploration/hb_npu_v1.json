@@ -16,7 +16,8 @@
     "timing_tiers": 8,
     "sram_bytes": 37748736,
     "compute_tiles": 16,
-    "hb_reserved_area_mm2": 1.0
+    "hb_reserved_area_mm2": 1.0,
+    "reference_compute_blocks": 256
   },
   "organizations": {
     "local_shared": 1,
@@ -257,6 +258,36 @@
         1,
         4
       ]
+    },
+    "compute_block_reference_mm2": {
+      "value": 23.838099200000002,
+      "unit": "mm2",
+      "classification": "Reasonably assumed",
+      "basis": "Derived from rounded Stratum Figure15 tensor core +matrix RF +row swap RF leaf areas; applied as a linear compute/RF block-area assumption, SRAM unchanged",
+      "source": "https://arxiv.org/html/2510.05245v1",
+      "range": null
+    },
+    "compute_static_w_mm2": {
+      "value": 0.02,
+      "unit": "W/mm2",
+      "classification": "Reasonably assumed",
+      "basis": "Common compute/RF standby density; no temperature leakage fit",
+      "source": null,
+      "range": [
+        0.01,
+        0.05
+      ]
+    },
+    "compute_block_area_scale": {
+      "value": 1.0,
+      "unit": "ratio",
+      "classification": "Reasonably assumed",
+      "basis": "Common compute/RF area density sensitivity; fixed noncompute area and fixed process efficiency",
+      "source": null,
+      "range": [
+        0.75,
+        1.25
+      ]
     }
   },
   "execution_assumptions": {
@@ -268,16 +299,19 @@
     "dvfs": "Idealized continuous time sharing of common discrete DVFS points",
     "thermal": "4x4 two active equivalent layers plus spreader; not eight separate DRAM dies",
     "known_technique_baseline": "segmented_2 is FGDRAM/SALP-inspired domain partitioning, not a new mechanism or full reproduction",
-    "return_buffer": "512KiB payload/tile plus metadata fits common 2.25MiB SRAM/tile. Lower-HB min-rate approximation assumes burst smoothing; does not simulate temperature-dependent refresh."
+    "return_buffer": "512KiB payload/tile plus metadata fits common 2.25MiB SRAM/tile. Lower-HB min-rate approximation assumes burst smoothing; does not simulate temperature-dependent refresh.",
+    "compute_allocation": "Main: remaining area divided into equal counts of PE-equivalent compute/RF blocks across16 tiles. Separate fixed128 TFLOP/s control. SRAM capacity fixed; SRAM/RF port conflicts idealized.",
+    "compute_density_uncertainty": "Area scale0.75..1.25 and other-dynamic energy0..0.08 pJ/FLOP; not a synthesized design."
   },
   "fairness": {
-    "same_compute": true,
     "same_sram": true,
     "same_capacity": true,
     "same_die_area_budget": true,
     "same_hb_budget": true,
     "same_cooling_per_scenario": true,
-    "extra_area_and_power_charged": true
+    "extra_area_and_power_charged": true,
+    "same_compute_technology": true,
+    "compute_area_exchange_charged": true
   },
   "policy": {
     "reference_reproduction_allowed": false,

@@ -1,9 +1,12 @@
 # thermal_exploartion
 
-**When Does Compute–Memory Locality Become Suboptimal in Hybrid-Bonded 3D Accelerators?**
+**Thermal-Constrained Memory Service Organization in Hybrid-Bonded 3D Accelerators**
 
 **研究决策：Compute–Memory Fabric 分支正式关闭；Thermal-aware Mapping 保留为基线。**
-当前只执行 G3 Reference Machine 与最小 G4 命令验证，不预设新架构。G5–G7 尚未启动。
+当前执行 [Mode B 架构实验](docs/architecture_exploration.md)：研究独立 Memory Service Units 的数量、
+Peripheral 与 Compute 的面积交换，以及 T0/T1_layer/T2 下的持续性能。
+采用 [Stratum-inspired、带来源与假设区间的配置](configs/exploration/hb_npu_v1.json)。
+Mode A 严格复现与 Mode B 条件性探索分别管理；尚未校准的器件参数不再禁止全部架构探索。
 
 新任务书与不可校准项见 [Grounded HB–DRAM Validation](docs/grounded_validation.md)。
 [Stratum Hardware Contract](configs/platforms/stratum_micro2025.json) 与旧 pilot 完全隔离，未知值保持 null。
@@ -11,7 +14,8 @@ G1、G2、Memory Audit 已共用 DRAM Service Model；现有解析扫描保留�
 
 [G3 +最小 G4 结果](results/grounded-2026-10-09/findings.md) 已完成：48 项服务一致性检查、
 128 项官方 HBM3 测试、5 个有限轨迹/负向控制。18704 请求与 23580 命令核查通过。
-Stratum Logic 功率组成仍有 6.51% 未解释差异，HB/cooling 和命令域未知；完整校准 No-Go，G5–G7 保持 deferred。
+Stratum Logic 功率组成仍有 6.51% 未解释差异，HB/cooling 和命令域未知；完整器件复现仍 NOT READY。
+104.13 W 是同一论文的参考账目一致性，不能视为独立功率验证。本轮不会通过调参消除这些差异。
 
 原研究目标是检验空间热耦合是否改变 Compute–Memory 物理连接的最优性。
 先做可证伪的小实验，结果允许支持 Local，也允许说明收益主要来自普通负载均衡。

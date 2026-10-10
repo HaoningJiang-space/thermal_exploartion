@@ -2,8 +2,9 @@ import copy
 import unittest
 from thermal_exploration.hardware_contract import IncompleteCalibration,load_profile,require_prediction_ready
 from thermal_exploration.hb_trace import address_vector,gemv_trace,streaming_trace,validate
-from thermal_exploration.organization import bounds,load_exploration,lp_config,organization_cost,values
+from thermal_exploration.organization import bounds,load_exploration,lp_config,organization_cost,solve,thermal_config,values
 from thermal_exploration.model import kernel
+from thermal_exploration.thermal import response
 
 
 class ArchitectureMode(unittest.TestCase):
@@ -38,8 +39,15 @@ class ArchitectureMode(unittest.TestCase):
         self.assertAlmostEqual(b["bank_cycle_tb_s"],30.34074074)
         self.assertLessEqual(b["necessary_service_tb_s"],b["hb_tb_s"])
 
+    def test_more_periphery_reduces_compute_under_shared_area_budget(self):
+        costs=[organization_cost(self.profile,k,"shared_area") for k in (1,2,4,8)]
+        self.assertTrue(all(c["area_feasible"] and c["active_area_mm2"]<=121 for c in costs))
+        self.assertTrue(all(a["compute_peak_tflops"]>b["compute_peak_tflops"] for a,b in zip(costs,costs[1:])))
+        for c in costs:self.assertEqual(c["compute_blocks"]%16,0)
+        self.assertLess(costs[-1]["compute_peak_tflops"],128)
+
     def test_mapping_preserves_32gib_geometry_and_local_full_gemv(self):
-        for paths in (1,2,4):
+        for paths in (1,2,4,8):
             req=gemv_trace(paths);work=validate(req,paths)
             self.assertEqual(work,dict(request_count=32776,read_bytes=2*4096**2+8192,useful_flops=2*4096**2))
             self.assertEqual(len({r["address"] for r in req}),len(req))
@@ -47,6 +55,15 @@ class ArchitectureMode(unittest.TestCase):
             self.assertEqual(len({tuple(address_vector(i*4096,paths)[:5]) for i in range(256)}),256)
         bad=streaming_trace(1,16);bad[0]["addr_vec"][0]=1
         with self.assertRaises(ValueError):validate(bad,1)
+
+    def test_mixed_cycle_cannot_drop_work_or_change_resident_layout(self):
+        h,g,_=response(4,thermal_config(self.profile))
+        r=solve(self.profile,2,29,h,g,2,2,allocation="shared_area")
+        self.assertEqual([p["repetitions"] for p in r["phases"]],[1,32])
+        for p in r["phases"]:
+            self.assertAlmostEqual(p["completed_work_tflop"],2*4096**2*32/1e12)
+        self.assertEqual(r["phases"][0]["bank_fractions"],r["phases"][1]["bank_fractions"])
+        self.assertAlmostEqual(r["tflops"]*r["cycle_time_s"],sum(r["required_work_tflop"]))
 
 
 if __name__=="__main__":unittest.main()

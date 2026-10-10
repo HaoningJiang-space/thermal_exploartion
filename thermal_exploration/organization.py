@@ -6,6 +6,7 @@ from pathlib import Path
 
 from .hardware_contract import require_prediction_ready
 from .model import Fabric,optimize
+from .multiphase import optimize_cycle
 
 
 def load_exploration(path="configs/exploration/hb_npu_v1.json"):
@@ -16,14 +17,28 @@ def load_exploration(path="configs/exploration/hb_npu_v1.json"):
 def values(p):return {k:v["value"] for k,v in p["parameters"].items()}
 
 
-def organization_cost(p,paths):
+def organization_cost(p,paths,allocation="fixed_compute"):
     v=values(p);r=p["resources"]
     extra=r["lv_periphery_reference_mm2"]*v["replicated_periphery_fraction"]*(paths-1)
     active=r["active_logic_reference_mm2"]+extra+r["hb_reserved_area_mm2"]
     pad_area=(v["hb_data_connections"]+v["hb_control_power_connections"])*v["hb_pitch_um"]**2/1e6
-    return dict(paths_per_channel=paths,additional_periphery_mm2=extra,active_area_mm2=active,
+    ref_compute=v["compute_block_reference_mm2"]
+    block_area=ref_compute/r["reference_compute_blocks"]*v["compute_block_area_scale"]
+    compute_area=block_area*r["reference_compute_blocks"];peak=v["logic_peak_tflops"];blocks=r["reference_compute_blocks"]
+    other=r["active_logic_reference_mm2"]-r["lv_periphery_reference_mm2"]-ref_compute
+    active+=compute_area-ref_compute
+    if allocation=="shared_area":
+        remaining=r["logic_area_mm2"]-other-r["hb_reserved_area_mm2"]-(r["lv_periphery_reference_mm2"]+extra)
+        blocks_per_tile=max(0,math.floor(remaining/block_area/16))
+        blocks=blocks_per_tile*16;compute_area=blocks*block_area
+        peak=blocks/r["reference_compute_blocks"]*v["logic_peak_tflops"]
+        active=other+r["hb_reserved_area_mm2"]+r["lv_periphery_reference_mm2"]+extra+compute_area
+    elif allocation!="fixed_compute":raise ValueError("Unknown area allocation")
+    return dict(paths_per_channel=paths,allocation=allocation,compute_blocks=blocks,compute_area_mm2=compute_area,
+                compute_peak_tflops=peak,compute_static_w=compute_area*v["compute_static_w_mm2"],
+                additional_periphery_mm2=extra,active_area_mm2=active,
                 die_area_budget_mm2=r["logic_area_mm2"],hb_grid_area_mm2=pad_area,
-                area_feasible=active<=r["logic_area_mm2"] and pad_area<=r["hb_reserved_area_mm2"],
+                area_feasible=blocks>0 and active<=r["logic_area_mm2"]+1e-9 and pad_area<=r["hb_reserved_area_mm2"],
                 periphery_static_w=(r["lv_periphery_reference_mm2"]+extra)*v["periphery_static_w_mm2"],
                 extra_dynamic_fraction=v["extra_path_dynamic_fraction"]*(paths-1))
 
@@ -51,8 +66,8 @@ def thermal_config(p):
         convection_w_m2k=1/(v["package_top_resistance_k_w"]*a),cooling_gradient=v["cooling_gradient"],vertical_scale=1.)
 
 
-def lp_config(p,paths,service_tb_s,act_per_byte=None):
-    v=values(p);r=p["resources"];cost=organization_cost(p,paths)
+def lp_config(p,paths,service_tb_s,act_per_byte=None,allocation="fixed_compute"):
+    v=values(p);r=p["resources"];cost=organization_cost(p,paths,allocation)
     if not cost["area_feasible"]:raise ValueError("Organization exceeds fixed silicon/HB area budget")
     access=v["access_energy_pj_byte"];activation=access*v["activation_share"]
     transfer=access-activation;logic_transfer=transfer*v["logic_memory_share"]
@@ -61,11 +76,11 @@ def lp_config(p,paths,service_tb_s,act_per_byte=None):
     # calibrate ACT/PRE. Additional path switching remains a paid cost.
     dram_energy=transfer-logic_transfer+activation*r["row_buffer_bytes"]*act_per_byte
     logic_energy=logic_transfer*(1+cost["extra_dynamic_fraction"])
-    hw=dict(tile_peak_tflops=v["logic_peak_tflops"]/16,bank_group_peak_tb_s=v["hb_chip_tb_s"]/16,
+    hw=dict(tile_peak_tflops=cost["compute_peak_tflops"]/16,bank_group_peak_tb_s=v["hb_chip_tb_s"]/16,
         internal_bank_group_ceiling_tb_s=service_tb_s/16,independent_banks_per_group=16,
         row_miss_penalty_ns=34.56,read_latency_ns=v["read_latency_ns"],outstanding_per_tile=512,
         transaction_bytes=1024,sram_bytes_per_tile=r["sram_bytes"]/16,
-        logic_static_w=(v["logic_background_w"]+cost["periphery_static_w"])/16,
+        logic_static_w=(v["logic_background_w"]+cost["periphery_static_w"]+cost["compute_static_w"])/16,
         # Refresh and its worst-case extra row reopenings are per-time costs,
         # not coefficients that incorrectly shrink with thermal throttling.
         dram_static_w=(v["dram_background_w"]+256*v["refresh_nj_per_bank"]/3900+
@@ -80,10 +95,17 @@ def lp_config(p,paths,service_tb_s,act_per_byte=None):
                 tilings=[dict(name="full_4k_row_optimized",chunk_bytes=4096,row_miss_fraction=1.)])
 
 
-def solve(p,paths,service,h,gh,workload,mode,act_per_byte=None):
-    cfg=lp_config(p,paths,service,act_per_byte)
-    result=optimize(cfg,h,gh,cfg["workloads"][workload],cfg["tilings"][0],Fabric("local",0),mode,[1/16]*16,"free")
-    result["organization_cost"]=organization_cost(p,paths)
+def solve(p,paths,service,h,gh,workload,mode,act_per_byte=None,allocation="fixed_compute"):
+    cfg=lp_config(p,paths,service,act_per_byte,allocation)
+    if workload==2:
+        g2=dict(phases=["prefill_gemm","decode_gemv"],tiling=cfg["tilings"][0]["name"],
+                resident_weight_bytes=2*4096**2,bank_capacity_bytes=p["resources"]["dram_capacity_bytes"]//16)
+        result=optimize_cycle(cfg,g2,h,gh,(1,32),Fabric("local",0),mode,"shared","phase_steady")
+        result["workload"]="mixed_shared_1prefill_32decode"
+        result["tflops"]=result["useful_tflops"]
+    else:
+        result=optimize(cfg,h,gh,cfg["workloads"][workload],cfg["tilings"][0],Fabric("local",0),mode,[1/16]*16,"free")
+    result["organization_cost"]=organization_cost(p,paths,allocation)
     result["prediction_mode"]="conditional_architecture_exploration"
     result["execution_scope"]="Steady divisible-work relaxation; common optimized placement/DVFS; not an implemented NPU"
     return result
@@ -98,6 +120,10 @@ def scenarios(p):
         ("logic_memory_share_low",{"logic_memory_share":.3}),
         ("logic_memory_share_high",{"logic_memory_share":.8}),
         ("periphery_cost_high",{"extra_path_dynamic_fraction":.2,"periphery_static_w_mm2":.2}),
+        ("compute_area_low",{"compute_block_area_scale":.75}),
+        ("compute_area_high",{"compute_block_area_scale":1.25}),
+        ("logic_energy_low",{"logic_other_dynamic_pj_flop":0.}),
+        ("logic_energy_high",{"logic_other_dynamic_pj_flop":.08}),
         ("HB_16",{"hb_chip_tb_s":16.}),("HB_8",{"hb_chip_tb_s":8.})]
     result=[]
     for name,changes in controls:

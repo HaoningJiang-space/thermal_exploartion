@@ -94,6 +94,10 @@ def main():
     upstream=verify_upstream(root)
     if out.exists():raise SystemExit("Choose a new directory")
     out.mkdir(parents=True);sys.path[:0]=[str(root/"python"),str(root)]
+    (out/"provenance.json").write_text(json.dumps(dict(source_commit=revision(),
+        source_dirty=bool(subprocess.check_output(["git","status","--porcelain"],text=True).strip()),
+        ramulator_commit=RAMULATOR_COMMIT,upstream_build_verification=upstream,python=sys.version,
+        started_utc=datetime.now(timezone.utc).isoformat(),thermal_backend=args.thermal_backend),indent=2)+"\n")
     profile=load_exploration();(out/"profile.json").write_text(json.dumps(profile,indent=2)+"\n")
     exe=native_build(root,out)
     # Fix applicability before any organization comparisons; no address-based
@@ -107,10 +111,15 @@ def main():
     if q1["command_validation"]["commands"].get("REFab",0) or q64["command_validation"]["commands"].get("REFab",0):
         raise ValueError("Refresh enabled in supposedly controlled pair")
     if q1["useful_bandwidth_gb_s"]>=q64["useful_bandwidth_gb_s"]:raise ValueError("Queue control did not constrain service")
+    print("Applicability controls PASS",flush=True)
     cases=[]
     for hb in (32,16,8):
-        for paths in (1,2,4):cases.append(command_case(exe,root,out,f"stream_p{paths}_HB{hb}",paths,hb,long=hb==32))
-    for paths in (1,2,4):cases.append(command_case(exe,root,out,f"gemv_p{paths}_HB32",paths,32,"gemv"))
+        for paths in ((1,2,4,8) if hb==32 else (1,2,4)):
+            cases.append(command_case(exe,root,out,f"stream_p{paths}_HB{hb}",paths,hb,long=hb==32))
+            print(cases[-1]["name"],cases[-1]["steady_window"]["useful_tb_s"],flush=True)
+    for paths in (1,2,4,8):
+        cases.append(command_case(exe,root,out,f"gemv_p{paths}_HB32",paths,32,"gemv"))
+        print(cases[-1]["name"],cases[-1]["steady_window"]["useful_tb_s"],flush=True)
     # One physical relaxation: shorten row-retention constraint; preserve all
     # other timing/refresh/HB limitations and modeled activity energy.
     cases.append(command_case(exe,root,out,"ideal_row_retention_p2_HB32",2,32,ideal=True,long=True))
@@ -118,38 +127,35 @@ def main():
     rows=[];thermal_records=[];rejected=[]
     for name,scenario in scenarios(profile):
         h,gh,record=response(4,thermal_config(scenario),args.thermal_backend);thermal_records.append(dict(scenario=name,**record))
-        for paths in (1,2,4,8):
-            cost=organization_cost(scenario,paths)
-            if not cost["area_feasible"]:
-                rejected.append(dict(scenario=name,paths=paths,reason="fixed area budget exceeded",**cost));continue
-            observed=lookup[(32,paths)]["steady_window"]
-            # Lower-interface service is the min of a multi-refresh internal
-            # rate and fixed HB rate, assuming the reserved return buffer
-            # smooths bursts. Short lower-HB traces are separately retained;
-            # they are not mislabeled as sustained multi-refresh measurements.
-            service=observed.copy();service["useful_tb_s"]=min(observed["useful_tb_s"],values(scenario)["hb_chip_tb_s"])
-            for workload in (0,1):
-                for mode in (0,3,2):
-                    r=solve(scenario,paths,service["useful_tb_s"],h,gh,workload,mode,service["ACT_per_useful_byte"])
-                    r.update(scenario=name,paths=paths,service_evidence="multi-refresh internal rate plus explicit buffered HB min bound",necessary_bounds=bounds(scenario,paths))
-                    rows.append(r)
+        for allocation in ("shared_area","fixed_compute"):
+            for paths in (1,2,4,8):
+                cost=organization_cost(scenario,paths,allocation)
+                if not cost["area_feasible"]:
+                    rejected.append(dict(scenario=name,paths=paths,reason="fixed area budget exceeded",**cost));continue
+                observed=lookup[(32,paths)]["steady_window"]
+                service=observed.copy();service["useful_tb_s"]=min(observed["useful_tb_s"],values(scenario)["hb_chip_tb_s"])
+                for workload in ((0,1,2) if allocation=="shared_area" else (0,1)):
+                    for mode in (0,3,2):
+                        r=solve(scenario,paths,service["useful_tb_s"],h,gh,workload,mode,service["ACT_per_useful_byte"],allocation)
+                        r.update(scenario=name,paths=paths,allocation=allocation,service_tb_s=service["useful_tb_s"],
+                                 service_evidence="multi-refresh internal rate plus explicit buffered HB min bound",necessary_bounds=bounds(scenario,paths))
+                        rows.append(r)
+        print("Thermal/area analysis",name,flush=True)
     ideal=next(c for c in cases if c["ideal_row_retention"])["steady_window"]
     h,gh,_=response(4,thermal_config(profile),args.thermal_backend)
     oracle=[]
-    for workload in (0,1):
-        for mode in (0,3,2):
-            r=solve(profile,2,ideal["useful_tb_s"],h,gh,workload,mode,ideal["ACT_per_useful_byte"])
-            r.update(scenario="default",paths=2,ideal_only=True,scope="Same cost/energy assumptions; row retention alone relaxed")
-            oracle.append(r)
+    for allocation in ("shared_area","fixed_compute"):
+        for workload in ((0,1,2) if allocation=="shared_area" else (0,1)):
+            for mode in (0,3,2):
+                r=solve(profile,2,ideal["useful_tb_s"],h,gh,workload,mode,ideal["ACT_per_useful_byte"],allocation)
+                r.update(scenario="default",paths=2,allocation=allocation,ideal_only=True,
+                         scope="Same cost/energy assumptions; row retention alone relaxed")
+                oracle.append(r)
     summary=dict(mode="Architecture Exploration",reference_reproduction_status="NOT_READY",command_cases=cases,
         applicability=dict(repeated_address="PASS; end-to-end ids",no_refresh_queue_control="PASS"),
         results=rows,rejected_organizations=rejected,ideal_row_retention=oracle,thermal_solver_records=thermal_records,
         experiment_scope="Finite, prespecified organizations and sensitivity controls; steady LP relaxations, not measured or RTL performance")
     (out/"summary.json").write_text(json.dumps(summary,indent=2,allow_nan=False)+"\n")
-    (out/"provenance.json").write_text(json.dumps(dict(source_commit=revision(),
-        source_dirty=bool(subprocess.check_output(["git","status","--porcelain"],text=True).strip()),
-        ramulator_commit=RAMULATOR_COMMIT,upstream_build_verification=upstream,python=sys.version,
-        started_utc=datetime.now(timezone.utc).isoformat(),thermal_backend=args.thermal_backend),indent=2)+"\n")
     print(json.dumps(dict(command_cases=len(cases),LP_results=len(rows),ideal_results=len(oracle),area_rejects=len(rejected))))
 
 

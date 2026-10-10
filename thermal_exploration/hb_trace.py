@@ -6,8 +6,8 @@ def address_vector(address,paths):
     if address<0 or address%TX:raise ValueError("Unaligned assumed HB address")
     txn=address//TX;column=txn%4;bank=(txn//4)%256;row=txn//1024
     if row>=32768:raise ValueError("Outside 32 GiB assumed memory")
-    channel=bank%16;local=bank//16;bp=16//paths
-    return [channel,local//bp,0,(local%bp)//(4//paths),local%(4//paths),row,column*8]
+    channel=bank%16;local=bank//16;bp=16//paths;bpg=bp//min(4,bp)
+    return [channel,local//bp,0,(local%bp)//bpg,local%bpg,row,column*8]
 
 
 def encoded(channel,bank,row,column):
@@ -75,7 +75,7 @@ def ramulator_config(root,out,paths,refresh=True,relax_row_retention=False):
     timing={name:ceil(ns/.5) for name,ns in dict(nRCDRD=2.29,nRCDWR=2.29,nRP=4.77,nRAS=29.79,
         nRRDS=2.5,nRRDL=3.125,nFAW=15.,nCL=4.,nCWL=4.).items()}
     dram=InternalSurrogate(org_preset="HBM3_16Gb_8hi",timing_preset="HBM3_6400Mbps",
-        pseudochannel=paths,sid=1,bankgroup=4,bank=4//paths,row=32768,column=32,
+        pseudochannel=paths,sid=1,bankgroup=min(4,16//paths),bank=(16//paths)//min(4,16//paths),row=32768,column=32,
         dq=1024,channel_width=8192*paths,rate=16000,tCK_ps=500,nBL=2,nCCDS=2,**timing)
     controller["dram"]=dram.to_config()
     controllers=[]
