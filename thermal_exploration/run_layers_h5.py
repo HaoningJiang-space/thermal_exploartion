@@ -50,8 +50,11 @@ def event_energy(directory,r,bins=128,logic_memory_share=.48):
     return energy,ledger
 
 
-def audit_record(directory,r,bins=128,grid=4,scale=1.,cooling=.3,backend='scipy',share=.48):
-    energy,ledger=event_energy(directory,r,bins,share)
+def audit_record(directory,r,bins=128,grid=4,scale=1.,cooling=.3,backend='scipy',share=.48,precomputed=None):
+    # Energy depends on the immutable event trace/binning/source assignment,
+    # not cooling or the scenario-wide coefficient multiplier. Verify once
+    # for this record, then reuse the same closed ledger across comparisons.
+    energy,ledger=event_energy(directory,r,bins,share) if precomputed is None else precomputed
     # Reuse the established RC implementation and area/background contract.
     # No timing-only oracle is evaluated as a paid implementation.
     mapped=dict(workload=r['scenario'],variant='known_fifo_baseline' if r['baseline'] in ('B2_stream_fusion','B3_3d_placement') else 'sram_baseline',
@@ -83,8 +86,9 @@ def main():
         if r['model']=='qwen15_moe' and r['routing']!='public_projected':continue
         if r['baseline'] not in ('B0_local','B1_dataflow','B2_stream_fusion','B3_3d_placement'):continue
         selected.append(r)
+        energy_ledger=event_energy(directory,r)
         for name,(scale,cooling) in SCENARIOS.items():
-            record=audit_record(directory,r,scale=scale,cooling=cooling,backend=a.thermal_backend);record['scenario']=name;records.append(record)
+            record=audit_record(directory,r,scale=scale,cooling=cooling,backend=a.thermal_backend,precomputed=energy_ledger);record['scenario']=name;records.append(record)
             print(r['scenario'],r['baseline'],name,record['sustainable_tokens_s'],record['periodic_logic_peak_c'],flush=True)
         (out/'partial.json').write_text(json.dumps(records,indent=2)+'\n')
     (out/'summary.json').write_text(json.dumps(records,indent=2)+'\n')
