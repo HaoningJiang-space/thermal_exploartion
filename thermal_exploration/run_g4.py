@@ -68,7 +68,7 @@ def device_and_config(case):
         controller_plugins=[ramulator.controller_plugin.CmdTraceRecorder(path=str(case/"commands.csv"))])
     memory=ramulator.memory_system.GenericDRAM(clock_ratio=1,
         channel_mapper=ramulator.channel_mapper.PassThroughChannelMapper(),controllers=[controller])
-    config={"frontend":ramulator.frontend.External(clock_ratio=1).to_config(),"memory_system":memory.to_config()}
+    config={"frontend":{"impl":"TraceConsumer","clock_ratio":1},"memory_system":memory.to_config()}
     return dram,config
 
 

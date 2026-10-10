@@ -12,8 +12,22 @@
 #include "ramulator/base/config.h"
 #include "ramulator/base/factory.h"
 #include "ramulator/base/request.h"
+#include "ramulator/base/param.h"
 #include "ramulator/frontend/i_frontend.h"
 #include "ramulator/memory_system/i_memory_system.h"
+
+namespace Ramulator {
+// External's default core count is one; controller per-source arrays must have
+// the same size as our 16 consumers. DRAM logic stays entirely upstream.
+class TraceConsumerFrontEnd : public IFrontEnd, public Implementation {
+  RAMULATOR_REGISTER_IMPLEMENTATION(IFrontEnd,TraceConsumerFrontEnd,"TraceConsumer")
+ public:
+  void init() override {RAMULATOR_PARSE_PARAM(m_clock_ratio,unsigned int,"clock_ratio").required();}
+  void tick() override {}
+  bool is_finished() override {return false;}
+  int get_num_cores() override {return 16;}
+};
+}
 
 struct Work {
   int id, source, bytes; long long ready, address, flops;
