@@ -43,10 +43,10 @@ def main():
     axes[0].set(ylabel='Effective compute (TFLOP/s)',title='Same6GiB traffic /7GiFLOP /128TF peak')
     for i,n in enumerate(names):axes[0].text(i,by[n]['tflops']+.15,f"{by[n]['tflops']:.2f}",ha='center',fontsize=8)
     bottom=[0.]*len(names)
-    for key,label,color in [('compute_busy','Compute','#267b9b'),('missing_critical_data','Missing input','#bf8547'),('dependency_wait','Dependency','#927aaa'),('no_remaining_work','Finished tile','#d6d9dc')]:
+    for key,label,color in [('compute_busy','Consumer occupied*','#267b9b'),('missing_critical_data','Missing input','#bf8547'),('dependency_wait','Dependency','#927aaa'),('no_remaining_work','Finished tile','#d6d9dc')]:
         vals=[by[n][key+'_fraction'] for n in names];axes[1].bar(labels,vals,bottom=bottom,label=label,color=color)
         bottom=[x+y for x,y in zip(bottom,vals)]
-    axes[1].set(ylabel='Fraction of total tile cycles',ylim=(0,1),title='Mutually exclusive consumer states');axes[1].legend(fontsize=8)
+    axes[1].set(ylabel='Fraction of total tile cycles',ylim=(0,1),title='Consumer states; *includes tick rounding');axes[1].legend(fontsize=8)
     fig.suptitle('D2: data arrivals, task joins and finite prefetch (T0 conditional model)');fig.tight_layout()
     for ext in ('png','pdf'):fig.savefig(out/('multitier_execution.'+ext),dpi=180)
     plt.close(fig)
