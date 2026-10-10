@@ -53,7 +53,9 @@ def validate(case,dram,settings,rows):
     for i,t in enumerate(tasks):
         prev=t['previous']
         if prev>=0 and (prev%16!=i%16 or t['start']<tasks[prev]['finish']):raise ValueError('Concurrent compute on one tile')
-    devices=[DeviceUnderTest(dram) for _ in range(16)];extra=TierLegality(settings['uniform'])
+    devices=[DeviceUnderTest(dram) for _ in range(16)]
+    command_ticks=dict(zip(dram.commands,dram.to_config()['command_cycles']))
+    extra=TierLegality(settings['uniform'],command_ticks)
     column=np.full(c['requests'],-1,dtype='i8');counts=Counter();tier_columns=Counter();tier_acts=Counter()
     def read_commands(path):
         with path.open() as stream:
@@ -97,7 +99,8 @@ def validate(case,dram,settings,rows):
         hb_utilization=c['total_bytes']/(d['ticks']*.25)/1000/32,
         consumer_frontier_bytes=frontier_bytes,task_start_causes=dict(frontier),
         critical_path_scope='Last packet of data-dominated task joins; excludes controller-resource causal chains, so not exact global critical-path data movement',
-        timing=tier_timings(settings['uniform']),scope='T0 assumed tier-aware internal model. Known prefetch/partial-sum streaming, not new hardware or physical device calibration')
+        timing=tier_timings(settings['uniform']),command_duration_ticks=command_ticks,
+        scope='T0 assumed tier-aware internal model. Known prefetch/partial-sum streaming, not new hardware or physical device calibration')
     (case/'result.json').write_text(json.dumps(result,indent=2)+'\n');return result
 
 

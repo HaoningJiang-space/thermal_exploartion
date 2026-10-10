@@ -4,6 +4,11 @@
       "run": "d2-smoke-9fd6376",
       "status": "Failed independent extra timing check; no D2 performance result used",
       "correction": "Account for multi-cycle command beginning/end offsets. Extend slow deadlines with ACT duration offset; PRE-to-ACT checker uses upstream offset."
+    },
+    {
+      "run": "d2-smoke-f70e6d8",
+      "status": "Failed independent extra timing check; no D2 performance result used",
+      "correction": "Native extension used serialized durations correctly; independent checker had assumed ACT2CK and Column/PRE1CK. Now both derive durations from serialized definition: ACT1.5CK, Column1CK, PRE0.5CK."
     }
   ],
   "export_correction": "None timing-only energy evidence handled as fixed, not a command-energy dictionary."

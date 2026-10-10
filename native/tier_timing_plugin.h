@@ -35,7 +35,8 @@ class TierTiming : public IControllerPlugin, public Implementation {
     auto extend=[&](const std::string& name,int delay){if(s.has_command(name)){
       auto id=s.get_command_id(name);
       // Like upstream codegen: timings are between command-receipt endings;
-      // traces timestamp their beginnings. ACT occupies two CK, RD/PRE one.
+      // traces timestamp their beginnings. Use serialized command durations
+      // (HBM3 ACT1.5CK, RD1CK, PRE0.5CK), not a guessed whole-CK framing.
       int offset=s.command_cycles[req.command]-s.command_cycles[id];
       bank->m_cmd_ready_clk[id]=std::max(bank->m_cmd_ready_clk[id],ctrl->m_clk+delay+offset);}};
     for(auto name:{"RD","RDA","WR","WRA"})extend(name,rcd[tier]);

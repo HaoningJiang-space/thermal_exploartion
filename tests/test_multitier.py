@@ -22,7 +22,7 @@ class MultiTierContract(unittest.TestCase):
         check.issue('ACT',v,0)
         with self.assertRaises(ValueError):check.issue('RD',v,10)
         with self.assertRaises(ValueError):check.issue('PREpb',v,120)
-        check.issue('RD',v,t['rcd_ticks'][7]+2);check.issue('PREpb',v,t['ras_ticks'][7]+2)
+        check.issue('RD',v,t['rcd_ticks'][7]+1);check.issue('PREpb',v,t['ras_ticks'][7]+2)
         with self.assertRaises(ValueError):check.issue('ACT',[0,0,0,0,0,0,0],t['rc_ticks'][7]-1)
         check.issue('ACT',[0,0,0,0,0,0,0],t['rc_ticks'][7])
 
