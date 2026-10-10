@@ -63,7 +63,34 @@ def cold_peak(audit,segments):
     return peak
 
 
-def evaluate(r,energy,ledger,p,cooling,scale=1.,backend='scipy',bins=64,grid=4):
+def idle_pace(audit,segments,p0):
+    """Keep active power/rates fixed and insert idle intervals after each bin.
+
+    This is a conditional duty-cycle construction, not a fitted DVFS curve.
+    Bin boundaries approximate drainable event checkpoints; no new controller
+    timing or voltage-energy relation is inferred from temperatures.
+    """
+    def checked(alpha):
+        paced=[]
+        for segment in segments:
+            paced.append(segment)
+            if alpha>1: paced.append(dict(name=segment['name']+'_idle',duration_s=segment['duration_s']*(alpha-1),power_w=p0.tolist()))
+        result=audit.audit(paced)
+        return result,result['logic_peak_upper_c']<=85+1e-7 and result['dram_peak_upper_c']<=85+1e-7
+    raw,feasible=checked(1.)
+    if feasible:return dict(factor=1.,unpaced=raw,paced=raw)
+    lo=1.;hi=2.;best,feasible=checked(hi)
+    while not feasible:
+        lo=hi;hi*=2;best,feasible=checked(hi)
+        if hi>1e6:raise ValueError('Active-bin burst itself exceeds thermal limit; refine checkpoints')
+    for _ in range(18):
+        mid=(lo+hi)/2;result,okay=checked(mid)
+        if okay:hi=mid;best=result
+        else:lo=mid
+    return dict(factor=hi,unpaced=raw,paced=best)
+
+
+def evaluate(r,energy,ledger,p,cooling,scale=1.,backend='scipy',bins=64,grid=4,pacing_mode='uniform'):
     if cooling<=0 or scale<=0 or r['time_us']<=0 or np.any(energy<0) or energy.shape!=(bins,32):raise ValueError('Invalid physical energy/time/boundary')
     profile=json.loads(json.dumps(p));profile['parameters']['package_top_resistance_k_w']['value']=cooling
     tc=thermal_config(profile);cost=organization_cost(profile,2,'fixed_compute');stream=r['variant'].startswith('known_fifo')
@@ -85,9 +112,15 @@ def evaluate(r,energy,ledger,p,cooling,scale=1.,backend='scipy',bins=64,grid=4):
     cfg=dict(grid=grid,thermal=tc);capacity=dict(silicon_volumetric_capacity_j_m3k=1.63e6,lid_volumetric_capacity_j_m3k=3.45e6,samples_per_segment=9)
     audit=PeriodicAudit(cfg,capacity)
     segments=[dict(name='bin'+str(i),duration_s=dt,power_w=power.tolist()) for i,power in enumerate(powers)]
-    paced=audit.pace(segments,p0)
+    if pacing_mode not in ('uniform','idle_bins'):raise ValueError('Unknown pacing construction')
+    paced=idle_pace(audit,segments,p0) if pacing_mode=='idle_bins' else audit.pace(segments,p0)
     factor=paced['factor'];energy_token=(energy.sum()*scale+p0.sum()*duration*factor)/r['meta']['tokens']
+    dynamic_mean=mean-p0;layer=layer_response(h)
+    base_temp=25+layer@p0;layer_dynamic=layer@dynamic_mean
+    if base_temp.max()>=85:raise ValueError('Background alone violates layer thermal limit')
+    layer_pace=max(1.,float(np.max(layer_dynamic/(85-base_temp))))
     return dict(workload=r['workload'],variant=r['variant'],time_us=r['time_us'],unpaced_tokens_s=r['meta']['tokens']/duration,
+        t1_layer_pace_factor=layer_pace,t1_layer_sustainable_tokens_s=r['meta']['tokens']/(duration*layer_pace),pacing_mode=pacing_mode,
         sustainable_tokens_s=r['meta']['tokens']/(duration*factor),pace_factor=factor,energy_per_token_j=float(energy_token),
         logic_mean_w=float(mean[:n].sum()),dram_mean_w=float(mean[n:].sum()),power_cooling_necessary_bound_w=60/cooling,
         t1_layer_steady_peak_c=float(layer_steady.max()),t2_steady_peak_c=float(spatial_steady.max()),cold_token_sampled_peak_c=cold_peak(audit,segments),
@@ -110,7 +143,7 @@ def main():
         disabled_feedback=['Temperature-dependent refresh','Leakage-temperature curves'],thermal_backend=a.thermal_backend),indent=2)+'\n')
     all_results=json.loads((directory/'summary.json').read_text())
     for r in all_results:
-        if r['variant'] not in ('sram_baseline','known_fifo_known_fusion'):continue
+        if r.get('status')=='FAILED_FINITE_SCHEDULE' or r['variant'] not in ('sram_baseline','known_fifo_known_fusion'):continue
         energy,ledger,removed=trace_power(directory,r)
         for name,(scale,cooling) in SCENARIOS.items():
             result=evaluate(r,energy,ledger,p,cooling,scale,a.thermal_backend);result.update(scenario=name,removed_declared_sram_spill_bytes=removed)

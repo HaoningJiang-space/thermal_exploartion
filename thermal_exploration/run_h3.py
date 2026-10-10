@@ -62,7 +62,11 @@ def main():
             for mode in (MODES if not stream else (*MODES,'known_fusion')):
                 variant=('known_fifo_' if stream else 'sram_')+mode
                 if reuse(name,variant,g.meta):continue
-                r=execute(g,mode);events=r.pop('events')
+                try:r=execute(g,mode)
+                except ValueError as error:
+                    result=dict(workload=name,variant=variant,source_commit=revision(),meta=g.meta,status='FAILED_FINITE_SCHEDULE',error=str(error))
+                    (out/(name+'-'+variant+'.json')).write_text(json.dumps(result,indent=2)+'\n');summaries.append(result);print(name,variant,result['status'],flush=True);continue
+                events=r.pop('events')
                 path=out/(name+'-'+variant+'.jsonl.gz')
                 with gzip.open(path,'wt') as f:
                     for node,event in zip(g.nodes,events):
@@ -74,14 +78,20 @@ def main():
             if stream:
                 for sensitivity,ports,links in (('ports_half',.5,1.),('ports_double',2.,1.),('links_half',1.,.5)):
                     if reuse(name,'known_fifo_'+sensitivity,g.meta):continue
-                    r=execute(g,'baseline',sram_scale=ports,link_scale=links);r.pop('events')
+                    try:r=execute(g,'baseline',sram_scale=ports,link_scale=links)
+                    except ValueError as error:
+                        result=dict(workload=name,variant='known_fifo_'+sensitivity,source_commit=revision(),meta=g.meta,status='FAILED_FINITE_SCHEDULE',error=str(error))
+                        (out/(name+'-'+result['variant']+'.json')).write_text(json.dumps(result,indent=2)+'\n');summaries.append(result);print(name,result['variant'],result['status'],flush=True);continue
+                    r.pop('events')
                     result=dict(workload=name,variant='known_fifo_'+sensitivity,source_commit=revision(),meta=g.meta,**r)
                     (out/(name+'-'+result['variant']+'.json')).write_text(json.dumps(result,indent=2)+'\n');summaries.append(result)
                     print(name,result['variant'],r['time_us'],flush=True)
     (out/'summary.json').write_text(json.dumps(summaries,indent=2)+'\n')
     with (out/'summary.csv').open('w') as f:
         writer=csv.writer(f);writer.writerow(('workload','variant','time_us','tokens','tokens_per_second','dram_bytes','mac_flops','noc_byte_hops'))
-        for r in summaries:writer.writerow((r['workload'],r['variant'],r['time_us'],r['meta']['tokens'],r['meta']['tokens']/r['time_us']*1e6,r['activity']['dram'],r['activity']['mac'],r['activity'].get('link',0)))
+        for r in summaries:
+            if r.get('status')=='FAILED_FINITE_SCHEDULE':writer.writerow((r['workload'],r['variant'],'FAILED',r['meta']['tokens'],'','','',''));continue
+            writer.writerow((r['workload'],r['variant'],r['time_us'],r['meta']['tokens'],r['meta']['tokens']/r['time_us']*1e6,r['activity']['dram'],r['activity']['mac'],r['activity'].get('link',0)))
 
 
 if __name__=='__main__':main()

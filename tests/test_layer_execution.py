@@ -27,6 +27,14 @@ class LayerExecutionTests(unittest.TestCase):
         self.assertGreater(coarse['ticks']/coarse_ideal['ticks'],1.05)
         self.assertEqual(fine['ticks'],fine_ideal['ticks'])
         self.assertEqual(fine['dram_bytes'],coarse['dram_bytes'])
+    def test_head_grouping_and_nonlinear_state_merge(self):
+        b0=attention_merge(1,16,16,128,True,'none')
+        grouped=attention_merge(1,16,16,128,False,'none')
+        self.assertEqual(b0['activity']['link'],16*520*15)
+        self.assertEqual(grouped['activity'].get('link',0),0)
+        llama=attention_merge(1,32,8,128,False,'none')
+        self.assertEqual(llama['activity']['link'],32*520)
+        self.assertGreater(llama['activity']['vector'],32*128)
     def test_global_and_regional_residency(self):
         c=load_model('qwen15_moe');a=capacity(c,8,2048);l=resident_layout(c,a,'B3_3d_placement',tp=4)
         self.assertTrue(all(x<=256*2**20 for row in l['used_bytes'] for x in row))

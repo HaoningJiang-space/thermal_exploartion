@@ -28,6 +28,14 @@ class DecodeGraphTests(unittest.TestCase):
         self.assertEqual(sum(n.work for n in mem),8*2**30)
         self.assertEqual(sum(n.work for n in mem if n.tier==0),4*2**30)
 
+    def test_same_producer_multiple_buffer_slices(self):
+        g=Graph();first=g.add('dram',0,32,ticks=1)
+        a=g.add('mac',0,20,(first,),ticks=2);b=g.add('vector',0,20,(first,),ticks=3)
+        g.lease(first,a,('output',0),32);g.lease(first,b,('output',0),32);g.output=[a,b]
+        r=execute(g);self.assertEqual(r['buffer_high']["('output', 0)"],64)
+    def test_propagation_does_not_serialize_link(self):
+        g=Graph(256,True);_,a=g.network_link(0,1,64,(),'input');_,b=g.network_link(0,1,64,(),'input');g.output=[a,b]
+        r=execute(g);self.assertEqual(r['ticks'],24);self.assertEqual(r['activity']['link'],128)
     def test_invalid_dependency_rejected(self):
         with self.assertRaises(ValueError):Graph().add('mac',0,1,(0,),ticks=1)
 

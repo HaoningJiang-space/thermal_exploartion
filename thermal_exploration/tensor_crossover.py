@@ -10,8 +10,8 @@ from .decode_graph import Graph, execute
 from .tensor_execution import build, CASES
 
 
-def graph(case):
-    model = build(CASES[case]); c = model['contract']; g = Graph()
+def graph(case,refined=False):
+    model = build(CASES[case]); c = model['contract']; g = Graph(256,True) if refined else Graph()
     inputs = {}
     for x in model['inputs']:
         arrivals = g.broadcast(x['source'], x['targets'], x['bytes'], stage='input')
@@ -39,8 +39,8 @@ def graph(case):
     return g
 
 
-def compare(case, detail):
-    g = graph(case); r = execute(g)
+def compare(case, detail,refined=False):
+    g = graph(case,refined); r = execute(g)
     activity = r['activity']; c = g.meta['contract']
     if activity['dram']!=c['dram_bytes'] or activity['mac']!=c['mac_flops']:
         raise ValueError('Cross-fidelity workload mismatch')
@@ -53,7 +53,7 @@ def compare(case, detail):
     for kind in ('dram','hb','link','sram_read','sram_write','mac','vector'):
         events = [e for e in r['events'] if e['kind']==kind]
         windows[kind] = (max(e['finish_tick'] for e in events)-min(e['start_tick'] for e in events))*.00025 if events else 0
-    return dict(case=case, contract=c, h2_time_us=detail['time_us'], h3_time_us=r['time_us'],
+    return dict(case=case,refined_packet_model=refined,contract=c, h2_time_us=detail['time_us'], h3_time_us=r['time_us'],
         latency_relative_error=error, ten_percent_latency_target_met=abs(error)<=.1,
         same_weight_bytes=True, same_mac_flops=True, same_noc_byte_hops=actual_link_bytes==expected_link_bytes,
         h2_noc_byte_hops=expected_link_bytes,h3_noc_byte_hops=actual_link_bytes,

@@ -56,7 +56,7 @@ def audit_record(directory,r,bins=128,grid=4,scale=1.,cooling=.3,backend='scipy'
     # No timing-only oracle is evaluated as a paid implementation.
     mapped=dict(workload=r['scenario'],variant='known_fifo_baseline' if r['baseline'] in ('B2_stream_fusion','B3_3d_placement') else 'sram_baseline',
                 ticks=round(r['time_us']/.00025),time_us=r['time_us'],meta=dict(tokens=r['tokens']))
-    result=evaluate(mapped,energy,ledger,load_exploration(),cooling,scale,backend,bins,grid)
+    result=evaluate(mapped,energy,ledger,load_exploration(),cooling,scale,backend,bins,grid,pacing_mode='idle_bins')
     result.update(baseline=r['baseline'],routing=r['routing'],tensor_parts=r['tensor_parts'],logic_memory_share=share,
         scope='Full structural128-step Decode event workload, conditional periodicRC feasibility; not device-calibrated inference throughput',
         t0_tokens_s=r['tokens_s'],event_power_resolution='Per-tile activity distributed over measured fast-kernel/packet stage windows; not per-command switching power',
@@ -74,11 +74,11 @@ def main():
         coefficients=COEFFICIENTS,scenarios=SCENARIOS,
         assumptions=['Memory3.432pJ/B aggregate includesHB; no independent command energy calibration',
         'Equivalent30um DRAM thermal layer; tier thermal depths unresolved','Memory logic heat fraction.48; bounded.3/.7 controls',
-        'Uniform pacing stretches execution and preserves dynamic energy, feasible construction not optimal DVFS',
+        'Active rates fixed; idle bins inserted for duty-cycle pacing; checkpoint/geometry assumptions remain uncalibrated',
         'Unknown refresh/leakage temperature feedback disabled','128/256 energy-bin and4/8 spatial convergence checks are numerical, not device validation']),indent=2)+'\n')
     selected=[]
     for r in summaries:
-        if r.get('status')!='PASS_ACCOUNTING' or r['oracle']!='none' or r['tensor_parts']!=16:continue
+        if r.get('status')!='PASS_ACCOUNTING' or r['oracle']!='none' :continue
         if r['model']=='qwen15_moe' and r['routing']!='public_projected':continue
         if r['baseline'] not in ('B0_local','B1_dataflow','B2_stream_fusion','B3_3d_placement'):continue
         selected.append(r)

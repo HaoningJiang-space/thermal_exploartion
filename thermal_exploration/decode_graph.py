@@ -27,8 +27,10 @@ class Node:
 
 
 class Graph:
-    def __init__(self):
+    def __init__(self,network_packet_bytes=4096,decoupled_link_latency=False):
         self.nodes=[];self.meta={};self.output=[]
+        self.packet_bytes=network_packet_bytes;self.decoupled_link_latency=decoupled_link_latency
+        if network_packet_bytes not in (64,256,4096):raise ValueError('Unsupported network packet')
 
     def add(self,kind,tile,work,deps=(),resource=None,ticks=0,stage='',tier=-1):
         id=len(self.nodes)
@@ -76,16 +78,21 @@ class Graph:
             self.lease(mem,mac if stream else read,('weight_fifo' if stream else 'weight',tile),size)
         return end
 
+    def network_link(self,source,target,size,deps,stage):
+        service=self.add('link',source,size,deps,('link',source,target),ceil(size/8)+(0 if self.decoupled_link_latency else 8),stage)
+        end=self.add('join',target,0,(service,),('flight',len(self.nodes)),8,stage) if self.decoupled_link_latency else service
+        return service,end
+
     def transfer(self,source,target,bytes_,deps,stage='communication'):
         if source==target:return self.join(deps,stage)
         packets=[]
-        for offset in range(0,bytes_,4096):
-            size=min(4096,bytes_-offset)
+        for offset in range(0,bytes_,self.packet_bytes):
+            size=min(self.packet_bytes,bytes_-offset)
             first=self.add('sram_read',source,size,deps,('read',source),ceil(size/256),stage)
             end=first;links=[]
             for a,b in route(source,target):
-                link=self.add('link',a,size,(end,),('link',a,b),ceil(size/8)+8,stage)
-                links.append((link,b));end=link
+                link,end=self.network_link(a,b,size,(end,),stage)
+                links.append((link,b))
             end=self.add('sram_write',target,size,(end,),('write',target),ceil(size/128),stage)
             self.lease(first,links[0][0],('transmit',source),size)
             for index,(link,node) in enumerate(links):
@@ -101,8 +108,8 @@ class Graph:
         children=defaultdict(list)
         for a,b in sorted(edges):children[a].append(b)
         output=defaultdict(list)
-        for offset in range(0,bytes_,4096):
-            size=min(4096,bytes_-offset)
+        for offset in range(0,bytes_,self.packet_bytes):
+            size=min(self.packet_bytes,bytes_-offset)
             read=self.add('sram_read',source,size,deps,('read',source),ceil(size/256),stage)
             def visit(node,before):
                 local=[]
@@ -110,8 +117,8 @@ class Graph:
                     write=self.add('sram_write',node,size,(before,),('write',node),ceil(size/128),stage)
                     self.lease(read,write,('receive',node),size);output[node].append(write);local.append(write)
                 for target in children[node]:
-                    link=self.add('link',node,size,(before,),('link',node,target),ceil(size/8)+8,stage)
-                    local.append(link);last=visit(target,link)
+                    link,arrival=self.network_link(node,target,size,(before,),stage)
+                    local.append(arrival);last=visit(target,arrival)
                     direction=0 if node==target-1 else 1 if node==target+1 else 2 if node==target-4 else 3
                     self.lease(link,last,('router'+str(direction),target),size)
                 return self.join(local or (before,),stage)
@@ -120,22 +127,22 @@ class Graph:
         if source in targets:result[source]=self.join(deps,stage)
         return result
 
-    def collective(self,root,producers,bytes_,stage='ffn_reduce'):
+    def collective(self,root,producers,bytes_,stage='ffn_reduce',preallocated_sources=False):
         """FP32 tree partials, ordinary tile vectors and same SRAM/links."""
         edges={e for source in producers for e in route(root,source)};children=defaultdict(list)
         for a,b in sorted(edges):children[a].append(b)
         outputs=[]
-        for offset in range(0,bytes_,4096):
-            size=min(4096,bytes_-offset)
+        for offset in range(0,bytes_,self.packet_bytes):
+            size=min(self.packet_bytes,bytes_-offset)
             def visit(node):
                 contributions=[];incoming=[]
                 if node in producers:contributions.append(producers[node])
                 for child in children[node]:
                     partial=visit(child)
                     read=self.add('sram_read',child,size,(partial,),('read',child),ceil(size/256),stage)
-                    self.lease(partial,read,('output',child),size)
-                    link=self.add('link',child,size,(read,),('link',child,node),ceil(size/8)+8,stage)
-                    write=self.add('sram_write',node,size,(link,),('write',node),ceil(size/128),stage)
+                    if not preallocated_sources or child not in producers:self.lease(partial,read,('output',child),size)
+                    link,arrival=self.network_link(child,node,size,(read,),stage)
+                    write=self.add('sram_write',node,size,(arrival,),('write',node),ceil(size/128),stage)
                     self.lease(read,link,('transmit',child),size);self.lease(link,write,('receive',node),size)
                     contributions.append(write);incoming.append(link)
                 read=self.add('sram_read',node,size*len(contributions),contributions,('read',node),ceil(size*len(contributions)/256),stage)
@@ -159,7 +166,7 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
     for node in g.nodes:
         remaining.append(len(node.deps))
         for dep in node.deps:children[dep].append(node.id)
-    queues=defaultdict(list);events=[];busy={};used=Counter();private_used=Counter();high=Counter();owners=defaultdict(set)
+    queues=defaultdict(list);events=[];busy={};used=Counter();private_used=Counter();high=Counter();owners=defaultdict(Counter)
     release=defaultdict(list);last_release={};done=np.full(n,-1,dtype=np.int64);start=done.copy();parents=[None]*n
     wait=Counter();last_resource={};clock=0;completed=0;activity=Counter();per_tile=defaultdict(Counter)
     caps={'weight':524288,'weight_fifo':262144,'return':65536,'receive':65536,'workspace':1048576,
@@ -178,7 +185,8 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
         while events and events[0][0]<=clock:
             time,i=heapq.heappop(events);done[i]=time;completed+=1
             for key,amount,owner in release.pop(i,[]):
-                used[key]-=amount;private_used[key[1]]-=amount;owners[key].remove(owner);last_release[key]=(i,time)
+                used[key]-=amount;private_used[key[1]]-=amount;owners[key][owner]-=1
+                if owners[key][owner]==0:del owners[key][owner];last_release[key]=(i,time)
             for child in children[i]:
                 remaining[child]-=1
                 if remaining[child]==0:enqueue(child)
@@ -191,7 +199,9 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
                 _,i=queues[key][0];node=g.nodes[i]
                 if any(used[k]+a>cap(k) for k,a,_ in node.leases):
                     wait[node.kind+'_credit']+=1;continue
-                heapq.heappop(queues[key]);start[i]=clock;progress=True
+                heapq.heappop(queues[key])
+                if not queues[key]:del queues[key]
+                start[i]=clock;progress=True
                 candidates=[(int(done[j]),j,'dependency') for j in node.deps]
                 if key in last_resource:candidates.append((busy[key],last_resource[key],'resource'))
                 for k,_,_ in node.leases:
@@ -203,8 +213,8 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
                 if node.kind in ('sram_read','sram_write'):duration=max(1,ceil(duration/sram_scale))
                 if node.kind=='link':duration=max(1,ceil(duration/link_scale))
                 if mode=='ideal_memory' and node.kind in ('dram','hb'):duration=0
-                if mode=='infinite_noc' and node.kind=='link':duration=0
-                if mode=='ideal_collective' and node.stage in ('combine','attention_reduce','ffn_reduce') and node.kind=='link':duration=0
+                if mode=='infinite_noc' and (node.kind=='link' or node.resource[0]=='flight'):duration=0
+                if mode=='ideal_collective' and node.stage in ('combine','attention_reduce','ffn_reduce') and (node.kind=='link' or node.resource[0]=='flight'):duration=0
                 if mode in ('direct_stream','known_fusion') and node.stage in ('up','down','expert_up','expert_down','attention_local'):
                     # Existing fused kernels/registered accumulators avoid a
                     # forced2KiB spill/reload on each local block. Dependencies
@@ -216,7 +226,7 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
                 # it is not implemented by secretly dropping compute work.
                 finish=clock+duration;busy[key]=finish;last_resource[key]=i
                 for k,a,last in node.leases:
-                    used[k]+=a;private_used[k[1]]+=a;high[k]=max(high[k],used[k]);owners[k].add(i);release[last].append((k,a,i))
+                    used[k]+=a;private_used[k[1]]+=a;high[k]=max(high[k],used[k]);owners[k][i]+=1;release[last].append((k,a,i))
                 if mode!='ideal_buffer' and any(private_used[t]+fixed[t]>private_budget for t in range(16)):
                     raise ValueError('Combined private SRAM budget exceeded')
                 heapq.heappush(events,(finish,i))
@@ -349,23 +359,30 @@ def moe(batch=32,skew=1.2,seed=20261010,stream=False,tensor_parts=4):
                         prev=g.memory_compute(tile,65536,65536*local_count,(*dispatch,entry),prev,tier,
                             h//tensor_parts*local_count*5 if layer==0 and chunk==512//tensor_parts-1 else 0,'expert_up' if layer==0 else 'expert_down',stream,(entry,))
                 g.lease(entry,prev,('workspace',tile),local_count*(d*2+h//tensor_parts*4+d*4))
-                partials[tile]=prev;groups.append((prev,tile,selected))
+                partials[tile]=prev;groups.append((prev,tile,selected,e))
             physical_weight_bytes+=4*d*h
             for token in selected:expert_finish[token,e]=partials
-    outputs=[]
+    outputs=[];partial_arrivals={}
     for token,es in enumerate(routing):
         root=token%16
-        arrivals=[g.collective(root,expert_finish[token,e],d*4,'combine') for e in es]
+        arrivals=[g.collective(root,expert_finish[token,e],d*4,'combine',preallocated_sources=True) for e in es]
+        for e,arrival in zip(es,arrivals):partial_arrivals[token,e]=arrival
         merge=g.add('vector',root,d*3,arrivals,('vector',root),ceil(d*3/16),'combine')
+        for e,arrival in zip(es,arrivals):
+            if root not in expert_finish[token,e]:g.lease(arrival,merge,('output',root),d*4)
         outputs.append(g.add('mac',root,2*d*128,(merge,),('mac',root),ceil(2*d*128/2000),'next_operator'))
-    for finish,tile,selected in groups:
-        retired=g.join([outputs[token] for token in selected],'output_retirement')
-        g.lease(finish,retired,('output',tile),len(selected)*d*4)
+    for finish,tile,selected,e in groups:
+        # Source partials retire after this expert's collective consumes them,
+        # not after an unrelated second expert completes the whole token.
+        for token in selected:
+            retired=outputs[token] if tile==token%16 else partial_arrivals[token,e]
+            g.lease(finish,retired,('output',tile),d*4)
     active_bytes=len(counts)*4*d*h
     g.output=outputs;g.meta=dict(family='MoE',batch=batch,experts=experts,d=d,h=h,topk=topk,seed=seed,skew=skew,
         routing=routing,expert_counts=dict(counts),expert_owners=owner,expert_tiers=expert_tiers,tensor_parts=tensor_parts,
         weight_bytes=physical_weight_bytes,unique_active_weight_bytes=active_bytes,
         resident_weight_bytes=resident,fast_capacity_bytes=4*2**30,mac_flops=4*d*h*batch*topk+2*d*128*batch,
         tokens=batch,baseline='Static popularity placement/load-balanced ownership; expert weight reuse, asynchronous dispatch and expert-granular combine',
+        output_retirement='Per-token source slice freed after own collective; root alias retained until combine; no duplicated source lease',
         routing_evidence='Assumed weighted-without-replacement probability trace, not an observed model route')
     return g

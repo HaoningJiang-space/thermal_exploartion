@@ -51,7 +51,7 @@ def run_case(c,admission,baseline,oracle,route_data,mode,directory,tp=16):
         activity=dict(total),critical_macro_path_ticks=dict(critical),step_records=rows,
         admission=admission,layout=layout,source_commit=revision(),events_file=event_file.name,
         events_sha256=hashlib.sha256(event_file.read_bytes()).hexdigest(),
-        qualification='Conditional hierarchy: Column crossover passes; Row/2D old H3 fail10%; full Decode is not independently prediction-validated',
+        qualification='Conditional hierarchy: Refined256B/decoupled-flight crossover passes10% for Row/Column/2D; full Decode remains conditional, not independent device/inference validation',
         baseline_scope='Named implemented mechanisms, NOT complete SET/SoMa/ATLAS/DeepStack/HDA algorithm reproductions',
         routing_scope='Qwen2 public trace projection, not Qwen1.5 captured inference' if mode=='public_projected' else 'Uniform seeded control',
         scope='Whole-model structural Decode latency; no model-weight execution, numerical accuracy, serving overhead or sampling correctness claim')
@@ -72,7 +72,7 @@ def main():
         assumptions=['D1 streaming guard26.599TB/s plus tier bank-cycle bounds','Independent256MiB physical tier/region capacities',
         'B2/B3 known bounded ingress FIFO and registered partials:0.8mm2/0.08W charged, same compute and36MiB',
         'Conservative operator/layer barriers; no claimed optimal SET/SoMa global schedule','No DRAM command traces in full-model hierarchy',
-        'Complete causal layer/step order; no autoregressive speculation','Context-extension flag is an architectural assumption, not validated inference quality']),indent=2)+'\n')
+        'Complete causal layer/step order; no autoregressive speculation','B1–B3 use grouped-head KV plus bounded split-KV; associative(m,l,o) merge, no plain-sum softmax','Qwen router61 scalar outputs are reduced before top-k; local expert weighting costs TP-dependent vector work','Final partials/materialized tensors are charged and1MiB expert workspace checked','Memory returns1024B with64KiB credits, separate32KiB compute blocks; fluid sub-tick HB serialization','Context-extension flag is an architectural assumption, not validated inference quality']),indent=2)+'\n')
     for scenario in a.cases:
         model,batch,context=SCENARIOS[scenario];c=load_model(model);admission=capacity(c,batch,context,allow_context_extension=a.allow_context_extension)
         admissions.append(dict(scenario=scenario,**admission));(out/'admissions.json').write_text(json.dumps(admissions,indent=2)+'\n')

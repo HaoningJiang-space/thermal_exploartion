@@ -10,6 +10,7 @@ from math import ceil
 import numpy as np
 from .decode_graph import Graph, execute
 from .model_contract import tensors
+from .horizontal import route
 
 TICK_NS=.25
 BASELINES=('B0_local','B1_dataflow','B2_stream_fusion','B3_3d_placement')
@@ -141,13 +142,23 @@ def tile_pipeline(parts,batch,stream,oracle='none',chunk=32768,ports=1.,useful_b
 @lru_cache(maxsize=2048)
 def collective(batch,width,kind,oracle='none'):
     """Known tree multicast/reduction on ordinary tiles, no network compute."""
-    g=Graph()
+    g=Graph(256,True)
     if kind=='broadcast':
         outputs=[]
         for source in range(16):
             x=g.broadcast(source,list(range(16)),ceil(batch*width*2/16),stage='broadcast')
             outputs.extend(x.values())
         g.output=outputs
+    elif kind=='router':
+        local={tile:g.join(()) for tile in range(16)}
+        g.output=[g.collective(0,local,batch*width*4,'attention_reduce')]
+    elif kind=='route_broadcast':
+        g.output=list(g.broadcast(0,list(range(16)),batch*36,stage='broadcast').values())
+    elif kind=='scalar':
+        local={tile:g.join(()) for tile in range(16)}
+        reduced=g.collective(0,local,batch*4,'attention_reduce')
+        delivered=g.broadcast(0,list(range(16)),batch*4,(reduced,),'attention_reduce')
+        g.output=list(delivered.values())
     else:
         roots=[];local={tile:g.join(()) for tile in range(16)}
         for root in range(16):roots.append(g.collective(root,local,ceil(batch*width*4/16),'attention_reduce'))
@@ -158,8 +169,57 @@ def collective(batch,width,kind,oracle='none'):
 
 @lru_cache(maxsize=128)
 def kv_gather(update,owner,oracle):
-    g=Graph();g.output=[g.transfer(t,owner,ceil(update/16),(),stage='kv_update') for t in range(16)]
+    g=Graph(256,True);g.output=[g.transfer(t,owner,ceil(update/16),(),stage='kv_update') for t in range(16)]
     return execute(g,'infinite_noc' if oracle=='infinite_noc' else 'baseline')
+
+
+@lru_cache(maxsize=256)
+def head_exchange(batch,hq,hkv,dim,context_mod,oracle,query=False):
+    g=Graph(256,True);split=16//hkv;ends=[]
+    for source in range(16):
+        group=source//split
+        if query:
+            targets=list(range(group*split,(group+1)*split))
+            size=batch*hq//16*dim*2
+        else:
+            targets=[group*split+context_mod%split]
+            size=batch*hkv*dim*4//16
+        for target in targets:ends.append(g.transfer(source,target,size,(),stage='query' if query else 'kv_update'))
+    g.output=ends
+    return execute(g,'infinite_noc' if oracle=='infinite_noc' else 'baseline')
+
+
+@lru_cache(maxsize=128)
+def attention_merge(batch,hq,hkv,dim,sequence_only,oracle):
+    """Associative online-softmax(m,l,o) state merge, not a plain sum.
+
+    A whole520B state arrives before its nonlinear merge. The link engine can
+    split it into256B packets; max/exp/rescaling depend on all state fields.
+    """
+    g=Graph(256,True);outputs=[];split=16 if sequence_only else 16//hkv
+    for token in range(batch):
+        for head in range(hq):
+            group=0 if sequence_only else head//(hq//hkv)
+            leaves=list(range(group*split,(group+1)*split));root=head//(hq//16)
+            edges={e for source in leaves for e in route(root,source)}
+            children=defaultdict(list)
+            for a,b in sorted(edges):children[a].append(b)
+            def visit(node):
+                arrivals=[g.join(())] if node in leaves else []
+                for child in children[node]:
+                    state=visit(child);arrival=g.transfer(child,node,(dim+2)*4,(state,),'attention_reduce')
+                    arrivals.append(arrival)
+                read=g.add('sram_read',node,len(arrivals)*(dim+2)*4,arrivals,('read',node),ceil(len(arrivals)*(dim+2)*4/256),'attention_reduce')
+                for arrival in arrivals[1:]:g.lease(arrival,read,('output',node),(dim+2)*4)
+                ops=max(0,len(arrivals)-1)*(3*dim+8)
+                merge=g.add('vector',node,ops,(read,),('vector',node),ceil(ops/16),'attention_reduce')
+                return g.add('sram_write',node,(dim+2)*4,(merge,),('write',node),ceil((dim+2)*4/128),'attention_reduce')
+            merged=visit(root)
+            normalized=g.add('vector',root,2*dim+1,(merged,),('vector',root),ceil((2*dim+1)/16),'attention_reduce')
+            outputs.append(g.add('sram_write',root,dim*2,(normalized,),('write',root),ceil(dim*2/128),'attention_output'))
+    g.output=outputs
+    mode='infinite_noc' if oracle=='infinite_noc' else 'ideal_collective' if oracle=='ideal_collective' else 'baseline'
+    return execute(g,mode)
 
 
 class LayerExecution:
@@ -197,6 +257,22 @@ class LayerExecution:
         self.events[-1]['tile_kernel_windows']={str(tile):dict(ticks=r['ticks'],dram_last_tick=r['dram_last_tick'],
             hb_last_tick=r['hb_last_tick'],max_response_bytes=r['max_response_bytes'],max_live_weight_bytes=r['max_live_weight_bytes']) for tile,r in results.items()}
 
+        # Final tensor/partial state must actually exist before its next
+        # consumer. Internal scratch spills do not substitute for this ledger.
+        result_bytes=Counter()
+        for n in names:
+            last=n.split('.')[-1];owners=self.layout['tensors'][n]
+            if n=='lm_head':width=self.c['vocab_size'];column=False
+            elif last in ('q','o','down'):width=self.c['hidden_size'];column=last in ('o','down')
+            elif last in ('k','v'):width=self.c['num_key_value_heads']*self.c['hidden_size']//self.c['num_attention_heads'];column=False
+            elif last in ('router','shared_router'):width=self.c['num_experts'] if last=='router' else 1;column=True
+            else:
+                width=self.c['moe_intermediate_size'] if '.expert' in n else self.c['shared_expert_intermediate_size'] if '.shared.' in n else self.c['intermediate_size'];column=False
+            for t in owners:result_bytes[t]+=batch*width*4 if column else ceil(batch*width*4/len(owners))
+        duration=max(ceil(n/128) for n in result_bytes.values())
+        if self.oracle=='direct_producer_stream':duration=0
+        self.phase(name+'_result_state',duration,{str(t):dict(sram_write=n) for t,n in result_bytes.items()},'vector/local state')
+
     def vector(self,name,ops,bytes_,batch):
         physical_bytes=0 if self.oracle=='direct_producer_stream' and any(x in name for x in ('silu','residual')) else bytes_
         duration=max(ceil(ops/16/16),ceil(physical_bytes/16/256)+ceil(physical_bytes/16/128))
@@ -208,20 +284,27 @@ class LayerExecution:
         small=sum(t['bytes'] for t in self.tensor_rows if t['layer']==layer and t['family'] in ('norm','bias'))
         self.phase(p+'norm_bias_weights',max(ceil(small/(26.599*1000*TICK_NS)),ceil(small/16/128)),
             {str(t):dict(dram=ceil(small/16),hb=ceil(small/16),sram_write=ceil(small/16)) for t in range(16)},'memory/storage')
-        self.vector(p+'input_norm',batch*d*6,batch*d*4,batch)
+        self.vector(p+'input_norm_partial_stats',batch*d*3,batch*d*2,batch)
         # RMS statistics use an ordinary scalar tree; traffic is small but its
         # synchronization latency is retained, not silently eliminated.
-        self.network(p+'norm_statistics',batch,16,'reduction')
+        self.network(p+'norm_statistics',batch,1,'scalar')
+        self.vector(p+'input_norm',batch*d*3,batch*d*2,batch)
         self.network(p+'input_distribution',batch,d,'broadcast')
         self.linear([p+x for x in ('q','k','v')],batch,p+'qkv')
         self.vector(p+'rope',batch*(d+kv*hd)*6,batch*(d+kv*hd)*4,batch)
-        self.network(p+'query_distribution',batch,d,'broadcast')
+        sequence_only=self.baseline=='B0_local'
+        if sequence_only:self.network(p+'query_distribution',batch,d,'broadcast')
+        else:
+            exchange=head_exchange(batch,hq,kv,hd,context,self.oracle,True)
+            self.phase(p+'head_group_query_distribution',exchange['ticks'],exchange['per_tile_activity'],'communication/synchronization')
         update=batch*kv*hd*4
         # Sequence-striped KV: gather the newly projected K/V shards at the
         # position owner, rather than pretending every region owns this row.
-        gathered=kv_gather(update,context%16,self.oracle)
+        gathered=kv_gather(update,context%16,self.oracle) if sequence_only else head_exchange(batch,hq,kv,hd,context,self.oracle)
         self.phase(p+'kv_update_delivery',gathered['ticks'],gathered['per_tile_activity'],'communication/synchronization')
-        self.phase(p+'kv_update',ceil(update/128),{str(context%16):dict(sram_read=update,hb=update,dram_write=update)},'KV update')
+        writers=[context%16] if sequence_only else [group*(16//kv)+context%(16//kv) for group in range(kv)]
+        local_update=update//len(writers)
+        self.phase(p+'kv_update',ceil(local_update/128),{str(t):dict(sram_read=local_update,hb=local_update,dram_write=local_update) for t in writers},'KV update')
         # Complete GQA K/V read and QK/PV work; score matrices never reside in
         # DRAM. The full-model all-layer KV was checked before this call.
         bytes_=batch*(context+1)*kv*hd*4
@@ -229,8 +312,9 @@ class LayerExecution:
         useful_per_tile={}
         for tile in range(16):
             resident=self.layout['kv'][tile];total=sum(n for _,n in resident)
-            positions=(context+1+15-tile)//16
-            useful_per_tile[tile]=batch*positions*kv*hd*4
+            seq_split=16 if sequence_only else 16//kv
+            positions=(context+1+seq_split-1-tile%seq_split)//seq_split
+            useful_per_tile[tile]=batch*positions*(kv if sequence_only else 1)*hd*4
             per_tile=ceil(useful_per_tile[tile]/4096)*4096;physical_per_tile[tile]=per_tile
             sizes=[(tier,ceil(per_tile*n/total/4096)*4096) for tier,n in resident]
             # Do not allow rounding to invent useful KV bytes/FLOPs.
@@ -240,7 +324,7 @@ class LayerExecution:
         # Query-head reuse factor is hq/kv, separate from batch already in KV.
         r={t:tile_pipeline(s,hq//kv,self.baseline in BASELINES[2:],self.oracle,useful_bytes=useful_per_tile[t],keep_events=False) for t,s in parts.items()}
         duration=max(x['ticks'] for x in r.values());useful_flops=4*batch*(context+1)*hq*hd
-        activity={str(t):dict(dram=physical_per_tile[t],hb=physical_per_tile[t],mac=useful_per_tile[t]*hq//kv,vector=5*batch*((context+1+15-t)//16)*hq,
+        activity={str(t):dict(dram=physical_per_tile[t],hb=physical_per_tile[t],mac=useful_per_tile[t]*hq//kv,vector=5*batch*((context+1+seq_split-1-t%seq_split)//seq_split)*(hq if sequence_only else hq//kv),
             sram_read=x['activity']['sram_read'],sram_write=x['activity']['sram_write']) for t,x in r.items()}
         # Online softmax has its own16ops/tick tile engine; include its service
         # bound in the streaming phase, not an uncharged extra compute unit.
@@ -249,11 +333,13 @@ class LayerExecution:
         duration=max(duration,vector_time)
         self.phase(p+'split_kv_attention',duration,activity,reason)
         self.events[-1]['useful_kv_bytes']=bytes_;self.events[-1]['physical_kv_bytes']=sum(physical_per_tile.values())
-        self.network(p+'attention_merge',batch,hq*(hd+2),'reduction')
+        merged=attention_merge(batch,hq,kv,hd,sequence_only,self.oracle)
+        self.phase(p+'attention_merge',merged['ticks'],merged['per_tile_activity'],'communication/synchronization')
         self.linear([p+'o'],batch,p+'o_projection')
         self.network(p+'o_reduce',batch,d,'reduction')
-        self.vector(p+'residual_postnorm',batch*d*8,batch*d*6,batch)
-        self.network(p+'postnorm_statistics',batch,16,'reduction')
+        self.vector(p+'residual_postnorm_partial',batch*d*4,batch*d*4,batch)
+        self.network(p+'postnorm_statistics',batch,1,'scalar')
+        self.vector(p+'postnorm_scale',batch*d*3,batch*d*2,batch)
         self.network(p+'ffn_input_distribution',batch,d,'broadcast')
         if c['model_type']=='llama':
             if self.baseline=='B0_local':
@@ -267,6 +353,9 @@ class LayerExecution:
             if routes is None or len(routes)!=batch or any(len(set(x))!=4 or any(not 0<=e<60 for e in x) for x in routes):
                 raise ValueError('Invalid immutable token routing')
             self.linear([p+'router',p+'shared_router'],batch,p+'router')
+            self.network(p+'router_scores',batch,61,'router')
+            self.phase(p+'topk_shared_sigmoid',ceil(batch*(60*4+5)/16),{'0':dict(vector=batch*(60*4+5),sram_read=batch*61*4,sram_write=batch*36)},'vector/local state')
+            self.network(p+'route_weights_distribution',batch,1,'route_broadcast')
             self.network(p+'dispatch',batch,d,'broadcast')
             # Active expert matrices are read once per token microbatch. Every
             # unselected expert remains resident but is not falsely charged as
@@ -284,7 +373,16 @@ class LayerExecution:
             self.linear([p+'shared.gate',p+'shared.up'],batch,p+'shared_gate_up')
             self.vector(p+'shared_silu',batch*c['shared_expert_intermediate_size']*6,batch*c['shared_expert_intermediate_size']*6,batch)
             self.linear([p+'shared.down'],batch,p+'shared_down')
-            self.vector(p+'shared_sigmoid_weighted_combine',batch*d*12,batch*d*8,batch)
+            # Weight and add each tile's FP32 partial BEFORE the one final
+            # collective. This multiplies vector work by TP width; no free
+            # network-side weighting or reduction is being assumed.
+            partial_counts=Counter({tile:batch for tile in range(16)})
+            for expert,count in counts.items():
+                for tile in self.layout['tensors'][p+f'expert{expert}.down']:partial_counts[tile]+=count
+            activity={str(tile):dict(vector=d*(2*n-batch),sram_read=d*4*n,sram_write=d*4*batch) for tile,n in partial_counts.items()}
+            if max(d*4*n for n in partial_counts.values())>1048576:raise ValueError('Expert partials exceed1MiB workspace; microbatch required')
+            duration=max(max(ceil(v['vector']/16),ceil(v['sram_read']/256)+ceil(v['sram_write']/128)) for v in activity.values())
+            self.phase(p+'local_weighted_partial_combine',duration,activity,'vector/local state')
         self.network(p+'output_reduce',batch,d,'reduction')
         self.vector(p+'residual',batch*d,batch*d*6,batch)
 
@@ -294,8 +392,9 @@ class LayerExecution:
         self.phase('embedding_lookup',ceil(batch*d*2/(26.599*1000*TICK_NS)),
             {str(t):dict(dram=ceil(batch*d*2/16),hb=ceil(batch*d*2/16)) for t in range(16)},'memory/storage')
         for layer in range(c['num_hidden_layers']):self.layer(layer,batch,context,None if routes is None else routes[layer])
-        self.vector('final_norm',batch*d*6,batch*d*4,batch)
-        self.network('final_norm_statistics',batch,16,'reduction')
+        self.vector('final_norm_partial_stats',batch*d*3,batch*d*2,batch)
+        self.network('final_norm_statistics',batch,1,'scalar')
+        self.vector('final_norm',batch*d*3,batch*d*2,batch)
         self.network('lm_head_input_distribution',batch,d,'broadcast')
         self.linear(['lm_head'],batch,'lm_head')
         self.vector('logit_selection',batch*c['vocab_size']*2,batch*c['vocab_size']*4,batch)
