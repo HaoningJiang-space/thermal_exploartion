@@ -40,7 +40,10 @@ MoE是256个4096维FP16 tokens、top2、16个固定专家、两个4096×4096线�
 3. **Ownership control**：枚举1×16、2×8、4×4、8×2、16×1矩阵切分、两个物理排列和XY/YX树。
    权重布局可静态优化，输入/最终输出驻留约定不变，未新增资源。
    这是有限集合中最佳的已知数据流对照，**不是任意所有权优化的严格全局上界**。
-   Redistribution另允许生产者直接生成消费布局；MoE只允许16种静态循环expert placement，不改变路由。
+   容量等效时优先较少byte-hop，再优先较少向量加法，不把任意相同上界的首个设计当作唯一最优。
+   Redistribution另理想化让初始DRAM tensor已按消费端布局驻留，最终输出归属不变；
+   若tensor必须由前一算子的固定布局产生，这项初始条件就不免费可得，必须接入生产者后收费。
+   MoE只允许16种静态循环expert placement，不改变路由。
 
 树边只记录一次广播，反向树在计算Tile上逐级合并；没有用逐目标unicast高估已知collective流量。
 容量条件为`time ≥ max(local DRAM/HB time, MAC time, per-Tile vector time, per-directed-link bytes/rate)`。

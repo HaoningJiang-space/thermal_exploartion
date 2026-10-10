@@ -97,8 +97,10 @@ def redistribution(aligned=False):
         for target in range(16):
             size = (m//16)*(n//16)*2
             accounted += size
-            destination = source if aligned else target
-            traffic.unicast("Redistribution", source, destination, size, f"tensor.rows{source}.cols{target}")
+            # Aligned relaxation changes initial DRAM ownership to the final
+            # consumer layout. It does not change final output ownership.
+            origin = target if aligned else source
+            traffic.unicast("Redistribution", origin, target, size, f"tensor.rows{source}.cols{target}")
     if accounted != m*n*2:
         raise ValueError("Tensor permutation lost data")
     return traffic, dict(weight_bytes=accounted,mac_flops=0,input_bytes=accounted,output_bytes=accounted,

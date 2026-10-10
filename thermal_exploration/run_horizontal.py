@@ -110,7 +110,8 @@ def main():
                 result=capacity_bounds(traffic,work,hb,dram,link)
                 evaluated.append((result,partition,index))
                 points.append(dict(case=name,control="tested_ownership",option=index,hb_tb_s=hb,link_gb_s=link,partition=partition,**result))
-            best=min(evaluated,key=lambda r:r[0]["completion_necessary_lower_us"])
+            best=min(evaluated,key=lambda r:(r[0]["completion_necessary_lower_us"],
+                sum(r[0]["byte_hops_by_kind"].values()),r[0]["vector_additions"]))
             # Minimum necessary time in this family is not a feasible schedule
             # or a global optimum over arbitrary ownership/architectures.
             points.append(dict(case=name,control="best_tested_ownership",option=best[2],hb_tb_s=hb,link_gb_s=link,partition=best[1],**best[0]))
