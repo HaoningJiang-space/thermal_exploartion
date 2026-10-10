@@ -196,11 +196,10 @@ int main(int argc,char** argv){try {
      chosen=id;break;
     }
     if(chosen>=0){auto& t=tasks[chosen];t.start=clk;
-     long long duration=std::max(1LL,(t.flops+1999)/2000);
-     mac_until[tile]=clk+duration;mac_running[tile]=chosen;
      mac_rleft[tile]=t.mcount*t.kcount*2+t.kcount*batch*2+(t.parent>=0?t.mcount*batch*4:0);
      mac_wleft[tile]=t.mcount*batch*4;
-     if(mac_rleft[tile]>duration*256||mac_wleft[tile]>duration*128)throw std::runtime_error("MAC block exceeds port roofline");
+     long long duration=std::max({1LL,(t.flops+1999)/2000,(mac_rleft[tile]+255)/256,(mac_wleft[tile]+127)/128});
+     mac_until[tile]=clk+duration;mac_running[tile]=chosen;
      if(first_mac<0)first_mac=clk;
     }else{if(why=="no_remaining_work"&&admit_index[tile]<local[tile].size())why="weight_cache_credit";
      states[why]++;}

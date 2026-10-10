@@ -43,7 +43,9 @@ def validate(case, model, dram):
     for expected, actual in zip(model['tasks'], tasks):
         if any(actual[k] != expected[k] for k in ('id','tile','m_start','k_start','parent','flops','final')):
             raise ValueError('Task identity/work changed')
-        if actual['finish']-actual['start'] != (expected['flops']+1999)//2000:
+        read=expected['m_count']*expected['k_count']*2+expected['k_count']*c['batch']*2+(expected['m_count']*c['batch']*4 if expected['parent']>=0 else 0)
+        write=expected['m_count']*c['batch']*4
+        if actual['finish']-actual['start'] != max(1,(expected['flops']+1999)//2000,(read+255)//256,(write+127)//128):
             raise ValueError('MAC service time')
         for rid in expected['requests']: uses[rid].append(actual)
     for expected, actual in zip(model['requests'], rd):
