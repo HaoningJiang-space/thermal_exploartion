@@ -26,3 +26,14 @@ B0局部Tiled；B1经典Tensor Parallelism/Megatron配对/Split-KV；B2既有pre
 - Llama配置取自DeepStack公开保存的Meta配置快照，记录文件digest，并与Meta公开模型卡核对。
 
 旧H1/G1/G2/D1/D2归档保留，不改变历史门槛与数字。H2归档已经通过独立FIFO重放；合成H3/H5继续作为机制记录，不作为完整模型验证替代品。
+
+## Qualification修正记录
+
+旧4KiB网络模型把传播延迟串行收费；256B包与独立flight事件后，Row/Column/2D交叉误差分别约+7.72%/+1.97%/−1.41%，均进入10%目标。
+旧32KiB整包返回引出的Buffer收益是事务抽象造成的；1024B独立返回和64KiB按字节credit后，该信号消失。
+原结果不删除。完整层级模型仍是Mode B条件性预测，不能凭三例交叉声称芯片/完整LLM验证。
+
+MoE旧代码的源结果生命期过长，并将已有源partial又作为新collective buffer收费；同一生产者多个buffer slice还需引用计数。
+修正为per-token源slice在自身collective后释放、root持有至combine，别名不重复收费；失败轨迹保留，不将调度死锁当物理架构瓶颈。
+完整模型的Attention采用head-grouped KV、真实(m,l,o)非线性状态合并；Qwen有router score归约和TP宽度相关的local partial weighting费用。
+这些是执行语义与已知基线，不是新架构。

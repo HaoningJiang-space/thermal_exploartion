@@ -30,18 +30,20 @@ def graph(case,refined=False):
             producers[tile] = tasks[relevant[0]['id']]
         end = g.collective(red['root'], producers, red['bytes'], 'tensor_reduce')
         cast = g.add('vector',red['root'],red['bytes']//4,(end,),ticks=ceil(red['bytes']/4/16),stage='cast')
-        g.output.append(cast)
+        stored=g.add('sram_write',red['root'],red['bytes']//2,(cast,),('write',red['root']),ceil(red['bytes']/2/128),'output_cast_store')
+        g.output.append(stored)
     g.meta = dict(contract=c, buffer_caps={'weight':c['weight_buffer'],'return':c['response_buffer'],'output':c['reduce_buffer']},
         fixed_sram_bytes=[n+65536+16384-2560 for n in c['static_sram_per_tile']],private_sram_budget_bytes=c['sram_per_tile'],
         output_ownership='canonical equal output shards, as H2',
         weight_bytes=c['dram_bytes'], mac_flops=c['mac_flops'],
-        difference='H3:32KiB memory-service abstraction,4KiB store-forward packets,serialized SRAM/MAC phases; H2:actual1024B requests,32B flits,overlapping MAC ports')
+        difference=f'H3:up-to32KiB memory-service abstraction,{g.packet_bytes}B packets,decoupled_flight={g.decoupled_link_latency},serialized SRAM/MAC phases; H2:actual1024B requests,32B flits,overlapping MAC ports')
     return g
 
 
 def compare(case, detail,refined=False):
     g = graph(case,refined); r = execute(g)
     activity = r['activity']; c = g.meta['contract']
+    if sum(n.work for n in g.nodes if n.stage=='output_cast_store')!=c['output_bytes']:raise ValueError('Missing BF16 output stores')
     if activity['dram']!=c['dram_bytes'] or activity['mac']!=c['mac_flops']:
         raise ValueError('Cross-fidelity workload mismatch')
     for node in g.nodes:
