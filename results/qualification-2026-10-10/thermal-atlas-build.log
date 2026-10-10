@@ -1,0 +1,187 @@
+[  0%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/binary.cpp.o
+[  2%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/bh_dram_controller.cpp.o
+[  2%] Building CXX object src/dram/ramulator2/src/test/CMakeFiles/ramulator-test.dir/test_impl.cpp.o
+[  2%] Building CXX object _deps/spdlog-build/CMakeFiles/spdlog.dir/src/spdlog.cpp.o
+[  2%] Building CXX object src/dram/ramulator2/src/base/CMakeFiles/ramulator-base.dir/factory.cpp.o
+[  2%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/allocators/allocator.cpp.o
+[  3%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/convert.cpp.o
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/bh_dram_controller.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/bh_controller.h:10:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/base/base.h:17:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/base/param.h:91:33: error: use 'template' keyword to treat 'as' as a dependent template name
+   91 |           return _config[_name].as<T>();
+      |                                 ^
+      |                                 template 
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/base/factory.cpp:5:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/frontend/frontend.h:8:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/base/base.h:17:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/base/param.h:91:33: error: use 'template' keyword to treat 'as' as a dependent template name
+   91 |           return _config[_name].as<T>();
+      |                                 ^
+      |                                 template 
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/test/test_impl.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/test/test_ifce.h:4:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/base/base.h:17:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/base/param.h:91:33: error: use 'template' keyword to treat 'as' as a dependent template name
+   91 |           return _config[_name].as<T>();
+      |                                 ^
+      |                                 template 
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/bh_dram_controller.cpp:248:30: warning: & has lower precedence than !=; != will be evaluated first [-Wparentheses]
+  248 |           if (!request_found & m_priority_buffer.size() != 0) {
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/bh_dram_controller.cpp:248:30: note: place parentheses around the '!=' expression to silence this warning
+  248 |           if (!request_found & m_priority_buffer.size() != 0) {
+      |                              ^                              
+      |                                (                            )
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/bh_dram_controller.cpp:248:30: note: place parentheses around the & expression to evaluate it first
+  248 |           if (!request_found & m_priority_buffer.size() != 0) {
+      |                              ^
+      |               (                                        )
+1 error generated.
+make[3]: *** [src/dram/ramulator2/src/test/CMakeFiles/ramulator-test.dir/test_impl.cpp.o] Error 1
+make[2]: *** [src/dram/ramulator2/src/test/CMakeFiles/ramulator-test.dir/all] Error 2
+make[2]: *** Waiting for unfinished jobs....
+[  3%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/dummy_controller.cpp.o
+[  4%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/allocators/islip.cpp.o
+[  4%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/depthguard.cpp.o
+1 error generated.
+make[3]: *** [src/dram/ramulator2/src/base/CMakeFiles/ramulator-base.dir/factory.cpp.o] Error 1
+make[2]: *** [src/dram/ramulator2/src/base/CMakeFiles/ramulator-base.dir/all] Error 2
+[  5%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/generic_dram_controller.cpp.o
+1 warning and 1 error generated.
+make[3]: *** [src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/bh_dram_controller.cpp.o] Error 1
+make[3]: *** Waiting for unfinished jobs....
+[  6%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/directives.cpp.o
+[  6%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/allocators/loa.cpp.o
+[  7%] Building CXX object _deps/spdlog-build/CMakeFiles/spdlog.dir/src/stdout_sinks.cpp.o
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/dummy_controller.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/controller.h:10:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/base/base.h:17:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/base/param.h:91:33: error: use 'template' keyword to treat 'as' as a dependent template name
+   91 |           return _config[_name].as<T>();
+      |                                 ^
+      |                                 template 
+[  7%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/emit.cpp.o
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/generic_dram_controller.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/controller.h:10:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/base/base.h:17:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/base/param.h:91:33: error: use 'template' keyword to treat 'as' as a dependent template name
+   91 |           return _config[_name].as<T>();
+      |                                 ^
+      |                                 template 
+[  8%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/allocators/maxsize.cpp.o
+1 error generated.
+make[3]: *** [src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/dummy_controller.cpp.o] Error 1
+[  8%] Building CXX object _deps/spdlog-build/CMakeFiles/spdlog.dir/src/color_sinks.cpp.o
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/generic_dram_controller.cpp:370:30: warning: & has lower precedence than !=; != will be evaluated first [-Wparentheses]
+  370 |           if (!request_found & m_priority_buffer.size() != 0) {
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/generic_dram_controller.cpp:370:30: note: place parentheses around the '!=' expression to silence this warning
+  370 |           if (!request_found & m_priority_buffer.size() != 0) {
+      |                              ^                              
+      |                                (                            )
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/generic_dram_controller.cpp:370:30: note: place parentheses around the & expression to evaluate it first
+  370 |           if (!request_found & m_priority_buffer.size() != 0) {
+      |                              ^
+      |               (                                        )
+[  9%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/emitfromevents.cpp.o
+[  9%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/emitter.cpp.o
+1 warning and 1 error generated.
+make[3]: *** [src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/generic_dram_controller.cpp.o] Error 1
+make[2]: *** [src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/all] Error 2
+[  9%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/allocators/pim.cpp.o
+[ 10%] Building CXX object _deps/spdlog-build/CMakeFiles/spdlog.dir/src/file_sinks.cpp.o
+[ 11%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/allocators/selalloc.cpp.o
+[ 12%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/emitterstate.cpp.o
+[ 13%] Building CXX object _deps/spdlog-build/CMakeFiles/spdlog.dir/src/async.cpp.o
+[ 13%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/emitterutils.cpp.o
+[ 13%] Building CXX object _deps/spdlog-build/CMakeFiles/spdlog.dir/src/cfg.cpp.o
+[ 15%] Building CXX object _deps/spdlog-build/CMakeFiles/spdlog.dir/src/bundled_fmtlib_format.cpp.o
+[ 16%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/allocators/separable.cpp.o
+[ 17%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/exceptions.cpp.o
+[ 17%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/allocators/separable_input_first.cpp.o
+[ 18%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/exp.cpp.o
+[ 19%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/allocators/separable_output_first.cpp.o
+[ 19%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/allocators/wavefront.cpp.o
+[ 19%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/fptostring.cpp.o
+[ 20%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/memory.cpp.o
+[ 20%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/node.cpp.o
+[ 21%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/arbiters/arbiter.cpp.o
+[ 22%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/node_data.cpp.o
+[ 22%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/nodebuilder.cpp.o
+[ 22%] Linking CXX static library ../../lib/libspdlog.a
+[ 22%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/arbiters/matrix_arb.cpp.o
+[ 22%] Built target spdlog
+[ 23%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/nodeevents.cpp.o
+[ 24%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/arbiters/prio_arb.cpp.o
+[ 24%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/arbiters/roundrobin_arb.cpp.o
+[ 25%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/arbiters/tree_arb.cpp.o
+[ 25%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/null.cpp.o
+[ 25%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/batchtrafficmanager.cpp.o
+[ 26%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/ostream_wrapper.cpp.o
+[ 26%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/parse.cpp.o
+[ 27%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/parser.cpp.o
+[ 29%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/regex_yaml.cpp.o
+[ 29%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/scanner.cpp.o
+[ 30%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/booksim_config.cpp.o
+[ 31%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/scanscalar.cpp.o
+[ 32%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/buffer.cpp.o
+[ 32%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/buffer_state.cpp.o
+[ 32%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/scantag.cpp.o
+[ 33%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/scantoken.cpp.o
+[ 34%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/config_utils.cpp.o
+[ 34%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/simplekey.cpp.o
+[ 35%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/singledocparser.cpp.o
+[ 35%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/credit.cpp.o
+[ 36%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/flit.cpp.o
+[ 36%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/flitchannel.cpp.o
+[ 36%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/stream.cpp.o
+[ 37%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/injection.cpp.o
+[ 38%] Building CXX object 3rd/yaml-cpp/CMakeFiles/yaml-cpp.dir/src/tag.cpp.o
+[ 38%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/misc_utils.cpp.o
+[ 39%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/module.cpp.o
+[ 39%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/networks/anynet.cpp.o
+[ 40%] Linking CXX static library ../../lib/libyaml-cpp.a
+[ 41%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/networks/cmesh.cpp.o
+[ 43%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/networks/dragonfly.cpp.o
+[ 43%] Built target yaml-cpp
+[ 43%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/networks/fattree.cpp.o
+[ 44%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/networks/flatfly_onchip.cpp.o
+[ 44%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/networks/fly.cpp.o
+[ 45%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/networks/kncube.cpp.o
+[ 45%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/networks/network.cpp.o
+[ 46%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/networks/qtree.cpp.o
+[ 46%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/networks/tree4.cpp.o
+[ 47%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/noc_main.cpp.o
+[ 47%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/outputset.cpp.o
+[ 48%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/packet_reply_info.cpp.o
+[ 49%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/power/buffer_monitor.cpp.o
+[ 49%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/power/power_module.cpp.o
+[ 50%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/power/switch_monitor.cpp.o
+[ 50%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/random_utils.cpp.o
+[ 51%] Building CXX object src/noc/booksim2/src/CMakeFiles/noc.dir/rng_double_wrapper.cpp.o
+In file included from <repo-root>/external/ATLAS/simulator/src/noc/booksim2/src/rng_double_wrapper.cpp:29:
+<repo-root>/external/ATLAS/simulator/src/noc/booksim2/src/rng-double.c:34:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   34 |   register int i,j;
+      |   ^~~~~~~~
+<repo-root>/external/ATLAS/simulator/src/noc/booksim2/src/rng-double.c:34:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   34 |   register int i,j;
+      |   ^~~~~~~~
+<repo-root>/external/ATLAS/simulator/src/noc/booksim2/src/rng-double.c:59:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   59 |   register int t,s,j;
+      |   ^~~~~~~~
+<repo-root>/external/ATLAS/simulator/src/noc/booksim2/src/rng-double.c:59:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   59 |   register int t,s,j;
+      |   ^~~~~~~~
+<repo-root>/external/ATLAS/simulator/src/noc/booksim2/src/rng-double.c:59:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+   59 |   register int t,s,j;
+      |   ^~~~~~~~
+<repo-root>/external/ATLAS/simulator/src/noc/booksim2/src/rng-double.c:103:3: error: ISO C++17 does not allow 'register' storage class specifier [-Wregister]
+  103 |   register int m; double a[2009]; /* a rudimentary test */
+      |   ^~~~~~~~
+6 errors generated.
+make[3]: *** [src/noc/booksim2/src/CMakeFiles/noc.dir/rng_double_wrapper.cpp.o] Error 1
+make[3]: *** Waiting for unfinished jobs....
+make[2]: *** [src/noc/booksim2/src/CMakeFiles/noc.dir/all] Error 2
+make[1]: *** [tests/CMakeFiles/test_dram.dir/rule] Error 2
+make: *** [test_dram] Error 2

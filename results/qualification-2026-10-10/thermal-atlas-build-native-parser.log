@@ -1,0 +1,28 @@
+[  2%] Built target ramulator-test
+[  5%] Built target spdlog
+[  8%] Built target ramulator-base
+[ 26%] Built target yaml-cpp
+[ 27%] Built target ramulator-translation
+[ 60%] Built target noc
+[ 61%] Built target ramulator-memorysystem
+[ 62%] Built target ramulator-addrmapper
+[ 68%] Built target ramulator-frontend
+[ 69%] Built target atlasim-noc
+[ 84%] Built target ramulator-controller
+[ 91%] Built target ramulator-dram
+[ 92%] Built target ramulator
+[ 93%] Built target atlasim-dram
+[ 97%] Built target atlasim-core
+[ 97%] Built target atlasim-chip
+[ 97%] Linking CXX shared library ../lib/libatlasim-lib.dylib
+ld: warning: ignoring duplicate libraries: '../lib/libyaml-cpp.a'
+Undefined symbols for architecture arm64:
+  "_yyparse", referenced from:
+      Configuration::ParseFile(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&) in libnoc.a[21](config_utils.cpp.o)
+      Configuration::ParseString(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&) in libnoc.a[21](config_utils.cpp.o)
+ld: symbol(s) not found for architecture arm64
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+make[3]: *** [lib/libatlasim-lib.dylib] Error 1
+make[2]: *** [src/CMakeFiles/atlasim-lib.dir/all] Error 2
+make[1]: *** [tests/CMakeFiles/test_dram.dir/rule] Error 2
+make: *** [test_dram] Error 2

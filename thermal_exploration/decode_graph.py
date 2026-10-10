@@ -164,6 +164,9 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
     wait=Counter();last_resource={};clock=0;completed=0;activity=Counter();per_tile=defaultdict(Counter)
     caps={'weight':524288,'weight_fifo':262144,'return':65536,'receive':65536,'workspace':1048576,
           'router0':4096,'router1':4096,'router2':4096,'router3':4096,'transmit':65536,'output':262144}
+    caps.update(g.meta.get('buffer_caps',{}))
+    fixed=g.meta.get('fixed_sram_bytes',[262144]*16)
+    private_budget=g.meta.get('private_sram_budget_bytes',2359296)
     def cap(key):return 2**50 if mode=='ideal_buffer' else caps[key[0]]
     priority={'join':0,'sram_write':1,'sram_read':2,'vector':3,'mac':4,'link':5,'hb':6,'dram':7}
     def enqueue(i):heapq.heappush(queues[g.nodes[i].resource],(priority[g.nodes[i].kind],i))
@@ -214,7 +217,7 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
                 finish=clock+duration;busy[key]=finish;last_resource[key]=i
                 for k,a,last in node.leases:
                     used[k]+=a;private_used[k[1]]+=a;high[k]=max(high[k],used[k]);owners[k].add(i);release[last].append((k,a,i))
-                if mode!='ideal_buffer' and max(private_used.values(),default=0)+262144>2359296:
+                if mode!='ideal_buffer' and any(private_used[t]+fixed[t]>private_budget for t in range(16)):
                     raise ValueError('Combined private SRAM budget exceeded')
                 heapq.heappush(events,(finish,i))
                 activity[node.kind]+=node.work;per_tile[node.tile][node.kind]+=node.work

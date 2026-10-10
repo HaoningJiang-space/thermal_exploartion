@@ -1,0 +1,57 @@
+{
+  "upstream_repo": "https://github.com/pku-gsun/ATLAS-MICRO-2026",
+  "upstream_commit": "b2787399408e32d327c820daee96d4e6610f551a",
+  "case_source": "tests/dram_dse_cloud.py:dse_interleave + tests/dram_test.py:test_matrix_access",
+  "tensor": {
+    "M": 64,
+    "K": 2048,
+    "N": 2048,
+    "tM": 16,
+    "tK": 512,
+    "tN": 128,
+    "input_row_major": true,
+    "output_row_major": true,
+    "weight_row_major": false,
+    "element_bytes": 2,
+    "dataflow": "OS"
+  },
+  "records": [
+    {
+      "case": "interleave0-repeat0",
+      "interleave_bit": 0,
+      "repeat": 0,
+      "latency_s": 0.000101834,
+      "bandwidth_gb_s": 347.628,
+      "bandwidth_utilization": 0.339481,
+      "log_sha256": "041156ace3b5b11c9525e9917c2f7832b0d6dc99c19031a80d9ae95ccf664d6c"
+    },
+    {
+      "case": "interleave0-repeat1",
+      "interleave_bit": 0,
+      "repeat": 1,
+      "latency_s": 0.000101834,
+      "bandwidth_gb_s": 347.628,
+      "bandwidth_utilization": 0.339481,
+      "log_sha256": "041156ace3b5b11c9525e9917c2f7832b0d6dc99c19031a80d9ae95ccf664d6c"
+    },
+    {
+      "case": "interleave7-repeat0",
+      "interleave_bit": 7,
+      "repeat": 0,
+      "latency_s": 7.8766e-05,
+      "bandwidth_gb_s": 449.437,
+      "bandwidth_utilization": 0.438904,
+      "log_sha256": "e5f8222010b81094cd581d7444121dc9f271f1c50616ff08c84b5c30d70a8d48"
+    }
+  ],
+  "deterministic_replay": "PASS",
+  "scope": "Official cloud DRAM AE subcase only; no full-model/chip/thermal reproduction and no Stratum equivalence",
+  "build_environment": {
+    "platform": "POSIX; see build log",
+    "binary_sha256": "fb04199e70af9b5809b2e6738873805a7cf2b042cd4da9a19fd97c21c27b1ca1"
+  },
+  "source_patches": {
+    "patches/ramulator2.patch": "3382dcba7dd57909f4f3b61edb0086dcab84c4dcc067c0d3dce58c38284b31aa",
+    "patches/booksim2.patch": "8acede04ff3ce4f118c5cf2f6a6ab2bd3f3b980d1e44b64c0cf8bd318f72d263"
+  }
+}

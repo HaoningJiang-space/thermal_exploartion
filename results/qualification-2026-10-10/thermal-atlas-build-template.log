@@ -1,0 +1,1045 @@
+[  1%] Building CXX object src/dram/ramulator2/src/test/CMakeFiles/ramulator-test.dir/test_impl.cpp.o
+[  4%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/bh_dram_controller.cpp.o
+[  6%] Built target spdlog
+[  6%] Building CXX object src/dram/ramulator2/src/base/CMakeFiles/ramulator-base.dir/factory.cpp.o
+[  6%] Building CXX object src/dram/ramulator2/src/base/CMakeFiles/ramulator-base.dir/config.cpp.o
+[ 24%] Built target yaml-cpp
+[ 24%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/dummy_controller.cpp.o
+[ 56%] Built target noc
+[ 58%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/generic_dram_controller.cpp.o
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/bh_dram_controller.cpp:248:30: warning: & has lower precedence than !=; != will be evaluated first [-Wparentheses]
+  248 |           if (!request_found & m_priority_buffer.size() != 0) {
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/bh_dram_controller.cpp:248:30: note: place parentheses around the '!=' expression to silence this warning
+  248 |           if (!request_found & m_priority_buffer.size() != 0) {
+      |                              ^                              
+      |                                (                            )
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/bh_dram_controller.cpp:248:30: note: place parentheses around the & expression to evaluate it first
+  248 |           if (!request_found & m_priority_buffer.size() != 0) {
+      |                              ^
+      |               (                                        )
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/generic_dram_controller.cpp:370:30: warning: & has lower precedence than !=; != will be evaluated first [-Wparentheses]
+  370 |           if (!request_found & m_priority_buffer.size() != 0) {
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/generic_dram_controller.cpp:370:30: note: place parentheses around the '!=' expression to silence this warning
+  370 |           if (!request_found & m_priority_buffer.size() != 0) {
+      |                              ^                              
+      |                                (                            )
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/generic_dram_controller.cpp:370:30: note: place parentheses around the & expression to evaluate it first
+  370 |           if (!request_found & m_priority_buffer.size() != 0) {
+      |                              ^
+      |               (                                        )
+[ 58%] Built target ramulator-test
+[ 59%] Building CXX object src/dram/ramulator2/src/base/CMakeFiles/ramulator-base.dir/stats.cpp.o
+[ 59%] Building CXX object src/dram/ramulator2/src/frontend/CMakeFiles/ramulator-frontend.dir/impl/memory_trace/loadstore_trace.cpp.o
+[ 59%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/prac_dram_controller.cpp.o
+1 warning generated.
+[ 59%] Building CXX object src/dram/ramulator2/src/translation/CMakeFiles/ramulator-translation.dir/impl/no_translation.cpp.o
+1 warning generated.
+[ 59%] Building CXX object src/dram/ramulator2/src/base/CMakeFiles/ramulator-base.dir/request.cpp.o
+[ 59%] Building CXX object src/dram/ramulator2/src/memory_system/CMakeFiles/ramulator-memorysystem.dir/impl/bh_DRAM_system.cpp.o
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/prac_dram_controller.cpp:296:36: warning: & has lower precedence than !=; != will be evaluated first [-Wparentheses]
+  296 |                 if (!request_found & m_prac_buffer.size() != 0) {
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/prac_dram_controller.cpp:296:36: note: place parentheses around the '!=' expression to silence this warning
+  296 |                 if (!request_found & m_prac_buffer.size() != 0) {
+      |                                    ^                          
+      |                                      (                        )
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/prac_dram_controller.cpp:296:36: note: place parentheses around the & expression to evaluate it first
+  296 |                 if (!request_found & m_prac_buffer.size() != 0) {
+      |                                    ^
+      |                     (                                    )
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/prac_dram_controller.cpp:309:36: warning: & has lower precedence than !=; != will be evaluated first [-Wparentheses]
+  309 |                 if (!request_found & m_priority_buffer.size() != 0) {
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/prac_dram_controller.cpp:309:36: note: place parentheses around the '!=' expression to silence this warning
+  309 |                 if (!request_found & m_priority_buffer.size() != 0) {
+      |                                    ^                              
+      |                                      (                            )
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/prac_dram_controller.cpp:309:36: note: place parentheses around the & expression to evaluate it first
+  309 |                 if (!request_found & m_priority_buffer.size() != 0) {
+      |                                    ^
+      |                     (                                        )
+[ 60%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/scheduler/bh_scheduler.cpp.o
+[ 62%] Built target ramulator-base
+[ 63%] Building CXX object src/dram/ramulator2/src/translation/CMakeFiles/ramulator-translation.dir/impl/random_translation.cpp.o
+[ 64%] Building CXX object src/dram/ramulator2/src/frontend/CMakeFiles/ramulator-frontend.dir/impl/memory_trace/readwrite_trace.cpp.o
+2 warnings generated.
+[ 64%] Building CXX object src/dram/ramulator2/src/addr_mapper/CMakeFiles/ramulator-addrmapper.dir/impl/linear_mappers.cpp.o
+[ 64%] Building CXX object src/dram/ramulator2/src/frontend/CMakeFiles/ramulator-frontend.dir/impl/hb_frontend.cpp.o
+[ 65%] Building CXX object src/dram/ramulator2/src/memory_system/CMakeFiles/ramulator-memorysystem.dir/impl/dummy_memory_system.cpp.o
+[ 65%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/scheduler/blocking_scheduler.cpp.o
+[ 65%] Built target ramulator-translation
+[ 66%] Building CXX object src/dram/ramulator2/src/addr_mapper/CMakeFiles/ramulator-addrmapper.dir/impl/rit.cpp.o
+[ 66%] Building CXX object src/dram/ramulator2/src/memory_system/CMakeFiles/ramulator-memorysystem.dir/impl/generic_DRAM_system.cpp.o
+[ 67%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/scheduler/generic_scheduler.cpp.o
+[ 67%] Building CXX object src/dram/ramulator2/src/dram/CMakeFiles/ramulator-dram.dir/impl/DDR3.cpp.o
+[ 68%] Building CXX object src/dram/ramulator2/src/frontend/CMakeFiles/ramulator-frontend.dir/impl/processor/simpleO3/simpleO3.cpp.o
+[ 69%] Building CXX object src/noc/CMakeFiles/atlasim-noc.dir/noc_wrapper.cpp.o
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR3.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR3.cpp:137:16: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  137 |     FuncMatrix<ActionFunc_t<Node>>  m_actions;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR3.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR3.cpp:138:16: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  138 |     FuncMatrix<PreqFunc_t<Node>>    m_preqs;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR3.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR3.cpp:139:16: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  139 |     FuncMatrix<RowhitFunc_t<Node>>  m_rowhits;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR3.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:274:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  274 | using RowopenFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR3.cpp:140:16: note: in instantiation of template type alias 'RowopenFunc_t' requested here
+  140 |     FuncMatrix<RowopenFunc_t<Node>> m_rowopens;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR3.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR3.cpp:398:53: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  398 |       m_actions.resize(m_levels.size(), std::vector<ActionFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR3.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR3.cpp:411:51: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  411 |       m_preqs.resize(m_levels.size(), std::vector<PreqFunc_t<Node>>(m_commands.size()));
+      |                                                   ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR3.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR3.cpp:422:53: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  422 |       m_rowhits.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR3.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR3.cpp:430:54: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  430 |       m_rowopens.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                      ^
+[ 69%] Built target atlasim-noc
+[ 70%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/scheduler/bliss_scheduler.cpp.o
+[ 70%] Built target ramulator-addrmapper
+[ 70%] Building CXX object src/dram/ramulator2/src/frontend/CMakeFiles/ramulator-frontend.dir/impl/processor/simpleO3/core.cpp.o
+[ 72%] Building CXX object src/dram/ramulator2/src/dram/CMakeFiles/ramulator-dram.dir/impl/DDR4.cpp.o
+[ 72%] Built target ramulator-memorysystem
+[ 73%] Building CXX object src/dram/ramulator2/src/frontend/CMakeFiles/ramulator-frontend.dir/impl/processor/simpleO3/llc.cpp.o
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:176:16: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  176 |     FuncMatrix<ActionFunc_t<Node>>  m_actions;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:177:16: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  177 |     FuncMatrix<PreqFunc_t<Node>>    m_preqs;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:178:16: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  178 |     FuncMatrix<RowhitFunc_t<Node>>  m_rowhits;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:274:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  274 | using RowopenFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:179:16: note: in instantiation of template type alias 'RowopenFunc_t' requested here
+  179 |     FuncMatrix<RowopenFunc_t<Node>> m_rowopens;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:276:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  276 | using PowerFunc_t = std::function<void(typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:180:16: note: in instantiation of template type alias 'PowerFunc_t' requested here
+  180 |     FuncMatrix<PowerFunc_t<Node>>   m_powers;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:497:53: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  497 |       m_actions.resize(m_levels.size(), std::vector<ActionFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:512:51: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  512 |       m_preqs.resize(m_levels.size(), std::vector<PreqFunc_t<Node>>(m_commands.size()));
+      |                                                   ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:525:53: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  525 |       m_rowhits.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:533:54: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  533 |       m_rowopens.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                      ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:276:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  276 | using PowerFunc_t = std::function<void(typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4.cpp:579:52: note: in instantiation of template type alias 'PowerFunc_t' requested here
+  579 |       m_powers.resize(m_levels.size(), std::vector<PowerFunc_t<Node>>(m_commands.size()));
+      |                                                    ^
+[ 73%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/scheduler/prac_scheduler.cpp.o
+[ 74%] Building CXX object src/dram/ramulator2/src/dram/CMakeFiles/ramulator-dram.dir/impl/DDR4-VRR.cpp.o
+[ 75%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/refresh/all_bank_refresh.cpp.o
+[ 75%] Building CXX object src/dram/ramulator2/src/frontend/CMakeFiles/ramulator-frontend.dir/impl/processor/simpleO3/trace.cpp.o
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:184:16: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  184 |     FuncMatrix<ActionFunc_t<Node>>  m_actions;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:185:16: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  185 |     FuncMatrix<PreqFunc_t<Node>>    m_preqs;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:186:16: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  186 |     FuncMatrix<RowhitFunc_t<Node>>  m_rowhits;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:274:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  274 | using RowopenFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:187:16: note: in instantiation of template type alias 'RowopenFunc_t' requested here
+  187 |     FuncMatrix<RowopenFunc_t<Node>> m_rowopens;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:276:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  276 | using PowerFunc_t = std::function<void(typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:188:16: note: in instantiation of template type alias 'PowerFunc_t' requested here
+  188 |     FuncMatrix<PowerFunc_t<Node>>   m_powers;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:531:53: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  531 |       m_actions.resize(m_levels.size(), std::vector<ActionFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:548:51: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  548 |       m_preqs.resize(m_levels.size(), std::vector<PreqFunc_t<Node>>(m_commands.size()));
+      |                                                   ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:564:53: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  564 |       m_rowhits.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:572:54: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  572 |       m_rowopens.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                      ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/refresh/all_bank_refresh.cpp:40:10: warning: 'tick' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   40 |     void tick() {
+      |          ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/refresh.h:16:18: note: overridden virtual function is here
+   16 |     virtual void tick() = 0;
+      |                  ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:276:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  276 | using PowerFunc_t = std::function<void(typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-VRR.cpp:618:52: note: in instantiation of template type alias 'PowerFunc_t' requested here
+  618 |       m_powers.resize(m_levels.size(), std::vector<PowerFunc_t<Node>>(m_commands.size()));
+      |                                                    ^
+8 warnings generated.
+[ 76%] Building CXX object src/dram/ramulator2/src/frontend/CMakeFiles/ramulator-frontend.dir/impl/processor/bhO3/bhO3.cpp.o
+[ 76%] Building CXX object src/dram/ramulator2/src/dram/CMakeFiles/ramulator-dram.dir/impl/DDR4-RVRR.cpp.o
+[ 76%] Building CXX object src/dram/ramulator2/src/frontend/CMakeFiles/ramulator-frontend.dir/impl/processor/bhO3/bhcore.cpp.o
+1 warning generated.
+[ 76%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/rowpolicy/basic_rowpolicies.cpp.o
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:192:16: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  192 |     FuncMatrix<ActionFunc_t<Node>>  m_actions;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:193:16: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  193 |     FuncMatrix<PreqFunc_t<Node>>    m_preqs;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:194:16: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  194 |     FuncMatrix<RowhitFunc_t<Node>>  m_rowhits;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:274:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  274 | using RowopenFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:195:16: note: in instantiation of template type alias 'RowopenFunc_t' requested here
+  195 |     FuncMatrix<RowopenFunc_t<Node>> m_rowopens;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:276:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  276 | using PowerFunc_t = std::function<void(typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:196:16: note: in instantiation of template type alias 'PowerFunc_t' requested here
+  196 |     FuncMatrix<PowerFunc_t<Node>>   m_powers;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:577:53: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  577 |       m_actions.resize(m_levels.size(), std::vector<ActionFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:596:51: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  596 |       m_preqs.resize(m_levels.size(), std::vector<PreqFunc_t<Node>>(m_commands.size()));
+      |                                                   ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:612:53: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  612 |       m_rowhits.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:620:54: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  620 |       m_rowopens.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                      ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:276:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  276 | using PowerFunc_t = std::function<void(typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR4-RVRR.cpp:666:52: note: in instantiation of template type alias 'PowerFunc_t' requested here
+  666 |       m_powers.resize(m_levels.size(), std::vector<PowerFunc_t<Node>>(m_commands.size()));
+      |                                                    ^
+10 warnings generated.
+[ 77%] Building CXX object src/dram/ramulator2/src/dram/CMakeFiles/ramulator-dram.dir/impl/DDR5.cpp.o
+[ 78%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/plugin/trace_recorder.cpp.o
+[ 79%] Building CXX object src/dram/ramulator2/src/frontend/CMakeFiles/ramulator-frontend.dir/impl/processor/bhO3/bhllc.cpp.o
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:180:16: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  180 |     FuncMatrix<ActionFunc_t<Node>>  m_actions;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:181:16: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  181 |     FuncMatrix<PreqFunc_t<Node>>    m_preqs;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:182:16: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  182 |     FuncMatrix<RowhitFunc_t<Node>>  m_rowhits;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:274:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  274 | using RowopenFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:183:16: note: in instantiation of template type alias 'RowopenFunc_t' requested here
+  183 |     FuncMatrix<RowopenFunc_t<Node>> m_rowopens;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:276:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  276 | using PowerFunc_t = std::function<void(typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:184:16: note: in instantiation of template type alias 'PowerFunc_t' requested here
+  184 |     FuncMatrix<PowerFunc_t<Node>>   m_powers;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:585:53: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  585 |       m_actions.resize(m_levels.size(), std::vector<ActionFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:615:51: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  615 |       m_preqs.resize(m_levels.size(), std::vector<PreqFunc_t<Node>>(m_commands.size()));
+      |                                                   ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:635:53: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  635 |       m_rowhits.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:643:54: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  643 |       m_rowopens.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                      ^
+[ 79%] Building CXX object src/dram/ramulator2/src/dram/CMakeFiles/ramulator-dram.dir/impl/DDR5-VRR.cpp.o
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:276:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  276 | using PowerFunc_t = std::function<void(typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5.cpp:689:52: note: in instantiation of template type alias 'PowerFunc_t' requested here
+  689 |       m_powers.resize(m_levels.size(), std::vector<PowerFunc_t<Node>>(m_commands.size()));
+      |                                                    ^
+10 warnings generated.
+[ 79%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/plugin/cmd_counter.cpp.o
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:186:16: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  186 |     FuncMatrix<ActionFunc_t<Node>>  m_actions;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:187:16: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  187 |     FuncMatrix<PreqFunc_t<Node>>    m_preqs;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:188:16: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  188 |     FuncMatrix<RowhitFunc_t<Node>>  m_rowhits;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:274:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  274 | using RowopenFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:189:16: note: in instantiation of template type alias 'RowopenFunc_t' requested here
+  189 |     FuncMatrix<RowopenFunc_t<Node>> m_rowopens;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:276:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  276 | using PowerFunc_t = std::function<void(typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:190:16: note: in instantiation of template type alias 'PowerFunc_t' requested here
+  190 |     FuncMatrix<PowerFunc_t<Node>>   m_powers;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:640:53: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  640 |       m_actions.resize(m_levels.size(), std::vector<ActionFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:672:51: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  672 |       m_preqs.resize(m_levels.size(), std::vector<PreqFunc_t<Node>>(m_commands.size()));
+      |                                                   ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:695:53: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  695 |       m_rowhits.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:703:54: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  703 |       m_rowopens.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                      ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:276:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  276 | using PowerFunc_t = std::function<void(typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-VRR.cpp:749:52: note: in instantiation of template type alias 'PowerFunc_t' requested here
+  749 |       m_powers.resize(m_levels.size(), std::vector<PowerFunc_t<Node>>(m_commands.size()));
+      |                                                    ^
+[ 80%] Building CXX object src/dram/ramulator2/src/frontend/CMakeFiles/ramulator-frontend.dir/impl/external_wrapper/gem5_frontend.cpp.o
+10 warnings generated.
+[ 81%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/plugin/para.cpp.o
+[ 82%] Building CXX object src/dram/ramulator2/src/dram/CMakeFiles/ramulator-dram.dir/impl/DDR5-RVRR.cpp.o
+[ 82%] Building CXX object src/dram/ramulator2/src/dram/CMakeFiles/ramulator-dram.dir/impl/LPDDR5.cpp.o
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:198:16: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  198 |     FuncMatrix<ActionFunc_t<Node>>  m_actions;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:199:16: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  199 |     FuncMatrix<PreqFunc_t<Node>>    m_preqs;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:200:16: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  200 |     FuncMatrix<RowhitFunc_t<Node>>  m_rowhits;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:274:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  274 | using RowopenFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:201:16: note: in instantiation of template type alias 'RowopenFunc_t' requested here
+  201 |     FuncMatrix<RowopenFunc_t<Node>> m_rowopens;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:276:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  276 | using PowerFunc_t = std::function<void(typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:202:16: note: in instantiation of template type alias 'PowerFunc_t' requested here
+  202 |     FuncMatrix<PowerFunc_t<Node>>   m_powers;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:674:53: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  674 |       m_actions.resize(m_levels.size(), std::vector<ActionFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:710:51: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  710 |       m_preqs.resize(m_levels.size(), std::vector<PreqFunc_t<Node>>(m_commands.size()));
+      |                                                   ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:734:53: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  734 |       m_rowhits.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:742:54: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  742 |       m_rowopens.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                      ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:276:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  276 | using PowerFunc_t = std::function<void(typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/DDR5-RVRR.cpp:788:52: note: in instantiation of template type alias 'PowerFunc_t' requested here
+  788 |       m_powers.resize(m_levels.size(), std::vector<PowerFunc_t<Node>>(m_commands.size()));
+      |                                                    ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/LPDDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/LPDDR5.cpp:136:16: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  136 |     FuncMatrix<ActionFunc_t<Node>>  m_actions;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/LPDDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/LPDDR5.cpp:137:16: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  137 |     FuncMatrix<PreqFunc_t<Node>>    m_preqs;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/LPDDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/LPDDR5.cpp:138:16: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  138 |     FuncMatrix<RowhitFunc_t<Node>>  m_rowhits;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/LPDDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:274:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  274 | using RowopenFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/LPDDR5.cpp:139:16: note: in instantiation of template type alias 'RowopenFunc_t' requested here
+  139 |     FuncMatrix<RowopenFunc_t<Node>> m_rowopens;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/LPDDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/LPDDR5.cpp:403:53: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  403 |       m_actions.resize(m_levels.size(), std::vector<ActionFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/LPDDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/LPDDR5.cpp:431:51: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  431 |       m_preqs.resize(m_levels.size(), std::vector<PreqFunc_t<Node>>(m_commands.size()));
+      |                                                   ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/LPDDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/LPDDR5.cpp:505:53: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  505 |       m_rowhits.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+[ 82%] Built target ramulator-frontend
+[ 82%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/plugin/graphene.cpp.o
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/LPDDR5.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/LPDDR5.cpp:513:54: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  513 |       m_rowopens.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                      ^
+10 warnings generated.
+[ 83%] Building CXX object src/dram/ramulator2/src/dram/CMakeFiles/ramulator-dram.dir/impl/HBM.cpp.o
+[ 83%] Building CXX object src/dram/ramulator2/src/dram/CMakeFiles/ramulator-dram.dir/impl/HBM2.cpp.o
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM.cpp:118:16: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  118 |     FuncMatrix<ActionFunc_t<Node>>  m_actions;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM.cpp:119:16: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  119 |     FuncMatrix<PreqFunc_t<Node>>    m_preqs;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM.cpp:120:16: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  120 |     FuncMatrix<RowhitFunc_t<Node>>  m_rowhits;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:274:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  274 | using RowopenFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM.cpp:121:16: note: in instantiation of template type alias 'RowopenFunc_t' requested here
+  121 |     FuncMatrix<RowopenFunc_t<Node>> m_rowopens;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM.cpp:370:53: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  370 |       m_actions.resize(m_levels.size(), std::vector<ActionFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM.cpp:383:51: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  383 |       m_preqs.resize(m_levels.size(), std::vector<PreqFunc_t<Node>>(m_commands.size()));
+      |                                                   ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM.cpp:395:53: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  395 |       m_rowhits.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM.cpp:403:54: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  403 |       m_rowopens.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                      ^
+10 warnings generated.
+[ 84%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/plugin/oracle_rh.cpp.o
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM2.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM2.cpp:119:16: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  119 |     FuncMatrix<ActionFunc_t<Node>>  m_actions;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM2.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM2.cpp:120:16: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  120 |     FuncMatrix<PreqFunc_t<Node>>    m_preqs;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM2.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM2.cpp:121:16: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  121 |     FuncMatrix<RowhitFunc_t<Node>>  m_rowhits;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM2.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:274:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  274 | using RowopenFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM2.cpp:122:16: note: in instantiation of template type alias 'RowopenFunc_t' requested here
+  122 |     FuncMatrix<RowopenFunc_t<Node>> m_rowopens;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM2.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM2.cpp:373:53: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  373 |       m_actions.resize(m_levels.size(), std::vector<ActionFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM2.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM2.cpp:386:51: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  386 |       m_preqs.resize(m_levels.size(), std::vector<PreqFunc_t<Node>>(m_commands.size()));
+      |                                                   ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM2.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM2.cpp:398:53: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  398 |       m_rowhits.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM2.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM2.cpp:406:54: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  406 |       m_rowopens.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                      ^
+[ 86%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/plugin/twice.cpp.o
+[ 87%] Building CXX object src/dram/ramulator2/src/dram/CMakeFiles/ramulator-dram.dir/impl/HBM3.cpp.o
+8 warnings generated.
+[ 87%] Building CXX object src/dram/ramulator2/src/dram/CMakeFiles/ramulator-dram.dir/impl/HB-DRAM.cpp.o
+10 warnings generated.
+[ 87%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/plugin/hydra.cpp.o
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM3.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM3.cpp:124:16: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  124 |     FuncMatrix<ActionFunc_t<Node>>  m_actions;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM3.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM3.cpp:125:16: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  125 |     FuncMatrix<PreqFunc_t<Node>>    m_preqs;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM3.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM3.cpp:126:16: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  126 |     FuncMatrix<RowhitFunc_t<Node>>  m_rowhits;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM3.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:274:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  274 | using RowopenFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM3.cpp:127:16: note: in instantiation of template type alias 'RowopenFunc_t' requested here
+  127 |     FuncMatrix<RowopenFunc_t<Node>> m_rowopens;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM3.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM3.cpp:378:53: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  378 |       m_actions.resize(m_levels.size(), std::vector<ActionFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM3.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM3.cpp:391:51: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  391 |       m_preqs.resize(m_levels.size(), std::vector<PreqFunc_t<Node>>(m_commands.size()));
+      |                                                   ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM3.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM3.cpp:403:53: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  403 |       m_rowhits.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM3.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HBM3.cpp:411:54: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  411 |       m_rowopens.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                      ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HB-DRAM.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HB-DRAM.cpp:179:16: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  179 |     FuncMatrix<ActionFunc_t<Node>>  m_actions;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HB-DRAM.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HB-DRAM.cpp:180:16: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  180 |     FuncMatrix<PreqFunc_t<Node>>    m_preqs;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HB-DRAM.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HB-DRAM.cpp:181:16: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  181 |     FuncMatrix<RowhitFunc_t<Node>>  m_rowhits;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HB-DRAM.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:274:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  274 | using RowopenFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HB-DRAM.cpp:182:16: note: in instantiation of template type alias 'RowopenFunc_t' requested here
+  182 |     FuncMatrix<RowopenFunc_t<Node>> m_rowopens;
+      |                ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HB-DRAM.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:268:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  268 | using ActionFunc_t = std::function<void(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HB-DRAM.cpp:415:53: note: in instantiation of template type alias 'ActionFunc_t' requested here
+  415 |       m_actions.resize(m_levels.size(), std::vector<ActionFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HB-DRAM.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:270:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  270 | using PreqFunc_t   = std::function<int (typename T::Node* node, int cmd, const AddrVec_t& addr_vec, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HB-DRAM.cpp:423:51: note: in instantiation of template type alias 'PreqFunc_t' requested here
+  423 |       m_preqs.resize(m_levels.size(), std::vector<PreqFunc_t<Node>>(m_commands.size()));
+      |                                                   ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HB-DRAM.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HB-DRAM.cpp:435:53: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  435 |       m_rowhits.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                     ^
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HB-DRAM.cpp:1:
+In file included from <repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/dram.h:11:
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/node.h:272:1: warning: ISO C++ specifies that qualified reference to 'Node' is a constructor name rather than a type in this context, despite preceding 'typename' keyword [-Winjected-class-name]
+  272 | using RowhitFunc_t = std::function<bool(typename T::Node* node, int cmd, int target_id, Clk_t clk)>;
+      | ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram/impl/HB-DRAM.cpp:443:54: note: in instantiation of template type alias 'RowhitFunc_t' requested here
+  443 |       m_rowopens.resize(m_levels.size(), std::vector<RowhitFunc_t<Node>>(m_commands.size()));
+      |                                                      ^
+[ 88%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/plugin/rrs.cpp.o
+8 warnings generated.
+[ 88%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/plugin/aqua.cpp.o
+8 warnings generated.
+[ 89%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/plugin/rfm_manager.cpp.o
+[ 89%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/plugin/blockhammer/blockhammer.cpp.o
+[ 90%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/plugin/device_config/device_config.cpp.o
+[ 90%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/plugin/bliss/bliss.cpp.o
+[ 91%] Building CXX object src/dram/ramulator2/src/dram_controller/CMakeFiles/ramulator-controller.dir/impl/plugin/prac/prac.cpp.o
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/plugin/blockhammer/blockhammer.cpp:237:10: warning: 'is_act_safe' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  237 |     bool is_act_safe(Request& req) {
+      |          ^
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/plugin/blockhammer/blockhammer.h:10:18: note: overridden virtual function is here
+   10 |     virtual bool is_act_safe(Request& req) = 0;
+      |                  ^
+8 warnings generated.
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/plugin/prac/prac.cpp:129:75: warning: format specifies type 'unsigned long' but the argument has type 'Clk_t' (aka 'long long') [-Wformat]
+  129 |                     std::printf("[PRAC] [%lu] <%s> Asserting ALERT_N.\n", m_clk, state_names[cur_state].c_str());
+      |                                          ~~~                              ^~~~~
+      |                                          %lld
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/plugin/prac/prac.cpp:139:71: warning: format specifies type 'unsigned long' but the argument has type 'Clk_t' (aka 'long long') [-Wformat]
+  139 |                     std::printf("[PRAC] [%lu] <%s> Received PREA.\n", m_clk, state_names[cur_state].c_str());
+      |                                          ~~~                          ^~~~~
+      |                                          %lld
+<repo-root>/external/ATLAS/simulator/src/dram/ramulator2/src/dram_controller/impl/plugin/prac/prac.cpp:172:56: warning: format specifies type 'unsigned long' but the argument has type 'Clk_t' (aka 'long long') [-Wformat]
+  172 |             std::printf("[PRAC] [%lu] <%s> -> <%s>\n", m_clk, state_names[cur_state].c_str(), state_names[m_state].c_str());
+      |                                  ~~~                   ^~~~~
+      |                                  %lld
+8 warnings generated.
+[ 91%] Built target ramulator-dram
+1 warning generated.
+3 warnings generated.
+[ 91%] Built target ramulator-controller
+[ 92%] Linking CXX shared library ../../../lib/libramulator.dylib
+[ 92%] Built target ramulator
+[ 93%] Building CXX object src/dram/CMakeFiles/atlasim-dram.dir/dram_wrapper.cpp.o
+[ 93%] Built target atlasim-dram
+[ 94%] Building CXX object src/core/CMakeFiles/atlasim-core.dir/buffer.cpp.o
+[ 94%] Building CXX object src/core/CMakeFiles/atlasim-core.dir/component.cpp.o
+[ 95%] Building CXX object src/core/CMakeFiles/atlasim-core.dir/noc_interface.cpp.o
+[ 96%] Building CXX object src/core/CMakeFiles/atlasim-core.dir/matrix_unit.cpp.o
+[ 96%] Building CXX object src/core/CMakeFiles/atlasim-core.dir/core.cpp.o
+[ 96%] Building CXX object src/core/CMakeFiles/atlasim-core.dir/vector_unit.cpp.o
+[ 97%] Building CXX object src/core/CMakeFiles/atlasim-core.dir/core_array.cpp.o
+[ 97%] Built target atlasim-core
+[ 97%] Building CXX object src/chip/CMakeFiles/atlasim-chip.dir/chip.cpp.o
+[ 97%] Built target atlasim-chip
+[ 97%] Linking CXX shared library ../lib/libatlasim-lib.dylib
+ld: warning: ignoring duplicate libraries: '../lib/libyaml-cpp.a'
+ld: archive member '/' not a mach-o file in '<repo-root>/external/ATLAS/simulator/src/noc/booksim2/src/parser/libparser.a'
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+make[3]: *** [lib/libatlasim-lib.dylib] Error 1
+make[2]: *** [src/CMakeFiles/atlasim-lib.dir/all] Error 2
+make[1]: *** [tests/CMakeFiles/test_dram.dir/rule] Error 2
+make: *** [test_dram] Error 2

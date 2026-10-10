@@ -1,0 +1,23 @@
+[  1%] Built target ramulator-test
+[  6%] Built target ramulator-base
+[  8%] Built target spdlog
+[ 26%] Built target yaml-cpp
+[ 27%] Built target ramulator-translation
+[ 29%] Built target ramulator-memorysystem
+[ 44%] Built target ramulator-controller
+[ 50%] Built target ramulator-frontend
+[ 82%] Built target noc
+[ 83%] Built target ramulator-addrmapper
+[ 90%] Built target ramulator-dram
+[ 91%] Built target atlasim-noc
+[ 92%] Built target ramulator
+[ 93%] Built target atlasim-dram
+[ 97%] Built target atlasim-core
+[ 97%] Built target atlasim-chip
+[ 97%] Linking CXX shared library ../lib/libatlasim-lib.dylib
+ld: warning: ignoring duplicate libraries: '../lib/libyaml-cpp.a'
+[ 97%] Built target atlasim-lib
+[ 98%] Building CXX object tests/CMakeFiles/test_dram.dir/test_dram.cpp.o
+[100%] Linking CXX executable ../bin/test_dram
+ld: warning: ignoring duplicate libraries: '../lib/libyaml-cpp.a'
+[100%] Built target test_dram
