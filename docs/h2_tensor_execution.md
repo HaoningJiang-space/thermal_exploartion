@@ -1,7 +1,7 @@
 # H2 — Physically Constrained Tensor Execution
 
-本轮只执行H2-A：1024×16384 FP16 W，batch32，16本地Compute/Bank服务区域，128TFLOP/s，4×4 Mesh，
-每方向32GB/s，36MiB私有SRAM。H2-B完整FFN与H2-C真实Multi-Tier MoE暂不启动。
+H2-A：1024×16384 FP16 W，batch32，16本地Compute/Bank服务区域，128TFLOP/s，4×4 Mesh，
+每方向32GB/s，36MiB私有SRAM。H3随后使用FFN、Attention与MoE的强基线。
 H1的43.69/128TFLOP/s为容量上界；H2记录实际任务/请求/数据流完成时间，不复用统一26.599TB/s服务cap。
 
 ## 预设软件对照
@@ -32,6 +32,9 @@ MAC 2000FLOP/tick/Tile、向量16ops/tick、SRAM读256B/tick与写128B/tick均�
 每tick端口额度在MAC、向量、NoC注入/接收及HB写回之间实际仲裁；容量与credit不足则停顿。
 HB32TB/s，传输须等待真实DRAM返回和SRAM写端口。请求发出前预留返回credit，因此不使用无限返回队列。
 Ideal transport只去掉网络传送时间，仍保留SRAM端口、缓冲和向量归约；它不是付费硬件。
+Ideal memory保留所有请求/字节，假设一个tick后返回，仍计HB交付与SRAM写；不验证被绕过的DRAM命令性能。
+Ideal buffer将private存储容量与预取window放大到足以容纳本算子，保留端口、链路、路由FIFO、MAC与Vector成本。
+这些反事实分别放松不同边界，收益不可相加；额外存储不属于相同面积的可实现设计。
 
 只验证执行/通信/字节/FLOP因果链，不执行实际浮点矩阵值，不声称精确复现Stratum器件。
 T0首先辨别执行损失；不启动G5热反馈或以热反转作为通用Gate。
