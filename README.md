@@ -1,6 +1,12 @@
 # thermal_exploartion
 
-**Hybrid-Bonded 3D Architecture Exploration**
+**Hybrid-Bonded 3D Accelerator Architecture Exploration**
+
+当前里程碑为 **Simulator Qualification → Architecture Characterization → 条件性 Architecture Discovery → Thermal Evaluation**。
+任务与证据边界见 [Stage 1–4 实验合同](docs/stage1_stage4.md)。
+[H2 正式结果](results/h2-2026-10-10/findings.md) 已归档：优化列切分模型吞吐124.23TFLOP/s，
+相对128TFLOP/s计算上限的剩余收益不超过3.04%，不支持孤立Wide GEMM的新硬件。
+H3原有FFN/Attention/MoE为合成子图，子图等效Token率不代表完整LLM Decode。
 
 **研究决策：Compute–Memory Fabric 分支正式关闭；Thermal-aware Mapping 保留为基线。**
 已完成 [D1/D2判别实验](docs/d1_d2.md)：关闭已知Row-cycle信号，再检验多Tier数据返回与任务依赖。
