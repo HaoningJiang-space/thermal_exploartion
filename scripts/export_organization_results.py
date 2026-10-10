@@ -42,6 +42,7 @@ def metrics(r):
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--input',required=True);ap.add_argument('--output',required=True)
+    ap.add_argument('--raw-input',help='Original command directory when numerical controls reuse its commands')
     a=ap.parse_args();src=Path(a.input);out=Path(a.output)
     if out.exists():raise SystemExit('Choose a new archive directory')
     out.mkdir(parents=True)
@@ -110,7 +111,7 @@ def main():
     # case. Omit redundant verbose request JSON and native binaries. Every
     # request field remains in TSV plus the frozen mapper and model source.
     archive_manifest=[]
-    for case in sorted(p for p in src.iterdir() if p.is_dir()):
+    for case in sorted(p for p in Path(a.raw_input or src).iterdir() if p.is_dir()):
         target=out/(case.name+'-raw.tar.gz');entries=[]
         with tarfile.open(target,'w:gz',compresslevel=6) as tar:
             for f in sorted(case.iterdir()):

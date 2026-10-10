@@ -124,6 +124,12 @@ def scenarios(p):
         ("compute_area_high",{"compute_block_area_scale":1.25}),
         ("logic_energy_low",{"logic_other_dynamic_pj_flop":0.}),
         ("logic_energy_high",{"logic_other_dynamic_pj_flop":.08}),
+        ("periphery_area_low",{"replicated_periphery_fraction":.25}),
+        ("periphery_area_high",{"replicated_periphery_fraction":.75}),
+        ("bond_resistance_low",{"bond_areal_resistance_mm2_k_w":.5}),
+        ("bond_resistance_high",{"bond_areal_resistance_mm2_k_w":2.}),
+        ("uniform_cooling",{"cooling_gradient":0.}),
+        ("cooling_gradient_high",{"cooling_gradient":.3}),
         ("HB_16",{"hb_chip_tb_s":16.}),("HB_8",{"hb_chip_tb_s":8.})]
     result=[]
     for name,changes in controls:
