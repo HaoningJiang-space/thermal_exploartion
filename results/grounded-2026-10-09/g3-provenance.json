@@ -1,0 +1,18 @@
+{
+  "source_commit": "3de8498968b55e9a639b533b91cc8be37bf7007d",
+  "source_dirty": false,
+  "started_utc": "2026-10-10T06:35:19.949016+00:00",
+  "python": "3.10.12 (main, Jul 29 2024, 16:56:48) [GCC 11.4.0]",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "platform": "Linux-6.8.0-40-generic-x86_64-with-glibc2.35",
+  "profile_sha256": "931f07f7b90d4e69a24f415d2a602c143fff64e4956e69017721d415dba1f440",
+  "invocation": [
+    "python",
+    "-m",
+    "thermal_exploration.calibrate",
+    "--output",
+    "<run-root>/g3-reference-3de8498"
+  ],
+  "scope": "source-isolated reference accounting; legacy LP entry-point regression; no Stratum thermal/timing simulator"
+}

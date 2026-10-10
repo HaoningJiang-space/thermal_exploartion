@@ -1,0 +1,11 @@
+component,area_mm2,site,scope
+tensor_core,13.9468928,bonded_logic,derived from rounded hierarchy percentages
+tiering_table,0.0291776,bonded_logic,derived from rounded hierarchy percentages
+row_swap_rf,4.8726592,bonded_logic,derived from rounded hierarchy percentages
+psum_sram,5.3103232,bonded_logic,derived from rounded hierarchy percentages
+matrix_rf,5.0185471999999995,bonded_logic,derived from rounded hierarchy percentages
+shared_memory,6.6175999999999995,bonded_logic,derived combined group; subcomponent split unavailable
+special_function_router_reducer,1.8048000000000002,bonded_logic,derived combined group; subcomponent split unavailable
+external_hbm3_phy_mm2,23.94,bonded_logic,reported area
+low_voltage_dram_periphery_mm2,14.8,bonded_logic,reported area
+power_tsv_mm2,0.21,bonded_logic,reported area

@@ -1,0 +1,216 @@
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=1, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[[Ramulator::LatencyThroughputTraceRamulator::LatencyThroughputTrace] [[32minfo[0m] ] [[32minfo[0m] LatencyThroughputTrace: nop_counter=18, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64LatencyThroughputTrace: nop_counter=17, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=19, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=20, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=21, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=22, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=23, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=24, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=26, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=28, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=32, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=36, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=40, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=44, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=48, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=52, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=56, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=60, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=70, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=80, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=100, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=120, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=160, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=200, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=300, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=400, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=4000, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=40000, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=1, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=17, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=18, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=19, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=20, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=21, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=22, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=23, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=24, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=26, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=28, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=32, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=36, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=40, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=44, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=48, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=52, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=56, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=60, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=70, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=80, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=100, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=120, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=160, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=200, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=300, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=400, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=4000, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=40000, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=1, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=17, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=18, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=19, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=20, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=21, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=22, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=23, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=24, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=26, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=28, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=32, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=36, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=40, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=44, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=48, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=52, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=56, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=60, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=70, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=80, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=100, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=120, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=160, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=200, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=300, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=400, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=4000, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=40000, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=1, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=17, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=18, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=19, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=20, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=21, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=22, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=23, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=24, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=26, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=28, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=32, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=36, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=40, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=44, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=48, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=52, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=56, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=60, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=70, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=80, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=100, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=120, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=160, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=200, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=300, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=400, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=4000, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=40000, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=1, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=17, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=18, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=19, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=20, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=21, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=22, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=23, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=24, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=26, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=28, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=32, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=36, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=40, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=44, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=48, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=52, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=56, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=60, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=70, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=80, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=100, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=120, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=160, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=200, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=300, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=400, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=4000, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=40000, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=1, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=17, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=18, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=19, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=20, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=21, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=22, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=23, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=24, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=26, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=28, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=32, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=36, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=40, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=44, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=48, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=52, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=56, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=60, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=70, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=80, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=100, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=120, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=160, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=200, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=300, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=400, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=4000, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=40000, latency_mode=random-probe, samples=10000, warmup=10000, bank_units=64
+[Ramulator::LatencyThroughputTrace] [[32minfo[0m] LatencyThroughputTrace: nop_counter=1, latency_mode=random-probe, samples=0, warmup=10000, bank_units=64
+  [HBM3] 10/174 completed
+  [HBM3] 20/174 completed
+  [HBM3] 30/174 completed
+  [HBM3] 40/174 completed
+  [HBM3] 50/174 completed
+  [HBM3] 60/174 completed
+  [HBM3] 70/174 completed
+  [HBM3] 80/174 completed
+  [HBM3] 90/174 completed
+  [HBM3] 100/174 completed
+  [HBM3] 110/174 completed
+  [HBM3] 120/174 completed
+  [HBM3] 130/174 completed
+  [HBM3] 140/174 completed
+  [HBM3] 150/174 completed
+  [HBM3] 160/174 completed
+  [HBM3] 170/174 completed
+  [HBM3] 174/174 completed
+  [HBM3] All 174 runs done in 181.5s
+
+============================================================
+  HBM3 Fast Latency-Throughput Results
+============================================================
+  Unloaded Latency:
+    Expected (nRP+nRCD+nCL)*tCK = (26+31+20) * 0.625 ns = 48.1 ns
+    Measured = 49.9 ns
+    Deviation = +3.7%
+
+  Streaming-Only Throughput (no probes):
+    Theoretical peak = 51.2 GB/s
+    Measured = 51.1 GB/s
+    Deviation = -0.2%
+
+  Mixed Workload Throughput (random probes included):
+    Theoretical peak = 51.2 GB/s
+    Measured max = 51.0 GB/s
+    Deviation = -0.3%
+============================================================
+  Plot saved: tests/latency_throughput/plots/fast/HBM3_lat_tp.png
+.
+1 passed, 10 deselected in 182.67s (0:03:02)

@@ -1,6 +1,7 @@
 # Grounded HB–DRAM Bottleneck Validation
 
 本轮只执行 G3 Reference Machine 和最小 G4 Execution Validation。Fabric 已关闭；G5–G7 均有进入条件。
+不可校准项单独登记在 [calibration_gaps.md](calibration_gaps.md)，不强行拟合，也不扩大参数扫描寻找正结果。
 
 ## 冻结参考系统
 

@@ -1,0 +1,9 @@
+tier,tRCD_ns,tRAS_ns,tRP_ns,tRC_ns,bank_only_full_row_ceiling_tb_s,minimum_ACT_to_column_delay_ns,necessary_inflight_requests_at_ceiling_for_256b,bound_status
+0,2.29,29.79,4.77,34.56,30.34074074074074,2.29,271.4074074074074,conditional bank-cycle bound; unknown ACT/column/queue/HB constraints remain
+1,3.92,31.42,4.77,36.19,28.974191765681127,3.92,443.6673114119923,conditional bank-cycle bound; unknown ACT/column/queue/HB constraints remain
+2,5.99,33.49,4.77,38.260000000000005,27.40658651332984,5.99,641.2713016204913,conditional bank-cycle bound; unknown ACT/column/queue/HB constraints remain
+3,8.5,36.0,4.77,40.769999999999996,25.719303409369637,8.5,853.9612460142263,conditional bank-cycle bound; unknown ACT/column/queue/HB constraints remain
+4,11.44,38.94,4.77,43.709999999999994,23.989384580187604,11.44,1072.0256234271335,conditional bank-cycle bound; unknown ACT/column/queue/HB constraints remain
+5,14.82,42.32,4.77,47.09,22.26748778933956,14.82,1289.0787853047354,conditional bank-cycle bound; unknown ACT/column/queue/HB constraints remain
+6,18.63,46.129999999999995,4.77,50.89999999999999,20.600707269155208,18.63,1499.1842829076622,conditional bank-cycle bound; unknown ACT/column/queue/HB constraints remain
+7,22.88,50.379999999999995,4.77,55.14999999999999,19.013164097914782,22.88,1699.3015412511336,conditional bank-cycle bound; unknown ACT/column/queue/HB constraints remain

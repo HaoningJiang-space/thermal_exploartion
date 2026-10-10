@@ -1,0 +1,39 @@
+{
+  "official_unique_tests": 128,
+  "failures": 0,
+  "groups": {
+    "tests.device_timings.test_hbm3": 19,
+    "tests.controller_scheduling.HBMController.test_hbm34_controller": 83,
+    "tests.controller_scheduling.HBMController.test_hbm34_refresh": 5,
+    "tests.controller_scheduling.HBMController.test_hbm34_timing": 18,
+    "tests.controller_scheduling.test_all_bank_refresh": 2,
+    "tests.latency_throughput.test_fast": 1
+  },
+  "official_printed_deviations_percent": {
+    "unloaded_latency": 3.7,
+    "streaming": -0.2,
+    "mixed": -0.3
+  },
+  "performance_threshold_percent": 5,
+  "performance_gate_scope": "matching upstream standard configuration; printed precision",
+  "own_cases": 5,
+  "own_requests": 18704,
+  "own_commands": 23580,
+  "own_command_counts": {
+    "ACT": 4153,
+    "RD": 18704,
+    "PREpb": 505,
+    "PREab": 106,
+    "REFab": 112
+  },
+  "source_tile_accounting": "PASS",
+  "work_transaction_accounting": "PASS",
+  "independent_command_replay": "PASS; independent state instance of same model, not independent physical validation",
+  "G3_whole_calibration": "NO_GO",
+  "G4_HBM3_integration": "PASS",
+  "G4_Stratum": "NOT_READY",
+  "G5_G6_G7": "DEFERRED",
+  "final_project_tests": 54,
+  "final_project_test_commit": "c6442e10782b3f3f1c02dfcc74dff8e5723abd9c",
+  "final_project_test_status": "PASS"
+}

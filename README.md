@@ -9,6 +9,10 @@
 [Stratum Hardware Contract](configs/platforms/stratum_micro2025.json) 与旧 pilot 完全隔离，未知值保持 null。
 G1、G2、Memory Audit 已共用 DRAM Service Model；现有解析扫描保留作历史证据。
 
+[G3 +最小 G4 结果](results/grounded-2026-10-09/findings.md) 已完成：48 项服务一致性检查、
+128 项官方 HBM3 测试、5 个有限轨迹/负向控制。18704 请求与 23580 命令核查通过。
+Stratum Logic 功率组成仍有 6.51% 未解释差异，HB/cooling 和命令域未知；完整校准 No-Go，G5–G7 保持 deferred。
+
 原研究目标是检验空间热耦合是否改变 Compute–Memory 物理连接的最优性。
 先做可证伪的小实验，结果允许支持 Local，也允许说明收益主要来自普通负载均衡。
 

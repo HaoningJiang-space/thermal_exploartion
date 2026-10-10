@@ -1,0 +1,79 @@
+{
+  "source_commit": "a7d3f941ef74a90c229d132d913340271f592859",
+  "source_dirty": false,
+  "ramulator_commit": "c6c7a5de0cef35935d6fad7369e6271406798865",
+  "upstream_build_verification": {
+    "codegen_format_changes": [
+      {
+        "path": "src/ramulator/dram/impl/DDR3.cpp",
+        "head_sha256": "34b7e64011659e515f667e74825aea60300c70489152dec757d490454d67e732",
+        "build_sha256": "0ca5b287a790b400c2f8dd58b9d70fffd879078d0858cdbf335eb695888c3c12"
+      },
+      {
+        "path": "src/ramulator/dram/impl/DDR4.cpp",
+        "head_sha256": "48da80790e6be036684855258e7506c4f561cebbc3314a4621147af6141db4ca",
+        "build_sha256": "c567a171621a712cd4c143c5798b68ca2b3d0ffd65ff4861c4e9be24921be660"
+      },
+      {
+        "path": "src/ramulator/dram/impl/DDR4_VRR.cpp",
+        "head_sha256": "80d91725e0a7407bb68c8d5559c17f95e82a04a53433bfd60cc922e39824bf52",
+        "build_sha256": "652fc93efee2ab0a071c571ec655ca53025999993f516e9ca46a4b8bd8346c4b"
+      },
+      {
+        "path": "src/ramulator/dram/impl/DDR5.cpp",
+        "head_sha256": "c934ae3019119d5b65754b3da21741085b690248233c768728062fb300a4d1de",
+        "build_sha256": "fe3a40576eb81e77bf8e2aa3b01d5cc9db82f103849393a1b9221aa6f6030415"
+      },
+      {
+        "path": "src/ramulator/dram/impl/DDR5_VRR.cpp",
+        "head_sha256": "63fc9276f2a5c7ee9823926c0eb65c0a5c791f296631ec82b35ab9596e60652f",
+        "build_sha256": "081182b62caef4c09db0d9687ea6094822761fdb63dfb5f462c5f55564ab0d06"
+      },
+      {
+        "path": "src/ramulator/dram/impl/GDDR6.cpp",
+        "head_sha256": "37acbf11a0151301269f5613a060a4e94bb4906f28e73c7e7e6c14e202e122d1",
+        "build_sha256": "c14a72c6944d2af7b28773063976cd9e7bf787653216da5023eda3aa7c14b789"
+      },
+      {
+        "path": "src/ramulator/dram/impl/GDDR7.cpp",
+        "head_sha256": "778eab25b2ffe0004c0eb7369ae05ebde6424a5546e9fd44c4dfa0facd6e5e8e",
+        "build_sha256": "d4a29e02a736d843ffa834740cfc2f289c8529dba1597e42a3b5fe74bac31673"
+      },
+      {
+        "path": "src/ramulator/dram/impl/HBM1.cpp",
+        "head_sha256": "9052df7ceedf6dc7998932b2083297501a4e3a36cbf96919c60522aae41199ca",
+        "build_sha256": "0dda0155677ec7d68378bf5066ae28df4d96fe65e6e064ff6fc98dcc4ec07a6d"
+      },
+      {
+        "path": "src/ramulator/dram/impl/HBM2.cpp",
+        "head_sha256": "0e814b778ac9210680b220f3b215d9b55fc50e624a955b3f83f5b0cecb98d6f2",
+        "build_sha256": "1d88980be92da0bbb5f814f2f991dd395e14f5ff772eb70514f8fb08d46c01a4"
+      },
+      {
+        "path": "src/ramulator/dram/impl/HBM3.cpp",
+        "head_sha256": "c2e19d70be3b4ea4f618e34a2c7f19bb466b62f3c6c59b1b6e7c5be6bd9bd474",
+        "build_sha256": "10668c431242943891a508c1e865e80af2783b8733b687bd96a7a7ca1fd840e2"
+      },
+      {
+        "path": "src/ramulator/dram/impl/HBM4.cpp",
+        "head_sha256": "5d12b651e90df87a5fb6853f8289407c98a7d2f654d24086b9d45644eea9cb74",
+        "build_sha256": "a46e1eb06c0c1fea77d771622e8ca12a1f610026279e249af46f2969b27032bc"
+      },
+      {
+        "path": "src/ramulator/dram/impl/LPDDR5.cpp",
+        "head_sha256": "3729e9ca157c36d6254cc37ba0e85a336d2a784261f37fa392adb4ec9a41b182",
+        "build_sha256": "2d5df57acfac1042ae332126ece91a8144555a60a581ee45877fb20971a81cb0"
+      },
+      {
+        "path": "src/ramulator/dram/impl/LPDDR6.cpp",
+        "head_sha256": "73b0d5e6d8dd0ea7fa1e9486d05270efbd30d2cc615602cbdcbee70b340ae59d",
+        "build_sha256": "118b91b715c680854f91944b2f4b85bf02e6829a6746d27f18f3b5a7eccc2f56"
+      }
+    ],
+    "policy": "Only generated C++ with identical tokens and include set; no timing/organization/command changes"
+  },
+  "python": "3.10.12 (main, Jul 29 2024, 16:56:48) [GCC 11.4.0]",
+  "started_utc": "2026-10-10T06:40:24.983996+00:00",
+  "native_adapter_sha256": "316faf734cd884539ed6b164213db8b7c15e96cc850200ffe9e81b154e6d84fe",
+  "invocation": "python -m thermal_exploration.run_g4 --ramulator-root <pinned-upstream> --output <new-dir>"
+}

@@ -1,0 +1,280 @@
+{
+  "profile_id": "stratum_micro2025_reference",
+  "geometry": {
+    "bank_count": 256,
+    "bank_capacity_bytes": 134217728,
+    "chip_capacity_bytes": 34359738368,
+    "rows_per_bank": 32768,
+    "rows_per_tier_per_bank": 4096,
+    "tier_capacity_bytes": 4294967296,
+    "mac_count": 65536,
+    "topology_peak_tflops": 131.072,
+    "sram_bytes": 37748736,
+    "row_swap_rf_bytes": 2097152
+  },
+  "tiers": [
+    {
+      "tier": 0,
+      "tRCD_ns": 2.29,
+      "tRAS_ns": 29.79,
+      "tRP_ns": 4.77,
+      "tRC_ns": 34.56,
+      "bank_only_full_row_ceiling_tb_s": 30.34074074074074,
+      "minimum_ACT_to_column_delay_ns": 2.29,
+      "necessary_inflight_requests_at_ceiling_for_256b": 271.4074074074074,
+      "bound_status": "conditional bank-cycle bound; unknown ACT/column/queue/HB constraints remain"
+    },
+    {
+      "tier": 1,
+      "tRCD_ns": 3.92,
+      "tRAS_ns": 31.42,
+      "tRP_ns": 4.77,
+      "tRC_ns": 36.19,
+      "bank_only_full_row_ceiling_tb_s": 28.974191765681127,
+      "minimum_ACT_to_column_delay_ns": 3.92,
+      "necessary_inflight_requests_at_ceiling_for_256b": 443.6673114119923,
+      "bound_status": "conditional bank-cycle bound; unknown ACT/column/queue/HB constraints remain"
+    },
+    {
+      "tier": 2,
+      "tRCD_ns": 5.99,
+      "tRAS_ns": 33.49,
+      "tRP_ns": 4.77,
+      "tRC_ns": 38.260000000000005,
+      "bank_only_full_row_ceiling_tb_s": 27.40658651332984,
+      "minimum_ACT_to_column_delay_ns": 5.99,
+      "necessary_inflight_requests_at_ceiling_for_256b": 641.2713016204913,
+      "bound_status": "conditional bank-cycle bound; unknown ACT/column/queue/HB constraints remain"
+    },
+    {
+      "tier": 3,
+      "tRCD_ns": 8.5,
+      "tRAS_ns": 36.0,
+      "tRP_ns": 4.77,
+      "tRC_ns": 40.769999999999996,
+      "bank_only_full_row_ceiling_tb_s": 25.719303409369637,
+      "minimum_ACT_to_column_delay_ns": 8.5,
+      "necessary_inflight_requests_at_ceiling_for_256b": 853.9612460142263,
+      "bound_status": "conditional bank-cycle bound; unknown ACT/column/queue/HB constraints remain"
+    },
+    {
+      "tier": 4,
+      "tRCD_ns": 11.44,
+      "tRAS_ns": 38.94,
+      "tRP_ns": 4.77,
+      "tRC_ns": 43.709999999999994,
+      "bank_only_full_row_ceiling_tb_s": 23.989384580187604,
+      "minimum_ACT_to_column_delay_ns": 11.44,
+      "necessary_inflight_requests_at_ceiling_for_256b": 1072.0256234271335,
+      "bound_status": "conditional bank-cycle bound; unknown ACT/column/queue/HB constraints remain"
+    },
+    {
+      "tier": 5,
+      "tRCD_ns": 14.82,
+      "tRAS_ns": 42.32,
+      "tRP_ns": 4.77,
+      "tRC_ns": 47.09,
+      "bank_only_full_row_ceiling_tb_s": 22.26748778933956,
+      "minimum_ACT_to_column_delay_ns": 14.82,
+      "necessary_inflight_requests_at_ceiling_for_256b": 1289.0787853047354,
+      "bound_status": "conditional bank-cycle bound; unknown ACT/column/queue/HB constraints remain"
+    },
+    {
+      "tier": 6,
+      "tRCD_ns": 18.63,
+      "tRAS_ns": 46.129999999999995,
+      "tRP_ns": 4.77,
+      "tRC_ns": 50.89999999999999,
+      "bank_only_full_row_ceiling_tb_s": 20.600707269155208,
+      "minimum_ACT_to_column_delay_ns": 18.63,
+      "necessary_inflight_requests_at_ceiling_for_256b": 1499.1842829076622,
+      "bound_status": "conditional bank-cycle bound; unknown ACT/column/queue/HB constraints remain"
+    },
+    {
+      "tier": 7,
+      "tRCD_ns": 22.88,
+      "tRAS_ns": 50.379999999999995,
+      "tRP_ns": 4.77,
+      "tRC_ns": 55.14999999999999,
+      "bank_only_full_row_ceiling_tb_s": 19.013164097914782,
+      "minimum_ACT_to_column_delay_ns": 22.88,
+      "necessary_inflight_requests_at_ceiling_for_256b": 1699.3015412511336,
+      "bound_status": "conditional bank-cycle bound; unknown ACT/column/queue/HB constraints remain"
+    }
+  ],
+  "areas": {
+    "leaves": [
+      {
+        "component": "tensor_core",
+        "area_mm2": 13.9468928,
+        "site": "bonded_logic",
+        "scope": "derived from rounded hierarchy percentages"
+      },
+      {
+        "component": "tiering_table",
+        "area_mm2": 0.0291776,
+        "site": "bonded_logic",
+        "scope": "derived from rounded hierarchy percentages"
+      },
+      {
+        "component": "row_swap_rf",
+        "area_mm2": 4.8726592,
+        "site": "bonded_logic",
+        "scope": "derived from rounded hierarchy percentages"
+      },
+      {
+        "component": "psum_sram",
+        "area_mm2": 5.3103232,
+        "site": "bonded_logic",
+        "scope": "derived from rounded hierarchy percentages"
+      },
+      {
+        "component": "matrix_rf",
+        "area_mm2": 5.0185471999999995,
+        "site": "bonded_logic",
+        "scope": "derived from rounded hierarchy percentages"
+      },
+      {
+        "component": "shared_memory",
+        "area_mm2": 6.6175999999999995,
+        "site": "bonded_logic",
+        "scope": "derived combined group; subcomponent split unavailable"
+      },
+      {
+        "component": "special_function_router_reducer",
+        "area_mm2": 1.8048000000000002,
+        "site": "bonded_logic",
+        "scope": "derived combined group; subcomponent split unavailable"
+      },
+      {
+        "component": "external_hbm3_phy_mm2",
+        "area_mm2": 23.94,
+        "site": "bonded_logic",
+        "scope": "reported area"
+      },
+      {
+        "component": "low_voltage_dram_periphery_mm2",
+        "area_mm2": 14.8,
+        "site": "bonded_logic",
+        "scope": "reported area"
+      },
+      {
+        "component": "power_tsv_mm2",
+        "area_mm2": 0.21,
+        "site": "bonded_logic",
+        "scope": "reported area"
+      }
+    ],
+    "leaf_total_mm2": 76.55,
+    "reported_active_mm2": 76.63,
+    "absolute_difference_mm2": -0.0799999999999983,
+    "relative_difference": -0.0010439775544826002,
+    "die_headroom_mm2": 44.45,
+    "controller_noc_vector_separate_areas": null,
+    "pe_rounded_total_mm2": 28.16,
+    "pe_hierarchy_percentage_total_mm2": 29.1776
+  },
+  "power": {
+    "mac_at_reported_peak_w": 38.656,
+    "mac_at_topology_peak_w": 39.583744,
+    "figure_compute_group_w": 35.84344,
+    "figure_logic_memory_communication_group_w": 6.79291,
+    "figure_dram_group_w": 101.89365,
+    "mac_plus_figure_memory_communication_w": 45.44891,
+    "logic_reference_w": 42.67,
+    "logic_absolute_error_w": 2.778909999999996,
+    "logic_relative_error": 0.06512561518631355,
+    "figure_logic_group_sum_w": 42.63635000000001,
+    "dram_aggregate_energy_ratio_pj_per_byte": 3.432,
+    "dram_aggregate_at_reference_bandwidth_w": 104.12688,
+    "dram_approx_reference_w": 104.0,
+    "dram_relative_error_vs_approx": 0.0012199999999999989,
+    "dram_detailed_reference_from_stack_minus_logic_w": 101.86,
+    "dram_relative_error_vs_detailed": 0.02225485961123108,
+    "component_coefficients": {
+      "ACT": null,
+      "PRE": null,
+      "SRAM": null,
+      "NoC": null,
+      "Controller": null,
+      "Vector": null,
+      "Background": null,
+      "CUA_periphery": null,
+      "Logic_memory_periphery": null
+    },
+    "status": "aggregate anchor checks only; unresolved activity/scope; no workload coefficients fitted"
+  },
+  "reference_errors": {
+    "fast_body_bandwidth": 2.4414658560845126e-05,
+    "slow_body_bandwidth": 0.00016644386716357928,
+    "fast_table3_bandwidth": -0.11646066567441071,
+    "topology_vs_reported_peak": 0.02400000000000002
+  },
+  "hb_interface": {
+    "data_rate_tb_s": null,
+    "missing_fields": [
+      "data_pad_count",
+      "data_rate_per_pad_gbps",
+      "address_control_pad_count",
+      "power_ground_pad_count",
+      "pad_pitch_um",
+      "io_area_mm2",
+      "static_power_w",
+      "energy_pj_per_bit",
+      "port_peripheral_mapping"
+    ],
+    "physically_complete": false,
+    "scope": "internal HB only; external xPU DQ rate is a separate path"
+  },
+  "legacy_parameter_check": {
+    "cooling_necessary_upper_bound_w": 96.0,
+    "dram_transfer_only_at_16tb_s_w": 192,
+    "conclusion": "Legacy 16 TB/s operation is infeasible by energy conservation before internal thermal resistances; not an architecture discovery"
+  },
+  "external_xpu_interface_tb_s": 0.8192,
+  "gates": {
+    "G3.1": {
+      "status": "PARTIAL",
+      "known_organization_and_tier_timing": "MATCHED",
+      "rounded_body_bank_bandwidth_anchor_pass": true,
+      "rounded_104w_dram_aggregate_anchor_pass": true,
+      "ACT_PRE_background_and_physical_split": "UNIDENTIFIED",
+      "actual_sustained_bandwidth_calibrated": false
+    },
+    "G3.2": {
+      "status": "NOT_CALIBRATED",
+      "area_inventory_closed_within_rounding": true,
+      "logic_power_composition_reference_check_pass": false,
+      "separate_SRAM_NoC_controller_coefficients": "UNIDENTIFIED"
+    },
+    "G3.3": {
+      "status": "UNKNOWN",
+      "HB_physical_interface_complete": false
+    },
+    "G4_Stratum_command_model": {
+      "status": "NOT_READY"
+    },
+    "G5": {
+      "status": "DEFERRED"
+    },
+    "G4.1": {
+      "status": "PASS",
+      "comparisons": 48,
+      "max_relative_phase_rate_error": 7.638334409421077e-14
+    }
+  },
+  "whole_model_calibration_gate_pass": false,
+  "prediction_allowed": false,
+  "unresolved_inputs": [
+    "ACT/column command-domain membership and timing scope",
+    "validated bank/row/column address mapping and subarray mapping",
+    "command timing beyond tRCD/tRAS/tRP/tRC",
+    "ACT/PRE/RD/background energy and their physical locations",
+    "SRAM ports, access events and energies",
+    "NoC/controller/vector activity and separate energy/area",
+    "internal HB pad/rate/area/power budget",
+    "tier-resolved geometry and complete cooling boundary",
+    "MAC energy versus reference peak-power activity/scope",
+    "published rounded/detailed reference inconsistencies"
+  ]
+}
