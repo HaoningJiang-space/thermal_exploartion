@@ -62,6 +62,7 @@ def device_and_config(case):
     controller=ramulator.controller.HBM34(
         dram=dram,scheduler=ramulator.scheduler.FRFCFSRowHit(),
         refresh_manager=ramulator.refresh_manager.AllBank(),
+        row_policy=ramulator.row_policy.Open(),
         addr_mapper=ramulator.addr_mapper.PassThroughAddrMapper(),
         read_buffer_size=128,write_buffer_size=64,
         controller_plugins=[ramulator.controller_plugin.CmdTraceRecorder(path=str(case/"commands.csv"))])
