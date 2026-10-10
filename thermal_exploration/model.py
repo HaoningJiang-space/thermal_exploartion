@@ -11,6 +11,7 @@ import numpy as np
 from scipy.optimize import linprog
 from scipy import sparse
 from .thermal import THERMAL_NAMES, layer_response, thermal_control
+from .memory_service import memory_service_model
 
 
 @dataclass(frozen=True)
@@ -81,18 +82,13 @@ def optimize(cfg, h, global_h, workload, tiling, fabric, thermal_mode,
     queue = np.zeros((n, v+1)); power = np.zeros((2*n, v+1))
     links = sorted({edge for path in paths for edge in path})
     link_load = np.zeros((len(links), v+1)); link_idx = {edge:i for i,edge in enumerate(links)}
-    dram_pj_byte = hw["dram_pj_per_byte"] + hw["activation_nj"]*1000*kr["row_miss_fraction"]/kr["chunk_bytes"]
-    # Serial row-miss penalty amortized across independent banks in a group.
-    bank_bw = 1/(1/hw["bank_group_peak_tb_s"] + hw["row_miss_penalty_ns"]*1000
-                 *kr["row_miss_fraction"]/(kr["chunk_bytes"]*hw["independent_banks_per_group"]))
-    if "internal_bank_group_ceiling_tb_s" in hw:
-        # Audit-only replacement: independent necessary ACT/column rate bounds.
-        # Do not add the legacy serial penalty again (it would double count).
-        bank_bw = min(hw["bank_group_peak_tb_s"], hw["internal_bank_group_ceiling_tb_s"])
+    memory = memory_service_model(hw, kr)
+    dram_pj_byte = memory.energy_pj_per_useful_byte
+    bank_bw = memory.bank_ceiling_tb_s
     for c, ((i,j,f), path) in enumerate(zip(flows, paths)):
         duty[i,c] = 1/(hw["tile_peak_tflops"]*(1-fabric.area_fraction)*f)
         bank[j,c] = 1/intensity  # TB/s, since both numerator units scale by 1e12.
-        latency_ns = hw["read_latency_ns"] + (len(path)*hw["mesh_hop_latency_ns"] if fabric.paid else 0)
+        latency_ns = memory.read_latency_ns + (len(path)*hw["mesh_hop_latency_ns"] if fabric.paid else 0)
         # Little's Law: outstanding entries = B * latency / transaction size.
         queue[i,c] = 1000*latency_ns/(intensity*hw["transaction_bytes"])
         voltage = hw["voltage_floor_fraction"]+(1-hw["voltage_floor_fraction"])*f
@@ -144,7 +140,7 @@ def optimize(cfg, h, global_h, workload, tiling, fabric, thermal_mode,
     layer_t = tc["ambient_c"]+layer_response(h)@p
     delivered = bank@x
     remote = sum(x[c] for c, path in enumerate(paths) if path)
-    act_per_s = delivered*1e12*kr["row_miss_fraction"]/kr["chunk_bytes"]
+    act_per_s = delivered*1e12*memory.activations_per_useful_byte
     mapping = np.zeros((n,n)); rates = np.zeros((n,len(hw["dvfs_fractions"])))
     for c,(i,j,f) in enumerate(flows):
         mapping[i,j] += x[c]

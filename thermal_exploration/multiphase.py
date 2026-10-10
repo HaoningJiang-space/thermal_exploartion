@@ -13,6 +13,7 @@ from scipy.optimize import linprog
 
 from .model import Fabric, kernel, route
 from .thermal import THERMAL_NAMES, layer_response, thermal_control
+from .memory_service import memory_service_model
 
 
 @dataclass
@@ -46,13 +47,13 @@ def service_block(cfg, workload, tiling, fabric):
     duty=np.zeros((n,v));bank=np.zeros((n,v));queue=np.zeros((n,v));power=np.zeros((2*n,v));shards=np.zeros((n,v))
     links=sorted({edge for path in paths for edge in path})
     link_idx={edge:i for i,edge in enumerate(links)};link_load=np.zeros((len(links),v))
-    dram_energy=hw["dram_pj_per_byte"]+hw["activation_nj"]*1000*kr["row_miss_fraction"]/kr["chunk_bytes"]
-    bank_bw=1/(1/hw["bank_group_peak_tb_s"]+hw["row_miss_penalty_ns"]*1000
-               *kr["row_miss_fraction"]/(kr["chunk_bytes"]*hw["independent_banks_per_group"]))
+    memory=memory_service_model(hw,kr)
+    dram_energy=memory.energy_pj_per_useful_byte
+    bank_bw=memory.bank_ceiling_tb_s
     for c,((i,j,f),path) in enumerate(zip(flows,paths)):
         duty[i,c]=1/(hw["tile_peak_tflops"]*(1-fabric.area_fraction)*f)
         bank[j,c]=1/intensity;shards[j,c]=1
-        latency=hw["read_latency_ns"]+(len(path)*hw["mesh_hop_latency_ns"] if fabric.paid else 0)
+        latency=memory.read_latency_ns+(len(path)*hw["mesh_hop_latency_ns"] if fabric.paid else 0)
         queue[i,c]=1000*latency/(intensity*hw["transaction_bytes"])
         voltage=hw["voltage_floor_fraction"]+(1-hw["voltage_floor_fraction"])*f
         power[i,c]=hw["logic_pj_per_flop"]*voltage**2

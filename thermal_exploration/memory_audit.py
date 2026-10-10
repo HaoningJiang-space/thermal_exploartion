@@ -23,6 +23,7 @@ import scipy
 from .model import fabric_cases, kernel, optimize
 from .run import revision
 from .thermal import THERMAL_MODES, response
+from .memory_service import memory_service_model
 
 
 def internal_ceilings(audit, traffic, subarrays=1):
@@ -126,8 +127,9 @@ def main():
                 fabric = fabric_cases(hw)[0]
                 for workload in cfg["workloads"]:
                     intensity = kernel(workload, tiling)["intensity"]
+                    service = memory_service_model(hw, kernel(workload, tiling))
                     logic_bw = n * hw["tile_peak_tflops"] / intensity
-                    queue_bw = n * hw["outstanding_per_tile"] * hw["transaction_bytes"] / hw["read_latency_ns"] / 1000
+                    queue_bw = n * hw["outstanding_per_tile"] * hw["transaction_bytes"] / service.read_latency_ns / 1000
                     ceilings_all = dict(HB=hb, DRAM_internal=internal * n, Logic_consumption=logic_bw, Request_capacity=queue_bw)
                     dominant = min(ceilings_all, key=ceilings_all.get)
                     # Release timing only, preserving ACT/PRE energy and all NPU resources.
