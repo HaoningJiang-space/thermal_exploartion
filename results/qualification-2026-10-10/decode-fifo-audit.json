@@ -1,0 +1,16 @@
+{
+  "column_reduce64": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 4,
+    "depth": 8,
+    "link_flits": 1920,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  },
+  "row_blocked_k": {
+    "status": "PASS",
+    "maximum_input_fifo_reserved_flits": 8,
+    "depth": 8,
+    "link_flits": 15360,
+    "scope": "Independent exact FIFO ordering and queued/inflight credit reconstruction including same-tick router phases"
+  }
+}
