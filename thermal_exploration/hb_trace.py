@@ -45,7 +45,8 @@ def validate(req,paths):
     return dict(request_count=len(req),read_bytes=sum(r["size"] for r in req),useful_flops=sum(r["useful_flops"] for r in req))
 
 
-def ramulator_config(root,out,paths,refresh=True,relax_row_retention=False):
+def ramulator_config(root,out,paths,refresh=True,relax_row_retention=False,
+                     timing_scale=1.,subarrays=1,selector_ck=0):
     # Reuse the frozen HBM3 state/controller definitions as an explicitly
     # assumed internal service surrogate. This is not standard HBM3 or Mono3D.
     from .run_g4 import device_and_config
@@ -71,11 +72,21 @@ def ramulator_config(root,out,paths,refresh=True,relax_row_retention=False):
             if relax_row_retention:t["nRAS"]=t["nRCDRD"]+8
             t["nRC"]=t["nRAS"]+t["nRP"]
             return org,t
+    if subarrays not in (1,2) or not 0<timing_scale<=1 or selector_ck<0:
+        raise ValueError("Invalid mechanism probe")
+    if subarrays>1:
+        from ramulator.dram.spec import TimingConstraint
+        # SID encodes local subarray state, not additional physical banks or
+        # independent ports. Parent PC keeps shared ACT/data/command limits.
+        # Conservatively keep nRRDL shared even across the virtual SID groups.
+        InternalSurrogate.timing_constraints=list(base.timing_constraints)+[
+            TimingConstraint(level="PseudoChannel",preceding=["ACT"],following=["ACT"],latency="nRRDL")]
     from math import ceil
-    timing={name:ceil(ns/.5) for name,ns in dict(nRCDRD=2.29,nRCDWR=2.29,nRP=4.77,nRAS=29.79,
+    timing={name:ceil(ns/.5) for name,ns in dict(nRCDRD=2.29*timing_scale,nRCDWR=2.29*timing_scale,nRP=4.77*timing_scale,nRAS=29.79*timing_scale,
         nRRDS=2.5,nRRDL=3.125,nFAW=15.,nCL=4.,nCWL=4.).items()}
+    timing["nRCDRD"]+=selector_ck;timing["nRCDWR"]+=selector_ck
     dram=InternalSurrogate(org_preset="HBM3_16Gb_8hi",timing_preset="HBM3_6400Mbps",
-        pseudochannel=paths,sid=1,bankgroup=min(4,16//paths),bank=(16//paths)//min(4,16//paths),row=32768,column=32,
+        pseudochannel=paths,sid=subarrays,bankgroup=min(4,16//paths),bank=(16//paths)//min(4,16//paths),row=32768//subarrays,column=32,
         dq=1024,channel_width=8192*paths,rate=16000,tCK_ps=500,nBL=2,nCCDS=2,**timing)
     controller["dram"]=dram.to_config()
     controllers=[]

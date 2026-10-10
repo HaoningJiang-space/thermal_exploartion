@@ -66,16 +66,30 @@ def thermal_config(p):
         convection_w_m2k=1/(v["package_top_resistance_k_w"]*a),cooling_gradient=v["cooling_gradient"],vertical_scale=1.)
 
 
-def lp_config(p,paths,service_tb_s,act_per_byte=None,allocation="fixed_compute"):
+def lp_config(p,paths,service_tb_s,act_per_byte=None,allocation="fixed_compute",
+              energy_mode="timing_only",command_activity=None):
     v=values(p);r=p["resources"];cost=organization_cost(p,paths,allocation)
     if not cost["area_feasible"]:raise ValueError("Organization exceeds fixed silicon/HB area budget")
     access=v["access_energy_pj_byte"];activation=access*v["activation_share"]
     transfer=access-activation;logic_transfer=transfer*v["logic_memory_share"]
-    act_per_byte=1/r["row_buffer_bytes"]
+    if energy_mode not in ("timing_only","trace_driven"):raise ValueError("Unknown energy contract")
+    if energy_mode=="trace_driven" and command_activity is None:
+        raise ValueError("Trace-driven energy requires command counts, useful bytes and elapsed time")
+    oracle_act_per_byte=1/r["row_buffer_bytes"]
     # Full-row energy partition is an assumption. It does not independently
     # calibrate ACT/PRE. Additional path switching remains a paid cost.
-    dram_energy=transfer-logic_transfer+activation*r["row_buffer_bytes"]*act_per_byte
+    dram_energy=transfer-logic_transfer+activation*r["row_buffer_bytes"]*oracle_act_per_byte
     logic_energy=logic_transfer*(1+cost["extra_dynamic_fraction"])
+    dram_static=v["dram_background_w"]+256*v["refresh_nj_per_bank"]/3900+256*activation*r["row_buffer_bytes"]/1000/3900
+    evidence=None
+    if energy_mode=="trace_driven":
+        from .command_power import command_energy
+        evidence=command_energy(p,paths=paths,**command_activity)
+        if act_per_byte is not None and not math.isclose(act_per_byte,evidence["ACT_per_useful_byte"],rel_tol=1e-8):
+            raise ValueError("Supplied ACT density disagrees with command trace")
+        dram_energy=evidence["dram_dynamic_pj_per_useful_byte"]
+        logic_energy=evidence["logic_dynamic_pj_per_useful_byte"]
+        dram_static=v["dram_background_w"]+evidence["refresh_power_w"]
     hw=dict(tile_peak_tflops=cost["compute_peak_tflops"]/16,bank_group_peak_tb_s=v["hb_chip_tb_s"]/16,
         internal_bank_group_ceiling_tb_s=service_tb_s/16,independent_banks_per_group=16,
         row_miss_penalty_ns=34.56,read_latency_ns=v["read_latency_ns"],outstanding_per_tile=512,
@@ -83,13 +97,14 @@ def lp_config(p,paths,service_tb_s,act_per_byte=None,allocation="fixed_compute")
         logic_static_w=(v["logic_background_w"]+cost["periphery_static_w"]+cost["compute_static_w"])/16,
         # Refresh and its worst-case extra row reopenings are per-time costs,
         # not coefficients that incorrectly shrink with thermal throttling.
-        dram_static_w=(v["dram_background_w"]+256*v["refresh_nj_per_bank"]/3900+
-                       256*activation*r["row_buffer_bytes"]/1000/3900)/16,
+        dram_static_w=dram_static/16,
         logic_pj_per_flop=v["logic_compute_pj_flop"]+v["logic_other_dynamic_pj_flop"],
         logic_memory_pj_per_byte=logic_energy,dram_pj_per_byte=dram_energy,activation_nj=0.,
         dvfs_fractions=[.25,.5,.75,1.],voltage_floor_fraction=.65,placement_max_fraction=.125,
         mesh_link_tb_s=.25,mesh_hop_latency_ns=2.,mesh_pj_per_byte_hop=.5,fabric_area_fraction=0.,fabric_static_w_per_tile=0.)
-    return dict(grid=4,hardware=hw,thermal=thermal_config(p),
+    if evidence is not None:hw["trace_ACT_per_useful_byte"]=evidence["ACT_per_useful_byte"]
+    return dict(grid=4,hardware=hw,thermal=thermal_config(p),energy_contract=dict(mode=energy_mode,
+                evidence=evidence,timing_oracle_fixed_ACT_density=oracle_act_per_byte if energy_mode=="timing_only" else None),
                 workloads=[dict(name="decode_gemv",batch=1,m=4096,k=4096,element_bytes=2,output_resident_in_logic=True),
                            dict(name="prefill_gemm",batch=32,m=4096,k=4096,element_bytes=2,output_resident_in_logic=True)],
                 tilings=[dict(name="full_4k_row_optimized",chunk_bytes=4096,row_miss_fraction=1.)])
@@ -106,6 +121,7 @@ def solve(p,paths,service,h,gh,workload,mode,act_per_byte=None,allocation="fixed
     else:
         result=optimize(cfg,h,gh,cfg["workloads"][workload],cfg["tilings"][0],Fabric("local",0),mode,[1/16]*16,"free")
     result["organization_cost"]=organization_cost(p,paths,allocation)
+    result["energy_contract"]=cfg["energy_contract"]
     result["prediction_mode"]="conditional_architecture_exploration"
     result["execution_scope"]="Steady divisible-work relaxation; common optimized placement/DVFS; not an implemented NPU"
     return result

@@ -29,7 +29,7 @@ def memory_service_model(hw, kernel):
                        * kernel["row_miss_fraction"] / (kernel["chunk_bytes"]
                                                        * hw["independent_banks_per_group"]))
         kind = "legacy_serial_row_miss_relaxation"
-    acts = kernel["row_miss_fraction"] / kernel["chunk_bytes"]
+    acts = hw.get("trace_ACT_per_useful_byte",kernel["row_miss_fraction"] / kernel["chunk_bytes"])
     energy = hw["dram_pj_per_byte"] + hw["activation_nj"] * 1000 * acts
     latency = hw["read_latency_ns"]
     if not all(math.isfinite(v) and v > 0 for v in (peak, bank_bw, latency)):
