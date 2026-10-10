@@ -57,6 +57,7 @@ def audit_record(directory,r,bins=128,grid=4,scale=1.,cooling=.3,backend='scipy'
     mapped=dict(workload=r['scenario'],variant='known_fifo_baseline' if r['baseline'] in ('B2_stream_fusion','B3_3d_placement') else 'sram_baseline',
                 ticks=round(r['time_us']/.00025),time_us=r['time_us'],meta=dict(tokens=r['tokens']))
     result=evaluate(mapped,energy,ledger,load_exploration(),cooling,scale,backend,bins,grid,pacing_mode='idle_bins')
+    result['cold_128_step_burst_sampled_peak_c']=result.pop('cold_token_sampled_peak_c')
     result.update(baseline=r['baseline'],routing=r['routing'],tensor_parts=r['tensor_parts'],logic_memory_share=share,
         scope='Full structural128-step Decode event workload, conditional periodicRC feasibility; not device-calibrated inference throughput',
         t0_tokens_s=r['tokens_s'],event_power_resolution='Per-tile activity distributed over measured fast-kernel/packet stage windows; not per-command switching power',

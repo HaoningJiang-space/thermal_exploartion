@@ -119,7 +119,11 @@ def evaluate(r,energy,ledger,p,cooling,scale=1.,backend='scipy',bins=64,grid=4,p
     base_temp=25+layer@p0;layer_dynamic=layer@dynamic_mean
     if base_temp.max()>=85:raise ValueError('Background alone violates layer thermal limit')
     layer_pace=max(1.,float(np.max(layer_dynamic/(85-base_temp))))
+    spatial_base=25+h@p0;spatial_dynamic=h@dynamic_mean
+    if spatial_base.max()>=85:raise ValueError('Background alone violates spatial limit')
+    spatial_pace=max(1.,float(np.max(spatial_dynamic/(85-spatial_base))))
     return dict(workload=r['workload'],variant=r['variant'],time_us=r['time_us'],unpaced_tokens_s=r['meta']['tokens']/duration,
+        t2_spatial_steady_pace_factor=spatial_pace,t2_spatial_steady_tokens_s=r['meta']['tokens']/(duration*spatial_pace),
         t1_layer_pace_factor=layer_pace,t1_layer_sustainable_tokens_s=r['meta']['tokens']/(duration*layer_pace),pacing_mode=pacing_mode,
         sustainable_tokens_s=r['meta']['tokens']/(duration*factor),pace_factor=factor,energy_per_token_j=float(energy_token),
         logic_mean_w=float(mean[:n].sum()),dram_mean_w=float(mean[n:].sum()),power_cooling_necessary_bound_w=60/cooling,
