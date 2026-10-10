@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "scope": "illustrative necessary rate bounds, not a DRAM device specification or timing simulator",
+  "base_config": "configs/pilot.json",
+  "cooling_gradient": 0.6,
+  "hb_chip_tb_s": [1.0, 16.0, 32.0],
+  "organization": {
+    "banks_per_group": 32,
+    "activation_domains_per_group": 1,
+    "column_domains_per_group": 8,
+    "bytes_per_column_command": 256,
+    "physical_row_bytes": 8192,
+    "ideal_subarrays_per_bank": 8
+  },
+  "timing_ns": {
+    "tRAS": 30.0,
+    "tRP": 15.0,
+    "tRCD": 15.0,
+    "tRRD": 4.0,
+    "tFAW": 20.0,
+    "tCCD": 2.0
+  },
+  "energy": {
+    "act_nj": 6.0,
+    "pre_nj": 2.0,
+    "array_pj_per_useful_byte": 4.0,
+    "peripheral_pj_per_useful_byte": 8.0,
+    "source": "illustrative split of prior 12 pJ/byte and 8 nJ activation; no physical calibration"
+  },
+  "traffic_cases": [
+    {"name": "full_row_spread", "useful_bytes_per_activation": 8192, "busy_banks_per_group": 32},
+    {"name": "quarter_row_spread", "useful_bytes_per_activation": 2048, "busy_banks_per_group": 32},
+    {"name": "small_row_spread", "useful_bytes_per_activation": 256, "busy_banks_per_group": 32},
+    {"name": "small_row_concentrated", "useful_bytes_per_activation": 256, "busy_banks_per_group": 1}
+  ],
+  "parameter_status": "All timings, domain scopes, row sizes and energy splits are uncalibrated assumptions. No parameter is transplanted as an HB device measurement."
+}

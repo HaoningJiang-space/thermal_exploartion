@@ -40,7 +40,8 @@ Migration 在最优周期时间固定后，再最小化搬运时间与份额，�
 
 ## 热条件与时间尺度
 
-T0 无热限制，T1 单一全局 R，T2 全空间 H，各自重新优化全部方案。
+T0 无热限制，旧 T1_scalar 单一 R，新增 T1_layer 保留 Logic/DRAM 两层热阻和温限，
+T2 全空间 H，各自重新优化全部方案。整数模式 3 表示 T1_layer，0/1/2 保持历史含义。
 Uniform/gradient cooling 沿用第一轮两个固定场景。没有新增硬件参数组合。
 
 Phase steady：每阶段满足 `H E[s] <= (DeltaTmax-H P0) t[s]`，描述长阶段稳态筛选。
@@ -69,7 +70,8 @@ HiTS 仍负责 H 的单位热源求解和原方程 acceptance，独立对照 Sci
 Independent Oracle 不用于声称可实现的 Local 周期上界，Shared 和 Migration 分别作公平对照。
 
 继续门槛：共享容量/布局、真实字节计费、同等优化机会与 paid 连接成本之后，
-净收益仍超过 5%，且 T2/T1 的相对增益超过 1%。
+净收益及匹配收益均超过 5%，且 T2/T1_layer 的相对增益超过 1%，
+T0/T1_layer 净收益不超过 1%。独立布局 oracle 和零成本 ideal 均不能成为架构候选。
 只通过乐观 LP 门槛仍不足以进入硬件；若周期收益上界都小于 5%，该配置可停止。
 若所有理想候选在 Shared 条件下都未通过，停止当前 Fabric 分支，不追加重构机制。
 HB 带宽与垂直耦合依赖性需要在出现有效收益后再检验，本轮不把一般多阶段问题宣称为 HB 特有。
@@ -83,5 +85,5 @@ PYTHONPATH="$HITS_SRC${PYTHONPATH:+:$PYTHONPATH}" \
   python -m thermal_exploration.run_g2 --thermal-backend hits --output outputs/g2-hits
 ```
 
-完整套件 648 个设计点，含 864 个 LP（Migration 增加一个定最优时间的 tie-break LP）。
+修正对照后的完整套件 864 个设计点，含 1152 个 LP（Migration 增加一个定最优时间的 tie-break LP）。
 输出目录必须不存在；保留全部阶段 work/layout、迁移双向字节、power 和周期温度界，不删除负结果。

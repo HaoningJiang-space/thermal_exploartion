@@ -25,3 +25,25 @@
 该式不含空闲的接口峰值带宽。增加峰值带宽不会自动降低持续算力；
 若同时增加静态/PHY 功率、Bank activity、refresh 或改变访问效率，才需重新计算边界。
 这是模型假设下的解析推导，不是对所有 DRAM 工作点的经验结论。
+
+## 历史先例与已知 DRAM 机制
+
+以下已读取一手正文，避免把 HB 场景下的旧思想重新包装为贡献。这里只判断直接重叠，不声称完成全领域 novelty 排除。
+
+| 工作 | 正文定位与核心机制 | 对后续审计的要求 |
+|---|---|---|
+| [NUCA, ASPLOS 2002](https://www.cs.utexas.edu/~cart/trips/publications/asplos02.pdf) | 非均匀 wire delay；动态迁移数据靠近处理器 | 动态局部性与非均匀访问不是新命题 |
+| [Thermal-Aware Memory Mapping, DATE 2009](https://past.date-conference.com/proceedings-archive/2009/DATE09/PDFFILES/10.6_1.PDF) | §II–IV：结合访问频率、层位置、散热条件做静态 3D DRAM 映射 | Thermal-aware data placement 有直接先例 |
+| [Performance/Thermal-Aware 3D L2, TODAES 2012](https://ceca.pku.edu.cn/media/lw/736bedbbc7780f63c2bba7b5565ce025.pdf) | 3D cache way placement 与热控制 | 存储组织/性能/热协同并非空白 |
+| [Temperature-Aware Runtime Power Management, ISQED 2014](https://si2.epfl.ch/demichel/publications/archive/2014/ISQED2014_Kyungsu_paper.pdf) | Cache partition/gating/data placement 与 per-core DVFS 联合优化 | Mapping/DVFS 必须作为强基线 |
+| [Runtime 3-D Stacked Cache Data Management, ISQED 2014](https://www.isqed.org/English/Conference/pdf/ISQED_2014_Best_Paper_1.pdf) | Fig.1、§IV：垂直 local bank、远端 crossbar、共享 TSV 竞争；运行时温度/流量感知 bank placement | 与本项目候选 Memory Service Fabric 直接重叠；SRAM→HB DRAM 不足以证明创新 |
+| [Loh, ISCA 2008](https://www.cs.cmu.edu/~18742/papers/Loh2008.pdf) | §IV：利用高密度互连重组内存；§V：改善内存后 L2 miss handling 成为限制 | 同时检查内部 DRAM 组织与 Logic 请求容量 |
+| [SALP, ISCA 2012](https://istc-cc.cmu.edu/publications/papers/2012/SALP-isca12.pdf) | §II/IV/V：tRC=tRAS+tRP、shared global structures；SALP-1/2/MASA 放开部分跨 subarray 重叠；MASA 仍需满足 tRRD/tFAW | Subarray 并行不能免费倍增共享 column bus 或 ACT power-domain 带宽 |
+| [Stratum, MICRO 2025](https://arxiv.org/html/2510.05245) | §II-A、evaluation：Mono3D staircase WL 造成层间 activation latency 差异，tiering 与 NMP 协同 | 普通 planar DRAM、TSV stacked die 和 Mono3D DRAM 参数不能混用 |
+
+Voxel 已处理相邻核心 row 请求进度，DeepStack 已考虑 partial-row transaction、activation/precharge 和 direct/interleaved bank 连接，SNAKE 沿用 Stratum 并固定有效 24 TB/s。
+这些已有机制必须逐个进入后续基线；不能把它们遗漏后得到的收益称为 HB-native 创新。
+没有收到/定位到具体 HPCA 2015 标题，不将“HPCA 2015”作为已核对引用。
+
+Compute–Memory Fabric 关闭的直接依据仍是本模型 G1/G2 的不足 5% 收益，历史重叠进一步削弱动机。
+HB-native Memory Organization 目前仅进入文献与瓶颈分析，没有已确认的新机制。

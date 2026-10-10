@@ -100,3 +100,5 @@ G2 已完成：648 个设计点、864 个 LP。当前模型中，Shared 布局�
 详见 [G2 结果与证据](results/g2-2026-10-09/findings.md)。
 
 P1 审计修正见 [docs/audit_p1.md](docs/audit_p1.md)。旧归档保留原始标量 T1 和旧标签，不能据此归因水平空间热机制。
+
+新阶段设计与运行：[HB–DRAM 内部必要上限审计](docs/memory_audit.md)。

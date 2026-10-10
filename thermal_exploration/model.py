@@ -85,6 +85,10 @@ def optimize(cfg, h, global_h, workload, tiling, fabric, thermal_mode,
     # Serial row-miss penalty amortized across independent banks in a group.
     bank_bw = 1/(1/hw["bank_group_peak_tb_s"] + hw["row_miss_penalty_ns"]*1000
                  *kr["row_miss_fraction"]/(kr["chunk_bytes"]*hw["independent_banks_per_group"]))
+    if "internal_bank_group_ceiling_tb_s" in hw:
+        # Audit-only replacement: independent necessary ACT/column rate bounds.
+        # Do not add the legacy serial penalty again (it would double count).
+        bank_bw = min(hw["bank_group_peak_tb_s"], hw["internal_bank_group_ceiling_tb_s"])
     for c, ((i,j,f), path) in enumerate(zip(flows, paths)):
         duty[i,c] = 1/(hw["tile_peak_tflops"]*(1-fabric.area_fraction)*f)
         bank[j,c] = 1/intensity  # TB/s, since both numerator units scale by 1e12.
