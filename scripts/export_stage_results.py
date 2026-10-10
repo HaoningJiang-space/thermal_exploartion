@@ -114,8 +114,9 @@ def main():
             r=best[s]
             if r['model']!=model:continue
             axes[0].scatter(r['batch'],r['initial_context'],s=170,marker=marker,color=color)
-            axes[0].annotate(s.replace('llama_','L ').replace('qwen_','Q '),(r['batch'],r['initial_context']),xytext=(4,5),textcoords='offset points',fontsize=8)
-    axes[0].set(xlabel='Decode batch',ylabel='Initial context',yscale='log',title='Six admitted cases; no interpolation')
+            offset=(5,10) if model=='llama31_8b' else (5,-14)
+            axes[0].annotate(s.replace('llama_','L ').replace('qwen_','Q '),(r['batch'],r['initial_context']),xytext=offset,textcoords='offset points',fontsize=8)
+    axes[0].set(xlabel='Decode batch',ylabel='Initial context',yscale='log',ylim=(1300,52000),xlim=(.6,9.1),title='Six admitted cases; no interpolation')
     labels=['DRAM read','SRAM R+W','NoC byte-hops']
     for i,label in enumerate(labels):
         vals=[(best[s]['activity'].get('dram',0) if i==0 else best[s]['activity'].get('sram_read',0)+best[s]['activity'].get('sram_write',0) if i==1 else best[s]['activity'].get('link',0))/best[s]['tokens']/2**20 for s in scenarios]
@@ -124,21 +125,24 @@ def main():
     fig.suptitle('Memory/storage includes delivery, finite copies and operand service');fig.tight_layout()
     for ext in ('png','pdf'):fig.savefig(out/('movement_and_map.'+ext),dpi=180)
     plt.close(fig)
-    fig,axes=plt.subplots(1,2,figsize=(12,4.5))
+    fig,axes=plt.subplots(1,3,figsize=(15,4.7))
     oracles=['ideal_memory','infinite_noc','ideal_buffer','ideal_collective','direct_producer_stream']
     gains=[]
     for i,o in enumerate(oracles):
         v=[100*(chosen(s,oracle=o)['tokens_s']/chosen(s)['tokens_s']-1) for s in scenarios];gains.append(v)
-        axes[0].plot(x,v,'o-',label=o.replace('_',' '))
-    axes[0].axhline(0,color='black',lw=.7);axes[0].set_xticks(x,scenarios,rotation=35,ha='right');axes[0].set_ylabel('Matched B3 counterfactual change (%)');axes[0].legend(fontsize=7)
+        axes[0 if o=='ideal_memory' else 1].plot(x,v,'o-',label=o.replace('_',' '))
+    for ax in axes[:2]:
+        ax.axhline(0,color='black',lw=.7);ax.set_xticks(x,scenarios,rotation=35,ha='right');ax.set_ylabel('Matched B3 change (%)');ax.legend(fontsize=7)
+    axes[0].set_title('Memory oracle removes DRAM and HB waits')
+    axes[1].set_title('Other resource oracles (independent scale)')
     for i,(key,label) in enumerate([('t0_tokens_s','T0'),('t1_layer_sustainable_tokens_s','T1 layer steady'),('t2_spatial_steady_tokens_s','T2 spatial steady'),('sustainable_tokens_s','T2 periodic')]):
         v=[]
         for s in scenarios:
             h=next(h for h in heat if h['workload']==s and h['baseline']==best[s]['baseline'] and h['tensor_parts']==16 and h['scenario']=='cooling_weak')
             v.append(h[key])
-        axes[1].bar(x+(i-1.5)*.2,v,.2,label=label)
-    axes[1].set_xticks(x,scenarios,rotation=35,ha='right');axes[1].set_ylabel('Conditional tokens/s');axes[1].legend(fontsize=7)
-    axes[1].set_title('Same baseline, weak cooling; steady vs periodic separated')
+        axes[2].bar(x+(i-1.5)*.2,v,.2,label=label)
+    axes[2].set_xticks(x,scenarios,rotation=35,ha='right');axes[2].set_ylabel('Conditional tokens/s');axes[2].legend(fontsize=7)
+    axes[2].set_title('Same baseline, weak cooling')
     fig.suptitle('Oracle effects overlap; none is a paid new architecture');fig.tight_layout()
     for ext in ('png','pdf'):fig.savefig(out/('isolation_and_thermal.'+ext),dpi=180)
     plt.close(fig)
@@ -147,7 +151,7 @@ def main():
     fig,axes=plt.subplots(1,2,figsize=(8,3.8))
     for i,layer in enumerate(('Logic','Equivalent DRAM')):
         im=axes[i].imshow(np.asarray(h['node_peak_upper_c'])[i*16:(i+1)*16].reshape(4,4),cmap='inferno',vmin=25,vmax=85)
-        axes[i].set_title(layer+' periodic peak upper bound');axes[i].set_xticks([]);axes[i].set_yticks([])
+        axes[i].set_title(layer+'\nPeriodic peak upper bound',fontsize=10);axes[i].set_xticks([]);axes[i].set_yticks([])
     fig.colorbar(im,ax=axes,shrink=.8,label='°C');fig.suptitle('Qwen B8/C2048; assumed equivalent-layer geometry')
     for ext in ('png','pdf'):fig.savefig(out/('spatial_temperature.'+ext),dpi=180,bbox_inches='tight')
     plt.close(fig)
