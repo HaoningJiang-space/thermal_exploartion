@@ -1,0 +1,854 @@
+{
+  "schema": 1,
+  "profile_id": "stratum_micro2025_reference",
+  "profile_kind": "literature_reference_and_calibration_gate",
+  "technology": "Mono3D_1T1C_CUA_plus_hybrid_bonded_logic",
+  "source": {
+    "url": "https://arxiv.org/html/2510.05245v1",
+    "pdf_url": "https://arxiv.org/pdf/2510.05245v1",
+    "doi": "10.1145/3725843.3756043",
+    "version": "arXiv v1",
+    "pdf_sha256": "3dfcff9f793db9352d5d872f63deb86854c30919c96030df5a078953a0b4ef65",
+    "locations": {
+      "device": "Table 1 / section 6.1.1",
+      "processor": "Table 3 / section 6.2.3",
+      "area_power": "Figure 15 / section 6.2.2-3",
+      "physical_sites": "Figure 13"
+    },
+    "pdf_pages": {
+      "Table1": 10,
+      "Table3_and_Figure15": 11
+    }
+  },
+  "unit_conventions": {
+    "bandwidth": "decimal TB/s",
+    "flops": "MAC = 2 FLOP",
+    "storage": "binary capacities derived from MAT topology; published KB/MB/GB labels retained separately",
+    "area": "mm2"
+  },
+  "die": {
+    "area_mm2": 121.0,
+    "logic_process_nm": 7,
+    "CUA_process_nm": 32,
+    "supply_v": 0.7,
+    "precision": "FP16"
+  },
+  "dram": {
+    "channels_per_chip": 16,
+    "banks_per_channel": 16,
+    "rank_count": null,
+    "bank_group_partition": null,
+    "subarrays_per_bank": null,
+    "mats_per_bank": 1024,
+    "mat_rows": 1024,
+    "mat_columns": 1024,
+    "reported_bank_capacity": "1 Gb",
+    "reported_chip_capacity": "32 GB",
+    "row_buffer_bytes": 4096,
+    "physical_wordline_layers": 1024,
+    "timing_tier_count": 8,
+    "reported_capacity_per_tier": "4 GB",
+    "tRP_ns": 4.77,
+    "tRAS_offset_from_tRCD_ns": 27.5,
+    "tier_tRCD_ns": [
+      2.29,
+      3.92,
+      5.99,
+      8.5,
+      11.44,
+      14.82,
+      18.63,
+      22.88
+    ],
+    "row_tier_mapping": "equal_row_count_per_tier; contiguous row partition is a derived address model, not verified command mapping",
+    "reported_internal_bandwidth_tb_s": {
+      "body_min": 19.01,
+      "body_max": 30.34,
+      "table3_max": 34.34
+    },
+    "energy_pj_per_bit": 0.429,
+    "energy_scope": "device aggregate estimate; ACT/PRE/RD/background and physical-site split unavailable",
+    "activation_domains": null,
+    "column_domains": null,
+    "tRRD_ns": null,
+    "tFAW_ns": null,
+    "tCCD_ns": null,
+    "tCL_ns": null,
+    "refresh_parameters": null
+  },
+  "logic": {
+    "pu_count": 16,
+    "pes_per_pu": 16,
+    "mac_array_rows": 16,
+    "mac_array_columns": 16,
+    "frequency_ghz": 1.0,
+    "reported_peak_tflops": 128.0,
+    "mac_energy_pj_per_mac": 0.604,
+    "psum_bytes_per_pe": 65536,
+    "shared_bytes_per_pu": 1310720,
+    "row_swap_rf_bytes_per_pe": 8192,
+    "tier_table_register_bits_per_pe": 256,
+    "reported_sram_capacity": "36 MB",
+    "special_function_simd_width": 256,
+    "ring_gb_s_per_link": 128.0,
+    "reported_ring_tb_s": 2.048,
+    "sram_port_count": null,
+    "sram_access_energy": null,
+    "noc_transfer_energy": null,
+    "controller_energy": null,
+    "vector_energy": null,
+    "background_power_w": null
+  },
+  "areas": {
+    "reported_active_mm2": 76.63,
+    "pu_mm2": 2.35,
+    "rounded_pe_mm2": 0.11,
+    "external_hbm3_phy_mm2": 23.94,
+    "low_voltage_dram_periphery_mm2": 14.8,
+    "power_tsv_mm2": 0.21,
+    "pu_fractions": {
+      "processing_elements": 0.776,
+      "shared_memory": 0.176,
+      "special_function_router_reducer": 0.048
+    },
+    "pe_fractions": {
+      "tensor_core": 0.478,
+      "tiering_table": 0.001,
+      "row_swap_rf": 0.167,
+      "psum_sram": 0.182,
+      "matrix_rf": 0.172
+    },
+    "separate_controller_mm2": null,
+    "separate_noc_mm2": null,
+    "separate_vector_mm2": null
+  },
+  "reference_power": {
+    "logic_table3_rounded_w": 43.0,
+    "logic_body_w": 42.67,
+    "logic_thermal_budget_w": 45.0,
+    "dram_approx_full_bandwidth_w": 104.0,
+    "dram_approx_bandwidth_tb_s": 30.34,
+    "stack_body_w": 144.53,
+    "figure15_fractions": {
+      "compute": 0.248,
+      "logic_memory_communication": 0.047,
+      "dram": 0.705
+    },
+    "fraction_precision": 0.001,
+    "activity_trace": null
+  },
+  "physical_sites": {
+    "dram_array": "Mono3D memory array",
+    "high_voltage_decoder": "32nm CMOS-under-array below memory array",
+    "low_voltage_dram_periphery": "7nm hybrid-bonded logic die",
+    "compute_sram_noc_controller": "7nm hybrid-bonded logic die",
+    "external_hbm3_phy": "7nm logic die; interposer xPU interface, not internal HB bandwidth",
+    "component_power_partition": null,
+    "tier_heat_geometry": null
+  },
+  "external_xpu_interface": {
+    "channels": 16,
+    "data_bits_per_channel": 64,
+    "gbps_per_pin": 6.4,
+    "scope": "interposer interface; not the internal hybrid-bonded link"
+  },
+  "hybrid_bonding": {
+    "data_pad_count": null,
+    "data_rate_per_pad_gbps": null,
+    "io_area_mm2": null,
+    "static_power_w": null,
+    "energy_pj_per_bit": null,
+    "effective_interface_areal_resistance_mm2_k_per_w": null,
+    "bandwidth_sweep_kind": "bandwidth_only_counterfactual unless these physical quantities are supplied",
+    "address_control_pad_count": null,
+    "power_ground_pad_count": null,
+    "pad_pitch_um": null,
+    "port_peripheral_mapping": null
+  },
+  "thermal": {
+    "calibrated_geometry": null,
+    "calibrated_boundary_conditions": null,
+    "tier_resolved_heat_nodes": null,
+    "independent_validation": null,
+    "status": "G5 deferred; no pilot.json thermal parameters inherited"
+  },
+  "calibration_policy": {
+    "reference_rounded_relative_tolerance": 0.005,
+    "logic_power_closure_relative_tolerance": 0.05,
+    "component_fit_policy": "Do not distribute residuals or infer unreported component coefficients to force agreement",
+    "performance_prediction_allowed": false
+  },
+  "unresolved_inputs": [
+    "ACT/column command-domain membership and timing scope",
+    "validated bank/row/column address mapping and subarray mapping",
+    "command timing beyond tRCD/tRAS/tRP/tRC",
+    "ACT/PRE/RD/background energy and their physical locations",
+    "SRAM ports, access events and energies",
+    "NoC/controller/vector activity and separate energy/area",
+    "internal HB pad/rate/area/power budget",
+    "tier-resolved geometry and complete cooling boundary",
+    "MAC energy versus reference peak-power activity/scope",
+    "published rounded/detailed reference inconsistencies"
+  ],
+  "power_components": {
+    "Logic_MAC": {
+      "coefficient": 0.604,
+      "physical_site": "bonded_logic",
+      "status": "Paper-reported",
+      "reason": "Compute energy anchor; relation to reference activity remains unresolved",
+      "unit": "pJ/MAC"
+    },
+    "Logic_SRAM": {
+      "coefficient": null,
+      "physical_site": "bonded_logic",
+      "status": "Unknown",
+      "reason": "Public aggregate energy cannot identify separate component command/activity costs"
+    },
+    "Logic_NoC": {
+      "coefficient": null,
+      "physical_site": "bonded_logic",
+      "status": "Unknown",
+      "reason": "Public aggregate energy cannot identify separate component command/activity costs"
+    },
+    "Logic_Controller": {
+      "coefficient": null,
+      "physical_site": "bonded_logic",
+      "status": "Unknown",
+      "reason": "Public aggregate energy cannot identify separate component command/activity costs"
+    },
+    "Logic_PHY": {
+      "coefficient": null,
+      "physical_site": "bonded_logic",
+      "status": "Unknown",
+      "reason": "Public aggregate energy cannot identify separate component command/activity costs"
+    },
+    "Logic_leakage": {
+      "coefficient": null,
+      "physical_site": "bonded_logic",
+      "status": "Unknown",
+      "reason": "Public aggregate energy cannot identify separate component command/activity costs"
+    },
+    "DRAM_ACT": {
+      "coefficient": null,
+      "physical_site": null,
+      "status": "Unknown",
+      "reason": "Public aggregate energy cannot identify separate component command/activity costs"
+    },
+    "DRAM_PRE": {
+      "coefficient": null,
+      "physical_site": null,
+      "status": "Unknown",
+      "reason": "Public aggregate energy cannot identify separate component command/activity costs"
+    },
+    "DRAM_RD_WR": {
+      "coefficient": null,
+      "physical_site": null,
+      "status": "Unknown",
+      "reason": "Public aggregate energy cannot identify separate component command/activity costs"
+    },
+    "DRAM_refresh": {
+      "coefficient": null,
+      "physical_site": null,
+      "status": "Unknown",
+      "reason": "Public aggregate energy cannot identify separate component command/activity costs"
+    },
+    "DRAM_background": {
+      "coefficient": null,
+      "physical_site": null,
+      "status": "Unknown",
+      "reason": "Public aggregate energy cannot identify separate component command/activity costs"
+    }
+  },
+  "parameter_provenance": {
+    "/die/area_mm2": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Tables 1/3"
+    },
+    "/die/logic_process_nm": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Tables 1/3"
+    },
+    "/die/CUA_process_nm": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Tables 1/3"
+    },
+    "/die/supply_v": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Tables 1/3"
+    },
+    "/die/precision": {
+      "classification": "Metadata",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Tables 1/3"
+    },
+    "/dram/channels_per_chip": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/banks_per_channel": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/rank_count": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/bank_group_partition": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/subarrays_per_bank": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/mats_per_bank": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/mat_rows": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/mat_columns": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/reported_bank_capacity": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/reported_chip_capacity": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/row_buffer_bytes": {
+      "classification": "Derived",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/physical_wordline_layers": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/timing_tier_count": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/reported_capacity_per_tier": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/tRP_ns": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/tRAS_offset_from_tRCD_ns": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/tier_tRCD_ns/0": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/tier_tRCD_ns/1": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/tier_tRCD_ns/2": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/tier_tRCD_ns/3": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/tier_tRCD_ns/4": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/tier_tRCD_ns/5": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/tier_tRCD_ns/6": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/tier_tRCD_ns/7": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/row_tier_mapping": {
+      "classification": "Metadata",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/reported_internal_bandwidth_tb_s/body_min": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/reported_internal_bandwidth_tb_s/body_max": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/reported_internal_bandwidth_tb_s/table3_max": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/energy_pj_per_bit": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/energy_scope": {
+      "classification": "Metadata",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/activation_domains": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/column_domains": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/tRRD_ns": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/tFAW_ns": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/tCCD_ns": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/tCL_ns": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/dram/refresh_parameters": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1 / section 6.1.1"
+    },
+    "/logic/pu_count": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/pes_per_pu": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/mac_array_rows": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/mac_array_columns": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/frequency_ghz": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/reported_peak_tflops": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/mac_energy_pj_per_mac": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/psum_bytes_per_pe": {
+      "classification": "Derived",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/shared_bytes_per_pu": {
+      "classification": "Derived",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/row_swap_rf_bytes_per_pe": {
+      "classification": "Derived",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/tier_table_register_bits_per_pe": {
+      "classification": "Derived",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/reported_sram_capacity": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/special_function_simd_width": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/ring_gb_s_per_link": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/reported_ring_tb_s": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/sram_port_count": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/sram_access_energy": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/noc_transfer_energy": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/controller_energy": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/vector_energy": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/logic/background_power_w": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 3 / section 6.2.3"
+    },
+    "/areas/reported_active_mm2": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/areas/pu_mm2": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/areas/rounded_pe_mm2": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/areas/external_hbm3_phy_mm2": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/areas/low_voltage_dram_periphery_mm2": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/areas/power_tsv_mm2": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/areas/pu_fractions/processing_elements": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/areas/pu_fractions/shared_memory": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/areas/pu_fractions/special_function_router_reducer": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/areas/pe_fractions/tensor_core": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/areas/pe_fractions/tiering_table": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/areas/pe_fractions/row_swap_rf": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/areas/pe_fractions/psum_sram": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/areas/pe_fractions/matrix_rf": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/areas/separate_controller_mm2": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/areas/separate_noc_mm2": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/areas/separate_vector_mm2": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / section 6.2.2"
+    },
+    "/reference_power/logic_table3_rounded_w": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / sections 6.2.2-3"
+    },
+    "/reference_power/logic_body_w": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / sections 6.2.2-3"
+    },
+    "/reference_power/logic_thermal_budget_w": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / sections 6.2.2-3"
+    },
+    "/reference_power/dram_approx_full_bandwidth_w": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / sections 6.2.2-3"
+    },
+    "/reference_power/dram_approx_bandwidth_tb_s": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / sections 6.2.2-3"
+    },
+    "/reference_power/stack_body_w": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / sections 6.2.2-3"
+    },
+    "/reference_power/figure15_fractions/compute": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / sections 6.2.2-3"
+    },
+    "/reference_power/figure15_fractions/logic_memory_communication": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / sections 6.2.2-3"
+    },
+    "/reference_power/figure15_fractions/dram": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / sections 6.2.2-3"
+    },
+    "/reference_power/fraction_precision": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / sections 6.2.2-3"
+    },
+    "/reference_power/activity_trace": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 15 / sections 6.2.2-3"
+    },
+    "/external_xpu_interface/channels": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1"
+    },
+    "/external_xpu_interface/data_bits_per_channel": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1"
+    },
+    "/external_xpu_interface/gbps_per_pin": {
+      "classification": "Paper-reported",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1"
+    },
+    "/external_xpu_interface/scope": {
+      "classification": "Metadata",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Table 1"
+    },
+    "/physical_sites/dram_array": {
+      "classification": "Metadata",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 13"
+    },
+    "/physical_sites/high_voltage_decoder": {
+      "classification": "Metadata",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 13"
+    },
+    "/physical_sites/low_voltage_dram_periphery": {
+      "classification": "Metadata",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 13"
+    },
+    "/physical_sites/compute_sram_noc_controller": {
+      "classification": "Metadata",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 13"
+    },
+    "/physical_sites/external_hbm3_phy": {
+      "classification": "Metadata",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 13"
+    },
+    "/physical_sites/component_power_partition": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 13"
+    },
+    "/physical_sites/tier_heat_geometry": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "Figure 13"
+    },
+    "/hybrid_bonding/data_pad_count": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "not reported as a full internal interface contract"
+    },
+    "/hybrid_bonding/data_rate_per_pad_gbps": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "not reported as a full internal interface contract"
+    },
+    "/hybrid_bonding/io_area_mm2": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "not reported as a full internal interface contract"
+    },
+    "/hybrid_bonding/static_power_w": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "not reported as a full internal interface contract"
+    },
+    "/hybrid_bonding/energy_pj_per_bit": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "not reported as a full internal interface contract"
+    },
+    "/hybrid_bonding/effective_interface_areal_resistance_mm2_k_per_w": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "not reported as a full internal interface contract"
+    },
+    "/hybrid_bonding/bandwidth_sweep_kind": {
+      "classification": "Metadata",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "not reported as a full internal interface contract"
+    },
+    "/thermal/calibrated_geometry": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "G5 deferred"
+    },
+    "/thermal/calibrated_boundary_conditions": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "G5 deferred"
+    },
+    "/thermal/tier_resolved_heat_nodes": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "G5 deferred"
+    },
+    "/thermal/independent_validation": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "G5 deferred"
+    },
+    "/thermal/status": {
+      "classification": "Metadata",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "G5 deferred"
+    },
+    "/hybrid_bonding/address_control_pad_count": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "full internal interface budget unavailable"
+    },
+    "/hybrid_bonding/power_ground_pad_count": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "full internal interface budget unavailable"
+    },
+    "/hybrid_bonding/pad_pitch_um": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "full internal interface budget unavailable"
+    },
+    "/hybrid_bonding/port_peripheral_mapping": {
+      "classification": "Unknown",
+      "source_url": "https://arxiv.org/html/2510.05245v1",
+      "location": "full internal interface budget unavailable"
+    }
+  }
+}

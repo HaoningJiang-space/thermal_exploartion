@@ -3,7 +3,11 @@
 **When Does Compute–Memory Locality Become Suboptimal in Hybrid-Bonded 3D Accelerators?**
 
 **研究决策：Compute–Memory Fabric 分支正式关闭；Thermal-aware Mapping 保留为基线。**
-当前转入 HB-native Memory Organization 的文献与小型瓶颈审计，不预设新架构。
+当前只执行 G3 Reference Machine 与最小 G4 命令验证，不预设新架构。G5–G7 尚未启动。
+
+新任务书与不可校准项见 [Grounded HB–DRAM Validation](docs/grounded_validation.md)。
+[Stratum Hardware Contract](configs/platforms/stratum_micro2025.json) 与旧 pilot 完全隔离，未知值保持 null。
+G1、G2、Memory Audit 已共用 DRAM Service Model；现有解析扫描保留作历史证据。
 
 原研究目标是检验空间热耦合是否改变 Compute–Memory 物理连接的最优性。
 先做可证伪的小实验，结果允许支持 Local，也允许说明收益主要来自普通负载均衡。
