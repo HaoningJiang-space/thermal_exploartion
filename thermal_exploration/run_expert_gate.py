@@ -57,10 +57,10 @@ def rows(r,out,baseline,steps):
   result=dict(label=label,baseline=baseline,profile=asdict(p),area=p.area(),status=status,reason=reason,completed_steps=len(perstep),time_us=ticks*.00025,tokens_s=32*len(perstep)/(ticks*.25e-9) if ticks else None,activity=dict(total),live_workspace_high_bytes=high,workspace_bytes=p.budget(32,2048,5632)['expert_workspace_bytes'],step_records=perstep,event_file=events.name,event_sha256=hashlib.sha256(events.read_bytes()).hexdigest(),scope='Complete24-layer conditional Decode; old cohort and known row-block schedule, not new hardware')
   write(out/(label+'.json'),result);summaries.append(result);write(out/'summary.json',summaries);print(label,status,result['tokens_s'],flush=True)
 
-def point(c,layout,layer,route,p,schedule,order,isolation,out,label,full=False):
+def point(c,layout,layer,route,p,schedule,order,isolation,out,label,full=False,down_partition='column',combine_scheme='fused'):
  started=time.time()
  try:
-  g,meta=expert_graph(c,layout,layer,route,p,schedule,order,isolation)
+  g,meta=expert_graph(c,layout,layer,route,p,schedule,order,isolation,down_partition,combine_scheme)
   z=execute(g,'infinite_noc' if isolation=='infinite_noc' else 'baseline')
   if z['activity']['mac']!=meta['mac_flops']:raise ValueError('Independent expert work mismatch')
   events={e['id']:e for e in z['events']};latencies=[]
@@ -82,12 +82,16 @@ def point(c,layout,layer,route,p,schedule,order,isolation,out,label,full=False):
    result.update(event_file=path.name,event_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),full_events_retained=True)
   else:result['full_events_retained']=False
  except ValueError as error:result=dict(status='INFEASIBLE_FINITE_SCHEDULE',reason=str(error))
- result.update(label=label,layer=layer,batch=len(route),schedule=schedule,order=order,isolation=isolation,elapsed_host_s=time.time()-started)
+ result.update(label=label,layer=layer,batch=len(route),schedule=schedule,order=order,isolation=isolation,down_partition=down_partition,combine_scheme=combine_scheme,elapsed_host_s=time.time()-started)
  write(out/(label+'.json'),result);print(label,result['status'],result.get('time_us',result.get('reason')),flush=True)
  return result
 
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--routes',required=True);ap.add_argument('--prior-routes');ap.add_argument('--output',required=True);ap.add_argument('--mode',choices=('stats','rows','experts','isolation'),required=True);ap.add_argument('--baseline',choices=('B2_stream_fusion','B3_3d_placement'),default='B3_3d_placement');ap.add_argument('--tp',choices=('1','4','16','hybrid'),default='16');ap.add_argument('--batch',type=int,default=8);ap.add_argument('--steps',type=int,default=128);a=ap.parse_args()
+ ap=argparse.ArgumentParser();ap.add_argument('--routes',required=True);ap.add_argument('--prior-routes');ap.add_argument('--output',required=True);ap.add_argument('--mode',choices=('stats','rows','experts','isolation'),required=True);ap.add_argument('--baseline',choices=('B2_stream_fusion','B3_3d_placement'),default='B3_3d_placement');ap.add_argument('--tp',choices=('1','4','16','hybrid'),default='16');ap.add_argument('--batch',type=int,default=8);ap.add_argument('--steps',type=int,default=128)
+ ap.add_argument('--down-partition',choices=('row','column'),default='column')
+ ap.add_argument('--combine-scheme',choices=('fused','eager'),default='fused')
+ ap.add_argument('--sample-steps',nargs='+',type=int);ap.add_argument('--sample-layers',nargs='+',type=int)
+ a=ap.parse_args()
  r,sha=captured(a.routes);out=Path(a.output);out.mkdir(parents=True,exist_ok=False)
  write(out/'provenance.json',dict(source_commit=revision(),dirty=bool(subprocess.check_output(['git','status','--porcelain'],text=True).strip()),routing_sha256=sha,route_model=r['model'],dtype=r['execution_dtype'],params=vars(a),selected_steps=STEPS,selected_layers=LAYERS,scope='Fixed P0–P3; no RTL or thermal scan'))
  if a.mode=='stats':stats(r,out);return
@@ -97,7 +101,7 @@ def main():
   pr,ph=captured(a.prior_routes);prior=pr['training_expected_activations'];write(out/'prior-provenance.json',dict(routing_sha256=ph,scope='Frozen separate training prefix, never evaluation routing'))
  c=load_model('qwen15_moe');ad=capacity(c,a.batch,r['capture_context']);tp=a.tp if a.tp=='hybrid' else int(a.tp);layout=resident_layout(c,ad,a.baseline,prior,tp)
  write(out/'resident-layout.json',layout);summaries=[]
- steps=[s for s in STEPS if s<r['steps']];layers=[l for l in LAYERS if l<len(r['routes'])]
+ steps=[s for s in a.sample_steps or STEPS if s<r['steps']];layers=[l for l in a.sample_layers or LAYERS if l<len(r['routes'])]
  if r['steps']<128:steps=sorted(set((0,r['steps']-1)));layers=[0,15,23]
  if a.mode=='isolation':steps=[0];layers=[0]
  for step in steps:
@@ -106,6 +110,6 @@ def main():
    for schedule,order in SCHEDULERS if a.mode=='experts' else (('overlap','dynamic'),):
     for iso in ('none',) if a.mode=='experts' else ('none','bank_cycle','uniform_fast_tier','hb_only','ingress_only','mac_only','infinite_noc','ideal_memory'):
      label=f'{a.baseline}-tp{tp}-b{a.batch}-l{l}-s{step}-{schedule}-{order}-{iso}'
-     summaries.append(point(c,layout,l,route,Profile(),schedule,order,iso,out,label,full=(a.mode=='isolation' or step==0 and l==0)))
+     summaries.append(point(c,layout,l,route,Profile(),schedule,order,iso,out,label,full=(a.mode=='isolation' or step==0 and l==0),down_partition=a.down_partition,combine_scheme=a.combine_scheme))
      write(out/'summary.json',summaries)
 if __name__=='__main__':main()

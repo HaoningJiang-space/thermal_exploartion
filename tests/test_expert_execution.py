@@ -40,5 +40,25 @@ class ExpertTests(unittest.TestCase):
   b=g.add('sram_read',0,10,resource=('read',0),ticks=10);g.output=[g.join((a,b))]
   r=execute(g);events={x['id']:x for x in r['events']}
   self.assertTrue(events[a]['finish_tick']<=events[b]['start_tick'] or events[b]['finish_tick']<=events[a]['start_tick'])
+ def test_hot_experts_do_not_duplicate_shared_inputs_or_deadlock(self):
+  c=load_model('qwen15_moe');a=capacity(c,32,512);layout=resident_layout(c,a,'B3_3d_placement')
+  g,meta=expert_graph(c,layout,0,[[0,1,2,3]]*32,Profile(),schedule='overlap')
+  result=execute(g)
+  self.assertEqual(result['activity']['mac'],meta['mac_flops'])
+  traffic=sum(n.work for n in g.nodes if n.kind=='link' and n.stage=='dispatch')
+  self.assertEqual(traffic,15*32*2048*2)
+  for job in meta['jobs']:self.assertEqual(job['count'],32)
+ def test_known_local_fusion_preserves_weights_and_reduces_once(self):
+  c=load_model('qwen15_moe');a=capacity(c,8,512);layout=resident_layout(c,a,'B3_3d_placement')
+  route=[[0,1,2,3]]*8
+  fused,meta=expert_graph(c,layout,0,route,Profile(),combine_scheme='fused')
+  eager,other=expert_graph(c,layout,0,route,Profile(),combine_scheme='eager')
+  row,packed=expert_graph(c,layout,0,route,Profile(),down_partition='row')
+  self.assertEqual(meta['mac_flops'],other['mac_flops']);self.assertEqual(meta['actual_dram_bytes'],other['actual_dram_bytes'])
+  self.assertEqual(packed['actual_dram_bytes'],meta['actual_dram_bytes']);self.assertEqual(packed['mac_flops'],meta['mac_flops'])
+  traffic=lambda g:sum(n.work for n in g.nodes if n.kind=='link' and n.stage=='combine')
+  self.assertEqual(traffic(fused),15*2048*8*4);self.assertEqual(traffic(eager),5*traffic(fused))
+  self.assertGreater(fused.meta['fixed_sram_bytes'][0],eager.meta['fixed_sram_bytes'][0])
+  self.assertEqual(execute(row)['activity']['mac'],meta['mac_flops'])
 
 if __name__=='__main__':unittest.main()

@@ -174,7 +174,7 @@ def validate(case, model, dram):
     duration=d['ticks']*.25
     if c['mac_flops']/duration/1000>c['compute_tflops']+.00001:raise ValueError('Compute upper bound violated')
     # Stage windows overlap; these values must not be added as a breakdown.
-    result=dict(contract=c,driver=d,validation='PASS: command legality/transaction identity, operand joins, MAC/vector serialization, physical link serialization, traffic and port accounting',
+    result=dict(contract=c,driver=d,validation=('PASS: shared transport/input/task/port accounting; synthetic memory emits no request commands' if c.get('fluid_memory') else 'PASS: command legality/transaction identity, operand joins, MAC/vector serialization, physical link serialization, traffic and port accounting'),
         command_validation=command_validation,time_us=duration/1000,effective_tflops=c['mac_flops']/duration/1000,
         useful_dram_tb_s=c['weight_bytes']/duration/1000,physical_dram_tb_s=c['dram_bytes']/duration/1000,
         mac_utilization=c['mac_flops']/duration/1000/c['compute_tflops'],byte_hops=dict(byte_hops),max_directed_link_bytes=max(hot.values(),default=0),

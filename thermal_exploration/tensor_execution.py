@@ -83,7 +83,7 @@ def hardware(settings,m=1024,n=16384,batch=32):
         command_domains_per_tile=settings.get('command_domains',1),
         fluid_memory=bool(settings.get('fluid_memory',False)),fluid_service_tb_s=float(settings.get('fluid_service_tb_s',26.599)),
         assumptions=['Fast-tier internal timing surrogate, not calibrated Mono3D',
-          '128TF peak MAC service, operand/register reuse ideal within a MAC block',
+          f'{peak:g}TF peak MAC service, operand/register reuse ideal within a MAC block',
           'Aggregate private-SRAM ports are assumed, explicitly arbitrated each tick',
           'Two virtual networks and router multicast common to all partitions',
           'Vector packet read/add/write are serial, transport and MAC may overlap',

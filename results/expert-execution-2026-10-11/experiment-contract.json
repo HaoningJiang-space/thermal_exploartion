@@ -1,0 +1,141 @@
+{
+  "schema": 1,
+  "research": "Dynamic Expert Execution under Physically Distributed 3D Memory",
+  "baseline_commit": "c160470",
+  "hardware": {
+    "area_mm2": 121,
+    "dram_gib": 32,
+    "sram_mib": 36,
+    "compute_tflops": 128,
+    "hb_tb_s": 32,
+    "tiles": 16,
+    "mesh_direction_gb_s": 32
+  },
+  "paid_qualification_profile": {
+    "compute_tflops": 152,
+    "sram_mib": 18,
+    "area_formula": "Existing c160470 ledger, no new macro calibration"
+  },
+  "p0": {
+    "shapes": [
+      [
+        6144,
+        4096,
+        4
+      ],
+      [
+        6144,
+        4096,
+        16
+      ],
+      [
+        2048,
+        1408,
+        2
+      ],
+      [
+        2048,
+        1408,
+        8
+      ],
+      [
+        2048,
+        1408,
+        16
+      ]
+    ],
+    "m_block": 32,
+    "k_block": "128 or aligned88 canonical elements",
+    "backend": "Pinned Ramulator versus measured-rate fluid; shared native flit/compute executor",
+    "absolute_error_target": 0.1,
+    "relative_speedup_error_target": 0.05,
+    "full_h3_validation": false
+  },
+  "p1": {
+    "steps": 128,
+    "batch": 32,
+    "context": 512,
+    "schedule": "Known64-row partial accumulation, bounded gated cohorts",
+    "compare": [
+      "128/36 cohort",
+      "128/36 rows",
+      "152/18 cohort",
+      "152/18 rows"
+    ]
+  },
+  "p2": {
+    "steps": [
+      0,
+      32,
+      64,
+      96,
+      127
+    ],
+    "layers": [
+      0,
+      7,
+      15,
+      23
+    ],
+    "batches": [
+      8,
+      32
+    ],
+    "partitions": [
+      "EP",
+      "TP4",
+      "TP16",
+      "hybrid"
+    ],
+    "placements": [
+      "Capacity striped",
+      "Training-prior frozen"
+    ],
+    "schedules": [
+      "barrier/static",
+      "overlap/static",
+      "overlap/dynamic LPT"
+    ],
+    "prefetch_limit_bytes": 262144,
+    "source": "Original Qwen1.5 captured router, not Qwen2 projection",
+    "scope": "Selected MoE subgraphs, not full tokens/s or global schedule optimality"
+  },
+  "p3": {
+    "step": 0,
+    "layer": 0,
+    "partitions": [
+      "EP",
+      "TP4",
+      "TP16",
+      "hybrid"
+    ],
+    "batches": [
+      8,
+      32
+    ],
+    "isolations": [
+      "none",
+      "bank_cycle",
+      "uniform_fast_tier",
+      "hb_only",
+      "ingress_only",
+      "mac_only",
+      "infinite_noc",
+      "ideal_memory"
+    ],
+    "no_thermal_scan": true
+  },
+  "precision": {
+    "checkpoint": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+    "prompt_families": [
+      "topic_short",
+      "code_math"
+    ],
+    "steps": 8,
+    "batch": 4,
+    "context": 128,
+    "teacher_forced": true,
+    "production_representative": false
+  },
+  "decision": "Conditional research evidence; no RTL or new Fabric design from a packet-model oracle alone"
+}

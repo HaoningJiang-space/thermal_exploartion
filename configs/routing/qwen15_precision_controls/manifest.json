@@ -1,0 +1,70 @@
+[
+  {
+    "file": "code_math-BF16.json.gz",
+    "sha256": "d9f67e06ad433da1d47b873c4580e3579bca045d82701775e1d28eca94004b62",
+    "capture_commit": "b468306",
+    "model": "Qwen/Qwen1.5-MoE-A2.7B",
+    "revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+    "dtype": "BF16",
+    "prompt_family": "code_math",
+    "context": 128,
+    "steps": 8,
+    "batch": 4,
+    "scope": [
+      "Eight-step four-prompt control, not a production workload",
+      "BF16 sees FP32 generated IDs; test isolates dtype given identical inputs",
+      "Not the same context/prompt distribution as primary512-token capture"
+    ]
+  },
+  {
+    "file": "code_math-FP32.json.gz",
+    "sha256": "314823f73e6a788e956a6a878423090f63a7d7b6128f346a0a1f6528a9460652",
+    "capture_commit": "b468306",
+    "model": "Qwen/Qwen1.5-MoE-A2.7B",
+    "revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+    "dtype": "FP32",
+    "prompt_family": "code_math",
+    "context": 128,
+    "steps": 8,
+    "batch": 4,
+    "scope": [
+      "Eight-step four-prompt control, not a production workload",
+      "BF16 sees FP32 generated IDs; test isolates dtype given identical inputs",
+      "Not the same context/prompt distribution as primary512-token capture"
+    ]
+  },
+  {
+    "file": "topic_short-BF16.json.gz",
+    "sha256": "864d621069b43f8fc5c2db87b9c051b850effa0be9b689fa5cd674c6dae56732",
+    "capture_commit": "b468306",
+    "model": "Qwen/Qwen1.5-MoE-A2.7B",
+    "revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+    "dtype": "BF16",
+    "prompt_family": "topic_short",
+    "context": 128,
+    "steps": 8,
+    "batch": 4,
+    "scope": [
+      "Eight-step four-prompt control, not a production workload",
+      "BF16 sees FP32 generated IDs; test isolates dtype given identical inputs",
+      "Not the same context/prompt distribution as primary512-token capture"
+    ]
+  },
+  {
+    "file": "topic_short-FP32.json.gz",
+    "sha256": "e39b90189987ec3688d59ed86cbbd72cf4117dfd3ae57377811f37f9b17ebb70",
+    "capture_commit": "b468306",
+    "model": "Qwen/Qwen1.5-MoE-A2.7B",
+    "revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+    "dtype": "FP32",
+    "prompt_family": "topic_short",
+    "context": 128,
+    "steps": 8,
+    "batch": 4,
+    "scope": [
+      "Eight-step four-prompt control, not a production workload",
+      "BF16 sees FP32 generated IDs; test isolates dtype given identical inputs",
+      "Not the same context/prompt distribution as primary512-token capture"
+    ]
+  }
+]
