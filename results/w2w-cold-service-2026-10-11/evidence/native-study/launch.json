@@ -1,0 +1,126 @@
+{
+  "source_commit": "565f148f25a7596380cc29f960ea9ffa6f836631",
+  "started_utc": "2026-10-11T14:06:52.847223+00:00",
+  "workers": {
+    "baseline": {
+      "pid": 757371,
+      "command": [
+        "taskset",
+        "-c",
+        "0,1",
+        "/Projects/haoning/w2w/.venv/bin/python",
+        "-m",
+        "tools.run_cold_service_gate",
+        "--root",
+        "/Projects/haoning/w2w-full-system-memory-causality-20261011/cold-gate-sol-r1",
+        "--case",
+        "baseline",
+        "--booksim-binary",
+        "/Projects/haoning/w2w-full-system-performance-placement-20261010/native-fast-r1/booksim/endpoint_booksim"
+      ]
+    },
+    "mc16": {
+      "pid": 757372,
+      "command": [
+        "taskset",
+        "-c",
+        "2,3",
+        "/Projects/haoning/w2w/.venv/bin/python",
+        "-m",
+        "tools.run_cold_service_gate",
+        "--root",
+        "/Projects/haoning/w2w-full-system-memory-causality-20261011/cold-gate-sol-r1",
+        "--case",
+        "mc16",
+        "--booksim-binary",
+        "/Projects/haoning/w2w-full-system-performance-placement-20261010/native-fast-r1/booksim/endpoint_booksim"
+      ]
+    },
+    "native_minimum_gaps": {
+      "pid": 757373,
+      "command": [
+        "taskset",
+        "-c",
+        "4,5",
+        "/Projects/haoning/w2w/.venv/bin/python",
+        "-m",
+        "tools.run_cold_service_gate",
+        "--root",
+        "/Projects/haoning/w2w-full-system-memory-causality-20261011/cold-gate-sol-r1",
+        "--case",
+        "native_minimum_gaps",
+        "--booksim-binary",
+        "/Projects/haoning/w2w-full-system-performance-placement-20261010/native-fast-r1/booksim/endpoint_booksim"
+      ]
+    },
+    "collection_minimum": {
+      "pid": 757374,
+      "command": [
+        "taskset",
+        "-c",
+        "6,7",
+        "/Projects/haoning/w2w/.venv/bin/python",
+        "-m",
+        "tools.run_cold_service_gate",
+        "--root",
+        "/Projects/haoning/w2w-full-system-memory-causality-20261011/cold-gate-sol-r1",
+        "--case",
+        "collection_minimum",
+        "--booksim-binary",
+        "/Projects/haoning/w2w-full-system-performance-placement-20261010/native-fast-r1/booksim/endpoint_booksim"
+      ]
+    },
+    "gateway_output_relaxed": {
+      "pid": 757375,
+      "command": [
+        "taskset",
+        "-c",
+        "8,9",
+        "/Projects/haoning/w2w/.venv/bin/python",
+        "-m",
+        "tools.run_cold_service_gate",
+        "--root",
+        "/Projects/haoning/w2w-full-system-memory-causality-20261011/cold-gate-sol-r1",
+        "--case",
+        "gateway_output_relaxed",
+        "--booksim-binary",
+        "/Projects/haoning/w2w-full-system-performance-placement-20261010/native-fast-r1/booksim/endpoint_booksim"
+      ]
+    },
+    "native_round_robin": {
+      "pid": 757376,
+      "command": [
+        "taskset",
+        "-c",
+        "10,11",
+        "/Projects/haoning/w2w/.venv/bin/python",
+        "-m",
+        "tools.run_cold_service_gate",
+        "--root",
+        "/Projects/haoning/w2w-full-system-memory-causality-20261011/cold-gate-sol-r1",
+        "--case",
+        "native_round_robin",
+        "--booksim-binary",
+        "/Projects/haoning/w2w-full-system-performance-placement-20261010/native-fast-r1/booksim/endpoint_booksim"
+      ]
+    },
+    "return_capacity_relaxed": {
+      "pid": 757377,
+      "command": [
+        "taskset",
+        "-c",
+        "12,13",
+        "/Projects/haoning/w2w/.venv/bin/python",
+        "-m",
+        "tools.run_cold_service_gate",
+        "--root",
+        "/Projects/haoning/w2w-full-system-memory-causality-20261011/cold-gate-sol-r1",
+        "--case",
+        "return_capacity_relaxed",
+        "--booksim-binary",
+        "/Projects/haoning/w2w-full-system-performance-placement-20261010/native-fast-r1/booksim/endpoint_booksim"
+      ]
+    }
+  },
+  "contract": "Independent registered full-size cold applications; no automatic retry or performance filtering"
+}

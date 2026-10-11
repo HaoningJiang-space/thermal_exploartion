@@ -1,0 +1,1405 @@
+{
+  "schema": "w2w.cold-service-diagnostics.v1",
+  "source_commit": "565f148f25a7596380cc29f960ea9ffa6f836631",
+  "cases": {
+    "baseline": {
+      "input_sha256": "3c3bfeeceafe44bb393bce3dae4dc0d21a6d613bc3ab39f7208784a283f5bf40",
+      "diagnostic": {
+        "case": "baseline",
+        "diagnostic": false,
+        "scope": "Unchanged original Up-local cold FFN; must match every saved physical record."
+      },
+      "resources": {
+        "schema": "w2w.physical-resources.v3",
+        "resource_budget": {
+          "pes": 65536,
+          "macs_per_cycle": 262144,
+          "sram_bytes": 3221225472,
+          "native_domains": 128,
+          "dram_capacity_bytes": 8589934592,
+          "hb_data_bits": 16384,
+          "gateway_output_bytes_per_cycle": 512,
+          "gateway_staging_bytes": 524288,
+          "gateway_descriptor_slots": 128,
+          "routers": 16,
+          "router_input_bytes": 2621440,
+          "router_injection_bytes": 1048576,
+          "fabric_data_bits": 49152
+        },
+        "compute": {
+          "clusters": 16,
+          "pes": 65536,
+          "macs_per_cycle": 262144,
+          "vector_ops_per_cycle": 65536,
+          "sram_bytes": 3221225472,
+          "compute_weight_read_bytes_per_cycle": 524288
+        },
+        "native": {
+          "domains": 128,
+          "capacity_bytes": 8589934592,
+          "interface_peak_bytes_per_ps": 0.5446808510638305,
+          "command_entries": 512,
+          "command_metadata_bare_min_bits": 14848,
+          "reserved_return_bytes": 131072
+        },
+        "vertical": {
+          "ports": 16,
+          "data_bits": 16384,
+          "control_bits": 1024,
+          "hb_sites": 17408,
+          "landing_footprint_um2": 278784,
+          "landing_pitch_scope": "declared 4 um candidate grid; geometry check, not process/PPA calibration"
+        },
+        "gateways": {
+          "count": 16,
+          "output_bytes_per_cycle": 512,
+          "staging_bytes": 524288,
+          "descriptor_slots": 128,
+          "control_bits": 1024,
+          "router_access_wire_bit_um": 0,
+          "router_access_pipeline_bits": 0,
+          "router_access_paths": [
+            {
+              "gateway": "g0_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            }
+          ]
+        },
+        "external": {
+          "ports": 0,
+          "bytes_per_cycle": 0,
+          "staging_bytes": 0,
+          "edge_access_wire_bit_um": 0,
+          "edge_access_pipeline_bits": 0,
+          "scope": "external DRAM, edge I/O and system cost are additional; not equal-cost vertical baseline"
+        },
+        "collection": {
+          "paths": 128,
+          "timing_profiles": [
+            "rwdl-collection-1mm-stage-v1"
+          ],
+          "wire_bit_um": 120832000,
+          "pipeline_bits": 122880,
+          "delay_in_execution": true,
+          "shared_native_service": true
+        },
+        "fabric": {
+          "routers": 16,
+          "channels": 48,
+          "data_wire_bit_um": 726630400,
+          "control_wire_bit_um": 726630400,
+          "data_pipeline_bits": 3162112,
+          "control_pipeline_bits": 3162112,
+          "input_data_buffer_bytes": 2621440,
+          "injection_buffer_bytes": 1048576,
+          "receive_staging_bytes": 3158016,
+          "input_cell_metadata_bytes": 163840,
+          "injection_cell_metadata_bytes": 65536,
+          "boundary_stitch_length_um": 1600,
+          "aggregated_fine_links_per_channel": 64,
+          "fine_data_bits_per_link": 16,
+          "fine_control_bits_per_link": 16,
+          "aggregation": "one BookSim macro channel represents a fine-mesh cut and its ordered pipeline; not a cycle-exact Cerebras router model"
+        },
+        "area_um2": null,
+        "energy_j": null,
+        "calibration": "candidate physical layout and resource proxies; macro timing and SRAM banking are explicit assumptions"
+      }
+    },
+    "mc16": {
+      "input_sha256": "5667ad42af00cef53a1ae6cceba1d6fe2f2b44280f2079289231f77abe7a07ae",
+      "diagnostic": {
+        "case": "mc16",
+        "diagnostic": true,
+        "scope": "Double shared MC/grouped descriptors and associated finite return storage/control credits; keep native read queues and all service rates."
+      },
+      "resources": {
+        "schema": "w2w.physical-resources.v3",
+        "resource_budget": {
+          "pes": 65536,
+          "macs_per_cycle": 262144,
+          "sram_bytes": 3221225472,
+          "native_domains": 128,
+          "dram_capacity_bytes": 8589934592,
+          "hb_data_bits": 16384,
+          "gateway_output_bytes_per_cycle": 512,
+          "gateway_staging_bytes": 1048576,
+          "gateway_descriptor_slots": 256,
+          "routers": 16,
+          "router_input_bytes": 2621440,
+          "router_injection_bytes": 1048576,
+          "fabric_data_bits": 49152
+        },
+        "compute": {
+          "clusters": 16,
+          "pes": 65536,
+          "macs_per_cycle": 262144,
+          "vector_ops_per_cycle": 65536,
+          "sram_bytes": 3221225472,
+          "compute_weight_read_bytes_per_cycle": 524288
+        },
+        "native": {
+          "domains": 128,
+          "capacity_bytes": 8589934592,
+          "interface_peak_bytes_per_ps": 0.5446808510638305,
+          "command_entries": 512,
+          "command_metadata_bare_min_bits": 14848,
+          "reserved_return_bytes": 131072
+        },
+        "vertical": {
+          "ports": 16,
+          "data_bits": 16384,
+          "control_bits": 1024,
+          "hb_sites": 17408,
+          "landing_footprint_um2": 278784,
+          "landing_pitch_scope": "declared 4 um candidate grid; geometry check, not process/PPA calibration"
+        },
+        "gateways": {
+          "count": 16,
+          "output_bytes_per_cycle": 512,
+          "staging_bytes": 1048576,
+          "descriptor_slots": 256,
+          "control_bits": 1024,
+          "router_access_wire_bit_um": 0,
+          "router_access_pipeline_bits": 0,
+          "router_access_paths": [
+            {
+              "gateway": "g0_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            }
+          ]
+        },
+        "external": {
+          "ports": 0,
+          "bytes_per_cycle": 0,
+          "staging_bytes": 0,
+          "edge_access_wire_bit_um": 0,
+          "edge_access_pipeline_bits": 0,
+          "scope": "external DRAM, edge I/O and system cost are additional; not equal-cost vertical baseline"
+        },
+        "collection": {
+          "paths": 128,
+          "timing_profiles": [
+            "rwdl-collection-1mm-stage-v1"
+          ],
+          "wire_bit_um": 120832000,
+          "pipeline_bits": 122880,
+          "delay_in_execution": true,
+          "shared_native_service": true
+        },
+        "fabric": {
+          "routers": 16,
+          "channels": 48,
+          "data_wire_bit_um": 726630400,
+          "control_wire_bit_um": 726630400,
+          "data_pipeline_bits": 3162112,
+          "control_pipeline_bits": 3162112,
+          "input_data_buffer_bytes": 2621440,
+          "injection_buffer_bytes": 1048576,
+          "receive_staging_bytes": 3158016,
+          "input_cell_metadata_bytes": 163840,
+          "injection_cell_metadata_bytes": 65536,
+          "boundary_stitch_length_um": 1600,
+          "aggregated_fine_links_per_channel": 64,
+          "fine_data_bits_per_link": 16,
+          "fine_control_bits_per_link": 16,
+          "aggregation": "one BookSim macro channel represents a fine-mesh cut and its ordered pipeline; not a cycle-exact Cerebras router model"
+        },
+        "area_um2": null,
+        "energy_j": null,
+        "calibration": "candidate physical layout and resource proxies; macro timing and SRAM banking are explicit assumptions"
+      }
+    },
+    "native_minimum_gaps": {
+      "input_sha256": "908eda155a19b476d794f35966b4db5ff6a65ce53ae064ba9b93ad9006d25b40",
+      "diagnostic": {
+        "case": "native_minimum_gaps",
+        "diagnostic": true,
+        "scope": "Optimistic uncalibrated row/CAS/refresh gaps; native command scheduler remains active, nBL=1, nREFI=1037, 128 domains and 3.76 ns bus unchanged. This does not idealize the native data bus or establish device feasibility."
+      },
+      "resources": {
+        "schema": "w2w.physical-resources.v3",
+        "resource_budget": {
+          "pes": 65536,
+          "macs_per_cycle": 262144,
+          "sram_bytes": 3221225472,
+          "native_domains": 128,
+          "dram_capacity_bytes": 8589934592,
+          "hb_data_bits": 16384,
+          "gateway_output_bytes_per_cycle": 512,
+          "gateway_staging_bytes": 524288,
+          "gateway_descriptor_slots": 128,
+          "routers": 16,
+          "router_input_bytes": 2621440,
+          "router_injection_bytes": 1048576,
+          "fabric_data_bits": 49152
+        },
+        "compute": {
+          "clusters": 16,
+          "pes": 65536,
+          "macs_per_cycle": 262144,
+          "vector_ops_per_cycle": 65536,
+          "sram_bytes": 3221225472,
+          "compute_weight_read_bytes_per_cycle": 524288
+        },
+        "native": {
+          "domains": 128,
+          "capacity_bytes": 8589934592,
+          "interface_peak_bytes_per_ps": 0.5446808510638305,
+          "command_entries": 512,
+          "command_metadata_bare_min_bits": 14848,
+          "reserved_return_bytes": 131072
+        },
+        "vertical": {
+          "ports": 16,
+          "data_bits": 16384,
+          "control_bits": 1024,
+          "hb_sites": 17408,
+          "landing_footprint_um2": 278784,
+          "landing_pitch_scope": "declared 4 um candidate grid; geometry check, not process/PPA calibration"
+        },
+        "gateways": {
+          "count": 16,
+          "output_bytes_per_cycle": 512,
+          "staging_bytes": 524288,
+          "descriptor_slots": 128,
+          "control_bits": 1024,
+          "router_access_wire_bit_um": 0,
+          "router_access_pipeline_bits": 0,
+          "router_access_paths": [
+            {
+              "gateway": "g0_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            }
+          ]
+        },
+        "external": {
+          "ports": 0,
+          "bytes_per_cycle": 0,
+          "staging_bytes": 0,
+          "edge_access_wire_bit_um": 0,
+          "edge_access_pipeline_bits": 0,
+          "scope": "external DRAM, edge I/O and system cost are additional; not equal-cost vertical baseline"
+        },
+        "collection": {
+          "paths": 128,
+          "timing_profiles": [
+            "rwdl-collection-1mm-stage-v1"
+          ],
+          "wire_bit_um": 120832000,
+          "pipeline_bits": 122880,
+          "delay_in_execution": true,
+          "shared_native_service": true
+        },
+        "fabric": {
+          "routers": 16,
+          "channels": 48,
+          "data_wire_bit_um": 726630400,
+          "control_wire_bit_um": 726630400,
+          "data_pipeline_bits": 3162112,
+          "control_pipeline_bits": 3162112,
+          "input_data_buffer_bytes": 2621440,
+          "injection_buffer_bytes": 1048576,
+          "receive_staging_bytes": 3158016,
+          "input_cell_metadata_bytes": 163840,
+          "injection_cell_metadata_bytes": 65536,
+          "boundary_stitch_length_um": 1600,
+          "aggregated_fine_links_per_channel": 64,
+          "fine_data_bits_per_link": 16,
+          "fine_control_bits_per_link": 16,
+          "aggregation": "one BookSim macro channel represents a fine-mesh cut and its ordered pipeline; not a cycle-exact Cerebras router model"
+        },
+        "area_um2": null,
+        "energy_j": null,
+        "calibration": "candidate physical layout and resource proxies; macro timing and SRAM banking are explicit assumptions"
+      }
+    },
+    "collection_minimum": {
+      "input_sha256": "2af43dc03d066161ea1c7244b0b0e9f103f10808732e3bcc3ab1b43b35bb52c7",
+      "diagnostic": {
+        "case": "collection_minimum",
+        "diagnostic": true,
+        "data_collection_delay_override_ps": 3760,
+        "scope": "Only data propagation shortened to one native tick; original wire geometry, control/ACK propagation, resource ledger and service rates retained. Deliberate timing counterfactual, not a legal physical machine."
+      },
+      "resources": {
+        "schema": "w2w.physical-resources.v3",
+        "resource_budget": {
+          "pes": 65536,
+          "macs_per_cycle": 262144,
+          "sram_bytes": 3221225472,
+          "native_domains": 128,
+          "dram_capacity_bytes": 8589934592,
+          "hb_data_bits": 16384,
+          "gateway_output_bytes_per_cycle": 512,
+          "gateway_staging_bytes": 524288,
+          "gateway_descriptor_slots": 128,
+          "routers": 16,
+          "router_input_bytes": 2621440,
+          "router_injection_bytes": 1048576,
+          "fabric_data_bits": 49152
+        },
+        "compute": {
+          "clusters": 16,
+          "pes": 65536,
+          "macs_per_cycle": 262144,
+          "vector_ops_per_cycle": 65536,
+          "sram_bytes": 3221225472,
+          "compute_weight_read_bytes_per_cycle": 524288
+        },
+        "native": {
+          "domains": 128,
+          "capacity_bytes": 8589934592,
+          "interface_peak_bytes_per_ps": 0.5446808510638305,
+          "command_entries": 512,
+          "command_metadata_bare_min_bits": 14848,
+          "reserved_return_bytes": 131072
+        },
+        "vertical": {
+          "ports": 16,
+          "data_bits": 16384,
+          "control_bits": 1024,
+          "hb_sites": 17408,
+          "landing_footprint_um2": 278784,
+          "landing_pitch_scope": "declared 4 um candidate grid; geometry check, not process/PPA calibration"
+        },
+        "gateways": {
+          "count": 16,
+          "output_bytes_per_cycle": 512,
+          "staging_bytes": 524288,
+          "descriptor_slots": 128,
+          "control_bits": 1024,
+          "router_access_wire_bit_um": 0,
+          "router_access_pipeline_bits": 0,
+          "router_access_paths": [
+            {
+              "gateway": "g0_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            }
+          ]
+        },
+        "external": {
+          "ports": 0,
+          "bytes_per_cycle": 0,
+          "staging_bytes": 0,
+          "edge_access_wire_bit_um": 0,
+          "edge_access_pipeline_bits": 0,
+          "scope": "external DRAM, edge I/O and system cost are additional; not equal-cost vertical baseline"
+        },
+        "collection": {
+          "paths": 128,
+          "timing_profiles": [
+            "rwdl-collection-1mm-stage-v1"
+          ],
+          "wire_bit_um": 120832000,
+          "pipeline_bits": 122880,
+          "delay_in_execution": true,
+          "shared_native_service": true
+        },
+        "fabric": {
+          "routers": 16,
+          "channels": 48,
+          "data_wire_bit_um": 726630400,
+          "control_wire_bit_um": 726630400,
+          "data_pipeline_bits": 3162112,
+          "control_pipeline_bits": 3162112,
+          "input_data_buffer_bytes": 2621440,
+          "injection_buffer_bytes": 1048576,
+          "receive_staging_bytes": 3158016,
+          "input_cell_metadata_bytes": 163840,
+          "injection_cell_metadata_bytes": 65536,
+          "boundary_stitch_length_um": 1600,
+          "aggregated_fine_links_per_channel": 64,
+          "fine_data_bits_per_link": 16,
+          "fine_control_bits_per_link": 16,
+          "aggregation": "one BookSim macro channel represents a fine-mesh cut and its ordered pipeline; not a cycle-exact Cerebras router model"
+        },
+        "area_um2": null,
+        "energy_j": null,
+        "calibration": "candidate physical layout and resource proxies; macro timing and SRAM banking are explicit assumptions"
+      }
+    },
+    "gateway_output_relaxed": {
+      "input_sha256": "08c3b088022ee7b7201111ac1faf2aff98d2e55d8a78b45e6ec62d1380055c5d",
+      "diagnostic": {
+        "case": "gateway_output_relaxed",
+        "diagnostic": true,
+        "scope": "Raise Gateway output from 32 to 4096 B/ns, charging the new output budget. Native/HB, collection, staging, MC and actual BookSim/RX remain fixed. This does not idealize NoC."
+      },
+      "resources": {
+        "schema": "w2w.physical-resources.v3",
+        "resource_budget": {
+          "pes": 65536,
+          "macs_per_cycle": 262144,
+          "sram_bytes": 3221225472,
+          "native_domains": 128,
+          "dram_capacity_bytes": 8589934592,
+          "hb_data_bits": 16384,
+          "gateway_output_bytes_per_cycle": 65536,
+          "gateway_staging_bytes": 524288,
+          "gateway_descriptor_slots": 128,
+          "routers": 16,
+          "router_input_bytes": 2621440,
+          "router_injection_bytes": 1048576,
+          "fabric_data_bits": 49152
+        },
+        "compute": {
+          "clusters": 16,
+          "pes": 65536,
+          "macs_per_cycle": 262144,
+          "vector_ops_per_cycle": 65536,
+          "sram_bytes": 3221225472,
+          "compute_weight_read_bytes_per_cycle": 524288
+        },
+        "native": {
+          "domains": 128,
+          "capacity_bytes": 8589934592,
+          "interface_peak_bytes_per_ps": 0.5446808510638305,
+          "command_entries": 512,
+          "command_metadata_bare_min_bits": 14848,
+          "reserved_return_bytes": 131072
+        },
+        "vertical": {
+          "ports": 16,
+          "data_bits": 16384,
+          "control_bits": 1024,
+          "hb_sites": 17408,
+          "landing_footprint_um2": 278784,
+          "landing_pitch_scope": "declared 4 um candidate grid; geometry check, not process/PPA calibration"
+        },
+        "gateways": {
+          "count": 16,
+          "output_bytes_per_cycle": 65536,
+          "staging_bytes": 524288,
+          "descriptor_slots": 128,
+          "control_bits": 1024,
+          "router_access_wire_bit_um": 0,
+          "router_access_pipeline_bits": 0,
+          "router_access_paths": [
+            {
+              "gateway": "g0_0",
+              "length_um": 0,
+              "data_bits": 32768,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_1",
+              "length_um": 0,
+              "data_bits": 32768,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_2",
+              "length_um": 0,
+              "data_bits": 32768,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_3",
+              "length_um": 0,
+              "data_bits": 32768,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_0",
+              "length_um": 0,
+              "data_bits": 32768,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_1",
+              "length_um": 0,
+              "data_bits": 32768,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_2",
+              "length_um": 0,
+              "data_bits": 32768,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_3",
+              "length_um": 0,
+              "data_bits": 32768,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_0",
+              "length_um": 0,
+              "data_bits": 32768,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_1",
+              "length_um": 0,
+              "data_bits": 32768,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_2",
+              "length_um": 0,
+              "data_bits": 32768,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_3",
+              "length_um": 0,
+              "data_bits": 32768,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_0",
+              "length_um": 0,
+              "data_bits": 32768,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_1",
+              "length_um": 0,
+              "data_bits": 32768,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_2",
+              "length_um": 0,
+              "data_bits": 32768,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_3",
+              "length_um": 0,
+              "data_bits": 32768,
+              "pipeline_cycles": 0
+            }
+          ]
+        },
+        "external": {
+          "ports": 0,
+          "bytes_per_cycle": 0,
+          "staging_bytes": 0,
+          "edge_access_wire_bit_um": 0,
+          "edge_access_pipeline_bits": 0,
+          "scope": "external DRAM, edge I/O and system cost are additional; not equal-cost vertical baseline"
+        },
+        "collection": {
+          "paths": 128,
+          "timing_profiles": [
+            "rwdl-collection-1mm-stage-v1"
+          ],
+          "wire_bit_um": 120832000,
+          "pipeline_bits": 122880,
+          "delay_in_execution": true,
+          "shared_native_service": true
+        },
+        "fabric": {
+          "routers": 16,
+          "channels": 48,
+          "data_wire_bit_um": 726630400,
+          "control_wire_bit_um": 726630400,
+          "data_pipeline_bits": 3162112,
+          "control_pipeline_bits": 3162112,
+          "input_data_buffer_bytes": 2621440,
+          "injection_buffer_bytes": 1048576,
+          "receive_staging_bytes": 3158016,
+          "input_cell_metadata_bytes": 163840,
+          "injection_cell_metadata_bytes": 65536,
+          "boundary_stitch_length_um": 1600,
+          "aggregated_fine_links_per_channel": 64,
+          "fine_data_bits_per_link": 16,
+          "fine_control_bits_per_link": 16,
+          "aggregation": "one BookSim macro channel represents a fine-mesh cut and its ordered pipeline; not a cycle-exact Cerebras router model"
+        },
+        "area_um2": null,
+        "energy_j": null,
+        "calibration": "candidate physical layout and resource proxies; macro timing and SRAM banking are explicit assumptions"
+      }
+    },
+    "native_round_robin": {
+      "input_sha256": "82a374a1d966644d3feab301ab1aa594fdbabe85a7573c7ff972fa9141cff684",
+      "diagnostic": {
+        "case": "native_round_robin",
+        "diagnostic": true,
+        "scope": "Change only native descriptor selection from row_batched to round_robin; all finite resources, command timings and physical rates fixed. A scheduling foil, not a new hardware design."
+      },
+      "resources": {
+        "schema": "w2w.physical-resources.v3",
+        "resource_budget": {
+          "pes": 65536,
+          "macs_per_cycle": 262144,
+          "sram_bytes": 3221225472,
+          "native_domains": 128,
+          "dram_capacity_bytes": 8589934592,
+          "hb_data_bits": 16384,
+          "gateway_output_bytes_per_cycle": 512,
+          "gateway_staging_bytes": 524288,
+          "gateway_descriptor_slots": 128,
+          "routers": 16,
+          "router_input_bytes": 2621440,
+          "router_injection_bytes": 1048576,
+          "fabric_data_bits": 49152
+        },
+        "compute": {
+          "clusters": 16,
+          "pes": 65536,
+          "macs_per_cycle": 262144,
+          "vector_ops_per_cycle": 65536,
+          "sram_bytes": 3221225472,
+          "compute_weight_read_bytes_per_cycle": 524288
+        },
+        "native": {
+          "domains": 128,
+          "capacity_bytes": 8589934592,
+          "interface_peak_bytes_per_ps": 0.5446808510638305,
+          "command_entries": 512,
+          "command_metadata_bare_min_bits": 14848,
+          "reserved_return_bytes": 131072
+        },
+        "vertical": {
+          "ports": 16,
+          "data_bits": 16384,
+          "control_bits": 1024,
+          "hb_sites": 17408,
+          "landing_footprint_um2": 278784,
+          "landing_pitch_scope": "declared 4 um candidate grid; geometry check, not process/PPA calibration"
+        },
+        "gateways": {
+          "count": 16,
+          "output_bytes_per_cycle": 512,
+          "staging_bytes": 524288,
+          "descriptor_slots": 128,
+          "control_bits": 1024,
+          "router_access_wire_bit_um": 0,
+          "router_access_pipeline_bits": 0,
+          "router_access_paths": [
+            {
+              "gateway": "g0_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            }
+          ]
+        },
+        "external": {
+          "ports": 0,
+          "bytes_per_cycle": 0,
+          "staging_bytes": 0,
+          "edge_access_wire_bit_um": 0,
+          "edge_access_pipeline_bits": 0,
+          "scope": "external DRAM, edge I/O and system cost are additional; not equal-cost vertical baseline"
+        },
+        "collection": {
+          "paths": 128,
+          "timing_profiles": [
+            "rwdl-collection-1mm-stage-v1"
+          ],
+          "wire_bit_um": 120832000,
+          "pipeline_bits": 122880,
+          "delay_in_execution": true,
+          "shared_native_service": true
+        },
+        "fabric": {
+          "routers": 16,
+          "channels": 48,
+          "data_wire_bit_um": 726630400,
+          "control_wire_bit_um": 726630400,
+          "data_pipeline_bits": 3162112,
+          "control_pipeline_bits": 3162112,
+          "input_data_buffer_bytes": 2621440,
+          "injection_buffer_bytes": 1048576,
+          "receive_staging_bytes": 3158016,
+          "input_cell_metadata_bytes": 163840,
+          "injection_cell_metadata_bytes": 65536,
+          "boundary_stitch_length_um": 1600,
+          "aggregated_fine_links_per_channel": 64,
+          "fine_data_bits_per_link": 16,
+          "fine_control_bits_per_link": 16,
+          "aggregation": "one BookSim macro channel represents a fine-mesh cut and its ordered pipeline; not a cycle-exact Cerebras router model"
+        },
+        "area_um2": null,
+        "energy_j": null,
+        "calibration": "candidate physical layout and resource proxies; macro timing and SRAM banking are explicit assumptions"
+      }
+    },
+    "return_capacity_relaxed": {
+      "input_sha256": "a3fa8412eb1c6f8411e3cc01154d4a1d7876e28b97f5536111f02c94d96b9897",
+      "diagnostic": {
+        "case": "return_capacity_relaxed",
+        "diagnostic": true,
+        "scope": "Raise per-domain atom return reservations from 64 to 1024; pay the reservation budget. MC/grouped slots, native command queues, Gateway output, geometry, control and BookSim/RX remain fixed. Finite diagnostic, not equal cost."
+      },
+      "resources": {
+        "schema": "w2w.physical-resources.v3",
+        "resource_budget": {
+          "pes": 65536,
+          "macs_per_cycle": 262144,
+          "sram_bytes": 3221225472,
+          "native_domains": 128,
+          "dram_capacity_bytes": 8589934592,
+          "hb_data_bits": 16384,
+          "gateway_output_bytes_per_cycle": 512,
+          "gateway_staging_bytes": 524288,
+          "gateway_descriptor_slots": 128,
+          "routers": 16,
+          "router_input_bytes": 2621440,
+          "router_injection_bytes": 1048576,
+          "fabric_data_bits": 49152
+        },
+        "compute": {
+          "clusters": 16,
+          "pes": 65536,
+          "macs_per_cycle": 262144,
+          "vector_ops_per_cycle": 65536,
+          "sram_bytes": 3221225472,
+          "compute_weight_read_bytes_per_cycle": 524288
+        },
+        "native": {
+          "domains": 128,
+          "capacity_bytes": 8589934592,
+          "interface_peak_bytes_per_ps": 0.5446808510638305,
+          "command_entries": 512,
+          "command_metadata_bare_min_bits": 16896,
+          "reserved_return_bytes": 2097152
+        },
+        "vertical": {
+          "ports": 16,
+          "data_bits": 16384,
+          "control_bits": 1024,
+          "hb_sites": 17408,
+          "landing_footprint_um2": 278784,
+          "landing_pitch_scope": "declared 4 um candidate grid; geometry check, not process/PPA calibration"
+        },
+        "gateways": {
+          "count": 16,
+          "output_bytes_per_cycle": 512,
+          "staging_bytes": 524288,
+          "descriptor_slots": 128,
+          "control_bits": 1024,
+          "router_access_wire_bit_um": 0,
+          "router_access_pipeline_bits": 0,
+          "router_access_paths": [
+            {
+              "gateway": "g0_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g0_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g1_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g2_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_0",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_1",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_2",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            },
+            {
+              "gateway": "g3_3",
+              "length_um": 0,
+              "data_bits": 256,
+              "pipeline_cycles": 0
+            }
+          ]
+        },
+        "external": {
+          "ports": 0,
+          "bytes_per_cycle": 0,
+          "staging_bytes": 0,
+          "edge_access_wire_bit_um": 0,
+          "edge_access_pipeline_bits": 0,
+          "scope": "external DRAM, edge I/O and system cost are additional; not equal-cost vertical baseline"
+        },
+        "collection": {
+          "paths": 128,
+          "timing_profiles": [
+            "rwdl-collection-1mm-stage-v1"
+          ],
+          "wire_bit_um": 120832000,
+          "pipeline_bits": 122880,
+          "delay_in_execution": true,
+          "shared_native_service": true
+        },
+        "fabric": {
+          "routers": 16,
+          "channels": 48,
+          "data_wire_bit_um": 726630400,
+          "control_wire_bit_um": 726630400,
+          "data_pipeline_bits": 3162112,
+          "control_pipeline_bits": 3162112,
+          "input_data_buffer_bytes": 2621440,
+          "injection_buffer_bytes": 1048576,
+          "receive_staging_bytes": 3158016,
+          "input_cell_metadata_bytes": 163840,
+          "injection_cell_metadata_bytes": 65536,
+          "boundary_stitch_length_um": 1600,
+          "aggregated_fine_links_per_channel": 64,
+          "fine_data_bits_per_link": 16,
+          "fine_control_bits_per_link": 16,
+          "aggregation": "one BookSim macro channel represents a fine-mesh cut and its ordered pipeline; not a cycle-exact Cerebras router model"
+        },
+        "area_um2": null,
+        "energy_j": null,
+        "calibration": "candidate physical layout and resource proxies; macro timing and SRAM banking are explicit assumptions"
+      }
+    }
+  },
+  "historical_root": "/Projects/haoning/w2w-full-system-co-placement-20261010/cold",
+  "historical_proof_sha256": "6f9e37e563b1ccef9da23bfe299ec50e477ba1f925ce77d553ab826996d164bd",
+  "historical_result_sha256": "6892d8dbd5eddf7cf631d57ce64ca0c2a886a15ea11daaad6bba5e701b8a3868",
+  "max_ps": 6000000000,
+  "trace_witness": {
+    "request_id": "Qwen/Qwen3-235B-A22B-FP8/mmlu/abstract_algebra/98.json",
+    "layer": "0",
+    "zero_based_decode_step": 16,
+    "ranked_experts": [
+      36,
+      10,
+      23,
+      108,
+      62,
+      67,
+      109,
+      50
+    ],
+    "raw_capture_sha256": "0a9933a9207fd02d20dd2a66b67537dd2c48e7320d54a298b78fb6078b729dae",
+    "normalized_capture_sha256": "c31274d35d754918b79aff619c2c26a2f98cc606aa445e70d24115f1abe1ffbb",
+    "dataset_revision": "27febb7b2d24169560a9f6f83d38eb53f94916cf",
+    "corpus_manifest_sha256": "3cbfa50f0022025c17c144ffcd6ef49e4bd846c2e252a332b62031c219dcac41",
+    "coverage_audit_sha256": "faf0b479c028de36167dac91ee94fcdec1aa1885ea08c7e48cdf7a26509e3a4f"
+  },
+  "scope": "Entire published 8-expert cold FFN, actual captured token; no smaller shape, task omission or synthetic routing. One-token selected-layer timing, not complete-request timing.",
+  "contract": "Separate diagnosis from architecture. Full native execution and saved-result audit; unchanged compute/SRAM/HB/NoC, addresses and traffic. No automatic retry or performance filtering."
+}

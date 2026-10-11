@@ -1,0 +1,10 @@
+{
+  "pid": 757725,
+  "reader_source_commit": "0e5a8d4",
+  "command": [
+    "/Projects/haoning/w2w/.venv/bin/python",
+    "-c",
+    "import json,subprocess,sys,time\nfrom pathlib import Path\nroot=Path(sys.argv[1]);workers=json.loads((root/'launch.json').read_text())['workers']\nwhile True:\n pending=[]\n for case,row in workers.items():\n  if (root/'cases'/case/'completion.json').exists():continue\n  stat=Path('/proc',str(row['pid']),'stat')\n  if not stat.exists() or stat.read_text().split()[2]=='Z':\n   (root/'readback-status.json').write_text(json.dumps(dict(state='worker_failed',case=case)))\n   raise SystemExit(1)\n  pending.append(case)\n (root/'readback-status.json').write_text(json.dumps(dict(state='waiting' if pending else 'analyzing',pending=pending)))\n if not pending:break\n time.sleep(30)\ncommand=[sys.executable,'-m','tools.audit_cold_service_gate','--root',str(root),'--output',str(root/'independent-readback.json')]\nresult=subprocess.run(command)\n(root/'readback-status.json').write_text(json.dumps(dict(state='complete' if result.returncode==0 else 'readback_failed',exit_code=result.returncode)))\nraise SystemExit(result.returncode)\n",
+    "/Projects/haoning/w2w-full-system-memory-causality-20261011/cold-gate-sol-r1"
+  ]
+}

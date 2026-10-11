@@ -1,0 +1,56 @@
+{
+  "complete": true,
+  "case": "native_minimum_gaps",
+  "source_commit": "565f148f25a7596380cc29f960ea9ffa6f836631",
+  "input_sha256": "908eda155a19b476d794f35966b4db5ff6a65ce53ae064ba9b93ad9006d25b40",
+  "makespan_ps": 347129000,
+  "drained_ps": 347171000,
+  "wall_seconds": 384.52398739848286,
+  "audit": {
+    "passed": true,
+    "packets": 75760,
+    "read_descriptors": 37152,
+    "read_words": 4719744,
+    "data_bytes": 4907008,
+    "physical_link_flits": 51432,
+    "tasks": 490,
+    "finite_fetch": {
+      "passed": true,
+      "contexts_per_cluster": 2,
+      "peak_contexts": {
+        "c12": 2,
+        "c13": 2,
+        "c14": 2,
+        "c15": 2,
+        "c4": 2,
+        "c5": 2,
+        "c6": 2,
+        "c7": 2,
+        "c11": 2,
+        "c10": 2,
+        "c1": 2,
+        "c0": 2,
+        "c3": 2,
+        "c2": 2,
+        "c9": 2,
+        "c8": 2
+      },
+      "metadata_bytes_per_cluster": 136,
+      "issue_and_outstanding_shared": true
+    },
+    "physical_domains": 128,
+    "native_bytes": 151031808,
+    "gateway_bytes": 151031808,
+    "physical_collection_charged": true,
+    "native_and_gateway_reservations_drained": true
+  },
+  "control_audit": {
+    "enabled": true,
+    "passed": true,
+    "ranges": 296064,
+    "command_bytes": 4737024,
+    "ack_bytes": 2368512
+  },
+  "booksim_sha256": "9d18611aa0cc74b6d8a475e302134c7888b1417648607abce3a6f8d04311e308",
+  "bridge_sha256": "37eb00768993fb5cfd903c690e72a21cdc69e10f4acbc421762f54dc5a33ba54"
+}

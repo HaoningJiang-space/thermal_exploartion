@@ -4,6 +4,11 @@
 
 **Hybrid-Bonded 3D Accelerator Architecture Exploration**
 
+[W2W cold 服务因果实验](results/w2w-cold-service-2026-10-11/findings.md)的报告、图表、
+审计证据与冻结复现代码现归档在本工作区。原执行使用 W2W V3 外部后端；
+其单 token cold 结果与本项目的 Stratum-inspired 模型结果采用不同硬件合同，分别解释。
+迁移检查与复现入口见 [reproduce.md](results/w2w-cold-service-2026-10-11/reproduce.md)。
+
 最新交付为 **[Compute–Memory–Communication Architecture Crossover](results/crossover-2026-10-11/findings.md)**。
 十组完整模型场景跨越供数与计算Roofline，保留275个点（185个成功、90个有限调度/面积失败）、
 原始Qwen1.5路由、分项Memory/NoC反事实和固定121mm²面积前沿。

@@ -1,0 +1,1 @@
+{"passed": true, "makespans": {"baseline": 451676000, "mc16": 451852000, "native_minimum_gaps": 347129000, "collection_minimum": 451611000, "gateway_output_relaxed": 451676000, "native_round_robin": 1533412000, "return_capacity_relaxed": 451676000}}

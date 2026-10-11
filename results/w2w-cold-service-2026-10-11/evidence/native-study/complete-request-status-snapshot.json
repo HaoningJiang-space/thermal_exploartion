@@ -1,0 +1,19 @@
+{
+  "controller": {
+    "state": "running",
+    "case": "reference_compute",
+    "worker_pid": 742455,
+    "elapsed_wall_seconds": 4624.322294796817,
+    "source_commit": "a708d50dbc2e7959d06e44b467c0eee39772f9f8"
+  },
+  "scope": "Full captured prefill/decode request for selected real layers; explicit token dispatch, expert gated FFNs, ordered block/partition sums and weighted combine. Post-router timing only: captured IDs, unavailable coefficient values (4-byte transfer format assumed). No router matmul/top-k, attention/KV/norm/residual or numerical full-model inference. No layer-route reuse or token truncation.",
+  "request_id": "Qwen/Qwen3-235B-A22B-FP8/mmlu/abstract_algebra/59.json",
+  "prefill_tokens": 46,
+  "decode_tokens": 128,
+  "layer_keys": [
+    "0",
+    "1"
+  ],
+  "source_commit": "a708d50dbc2e7959d06e44b467c0eee39772f9f8",
+  "limits": "Separate ongoing complete-phase request. No completed timing claim from this snapshot."
+}

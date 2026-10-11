@@ -1,0 +1,13 @@
+{
+  "host": "ee4e072",
+  "python": "3.10.12",
+  "executable": "/Projects/haoning/w2w/.venv/bin/python",
+  "execution_source": "565f148f25a7596380cc29f960ea9ffa6f836631",
+  "reader_source": "0e5a8d4270e2a7cbae02f669ba4f4779fdf18410",
+  "native_tools": [
+    "9d18611aa0cc74b6d8a475e302134c7888b1417648607abce3a6f8d04311e308",
+    "37eb00768993fb5cfd903c690e72a21cdc69e10f4acbc421762f54dc5a33ba54"
+  ],
+  "raw_archive": "/Projects/haoning/w2w-full-system-memory-causality-20261011/cold-gate-sol-r1",
+  "baseline_physical_record_equal": true
+}

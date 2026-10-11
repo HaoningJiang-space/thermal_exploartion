@@ -1,0 +1,11 @@
+test_collection_override_does_not_change_physical_control_or_rates (tests.test_cold_service_gate.ColdServiceGate) ... ok
+test_every_diagnostic_keeps_full_captured_ffn_and_data_addresses (tests.test_cold_service_gate.ColdServiceGate) ... ok
+test_mc_entries_and_finite_return_reservations_are_paid (tests.test_cold_service_gate.ColdServiceGate) ... ok
+test_disjoint_capacity_time_and_bus_tail_convention (tests.test_memory_service_causality.MemoryCausality) ... ok
+test_full_pool_has_no_unattributed_slot_time (tests.test_memory_service_causality.MemoryCausality) ... ok
+test_missing_or_impossible_physical_evidence_is_rejected (tests.test_memory_service_causality.MemoryCausality) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 19.081s
+
+OK
