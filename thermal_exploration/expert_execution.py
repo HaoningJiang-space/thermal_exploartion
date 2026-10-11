@@ -101,8 +101,9 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
     if down_partition not in ('row','column'):raise ValueError('Unknown frozen down layout')
     if combine_scheme not in ('fused','eager'):raise ValueError('Unknown known combine schedule')
     if dispatch_scheme not in ('broadcast_all','destination_only','decoupled'):raise ValueError('Unknown input delivery')
-    if reduction_scheme not in ('drain_all','row_ready'):raise ValueError('Unknown reduction admission')
-    if reduction_scheme=='row_ready' and combine_scheme!='fused':raise ValueError('Row-ready requires local token accumulation')
+    if reduction_scheme not in ('drain_all','row_ready','row_ready_128'):raise ValueError('Unknown reduction admission')
+    early_reduction=reduction_scheme!='drain_all'
+    if early_reduction and combine_scheme!='fused':raise ValueError('Row-ready requires local token accumulation')
     if not profile.area()['area_feasible']:raise ValueError('Paid area infeasible')
     b=len(routes);d=c['hidden_size'];h=c['moe_intermediate_size'];hs=c['shared_expert_intermediate_size']
     if any(len(r)!=c['num_experts_per_tok'] or len(set(r))!=len(r) or any(not 0<=e<c['num_experts'] for e in r) for r in routes):
@@ -236,7 +237,7 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
                     read=g.add('sram_read',tile,rows*count*8,(partial,),('read',tile),ceil(rows*count*8/(128 if schedule=='overlap' else 256)),'local_token_accumulate')
                     add=g.add('vector',tile,rows*count,(read,),('vector',tile),ceil(rows*count/16),'local_token_accumulate')
                     end=g.add('sram_write',tile,rows*count*4,(add,),('write',tile),ceil(rows*count*4/128),'local_token_accumulate')
-                    g.lease(partial,end,('local_output' if reduction_scheme=='row_ready' else 'output',tile),rows*count*4)
+                    g.lease(partial,end,('local_output' if early_reduction else 'output',tile),rows*count*4)
                     semantics[-len(partials)+list(partials).index(tile)]['accumulate_node']=end
                     token_rows.setdefault((row,tile),[]).append(end);local.append(end)
                     prior[tile]=end
@@ -270,16 +271,18 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
     g.meta.update(fixed_sram_bytes=[budget['activation_reserved_bytes']+65536+accumulator]*16,
         private_sram_budget_bytes=budget['private_bytes'],buffer_caps={'workspace':budget['expert_workspace_bytes'],'output':65536})
     if combine_scheme=='fused':
-        if reduction_scheme=='row_ready':
+        if early_reduction:
             # Two software credit classes in the SAME64KiB output storage.
-            # One128-row producer<=16KiB (B32), one64-row collective cohort
-            # has at most4 inbound tree edges *8KiB <=32KiB. No future
+            # One128-row producer<=16KiB (B32). No future
             # producer can consume the collective's reserved credit.
+            # A128-row cohort uses packet streaming: all row producers ready,
+            # one tree/root, at most4*256B incoming data per packet join.
+            # Finite48KiB credits backpressure injection, not future operands.
             local_cap=b*row_block*4
             if local_cap>16384:raise ValueError('Row-ready producer exceeds reserved16KiB')
             g.meta['buffer_caps'].update(local_output=16384,reduce_output=49152)
             g.meta['credit_groups']={'output':dict(members=['local_output','reduce_output'],capacity=65536)}
-        final=[];local_done=g.join(terminals,'all_local_token_accumulators_ready') if reduction_scheme=='drain_all' else None
+        final=[];local_done=g.join(terminals,'all_local_token_accumulators_ready') if not early_reduction else None
         reduce_block=min(64,row_block) if reduction_scheme=='row_ready' else row_block
         for row in range(0,d,reduce_block):
             root=row//(d//16)
@@ -294,10 +297,10 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
             # roots can hold each other's bounded reduction buffers while
             # waiting for sibling contributions; the eager baseline already
             # serializes these row cohorts. Pay this same finite discipline.
-            row_ready=g.join(producers.values(),'row_contributions_ready') if reduction_scheme=='row_ready' else local_done
-            admission=g.join([row_ready]+final[-1:],'row_credit_admission') if reduction_scheme=='row_ready' else (local_done if not final else final[-1])
+            row_ready=g.join(producers.values(),'row_contributions_ready') if early_reduction else local_done
+            admission=g.join([row_ready]+final[-1:],'row_credit_admission') if early_reduction else (local_done if not final else final[-1])
             producers={tile:g.join((node,admission),'token_reduce_admitted') for tile,node in producers.items()}
-            final.append(g.collective(root,producers,min(reduce_block,d-row)*b*4,'combine',preallocated_sources=True,output_credit='reduce_output' if reduction_scheme=='row_ready' else 'output'))
+            final.append(g.collective(root,producers,min(reduce_block,d-row)*b*4,'combine',preallocated_sources=True,output_credit='reduce_output' if early_reduction else 'output'))
         g.output=[g.join(final,'moe_output_ready')]
     else:g.output=[g.join(terminals,'moe_output_ready')]
     expected=6*d*h*sum(counts.values())+6*d*hs*b

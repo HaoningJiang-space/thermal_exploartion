@@ -10,7 +10,7 @@ from .moe_numerical import compare,check_ledger
 
 CASES=((0,0),(32,7),(127,23)) # primary then two predeclared holdouts
 DISPATCHES=('broadcast_all','destination_only','decoupled')
-REDUCTIONS=('drain_all','row_ready')
+REDUCTIONS=('drain_all','row_ready','row_ready_128')
 
 
 def main():

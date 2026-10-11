@@ -36,6 +36,10 @@ class P4Tests(unittest.TestCase):
   self.assertLessEqual(max(result['private_sram_high'].values()),g.meta['private_sram_budget_bytes'])
   self.assertEqual(sum(n.work for n in g.nodes if n.kind=='link' and n.stage=='combine'),15*32*2048*4)
   self.assertEqual(result['activity']['mac'],meta['mac_flops'])
+  large,other=expert_graph(self.c,layout,0,self.capture['routes'],Profile(),schedule='barrier',order='static',down_partition='row',reduction_scheme='row_ready_128')
+  z=execute(large)
+  self.assertEqual(z['activity'],result['activity'])
+  self.assertLessEqual(max(z['credit_group_high'].values()),65536)
  def test_credit_classes_cannot_create_storage(self):
   g=Graph();g.meta.update(buffer_caps={'a':32768,'b':49152},credit_groups={'output':dict(members=['a','b'],capacity=65536)})
   g.output=[g.join(())]

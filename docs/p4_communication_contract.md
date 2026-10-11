@@ -47,3 +47,10 @@ FP32/BF16分别比对，BF16 case对输入/权重/概率/gated state做round-to-
 
 每个性能点保存完整 events、source/routing/layout/point hashes、真实执行case、原 packet与补齐 kernel活动账目、critical chain、finite-credit审计。
 旧基线与归档26d1b02须精确重放；失败、负收益和不收缩的Oracle都保留。
+
+## 有界 cohort 粒度补充对照
+
+初始64-row方案在主案例中没有延迟净收益。为排除较保守cohort造成的额外序列化，追加同三组case、B8/B32、TP4/TP16、column/row的 `broadcast_all + row_ready_128` baseline/infinite-NoC，共48点。
+沿用16/48 KiB信用划分、一次一个tree/root、所有该行producer ready的admission；128-row数据按256B packet逐包推进，最多四个incoming packet需要1 KiB才能使对应packet join就绪。
+信用不足时停止对应packet注入，等待已就绪树内消费者释放；不需要为完整128-row的全部入边数据同时保留64 KiB。
+所有真实点仍做独立事件与容量重放。此对照在观察64-row负结果后冻结并执行，不能写成最初预声明矩阵，也不混同增加buffer。

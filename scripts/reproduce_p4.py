@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--source',type=Path,required=True);ap.add_argument('--pin',required=True);ap.add_argument('--routes',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--workers',type=int,default=2);ap.add_argument('--list-only',action='store_true');a=ap.parse_args()
+ ap=argparse.ArgumentParser();ap.add_argument('--source',type=Path,required=True);ap.add_argument('--pin',required=True);ap.add_argument('--routes',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--workers',type=int,default=2);ap.add_argument('--list-only',action='store_true');ap.add_argument('--cohort-control',action='store_true');a=ap.parse_args()
  source=a.source.resolve();routes=a.routes.resolve();output=a.output.resolve()
  revision=subprocess.check_output(['git','-C',str(source),'rev-parse','HEAD'],text=True).strip()
  if not revision.startswith(a.pin) or subprocess.check_output(['git','-C',str(source),'status','--porcelain'],text=True).strip():raise ValueError('Clean pinned source required')
@@ -15,13 +15,15 @@ def main():
   for tp in (4,16):
    for down in ('column','row'):
     base=[sys.executable,'-m','thermal_exploration.run_p4_communication','--routes',str(routes),'--batch',str(batch),'--tp',str(tp),'--down-partition',down]
+    if a.cohort_control:
+     jobs.append((f'b{batch}-tp{tp}-{down}-broadcast_all-row_ready_128',base+['--dispatch','broadcast_all','--reduction','row_ready_128']));continue
     for dispatch in ('broadcast_all','destination_only','decoupled'):
      for reduction in ('drain_all','row_ready'):
       label=f'b{batch}-tp{tp}-{down}-{dispatch}-{reduction}'
       jobs.append((label,base+['--dispatch',dispatch,'--reduction',reduction]))
     jobs.append((f'numerical-b{batch}-tp{tp}-{down}',base+['--dispatch','destination_only','--reduction','row_ready','--numerical-only']))
  if a.list_only:
-  print(json.dumps(dict(source=revision,jobs=len(jobs),performance_points=288,numerical_comparisons=48,commands=[cmd+['--output',str(output/label)] for label,cmd in jobs]),indent=2));return
+  print(json.dumps(dict(source=revision,jobs=len(jobs),performance_points=48 if a.cohort_control else 288,numerical_comparisons=0 if a.cohort_control else 48,commands=[cmd+['--output',str(output/label)] for label,cmd in jobs]),indent=2));return
  output.mkdir(parents=True,exist_ok=False)
  env=dict(os.environ,PYTHONPATH=str(source),OMP_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='1')
  def run(job):
