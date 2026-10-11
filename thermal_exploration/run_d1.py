@@ -16,9 +16,19 @@ from .model import optimize,Fabric
 from .run import revision
 
 
-def run_case(exe,root,out,name,partial=False):
-    case=out/(name+('_partial_row' if partial else ''));case.mkdir()
+def run_case(exe,root,out,name,partial=False,ordering=None):
+    case=out/(name+('_partial_row' if partial else '')+('_'+ordering if ordering else ''));case.mkdir()
     settings=MECHANISMS[name];req=trace(name,partial)
+    if ordering:
+        if ordering not in ('bank_column_interleave','bank_row_interleave') or partial:raise ValueError('Unsupported ordering control')
+        # Same addresses, bytes, timing and controller. Alternate PC/BG before
+        # another bank in a shared group; optional column-major request order.
+        def key(r):
+            ch,pc,sid,bg,bank,row,col=r['addr_vec']
+            b=bank*8+bg*2+pc
+            return (row,col,b,ch) if ordering=='bank_column_interleave' else (row,b,col,ch)
+        req.sort(key=key)
+        for i,r in enumerate(req):r['id']=i
     validator=lambda r:validate(r,settings['subarrays'])
     write_trace(req,case,validator)
     dram,config=hb_trace.ramulator_config(root,case,2,**settings)
@@ -39,7 +49,7 @@ def run_case(exe,root,out,name,partial=False):
     if settings['subarrays']>1 and (resolved['nRAS']!=60 or not audit['overlapping_ACTs']):
         raise ValueError('Subarray overlap either shortened restoration or never overlapped')
     counts=replay['counts'].copy();counts['PREab_rows']=audit['PREab_rows']
-    r=dict(name=case.name,mechanism=name,partial_row=partial,settings=settings,
+    r=dict(name=case.name,mechanism=name,partial_row=partial,settings=settings,request_ordering=ordering,
         work=work,driver=driver,commands=replay,audit=audit,
         steady=dict(start_tick=start,end_tick=end,duration_ns=(end-start)*.25,useful_tb_s=rate),
         activity=dict(counts=counts,useful_bytes=work['read_bytes'],duration_ns=driver['ticks']*.25,
