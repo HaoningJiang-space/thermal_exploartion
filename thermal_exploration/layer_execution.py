@@ -229,6 +229,9 @@ class LayerExecution:
         self.tensor_rows=tensors(c)
         self.tensor_bytes={t['name']:t['bytes'] for t in self.tensor_rows}
 
+    def kernel(self,*args,**kwargs):
+        return tile_pipeline(*args,**kwargs)
+
     def phase(self,name,duration,activity,reason):
         if duration<0:raise ValueError('Negative phase')
         start=self.clock;self.clock+=duration
@@ -246,7 +249,7 @@ class LayerExecution:
         for name_ in names:
             owners=self.layout['tensors'][name_]
             for tile in owners:useful[tile]+=self.tensor_bytes[name_]//len(owners)
-        results={tile:tile_pipeline(spans,batch,stream,self.oracle,useful_bytes=useful[tile],keep_events=False) for tile,spans in parts.items()}
+        results={tile:self.kernel(spans,batch,stream,self.oracle,useful_bytes=useful[tile],keep_events=False) for tile,spans in parts.items()}
         elapsed=max(r['ticks'] for r in results.values());activity={str(tile):r['activity'] for tile,r in results.items()}
         # Exact event windows are nested in the operator. A macro phase is
         # never interpreted as serial DRAM+HB+MAC times.
@@ -322,7 +325,7 @@ class LayerExecution:
             if excess:sizes[-1]=(sizes[-1][0],sizes[-1][1]-excess)
             parts[tile]=tuple((t,n) for t,n in sizes if n)
         # Query-head reuse factor is hq/kv, separate from batch already in KV.
-        r={t:tile_pipeline(s,hq//kv,self.baseline in BASELINES[2:],self.oracle,useful_bytes=useful_per_tile[t],keep_events=False) for t,s in parts.items()}
+        r={t:self.kernel(s,hq//kv,self.baseline in BASELINES[2:],self.oracle,useful_bytes=useful_per_tile[t],keep_events=False) for t,s in parts.items()}
         duration=max(x['ticks'] for x in r.values());useful_flops=4*batch*(context+1)*hq*hd
         activity={str(t):dict(dram=physical_per_tile[t],hb=physical_per_tile[t],mac=useful_per_tile[t]*hq//kv,vector=5*batch*((context+1+seq_split-1-t%seq_split)//seq_split)*(hq if sequence_only else hq//kv),
             sram_read=x['activity']['sram_read'],sram_write=x['activity']['sram_write']) for t,x in r.items()}
@@ -356,23 +359,31 @@ class LayerExecution:
             self.network(p+'router_scores',batch,61,'router')
             self.phase(p+'topk_shared_sigmoid',ceil(batch*(60*4+5)/16),{'0':dict(vector=batch*(60*4+5),sram_read=batch*61*4,sram_write=batch*36)},'vector/local state')
             self.network(p+'route_weights_distribution',batch,1,'route_broadcast')
-            self.network(p+'dispatch',batch,d,'broadcast')
+            if not getattr(self,'resident_expert_input',False):
+                self.network(p+'dispatch',batch,d,'broadcast')
             # Active expert matrices are read once per token microbatch. Every
             # unselected expert remains resident but is not falsely charged as
             # a per-step read. Shared MLP is always active, with3 projections.
             counts=Counter(e for row in routes for e in row)
             expert_groups=defaultdict(list)
             for e,count in sorted(counts.items()):expert_groups[count].extend(p+f'expert{e}.'+x for x in ('gate','up','down'))
+            if getattr(self,'incremental_combine',False):self.initialize_combine(p,batch)
             # gate/up -> SiLU -> down dependencies are preserved per expert;
             # combine one count cohort's three stages, never one unconstrained
             # fused3-matrix multiply. Separate cohorts serialize conservatively.
-            for count,names in expert_groups.items():
+            groups=list(expert_groups.items())
+            if hasattr(self,'bounded_expert_cohorts'):groups=self.bounded_expert_cohorts(groups,batch)
+            for count,names in groups:
                 self.linear([n for n in names if not n.endswith('.down')],count,p+'routed_gate_up')
                 self.vector(p+'routed_silu',count*(len(names)//3)*c['moe_intermediate_size']*6,count*(len(names)//3)*c['moe_intermediate_size']*6,batch)
                 self.linear([n for n in names if n.endswith('.down')],count,p+'routed_down')
+                if getattr(self,'incremental_combine',False):
+                    self.accumulate_expert_partials(p,count,names,batch)
             self.linear([p+'shared.gate',p+'shared.up'],batch,p+'shared_gate_up')
             self.vector(p+'shared_silu',batch*c['shared_expert_intermediate_size']*6,batch*c['shared_expert_intermediate_size']*6,batch)
             self.linear([p+'shared.down'],batch,p+'shared_down')
+            if getattr(self,'incremental_combine',False):
+                self.accumulate_expert_partials(p,batch,[p+'shared.down'],batch)
             # Weight and add each tile's FP32 partial BEFORE the one final
             # collective. This multiplies vector work by TP width; no free
             # network-side weighting or reduction is being assumed.
@@ -380,9 +391,10 @@ class LayerExecution:
             for expert,count in counts.items():
                 for tile in self.layout['tensors'][p+f'expert{expert}.down']:partial_counts[tile]+=count
             activity={str(tile):dict(vector=d*(2*n-batch),sram_read=d*4*n,sram_write=d*4*batch) for tile,n in partial_counts.items()}
-            if max(d*4*n for n in partial_counts.values())>1048576:raise ValueError('Expert partials exceed1MiB workspace; microbatch required')
-            duration=max(max(ceil(v['vector']/16),ceil(v['sram_read']/256)+ceil(v['sram_write']/128)) for v in activity.values())
-            self.phase(p+'local_weighted_partial_combine',duration,activity,'vector/local state')
+            if not getattr(self,'incremental_combine',False):
+                if max(d*4*n for n in partial_counts.values())>getattr(self,'expert_workspace_bytes',1048576):raise ValueError('Expert partials exceed workspace; microbatch required')
+                duration=max(max(ceil(v['vector']/16),ceil(v['sram_read']/256)+ceil(v['sram_write']/128)) for v in activity.values())
+                self.phase(p+'local_weighted_partial_combine',duration,activity,'vector/local state')
         self.network(p+'output_reduce',batch,d,'reduction')
         self.vector(p+'residual',batch*d,batch*d*6,batch)
 
