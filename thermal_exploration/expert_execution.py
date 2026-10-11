@@ -85,7 +85,7 @@ class RowBlockedExecution(CrossoverExecution):
         return r
 
 
-def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic',isolation='none',down_partition='column',combine_scheme='fused'):
+def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic',isolation='none',down_partition='column',combine_scheme='fused',dispatch_scheme='broadcast_all',reduction_scheme='drain_all'):
     """Conventional TP/EP, packed dispatch, paired SwiGLU and row reductions.
 
     A joint local kernel uses the existing finite streaming service model.
@@ -100,6 +100,9 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
         raise ValueError('Unknown conventional expert schedule')
     if down_partition not in ('row','column'):raise ValueError('Unknown frozen down layout')
     if combine_scheme not in ('fused','eager'):raise ValueError('Unknown known combine schedule')
+    if dispatch_scheme not in ('broadcast_all','destination_only','decoupled'):raise ValueError('Unknown input delivery')
+    if reduction_scheme not in ('drain_all','row_ready'):raise ValueError('Unknown reduction admission')
+    if reduction_scheme=='row_ready' and combine_scheme!='fused':raise ValueError('Row-ready requires local token accumulation')
     if not profile.area()['area_feasible']:raise ValueError('Paid area infeasible')
     b=len(routes);d=c['hidden_size'];h=c['moe_intermediate_size'];hs=c['shared_expert_intermediate_size']
     if any(len(r)!=c['num_experts_per_tok'] or len(set(r))!=len(r) or any(not 0<=e<c['num_experts'] for e in r) for r in routes):
@@ -107,26 +110,50 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
     counts=Counter(e for row in routes for e in row);budget=profile.budget(b,d,hs)
     if not budget['feasible']:raise ValueError('Fixed SRAM budget infeasible')
     p=replace(profile,isolation=isolation if isolation!='none' else profile.isolation)
-    g=Graph(256,True);g.meta['coupled_resources']={};jobs=[];ledger=[]
+    g=Graph(256,True);g.meta['coupled_resources']={};jobs=[];ledger=[];semantics=[]
     experts=list(counts)
     if order=='static':experts.sort()
     else:experts.sort(key=lambda e:(-counts[e]/len(layout['tensors'][f'layer{layer}.expert{e}.up']),e))
     descriptors=[(f'layer{layer}.expert{e}',[t for t,row in enumerate(routes) if e in row],h,e) for e in experts]
     descriptors.append((f'layer{layer}.shared',list(range(b)),hs,'shared'))
-    # The shared expert already needs every token on all16 tiles. Reuse this
-    # one legal input distribution instead of resending it once per expert.
-    common={t:[] for t in range(16)}
-    for source in range(16):
-        distributed=g.broadcast(source,list(range(16)),b*d*2//16,stage='dispatch')
-        for tile in range(16):common[tile].append(distributed[tile])
-    common_ready={t:g.join(deps,'resident_token_input') for t,deps in common.items()}
+    owners_by_expert={e:sorted(layout['tensors'][prefix+'.up']) for prefix,_,_,e in descriptors}
+    shared_owners=owners_by_expert['shared'];delivery=[]
+    def deliver(token,targets,stage):
+        ready={t:[] for t in targets}
+        for source in range(16):
+            distributed=g.broadcast(source,targets,d*2//16,stage=stage)
+            delivery.append(dict(token=token,source=source,targets=targets,bytes=d*2//16,stage=stage))
+            for tile in targets:ready[tile].append(distributed[tile])
+        return {t:g.join(deps,'token_input_ready') for t,deps in ready.items()}
+    if dispatch_scheme=='broadcast_all':
+        # Preserve26d1b02 exactly, including batch-level dependency joins.
+        common={t:[] for t in range(16)}
+        for source in range(16):
+            distributed=g.broadcast(source,list(range(16)),b*d*2//16,stage='dispatch')
+            delivery.append(dict(token='all',source=source,targets=list(range(16)),bytes=b*d*2//16,stage='dispatch'))
+            for tile in range(16):common[tile].append(distributed[tile])
+        common_ready={t:g.join(deps,'resident_token_input') for t,deps in common.items()}
+    else:
+        routed_ready={};shared_ready={}
+        for token,selected in enumerate(routes):
+            routed_targets=sorted({t for e in selected for t in owners_by_expert[e]})
+            if dispatch_scheme=='destination_only':
+                # Deduplicate shared/routed token delivery at each endpoint.
+                targets=sorted(set(routed_targets)|set(shared_owners))
+                routed_ready[token]=shared_ready[token]=deliver(token,targets,'dispatch')
+            else:
+                # Separate physical deliveries: pay duplicates, no free
+                # alternative shared weight layout or weight migration.
+                routed_ready[token]=deliver(token,routed_targets,'routed_dispatch')
+                shared_ready[token]=deliver(token,shared_owners,'shared_dispatch')
     dispatches=[]
     for prefix,tokens,width,expert in descriptors:
         owners=sorted(layout['tensors'][prefix+'.up']);count=len(tokens)
-        dispatch={t:common_ready[t] for t in owners}
+        dispatch={t:common_ready[t] for t in owners} if dispatch_scheme=='broadcast_all' else {
+            t:g.join([(shared_ready if expert=='shared' else routed_ready)[token][t] for token in tokens],'expert_token_input_ready') for t in owners}
         dispatches.extend(dispatch.values())
         jobs.append(dict(prefix=prefix,tokens=tokens,count=count,width=width,expert=expert,owners=owners,dispatch=dispatch))
-    barrier=g.join(dispatches,'dispatch_barrier') if schedule=='barrier' else None
+    barrier=g.join(dispatches,'dispatch_barrier') if schedule=='barrier' and dispatch_scheme=='broadcast_all' else None
     terminals=[];stage_done=[];token_rows={}
     accumulator_init={tile:g.add('sram_write',tile,b*d*4,resource=('write',tile),ticks=ceil(b*d*4/128),stage='token_accumulator_init') for tile in range(16)} if combine_scheme=='fused' else {}
     def kernel(tile,spans,count,useful,deps,stage,memory_deps=()):
@@ -166,6 +193,7 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
             admission=sorted({owner_last[t] for t in owners if t in owner_last})
             deps=([barrier] if barrier is not None else [job['dispatch'][tile]])+admission+([accumulator_init[tile]] if combine_scheme=='fused' else [])
             node=kernel(tile,spans,count,4*d*width//len(owners),deps,'expert_gate_up',admission)
+            semantics.append(dict(kind='gate_up',node=node,expert=job['expert'],tile=tile,tokens=job['tokens'],intermediate=[owners.index(tile)*width//len(owners),(owners.index(tile)+1)*width//len(owners)]))
             gate.append(node)
             size=count*width//len(owners);write=g.add('sram_write',tile,size*8,(node,),('write',tile),ceil(size*8/128),'gated_state')
             read=g.add('sram_read',tile,size*8,(write,),('read',tile),ceil(size*8/(128 if schedule=='overlap' else 256)),'gated_state')
@@ -183,8 +211,9 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
                 for tile in owners:gathered[tile].append(copied[tile])
             for tile in owners:
                 prior[tile]=g.join(gathered[tile],'row_down_input_ready');gather_starts.append(prior[tile])
-        for row in range(0,d,128):
-            rows=min(128,d-row);root=row//(d//16);partials={}
+        row_block=min(128,d//16)
+        for row in range(0,d,row_block):
+            rows=min(row_block,d-row);root=row//(d//16);partials={}
             row_owners=[owners[row//(d//len(owners))]] if row_down else owners
             for tile in row_owners:
                 local_row=row%(d//len(owners)) if row_down else row
@@ -192,6 +221,7 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
                 deps=[prior[tile]]
                 if schedule=='barrier':deps+=gate
                 k=kernel(tile,spans,count,2*rows*width//(1 if row_down else len(owners)),deps,'expert_down_rows',deps);first_rows.append(k)
+                semantics.append(dict(kind='down',node=k,expert=job['expert'],tile=tile,tokens=job['tokens'],routing_slots=[None if job['expert']=='shared' else routes[token].index(job['expert']) for token in job['tokens']],rows=[row,row+rows],intermediate=[0,width] if row_down else [owners.index(tile)*width//len(owners),(owners.index(tile)+1)*width//len(owners)]))
                 size=rows*count*4;write=g.add('sram_write',tile,size,(k,),('write',tile),ceil(size/128),'partial_store')
                 read=g.add('sram_read',tile,size,(write,),('read',tile),ceil(size/(128 if schedule=='overlap' else 256)),'weighted_partial')
                 weight=g.add('vector',tile,rows*count,(read,),('vector',tile),ceil(rows*count/16),'weighted_partial')
@@ -206,7 +236,8 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
                     read=g.add('sram_read',tile,rows*count*8,(partial,),('read',tile),ceil(rows*count*8/(128 if schedule=='overlap' else 256)),'local_token_accumulate')
                     add=g.add('vector',tile,rows*count,(read,),('vector',tile),ceil(rows*count/16),'local_token_accumulate')
                     end=g.add('sram_write',tile,rows*count*4,(add,),('write',tile),ceil(rows*count*4/128),'local_token_accumulate')
-                    g.lease(partial,end,('output',tile),rows*count*4)
+                    g.lease(partial,end,('local_output' if reduction_scheme=='row_ready' else 'output',tile),rows*count*4)
+                    semantics[-len(partials)+list(partials).index(tile)]['accumulate_node']=end
                     token_rows.setdefault((row,tile),[]).append(end);local.append(end)
                     prior[tile]=end
                 all_ends.append(g.join(local,'expert_row_accumulated'))
@@ -239,10 +270,21 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
     g.meta.update(fixed_sram_bytes=[budget['activation_reserved_bytes']+65536+accumulator]*16,
         private_sram_budget_bytes=budget['private_bytes'],buffer_caps={'workspace':budget['expert_workspace_bytes'],'output':65536})
     if combine_scheme=='fused':
-        final=[];local_done=g.join(terminals,'all_local_token_accumulators_ready')
-        for row in range(0,d,128):
+        if reduction_scheme=='row_ready':
+            # Two software credit classes in the SAME64KiB output storage.
+            # One128-row producer<=16KiB (B32), one64-row collective cohort
+            # has at most4 inbound tree edges *8KiB <=32KiB. No future
+            # producer can consume the collective's reserved credit.
+            local_cap=b*row_block*4
+            if local_cap>16384:raise ValueError('Row-ready producer exceeds reserved16KiB')
+            g.meta['buffer_caps'].update(local_output=16384,reduce_output=49152)
+            g.meta['credit_groups']={'output':dict(members=['local_output','reduce_output'],capacity=65536)}
+        final=[];local_done=g.join(terminals,'all_local_token_accumulators_ready') if reduction_scheme=='drain_all' else None
+        reduce_block=min(64,row_block) if reduction_scheme=='row_ready' else row_block
+        for row in range(0,d,reduce_block):
             root=row//(d//16)
-            producers={tile:g.join([accumulator_init[tile]]+token_rows.get((row,tile),[]),'all_local_expert_rows_ready') for tile in range(16)}
+            producer_row=row//row_block*row_block
+            producers={tile:g.join([accumulator_init[tile]]+token_rows.get((producer_row,tile),[]),'all_local_expert_rows_ready') for tile in range(16)}
             # Drain local weighted partials before the collective borrows the
             # same finite output buffers. Early reduction arrivals otherwise
             # fill those buffers and block a local producer needed by the
@@ -252,9 +294,10 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
             # roots can hold each other's bounded reduction buffers while
             # waiting for sibling contributions; the eager baseline already
             # serializes these row cohorts. Pay this same finite discipline.
-            admission=local_done if not final else final[-1]
+            row_ready=g.join(producers.values(),'row_contributions_ready') if reduction_scheme=='row_ready' else local_done
+            admission=g.join([row_ready]+final[-1:],'row_credit_admission') if reduction_scheme=='row_ready' else (local_done if not final else final[-1])
             producers={tile:g.join((node,admission),'token_reduce_admitted') for tile,node in producers.items()}
-            final.append(g.collective(root,producers,min(128,d-row)*b*4,'combine',preallocated_sources=True))
+            final.append(g.collective(root,producers,min(reduce_block,d-row)*b*4,'combine',preallocated_sources=True,output_credit='reduce_output' if reduction_scheme=='row_ready' else 'output'))
         g.output=[g.join(final,'moe_output_ready')]
     else:g.output=[g.join(terminals,'moe_output_ready')]
     expected=6*d*h*sum(counts.values())+6*d*hs*b
@@ -265,5 +308,5 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
     return g,dict(jobs=[{k:v for k,v in j.items() if k not in ('dispatch',)} for j in jobs],kernel_ledger=ledger,
         mac_flops=expected,active_weight_bytes=unique,actual_dram_bytes=sum(r['dram_bytes'] for r in ledger),
         all_expert_model_weight_bytes=c['num_experts']*6*d*h+6*d*hs,budget=budget,
-        token_expert_assignments=sum(counts.values()),counts=dict(counts),schedule=schedule,order=order,down_partition=down_partition,combine_scheme=combine_scheme,
+        token_expert_assignments=sum(counts.values()),counts=dict(counts),schedule=schedule,order=order,down_partition=down_partition,combine_scheme=combine_scheme,dispatch_scheme=dispatch_scheme,reduction_scheme=reduction_scheme,semantic_ledger=semantics,input_delivery=delivery,
         scope='Captured routing, conventional static physical ownership, finite packed collectives and row buffering; joint service kernel serializes local experts conservatively; not complete LLM tokens/s')

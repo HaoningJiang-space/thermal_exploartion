@@ -128,7 +128,7 @@ class Graph:
         if source in targets:result[source]=self.join(deps,stage)
         return result
 
-    def collective(self,root,producers,bytes_,stage='ffn_reduce',preallocated_sources=False):
+    def collective(self,root,producers,bytes_,stage='ffn_reduce',preallocated_sources=False,output_credit='output'):
         """FP32 tree partials, ordinary tile vectors and same SRAM/links."""
         edges={e for source in producers for e in route(root,source)};children=defaultdict(list)
         for a,b in sorted(edges):children[a].append(b)
@@ -141,13 +141,13 @@ class Graph:
                 for child in children[node]:
                     partial=visit(child)
                     read=self.add('sram_read',child,size,(partial,),('read',child),ceil(size/256),stage)
-                    if not preallocated_sources or child not in producers:self.lease(partial,read,('output',child),size)
+                    if not preallocated_sources or child not in producers:self.lease(partial,read,(output_credit,child),size)
                     link,arrival=self.network_link(child,node,size,(read,),stage)
                     write=self.add('sram_write',node,size,(arrival,),('write',node),ceil(size/128),stage)
                     self.lease(read,link,('transmit',child),size);self.lease(link,write,('receive',node),size)
                     contributions.append(write);incoming.append(link)
                 read=self.add('sram_read',node,size*len(contributions),contributions,('read',node),ceil(size*len(contributions)/256),stage)
-                for link in incoming:self.lease(link,read,('output',node),size)
+                for link in incoming:self.lease(link,read,(output_credit,node),size)
                 ops=(len(contributions)-1)*size//4
                 vector=self.add('vector',node,ops,(read,),('vector',node),ceil(ops/16),stage)
                 return self.add('sram_write',node,size,(vector,),('write',node),ceil(size/128),stage)
@@ -169,10 +169,13 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
         for dep in node.deps:children[dep].append(node.id)
     queues=defaultdict(list);events=[];busy={};used=Counter();private_used=Counter();high=Counter();owners=defaultdict(Counter)
     release=defaultdict(list);last_release={};done=np.full(n,-1,dtype=np.int64);start=done.copy();parents=[None]*n
-    wait=Counter();last_resource={};clock=0;completed=0;activity=Counter();per_tile=defaultdict(Counter)
+    wait=Counter();last_resource={};clock=0;completed=0;activity=Counter();per_tile=defaultdict(Counter);private_high=Counter();group_high=Counter()
     caps={'weight':524288,'weight_fifo':262144,'return':65536,'receive':65536,'workspace':1048576,
           'router0':4096,'router1':4096,'router2':4096,'router3':4096,'transmit':65536,'output':262144}
     caps.update(g.meta.get('buffer_caps',{}))
+    groups=g.meta.get('credit_groups',{})
+    if any(sum(caps[name] for name in group['members'])>group['capacity'] for group in groups.values()):
+        raise ValueError('Credit partitions exceed physical storage')
     fixed=g.meta.get('fixed_sram_bytes',[262144]*16)
     private_budget=g.meta.get('private_sram_budget_bytes',2359296)
     def cap(key):return 2**50 if mode=='ideal_buffer' else caps[key[0]]
@@ -238,6 +241,12 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
                 for k in coupled:busy[k]=finish;last_resource[k]=i
                 for k,a,last in node.leases:
                     used[k]+=a;private_used[k[1]]+=a;high[k]=max(high[k],used[k]);owners[k][i]+=1;release[last].append((k,a,i))
+                for t in required:
+                    private_high[t]=max(private_high[t],private_used[t]+fixed[t])
+                    for name,group in groups.items():
+                        live=sum(used[(member,t)] for member in group['members'])
+                        if live>group['capacity']:raise ValueError('Physical credit group exceeded')
+                        group_high[(name,t)]=max(group_high[(name,t)],live)
                 if mode!='ideal_buffer' and any(private_used[t]+fixed[t]>private_budget for t in range(16)):
                     raise ValueError('Combined private SRAM budget exceeded')
                 heapq.heappush(events,(finish,i))
@@ -270,7 +279,7 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
             start_tick=int(start[node.id]),finish_tick=int(done[node.id]),parent=parent,cause=cause))
     return dict(mode=mode,ticks=int(done[end]),time_us=float(done[end])*.00025,activity=dict(activity),
         per_tile_activity={str(k):dict(v) for k,v in per_tile.items()},buffer_high={str(k):v for k,v in high.items()},
-        credit_stall_probes=dict(wait),critical_path=list(reversed(path)),events=records,
+        credit_stall_probes=dict(wait),private_sram_high={str(k):v for k,v in private_high.items()},credit_group_high={str(k):v for k,v in group_high.items()},critical_path=list(reversed(path)),events=records,
         critical_path_scope='Resource/dependency/credit chain for the fixed packet scheduler; not an optimal-schedule lower bound',
         validation='PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation',
         fidelity='Packet DAG; tier row-cycle service bounds, not Ramulator commands; no numerical LLM outputs')
