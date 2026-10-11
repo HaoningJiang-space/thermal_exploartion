@@ -30,5 +30,14 @@ class TensorContractTests(unittest.TestCase):
         with self.assertRaises(ValueError):hardware(dict(CASES['column_blocked_m'],weight_buffer=4*2**20))
         with self.assertRaises(ValueError):hardware(CASES['column_blocked_m'],65,1024,8)
 
+    def test_input_groups_have_real_canonical_producers(self):
+        for m,n,b in ((64,1024,8),(2048,1408,2),(6144,4096,4)):
+            x=build(CASES['row_fifo_k'],m,n,b);kb=x['contract']['k_block']
+            for group in x['inputs']:
+                first=group['id']*kb;owner=group['source']*(n//16)
+                self.assertGreaterEqual(first,owner)
+                self.assertLessEqual(first+kb,owner+n//16)
+        with self.assertRaises(ValueError):hardware(CASES['row_fifo_k'],2048,1408,1)
+
 
 if __name__=='__main__':unittest.main()

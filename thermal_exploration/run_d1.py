@@ -16,8 +16,8 @@ from .model import optimize,Fabric
 from .run import revision
 
 
-def run_case(exe,root,out,name,partial=False,ordering=None):
-    case=out/(name+('_partial_row' if partial else '')+('_'+ordering if ordering else ''));case.mkdir()
+def run_case(exe,root,out,name,partial=False,ordering=None,independent_commands=False):
+    case=out/(name+('_partial_row' if partial else '')+('_'+ordering if ordering else '')+('_independent_commands' if independent_commands else ''));case.mkdir()
     settings=MECHANISMS[name];req=trace(name,partial)
     if ordering:
         if ordering not in ('bank_column_interleave','bank_row_interleave') or partial:raise ValueError('Unsupported ordering control')
@@ -29,18 +29,26 @@ def run_case(exe,root,out,name,partial=False,ordering=None):
             return (row,col,b,ch) if ordering=='bank_column_interleave' else (row,b,col,ch)
         req.sort(key=key)
         for i,r in enumerate(req):r['id']=i
-    validator=lambda r:validate(r,settings['subarrays'])
+    if independent_commands:
+        canonical=validate(req,settings['subarrays'])
+        for r in req:r['addr_vec']=hb_trace.command_domain_vector(r['addr_vec']);r['target_bank']=r['addr_vec'][:5]
+        def validator(rows):
+            for r in rows:
+                v=hb_trace.address_vector(r['address'],2);v[2]=v[5]%settings['subarrays'];v[5]//=settings['subarrays']
+                if r['addr_vec']!=hb_trace.command_domain_vector(v):raise ValueError('Changed physical bank/row')
+            return canonical
+    else:validator=lambda r:validate(r,settings['subarrays'])
     write_trace(req,case,validator)
-    dram,config=hb_trace.ramulator_config(root,case,2,**settings)
+    dram,config=hb_trace.ramulator_config(root,case,2,independent_commands=independent_commands,**settings)
     (case/'config.json').write_text(json.dumps(config,indent=2)+'\n')
     with (case/'execution.log').open('w') as log:
         subprocess.run([str(exe),str(case/'config.json'),str(case/'requests.tsv'),str(case/'run'),'8192','2000','500','0','2'],stdout=log,stderr=log,check=True)
     driver=json.loads((case/'run-driver.json').read_text());events=read_csv(case/'run-events.csv')
     work=validate_events(req,events,driver,validator)
     commands=[]
-    for ch in range(16):commands.extend(read_csv(case/f'transaction-commands.ch{ch}.csv'))
+    for ch in range(32 if independent_commands else 16):commands.extend(read_csv(case/f'transaction-commands.ch{ch}.csv'))
     commands.sort(key=lambda c:int(c['clock']))
-    replay=check_commands(dram,req,events,commands,2);audit=mechanism_audit(commands)
+    replay=check_commands(dram,req,events,commands,2,32 if independent_commands else 16);audit=mechanism_audit(commands)
     period=15600;start=period*2;end=(driver['ticks']//period-1)*period
     if end-start<5*period:raise ValueError('Not enough refresh periods')
     delivered=sum(start<=int(e['completed'])<end for e in events)*1024
@@ -49,7 +57,7 @@ def run_case(exe,root,out,name,partial=False,ordering=None):
     if settings['subarrays']>1 and (resolved['nRAS']!=60 or not audit['overlapping_ACTs']):
         raise ValueError('Subarray overlap either shortened restoration or never overlapped')
     counts=replay['counts'].copy();counts['PREab_rows']=audit['PREab_rows']
-    r=dict(name=case.name,mechanism=name,partial_row=partial,settings=settings,request_ordering=ordering,
+    r=dict(name=case.name,mechanism=name,partial_row=partial,settings=settings,request_ordering=ordering,independent_commands=independent_commands,
         work=work,driver=driver,commands=replay,audit=audit,
         steady=dict(start_tick=start,end_tick=end,duration_ns=(end-start)*.25,useful_tb_s=rate),
         activity=dict(counts=counts,useful_bytes=work['read_bytes'],duration_ns=driver['ticks']*.25,

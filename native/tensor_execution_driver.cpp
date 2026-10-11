@@ -40,13 +40,14 @@ int main(int argc,char** argv){try {
  if(argc!=4)throw std::runtime_error("config.json contract-directory output-prefix");
  std::string dir=argv[2],prefix=argv[3];
  int m,n,batch,pr,pc,mb,kb,wbudget,rbudget,redbudget,window,pbytes,ideal,barrier,ideal_memory;
- int stream_fifo=0;
+ int stream_fifo=0,command_domains=1;
  std::array<int,16> fixed;
  {std::ifstream f(dir+"/resources.tsv");
   if(!(f>>m>>n>>batch>>pr>>pc>>mb>>kb>>wbudget>>rbudget>>redbudget>>window>>pbytes>>ideal>>barrier>>ideal_memory))
    throw std::runtime_error("Invalid resource contract");
   for(auto& x:fixed)if(!(f>>x))throw std::runtime_error("Missing private SRAM");
   if(!(f>>stream_fifo))stream_fifo=0;
+  if(!(f>>command_domains))command_domains=1;
  }
  if(pr*pc!=16||wbudget<8192||wbudget>4194304||rbudget>wbudget||pbytes%32||window<1)
   throw std::runtime_error("Unsafe resource configuration");
@@ -326,7 +327,9 @@ int main(int argc,char** argv){try {
    }
    if(!unsent[tile].empty()&&response_used[tile]+1024<=rbudget){
     int rid=*unsent[tile].begin();auto& r=reads[rid];
-    Ramulator::Request request(r.vec,Ramulator::Request::Type::Read);request.addr=r.address;request.source_id=tile;request.ingress_id=rid;request.size_bytes=1024;
+    auto physical=r.vec;
+    if(command_domains==2){physical[0]=tile*2+physical[1];physical[1]=0;}
+    Ramulator::Request request(physical,Ramulator::Request::Type::Read);request.addr=r.address;request.source_id=tile;request.ingress_id=rid;request.size_bytes=1024;
     request.callback=[&,rid,tile](Ramulator::Request& response){auto& r=reads[rid];
      if(response.ingress_id!=rid||r.accepted<0||r.depart>=0)throw std::runtime_error("Duplicate/wrong DRAM response");
      // Command/controller timestamps are0.5ns DRAM cycles; this driver uses

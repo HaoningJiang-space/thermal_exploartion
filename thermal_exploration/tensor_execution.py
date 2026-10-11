@@ -14,6 +14,8 @@ CASES.update({
     'row_fifo_k':dict(rows=16,columns=1,layout='blocked',order='k',stream_fifo=True,weight_buffer=262144),
     'column_fifo64':dict(rows=1,columns=16,layout='blocked',order='m',reduction_packet=64,stream_fifo=True,weight_buffer=262144),
     'column_fifo_barrier':dict(rows=1,columns=16,layout='blocked',order='m',reduction_packet=64,barrier=True,stream_fifo=True,weight_buffer=262144),
+    'row_fifo_independent':dict(rows=16,columns=1,layout='blocked',order='k',stream_fifo=True,weight_buffer=262144,command_domains=2),
+    'column_fifo_independent':dict(rows=1,columns=16,layout='blocked',order='m',reduction_packet=64,stream_fifo=True,weight_buffer=262144,command_domains=2),
     'row_local_first':dict(rows=16,columns=1,layout='blocked',order='k',local_first=True),
     '2d_local_first':dict(rows=4,columns=4,layout='blocked',order='k',local_first=True),
     'row_rowmajor_k':dict(rows=16,columns=1,layout='row_major',order='k'),
@@ -37,7 +39,12 @@ def hardware(settings,m=1024,n=16384,batch=32):
     p,q=settings['rows'],settings['columns']
     if p*q!=16 or min(m,n,batch,p,q)<1 or m%16 or n%16 or (m//16*batch*4)%32:
         raise ValueError('Invalid tensor/hardware partition')
-    ml,nl=m//p,n//q;mb,kb=min(32,ml),min(128,nl)
+    ml,nl=m//p,n//q;mb,kb=min(32,ml),min(128,nl,n//16)
+    # Input groups must be wholly owned by their canonical source shard.
+    # Pick an aligned divisor; never invent a128-element source block when
+    # a source owns only88 elements (e.g. Qwen expert1408/16).
+    while kb and (nl%kb or (n//16)%kb or (kb*batch*2)%32):kb-=1
+    if not kb:raise ValueError('No canonically owned32B-aligned input block; padding unsupported')
     if ml%mb or nl%kb:raise ValueError('Nonintegral MAC blocks')
     packet=settings.get('reduction_packet',256)
     if packet not in (64,256) or (m//16*batch*4)%min(packet,m//16*batch*4):raise ValueError('Unaligned output')
@@ -68,6 +75,7 @@ def hardware(settings,m=1024,n=16384,batch=32):
         ideal_noc=settings.get('ideal_noc',False),barrier=settings.get('barrier',False),
         ideal_memory=settings.get('ideal_memory',False),ideal_buffer=ideal_buffer,
         stream_fifo=settings.get('stream_fifo',False),fifo_bytes_per_tick=500,
+        command_domains_per_tile=settings.get('command_domains',1),
         assumptions=['Fast-tier internal timing surrogate, not calibrated Mono3D',
           '128TF peak MAC service, operand/register reuse ideal within a MAC block',
           'Aggregate private-SRAM ports are assumed, explicitly arbitrated each tick',
@@ -149,7 +157,7 @@ def write_contract(model,out):
               'reduce_buffer','prefetch_tasks','packet_bytes','ideal_noc','barrier','ideal_memory')
         f.write(' '.join(str(int(c[k])) for k in keys)+'\n')
         f.write(' '.join(map(str,c['static_sram_per_tile']))+'\n')
-        f.write(str(int(c.get('stream_fifo',False)))+'\n')
+        f.write(str(int(c.get('stream_fifo',False)))+' '+str(c.get('command_domains_per_tile',1))+'\n')
     with (out/'tasks.tsv').open('w') as f:
         for t in model['tasks']:
             f.write(' '.join(map(str,[t[k] for k in ('id','tile','m_start','m_count','k_start','k_count','flops','parent','input_group','final')]+[len(t['requests'])]+t['requests']))+'\n')

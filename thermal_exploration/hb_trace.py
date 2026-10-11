@@ -46,7 +46,7 @@ def validate(req,paths):
 
 
 def ramulator_config(root,out,paths,refresh=True,relax_row_retention=False,
-                     timing_scale=1.,subarrays=1,selector_ck=0):
+                     timing_scale=1.,subarrays=1,selector_ck=0,independent_commands=False):
     # Reuse the frozen HBM3 state/controller definitions as an explicitly
     # assumed internal service surrogate. This is not standard HBM3 or Mono3D.
     from .run_g4 import device_and_config
@@ -85,16 +85,26 @@ def ramulator_config(root,out,paths,refresh=True,relax_row_retention=False,
     timing={name:ceil(ns/.5) for name,ns in dict(nRCDRD=2.29*timing_scale,nRCDWR=2.29*timing_scale,nRP=4.77*timing_scale,nRAS=29.79*timing_scale,
         nRRDS=2.5,nRRDL=3.125,nFAW=15.,nCL=4.,nCWL=4.).items()}
     timing["nRCDRD"]+=selector_ck;timing["nRCDWR"]+=selector_ck
+    device_paths=1 if independent_commands else paths
     dram=InternalSurrogate(org_preset="HBM3_16Gb_8hi",timing_preset="HBM3_6400Mbps",
-        pseudochannel=paths,sid=subarrays,bankgroup=min(4,16//paths),bank=(16//paths)//min(4,16//paths),row=32768//subarrays,column=32,
-        dq=1024,channel_width=8192*paths,rate=16000,tCK_ps=500,nBL=2,nCCDS=2,**timing)
+        pseudochannel=device_paths,sid=subarrays,bankgroup=min(4,16//paths),bank=(16//paths)//min(4,16//paths),row=32768//subarrays,column=32,
+        dq=1024,channel_width=8192*device_paths,rate=16000,tCK_ps=500,nBL=2,nCCDS=2,**timing)
     controller["dram"]=dram.to_config()
     controllers=[]
     import copy
-    for channel in range(16):
+    for channel in range(16*(paths if independent_commands else 1)):
         c=copy.deepcopy(controller)
+        if independent_commands:
+            # Preserve total controller queue metadata per physical region.
+            for key in ('read_buffer_size','write_buffer_size','priority_buffer_size'):c[key]//=paths
         c["controller_plugins"][0]["path"]=str(out/"commands.csv")
         c["controller_plugins"][1]["path"]=str(out/f"transaction-commands.ch{channel}.csv")
         controllers.append(c)
     config["memory_system"]["controllers"]=controllers
     return dram,config
+
+
+def command_domain_vector(vec,paths=2):
+    """Change service-domain identifier, retaining the SAME physical bank."""
+    channel,port,*rest=vec
+    return [channel*paths+port,0,*rest]

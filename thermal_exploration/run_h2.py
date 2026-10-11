@@ -57,18 +57,21 @@ def validate(case, model, dram):
         if len(uses[actual['id']]) != actual['refs'] or actual['last_use'] != max(t['finish'] for t in uses[actual['id']]):
             raise ValueError('Wrong weight lifetime/refcount')
     request_records = [dict(r, source_tile=r['tile']) for r in model['requests']]
+    independent=c.get('command_domains_per_tile',1)==2
+    if independent:
+        for r in request_records:r['addr_vec']=hb_trace.command_domain_vector(r['addr_vec'])
     # DeviceUnderTest replays DRAM-cycle commands. Request traces remain in
     # logic ticks; convert only this validator view, preserving original IDs.
     events = [dict(r,completed=r['depart']) for r in rd]
-    streams = [rows(case/f'transaction-commands.ch{ch}.csv') for ch in range(16)]
+    channels=32 if independent else 16
     # Command names are strings, unlike the numerical event traces above.
     def commands(path):
         with path.open() as f: yield from csv.DictReader(f)
-    merged = heapq.merge(*(commands(case/f'transaction-commands.ch{ch}.csv') for ch in range(16)),key=lambda x:int(x['clock']))
+    merged = heapq.merge(*(commands(case/f'transaction-commands.ch{ch}.csv') for ch in range(channels)),key=lambda x:int(x['clock']))
     if c['ideal_memory']:
         command_validation=check_commands(dram, [], [], merged)
         command_validation['scope']='Oracle bypasses memory requests; emitted refresh commands only, no DRAM-performance claim'
-    else:command_validation = check_commands(dram, request_records, events, merged,2)
+    else:command_validation = check_commands(dram, request_records, events, merged,2,channels)
     input_events = {(r['group'],r['tile']):r for r in rows(case/'run-inputs.csv')}
     for e, t in zip(model['tasks'],tasks):
         ready = input_events[e['input_group'],e['tile']]['last_tick']
@@ -196,7 +199,7 @@ def main():
     exe=native_build(root,out);results=[]
     for name in a.cases:
         case=out/name;case.mkdir();model=build(CASES[name],*(a.shape or ((64,1024,8) if a.smoke else (1024,16384,32))))
-        write_contract(model,case);dram,cfg=hb_trace.ramulator_config(root,case,2,refresh=True)
+        write_contract(model,case);dram,cfg=hb_trace.ramulator_config(root,case,2,refresh=True,independent_commands=model['contract']['command_domains_per_tile']==2)
         from .clock_contract import ClockContract
         (case/'clock-contract.json').write_text(json.dumps(ClockContract().validate_device(dram),indent=2)+'\n')
         (case/'config.json').write_text(json.dumps(cfg,indent=2)+'\n')

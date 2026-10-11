@@ -63,18 +63,18 @@ def run_one(c,a,layout,profile,schedule,route_data,route_mode,out,scenario):
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--output',required=True);ap.add_argument('--routes');ap.add_argument('--cases',nargs='+');ap.add_argument('--steps',type=int,default=128);ap.add_argument('--mode',choices=('baseline','isolation','frontier','all'),default='all');ap.add_argument('--service',type=float,default=26.599);ap.add_argument('--uniform-control',action='store_true')
-    ap.add_argument('--service-reference');a=ap.parse_args()
+    ap.add_argument('--service-reference');ap.add_argument('--command-domains',type=int,choices=(1,2),default=1);a=ap.parse_args()
     reference=Path(a.service_reference) if a.service_reference else None
     if reference:
         ref=json.loads(reference.read_text())
         if ref.get('ratio')!=2:raise ValueError('Reference must use corrected clock domains')
-        a.service=max(r['steady']['useful_tb_s'] for r in ref['records'] if r['mechanism']=='baseline')
+        a.service=max(r['steady']['useful_tb_s'] for r in ref['records'] if r['mechanism']=='baseline' and r.get('independent_commands',False)==(a.command_domains==2))
     out=Path(a.output);out.mkdir(parents=True,exist_ok=False);contract=json.loads((ROOT/'configs/crossover/contract.json').read_text())
     source=Path(a.routes) if a.routes else None
     routes=json.loads(source.read_text()) if source else {};routes['_file_sha256']=hashlib.sha256(source.read_bytes()).hexdigest() if source else None
     mode='uniform_control' if a.uniform_control else 'matched_capture'
     if mode=='matched_capture' and not source:raise ValueError('Matched capture required, never substitute projected routes')
-    contract.update(source_commit=revision(),source_dirty=bool(subprocess.check_output(['git','status','--porcelain'],text=True).strip()),steps=a.steps,routing=mode,route_sha256=routes['_file_sha256'],service_tb_s=a.service,service_reference_sha256=hashlib.sha256(reference.read_bytes()).hexdigest() if reference else None,frontier_cases=FRONTIER_CASES,isolation_cases=ISOLATION_CASES,
+    contract.update(source_commit=revision(),source_dirty=bool(subprocess.check_output(['git','status','--porcelain'],text=True).strip()),steps=a.steps,routing=mode,route_sha256=routes['_file_sha256'],service_tb_s=a.service,command_domains_per_tile=a.command_domains,service_reference_sha256=hashlib.sha256(reference.read_bytes()).hexdigest() if reference else None,frontier_cases=FRONTIER_CASES,isolation_cases=ISOLATION_CASES,
        assumptions=['35.25mm2 frozen as unavailable','MAC/read-port128+128 split for overlapped producer/reduction;128B writes shared by result/collective',
        'D1 guard is not theorematically attainable service for each operator','bank_cycle removes only tier bank-cycle ceiling; keeps shared D1 guard',
        'ingress_only removes FIFO input serialization while preserving HB and FIFO output rate; conventional SRAM copies eliminated by baseline',

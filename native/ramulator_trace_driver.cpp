@@ -92,7 +92,9 @@ int main(int argc,char** argv) {
   std::vector<int> tile_outstanding(16,0);
   std::vector<double> hb_finish(16,0);
   std::set<int> returned_waiting;
-  std::vector<std::set<int>> ready_by_channel(16);
+  int channels=1;for(const auto& w:works)channels=std::max(channels,w.vec[0]+1);
+  if(channels>32)throw std::runtime_error("Unsupported internal service domains");
+  std::vector<std::set<int>> ready_by_channel(channels);
   std::vector<int> unresolved(works.size(),0);
   std::vector<std::vector<int>> dependents(works.size());
   using Completion=std::pair<long long,int>;
@@ -121,9 +123,9 @@ int main(int argc,char** argv) {
    // One candidate per channel per round, rotating the first channel each
    // tick. A rejected channel is retried next tick rather than scanning all
    // future requests. Dependency completion releases identities exactly once.
-   bool blocked[16]={};
+   bool blocked[32]={};
    for(int attempt=0;attempt<256&&active<limit&&sent<16;attempt++){
-    int channel=(clk+attempt)%16;
+    int channel=(clk+attempt)%channels;
     if(blocked[channel]||ready_by_channel[channel].empty())continue;
     auto& w=works[*ready_by_channel[channel].begin()];eligible++;
     if(hb_rate>0&&tile_outstanding[w.source]>=limit/16){blocked[channel]=true;continue;}
@@ -137,7 +139,7 @@ int main(int argc,char** argv) {
       x.completed=clk+1;x.depart=r.depart*dram_ratio;
       if(x.depart>x.completed)throw std::runtime_error("callback precedes response readiness");
       if(hb_rate>0){
-        int channel=x.vec[0];hb_finish[channel]=std::max(double(x.completed),hb_finish[channel])+x.bytes/hb_rate;
+        int channel=x.source;hb_finish[channel]=std::max(double(x.completed),hb_finish[channel])+x.bytes/hb_rate;
         x.completed=static_cast<long long>(std::ceil(hb_finish[channel]));
       }
       auto duration=static_cast<long long>(std::ceil(x.flops/rate));

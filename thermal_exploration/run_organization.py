@@ -18,9 +18,9 @@ from .thermal import response
 from .trace_generator import request,streaming,write_trace
 
 
-def check_commands(dram,req,events,commands,logic_ticks_per_dram_tick=1):
+def check_commands(dram,req,events,commands,logic_ticks_per_dram_tick=1,device_channels=16):
     from tests.device_timings.harness import DeviceUnderTest
-    devices=[DeviceUnderTest(dram) for _ in range(16)]
+    devices=[DeviceUnderTest(dram) for _ in range(device_channels)]
     issued=set();counts=Counter();ev={int(e["id"]):e for e in events}
     for c in commands:
         channel=int(c["Channel"]);dut=devices[channel];vec=[int(c[k]) for k in dut.level_names];vec[0]=0
