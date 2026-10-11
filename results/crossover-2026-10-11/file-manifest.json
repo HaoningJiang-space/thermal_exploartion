@@ -1,0 +1,177 @@
+[
+  {
+    "file": "admissions.json",
+    "bytes": 8090,
+    "sha256": "bce6427d0492d46fe2d1d72d464ab1e9f433f9e083f4af031645f2ec18adbc48"
+  },
+  {
+    "file": "all-points.json",
+    "bytes": 907360,
+    "sha256": "15eb39beb4550e85585aea18bfab3d9f868684c93831a2f4291ca4a885a59a18"
+  },
+  {
+    "file": "architecture-crossover.pdf",
+    "bytes": 23907,
+    "sha256": "64684ae7a9135975230a5be843eb298c91dcabc719e6b9a2910d1a622c9f2100"
+  },
+  {
+    "file": "architecture-crossover.png",
+    "bytes": 125239,
+    "sha256": "24f709bd0a1902680627689689a499c5426bb93fd6e393c627b13d3e75c78687"
+  },
+  {
+    "file": "architecture-frontier.pdf",
+    "bytes": 24950,
+    "sha256": "c273c5b212ab962c4f827886819a12791c3ad2bfdb58e97d44b91fe798fcc2ba"
+  },
+  {
+    "file": "architecture-frontier.png",
+    "bytes": 166127,
+    "sha256": "964c6ecdaee819baffe989517ffebb1898802b9b716868a51d4e3fa25d06a3b9"
+  },
+  {
+    "file": "area-ledger.json",
+    "bytes": 11587,
+    "sha256": "f251f4626dd0e0ff498188ecccbdf123c0e95b58d946d39ebb99e5e5df0e4f7c"
+  },
+  {
+    "file": "artifacts.json",
+    "bytes": 1687,
+    "sha256": "60a9ac5ecc86767fa1077ae95d930e23da89ec9c9eb495bd02a09f0253f70aae"
+  },
+  {
+    "file": "contracts.json",
+    "bytes": 41404,
+    "sha256": "e984b88e0d5c447fbbdd618de7a37ad49346dfcc0f4a77f80880e2dbdf2e4d91"
+  },
+  {
+    "file": "counts.json",
+    "bytes": 187,
+    "sha256": "4647cc8ce3a9e3b21a39ddfcc9413471dce9987d5bc047a5dd56ecaf1b727d62"
+  },
+  {
+    "file": "cross-fidelity.json",
+    "bytes": 5042,
+    "sha256": "ff8b73d448da23b57f37b7c8652f8e8f4ec540e5b6aebd0a595abd637e9a35c3"
+  },
+  {
+    "file": "crossover-map.json",
+    "bytes": 39982,
+    "sha256": "5c39fdf67ac698c8047032d81e84dca2d69afa7ffd63ec577f3bc7fb34210879"
+  },
+  {
+    "file": "detailed-memory.json",
+    "bytes": 55312,
+    "sha256": "ea96a13cd6ce85e73756a2d93a9098c1a3b9922e690283d8e86771dfbd11eb20"
+  },
+  {
+    "file": "findings.md",
+    "bytes": 12621,
+    "sha256": "e360ae5b9db4dfab84d44e19dffe021164f5b21fdb9ef93c428fd8a77376827a"
+  },
+  {
+    "file": "flit-credit-replay.json",
+    "bytes": 3463,
+    "sha256": "bd123b62abddbcb28aa27546fc787bee04a96d28098bdee2b8b361400e6159e1"
+  },
+  {
+    "file": "frontier.json",
+    "bytes": 22992,
+    "sha256": "c3e1c871f58aed4468687a744a7a6b958aee38af11aaa47a2f8c84a633a197db"
+  },
+  {
+    "file": "generated-clock-qualification.json",
+    "bytes": 3833,
+    "sha256": "6d82f73ee8f10b7cbf1e03dc6afeb7db4ad9e6ad53f33a3d9506627e38d84f42"
+  },
+  {
+    "file": "memory-service-isolation.pdf",
+    "bytes": 19645,
+    "sha256": "23ebfb91bd9b16bf4b2a8b6c045b2a88c3753b21d961d0ac2893ab2505feeb35"
+  },
+  {
+    "file": "memory-service-isolation.png",
+    "bytes": 118384,
+    "sha256": "f0c1b1f1d0ae18a2768692131d675d4304510a706c765fba03f8f732512b7a7e"
+  },
+  {
+    "file": "native-memory-breakdown.pdf",
+    "bytes": 21569,
+    "sha256": "3ca0d6e5f6a0a5631d682962f055cfb03f797dbad92b893611288b192399d20b"
+  },
+  {
+    "file": "native-memory-breakdown.png",
+    "bytes": 114554,
+    "sha256": "4116f5da107ebf10cca142e981fe86d27b16fa90cea31ab8bc3c1afa27ad0037"
+  },
+  {
+    "file": "optimized-scheduling.pdf",
+    "bytes": 14495,
+    "sha256": "33eaf45dd51c416d6f734c8cda7b304b0a8c3ab3a67f02b2b5fa925ce88207f7"
+  },
+  {
+    "file": "optimized-scheduling.png",
+    "bytes": 44234,
+    "sha256": "490525fc1d7b4c56016adeabf3e755f93be36f8cd6944c690ffd524419292bae"
+  },
+  {
+    "file": "raw-manifest-detail.json",
+    "bytes": 158895,
+    "sha256": "d6b8cf36d8ef1cb93ec7bda0b4df6e646dbf794779207a7bf7e243cc9ba480ad"
+  },
+  {
+    "file": "raw-manifest-primary.json",
+    "bytes": 174628,
+    "sha256": "0c7339129048b27486612fb1fce3f87a95698003a690e08399986d2293604779"
+  },
+  {
+    "file": "raw-manifest-retired.json",
+    "bytes": 263364,
+    "sha256": "8e31ed837fbb8bf44307d3969ca58abcb7842cfe070051951a0a8ed457dc7dc2"
+  },
+  {
+    "file": "reproduce.md",
+    "bytes": 3616,
+    "sha256": "e05a1eb9b1861fa03ba8cfb8126666708a56a79e7cef38e2bfe97f41ba2e8174"
+  },
+  {
+    "file": "resource-probes.json",
+    "bytes": 8979,
+    "sha256": "1616b2157d7c2e90a9c099e8357ffa9c0ce63d60df1b2e77df3cb0b5bfe596bb"
+  },
+  {
+    "file": "retired-slow-controls.json",
+    "bytes": 806194,
+    "sha256": "e9dc8d6994534e6354345f8bd376fb9c73d338c9331eee6fa5aa5f763644fc2c"
+  },
+  {
+    "file": "schedules.json",
+    "bytes": 11775,
+    "sha256": "1cc66c557567f1dc3f7b90fe73444701eb8674a5afac0bc5e32852608ce667a3"
+  },
+  {
+    "file": "service-reference.json",
+    "bytes": 21722,
+    "sha256": "9109d9f17299273d793b131668ab54a2ccd0fd61d3ea01ccd3e0972f774ec4aa"
+  },
+  {
+    "file": "thermal-frontier.pdf",
+    "bytes": 25314,
+    "sha256": "8997ff8160d69cb2768f1f961f76962227440b8adaf9bb6107c503eecbecaab1"
+  },
+  {
+    "file": "thermal-frontier.png",
+    "bytes": 180839,
+    "sha256": "8313a3a87c9276b0a408e15e756be1e52dd30b49418946a54b65824aea6c83dd"
+  },
+  {
+    "file": "thermal.json",
+    "bytes": 106263,
+    "sha256": "f161a6523ad6093bb5309a36c57276d33b942fab5c72805cf630cf4fe6b4bf2a"
+  },
+  {
+    "file": "validation.json",
+    "bytes": 1135,
+    "sha256": "ff6ee582e44a7523de32c610c2db78672ea94f63e026c87918f6ac73f8bf519d"
+  }
+]

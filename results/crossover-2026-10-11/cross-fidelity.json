@@ -1,0 +1,147 @@
+[
+  {
+    "experiment": "crossover-detail-qkv-b1-2bb172c",
+    "case": "row_fifo_k",
+    "shape": [
+      6144,
+      4096,
+      1
+    ],
+    "native_us": 1.908,
+    "fast_us": 1.985,
+    "relative_error": 0.040356394129979156,
+    "target_met": true,
+    "work_checks": {
+      "mac_flops": true,
+      "dram_bytes": true,
+      "input_byte_hops": true
+    },
+    "terms_us": {
+      "input_distribution": 0.19475,
+      "finite_weight_mac_kernel": 1.77825,
+      "result_cast_tail": 0.012
+    },
+    "differences": [
+      "Fast model retains full input-distribution barrier; native consumes128/88-element groups as they arrive",
+      "Fast32KiB tiles/register-reused partials versus native32x128/88 MAC tasks with intermediate partial SRAM access",
+      "Physical bank/address order abstracted into measured service guard; same area/ports/capacity but not identical execution schedule"
+    ],
+    "verdict": "Case-level characterization; no general absolute-latency qualification or empirical fit"
+  },
+  {
+    "experiment": "crossover-detail-qkv-b1-2bb172c",
+    "case": "row_fifo_m",
+    "shape": [
+      6144,
+      4096,
+      1
+    ],
+    "native_us": 1.81725,
+    "fast_us": 1.985,
+    "relative_error": 0.09230980877699824,
+    "target_met": true,
+    "work_checks": {
+      "mac_flops": true,
+      "dram_bytes": true,
+      "input_byte_hops": true
+    },
+    "terms_us": {
+      "input_distribution": 0.19475,
+      "finite_weight_mac_kernel": 1.77825,
+      "result_cast_tail": 0.012
+    },
+    "differences": [
+      "Fast model retains full input-distribution barrier; native consumes128/88-element groups as they arrive",
+      "Fast32KiB tiles/register-reused partials versus native32x128/88 MAC tasks with intermediate partial SRAM access",
+      "Physical bank/address order abstracted into measured service guard; same area/ports/capacity but not identical execution schedule"
+    ],
+    "verdict": "Case-level characterization; no general absolute-latency qualification or empirical fit"
+  },
+  {
+    "experiment": "crossover-detail-qkv-b4-2bb172c",
+    "case": "row_fifo_k",
+    "shape": [
+      6144,
+      4096,
+      4
+    ],
+    "native_us": 2.16675,
+    "fast_us": 2.597,
+    "relative_error": 0.19856928579670008,
+    "target_met": false,
+    "work_checks": {
+      "mac_flops": true,
+      "dram_bytes": true,
+      "input_byte_hops": true
+    },
+    "terms_us": {
+      "input_distribution": 0.77075,
+      "finite_weight_mac_kernel": 1.77825,
+      "result_cast_tail": 0.048
+    },
+    "differences": [
+      "Fast model retains full input-distribution barrier; native consumes128/88-element groups as they arrive",
+      "Fast32KiB tiles/register-reused partials versus native32x128/88 MAC tasks with intermediate partial SRAM access",
+      "Physical bank/address order abstracted into measured service guard; same area/ports/capacity but not identical execution schedule"
+    ],
+    "verdict": "Case-level characterization; no general absolute-latency qualification or empirical fit"
+  },
+  {
+    "experiment": "crossover-detail-qkv-b4-2bb172c",
+    "case": "row_fifo_m",
+    "shape": [
+      6144,
+      4096,
+      4
+    ],
+    "native_us": 2.37575,
+    "fast_us": 2.597,
+    "relative_error": 0.0931284857413448,
+    "target_met": true,
+    "work_checks": {
+      "mac_flops": true,
+      "dram_bytes": true,
+      "input_byte_hops": true
+    },
+    "terms_us": {
+      "input_distribution": 0.77075,
+      "finite_weight_mac_kernel": 1.77825,
+      "result_cast_tail": 0.048
+    },
+    "differences": [
+      "Fast model retains full input-distribution barrier; native consumes128/88-element groups as they arrive",
+      "Fast32KiB tiles/register-reused partials versus native32x128/88 MAC tasks with intermediate partial SRAM access",
+      "Physical bank/address order abstracted into measured service guard; same area/ports/capacity but not identical execution schedule"
+    ],
+    "verdict": "Case-level characterization; no general absolute-latency qualification or empirical fit"
+  },
+  {
+    "experiment": "crossover-detail-expert-b2-2bb172c",
+    "case": "row_fifo_k",
+    "shape": [
+      2048,
+      1408,
+      2
+    ],
+    "native_us": 0.291,
+    "fast_us": 0.324,
+    "relative_error": 0.11340206185567014,
+    "target_met": false,
+    "work_checks": {
+      "mac_flops": true,
+      "dram_bytes": true,
+      "input_byte_hops": true
+    },
+    "terms_us": {
+      "input_distribution": 0.1345,
+      "finite_weight_mac_kernel": 0.1815,
+      "result_cast_tail": 0.008
+    },
+    "differences": [
+      "Fast model retains full input-distribution barrier; native consumes128/88-element groups as they arrive",
+      "Fast32KiB tiles/register-reused partials versus native32x128/88 MAC tasks with intermediate partial SRAM access",
+      "Physical bank/address order abstracted into measured service guard; same area/ports/capacity but not identical execution schedule"
+    ],
+    "verdict": "Case-level characterization; no general absolute-latency qualification or empirical fit"
+  }
+]

@@ -1,0 +1,1322 @@
+[
+  {
+    "experiment": "crossover-main-llama-b16-2bb172c",
+    "contract": {
+      "schema": 1,
+      "research": "Hybrid-Bonded 3D Compute\u2013Memory\u2013Communication Architecture Crossover",
+      "parent_result_commit": "849c796",
+      "decode_steps": 128,
+      "default_profile": {
+        "area_mm2": 121,
+        "compute_tflops": 128,
+        "sram_mib": 36,
+        "dram_gib": 32,
+        "hb_tb_s": 32,
+        "mesh_link_gb_s": 32,
+        "tiles": 16,
+        "banks": 256,
+        "fifo_read_write_bytes_per_tile_tick": 500
+      },
+      "reserved_unidentified_area_mm2": 35.25,
+      "resizable_mac_reference_mm2": 18.96544,
+      "resizable_storage_reference_mm2": 11.9279232,
+      "area_scaling_classification": "Reasonably assumed: Tensor core plus Matrix RF scale with compute; row-swap RF fixed with unchanged DRAM; private buffer area20% fixed peripheral and80% capacity scaled. Unknown35.25mm2 unavailable. Phi0/.4 ledger sensitivity; no layout claim.",
+      "scenarios": {
+        "llama_b1_c2k": [
+          "llama31_8b",
+          1,
+          2048
+        ],
+        "llama_b1_c32k": [
+          "llama31_8b",
+          1,
+          32768
+        ],
+        "llama_b4_c8k": [
+          "llama31_8b",
+          4,
+          8192
+        ],
+        "llama_b8_c2k": [
+          "llama31_8b",
+          8,
+          2048
+        ],
+        "llama_b16_c2k": [
+          "llama31_8b",
+          16,
+          2048
+        ],
+        "qwen_b1_c2k": [
+          "qwen15_moe",
+          1,
+          2048
+        ],
+        "qwen_b2_c8k_context_control": [
+          "qwen15_moe",
+          2,
+          8192
+        ],
+        "qwen_b8_c2k": [
+          "qwen15_moe",
+          8,
+          2048
+        ],
+        "qwen_b16_c512": [
+          "qwen15_moe",
+          16,
+          512
+        ],
+        "qwen_b32_c512": [
+          "qwen15_moe",
+          32,
+          512
+        ]
+      },
+      "profiles": [
+        [
+          64,
+          47
+        ],
+        [
+          96,
+          40
+        ],
+        [
+          128,
+          36
+        ],
+        [
+          152,
+          18
+        ],
+        [
+          192,
+          24
+        ],
+        [
+          192,
+          6
+        ],
+        [
+          256,
+          12
+        ]
+      ],
+      "isolation": [
+        "bank_cycle",
+        "uniform_fast_tier",
+        "hb_only",
+        "ingress_only",
+        "mac_only"
+      ],
+      "scheduling": [
+        "serial",
+        "finite_prefetch",
+        "blocked_collective",
+        "prefetch_collective"
+      ],
+      "software_sources": {
+        "SET": "https://github.com/SET-Scheduling-Project/SET-ISCA2023/tree/a7bd73912f58d9fea10fadab693eebd4e6e3054d",
+        "SoMa": "https://github.com/SET-Scheduling-Project/SoMa-HPCA2025/tree/6e808366f0005b0280cbab12a8a1d58cbbec827a",
+        "DeepStack": "https://github.com/tile-ai/DeepStack/tree/17e21bf54115e11b9e7c6edc0b2d1723d25d022b"
+      },
+      "scope": "Named finite prefetch / producer-collective overlap adaptations, not reproduction of complete upstream optimizers. Freeze 35.25mm2 as unavailable; preserve all infeasible outcomes. No new Peripheral DSE, RTL, or Thermal DSE.",
+      "fifo_budget_basis": "Assumed dedicated FIFO read and write ports, each500B/tick, allocated within36MiB with0.8mm2 steering area. Sensitivity at128B/tick; not measured macro.",
+      "ingress_sensitivity_bytes_tick": [
+        128,
+        500
+      ],
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.2,
+      "source_commit": "2bb172cb452f44586eea12eeafad506381cfaad1",
+      "source_dirty": false,
+      "steps": 128,
+      "routing": "uniform_control",
+      "route_sha256": null,
+      "service_tb_s": 26.599,
+      "command_domains_per_tile": 1,
+      "service_reference_sha256": null,
+      "frontier_cases": [
+        "llama_b1_c2k",
+        "llama_b4_c8k",
+        "llama_b16_c2k",
+        "qwen_b1_c2k",
+        "qwen_b8_c2k",
+        "qwen_b16_c512",
+        "qwen_b32_c512"
+      ],
+      "isolation_cases": [
+        "llama_b1_c2k",
+        "llama_b4_c8k",
+        "qwen_b8_c2k"
+      ],
+      "assumptions": [
+        "35.25mm2 frozen as unavailable",
+        "MAC/read-port128+128 split for overlapped producer/reduction;128B writes shared by result/collective",
+        "D1 guard is not theorematically attainable service for each operator",
+        "bank_cycle removes only tier bank-cycle ceiling; keeps shared D1 guard",
+        "ingress_only removes FIFO input serialization while preserving HB and FIFO output rate; conventional SRAM copies eliminated by baseline",
+        "Prefetch only immediately preceding non-memory/non-MAC phase;256KiB FIFO; routed experts wait for actual routing",
+        "GatedFFN pairing and bounded expert-cohort accumulation are known software mechanisms",
+        "Bounded64-row logit scan and associative greedy selection are known software mechanisms; expert whole-partial workspace may reject a case recoverable by row-blocked accumulation",
+        "Same frozen32GiB regional/tier capacity; all128steps; QwenC8192 extension isolated as control"
+      ]
+    }
+  },
+  {
+    "experiment": "crossover-main-llama-b4-2bb172c",
+    "contract": {
+      "schema": 1,
+      "research": "Hybrid-Bonded 3D Compute\u2013Memory\u2013Communication Architecture Crossover",
+      "parent_result_commit": "849c796",
+      "decode_steps": 128,
+      "default_profile": {
+        "area_mm2": 121,
+        "compute_tflops": 128,
+        "sram_mib": 36,
+        "dram_gib": 32,
+        "hb_tb_s": 32,
+        "mesh_link_gb_s": 32,
+        "tiles": 16,
+        "banks": 256,
+        "fifo_read_write_bytes_per_tile_tick": 500
+      },
+      "reserved_unidentified_area_mm2": 35.25,
+      "resizable_mac_reference_mm2": 18.96544,
+      "resizable_storage_reference_mm2": 11.9279232,
+      "area_scaling_classification": "Reasonably assumed: Tensor core plus Matrix RF scale with compute; row-swap RF fixed with unchanged DRAM; private buffer area20% fixed peripheral and80% capacity scaled. Unknown35.25mm2 unavailable. Phi0/.4 ledger sensitivity; no layout claim.",
+      "scenarios": {
+        "llama_b1_c2k": [
+          "llama31_8b",
+          1,
+          2048
+        ],
+        "llama_b1_c32k": [
+          "llama31_8b",
+          1,
+          32768
+        ],
+        "llama_b4_c8k": [
+          "llama31_8b",
+          4,
+          8192
+        ],
+        "llama_b8_c2k": [
+          "llama31_8b",
+          8,
+          2048
+        ],
+        "llama_b16_c2k": [
+          "llama31_8b",
+          16,
+          2048
+        ],
+        "qwen_b1_c2k": [
+          "qwen15_moe",
+          1,
+          2048
+        ],
+        "qwen_b2_c8k_context_control": [
+          "qwen15_moe",
+          2,
+          8192
+        ],
+        "qwen_b8_c2k": [
+          "qwen15_moe",
+          8,
+          2048
+        ],
+        "qwen_b16_c512": [
+          "qwen15_moe",
+          16,
+          512
+        ],
+        "qwen_b32_c512": [
+          "qwen15_moe",
+          32,
+          512
+        ]
+      },
+      "profiles": [
+        [
+          64,
+          47
+        ],
+        [
+          96,
+          40
+        ],
+        [
+          128,
+          36
+        ],
+        [
+          152,
+          18
+        ],
+        [
+          192,
+          24
+        ],
+        [
+          192,
+          6
+        ],
+        [
+          256,
+          12
+        ]
+      ],
+      "isolation": [
+        "bank_cycle",
+        "uniform_fast_tier",
+        "hb_only",
+        "ingress_only",
+        "mac_only"
+      ],
+      "scheduling": [
+        "serial",
+        "finite_prefetch",
+        "blocked_collective",
+        "prefetch_collective"
+      ],
+      "software_sources": {
+        "SET": "https://github.com/SET-Scheduling-Project/SET-ISCA2023/tree/a7bd73912f58d9fea10fadab693eebd4e6e3054d",
+        "SoMa": "https://github.com/SET-Scheduling-Project/SoMa-HPCA2025/tree/6e808366f0005b0280cbab12a8a1d58cbbec827a",
+        "DeepStack": "https://github.com/tile-ai/DeepStack/tree/17e21bf54115e11b9e7c6edc0b2d1723d25d022b"
+      },
+      "scope": "Named finite prefetch / producer-collective overlap adaptations, not reproduction of complete upstream optimizers. Freeze 35.25mm2 as unavailable; preserve all infeasible outcomes. No new Peripheral DSE, RTL, or Thermal DSE.",
+      "fifo_budget_basis": "Assumed dedicated FIFO read and write ports, each500B/tick, allocated within36MiB with0.8mm2 steering area. Sensitivity at128B/tick; not measured macro.",
+      "ingress_sensitivity_bytes_tick": [
+        128,
+        500
+      ],
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.2,
+      "source_commit": "2bb172cb452f44586eea12eeafad506381cfaad1",
+      "source_dirty": false,
+      "steps": 128,
+      "routing": "uniform_control",
+      "route_sha256": null,
+      "service_tb_s": 26.599,
+      "command_domains_per_tile": 1,
+      "service_reference_sha256": null,
+      "frontier_cases": [
+        "llama_b1_c2k",
+        "llama_b4_c8k",
+        "llama_b16_c2k",
+        "qwen_b1_c2k",
+        "qwen_b8_c2k",
+        "qwen_b16_c512",
+        "qwen_b32_c512"
+      ],
+      "isolation_cases": [
+        "llama_b1_c2k",
+        "llama_b4_c8k",
+        "qwen_b8_c2k"
+      ],
+      "assumptions": [
+        "35.25mm2 frozen as unavailable",
+        "MAC/read-port128+128 split for overlapped producer/reduction;128B writes shared by result/collective",
+        "D1 guard is not theorematically attainable service for each operator",
+        "bank_cycle removes only tier bank-cycle ceiling; keeps shared D1 guard",
+        "ingress_only removes FIFO input serialization while preserving HB and FIFO output rate; conventional SRAM copies eliminated by baseline",
+        "Prefetch only immediately preceding non-memory/non-MAC phase;256KiB FIFO; routed experts wait for actual routing",
+        "GatedFFN pairing and bounded expert-cohort accumulation are known software mechanisms",
+        "Bounded64-row logit scan and associative greedy selection are known software mechanisms; expert whole-partial workspace may reject a case recoverable by row-blocked accumulation",
+        "Same frozen32GiB regional/tier capacity; all128steps; QwenC8192 extension isolated as control"
+      ]
+    }
+  },
+  {
+    "experiment": "crossover-main-llama-b8-2bb172c",
+    "contract": {
+      "schema": 1,
+      "research": "Hybrid-Bonded 3D Compute\u2013Memory\u2013Communication Architecture Crossover",
+      "parent_result_commit": "849c796",
+      "decode_steps": 128,
+      "default_profile": {
+        "area_mm2": 121,
+        "compute_tflops": 128,
+        "sram_mib": 36,
+        "dram_gib": 32,
+        "hb_tb_s": 32,
+        "mesh_link_gb_s": 32,
+        "tiles": 16,
+        "banks": 256,
+        "fifo_read_write_bytes_per_tile_tick": 500
+      },
+      "reserved_unidentified_area_mm2": 35.25,
+      "resizable_mac_reference_mm2": 18.96544,
+      "resizable_storage_reference_mm2": 11.9279232,
+      "area_scaling_classification": "Reasonably assumed: Tensor core plus Matrix RF scale with compute; row-swap RF fixed with unchanged DRAM; private buffer area20% fixed peripheral and80% capacity scaled. Unknown35.25mm2 unavailable. Phi0/.4 ledger sensitivity; no layout claim.",
+      "scenarios": {
+        "llama_b1_c2k": [
+          "llama31_8b",
+          1,
+          2048
+        ],
+        "llama_b1_c32k": [
+          "llama31_8b",
+          1,
+          32768
+        ],
+        "llama_b4_c8k": [
+          "llama31_8b",
+          4,
+          8192
+        ],
+        "llama_b8_c2k": [
+          "llama31_8b",
+          8,
+          2048
+        ],
+        "llama_b16_c2k": [
+          "llama31_8b",
+          16,
+          2048
+        ],
+        "qwen_b1_c2k": [
+          "qwen15_moe",
+          1,
+          2048
+        ],
+        "qwen_b2_c8k_context_control": [
+          "qwen15_moe",
+          2,
+          8192
+        ],
+        "qwen_b8_c2k": [
+          "qwen15_moe",
+          8,
+          2048
+        ],
+        "qwen_b16_c512": [
+          "qwen15_moe",
+          16,
+          512
+        ],
+        "qwen_b32_c512": [
+          "qwen15_moe",
+          32,
+          512
+        ]
+      },
+      "profiles": [
+        [
+          64,
+          47
+        ],
+        [
+          96,
+          40
+        ],
+        [
+          128,
+          36
+        ],
+        [
+          152,
+          18
+        ],
+        [
+          192,
+          24
+        ],
+        [
+          192,
+          6
+        ],
+        [
+          256,
+          12
+        ]
+      ],
+      "isolation": [
+        "bank_cycle",
+        "uniform_fast_tier",
+        "hb_only",
+        "ingress_only",
+        "mac_only"
+      ],
+      "scheduling": [
+        "serial",
+        "finite_prefetch",
+        "blocked_collective",
+        "prefetch_collective"
+      ],
+      "software_sources": {
+        "SET": "https://github.com/SET-Scheduling-Project/SET-ISCA2023/tree/a7bd73912f58d9fea10fadab693eebd4e6e3054d",
+        "SoMa": "https://github.com/SET-Scheduling-Project/SoMa-HPCA2025/tree/6e808366f0005b0280cbab12a8a1d58cbbec827a",
+        "DeepStack": "https://github.com/tile-ai/DeepStack/tree/17e21bf54115e11b9e7c6edc0b2d1723d25d022b"
+      },
+      "scope": "Named finite prefetch / producer-collective overlap adaptations, not reproduction of complete upstream optimizers. Freeze 35.25mm2 as unavailable; preserve all infeasible outcomes. No new Peripheral DSE, RTL, or Thermal DSE.",
+      "fifo_budget_basis": "Assumed dedicated FIFO read and write ports, each500B/tick, allocated within36MiB with0.8mm2 steering area. Sensitivity at128B/tick; not measured macro.",
+      "ingress_sensitivity_bytes_tick": [
+        128,
+        500
+      ],
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.2,
+      "source_commit": "2bb172cb452f44586eea12eeafad506381cfaad1",
+      "source_dirty": false,
+      "steps": 128,
+      "routing": "uniform_control",
+      "route_sha256": null,
+      "service_tb_s": 26.599,
+      "command_domains_per_tile": 1,
+      "service_reference_sha256": null,
+      "frontier_cases": [
+        "llama_b1_c2k",
+        "llama_b4_c8k",
+        "llama_b16_c2k",
+        "qwen_b1_c2k",
+        "qwen_b8_c2k",
+        "qwen_b16_c512",
+        "qwen_b32_c512"
+      ],
+      "isolation_cases": [
+        "llama_b1_c2k",
+        "llama_b4_c8k",
+        "qwen_b8_c2k"
+      ],
+      "assumptions": [
+        "35.25mm2 frozen as unavailable",
+        "MAC/read-port128+128 split for overlapped producer/reduction;128B writes shared by result/collective",
+        "D1 guard is not theorematically attainable service for each operator",
+        "bank_cycle removes only tier bank-cycle ceiling; keeps shared D1 guard",
+        "ingress_only removes FIFO input serialization while preserving HB and FIFO output rate; conventional SRAM copies eliminated by baseline",
+        "Prefetch only immediately preceding non-memory/non-MAC phase;256KiB FIFO; routed experts wait for actual routing",
+        "GatedFFN pairing and bounded expert-cohort accumulation are known software mechanisms",
+        "Bounded64-row logit scan and associative greedy selection are known software mechanisms; expert whole-partial workspace may reject a case recoverable by row-blocked accumulation",
+        "Same frozen32GiB regional/tier capacity; all128steps; QwenC8192 extension isolated as control"
+      ]
+    }
+  },
+  {
+    "experiment": "crossover-main-llama-low-2bb172c",
+    "contract": {
+      "schema": 1,
+      "research": "Hybrid-Bonded 3D Compute\u2013Memory\u2013Communication Architecture Crossover",
+      "parent_result_commit": "849c796",
+      "decode_steps": 128,
+      "default_profile": {
+        "area_mm2": 121,
+        "compute_tflops": 128,
+        "sram_mib": 36,
+        "dram_gib": 32,
+        "hb_tb_s": 32,
+        "mesh_link_gb_s": 32,
+        "tiles": 16,
+        "banks": 256,
+        "fifo_read_write_bytes_per_tile_tick": 500
+      },
+      "reserved_unidentified_area_mm2": 35.25,
+      "resizable_mac_reference_mm2": 18.96544,
+      "resizable_storage_reference_mm2": 11.9279232,
+      "area_scaling_classification": "Reasonably assumed: Tensor core plus Matrix RF scale with compute; row-swap RF fixed with unchanged DRAM; private buffer area20% fixed peripheral and80% capacity scaled. Unknown35.25mm2 unavailable. Phi0/.4 ledger sensitivity; no layout claim.",
+      "scenarios": {
+        "llama_b1_c2k": [
+          "llama31_8b",
+          1,
+          2048
+        ],
+        "llama_b1_c32k": [
+          "llama31_8b",
+          1,
+          32768
+        ],
+        "llama_b4_c8k": [
+          "llama31_8b",
+          4,
+          8192
+        ],
+        "llama_b8_c2k": [
+          "llama31_8b",
+          8,
+          2048
+        ],
+        "llama_b16_c2k": [
+          "llama31_8b",
+          16,
+          2048
+        ],
+        "qwen_b1_c2k": [
+          "qwen15_moe",
+          1,
+          2048
+        ],
+        "qwen_b2_c8k_context_control": [
+          "qwen15_moe",
+          2,
+          8192
+        ],
+        "qwen_b8_c2k": [
+          "qwen15_moe",
+          8,
+          2048
+        ],
+        "qwen_b16_c512": [
+          "qwen15_moe",
+          16,
+          512
+        ],
+        "qwen_b32_c512": [
+          "qwen15_moe",
+          32,
+          512
+        ]
+      },
+      "profiles": [
+        [
+          64,
+          47
+        ],
+        [
+          96,
+          40
+        ],
+        [
+          128,
+          36
+        ],
+        [
+          152,
+          18
+        ],
+        [
+          192,
+          24
+        ],
+        [
+          192,
+          6
+        ],
+        [
+          256,
+          12
+        ]
+      ],
+      "isolation": [
+        "bank_cycle",
+        "uniform_fast_tier",
+        "hb_only",
+        "ingress_only",
+        "mac_only"
+      ],
+      "scheduling": [
+        "serial",
+        "finite_prefetch",
+        "blocked_collective",
+        "prefetch_collective"
+      ],
+      "software_sources": {
+        "SET": "https://github.com/SET-Scheduling-Project/SET-ISCA2023/tree/a7bd73912f58d9fea10fadab693eebd4e6e3054d",
+        "SoMa": "https://github.com/SET-Scheduling-Project/SoMa-HPCA2025/tree/6e808366f0005b0280cbab12a8a1d58cbbec827a",
+        "DeepStack": "https://github.com/tile-ai/DeepStack/tree/17e21bf54115e11b9e7c6edc0b2d1723d25d022b"
+      },
+      "scope": "Named finite prefetch / producer-collective overlap adaptations, not reproduction of complete upstream optimizers. Freeze 35.25mm2 as unavailable; preserve all infeasible outcomes. No new Peripheral DSE, RTL, or Thermal DSE.",
+      "fifo_budget_basis": "Assumed dedicated FIFO read and write ports, each500B/tick, allocated within36MiB with0.8mm2 steering area. Sensitivity at128B/tick; not measured macro.",
+      "ingress_sensitivity_bytes_tick": [
+        128,
+        500
+      ],
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.2,
+      "source_commit": "2bb172cb452f44586eea12eeafad506381cfaad1",
+      "source_dirty": false,
+      "steps": 128,
+      "routing": "uniform_control",
+      "route_sha256": null,
+      "service_tb_s": 26.599,
+      "command_domains_per_tile": 1,
+      "service_reference_sha256": null,
+      "frontier_cases": [
+        "llama_b1_c2k",
+        "llama_b4_c8k",
+        "llama_b16_c2k",
+        "qwen_b1_c2k",
+        "qwen_b8_c2k",
+        "qwen_b16_c512",
+        "qwen_b32_c512"
+      ],
+      "isolation_cases": [
+        "llama_b1_c2k",
+        "llama_b4_c8k",
+        "qwen_b8_c2k"
+      ],
+      "assumptions": [
+        "35.25mm2 frozen as unavailable",
+        "MAC/read-port128+128 split for overlapped producer/reduction;128B writes shared by result/collective",
+        "D1 guard is not theorematically attainable service for each operator",
+        "bank_cycle removes only tier bank-cycle ceiling; keeps shared D1 guard",
+        "ingress_only removes FIFO input serialization while preserving HB and FIFO output rate; conventional SRAM copies eliminated by baseline",
+        "Prefetch only immediately preceding non-memory/non-MAC phase;256KiB FIFO; routed experts wait for actual routing",
+        "GatedFFN pairing and bounded expert-cohort accumulation are known software mechanisms",
+        "Bounded64-row logit scan and associative greedy selection are known software mechanisms; expert whole-partial workspace may reject a case recoverable by row-blocked accumulation",
+        "Same frozen32GiB regional/tier capacity; all128steps; QwenC8192 extension isolated as control"
+      ]
+    }
+  },
+  {
+    "experiment": "crossover-main-qwen-b16-2bb172c",
+    "contract": {
+      "schema": 1,
+      "research": "Hybrid-Bonded 3D Compute\u2013Memory\u2013Communication Architecture Crossover",
+      "parent_result_commit": "849c796",
+      "decode_steps": 128,
+      "default_profile": {
+        "area_mm2": 121,
+        "compute_tflops": 128,
+        "sram_mib": 36,
+        "dram_gib": 32,
+        "hb_tb_s": 32,
+        "mesh_link_gb_s": 32,
+        "tiles": 16,
+        "banks": 256,
+        "fifo_read_write_bytes_per_tile_tick": 500
+      },
+      "reserved_unidentified_area_mm2": 35.25,
+      "resizable_mac_reference_mm2": 18.96544,
+      "resizable_storage_reference_mm2": 11.9279232,
+      "area_scaling_classification": "Reasonably assumed: Tensor core plus Matrix RF scale with compute; row-swap RF fixed with unchanged DRAM; private buffer area20% fixed peripheral and80% capacity scaled. Unknown35.25mm2 unavailable. Phi0/.4 ledger sensitivity; no layout claim.",
+      "scenarios": {
+        "llama_b1_c2k": [
+          "llama31_8b",
+          1,
+          2048
+        ],
+        "llama_b1_c32k": [
+          "llama31_8b",
+          1,
+          32768
+        ],
+        "llama_b4_c8k": [
+          "llama31_8b",
+          4,
+          8192
+        ],
+        "llama_b8_c2k": [
+          "llama31_8b",
+          8,
+          2048
+        ],
+        "llama_b16_c2k": [
+          "llama31_8b",
+          16,
+          2048
+        ],
+        "qwen_b1_c2k": [
+          "qwen15_moe",
+          1,
+          2048
+        ],
+        "qwen_b2_c8k_context_control": [
+          "qwen15_moe",
+          2,
+          8192
+        ],
+        "qwen_b8_c2k": [
+          "qwen15_moe",
+          8,
+          2048
+        ],
+        "qwen_b16_c512": [
+          "qwen15_moe",
+          16,
+          512
+        ],
+        "qwen_b32_c512": [
+          "qwen15_moe",
+          32,
+          512
+        ]
+      },
+      "profiles": [
+        [
+          64,
+          47
+        ],
+        [
+          96,
+          40
+        ],
+        [
+          128,
+          36
+        ],
+        [
+          152,
+          18
+        ],
+        [
+          192,
+          24
+        ],
+        [
+          192,
+          6
+        ],
+        [
+          256,
+          12
+        ]
+      ],
+      "isolation": [
+        "bank_cycle",
+        "uniform_fast_tier",
+        "hb_only",
+        "ingress_only",
+        "mac_only"
+      ],
+      "scheduling": [
+        "serial",
+        "finite_prefetch",
+        "blocked_collective",
+        "prefetch_collective"
+      ],
+      "software_sources": {
+        "SET": "https://github.com/SET-Scheduling-Project/SET-ISCA2023/tree/a7bd73912f58d9fea10fadab693eebd4e6e3054d",
+        "SoMa": "https://github.com/SET-Scheduling-Project/SoMa-HPCA2025/tree/6e808366f0005b0280cbab12a8a1d58cbbec827a",
+        "DeepStack": "https://github.com/tile-ai/DeepStack/tree/17e21bf54115e11b9e7c6edc0b2d1723d25d022b"
+      },
+      "scope": "Named finite prefetch / producer-collective overlap adaptations, not reproduction of complete upstream optimizers. Freeze 35.25mm2 as unavailable; preserve all infeasible outcomes. No new Peripheral DSE, RTL, or Thermal DSE.",
+      "fifo_budget_basis": "Assumed dedicated FIFO read and write ports, each500B/tick, allocated within36MiB with0.8mm2 steering area. Sensitivity at128B/tick; not measured macro.",
+      "ingress_sensitivity_bytes_tick": [
+        128,
+        500
+      ],
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.2,
+      "source_commit": "2bb172cb452f44586eea12eeafad506381cfaad1",
+      "source_dirty": false,
+      "steps": 128,
+      "routing": "matched_capture",
+      "route_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "service_tb_s": 26.599,
+      "command_domains_per_tile": 1,
+      "service_reference_sha256": null,
+      "frontier_cases": [
+        "llama_b1_c2k",
+        "llama_b4_c8k",
+        "llama_b16_c2k",
+        "qwen_b1_c2k",
+        "qwen_b8_c2k",
+        "qwen_b16_c512",
+        "qwen_b32_c512"
+      ],
+      "isolation_cases": [
+        "llama_b1_c2k",
+        "llama_b4_c8k",
+        "qwen_b8_c2k"
+      ],
+      "assumptions": [
+        "35.25mm2 frozen as unavailable",
+        "MAC/read-port128+128 split for overlapped producer/reduction;128B writes shared by result/collective",
+        "D1 guard is not theorematically attainable service for each operator",
+        "bank_cycle removes only tier bank-cycle ceiling; keeps shared D1 guard",
+        "ingress_only removes FIFO input serialization while preserving HB and FIFO output rate; conventional SRAM copies eliminated by baseline",
+        "Prefetch only immediately preceding non-memory/non-MAC phase;256KiB FIFO; routed experts wait for actual routing",
+        "GatedFFN pairing and bounded expert-cohort accumulation are known software mechanisms",
+        "Bounded64-row logit scan and associative greedy selection are known software mechanisms; expert whole-partial workspace may reject a case recoverable by row-blocked accumulation",
+        "Same frozen32GiB regional/tier capacity; all128steps; QwenC8192 extension isolated as control"
+      ]
+    }
+  },
+  {
+    "experiment": "crossover-main-qwen-b32-2bb172c",
+    "contract": {
+      "schema": 1,
+      "research": "Hybrid-Bonded 3D Compute\u2013Memory\u2013Communication Architecture Crossover",
+      "parent_result_commit": "849c796",
+      "decode_steps": 128,
+      "default_profile": {
+        "area_mm2": 121,
+        "compute_tflops": 128,
+        "sram_mib": 36,
+        "dram_gib": 32,
+        "hb_tb_s": 32,
+        "mesh_link_gb_s": 32,
+        "tiles": 16,
+        "banks": 256,
+        "fifo_read_write_bytes_per_tile_tick": 500
+      },
+      "reserved_unidentified_area_mm2": 35.25,
+      "resizable_mac_reference_mm2": 18.96544,
+      "resizable_storage_reference_mm2": 11.9279232,
+      "area_scaling_classification": "Reasonably assumed: Tensor core plus Matrix RF scale with compute; row-swap RF fixed with unchanged DRAM; private buffer area20% fixed peripheral and80% capacity scaled. Unknown35.25mm2 unavailable. Phi0/.4 ledger sensitivity; no layout claim.",
+      "scenarios": {
+        "llama_b1_c2k": [
+          "llama31_8b",
+          1,
+          2048
+        ],
+        "llama_b1_c32k": [
+          "llama31_8b",
+          1,
+          32768
+        ],
+        "llama_b4_c8k": [
+          "llama31_8b",
+          4,
+          8192
+        ],
+        "llama_b8_c2k": [
+          "llama31_8b",
+          8,
+          2048
+        ],
+        "llama_b16_c2k": [
+          "llama31_8b",
+          16,
+          2048
+        ],
+        "qwen_b1_c2k": [
+          "qwen15_moe",
+          1,
+          2048
+        ],
+        "qwen_b2_c8k_context_control": [
+          "qwen15_moe",
+          2,
+          8192
+        ],
+        "qwen_b8_c2k": [
+          "qwen15_moe",
+          8,
+          2048
+        ],
+        "qwen_b16_c512": [
+          "qwen15_moe",
+          16,
+          512
+        ],
+        "qwen_b32_c512": [
+          "qwen15_moe",
+          32,
+          512
+        ]
+      },
+      "profiles": [
+        [
+          64,
+          47
+        ],
+        [
+          96,
+          40
+        ],
+        [
+          128,
+          36
+        ],
+        [
+          152,
+          18
+        ],
+        [
+          192,
+          24
+        ],
+        [
+          192,
+          6
+        ],
+        [
+          256,
+          12
+        ]
+      ],
+      "isolation": [
+        "bank_cycle",
+        "uniform_fast_tier",
+        "hb_only",
+        "ingress_only",
+        "mac_only"
+      ],
+      "scheduling": [
+        "serial",
+        "finite_prefetch",
+        "blocked_collective",
+        "prefetch_collective"
+      ],
+      "software_sources": {
+        "SET": "https://github.com/SET-Scheduling-Project/SET-ISCA2023/tree/a7bd73912f58d9fea10fadab693eebd4e6e3054d",
+        "SoMa": "https://github.com/SET-Scheduling-Project/SoMa-HPCA2025/tree/6e808366f0005b0280cbab12a8a1d58cbbec827a",
+        "DeepStack": "https://github.com/tile-ai/DeepStack/tree/17e21bf54115e11b9e7c6edc0b2d1723d25d022b"
+      },
+      "scope": "Named finite prefetch / producer-collective overlap adaptations, not reproduction of complete upstream optimizers. Freeze 35.25mm2 as unavailable; preserve all infeasible outcomes. No new Peripheral DSE, RTL, or Thermal DSE.",
+      "fifo_budget_basis": "Assumed dedicated FIFO read and write ports, each500B/tick, allocated within36MiB with0.8mm2 steering area. Sensitivity at128B/tick; not measured macro.",
+      "ingress_sensitivity_bytes_tick": [
+        128,
+        500
+      ],
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.2,
+      "source_commit": "2bb172cb452f44586eea12eeafad506381cfaad1",
+      "source_dirty": false,
+      "steps": 128,
+      "routing": "matched_capture",
+      "route_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "service_tb_s": 26.599,
+      "command_domains_per_tile": 1,
+      "service_reference_sha256": null,
+      "frontier_cases": [
+        "llama_b1_c2k",
+        "llama_b4_c8k",
+        "llama_b16_c2k",
+        "qwen_b1_c2k",
+        "qwen_b8_c2k",
+        "qwen_b16_c512",
+        "qwen_b32_c512"
+      ],
+      "isolation_cases": [
+        "llama_b1_c2k",
+        "llama_b4_c8k",
+        "qwen_b8_c2k"
+      ],
+      "assumptions": [
+        "35.25mm2 frozen as unavailable",
+        "MAC/read-port128+128 split for overlapped producer/reduction;128B writes shared by result/collective",
+        "D1 guard is not theorematically attainable service for each operator",
+        "bank_cycle removes only tier bank-cycle ceiling; keeps shared D1 guard",
+        "ingress_only removes FIFO input serialization while preserving HB and FIFO output rate; conventional SRAM copies eliminated by baseline",
+        "Prefetch only immediately preceding non-memory/non-MAC phase;256KiB FIFO; routed experts wait for actual routing",
+        "GatedFFN pairing and bounded expert-cohort accumulation are known software mechanisms",
+        "Bounded64-row logit scan and associative greedy selection are known software mechanisms; expert whole-partial workspace may reject a case recoverable by row-blocked accumulation",
+        "Same frozen32GiB regional/tier capacity; all128steps; QwenC8192 extension isolated as control"
+      ]
+    }
+  },
+  {
+    "experiment": "crossover-main-qwen-b8-2bb172c",
+    "contract": {
+      "schema": 1,
+      "research": "Hybrid-Bonded 3D Compute\u2013Memory\u2013Communication Architecture Crossover",
+      "parent_result_commit": "849c796",
+      "decode_steps": 128,
+      "default_profile": {
+        "area_mm2": 121,
+        "compute_tflops": 128,
+        "sram_mib": 36,
+        "dram_gib": 32,
+        "hb_tb_s": 32,
+        "mesh_link_gb_s": 32,
+        "tiles": 16,
+        "banks": 256,
+        "fifo_read_write_bytes_per_tile_tick": 500
+      },
+      "reserved_unidentified_area_mm2": 35.25,
+      "resizable_mac_reference_mm2": 18.96544,
+      "resizable_storage_reference_mm2": 11.9279232,
+      "area_scaling_classification": "Reasonably assumed: Tensor core plus Matrix RF scale with compute; row-swap RF fixed with unchanged DRAM; private buffer area20% fixed peripheral and80% capacity scaled. Unknown35.25mm2 unavailable. Phi0/.4 ledger sensitivity; no layout claim.",
+      "scenarios": {
+        "llama_b1_c2k": [
+          "llama31_8b",
+          1,
+          2048
+        ],
+        "llama_b1_c32k": [
+          "llama31_8b",
+          1,
+          32768
+        ],
+        "llama_b4_c8k": [
+          "llama31_8b",
+          4,
+          8192
+        ],
+        "llama_b8_c2k": [
+          "llama31_8b",
+          8,
+          2048
+        ],
+        "llama_b16_c2k": [
+          "llama31_8b",
+          16,
+          2048
+        ],
+        "qwen_b1_c2k": [
+          "qwen15_moe",
+          1,
+          2048
+        ],
+        "qwen_b2_c8k_context_control": [
+          "qwen15_moe",
+          2,
+          8192
+        ],
+        "qwen_b8_c2k": [
+          "qwen15_moe",
+          8,
+          2048
+        ],
+        "qwen_b16_c512": [
+          "qwen15_moe",
+          16,
+          512
+        ],
+        "qwen_b32_c512": [
+          "qwen15_moe",
+          32,
+          512
+        ]
+      },
+      "profiles": [
+        [
+          64,
+          47
+        ],
+        [
+          96,
+          40
+        ],
+        [
+          128,
+          36
+        ],
+        [
+          152,
+          18
+        ],
+        [
+          192,
+          24
+        ],
+        [
+          192,
+          6
+        ],
+        [
+          256,
+          12
+        ]
+      ],
+      "isolation": [
+        "bank_cycle",
+        "uniform_fast_tier",
+        "hb_only",
+        "ingress_only",
+        "mac_only"
+      ],
+      "scheduling": [
+        "serial",
+        "finite_prefetch",
+        "blocked_collective",
+        "prefetch_collective"
+      ],
+      "software_sources": {
+        "SET": "https://github.com/SET-Scheduling-Project/SET-ISCA2023/tree/a7bd73912f58d9fea10fadab693eebd4e6e3054d",
+        "SoMa": "https://github.com/SET-Scheduling-Project/SoMa-HPCA2025/tree/6e808366f0005b0280cbab12a8a1d58cbbec827a",
+        "DeepStack": "https://github.com/tile-ai/DeepStack/tree/17e21bf54115e11b9e7c6edc0b2d1723d25d022b"
+      },
+      "scope": "Named finite prefetch / producer-collective overlap adaptations, not reproduction of complete upstream optimizers. Freeze 35.25mm2 as unavailable; preserve all infeasible outcomes. No new Peripheral DSE, RTL, or Thermal DSE.",
+      "fifo_budget_basis": "Assumed dedicated FIFO read and write ports, each500B/tick, allocated within36MiB with0.8mm2 steering area. Sensitivity at128B/tick; not measured macro.",
+      "ingress_sensitivity_bytes_tick": [
+        128,
+        500
+      ],
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.2,
+      "source_commit": "2bb172cb452f44586eea12eeafad506381cfaad1",
+      "source_dirty": false,
+      "steps": 128,
+      "routing": "matched_capture",
+      "route_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "service_tb_s": 26.599,
+      "command_domains_per_tile": 1,
+      "service_reference_sha256": null,
+      "frontier_cases": [
+        "llama_b1_c2k",
+        "llama_b4_c8k",
+        "llama_b16_c2k",
+        "qwen_b1_c2k",
+        "qwen_b8_c2k",
+        "qwen_b16_c512",
+        "qwen_b32_c512"
+      ],
+      "isolation_cases": [
+        "llama_b1_c2k",
+        "llama_b4_c8k",
+        "qwen_b8_c2k"
+      ],
+      "assumptions": [
+        "35.25mm2 frozen as unavailable",
+        "MAC/read-port128+128 split for overlapped producer/reduction;128B writes shared by result/collective",
+        "D1 guard is not theorematically attainable service for each operator",
+        "bank_cycle removes only tier bank-cycle ceiling; keeps shared D1 guard",
+        "ingress_only removes FIFO input serialization while preserving HB and FIFO output rate; conventional SRAM copies eliminated by baseline",
+        "Prefetch only immediately preceding non-memory/non-MAC phase;256KiB FIFO; routed experts wait for actual routing",
+        "GatedFFN pairing and bounded expert-cohort accumulation are known software mechanisms",
+        "Bounded64-row logit scan and associative greedy selection are known software mechanisms; expert whole-partial workspace may reject a case recoverable by row-blocked accumulation",
+        "Same frozen32GiB regional/tier capacity; all128steps; QwenC8192 extension isolated as control"
+      ]
+    }
+  },
+  {
+    "experiment": "crossover-main-qwen-low-2bb172c",
+    "contract": {
+      "schema": 1,
+      "research": "Hybrid-Bonded 3D Compute\u2013Memory\u2013Communication Architecture Crossover",
+      "parent_result_commit": "849c796",
+      "decode_steps": 128,
+      "default_profile": {
+        "area_mm2": 121,
+        "compute_tflops": 128,
+        "sram_mib": 36,
+        "dram_gib": 32,
+        "hb_tb_s": 32,
+        "mesh_link_gb_s": 32,
+        "tiles": 16,
+        "banks": 256,
+        "fifo_read_write_bytes_per_tile_tick": 500
+      },
+      "reserved_unidentified_area_mm2": 35.25,
+      "resizable_mac_reference_mm2": 18.96544,
+      "resizable_storage_reference_mm2": 11.9279232,
+      "area_scaling_classification": "Reasonably assumed: Tensor core plus Matrix RF scale with compute; row-swap RF fixed with unchanged DRAM; private buffer area20% fixed peripheral and80% capacity scaled. Unknown35.25mm2 unavailable. Phi0/.4 ledger sensitivity; no layout claim.",
+      "scenarios": {
+        "llama_b1_c2k": [
+          "llama31_8b",
+          1,
+          2048
+        ],
+        "llama_b1_c32k": [
+          "llama31_8b",
+          1,
+          32768
+        ],
+        "llama_b4_c8k": [
+          "llama31_8b",
+          4,
+          8192
+        ],
+        "llama_b8_c2k": [
+          "llama31_8b",
+          8,
+          2048
+        ],
+        "llama_b16_c2k": [
+          "llama31_8b",
+          16,
+          2048
+        ],
+        "qwen_b1_c2k": [
+          "qwen15_moe",
+          1,
+          2048
+        ],
+        "qwen_b2_c8k_context_control": [
+          "qwen15_moe",
+          2,
+          8192
+        ],
+        "qwen_b8_c2k": [
+          "qwen15_moe",
+          8,
+          2048
+        ],
+        "qwen_b16_c512": [
+          "qwen15_moe",
+          16,
+          512
+        ],
+        "qwen_b32_c512": [
+          "qwen15_moe",
+          32,
+          512
+        ]
+      },
+      "profiles": [
+        [
+          64,
+          47
+        ],
+        [
+          96,
+          40
+        ],
+        [
+          128,
+          36
+        ],
+        [
+          152,
+          18
+        ],
+        [
+          192,
+          24
+        ],
+        [
+          192,
+          6
+        ],
+        [
+          256,
+          12
+        ]
+      ],
+      "isolation": [
+        "bank_cycle",
+        "uniform_fast_tier",
+        "hb_only",
+        "ingress_only",
+        "mac_only"
+      ],
+      "scheduling": [
+        "serial",
+        "finite_prefetch",
+        "blocked_collective",
+        "prefetch_collective"
+      ],
+      "software_sources": {
+        "SET": "https://github.com/SET-Scheduling-Project/SET-ISCA2023/tree/a7bd73912f58d9fea10fadab693eebd4e6e3054d",
+        "SoMa": "https://github.com/SET-Scheduling-Project/SoMa-HPCA2025/tree/6e808366f0005b0280cbab12a8a1d58cbbec827a",
+        "DeepStack": "https://github.com/tile-ai/DeepStack/tree/17e21bf54115e11b9e7c6edc0b2d1723d25d022b"
+      },
+      "scope": "Named finite prefetch / producer-collective overlap adaptations, not reproduction of complete upstream optimizers. Freeze 35.25mm2 as unavailable; preserve all infeasible outcomes. No new Peripheral DSE, RTL, or Thermal DSE.",
+      "fifo_budget_basis": "Assumed dedicated FIFO read and write ports, each500B/tick, allocated within36MiB with0.8mm2 steering area. Sensitivity at128B/tick; not measured macro.",
+      "ingress_sensitivity_bytes_tick": [
+        128,
+        500
+      ],
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.2,
+      "source_commit": "2bb172cb452f44586eea12eeafad506381cfaad1",
+      "source_dirty": false,
+      "steps": 128,
+      "routing": "matched_capture",
+      "route_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "service_tb_s": 26.599,
+      "command_domains_per_tile": 1,
+      "service_reference_sha256": null,
+      "frontier_cases": [
+        "llama_b1_c2k",
+        "llama_b4_c8k",
+        "llama_b16_c2k",
+        "qwen_b1_c2k",
+        "qwen_b8_c2k",
+        "qwen_b16_c512",
+        "qwen_b32_c512"
+      ],
+      "isolation_cases": [
+        "llama_b1_c2k",
+        "llama_b4_c8k",
+        "qwen_b8_c2k"
+      ],
+      "assumptions": [
+        "35.25mm2 frozen as unavailable",
+        "MAC/read-port128+128 split for overlapped producer/reduction;128B writes shared by result/collective",
+        "D1 guard is not theorematically attainable service for each operator",
+        "bank_cycle removes only tier bank-cycle ceiling; keeps shared D1 guard",
+        "ingress_only removes FIFO input serialization while preserving HB and FIFO output rate; conventional SRAM copies eliminated by baseline",
+        "Prefetch only immediately preceding non-memory/non-MAC phase;256KiB FIFO; routed experts wait for actual routing",
+        "GatedFFN pairing and bounded expert-cohort accumulation are known software mechanisms",
+        "Bounded64-row logit scan and associative greedy selection are known software mechanisms; expert whole-partial workspace may reject a case recoverable by row-blocked accumulation",
+        "Same frozen32GiB regional/tier capacity; all128steps; QwenC8192 extension isolated as control"
+      ]
+    }
+  }
+]

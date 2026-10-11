@@ -1,0 +1,34 @@
+{
+  "release": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/tag/crossover-execution-2026-10-11",
+  "release_id": 409568956,
+  "verification": "All three GitHub asset digests match uploaded SHA256 and sizes; nested archives and decoded gzip traces scanned before publication; experimental source commits remain distinct from render/publication commits",
+  "assets": [
+    {
+      "file": "crossover-primary-execution-2026-10-11.tar",
+      "bytes": 1379901440,
+      "sha256": "d076fd44f96cc4b757d676f3b52fb8c6d617096cc52372bb62f6281abf37e868",
+      "id": 630339538,
+      "scan": "PASS",
+      "inspected_bytes": 49670106054,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/crossover-execution-2026-10-11/crossover-primary-execution-2026-10-11.tar"
+    },
+    {
+      "file": "crossover-detailed-commands-2026-10-11.tar",
+      "bytes": 389795840,
+      "sha256": "1fff6aa4aba134dc8dfa83a5fba2bb44d2afcb25c12615d439a2fa4f62dcedb8",
+      "id": 630335428,
+      "scan": "PASS",
+      "inspected_bytes": 4512823209,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/crossover-execution-2026-10-11/crossover-detailed-commands-2026-10-11.tar"
+    },
+    {
+      "file": "crossover-retired-controls-2026-10-11.tar",
+      "bytes": 2121011200,
+      "sha256": "4574078b26a8cf10489c13fc7558922f69768958e3f39fb4728c032f76e25223",
+      "id": 630341476,
+      "scan": "PASS",
+      "inspected_bytes": 69561805857,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/crossover-execution-2026-10-11/crossover-retired-controls-2026-10-11.tar"
+    }
+  ]
+}

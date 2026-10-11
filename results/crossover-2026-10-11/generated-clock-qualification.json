@@ -1,0 +1,167 @@
+{
+  "status": "PASS",
+  "upstream_tick_multiplier": 2,
+  "records": [
+    {
+      "case": "baseline",
+      "native_period_ns": 0.25,
+      "python_CK_ns": 0.5,
+      "physical_timing_ns": {
+        "RCDRD": 2.5,
+        "RAS": 30.0,
+        "RP": 5.0,
+        "RC": 35.0
+      },
+      "timing_checks": {
+        "RCDRD": true,
+        "RAS": true,
+        "RP": true,
+        "RC": true
+      },
+      "physical_banks": 256,
+      "commands": 1572080,
+      "command_state_timing_validation": "PASS"
+    },
+    {
+      "case": "subarray_overlap_2",
+      "native_period_ns": 0.25,
+      "python_CK_ns": 0.5,
+      "physical_timing_ns": {
+        "RCDRD": 3.0,
+        "RAS": 30.0,
+        "RP": 5.0,
+        "RC": 35.0
+      },
+      "timing_checks": {
+        "RCDRD": true,
+        "RAS": true,
+        "RP": true,
+        "RC": true
+      },
+      "physical_banks": 256,
+      "commands": 1576368,
+      "command_state_timing_validation": "PASS"
+    },
+    {
+      "case": "row_cycle_oracle",
+      "native_period_ns": 0.25,
+      "python_CK_ns": 0.5,
+      "physical_timing_ns": {
+        "RCDRD": 2.5,
+        "RAS": 6.5,
+        "RP": 5.0,
+        "RC": 11.5
+      },
+      "timing_checks": {
+        "RCDRD": true,
+        "RAS": true,
+        "RP": true,
+        "RC": true
+      },
+      "physical_banks": 256,
+      "commands": 1574464,
+      "command_state_timing_validation": "PASS"
+    },
+    {
+      "case": "baseline_independent_commands",
+      "native_period_ns": 0.25,
+      "python_CK_ns": 0.5,
+      "physical_timing_ns": {
+        "RCDRD": 2.5,
+        "RAS": 30.0,
+        "RP": 5.0,
+        "RC": 35.0
+      },
+      "timing_checks": {
+        "RCDRD": true,
+        "RAS": true,
+        "RP": true,
+        "RC": true
+      },
+      "physical_banks": 256,
+      "commands": 1572538,
+      "command_state_timing_validation": "PASS"
+    },
+    {
+      "case": "subarray_overlap_2_independent_commands",
+      "native_period_ns": 0.25,
+      "python_CK_ns": 0.5,
+      "physical_timing_ns": {
+        "RCDRD": 3.0,
+        "RAS": 30.0,
+        "RP": 5.0,
+        "RC": 35.0
+      },
+      "timing_checks": {
+        "RCDRD": true,
+        "RAS": true,
+        "RP": true,
+        "RC": true
+      },
+      "physical_banks": 256,
+      "commands": 1576540,
+      "command_state_timing_validation": "PASS"
+    },
+    {
+      "case": "row_cycle_oracle_independent_commands",
+      "native_period_ns": 0.25,
+      "python_CK_ns": 0.5,
+      "physical_timing_ns": {
+        "RCDRD": 2.5,
+        "RAS": 6.5,
+        "RP": 5.0,
+        "RC": 11.5
+      },
+      "timing_checks": {
+        "RCDRD": true,
+        "RAS": true,
+        "RP": true,
+        "RC": true
+      },
+      "physical_banks": 256,
+      "commands": 1574586,
+      "command_state_timing_validation": "PASS"
+    },
+    {
+      "case": "baseline_bank_row_interleave",
+      "native_period_ns": 0.25,
+      "python_CK_ns": 0.5,
+      "physical_timing_ns": {
+        "RCDRD": 2.5,
+        "RAS": 30.0,
+        "RP": 5.0,
+        "RC": 35.0
+      },
+      "timing_checks": {
+        "RCDRD": true,
+        "RAS": true,
+        "RP": true,
+        "RC": true
+      },
+      "physical_banks": 256,
+      "commands": 1572032,
+      "command_state_timing_validation": "PASS"
+    },
+    {
+      "case": "baseline_bank_column_interleave",
+      "native_period_ns": 0.25,
+      "python_CK_ns": 0.5,
+      "physical_timing_ns": {
+        "RCDRD": 2.5,
+        "RAS": 30.0,
+        "RP": 5.0,
+        "RC": 35.0
+      },
+      "timing_checks": {
+        "RCDRD": true,
+        "RAS": true,
+        "RP": true,
+        "RC": true
+      },
+      "physical_banks": 256,
+      "commands": 1572688,
+      "command_state_timing_validation": "PASS"
+    }
+  ],
+  "scope": "Generated native timing and Logic conversion; software contract only, no device calibration"
+}

@@ -4,7 +4,19 @@
 
 **Hybrid-Bonded 3D Accelerator Architecture Exploration**
 
-当前里程碑为 **Simulator Qualification → Architecture Characterization → 条件性 Architecture Discovery → Thermal Evaluation**。
+最新交付为 **[Compute–Memory–Communication Architecture Crossover](results/crossover-2026-10-11/findings.md)**。
+十组完整模型场景跨越供数与计算Roofline，保留275个点（185个成功、90个有限调度/面积失败）、
+原始Qwen1.5路由、分项Memory/NoC反事实和固定121mm²面积前沿。
+152TF/18MiB在条件性模型内使Llama B16提高12.92%、Qwen B16提高7.06%；35.25mm²未识别面积没有被使用。
+19个默认热评价点均无需降速，最高周期Logic温度65.81°C。
+113项回归通过；但大Batch交叉验证最大误差19.86%仍未达标，不能据此宣布新硬件预测合格。
+[本轮合同](docs/crossover_architecture.md)、[复现说明](results/crossover-2026-10-11/reproduce.md)及
+[完整公开原始数据](https://github.com/HaoningJiang-space/thermal_exploartion/releases/tag/crossover-execution-2026-10-11)分别记录假设、控制和失败。
+Research Go保持；尚无新Hardware Go，不推进RTL。
+
+**历史冻结记录：Stage 1–4（849c796）**
+
+该轮里程碑为 **Simulator Qualification → Architecture Characterization → 条件性 Architecture Discovery → Thermal Evaluation**。
 任务与证据边界见 [Stage 1–4 实验合同](docs/stage1_stage4.md)。
 **[Stage 1–4 正式报告、全部结果与图表](results/stages-2026-10-10/findings.md)已完成并归档。**
 H2–H3三个同合同案例误差均在10%内；实际复现一个ATLAS官方AE子案例。

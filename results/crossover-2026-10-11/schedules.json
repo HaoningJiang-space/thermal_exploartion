@@ -1,0 +1,482 @@
+[
+  {
+    "scenario": "llama_b16_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "serial",
+    "tokens_s": 5681.720325484451
+  },
+  {
+    "scenario": "llama_b16_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "finite_prefetch",
+    "tokens_s": 5688.756404073079
+  },
+  {
+    "scenario": "llama_b16_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "blocked_collective",
+    "tokens_s": 6417.94843459218
+  },
+  {
+    "scenario": "llama_b16_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "tokens_s": 6426.92754101133
+  },
+  {
+    "scenario": "llama_b16_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "serial",
+    "tokens_s": 5651.322413859938
+  },
+  {
+    "scenario": "llama_b16_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "finite_prefetch",
+    "tokens_s": 5658.818180580315
+  },
+  {
+    "scenario": "llama_b16_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "blocked_collective",
+    "tokens_s": 6379.189171166901
+  },
+  {
+    "scenario": "llama_b16_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "tokens_s": 6388.741759271811
+  },
+  {
+    "scenario": "llama_b4_c8k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "serial",
+    "tokens_s": 3972.6512754569353
+  },
+  {
+    "scenario": "llama_b4_c8k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "finite_prefetch",
+    "tokens_s": 4045.9999853332492
+  },
+  {
+    "scenario": "llama_b4_c8k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "blocked_collective",
+    "tokens_s": 4369.692360002567
+  },
+  {
+    "scenario": "llama_b4_c8k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "tokens_s": 4448.919315789576
+  },
+  {
+    "scenario": "llama_b4_c8k",
+    "baseline": "B3_3d_placement",
+    "schedule": "serial",
+    "tokens_s": 4220.668137041929
+  },
+  {
+    "scenario": "llama_b4_c8k",
+    "baseline": "B3_3d_placement",
+    "schedule": "finite_prefetch",
+    "tokens_s": 4303.862366785373
+  },
+  {
+    "scenario": "llama_b4_c8k",
+    "baseline": "B3_3d_placement",
+    "schedule": "blocked_collective",
+    "tokens_s": 4640.540808625838
+  },
+  {
+    "scenario": "llama_b4_c8k",
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "tokens_s": 4730.290652709155
+  },
+  {
+    "scenario": "llama_b8_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "serial",
+    "tokens_s": 5644.230731919148
+  },
+  {
+    "scenario": "llama_b8_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "finite_prefetch",
+    "tokens_s": 5658.134788794206
+  },
+  {
+    "scenario": "llama_b8_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "blocked_collective",
+    "tokens_s": 6371.290962921076
+  },
+  {
+    "scenario": "llama_b8_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "tokens_s": 6389.013452467137
+  },
+  {
+    "scenario": "llama_b8_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "serial",
+    "tokens_s": 5617.598320478542
+  },
+  {
+    "scenario": "llama_b8_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "finite_prefetch",
+    "tokens_s": 5632.430903493841
+  },
+  {
+    "scenario": "llama_b8_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "blocked_collective",
+    "tokens_s": 6337.375952054582
+  },
+  {
+    "scenario": "llama_b8_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "tokens_s": 6356.259400932483
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "serial",
+    "tokens_s": 1404.8307916432234
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "finite_prefetch",
+    "tokens_s": 1432.0082483675105
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "blocked_collective",
+    "tokens_s": 1458.1223612541894
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "tokens_s": 1487.4223565529878
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "serial",
+    "tokens_s": 1565.3671901384996
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "finite_prefetch",
+    "tokens_s": 1599.2777661608018
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "blocked_collective",
+    "tokens_s": 1631.8224968760796
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "tokens_s": 1668.7073567049702
+  },
+  {
+    "scenario": "llama_b1_c32k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "serial",
+    "tokens_s": 1156.3347195859396
+  },
+  {
+    "scenario": "llama_b1_c32k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "finite_prefetch",
+    "tokens_s": 1174.6850669335552
+  },
+  {
+    "scenario": "llama_b1_c32k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "blocked_collective",
+    "tokens_s": 1192.1999128501864
+  },
+  {
+    "scenario": "llama_b1_c32k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "tokens_s": 1211.7158380953765
+  },
+  {
+    "scenario": "llama_b1_c32k",
+    "baseline": "B3_3d_placement",
+    "schedule": "serial",
+    "tokens_s": 1241.400585382446
+  },
+  {
+    "scenario": "llama_b1_c32k",
+    "baseline": "B3_3d_placement",
+    "schedule": "finite_prefetch",
+    "tokens_s": 1262.6322409986158
+  },
+  {
+    "scenario": "llama_b1_c32k",
+    "baseline": "B3_3d_placement",
+    "schedule": "blocked_collective",
+    "tokens_s": 1282.8312599038582
+  },
+  {
+    "scenario": "llama_b1_c32k",
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "tokens_s": 1305.5166892357863
+  },
+  {
+    "scenario": "qwen_b16_c512",
+    "baseline": "B2_stream_fusion",
+    "schedule": "serial",
+    "tokens_s": 13020.846371862433
+  },
+  {
+    "scenario": "qwen_b16_c512",
+    "baseline": "B2_stream_fusion",
+    "schedule": "finite_prefetch",
+    "tokens_s": 12964.442220802053
+  },
+  {
+    "scenario": "qwen_b16_c512",
+    "baseline": "B2_stream_fusion",
+    "schedule": "blocked_collective",
+    "tokens_s": 12974.318195540187
+  },
+  {
+    "scenario": "qwen_b16_c512",
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "tokens_s": 13210.61900324354
+  },
+  {
+    "scenario": "qwen_b16_c512",
+    "baseline": "B3_3d_placement",
+    "schedule": "serial",
+    "tokens_s": 12955.457104695024
+  },
+  {
+    "scenario": "qwen_b16_c512",
+    "baseline": "B3_3d_placement",
+    "schedule": "finite_prefetch",
+    "tokens_s": 12893.839510467753
+  },
+  {
+    "scenario": "qwen_b16_c512",
+    "baseline": "B3_3d_placement",
+    "schedule": "blocked_collective",
+    "tokens_s": 12909.394247192566
+  },
+  {
+    "scenario": "qwen_b16_c512",
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "tokens_s": 13137.317120831995
+  },
+  {
+    "scenario": "qwen_b32_c512",
+    "baseline": "B2_stream_fusion",
+    "schedule": "serial",
+    "tokens_s": 13819.937785194214
+  },
+  {
+    "scenario": "qwen_b32_c512",
+    "baseline": "B2_stream_fusion",
+    "schedule": "finite_prefetch",
+    "tokens_s": 13477.184665412511
+  },
+  {
+    "scenario": "qwen_b32_c512",
+    "baseline": "B2_stream_fusion",
+    "schedule": "blocked_collective",
+    "tokens_s": 13615.487486046086
+  },
+  {
+    "scenario": "qwen_b32_c512",
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "tokens_s": 13743.418993928817
+  },
+  {
+    "scenario": "qwen_b32_c512",
+    "baseline": "B3_3d_placement",
+    "schedule": "serial",
+    "tokens_s": 13626.267398912314
+  },
+  {
+    "scenario": "qwen_b32_c512",
+    "baseline": "B3_3d_placement",
+    "schedule": "finite_prefetch",
+    "tokens_s": 13294.36652589771
+  },
+  {
+    "scenario": "qwen_b32_c512",
+    "baseline": "B3_3d_placement",
+    "schedule": "blocked_collective",
+    "tokens_s": 13427.466000209994
+  },
+  {
+    "scenario": "qwen_b32_c512",
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "tokens_s": 13553.357499985595
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "serial",
+    "tokens_s": 10645.999150477339
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "finite_prefetch",
+    "tokens_s": 10774.370755967204
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "blocked_collective",
+    "tokens_s": 10649.951484608828
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "tokens_s": 10941.6558958851
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "serial",
+    "tokens_s": 10313.058401850149
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "finite_prefetch",
+    "tokens_s": 10397.893124874732
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "blocked_collective",
+    "tokens_s": 10316.767349559172
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "tokens_s": 10553.607491131987
+  },
+  {
+    "scenario": "qwen_b1_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "serial",
+    "tokens_s": 3842.466556131712
+  },
+  {
+    "scenario": "qwen_b1_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "finite_prefetch",
+    "tokens_s": 3953.4637778706838
+  },
+  {
+    "scenario": "qwen_b1_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "blocked_collective",
+    "tokens_s": 3893.542754019596
+  },
+  {
+    "scenario": "qwen_b1_c2k",
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "tokens_s": 4026.141738306826
+  },
+  {
+    "scenario": "qwen_b1_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "serial",
+    "tokens_s": 4159.101589866134
+  },
+  {
+    "scenario": "qwen_b1_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "finite_prefetch",
+    "tokens_s": 4290.560332346803
+  },
+  {
+    "scenario": "qwen_b1_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "blocked_collective",
+    "tokens_s": 4219.008013816196
+  },
+  {
+    "scenario": "qwen_b1_c2k",
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "tokens_s": 4376.295008303036
+  },
+  {
+    "scenario": "qwen_b2_c8k_context_control",
+    "baseline": "B2_stream_fusion",
+    "schedule": "serial",
+    "tokens_s": 4367.51150646284
+  },
+  {
+    "scenario": "qwen_b2_c8k_context_control",
+    "baseline": "B2_stream_fusion",
+    "schedule": "finite_prefetch",
+    "tokens_s": 4466.3275886590445
+  },
+  {
+    "scenario": "qwen_b2_c8k_context_control",
+    "baseline": "B2_stream_fusion",
+    "schedule": "blocked_collective",
+    "tokens_s": 4414.770613584695
+  },
+  {
+    "scenario": "qwen_b2_c8k_context_control",
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "tokens_s": 4539.376037229692
+  },
+  {
+    "scenario": "qwen_b2_c8k_context_control",
+    "baseline": "B3_3d_placement",
+    "schedule": "serial",
+    "tokens_s": 4276.727900709179
+  },
+  {
+    "scenario": "qwen_b2_c8k_context_control",
+    "baseline": "B3_3d_placement",
+    "schedule": "finite_prefetch",
+    "tokens_s": 4370.781523565998
+  },
+  {
+    "scenario": "qwen_b2_c8k_context_control",
+    "baseline": "B3_3d_placement",
+    "schedule": "blocked_collective",
+    "tokens_s": 4308.624718420961
+  },
+  {
+    "scenario": "qwen_b2_c8k_context_control",
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "tokens_s": 4426.560448582102
+  }
+]

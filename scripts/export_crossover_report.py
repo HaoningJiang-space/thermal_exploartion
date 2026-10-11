@@ -60,7 +60,8 @@ def main():
  for r in best:
   control=r['admission']['context_extension_assumed'];marker='x' if control else 'o';ax[0].scatter(r['arithmetic_intensity'],r['effective_mac_tflops'],c=colors[r['model']],marker=marker)
   label=('L' if r['model']=='llama31_8b' else 'Q')+str(r['batch'])+('/32K' if r['context']==32768 else '/8K' if r['context']==8192 else '')
-  ax[0].annotate(label,(r['arithmetic_intensity'],r['effective_mac_tflops']),xytext=(4,4),textcoords='offset points',fontsize=8)
+  offset=(4,-12) if r['scenario']=='qwen_b1_c2k' else (-16,8) if r['scenario']=='llama_b1_c2k' else (5,1) if control else (4,4)
+  ax[0].annotate(label,(r['arithmetic_intensity'],r['effective_mac_tflops']),xytext=offset,textcoords='offset points',fontsize=8)
  ax[0].axvline(128/26.599,ls=':',c='black');ax[0].set(xlabel='Actual MAC FLOP / DRAM read byte',ylabel='Effective MAC TFLOP/s',ylim=(0,140),xlim=(0,17));ax[0].legend(fontsize=8)
  labels=[('L' if r['model']=='llama31_8b' else 'Q')+str(r['batch'])+'/'+str(r['context']) for r in best]
  ax[1].bar(range(len(best)),[100*r['memory_lower_fraction'] for r in best],color=[colors[r['model']] for r in best]);ax[1].set(xticks=range(len(best)),xticklabels=labels,ylim=(0,105),ylabel='Bytes / reference service / execution (%)');ax[1].tick_params(axis='x',rotation=65)
@@ -73,9 +74,11 @@ def main():
  fig,ax=plt.subplots(1,2,figsize=(12,4.8))
  for axis,model in zip(ax,('llama','qwen')):
   for scenario in dict.fromkeys(r['scenario'] for r in frontier if r['scenario'].startswith(model)):
-   rr=sorted((r for r in frontier if r['scenario']==scenario),key=lambda r:r['compute_tflops']);axis.plot([r['compute_tflops'] for r in rr],[100*r['relative_performance'] for r in rr],'-o',label=scenario.replace(model+'_',''))
+   rr=sorted((r for r in frontier if r['scenario']==scenario),key=lambda r:r['compute_tflops'])
+   if len(rr)<2:continue
+   axis.plot([r['compute_tflops'] for r in rr],[100*r['relative_performance'] for r in rr],'-o',label=scenario.replace(model+'_',''))
   axis.axhline(100,ls='--',c='grey');axis.set(title=model.title(),xlabel='Peak MAC TFLOP/s (SRAM changes with profile)',ylabel='Relative tokens/s (%)',xticks=[64,96,128,152]);axis.legend(fontsize=8);axis.grid(alpha=.2)
- fig.suptitle('Fixed121mm² ledger: unassigned35.25mm² remains unavailable');save(fig,'architecture-frontier')
+ fig.suptitle('Fixed 121 mm² ledger: unassigned 35.25 mm² remains unavailable');save(fig,'architecture-frontier')
  fig,ax=plt.subplots(figsize=(9,4.3));key='llama_b4_c8k';rr=[r for r in schedules if r['scenario']==key]
  for i,b in enumerate(('B2_stream_fusion','B3_3d_placement')):
   v=[r for r in rr if r['baseline']==b];ax.bar([j+i*.38 for j in range(4)],[r['tokens_s'] for r in v],width=.38,label=b)

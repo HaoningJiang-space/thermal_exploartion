@@ -1,0 +1,282 @@
+[
+  {
+    "compute_tflops": 64,
+    "sram_mib": 47,
+    "default": {
+      "active_area_mm2": 79.18299456,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 9.48272,
+      "storage_area_mm2": 14.84363776,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.2,
+      "total_committed_mm2": 114.43299456,
+      "area_feasible": true,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    },
+    "phi0": {
+      "active_area_mm2": 79.91192319999999,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 9.48272,
+      "storage_area_mm2": 15.572566400000001,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0,
+      "total_committed_mm2": 115.16192319999999,
+      "area_feasible": true,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    },
+    "phi04": {
+      "active_area_mm2": 78.45406592,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 9.48272,
+      "storage_area_mm2": 14.11470912,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.4,
+      "total_committed_mm2": 113.70406592,
+      "area_feasible": true,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    }
+  },
+  {
+    "compute_tflops": 96,
+    "sram_mib": 40,
+    "default": {
+      "active_area_mm2": 82.06889984,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 14.22408,
+      "storage_area_mm2": 12.98818304,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.2,
+      "total_committed_mm2": 117.31889984,
+      "area_feasible": true,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    },
+    "phi0": {
+      "active_area_mm2": 82.33396479999999,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 14.22408,
+      "storage_area_mm2": 13.253248000000001,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0,
+      "total_committed_mm2": 117.58396479999999,
+      "area_feasible": true,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    },
+    "phi04": {
+      "active_area_mm2": 81.80383488,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 14.22408,
+      "storage_area_mm2": 12.72311808,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.4,
+      "total_committed_mm2": 117.05383488,
+      "area_feasible": true,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    }
+  },
+  {
+    "compute_tflops": 128,
+    "sram_mib": 36,
+    "default": {
+      "active_area_mm2": 85.75,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 18.96544,
+      "storage_area_mm2": 11.9279232,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.2,
+      "total_committed_mm2": 121.0,
+      "area_feasible": true,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    },
+    "phi0": {
+      "active_area_mm2": 85.75,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 18.96544,
+      "storage_area_mm2": 11.9279232,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0,
+      "total_committed_mm2": 121.0,
+      "area_feasible": true,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    },
+    "phi04": {
+      "active_area_mm2": 85.75,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 18.96544,
+      "storage_area_mm2": 11.9279232,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.4,
+      "total_committed_mm2": 121.0,
+      "area_feasible": true,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    }
+  },
+  {
+    "compute_tflops": 152,
+    "sram_mib": 18,
+    "default": {
+      "active_area_mm2": 84.53485072000001,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 22.52146,
+      "storage_area_mm2": 7.156753920000002,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.2,
+      "total_committed_mm2": 119.78485072000001,
+      "area_feasible": true,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    },
+    "phi0": {
+      "active_area_mm2": 83.3420584,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 22.52146,
+      "storage_area_mm2": 5.9639616,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0,
+      "total_committed_mm2": 118.5920584,
+      "area_feasible": true,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    },
+    "phi04": {
+      "active_area_mm2": 85.72764304,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 22.52146,
+      "storage_area_mm2": 8.34954624,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.4,
+      "total_committed_mm2": 120.97764304,
+      "area_feasible": true,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    }
+  },
+  {
+    "compute_tflops": 192,
+    "sram_mib": 24,
+    "default": {
+      "active_area_mm2": 92.05194048,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 28.44816,
+      "storage_area_mm2": 8.74714368,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.2,
+      "total_committed_mm2": 127.30194048,
+      "area_feasible": false,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    },
+    "phi0": {
+      "active_area_mm2": 91.25674559999999,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 28.44816,
+      "storage_area_mm2": 7.9519488,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0,
+      "total_committed_mm2": 126.50674559999999,
+      "area_feasible": false,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    },
+    "phi04": {
+      "active_area_mm2": 92.84713536000001,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 28.44816,
+      "storage_area_mm2": 9.542338560000001,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.4,
+      "total_committed_mm2": 128.09713536,
+      "area_feasible": false,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    }
+  },
+  {
+    "compute_tflops": 192,
+    "sram_mib": 6,
+    "default": {
+      "active_area_mm2": 87.2807712,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 28.44816,
+      "storage_area_mm2": 3.9759744000000006,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.2,
+      "total_committed_mm2": 122.5307712,
+      "area_feasible": false,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    },
+    "phi0": {
+      "active_area_mm2": 85.292784,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 28.44816,
+      "storage_area_mm2": 1.9879872,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0,
+      "total_committed_mm2": 120.542784,
+      "area_feasible": true,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    },
+    "phi04": {
+      "active_area_mm2": 89.2687584,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 28.44816,
+      "storage_area_mm2": 5.9639616,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.4,
+      "total_committed_mm2": 124.5187584,
+      "area_feasible": false,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    }
+  },
+  {
+    "compute_tflops": 256,
+    "sram_mib": 12,
+    "default": {
+      "active_area_mm2": 98.35388096,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 37.93088,
+      "storage_area_mm2": 5.566364160000001,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.2,
+      "total_committed_mm2": 133.60388096,
+      "area_feasible": false,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    },
+    "phi0": {
+      "active_area_mm2": 96.7634912,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 37.93088,
+      "storage_area_mm2": 3.9759744,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0,
+      "total_committed_mm2": 132.0134912,
+      "area_feasible": false,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    },
+    "phi04": {
+      "active_area_mm2": 99.94427071999999,
+      "fixed_area_mm2": 54.8566368,
+      "mac_area_mm2": 37.93088,
+      "storage_area_mm2": 7.15675392,
+      "reserved_unidentified_area_mm2": 35.25,
+      "fixed_row_swap_rf_mm2": 4.8726592,
+      "storage_fixed_fraction": 0.4,
+      "total_committed_mm2": 135.19427072,
+      "area_feasible": false,
+      "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+    }
+  }
+]

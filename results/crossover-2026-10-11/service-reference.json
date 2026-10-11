@@ -1,0 +1,724 @@
+{
+  "source_commit": "2bb172cb452f44586eea12eeafad506381cfaad1",
+  "logic_tick_ns": 0.25,
+  "dram_CK_ns": 0.5,
+  "dram_tick_ns": 0.25,
+  "ratio": 1,
+  "records": [
+    {
+      "name": "baseline",
+      "mechanism": "baseline",
+      "partial_row": false,
+      "settings": {
+        "timing_scale": 1.0,
+        "subarrays": 1,
+        "selector_ck": 0
+      },
+      "request_ordering": null,
+      "independent_commands": false,
+      "work": {
+        "request_count": 1048576,
+        "read_bytes": 1073741824,
+        "useful_flops": 0
+      },
+      "driver": {
+        "ticks": 161076,
+        "terminal_idle_ticks": 0,
+        "accepted": 1048576,
+        "returned": 1048576,
+        "consumed": 1048576,
+        "useful_bytes": 1073741824,
+        "useful_flops": 0,
+        "outstanding_max": 2288,
+        "outstanding_sum": 357200912,
+        "consumer_active_tile_ticks": 0,
+        "controller_send_rejects": 1521824,
+        "frontend_cycle_states": {
+          "controller_reject": 95114,
+          "service_or_return_progress": 65962
+        }
+      },
+      "commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 262640,
+          "RD": 1048576,
+          "PREpb": 260224,
+          "PREab": 320,
+          "REFab": 320
+        },
+        "commands": 1572080,
+        "logical_reads": 1048576,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "audit": {
+        "overlapping_ACTs": 0,
+        "selector_events": 256,
+        "PREab_rows": 2160,
+        "selector_scope": "Implicit address-selected local row buffer; 0.5ns first-access delay plus charged area/energy; not literal MASA SA_SEL commands"
+      },
+      "steady": {
+        "start_tick": 31200,
+        "end_tick": 140400,
+        "duration_ns": 27300.0,
+        "useful_tb_s": 26.59909391941392
+      },
+      "activity": {
+        "counts": {
+          "ACT": 262640,
+          "RD": 1048576,
+          "PREpb": 260224,
+          "PREab": 320,
+          "REFab": 320,
+          "PREab_rows": 2160
+        },
+        "useful_bytes": 1073741824,
+        "duration_ns": 40269.0,
+        "selector_events": 0
+      },
+      "timing_ns": {
+        "RCDRD": 2.5,
+        "RAS": 30.0,
+        "RP": 5.0,
+        "RC": 35.0
+      },
+      "resources": {
+        "physical_banks": 256,
+        "subarrays_per_bank": 1,
+        "native_local_states": 256,
+        "capacity_bytes": 34359738368,
+        "compute_tflops": 128,
+        "hb_tb_s": 32,
+        "K": 32
+      },
+      "scope": "Known-mechanism surrogate. Subarray selection is implicit with0.5ns first-access overhead; not literal SALP/MASA or qualified AL-DRAM"
+    },
+    {
+      "name": "subarray_overlap_2",
+      "mechanism": "subarray_overlap_2",
+      "partial_row": false,
+      "settings": {
+        "timing_scale": 1.0,
+        "subarrays": 2,
+        "selector_ck": 1
+      },
+      "request_ordering": null,
+      "independent_commands": false,
+      "work": {
+        "request_count": 1048576,
+        "read_bytes": 1073741824,
+        "useful_flops": 0
+      },
+      "driver": {
+        "ticks": 145574,
+        "terminal_idle_ticks": 0,
+        "accepted": 1048576,
+        "returned": 1048576,
+        "consumed": 1048576,
+        "useful_bytes": 1073741824,
+        "useful_flops": 0,
+        "outstanding_max": 5184,
+        "outstanding_sum": 496119728,
+        "consumer_active_tile_ticks": 0,
+        "controller_send_rejects": 1274464,
+        "frontend_cycle_states": {
+          "controller_reject": 79654,
+          "service_or_return_progress": 65920
+        }
+      },
+      "commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 265984,
+          "RD": 1048576,
+          "PREpb": 261232,
+          "PREab": 288,
+          "REFab": 288
+        },
+        "commands": 1576368,
+        "logical_reads": 1048576,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "audit": {
+        "overlapping_ACTs": 263424,
+        "selector_events": 267264,
+        "PREab_rows": 4240,
+        "selector_scope": "Implicit address-selected local row buffer; 0.5ns first-access delay plus charged area/energy; not literal MASA SA_SEL commands"
+      },
+      "steady": {
+        "start_tick": 31200,
+        "end_tick": 124800,
+        "duration_ns": 23400.0,
+        "useful_tb_s": 29.41628170940171
+      },
+      "activity": {
+        "counts": {
+          "ACT": 265984,
+          "RD": 1048576,
+          "PREpb": 261232,
+          "PREab": 288,
+          "REFab": 288,
+          "PREab_rows": 4240
+        },
+        "useful_bytes": 1073741824,
+        "duration_ns": 36393.5,
+        "selector_events": 267264
+      },
+      "timing_ns": {
+        "RCDRD": 3.0,
+        "RAS": 30.0,
+        "RP": 5.0,
+        "RC": 35.0
+      },
+      "resources": {
+        "physical_banks": 256,
+        "subarrays_per_bank": 2,
+        "native_local_states": 512,
+        "capacity_bytes": 34359738368,
+        "compute_tflops": 128,
+        "hb_tb_s": 32,
+        "K": 32
+      },
+      "scope": "Known-mechanism surrogate. Subarray selection is implicit with0.5ns first-access overhead; not literal SALP/MASA or qualified AL-DRAM"
+    },
+    {
+      "name": "row_cycle_oracle",
+      "mechanism": "row_cycle_oracle",
+      "partial_row": false,
+      "settings": {
+        "timing_scale": 1.0,
+        "subarrays": 1,
+        "selector_ck": 0,
+        "relax_row_retention": true
+      },
+      "request_ordering": null,
+      "independent_commands": false,
+      "work": {
+        "request_count": 1048576,
+        "read_bytes": 1073741824,
+        "useful_flops": 0
+      },
+      "driver": {
+        "ticks": 144560,
+        "terminal_idle_ticks": 0,
+        "accepted": 1048576,
+        "returned": 1048576,
+        "consumed": 1048576,
+        "useful_bytes": 1073741824,
+        "useful_flops": 0,
+        "outstanding_max": 5168,
+        "outstanding_sum": 497057056,
+        "consumer_active_tile_ticks": 0,
+        "controller_send_rejects": 1257920,
+        "frontend_cycle_states": {
+          "controller_reject": 78620,
+          "service_or_return_progress": 65940
+        }
+      },
+      "commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 263760,
+          "RD": 1048576,
+          "PREpb": 261552,
+          "PREab": 288,
+          "REFab": 288
+        },
+        "commands": 1574464,
+        "logical_reads": 1048576,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "audit": {
+        "overlapping_ACTs": 0,
+        "selector_events": 256,
+        "PREab_rows": 1952,
+        "selector_scope": "Implicit address-selected local row buffer; 0.5ns first-access delay plus charged area/energy; not literal MASA SA_SEL commands"
+      },
+      "steady": {
+        "start_tick": 31200,
+        "end_tick": 124800,
+        "duration_ns": 23400.0,
+        "useful_tb_s": 29.66134153846154
+      },
+      "activity": {
+        "counts": {
+          "ACT": 263760,
+          "RD": 1048576,
+          "PREpb": 261552,
+          "PREab": 288,
+          "REFab": 288,
+          "PREab_rows": 1952
+        },
+        "useful_bytes": 1073741824,
+        "duration_ns": 36140.0,
+        "selector_events": 0
+      },
+      "timing_ns": {
+        "RCDRD": 2.5,
+        "RAS": 6.5,
+        "RP": 5.0,
+        "RC": 11.5
+      },
+      "resources": {
+        "physical_banks": 256,
+        "subarrays_per_bank": 1,
+        "native_local_states": 256,
+        "capacity_bytes": 34359738368,
+        "compute_tflops": 128,
+        "hb_tb_s": 32,
+        "K": 32
+      },
+      "scope": "Known-mechanism surrogate. Subarray selection is implicit with0.5ns first-access overhead; not literal SALP/MASA or qualified AL-DRAM"
+    },
+    {
+      "name": "baseline_independent_commands",
+      "mechanism": "baseline",
+      "partial_row": false,
+      "settings": {
+        "timing_scale": 1.0,
+        "subarrays": 1,
+        "selector_ck": 0
+      },
+      "request_ordering": null,
+      "independent_commands": true,
+      "work": {
+        "request_count": 1048576,
+        "read_bytes": 1073741824,
+        "useful_flops": 0
+      },
+      "driver": {
+        "ticks": 158897,
+        "terminal_idle_ticks": 0,
+        "accepted": 1048576,
+        "returned": 1048576,
+        "consumed": 1048576,
+        "useful_bytes": 1073741824,
+        "useful_flops": 0,
+        "outstanding_max": 2299,
+        "outstanding_sum": 354248650,
+        "consumer_active_tile_ticks": 0,
+        "controller_send_rejects": 4287294,
+        "frontend_cycle_states": {
+          "controller_reject": 156665,
+          "service_or_return_progress": 2232
+        }
+      },
+      "commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 262822,
+          "RD": 1048576,
+          "PREpb": 260500,
+          "PREab": 320,
+          "REFab": 320
+        },
+        "commands": 1572538,
+        "logical_reads": 1048576,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "audit": {
+        "overlapping_ACTs": 0,
+        "selector_events": 256,
+        "PREab_rows": 2066,
+        "selector_scope": "Implicit address-selected local row buffer; 0.5ns first-access delay plus charged area/energy; not literal MASA SA_SEL commands"
+      },
+      "steady": {
+        "start_tick": 31200,
+        "end_tick": 140400,
+        "duration_ns": 27300.0,
+        "useful_tb_s": 26.985700805860805
+      },
+      "activity": {
+        "counts": {
+          "ACT": 262822,
+          "RD": 1048576,
+          "PREpb": 260500,
+          "PREab": 320,
+          "REFab": 320,
+          "PREab_rows": 2066
+        },
+        "useful_bytes": 1073741824,
+        "duration_ns": 39724.25,
+        "selector_events": 0
+      },
+      "timing_ns": {
+        "RCDRD": 2.5,
+        "RAS": 30.0,
+        "RP": 5.0,
+        "RC": 35.0
+      },
+      "resources": {
+        "physical_banks": 256,
+        "subarrays_per_bank": 1,
+        "native_local_states": 256,
+        "capacity_bytes": 34359738368,
+        "compute_tflops": 128,
+        "hb_tb_s": 32,
+        "K": 32
+      },
+      "scope": "Known-mechanism surrogate. Subarray selection is implicit with0.5ns first-access overhead; not literal SALP/MASA or qualified AL-DRAM"
+    },
+    {
+      "name": "subarray_overlap_2_independent_commands",
+      "mechanism": "subarray_overlap_2",
+      "partial_row": false,
+      "settings": {
+        "timing_scale": 1.0,
+        "subarrays": 2,
+        "selector_ck": 1
+      },
+      "request_ordering": null,
+      "independent_commands": true,
+      "work": {
+        "request_count": 1048576,
+        "read_bytes": 1073741824,
+        "useful_flops": 0
+      },
+      "driver": {
+        "ticks": 145458,
+        "terminal_idle_ticks": 0,
+        "accepted": 1048576,
+        "returned": 1048576,
+        "consumed": 1048576,
+        "useful_bytes": 1073741824,
+        "useful_flops": 0,
+        "outstanding_max": 5186,
+        "outstanding_sum": 497133412,
+        "consumer_active_tile_ticks": 0,
+        "controller_send_rejects": 3823229,
+        "frontend_cycle_states": {
+          "controller_reject": 143472,
+          "service_or_return_progress": 1986
+        }
+      },
+      "commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 266086,
+          "RD": 1048576,
+          "PREpb": 261302,
+          "PREab": 288,
+          "REFab": 288
+        },
+        "commands": 1576540,
+        "logical_reads": 1048576,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "audit": {
+        "overlapping_ACTs": 263526,
+        "selector_events": 267264,
+        "PREab_rows": 4272,
+        "selector_scope": "Implicit address-selected local row buffer; 0.5ns first-access delay plus charged area/energy; not literal MASA SA_SEL commands"
+      },
+      "steady": {
+        "start_tick": 31200,
+        "end_tick": 124800,
+        "duration_ns": 23400.0,
+        "useful_tb_s": 29.44
+      },
+      "activity": {
+        "counts": {
+          "ACT": 266086,
+          "RD": 1048576,
+          "PREpb": 261302,
+          "PREab": 288,
+          "REFab": 288,
+          "PREab_rows": 4272
+        },
+        "useful_bytes": 1073741824,
+        "duration_ns": 36364.5,
+        "selector_events": 267264
+      },
+      "timing_ns": {
+        "RCDRD": 3.0,
+        "RAS": 30.0,
+        "RP": 5.0,
+        "RC": 35.0
+      },
+      "resources": {
+        "physical_banks": 256,
+        "subarrays_per_bank": 2,
+        "native_local_states": 512,
+        "capacity_bytes": 34359738368,
+        "compute_tflops": 128,
+        "hb_tb_s": 32,
+        "K": 32
+      },
+      "scope": "Known-mechanism surrogate. Subarray selection is implicit with0.5ns first-access overhead; not literal SALP/MASA or qualified AL-DRAM"
+    },
+    {
+      "name": "row_cycle_oracle_independent_commands",
+      "mechanism": "row_cycle_oracle",
+      "partial_row": false,
+      "settings": {
+        "timing_scale": 1.0,
+        "subarrays": 1,
+        "selector_ck": 0,
+        "relax_row_retention": true
+      },
+      "request_ordering": null,
+      "independent_commands": true,
+      "work": {
+        "request_count": 1048576,
+        "read_bytes": 1073741824,
+        "useful_flops": 0
+      },
+      "driver": {
+        "ticks": 144426,
+        "terminal_idle_ticks": 0,
+        "accepted": 1048576,
+        "returned": 1048576,
+        "consumed": 1048576,
+        "useful_bytes": 1073741824,
+        "useful_flops": 0,
+        "outstanding_max": 5186,
+        "outstanding_sum": 498289045,
+        "consumer_active_tile_ticks": 0,
+        "controller_send_rejects": 3699605,
+        "frontend_cycle_states": {
+          "controller_reject": 138145,
+          "service_or_return_progress": 6281
+        }
+      },
+      "commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 263852,
+          "RD": 1048576,
+          "PREpb": 261582,
+          "PREab": 288,
+          "REFab": 288
+        },
+        "commands": 1574586,
+        "logical_reads": 1048576,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "audit": {
+        "overlapping_ACTs": 0,
+        "selector_events": 256,
+        "PREab_rows": 2014,
+        "selector_scope": "Implicit address-selected local row buffer; 0.5ns first-access delay plus charged area/energy; not literal MASA SA_SEL commands"
+      },
+      "steady": {
+        "start_tick": 31200,
+        "end_tick": 124800,
+        "duration_ns": 23400.0,
+        "useful_tb_s": 29.67757675213675
+      },
+      "activity": {
+        "counts": {
+          "ACT": 263852,
+          "RD": 1048576,
+          "PREpb": 261582,
+          "PREab": 288,
+          "REFab": 288,
+          "PREab_rows": 2014
+        },
+        "useful_bytes": 1073741824,
+        "duration_ns": 36106.5,
+        "selector_events": 0
+      },
+      "timing_ns": {
+        "RCDRD": 2.5,
+        "RAS": 6.5,
+        "RP": 5.0,
+        "RC": 11.5
+      },
+      "resources": {
+        "physical_banks": 256,
+        "subarrays_per_bank": 1,
+        "native_local_states": 256,
+        "capacity_bytes": 34359738368,
+        "compute_tflops": 128,
+        "hb_tb_s": 32,
+        "K": 32
+      },
+      "scope": "Known-mechanism surrogate. Subarray selection is implicit with0.5ns first-access overhead; not literal SALP/MASA or qualified AL-DRAM"
+    },
+    {
+      "name": "baseline_bank_row_interleave",
+      "mechanism": "baseline",
+      "partial_row": false,
+      "settings": {
+        "timing_scale": 1.0,
+        "subarrays": 1,
+        "selector_ck": 0
+      },
+      "request_ordering": "bank_row_interleave",
+      "independent_commands": false,
+      "work": {
+        "request_count": 1048576,
+        "read_bytes": 1073741824,
+        "useful_flops": 0
+      },
+      "driver": {
+        "ticks": 160826,
+        "terminal_idle_ticks": 0,
+        "accepted": 1048576,
+        "returned": 1048576,
+        "consumed": 1048576,
+        "useful_bytes": 1073741824,
+        "useful_flops": 0,
+        "outstanding_max": 2288,
+        "outstanding_sum": 356673856,
+        "consumer_active_tile_ticks": 0,
+        "controller_send_rejects": 1518384,
+        "frontend_cycle_states": {
+          "controller_reject": 94899,
+          "service_or_return_progress": 65927
+        }
+      },
+      "commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 262608,
+          "RD": 1048576,
+          "PREpb": 260208,
+          "PREab": 320,
+          "REFab": 320
+        },
+        "commands": 1572032,
+        "logical_reads": 1048576,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "audit": {
+        "overlapping_ACTs": 0,
+        "selector_events": 256,
+        "PREab_rows": 2144,
+        "selector_scope": "Implicit address-selected local row buffer; 0.5ns first-access delay plus charged area/energy; not literal MASA SA_SEL commands"
+      },
+      "steady": {
+        "start_tick": 31200,
+        "end_tick": 140400,
+        "duration_ns": 27300.0,
+        "useful_tb_s": 26.597893626373626
+      },
+      "activity": {
+        "counts": {
+          "ACT": 262608,
+          "RD": 1048576,
+          "PREpb": 260208,
+          "PREab": 320,
+          "REFab": 320,
+          "PREab_rows": 2144
+        },
+        "useful_bytes": 1073741824,
+        "duration_ns": 40206.5,
+        "selector_events": 0
+      },
+      "timing_ns": {
+        "RCDRD": 2.5,
+        "RAS": 30.0,
+        "RP": 5.0,
+        "RC": 35.0
+      },
+      "resources": {
+        "physical_banks": 256,
+        "subarrays_per_bank": 1,
+        "native_local_states": 256,
+        "capacity_bytes": 34359738368,
+        "compute_tflops": 128,
+        "hb_tb_s": 32,
+        "K": 32
+      },
+      "scope": "Known-mechanism surrogate. Subarray selection is implicit with0.5ns first-access overhead; not literal SALP/MASA or qualified AL-DRAM"
+    },
+    {
+      "name": "baseline_bank_column_interleave",
+      "mechanism": "baseline",
+      "partial_row": false,
+      "settings": {
+        "timing_scale": 1.0,
+        "subarrays": 1,
+        "selector_ck": 0
+      },
+      "request_ordering": "bank_column_interleave",
+      "independent_commands": false,
+      "work": {
+        "request_count": 1048576,
+        "read_bytes": 1073741824,
+        "useful_flops": 0
+      },
+      "driver": {
+        "ticks": 161498,
+        "terminal_idle_ticks": 0,
+        "accepted": 1048576,
+        "returned": 1048576,
+        "consumed": 1048576,
+        "useful_bytes": 1073741824,
+        "useful_flops": 0,
+        "outstanding_max": 2288,
+        "outstanding_sum": 357937344,
+        "consumer_active_tile_ticks": 0,
+        "controller_send_rejects": 1528720,
+        "frontend_cycle_states": {
+          "controller_reject": 95545,
+          "service_or_return_progress": 65953
+        }
+      },
+      "commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 262976,
+          "RD": 1048576,
+          "PREpb": 260496,
+          "PREab": 320,
+          "REFab": 320
+        },
+        "commands": 1572688,
+        "logical_reads": 1048576,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "audit": {
+        "overlapping_ACTs": 0,
+        "selector_events": 256,
+        "PREab_rows": 2224,
+        "selector_scope": "Implicit address-selected local row buffer; 0.5ns first-access delay plus charged area/energy; not literal MASA SA_SEL commands"
+      },
+      "steady": {
+        "start_tick": 31200,
+        "end_tick": 140400,
+        "duration_ns": 27300.0,
+        "useful_tb_s": 26.481465201465202
+      },
+      "activity": {
+        "counts": {
+          "ACT": 262976,
+          "RD": 1048576,
+          "PREpb": 260496,
+          "PREab": 320,
+          "REFab": 320,
+          "PREab_rows": 2224
+        },
+        "useful_bytes": 1073741824,
+        "duration_ns": 40374.5,
+        "selector_events": 0
+      },
+      "timing_ns": {
+        "RCDRD": 2.5,
+        "RAS": 30.0,
+        "RP": 5.0,
+        "RC": 35.0
+      },
+      "resources": {
+        "physical_banks": 256,
+        "subarrays_per_bank": 1,
+        "native_local_states": 256,
+        "capacity_bytes": 34359738368,
+        "compute_tflops": 128,
+        "hb_tb_s": 32,
+        "K": 32
+      },
+      "scope": "Known-mechanism surrogate. Subarray selection is implicit with0.5ns first-access overhead; not literal SALP/MASA or qualified AL-DRAM"
+    }
+  ],
+  "scope": "Serialized half-CK qualification; existing mechanism timing proxies only; not SALP circuitry or calibrated device. All reference requests/commands retained."
+}

@@ -1,0 +1,380 @@
+[
+  {
+    "scenario": "llama_b4_c8k",
+    "probe": "bank_cycle",
+    "speedup_fraction": 0.020838042729984352,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 108238.592,
+    "time_us": 106029.152,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b4_c8k",
+    "probe": "uniform_fast_tier",
+    "speedup_fraction": 0.02099673518275247,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 108238.592,
+    "time_us": 106012.672,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b4_c8k",
+    "probe": "hb_only",
+    "speedup_fraction": 0.0,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 108238.592,
+    "time_us": 108238.592,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b4_c8k",
+    "probe": "ingress_only",
+    "speedup_fraction": 0.0,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 108238.592,
+    "time_us": 108238.592,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b4_c8k",
+    "probe": "mac_only",
+    "speedup_fraction": 0.0,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 108238.592,
+    "time_us": 108238.592,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b4_c8k",
+    "probe": "HB16",
+    "speedup_fraction": -0.337515575686378,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 108238.592,
+    "time_us": 163382.848,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b4_c8k",
+    "probe": "FIFO_ingress128",
+    "speedup_fraction": -0.6490058720810294,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 108238.592,
+    "time_us": 308377.216,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b4_c8k",
+    "probe": "infinite_noc",
+    "speedup_fraction": 0.09217530570005072,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 108238.592,
+    "time_us": 99103.68000000001,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b4_c8k",
+    "probe": "ideal_memory",
+    "speedup_fraction": 0.12271864420956757,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 108238.592,
+    "time_us": 96407.584,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "probe": "bank_cycle",
+    "speedup_fraction": 0.005703024831002823,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 76706.08,
+    "time_us": 76271.104,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "probe": "uniform_fast_tier",
+    "speedup_fraction": 0.0064808555485109665,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 76706.08,
+    "time_us": 76212.16,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "probe": "hb_only",
+    "speedup_fraction": 0.0,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 76706.08,
+    "time_us": 76706.08,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "probe": "ingress_only",
+    "speedup_fraction": 0.0,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 76706.08,
+    "time_us": 76706.08,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "probe": "mac_only",
+    "speedup_fraction": 0.0,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 76706.08,
+    "time_us": 76706.08,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "probe": "HB16",
+    "speedup_fraction": -0.38340734216672034,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 76706.08,
+    "time_us": 124403.168,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "probe": "FIFO_ingress128",
+    "speedup_fraction": -0.6816591364338477,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 76706.08,
+    "time_us": 240955.80800000002,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "probe": "infinite_noc",
+    "speedup_fraction": 0.016844719253265028,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 76706.08,
+    "time_us": 75435.392,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "llama_b1_c2k",
+    "probe": "ideal_memory",
+    "speedup_fraction": 0.17001285173259206,
+    "baseline": "B3_3d_placement",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 76706.08,
+    "time_us": 65560.032,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "probe": "bank_cycle",
+    "speedup_fraction": 0.028548767596430435,
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 93587.297,
+    "time_us": 90989.6545,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "probe": "uniform_fast_tier",
+    "speedup_fraction": 0.032397517949373844,
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 93587.297,
+    "time_us": 90650.4475,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "probe": "hb_only",
+    "speedup_fraction": 0.0,
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 93587.297,
+    "time_us": 93587.297,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "probe": "ingress_only",
+    "speedup_fraction": 0.0,
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 93587.297,
+    "time_us": 93587.297,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "probe": "mac_only",
+    "speedup_fraction": 0.11164491629512407,
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 93587.297,
+    "time_us": 84188.12125,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "probe": "HB16",
+    "speedup_fraction": -0.17096137987351945,
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 93587.297,
+    "time_us": 112886.53475,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "probe": "FIFO_ingress128",
+    "speedup_fraction": -0.5062380576140991,
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 93587.297,
+    "time_us": 189539.30825,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "probe": "infinite_noc",
+    "speedup_fraction": 0.1323026480374212,
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 93587.297,
+    "time_us": 82652.193,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  },
+  {
+    "scenario": "qwen_b8_c2k",
+    "probe": "ideal_memory",
+    "speedup_fraction": 0.08298371220207956,
+    "baseline": "B2_stream_fusion",
+    "schedule": "prefetch_collective",
+    "reference_time_us": 93587.297,
+    "time_us": 86416.163,
+    "work_preserved": {
+      "dram": true,
+      "mac": true,
+      "hb": true
+    }
+  }
+]

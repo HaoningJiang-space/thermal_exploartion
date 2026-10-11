@@ -1,0 +1,10 @@
+{
+  "points": 275,
+  "statuses": {
+    "PASS_ACCOUNTING": 185,
+    "INFEASIBLE_FINITE_SCHEDULE": 90
+  },
+  "steps": 128,
+  "primary_source": "2bb172c",
+  "supplement_source": "6bf1571"
+}

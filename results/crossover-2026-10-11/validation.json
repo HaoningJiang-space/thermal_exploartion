@@ -1,0 +1,40 @@
+{
+  "regression_tests": {
+    "command": "python -m unittest discover -s tests -q",
+    "passed": 113,
+    "failed": 0
+  },
+  "native_kernel_cases": {
+    "transaction_timing_port_validation_passed": 12,
+    "independent_flit_fifo_credit_replay_passed": 12
+  },
+  "long_stream_cases": {
+    "passed": 8,
+    "requests_each": 1048576,
+    "generated_native_tick_ns": 0.25,
+    "python_CK_ns": 0.5
+  },
+  "whole_model_points": {
+    "points": 275,
+    "statuses": {
+      "PASS_ACCOUNTING": 185,
+      "INFEASIBLE_FINITE_SCHEDULE": 90
+    },
+    "steps": 128,
+    "primary_source": "2bb172c",
+    "supplement_source": "6bf1571"
+  },
+  "cross_fidelity": {
+    "cases": 5,
+    "within_10_percent": 3,
+    "outside_10_percent": 2,
+    "maximum_relative_error": 0.19856928579670008
+  },
+  "thermal": {
+    "default_points": 19,
+    "maximum_periodic_logic_c": 65.81214078667318,
+    "maximum_periodic_dram_c": 65.13152683980228,
+    "maximum_pace_factor": 1.0
+  },
+  "evidence_boundary": "Software/state/numerical checks and conditional structural predictions; not device validation, numerical LLM inference or new-hardware qualification"
+}

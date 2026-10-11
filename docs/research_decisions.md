@@ -30,3 +30,20 @@ H1容量上界只能产生Research Signal；没有耦合执行、已知数据流
 Flash-Decoding已有分区KV局部计算再合并的执行方式，不能把这一步直接当作新的协作单元。
 依据：[Flash-Decoding作者说明](https://crfm.stanford.edu/2023/10/12/flashdecoding.html)、
 [FlashAttention](https://arxiv.org/abs/2205.14135)、[FlashInfer](https://arxiv.org/abs/2501.01005)。
+
+## 2026-10-11 — Architecture Crossover gate
+
+本轮交付见[正式报告](../results/crossover-2026-10-11/findings.md)。
+跨越4.812FLOP/B参考交叉点，新增Llama B8/B16与Qwen B16/B32；原始Qwen1.5受控FP32路由替换主实验的Qwen2投影。
+185个成功执行点各128步，90个有限调度/面积失败全部保留。固定121mm²账目将35.25mm²未知面积冻结不可用。
+MAC与Matrix RF一起缩放、Row-swap RF固定；152TF/18MiB的模型内Llama B16/Qwen B16收益为12.92%/7.06%。
+Qwen B32的小SRAM失败属于所测调度的工作空间边界，不能当成硬件不可行证明。
+默认19个热评价点最高65.81°C，Thermal不构成新架构核心动机。
+
+Research Go：保留资源交叉与NoC–执行交互证据。
+Hardware Go：未建立。当前结果不证明HB特有的新结构，也尚未排除更强的EP/TP和合法流式执行。
+跨精度最大延迟误差19.86%与11.34%未被掩盖；普通软件边界应先在详细执行中验证。
+已关闭的Fabric、Peripheral、Row-cycle硬件分支保持关闭，不以本轮正收益重启它们，也不否定整个HB方向。
+
+本轮初始“历史时钟快一倍”的审计判断已撤回：上游序列化将0.5ns CK变成0.25ns原生半周期。
+旧换算正确；新错误二分频及其衍生低service-guard模型归为retired controls。历史发布记录不改动。
