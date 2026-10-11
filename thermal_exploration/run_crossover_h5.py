@@ -15,8 +15,8 @@ def main():
   directory=Path(name)
   for r in json.loads((directory/'summary.json').read_text()):
    if r.get('status')!='PASS_ACCOUNTING' or r['profile']['isolation']!='none' or r['profile']['hb_tb_s']!=32 or r['profile']['fifo_ingress_bytes_tick']!=500:continue
-   if r['scenario'] not in ('llama_b1_c2k','llama_b16_c2k','qwen_b8_c2k','qwen_b32_c512'):continue
-   key=(r['scenario'],r['profile']['compute_tflops'],r['routing'])
+   if r['scenario'] not in ('llama_b1_c2k','llama_b16_c2k','qwen_b8_c2k','qwen_b16_c512','qwen_b32_c512'):continue
+   key=(r['scenario'],r['profile']['compute_tflops'],r['routing'],r['profile']['service_tb_s'])
    previous=next((x for x in selected if x[0]==key),None)
    if previous and previous[2]['time_us']<=r['time_us']:continue
    if previous:selected.remove(previous)

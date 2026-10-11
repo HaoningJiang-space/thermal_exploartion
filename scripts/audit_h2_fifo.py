@@ -85,7 +85,8 @@ def main():
     records={}
     for run in map(Path,a.runs):
         for case in sorted(p for p in run.iterdir() if p.is_dir() and (p/'result.json').exists()):
-            records[case.name]=audit(case);print(case.name,records[case.name]['status'],flush=True)
+            key=run.name+'/'+case.name
+            records[key]=audit(case);print(key,records[key]['status'],flush=True)
     Path(a.output).write_text(json.dumps(records,indent=2)+'\n')
 
 

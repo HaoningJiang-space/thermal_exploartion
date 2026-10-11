@@ -10,7 +10,7 @@ from .model_contract import ROOT,load_model,capacity,expected_mac_flops
 from .run import revision
 
 ISOLATION_CASES=('llama_b1_c2k','llama_b4_c8k','qwen_b8_c2k')
-FRONTIER_CASES=('llama_b1_c2k','llama_b4_c8k','llama_b16_c2k','qwen_b1_c2k','qwen_b8_c2k','qwen_b32_c512')
+FRONTIER_CASES=('llama_b1_c2k','llama_b4_c8k','llama_b16_c2k','qwen_b1_c2k','qwen_b8_c2k','qwen_b16_c512','qwen_b32_c512')
 
 def routes_for(c,batch,step,route_data,mode):
     if c['model_type']=='llama':return None
@@ -79,7 +79,7 @@ def main():
        'D1 guard is not theorematically attainable service for each operator','bank_cycle removes only tier bank-cycle ceiling; keeps shared D1 guard',
        'ingress_only removes FIFO input serialization while preserving HB and FIFO output rate; conventional SRAM copies eliminated by baseline',
        'Prefetch only immediately preceding non-memory/non-MAC phase;256KiB FIFO; routed experts wait for actual routing',
-       'GatedFFN pairing and bounded expert-cohort accumulation are known software mechanisms','Full materialized LM-head output retained; reduced SRAM may reject a case that known streaming Logit Selection could recover',
+       'GatedFFN pairing and bounded expert-cohort accumulation are known software mechanisms','Bounded64-row logit scan and associative greedy selection are known software mechanisms; expert whole-partial workspace may reject a case recoverable by row-blocked accumulation',
        'Same frozen32GiB regional/tier capacity; all128steps; QwenC8192 extension isolated as control'])
     (out/'contract.json').write_text(json.dumps(contract,indent=2)+'\n');summaries=[];admissions=[]
     def add(c,ad,layout,p,s,scenario):
