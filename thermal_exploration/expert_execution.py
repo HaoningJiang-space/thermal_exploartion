@@ -81,7 +81,7 @@ class RowBlockedExecution(CrossoverExecution):
 
     def token(self,*args,**kwargs):
         r=super().token(*args,**kwargs);r['row_block_ledger']=self.row_ledger
-        r['scope']+='; known64-row expert accumulation, conservative single-expert cohorts'
+        r['scope']+='; known64-row expert accumulation, bounded gated-state cohorts'
         return r
 
 

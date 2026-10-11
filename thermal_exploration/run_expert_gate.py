@@ -71,6 +71,10 @@ def point(c,layout,layer,route,p,schedule,order,isolation,out,label,full=False):
   maxgap=sum(ev['unattributed_gap_ticks'] for ev in z['critical_path'])
   if sum(chain.values())+maxgap!=z['ticks']:raise ValueError('Critical chain does not close')
   result={k:z[k] for k in ('time_us','ticks','activity','per_tile_activity','buffer_high','credit_stall_probes','validation','fidelity')}
+  result['packet_dag_activity']=dict(result['activity'])
+  result['activity']=dict(result['activity'],dram=meta['actual_dram_bytes'],hb=meta['actual_dram_bytes'])
+  result['activity']['sram_read']=result['activity'].get('sram_read',0)+sum(x['activity']['sram_read'] for x in meta['kernel_ledger'])
+  result['critical_attribution_note']='Gate/up and down-row MAC nodes are JOINT memory/MAC services, not pure compute durations; component oracles are nonadditive.'
   result.update(status='PASS_ACCOUNTING',critical_path=z['critical_path'],critical_chain_ticks=dict(chain),critical_gap_ticks=maxgap,expert_service_latency=latencies,tail_expert=max(latencies,key=lambda x:x['finish_us']),mac_flops=meta['mac_flops'],actual_dram_bytes=meta['actual_dram_bytes'],active_weight_bytes=meta['active_weight_bytes'],all_expert_model_weight_bytes=meta['all_expert_model_weight_bytes'],counts=meta['counts'],effective_s_mfu=meta['mac_flops']/(z['ticks']*.25e-9*p.compute_tflops*1e12),effective_s_mbu=meta['active_weight_bytes']/(z['ticks']*.25e-9*p.service_tb_s*1e12),actual_read_utilization=meta['actual_dram_bytes']/(z['ticks']*.25e-9*p.service_tb_s*1e12),kernel_service_windows=[{k:v for k,v in rec.items() if k not in ('byte_completion','mac_blocks')} for rec in meta['kernel_ledger']],scope=meta['scope'])
   if full:
    path=out/(label+'-events.json.gz')
@@ -83,12 +87,15 @@ def point(c,layout,layer,route,p,schedule,order,isolation,out,label,full=False):
  return result
 
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--routes',required=True);ap.add_argument('--output',required=True);ap.add_argument('--mode',choices=('stats','rows','experts','isolation'),required=True);ap.add_argument('--baseline',choices=('B2_stream_fusion','B3_3d_placement'),default='B3_3d_placement');ap.add_argument('--tp',choices=('1','4','16','hybrid'),default='16');ap.add_argument('--batch',type=int,default=8);ap.add_argument('--steps',type=int,default=128);a=ap.parse_args()
+ ap=argparse.ArgumentParser();ap.add_argument('--routes',required=True);ap.add_argument('--prior-routes');ap.add_argument('--output',required=True);ap.add_argument('--mode',choices=('stats','rows','experts','isolation'),required=True);ap.add_argument('--baseline',choices=('B2_stream_fusion','B3_3d_placement'),default='B3_3d_placement');ap.add_argument('--tp',choices=('1','4','16','hybrid'),default='16');ap.add_argument('--batch',type=int,default=8);ap.add_argument('--steps',type=int,default=128);a=ap.parse_args()
  r,sha=captured(a.routes);out=Path(a.output);out.mkdir(parents=True,exist_ok=False)
  write(out/'provenance.json',dict(source_commit=revision(),dirty=bool(subprocess.check_output(['git','status','--porcelain'],text=True).strip()),routing_sha256=sha,route_model=r['model'],dtype=r['execution_dtype'],params=vars(a),selected_steps=STEPS,selected_layers=LAYERS,scope='Fixed P0–P3; no RTL or thermal scan'))
  if a.mode=='stats':stats(r,out);return
  if a.mode=='rows':rows(r,out,a.baseline,a.steps);return
- c=load_model('qwen15_moe');ad=capacity(c,a.batch,r['capture_context']);tp=a.tp if a.tp=='hybrid' else int(a.tp);layout=resident_layout(c,ad,a.baseline,r.get('training_expected_activations'),tp)
+ prior=r.get('training_expected_activations')
+ if a.prior_routes:
+  pr,ph=captured(a.prior_routes);prior=pr['training_expected_activations'];write(out/'prior-provenance.json',dict(routing_sha256=ph,scope='Frozen separate training prefix, never evaluation routing'))
+ c=load_model('qwen15_moe');ad=capacity(c,a.batch,r['capture_context']);tp=a.tp if a.tp=='hybrid' else int(a.tp);layout=resident_layout(c,ad,a.baseline,prior,tp)
  write(out/'resident-layout.json',layout);summaries=[]
  steps=[s for s in STEPS if s<r['steps']];layers=[l for l in LAYERS if l<len(r['routes'])]
  if r['steps']<128:steps=sorted(set((0,r['steps']-1)));layers=[0,15,23]

@@ -1,0 +1,25 @@
+{
+  "model": "Qwen/Qwen1.5-MoE-A2.7B",
+  "revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+  "records": [
+    {
+      "family": "topic_short",
+      "route_records": 768,
+      "ordered_top4_equal": 0.84375,
+      "top4_set_equal": 0.9270833333333334,
+      "mean_top4_overlap": 0.9817708333333334,
+      "same_inputs": true,
+      "generated_argmax_equal": 0.96875
+    },
+    {
+      "family": "code_math",
+      "route_records": 768,
+      "ordered_top4_equal": 0.83203125,
+      "top4_set_equal": 0.9205729166666666,
+      "mean_top4_overlap": 0.9801432291666666,
+      "same_inputs": true,
+      "generated_argmax_equal": 1.0
+    }
+  ],
+  "scope": "Small paired control, not universal BF16 routing identity"
+}
