@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "research": "Hybrid-Bonded 3D Compute–Memory–Communication Architecture Crossover",
+  "parent_result_commit": "849c796",
+  "decode_steps": 128,
+  "default_profile": {"area_mm2": 121, "compute_tflops": 128, "sram_mib": 36, "dram_gib": 32, "hb_tb_s": 32, "mesh_link_gb_s": 32, "tiles": 16, "banks": 256},
+  "reserved_unidentified_area_mm2": 35.25,
+  "resizable_mac_reference_mm2": 13.9468928,
+  "resizable_storage_reference_mm2": 21.8191296,
+  "area_scaling_classification": "Reasonably assumed: replicated MAC and linearly scaled aggregate SRAM/RF area; fixed clocks and port widths; not a layout or CACTI reconstruction",
+  "scenarios": {
+    "llama_b1_c2k": ["llama31_8b", 1, 2048],
+    "llama_b1_c32k": ["llama31_8b", 1, 32768],
+    "llama_b4_c8k": ["llama31_8b", 4, 8192],
+    "llama_b8_c2k": ["llama31_8b", 8, 2048],
+    "llama_b16_c2k": ["llama31_8b", 16, 2048],
+    "qwen_b1_c2k": ["qwen15_moe", 1, 2048],
+    "qwen_b2_c8k_context_control": ["qwen15_moe", 2, 8192],
+    "qwen_b8_c2k": ["qwen15_moe", 8, 2048],
+    "qwen_b16_c512": ["qwen15_moe", 16, 512],
+    "qwen_b32_c512": ["qwen15_moe", 32, 512]
+  },
+  "profiles": [[64, 47], [96, 40], [128, 36], [192, 24], [256, 12]],
+  "isolation": ["bank_cycle", "uniform_fast_tier", "hb_only", "ingress_only", "mac_only"],
+  "scheduling": ["serial", "finite_prefetch", "blocked_collective", "prefetch_collective"],
+  "software_sources": {
+    "SET": "https://github.com/SET-Scheduling-Project/SET-ISCA2023/tree/a7bd73912f58d9fea10fadab693eebd4e6e3054d",
+    "SoMa": "https://github.com/SET-Scheduling-Project/SoMa-HPCA2025/tree/6e808366f0005b0280cbab12a8a1d58cbbec827a",
+    "DeepStack": "https://github.com/tile-ai/DeepStack/tree/17e21bf54115e11b9e7c6edc0b2d1723d25d022b"
+  },
+  "scope": "Named finite prefetch / producer-collective overlap adaptations, not reproduction of complete upstream optimizers. Freeze 35.25mm2 as unavailable; preserve all infeasible outcomes. No new Peripheral DSE, RTL, or Thermal DSE."
+}
