@@ -25,7 +25,7 @@ def event_energy(directory,r,bins=128,logic_memory_share=.48):
     totals={}
     with gzip.open(file,'rt') as f:
         for line in f:
-            event=json.loads(line);a,b=event['start_tick'],event['finish_tick']
+            event=json.loads(line);a,b=event.get('overlap_start_tick',event['start_tick']),event['finish_tick']
             for tile,kinds in event['activity'].items():
                 tile=int(tile);window=event.get('tile_kernel_windows',{}).get(str(tile),{})
                 for kind,work in kinds.items():
@@ -35,11 +35,13 @@ def event_energy(directory,r,bins=128,logic_memory_share=.48):
                         # Aggregate full-row energy scale, NOT a calibrated
                         # ACT/PRE/RD/WR model. Interface/peripheral already in it.
                         joules=work*3.432e-12
-                        deposit(a,finish,tile,joules*logic_memory_share);deposit(a,finish,tile+16,joules*(1-logic_memory_share))
+                        memory_start=a+window.get('memory_start_tick',0)
+                        memory_end=min(b,a+window.get('hb_last_tick',window.get('ticks',b-a))) if 'memory_start_tick' in window else finish
+                        deposit(memory_start,memory_end,tile,joules*logic_memory_share);deposit(memory_start,memory_end,tile+16,joules*(1-logic_memory_share))
                         ledger['memory_access_j']=ledger.get('memory_access_j',0)+joules
                         if stream:
                             extra=work*COEFFICIENTS['fifo_and_steering_pj_byte']*1e-12
-                            deposit(a,finish,tile,extra);ledger['fifo_steering_j']=ledger.get('fifo_steering_j',0)+extra
+                            deposit(memory_start,memory_end,tile,extra);ledger['fifo_steering_j']=ledger.get('fifo_steering_j',0)+extra
                         continue
                     coeff=dict(mac=COEFFICIENTS['mac_pj_flop'],vector=COEFFICIENTS['vector_pj_op'],link=COEFFICIENTS['noc_pj_byte_hop'],sram_read=COEFFICIENTS['sram_pj_byte'],sram_write=COEFFICIENTS['sram_pj_byte']).get(kind,0)
                     # HB is included in the memory aggregate, no second charge.

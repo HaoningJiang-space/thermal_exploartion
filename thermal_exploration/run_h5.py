@@ -90,17 +90,22 @@ def idle_pace(audit,segments,p0):
     return dict(factor=hi,unpaced=raw,paced=best)
 
 
-def evaluate(r,energy,ledger,p,cooling,scale=1.,backend='scipy',bins=64,grid=4,pacing_mode='uniform'):
+def evaluate(r,energy,ledger,p,cooling,scale=1.,backend='scipy',bins=64,grid=4,pacing_mode='uniform',physical_contract=None):
     if cooling<=0 or scale<=0 or r['time_us']<=0 or np.any(energy<0) or energy.shape!=(bins,32):raise ValueError('Invalid physical energy/time/boundary')
     profile=json.loads(json.dumps(p));profile['parameters']['package_top_resistance_k_w']['value']=cooling
     tc=thermal_config(profile);cost=organization_cost(profile,2,'fixed_compute');stream=r['variant'].startswith('known_fifo')
     if grid not in (4,8):raise ValueError('Unsupported convergence grid')
     tc['tile_pitch_m']*=4/grid
     active_area=cost['active_area_mm2']+(COEFFICIENTS['fifo_steering_area_mm2'] if stream else 0)
+    static_delta=0.
+    if physical_contract is not None:
+        active_area=physical_contract['active_area_mm2']
+        if active_area+physical_contract['reserved_unidentified_area_mm2']>121+1e-8:raise ValueError('Committed area exceeds budget')
+        static_delta=physical_contract['variable_area_static_delta_w']
     if active_area>121:raise ValueError('Area budget exceeded')
     # All private storage is reallocated within36MiB; no capacity oracle is
     # evaluated as paid hardware. Background has explicit physical location.
-    p0=np.r_[np.full(16,(3.2+cost['periphery_static_w']+.5+(COEFFICIENTS['fifo_steering_static_w'] if stream else 0))/16),np.full(16,4.8/16)]
+    p0=np.r_[np.full(16,(3.2+cost['periphery_static_w']+.5+(COEFFICIENTS['fifo_steering_static_w'] if stream else 0)+static_delta)/16),np.full(16,4.8/16)]
     duration=r['time_us']*1e-6;dt=duration/bins
     powers=p0[None,:]+energy*scale/dt
     if grid==8:
@@ -131,7 +136,7 @@ def evaluate(r,energy,ledger,p,cooling,scale=1.,backend='scipy',bins=64,grid=4,p
         periodic_logic_peak_c=paced['paced']['logic_peak_upper_c'],periodic_dram_peak_c=paced['paced']['dram_peak_upper_c'],
         node_peak_upper_c=paced['paced']['node_peak_upper_c'],mean_power_w=mean.tolist(),
         unpaced_periodic_peak_c=max(paced['unpaced']['logic_peak_upper_c'],paced['unpaced']['dram_peak_upper_c']),
-        area_mm2=active_area,sram_bytes=36*2**20,energy_ledger_j=ledger,energy_scale=scale,cooling_top_k_w=cooling,grid=grid,bins=bins,
+        area_mm2=active_area,sram_bytes=physical_contract['sram_bytes'] if physical_contract else 36*2**20,energy_ledger_j=ledger,energy_scale=scale,cooling_top_k_w=cooling,grid=grid,bins=bins,
         thermal_numerical=numerical,periodic=audit.record,energy_balance_error_k=paced['paced']['mean_energy_balance_error_k'],
         scope='Conditional event-derived periodic RC schedule, uniform pacing; not measured tokens/s, calibrated package or optimal thermal scheduler')
 
