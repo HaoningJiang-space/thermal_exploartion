@@ -19,7 +19,7 @@ ORACLES=('none','ideal_memory','infinite_noc','ideal_buffer','ideal_collective',
 
 def resident_layout(c, admission, baseline, prior=None, tp=16):
     """Each physical channel/tier has256MiB; no globally pooled fast tier."""
-    if tp not in (4,16):raise ValueError('Unsupported static TP/EP layout')
+    if tp not in (1,4,16,'hybrid'):raise ValueError('Unsupported static TP/EP layout')
     rows=tensors(c); room=np.full((16,8),256*2**20,dtype=np.int64);layout={}
     def priority(t):
         if t['family']=='embedding':return 0.
@@ -30,9 +30,15 @@ def resident_layout(c, admission, baseline, prior=None, tp=16):
     ordered=sorted(rows,key=lambda t:(-priority(t),t['name'])) if baseline=='B3_3d_placement' else rows
     for t in ordered:
         owners=list(range(16))
-        if t['family']=='routed' and tp==4:
-            group=(t['expert']+t['layer'])%4
-            owners=list(range(group*4,group*4+4))
+        if t['family']=='routed' and tp!=16:
+            width=tp
+            if tp=='hybrid':
+                # Frozen training prior only, no future Decode routing.
+                scores=prior[t['layer']] if prior is not None else [0]*c['num_experts']
+                hot=sorted(range(c['num_experts']),key=lambda e:(-scores[e],e))[:8]
+                width=16 if t['expert'] in hot else 4
+            group=(t['expert']+t['layer'])%(16//width)
+            owners=list(range(group*width,group*width+width))
         remaining=ceil(t['bytes']/len(owners)/4096)*4096
         spans={}
         for tile in owners:

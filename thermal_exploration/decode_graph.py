@@ -196,14 +196,23 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
             # A fixed drain-first policy is common to every counterfactual.
             for key in sorted(queues,key=lambda k:(priority[g.nodes[queues[k][0][1]].kind] if queues[k] else 99,str(k))):
                 if not queues[key] or busy.get(key,0)>clock:continue
+                candidate=queues[key][0][1]
+                coupled=[tuple(k) for k in g.meta.get('coupled_resources',{}).get(candidate,())]
+                if any(busy.get(k,0)>clock for k in coupled):continue
                 _,i=queues[key][0];node=g.nodes[i]
                 if any(used[k]+a>cap(k) for k,a,_ in node.leases):
                     wait[node.kind+'_credit']+=1;continue
+                required=Counter()
+                for k,a,_ in node.leases:required[k[1]]+=a
+                if mode!='ideal_buffer' and any(private_used[t]+fixed[t]+a>private_budget for t,a in required.items()):
+                    wait[node.kind+'_private_credit']+=1;continue
                 heapq.heappop(queues[key])
                 if not queues[key]:del queues[key]
                 start[i]=clock;progress=True
                 candidates=[(int(done[j]),j,'dependency') for j in node.deps]
                 if key in last_resource:candidates.append((busy[key],last_resource[key],'resource'))
+                for k in coupled:
+                    if k in last_resource:candidates.append((busy[k],last_resource[k],'resource'))
                 for k,_,_ in node.leases:
                     if k in last_release:candidates.append((last_release[k][1],last_release[k][0],'buffer_credit'))
                 candidates=[x for x in candidates if x[0]<=clock]
@@ -225,6 +234,7 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
                 # Direct streaming is a separate graph with a bounded FIFO;
                 # it is not implemented by secretly dropping compute work.
                 finish=clock+duration;busy[key]=finish;last_resource[key]=i
+                for k in coupled:busy[k]=finish;last_resource[k]=i
                 for k,a,last in node.leases:
                     used[k]+=a;private_used[k[1]]+=a;high[k]=max(high[k],used[k]);owners[k][i]+=1;release[last].append((k,a,i))
                 if mode!='ideal_buffer' and any(private_used[t]+fixed[t]>private_budget for t in range(16)):
@@ -239,7 +249,9 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
         raise ValueError('Noncausal execution or unreleased buffer')
     # Independent per-resource overlap replay, also applied to zero-time oracles.
     intervals=defaultdict(list)
-    for node in g.nodes:intervals[node.resource].append((int(start[node.id]),int(done[node.id]),node.id))
+    for node in g.nodes:
+        for resource in [node.resource]+[tuple(k) for k in g.meta.get('coupled_resources',{}).get(node.id,())]:
+            intervals[resource].append((int(start[node.id]),int(done[node.id]),node.id))
     for values in intervals.values():
         ordered=sorted(values)
         if any(a[1]>b[0] for a,b in zip(ordered,ordered[1:])):raise ValueError('Shared resource overcommitted')
