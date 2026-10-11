@@ -28,7 +28,9 @@ class CrossoverTests(unittest.TestCase):
   self.assertGreaterEqual(r['ticks'],r['mac_busy_ticks'])
  def test_area_and_workspace_not_free(self):
   self.assertAlmostEqual(Profile().area()['total_committed_mm2'],121)
-  self.assertTrue(Profile(192,24).area()['area_feasible'])
+  self.assertTrue(Profile(152,18).area()['area_feasible'])
+  self.assertFalse(Profile(192,24).area()['area_feasible'])
+  self.assertTrue(Profile(152,18).area(.4)['area_feasible'])
   self.assertFalse(Profile(192,36).area()['area_feasible'])
   self.assertFalse(Profile(256,12).budget(32,2048,5632)['feasible'])
  def test_complete_schedule_conservation_and_global_dependency(self):
@@ -42,11 +44,19 @@ class CrossoverTests(unittest.TestCase):
   self.assertGreaterEqual(events['layer0.residual_postnorm_partial']['start_tick'],events['layer0.o_reduce']['finish_tick'])
   self.assertGreaterEqual(events['layer1.input_norm_partial_stats']['start_tick'],events['layer0.residual']['finish_tick'])
   self.assertEqual(sum(r['critical_path_ticks'].values()),r['ticks'])
+ def test_streamed_logits_fit_area_candidate_and_preserve_work(self):
+  c=load_model('llama31_8b');a=capacity(c,16,2048);layout=resident_layout(c,a,'B3_3d_placement')
+  r=CrossoverExecution(c,a,layout,profile=Profile(152,18),schedule='prefetch_collective').token(16,2048)
+  self.assertEqual(r['activity']['mac'],expected_mac_flops(c,16,2048))
+  logit=next(e for e in r['events'] if e['stage']=='lm_head_streaming_selection')
+  self.assertLessEqual(max(logit['maximum_logit_pending_bytes'].values()),2*64*16*4)
+  self.assertIn('max/index',r['events'][-1]['semantics'])
  def test_router_causality_and_large_cohort_lifetime(self):
   c=load_model('qwen15_moe');a=capacity(c,32,512);layout=resident_layout(c,a,'B3_3d_placement')
   routes=[[[i%60,(i+1)%60,(i+2)%60,(i+3)%60] for i in range(32)] for l in range(24)]
   r=CrossoverExecution(c,a,layout,schedule='prefetch_collective').token(32,512,routes)
-  narrow=CrossoverExecution(c,a,layout,profile=Profile(192,24),schedule='prefetch_collective');narrow.layer(0,32,512,routes[0])
+  narrow=CrossoverExecution(c,a,layout,profile=Profile(152,18),schedule='prefetch_collective')
+  with self.assertRaisesRegex(ValueError,'Cohort'):narrow.layer(0,32,512,routes[0])
   self.assertTrue(all(e.get('live_expert_workspace_bytes',0)<=narrow.expert_workspace_bytes for e in narrow.events))
   self.assertEqual(r['activity']['mac'],expected_mac_flops(c,32,512,routes))
   for entry in r['prefetch_ledger']:

@@ -15,9 +15,9 @@
     "fifo_read_write_bytes_per_tile_tick": 500
   },
   "reserved_unidentified_area_mm2": 35.25,
-  "resizable_mac_reference_mm2": 13.9468928,
-  "resizable_storage_reference_mm2": 21.8191296,
-  "area_scaling_classification": "Reasonably assumed: replicated MAC and linearly scaled aggregate SRAM/RF area; fixed clocks and port widths; not a layout or CACTI reconstruction",
+  "resizable_mac_reference_mm2": 18.96544,
+  "resizable_storage_reference_mm2": 11.9279232,
+  "area_scaling_classification": "Reasonably assumed: Tensor core plus Matrix RF scale with compute; row-swap RF fixed with unchanged DRAM; private buffer area20% fixed peripheral and80% capacity scaled. Unknown35.25mm2 unavailable. Phi0/.4 ledger sensitivity; no layout claim.",
   "scenarios": {
     "llama_b1_c2k": [
       "llama31_8b",
@@ -84,8 +84,16 @@
       36
     ],
     [
+      152,
+      18
+    ],
+    [
       192,
       24
+    ],
+    [
+      192,
+      6
     ],
     [
       256,
@@ -115,5 +123,7 @@
   "ingress_sensitivity_bytes_tick": [
     128,
     500
-  ]
+  ],
+  "fixed_row_swap_rf_mm2": 4.8726592,
+  "storage_fixed_fraction": 0.2
 }

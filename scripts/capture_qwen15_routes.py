@@ -39,15 +39,18 @@ def main():
         started=time.time()
         for step in range(a.steps):
             mask=torch.cat((mask,torch.ones((32,1),dtype=mask.dtype)),dim=1)
-            r=model(input_ids=token,attention_mask=mask,past_key_values=past,output_router_logits=True,use_cache=True)
+            # The CausalLM wrapper's training auxiliary-loss mask is incompatible
+            # with one-token cached router logits in Transformers4.51.3.
+            # The underlying model computes identical hidden states/routers.
+            r=model.model(input_ids=token,attention_mask=mask,past_key_values=past,output_router_logits=True,use_cache=True)
             for layer,logits in enumerate(r.router_logits):
                 scores,ids=logits.float().softmax(-1).topk(4,dim=-1)
                 routes[layer].extend(ids.tolist());probabilities[layer].extend((scores/scores.sum(-1,keepdim=True)).tolist())
-            generated.append(token.flatten().tolist());past=r.past_key_values;token=r.logits[:,-1:].argmax(-1);del r
+            generated.append(token.flatten().tolist());past=r.past_key_values;token=model.lm_head(r.last_hidden_state[:,-1:]).argmax(-1);del r
             (out/'progress.json').write_text(json.dumps(dict(completed_steps=step+1,elapsed_s=time.time()-started)))
             print('captured',step+1,flush=True)
         record=dict(schema=1,model=MODEL,checkpoint_revision=REVISION,checkpoint_sha256=manifest,execution_dtype='FP32',architecture_dtype='BF16',model_matched_capture=True,
-          source='Original public checkpoint inference; benign generated topic prompts',capture_context=a.context,steps=a.steps,max_batch=32,layers=24,experts=60,topk=4,
+          capture_source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),capture_api='Qwen2MoeModel plus original lm_head; bypass training-only auxiliary loss on cached Decode',source='Original public checkpoint inference; benign generated topic prompts',capture_context=a.context,steps=a.steps,max_batch=32,layers=24,experts=60,topk=4,
           prompt_sha256=hashlib.sha256(json.dumps(texts).encode()).hexdigest(),training_prompt_sha256=hashlib.sha256(json.dumps(prompts(True)).encode()).hexdigest(),
           training_scope='Four separate prompts, last64 prefill positions each;256 records; never holdout Decode',training_expected_activations=prior,routes=routes,route_probabilities=probabilities,generated_token_ids=generated,
           torch_version=torch.__version__,transformers_version=__import__('transformers').__version__,threads=a.threads,
