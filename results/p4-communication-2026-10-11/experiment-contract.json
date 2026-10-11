@@ -1,0 +1,78 @@
+{
+  "phase": "P4-A",
+  "baseline": "26d1b0277882262f9bd88c24e8e8d26fff8aad56",
+  "primary_source": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+  "cohort_control_source": "0f7eaa56250d344293732d01c7fffa837b9dde3d",
+  "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+  "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+  "cases": [
+    {
+      "step": 0,
+      "layer": 0,
+      "role": "primary"
+    },
+    {
+      "step": 32,
+      "layer": 7,
+      "role": "holdout"
+    },
+    {
+      "step": 127,
+      "layer": 23,
+      "role": "holdout"
+    }
+  ],
+  "batches": [
+    8,
+    32
+  ],
+  "tp": [
+    4,
+    16
+  ],
+  "down_layouts": [
+    "column",
+    "row"
+  ],
+  "placement": "B3_3d_placement; separate prefill training prior; all owner/tier bytes frozen",
+  "resource_schedule": "barrier/static (joint kernel unchanged); destination-only relaxes only input-ready dependencies",
+  "main_dispatch": [
+    "broadcast_all",
+    "destination_only",
+    "decoupled"
+  ],
+  "main_reduction": [
+    "drain_all",
+    "row_ready"
+  ],
+  "cohort_control": {
+    "dispatch": "broadcast_all",
+    "reduction": "row_ready_128",
+    "status": "Separately frozen after observing initial64-row negative results"
+  },
+  "performance_points": 336,
+  "numerical_comparisons": 48,
+  "profile": {
+    "compute_tflops": 128,
+    "sram_mib": 36,
+    "hb_tb_s": 32,
+    "isolation": "none",
+    "fifo_bytes_tick": 500,
+    "fifo_ingress_bytes_tick": 500,
+    "service_tb_s": 26.599
+  },
+  "area_assumptions": {
+    "active_area_mm2": 85.75,
+    "fixed_area_mm2": 54.8566368,
+    "mac_area_mm2": 18.96544,
+    "storage_area_mm2": 11.9279232,
+    "reserved_unidentified_area_mm2": 35.25,
+    "fixed_row_swap_rf_mm2": 4.8726592,
+    "storage_fixed_fraction": 0.2,
+    "total_committed_mm2": 121.0,
+    "area_feasible": true,
+    "scaling": "MAC+matrixRF scale together; row-swap RF fixed;20% buffer-area periphery fixed,80% capacity-scaled; clocks/ports fixed; unassigned area unavailable"
+  },
+  "native_memory_fidelity": "Existing finite fluid service; P0 shares execution frontend; not new independent native MoE validation",
+  "scope": "Fixed-weight-layout P4-A; no new hardware, Joint Kernel splitting, P4-C, thermal scan, PIM or power delivery"
+}

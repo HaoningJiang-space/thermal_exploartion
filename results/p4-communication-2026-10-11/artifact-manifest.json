@@ -1,0 +1,52 @@
+{
+  "release": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/tag/p4-communication-2026-10-11",
+  "release_id": 409783212,
+  "asset_count": 4,
+  "total_bytes": 903086080,
+  "performance_points": 336,
+  "numerical_comparisons": 48,
+  "runs": 64,
+  "assets": [
+    {
+      "file": "p4-communication-b8-tp4.tar",
+      "bytes": 88330240,
+      "sha256": "21deb32da6d48c788a95f2493475a35d40a734f530345fe4a2b03457d89911de",
+      "raw_manifest_sha256": "25a7776a2fabf3435422ac79d0b7167c24876e80c3070a45df3f5b93a23a559b",
+      "asset_id": 631224465,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-communication-2026-10-11/p4-communication-b8-tp4.tar",
+      "protected_content_scan": "PASS",
+      "inspected_bytes": 1606502567
+    },
+    {
+      "file": "p4-communication-b8-tp16.tar",
+      "bytes": 132638720,
+      "sha256": "f78c81a776f3e8b22d44dfd68509db22dafddafd595735c5b66afc27a3000aa5",
+      "raw_manifest_sha256": "1691935d097c9e23bfd3c8bed628066103c2875426b8a4837c4a0602cadd9b9e",
+      "asset_id": 631224510,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-communication-2026-10-11/p4-communication-b8-tp16.tar",
+      "protected_content_scan": "PASS",
+      "inspected_bytes": 2596710146
+    },
+    {
+      "file": "p4-communication-b32-tp4.tar",
+      "bytes": 287856640,
+      "sha256": "67bed7178dd9fb42cd67d7c3fc9b3a7b30e8af8297ff8c6656ca1730d37fc45c",
+      "raw_manifest_sha256": "c07201f5741ce839bcb962c1365dc7b486daadb5d2d6d522b1bd0e2caff9a77f",
+      "asset_id": 631226562,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-communication-2026-10-11/p4-communication-b32-tp4.tar",
+      "protected_content_scan": "PASS",
+      "inspected_bytes": 5336016972
+    },
+    {
+      "file": "p4-communication-b32-tp16.tar",
+      "bytes": 394260480,
+      "sha256": "987b2fef2adb0551734facdd70022141d1a11ed036f72452ffe0d8be6fa2038b",
+      "raw_manifest_sha256": "959df81697ee2a9171abfe049a793963e821f3d206097ab5ff6cc5b53d3b5c56",
+      "asset_id": 631226964,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-communication-2026-10-11/p4-communication-b32-tp16.tar",
+      "protected_content_scan": "PASS",
+      "inspected_bytes": 7515889711
+    }
+  ],
+  "scope": "Complete original raw events and summaries; allpoint finite-resource and protected-content audits pass; plain-text private paths sanitized with original and packaged entry SHA recorded"
+}

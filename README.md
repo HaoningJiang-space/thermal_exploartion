@@ -7,7 +7,16 @@
 研究主线仅为本仓库的 **Hybrid-Bonded 3D DRAM-on-Logic Architecture**：
 真实 Dense/MoE LLM、Compute/Memory/NoC物理组织与Spatial Thermal；计算在logic，不做PIM或Power Delivery。
 
-最新交付为 **[P0–P3：真实路由下的传统 MoE 执行边界](results/expert-execution-2026-10-11/findings.md)**。
+最新交付为 **[P4-A：通信语义与有界 Row-ready Reduction](results/p4-communication-2026-10-11/findings.md)**。
+336个真实路由性能点、48个小张量数值对照、64个进程全部完成；所有性能点通过独立事件/资源重放，28个旧案例精确重放。
+固定Shared权重布局下，Destination-only仍需覆盖全部16个Tile；独立Shared/Routed交付的重复通信全部付费。
+保留输入复用的128-row Row-ready在相同64KiB输出空间内取得1.0243×主案例、1.0209×验证案例几何平均加速。
+TP16 row-down的B8/B32 NoC诊断收益降至30.37%/30.84%，仍不能当作新硬件机会；Joint Kernel解耦留给P4-B。
+[冻结合同](docs/p4_communication_contract.md)、[审计](results/p4-communication-2026-10-11/audit.json)、
+[复现](results/p4-communication-2026-10-11/reproduce.md)和
+[完整原始记录](https://github.com/HaoningJiang-space/thermal_exploartion/releases/tag/p4-communication-2026-10-11)均保留负结果。
+
+**上一轮：[P0–P3：真实路由下的传统 MoE 执行边界](results/expert-execution-2026-10-11/findings.md)**。
 P0原生/Fluid共享前端36点完成，18个绝对延迟对照最大误差2.80%；它只验证Memory abstraction，未独立认证完整H3。
 P1全部128步确认64-row软件累加能修复152TF/18MiB的Qwen B32调度失败。
 P2完成EP/TP4/TP16/固定Hybrid、已付费local token fusion、冻结row-down权重布局；

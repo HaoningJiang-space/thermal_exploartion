@@ -1,0 +1,2754 @@
+[
+  {
+    "directory": "b8-tp4-column-broadcast_all-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp4-column-broadcast_all-drain_all",
+        "batch": 8,
+        "tp": 4,
+        "down_partition": "column",
+        "dispatch": "broadcast_all",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "a7ba2c4e5e08a66632e337e0e0c70d2b4add7b90cb30cd650d7a5f8a9237830c",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-column-broadcast_all-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp4-column-broadcast_all-row_ready",
+        "batch": 8,
+        "tp": 4,
+        "down_partition": "column",
+        "dispatch": "broadcast_all",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "99402111696b749cf98e0dff544ec8047fb554d71a490f49185a6e6540b27bb0",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-column-destination_only-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp4-column-destination_only-drain_all",
+        "batch": 8,
+        "tp": 4,
+        "down_partition": "column",
+        "dispatch": "destination_only",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "13a92843c27ab1796a449b1785cbab55d4f6c076be4f81a92bbb04234bfb69c6",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-column-destination_only-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp4-column-destination_only-row_ready",
+        "batch": 8,
+        "tp": 4,
+        "down_partition": "column",
+        "dispatch": "destination_only",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "c87d90d428bfe43432b54275f0b250ddd8d1fe32876d4867b66bc60d78b4066e",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-column-decoupled-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp4-column-decoupled-drain_all",
+        "batch": 8,
+        "tp": 4,
+        "down_partition": "column",
+        "dispatch": "decoupled",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "bc11d9d74c2df9de4339df1dbc568673c6a2442306e777891c047484034cc6d8",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-column-decoupled-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp4-column-decoupled-row_ready",
+        "batch": 8,
+        "tp": 4,
+        "down_partition": "column",
+        "dispatch": "decoupled",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "a1b118dbd566db9ee07b87840b13b84321c5d7ce88f3c4563cfe5f05025c1344",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "numerical-b8-tp4-column",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "numerical-b8-tp4-column",
+        "batch": 8,
+        "tp": 4,
+        "down_partition": "column",
+        "dispatch": "destination_only",
+        "reduction": "row_ready",
+        "numerical_only": true
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "4de48873d607d104afb1a3044a3e6293bae0e10a8a683940303cc8d2adb6c690",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-row-broadcast_all-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp4-row-broadcast_all-drain_all",
+        "batch": 8,
+        "tp": 4,
+        "down_partition": "row",
+        "dispatch": "broadcast_all",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "453e46336220cb5060e1a74f8c250ee44dfdc4d27071fb052836b906e0a5f490",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-row-broadcast_all-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp4-row-broadcast_all-row_ready",
+        "batch": 8,
+        "tp": 4,
+        "down_partition": "row",
+        "dispatch": "broadcast_all",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "3eb15a9f5bf87d0d1eb3da057f36fa51dd8bd8f24eb5139ff4dcd9ca742d4078",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-row-destination_only-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp4-row-destination_only-drain_all",
+        "batch": 8,
+        "tp": 4,
+        "down_partition": "row",
+        "dispatch": "destination_only",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "9e9f8203d18917ca6448cea00d5990f022ecdc3b0d284eb95d1038e209329f09",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-row-destination_only-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp4-row-destination_only-row_ready",
+        "batch": 8,
+        "tp": 4,
+        "down_partition": "row",
+        "dispatch": "destination_only",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "06bf59968f8c5f20e337b0cbd7aca3a8f63291a1d6dc08ed8e0e2a54e5b42de1",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-row-decoupled-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp4-row-decoupled-drain_all",
+        "batch": 8,
+        "tp": 4,
+        "down_partition": "row",
+        "dispatch": "decoupled",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "d62d2eba98d9309065157b8f2cfa7535b3109a9fb8e651669faecf62d9d37acd",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-row-decoupled-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp4-row-decoupled-row_ready",
+        "batch": 8,
+        "tp": 4,
+        "down_partition": "row",
+        "dispatch": "decoupled",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "8567b4711cec732be51f09cdf891ce6cba5770ee556d013e42fb0bfe1e23bdb9",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "numerical-b8-tp4-row",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "numerical-b8-tp4-row",
+        "batch": 8,
+        "tp": 4,
+        "down_partition": "row",
+        "dispatch": "destination_only",
+        "reduction": "row_ready",
+        "numerical_only": true
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "6cc05d4afe4d923a3527a1cbe58fe4ae274ad7361517e145323afda8c19a579a",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp16-column-broadcast_all-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp16-column-broadcast_all-drain_all",
+        "batch": 8,
+        "tp": 16,
+        "down_partition": "column",
+        "dispatch": "broadcast_all",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "f9b3652ddcbb6a69017cb9612b09ded65278c56b421e9a38430a0dc1ee266e2f",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-column-broadcast_all-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp16-column-broadcast_all-row_ready",
+        "batch": 8,
+        "tp": 16,
+        "down_partition": "column",
+        "dispatch": "broadcast_all",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "718b0706250e8748f227d0754a221d2b927134707dae78b464aa575d52106a18",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-column-destination_only-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp16-column-destination_only-drain_all",
+        "batch": 8,
+        "tp": 16,
+        "down_partition": "column",
+        "dispatch": "destination_only",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "941935e660fef9c4b2db8469488fb7f18811f0ae1472a4794807428e3a821cac",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-column-destination_only-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp16-column-destination_only-row_ready",
+        "batch": 8,
+        "tp": 16,
+        "down_partition": "column",
+        "dispatch": "destination_only",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "cc4d193babc05e75d7d6336b58d0880d1d4a7c12acbadc94bcc9f5183c9f5b7d",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-column-decoupled-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp16-column-decoupled-drain_all",
+        "batch": 8,
+        "tp": 16,
+        "down_partition": "column",
+        "dispatch": "decoupled",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "9aad0fa2459c711ba3a7258824621f595baf43f747cf4ea7c1b2747f50efd73a",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-column-decoupled-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp16-column-decoupled-row_ready",
+        "batch": 8,
+        "tp": 16,
+        "down_partition": "column",
+        "dispatch": "decoupled",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "dfae30d1a51018deb9cef4acca5c79193b95fe513662d1e0bf2b4a09d390c2d2",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "numerical-b8-tp16-column",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "numerical-b8-tp16-column",
+        "batch": 8,
+        "tp": 16,
+        "down_partition": "column",
+        "dispatch": "destination_only",
+        "reduction": "row_ready",
+        "numerical_only": true
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "856a1ab2360e9493d78a28e2d5772fe8b79c8aa3cbdcadec8a99e295874b82cd",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-row-broadcast_all-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp16-row-broadcast_all-drain_all",
+        "batch": 8,
+        "tp": 16,
+        "down_partition": "row",
+        "dispatch": "broadcast_all",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "0a62435e81f1d8c3a5e95a2d1593f273031929d4774b963516fc1d7ef2250935",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-row-broadcast_all-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp16-row-broadcast_all-row_ready",
+        "batch": 8,
+        "tp": 16,
+        "down_partition": "row",
+        "dispatch": "broadcast_all",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "14459578c86451fc16c8b847d96079e7c3d14d29d433090fc027e403cb380639",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-row-destination_only-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp16-row-destination_only-drain_all",
+        "batch": 8,
+        "tp": 16,
+        "down_partition": "row",
+        "dispatch": "destination_only",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "52c2d51c84cb5672c957d1db11000968d0741d083ffc79879b3e405551f66691",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-row-destination_only-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp16-row-destination_only-row_ready",
+        "batch": 8,
+        "tp": 16,
+        "down_partition": "row",
+        "dispatch": "destination_only",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "ab121ec90a6e1971e7e1d6098b0ae1076b0bc929408efdfbb088d9650d29b634",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-row-decoupled-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp16-row-decoupled-drain_all",
+        "batch": 8,
+        "tp": 16,
+        "down_partition": "row",
+        "dispatch": "decoupled",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "c467d22021712ec3279594dd2d3b168b614372d364bf60888c895ca2621d58f8",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-row-decoupled-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp16-row-decoupled-row_ready",
+        "batch": 8,
+        "tp": 16,
+        "down_partition": "row",
+        "dispatch": "decoupled",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "c9dd251a5516140f02df5db41cf8d4918176815df558331f7a5e0e780076032f",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "numerical-b8-tp16-row",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "numerical-b8-tp16-row",
+        "batch": 8,
+        "tp": 16,
+        "down_partition": "row",
+        "dispatch": "destination_only",
+        "reduction": "row_ready",
+        "numerical_only": true
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "f7031810fa9df6ff6b9869d17c5f9a32b96741d348fffc72c12f26ddeb43be4a",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b32-tp4-column-broadcast_all-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp4-column-broadcast_all-drain_all",
+        "batch": 32,
+        "tp": 4,
+        "down_partition": "column",
+        "dispatch": "broadcast_all",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "f551d6a43064dc2f7e64b5173734c056981eeea90ecb0f8bf04daa8ded203217",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-column-broadcast_all-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp4-column-broadcast_all-row_ready",
+        "batch": 32,
+        "tp": 4,
+        "down_partition": "column",
+        "dispatch": "broadcast_all",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "3850b7c1d31a825ee6342aec1537074e8b810e6d80f33f1075bbf05951cef430",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-column-destination_only-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp4-column-destination_only-drain_all",
+        "batch": 32,
+        "tp": 4,
+        "down_partition": "column",
+        "dispatch": "destination_only",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "d2ae70e17194f6cfdefd5717864d0100cdf3bfc6d1eec03330a7700ea5b37aba",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-column-destination_only-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp4-column-destination_only-row_ready",
+        "batch": 32,
+        "tp": 4,
+        "down_partition": "column",
+        "dispatch": "destination_only",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "ee26bedb2f37eac15e2e0c45422387510414d2d00d019c2418f84326098b6ffd",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-column-decoupled-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp4-column-decoupled-drain_all",
+        "batch": 32,
+        "tp": 4,
+        "down_partition": "column",
+        "dispatch": "decoupled",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "ad3d2b848ad6e269b08c22793484994751dd1e17dc97a05774178002650e878b",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-column-decoupled-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp4-column-decoupled-row_ready",
+        "batch": 32,
+        "tp": 4,
+        "down_partition": "column",
+        "dispatch": "decoupled",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "c1d31c7513f8364b544fba87ffbe03b63afaca041c7a39b2896ea26047dfdcac",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "numerical-b32-tp4-column",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "numerical-b32-tp4-column",
+        "batch": 32,
+        "tp": 4,
+        "down_partition": "column",
+        "dispatch": "destination_only",
+        "reduction": "row_ready",
+        "numerical_only": true
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "68fe91633b798ad063c9f63f3462ee369888182164d146180001f56ab73bf5b9",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-row-broadcast_all-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp4-row-broadcast_all-drain_all",
+        "batch": 32,
+        "tp": 4,
+        "down_partition": "row",
+        "dispatch": "broadcast_all",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "e287d395394c9dab19ab4537609879b720f201738c650b1e79fe816a86783c5f",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-row-broadcast_all-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp4-row-broadcast_all-row_ready",
+        "batch": 32,
+        "tp": 4,
+        "down_partition": "row",
+        "dispatch": "broadcast_all",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "f50d55d1a61694010fa9e03704db05d25a9d6a395ce0aadb395e134a74792101",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-row-destination_only-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp4-row-destination_only-drain_all",
+        "batch": 32,
+        "tp": 4,
+        "down_partition": "row",
+        "dispatch": "destination_only",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "94bfa62fa94c4df2caa33f63eaddc6cc968893a3b03318dae03bcdc1ea059b62",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-row-destination_only-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp4-row-destination_only-row_ready",
+        "batch": 32,
+        "tp": 4,
+        "down_partition": "row",
+        "dispatch": "destination_only",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "4af37aacb2c554bb67d4f902fb8ab32b2e72dff292b926cb051c52f4f3388d67",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-row-decoupled-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp4-row-decoupled-drain_all",
+        "batch": 32,
+        "tp": 4,
+        "down_partition": "row",
+        "dispatch": "decoupled",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "f69fd86a479650747284558f101dec89264ac2e7101d16f18ca11a070e3007fe",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-row-decoupled-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp4-row-decoupled-row_ready",
+        "batch": 32,
+        "tp": 4,
+        "down_partition": "row",
+        "dispatch": "decoupled",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "d92d0c26a749e7198a3ca0cb69b185cf8601d52b58476e1c36a9214a9e740a09",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "numerical-b32-tp4-row",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "numerical-b32-tp4-row",
+        "batch": 32,
+        "tp": 4,
+        "down_partition": "row",
+        "dispatch": "destination_only",
+        "reduction": "row_ready",
+        "numerical_only": true
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "a90410de30ced8bb59efab691d486c0069721a54f3be927f9cbf5f68204828d0",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp16-column-broadcast_all-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp16-column-broadcast_all-drain_all",
+        "batch": 32,
+        "tp": 16,
+        "down_partition": "column",
+        "dispatch": "broadcast_all",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "f74744226ee137e7f56586a211ba1843af41b84524721d77b17c6455b1d2de19",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-column-broadcast_all-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp16-column-broadcast_all-row_ready",
+        "batch": 32,
+        "tp": 16,
+        "down_partition": "column",
+        "dispatch": "broadcast_all",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "7cd17758bf347935f1cc1425adf57aebd80e9585ec3b861b536e9e576225039f",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-column-destination_only-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp16-column-destination_only-drain_all",
+        "batch": 32,
+        "tp": 16,
+        "down_partition": "column",
+        "dispatch": "destination_only",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "7938c1cb22c9f4d37c98a5d01208cb09ab2785f5673dfb807f9cf89823f3a22b",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-column-destination_only-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp16-column-destination_only-row_ready",
+        "batch": 32,
+        "tp": 16,
+        "down_partition": "column",
+        "dispatch": "destination_only",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "c6ee2bdf6a8395bb9156b64cf7c93c94fa065b2f36fe638213d487fdf35fedd2",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-column-decoupled-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp16-column-decoupled-drain_all",
+        "batch": 32,
+        "tp": 16,
+        "down_partition": "column",
+        "dispatch": "decoupled",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "8337b84db995547aa57ca78921c35a284fe80d48fa459ec5504a2d69d6f03561",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-column-decoupled-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp16-column-decoupled-row_ready",
+        "batch": 32,
+        "tp": 16,
+        "down_partition": "column",
+        "dispatch": "decoupled",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "69e162e4dc80a126af17e470adcc3845dc991e87b67ebb49db4e20c102c0a791",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "numerical-b32-tp16-column",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "numerical-b32-tp16-column",
+        "batch": 32,
+        "tp": 16,
+        "down_partition": "column",
+        "dispatch": "destination_only",
+        "reduction": "row_ready",
+        "numerical_only": true
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "85c04443b466814c5df2f4226c013f99e139296b2d8d174198ff30740efec7e0",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-row-broadcast_all-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp16-row-broadcast_all-drain_all",
+        "batch": 32,
+        "tp": 16,
+        "down_partition": "row",
+        "dispatch": "broadcast_all",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "fb7bb7104bc622a57bf933b18920827a752f0c61084d25b5ce14a8a9d00272a6",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-row-broadcast_all-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp16-row-broadcast_all-row_ready",
+        "batch": 32,
+        "tp": 16,
+        "down_partition": "row",
+        "dispatch": "broadcast_all",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "bde0964da5e39d7dda6a1e57924bc274b3c96d534048a729835695a4eba80c23",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-row-destination_only-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp16-row-destination_only-drain_all",
+        "batch": 32,
+        "tp": 16,
+        "down_partition": "row",
+        "dispatch": "destination_only",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "57639cf28067d9bc5a2fe1697e1776b281bdd7470777ee65cc2d30e288a9315c",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-row-destination_only-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp16-row-destination_only-row_ready",
+        "batch": 32,
+        "tp": 16,
+        "down_partition": "row",
+        "dispatch": "destination_only",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "cea1f387e3de88ccbe8147f257a192896366a2087cab55645d48be68e7b245ee",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-row-decoupled-drain_all",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp16-row-decoupled-drain_all",
+        "batch": 32,
+        "tp": 16,
+        "down_partition": "row",
+        "dispatch": "decoupled",
+        "reduction": "drain_all",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "7cc3f51ea9d63892822aa6caea8f713e609f557ad0d731aa75c7e4f40df2f227",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-row-decoupled-row_ready",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp16-row-decoupled-row_ready",
+        "batch": 32,
+        "tp": 16,
+        "down_partition": "row",
+        "dispatch": "decoupled",
+        "reduction": "row_ready",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "b6998ebbaba682131e1a05a144558d7b17dc4b3375400105ba38fa2898b08054",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "numerical-b32-tp16-row",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "2a1188b3fbc0f9fadfb8d438531eba0f933dfcec",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "numerical-b32-tp16-row",
+        "batch": 32,
+        "tp": 16,
+        "down_partition": "row",
+        "dispatch": "destination_only",
+        "reduction": "row_ready",
+        "numerical_only": true
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "d2351d64ddf985ca2116c691daa1c9eedd5444d16a1d03efe9c53a9277a5e0fc",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b8-tp4-column-broadcast_all-row_ready_128",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "0f7eaa56250d344293732d01c7fffa837b9dde3d",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp4-column-broadcast_all-row_ready_128",
+        "batch": 8,
+        "tp": 4,
+        "down_partition": "column",
+        "dispatch": "broadcast_all",
+        "reduction": "row_ready_128",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "f85e9e31e891ce34c9cc0664c6f6c45f83524c83dac23b4e8617d65d536058a7",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-row-broadcast_all-row_ready_128",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "0f7eaa56250d344293732d01c7fffa837b9dde3d",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp4-row-broadcast_all-row_ready_128",
+        "batch": 8,
+        "tp": 4,
+        "down_partition": "row",
+        "dispatch": "broadcast_all",
+        "reduction": "row_ready_128",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "d1785efb125221ae16dd5750bff08f03d302a304bbe8bf188b2c909bd6bca08b",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp16-column-broadcast_all-row_ready_128",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "0f7eaa56250d344293732d01c7fffa837b9dde3d",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp16-column-broadcast_all-row_ready_128",
+        "batch": 8,
+        "tp": 16,
+        "down_partition": "column",
+        "dispatch": "broadcast_all",
+        "reduction": "row_ready_128",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "91daa21c4a4f6f4060c78406c2016ecd44546b200932047b9a4baac1fee82c84",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-row-broadcast_all-row_ready_128",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "0f7eaa56250d344293732d01c7fffa837b9dde3d",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b8-tp16-row-broadcast_all-row_ready_128",
+        "batch": 8,
+        "tp": 16,
+        "down_partition": "row",
+        "dispatch": "broadcast_all",
+        "reduction": "row_ready_128",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "970db2f9e599419781ed87014e3c48057d22a5d0128d5e1403824967b608fedb",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b32-tp4-column-broadcast_all-row_ready_128",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "0f7eaa56250d344293732d01c7fffa837b9dde3d",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp4-column-broadcast_all-row_ready_128",
+        "batch": 32,
+        "tp": 4,
+        "down_partition": "column",
+        "dispatch": "broadcast_all",
+        "reduction": "row_ready_128",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "5f61bf296a8ef4b5a13d199a4f64df94e989bdede2d8734c75f614cf8a47264e",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-row-broadcast_all-row_ready_128",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "0f7eaa56250d344293732d01c7fffa837b9dde3d",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp4-row-broadcast_all-row_ready_128",
+        "batch": 32,
+        "tp": 4,
+        "down_partition": "row",
+        "dispatch": "broadcast_all",
+        "reduction": "row_ready_128",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "84efff0d99928ca3bb01b05c67698f8a65ed705c0879dec7b48b40ed5fe63930",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp16-column-broadcast_all-row_ready_128",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "0f7eaa56250d344293732d01c7fffa837b9dde3d",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp16-column-broadcast_all-row_ready_128",
+        "batch": 32,
+        "tp": 16,
+        "down_partition": "column",
+        "dispatch": "broadcast_all",
+        "reduction": "row_ready_128",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "9e8a51a88a967514418e417f6c6140fcf53c39a28d218dbf5e6012c4eb88d474",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-row-broadcast_all-row_ready_128",
+    "exit_code": 0,
+    "provenance": {
+      "source_commit": "0f7eaa56250d344293732d01c7fffa837b9dde3d",
+      "dirty": false,
+      "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "distribution_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+      "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
+      "execution_dtype": "FP32",
+      "cases": [
+        {
+          "step": 0,
+          "layer": 0,
+          "role": "primary"
+        },
+        {
+          "step": 32,
+          "layer": 7,
+          "role": "holdout"
+        },
+        {
+          "step": 127,
+          "layer": 23,
+          "role": "holdout"
+        }
+      ],
+      "params": {
+        "routes": "routes.json",
+        "output": "b32-tp16-row-broadcast_all-row_ready_128",
+        "batch": 32,
+        "tp": 16,
+        "down_partition": "row",
+        "dispatch": "broadcast_all",
+        "reduction": "row_ready_128",
+        "numerical_only": false
+      },
+      "scope": "P4-A only; unchanged joint memory/MAC abstraction, frozen B3 placement and paid resources"
+    },
+    "points": 6,
+    "summary_sha256": "639cb0de90098c8bcbcfcad3bef68a9b02f9ba1b606729de2c28c2ea69caa805",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  }
+]
