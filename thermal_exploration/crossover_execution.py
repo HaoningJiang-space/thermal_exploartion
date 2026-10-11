@@ -57,7 +57,7 @@ def pipeline(parts,batch,profile=Profile(),lead=0,collective_ports=False,useful_
     half. All128B/tick writes go to the collective/result engine. No extra port.
     """
     if min(profile.compute_tflops,profile.hb_tb_s,profile.fifo_bytes_tick,profile.fifo_ingress_bytes_tick)<=0 or lead<0:raise ValueError('Invalid resource profile')
-    if profile.isolation not in ('none','bank_cycle','uniform_fast_tier','hb_only','ingress_only','mac_only','ideal_memory'):raise ValueError('Unknown isolation')
+    if profile.isolation not in ('none','bank_cycle','uniform_fast_tier','hb_only','ingress_only','mac_only','ideal_memory','infinite_noc'):raise ValueError('Unknown isolation')
     mem_free=hb_free=-lead;mac_free=0;weights=defaultdict(lambda:-lead);returns=defaultdict(lambda:-lead)
     chunk=32768;packet=1024;slots=8;return_slots=64;index=packet_index=processed=0
     total=sum(n for _,n in parts);useful=total if useful_bytes is None else useful_bytes
@@ -182,7 +182,7 @@ def stream_logits(results,batch,vocab):
 
 
 @lru_cache(maxsize=128)
-def greedy_selection(batch):
+def greedy_selection(batch,oracle='none'):
     # Each vocabulary shard contributes(max_logit,index), not a floating sum.
     from .horizontal import route
     g=Graph(256,True);children=defaultdict(list)
@@ -196,12 +196,12 @@ def greedy_selection(batch):
         merge=g.add('vector',tile,work,(read,),('vector',tile),ceil(work/16),'greedy_argmax')
         return g.add('sram_write',tile,batch*8,(merge,),('write',tile),ceil(batch*8/128),'greedy_argmax')
     result=visit(0);g.output=list(g.broadcast(0,list(range(16)),batch*4,(result,),'selected_token_id').values())
-    r=execute(g);return dict(ticks=r['ticks'],activity=r['per_tile_activity'],semantics='Associative max/index with lowest-index ties, then generated ID broadcast')
+    r=execute(g,'infinite_noc' if oracle=='infinite_noc' else 'baseline');return dict(ticks=r['ticks'],activity=r['per_tile_activity'],semantics='Associative max/index with lowest-index ties, then generated ID broadcast')
 
 
 class CrossoverExecution(LayerExecution):
     def __init__(self,c,admission,layout,baseline='B3_3d_placement',profile=Profile(),schedule='serial'):
-        super().__init__(c,admission,layout,baseline,'none')
+        super().__init__(c,admission,layout,baseline,'infinite_noc' if profile.isolation=='infinite_noc' else 'none')
         if schedule not in ('serial','finite_prefetch','blocked_collective','prefetch_collective'):raise ValueError('Unknown schedule')
         if not profile.area()['area_feasible']:raise ValueError('Committed area exceeds121mm2')
         self.profile=profile;self.schedule=schedule;self.pending=None;self.route_ready=0
@@ -257,12 +257,12 @@ class CrossoverExecution(LayerExecution):
             self.phase(name+'_result_state',max(ceil(n/128) for n in sizes.values()),{str(t):dict(sram_write=n) for t,n in sizes.items()},'vector/local state')
     def network(self,name,batch,width,kind):
         if name=='next_token_sampling':
-            r=greedy_selection(batch);self.phase(name,r['ticks'],r['activity'],'communication/synchronization')
+            r=greedy_selection(batch,self.oracle);self.phase(name,r['ticks'],r['activity'],'communication/synchronization')
             self.events[-1]['semantics']=r['semantics'];return
         if self.pending and kind=='reduction':
             p=self.pending;self.pending=None
             if batch!=p['batch'] or width!=p['width']:raise ValueError('Collective producer mismatch')
-            r=output_collective(p['results'],batch,width,self.budget['private_bytes'],self.budget['activation_reserved_bytes'])
+            r=output_collective(p['results'],batch,width,self.budget['private_bytes'],self.budget['activation_reserved_bytes'],self.oracle)
             end=p['start']+r['ticks'];tail=max(0,end-self.clock)
             self.phase(name,tail,r['per_tile_activity'],'communication/synchronization')
             self.events[-1]['overlap_start_tick']=p['start'];self.events[-1]['collective_buffer_high']=r['buffer_high']

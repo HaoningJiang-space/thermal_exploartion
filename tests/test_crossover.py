@@ -51,6 +51,14 @@ class CrossoverTests(unittest.TestCase):
   logit=next(e for e in r['events'] if e['stage']=='lm_head_streaming_selection')
   self.assertLessEqual(max(logit['maximum_logit_pending_bytes'].values()),2*64*16*4)
   self.assertIn('max/index',r['events'][-1]['semantics'])
+ def test_network_oracle_preserves_work_and_legal_dependencies(self):
+  c=load_model('llama31_8b');a=capacity(c,4,8192);layout=resident_layout(c,a,'B3_3d_placement')
+  e=CrossoverExecution(c,a,layout,schedule='prefetch_collective');e.layer(0,4,8192)
+  ideal=CrossoverExecution(c,a,layout,profile=Profile(isolation='infinite_noc'),schedule='prefetch_collective');ideal.layer(0,4,8192)
+  for kind in ('dram','mac','hb','link'):self.assertEqual(e.work[kind],ideal.work[kind])
+  self.assertLess(ideal.clock,e.clock)
+  events={v['stage']:v for v in ideal.events}
+  self.assertGreaterEqual(events['layer0.residual']['start_tick'],events['layer0.output_reduce']['finish_tick'])
  def test_router_causality_and_large_cohort_lifetime(self):
   c=load_model('qwen15_moe');a=capacity(c,32,512);layout=resident_layout(c,a,'B3_3d_placement')
   routes=[[[i%60,(i+1)%60,(i+2)%60,(i+3)%60] for i in range(32)] for l in range(24)]
