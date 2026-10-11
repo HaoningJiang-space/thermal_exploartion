@@ -1,0 +1,727 @@
+{
+  "absolute": [
+    {
+      "shape": [
+        2048,
+        1408,
+        2
+      ],
+      "case": "column_fifo64",
+      "peak": 128,
+      "native_us": 0.56875,
+      "matched_fluid_us": 0.563,
+      "relative_error": -0.010109890109890163,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        2
+      ],
+      "case": "column_fifo64",
+      "peak": 152,
+      "native_us": 0.56875,
+      "matched_fluid_us": 0.563,
+      "relative_error": -0.010109890109890163,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        2
+      ],
+      "case": "row_fifo_k",
+      "peak": 128,
+      "native_us": 0.291,
+      "matched_fluid_us": 0.291,
+      "relative_error": 0.0,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        2
+      ],
+      "case": "row_fifo_k",
+      "peak": 152,
+      "native_us": 0.291,
+      "matched_fluid_us": 0.291,
+      "relative_error": 0.0,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        8
+      ],
+      "case": "column_fifo64",
+      "peak": 128,
+      "native_us": 2.0945,
+      "matched_fluid_us": 2.0905,
+      "relative_error": -0.0019097636667462226,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        8
+      ],
+      "case": "column_fifo64",
+      "peak": 152,
+      "native_us": 2.0955,
+      "matched_fluid_us": 2.0915,
+      "relative_error": -0.0019088523025531101,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        8
+      ],
+      "case": "row_fifo_k",
+      "peak": 128,
+      "native_us": 0.8245,
+      "matched_fluid_us": 0.8245,
+      "relative_error": 0.0,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        8
+      ],
+      "case": "row_fifo_k",
+      "peak": 152,
+      "native_us": 0.779,
+      "matched_fluid_us": 0.779,
+      "relative_error": 0.0,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        16
+      ],
+      "case": "column_fifo64",
+      "peak": 128,
+      "native_us": 4.14525,
+      "matched_fluid_us": 4.14125,
+      "relative_error": -0.0009649598938542558,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        16
+      ],
+      "case": "column_fifo64",
+      "peak": 152,
+      "native_us": 4.14575,
+      "matched_fluid_us": 4.14175,
+      "relative_error": -0.0009648435144423706,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        16
+      ],
+      "case": "row_fifo_k",
+      "peak": 128,
+      "native_us": 1.63975,
+      "matched_fluid_us": 1.63975,
+      "relative_error": 0.0,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        16
+      ],
+      "case": "row_fifo_k",
+      "peak": 152,
+      "native_us": 1.54825,
+      "matched_fluid_us": 1.54825,
+      "relative_error": 0.0,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        6144,
+        4096,
+        4
+      ],
+      "case": "row_fifo_k",
+      "peak": 128,
+      "native_us": 2.16675,
+      "matched_fluid_us": 2.14675,
+      "relative_error": -0.009230414214837945,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        6144,
+        4096,
+        4
+      ],
+      "case": "row_fifo_k",
+      "peak": 152,
+      "native_us": 2.16675,
+      "matched_fluid_us": 2.14675,
+      "relative_error": -0.009230414214837945,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        6144,
+        4096,
+        4
+      ],
+      "case": "row_fifo_m",
+      "peak": 128,
+      "native_us": 2.37575,
+      "matched_fluid_us": 2.44225,
+      "relative_error": 0.027991160686099192,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        6144,
+        4096,
+        4
+      ],
+      "case": "row_fifo_m",
+      "peak": 152,
+      "native_us": 2.37575,
+      "matched_fluid_us": 2.44225,
+      "relative_error": 0.027991160686099192,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        6144,
+        4096,
+        16
+      ],
+      "case": "row_fifo_k",
+      "peak": 128,
+      "native_us": 7.8825,
+      "matched_fluid_us": 7.8825,
+      "relative_error": 0.0,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    },
+    {
+      "shape": [
+        6144,
+        4096,
+        16
+      ],
+      "case": "row_fifo_k",
+      "peak": 152,
+      "native_us": 7.012,
+      "matched_fluid_us": 7.012,
+      "relative_error": 0.0,
+      "target_met": true,
+      "work_and_port_checks": {
+        "mac_flops": true,
+        "weight_bytes": true,
+        "dram_bytes": true,
+        "m_block": true,
+        "k_block": true,
+        "sram_per_tile": true,
+        "mac_flops_per_tick": true,
+        "byte_hops": true,
+        "sram_activity": true
+      }
+    }
+  ],
+  "speedup": [
+    {
+      "shape": [
+        2048,
+        1408,
+        2
+      ],
+      "case": "column_fifo64",
+      "native_speedup": 1.0,
+      "matched_fluid_speedup": 1.0,
+      "relative_speedup_error": 0.0,
+      "target_met": true
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        2
+      ],
+      "case": "row_fifo_k",
+      "native_speedup": 1.0,
+      "matched_fluid_speedup": 1.0,
+      "relative_speedup_error": 0.0,
+      "target_met": true,
+      "legacy_speedup": 1.0,
+      "legacy_relative_speedup_error": 0.0,
+      "legacy_target_met": true
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        8
+      ],
+      "case": "column_fifo64",
+      "native_speedup": 0.9995227869243618,
+      "matched_fluid_speedup": 0.9995218742529286,
+      "relative_speedup_error": -9.131071798673673e-07,
+      "target_met": true
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        8
+      ],
+      "case": "row_fifo_k",
+      "native_speedup": 1.0584082156611039,
+      "matched_fluid_speedup": 1.0584082156611039,
+      "relative_speedup_error": 0.0,
+      "target_met": true,
+      "legacy_speedup": 1.066551426101988,
+      "legacy_relative_speedup_error": 0.007693827693691535,
+      "legacy_target_met": true
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        16
+      ],
+      "case": "column_fifo64",
+      "native_speedup": 0.9998793945606947,
+      "matched_fluid_speedup": 0.999879278082936,
+      "relative_speedup_error": -1.1649180831074801e-07,
+      "target_met": true
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        16
+      ],
+      "case": "row_fifo_k",
+      "native_speedup": 1.0590989827224286,
+      "matched_fluid_speedup": 1.0590989827224286,
+      "relative_speedup_error": 0.0,
+      "target_met": true,
+      "legacy_speedup": 1.0667437156891073,
+      "legacy_relative_speedup_error": 0.00721814777597829,
+      "legacy_target_met": true
+    },
+    {
+      "shape": [
+        6144,
+        4096,
+        4
+      ],
+      "case": "row_fifo_k",
+      "native_speedup": 1.0,
+      "matched_fluid_speedup": 1.0,
+      "relative_speedup_error": 0.0,
+      "target_met": true,
+      "legacy_speedup": 1.0,
+      "legacy_relative_speedup_error": 0.0,
+      "legacy_target_met": true
+    },
+    {
+      "shape": [
+        6144,
+        4096,
+        4
+      ],
+      "case": "row_fifo_m",
+      "native_speedup": 1.0,
+      "matched_fluid_speedup": 1.0,
+      "relative_speedup_error": 0.0,
+      "target_met": true,
+      "legacy_speedup": 1.0,
+      "legacy_relative_speedup_error": 0.0,
+      "legacy_target_met": true
+    },
+    {
+      "shape": [
+        6144,
+        4096,
+        16
+      ],
+      "case": "row_fifo_k",
+      "native_speedup": 1.1241443240159728,
+      "matched_fluid_speedup": 1.1241443240159728,
+      "relative_speedup_error": 0.0,
+      "target_met": true,
+      "legacy_speedup": 1.1176093107371,
+      "legacy_relative_speedup_error": -0.005813322310365576,
+      "legacy_target_met": true
+    }
+  ],
+  "legacy_mismatch_control": [
+    {
+      "shape": [
+        2048,
+        1408,
+        2
+      ],
+      "case": "row_fifo_k",
+      "peak": 128,
+      "legacy_us": 0.324,
+      "native_us": 0.291,
+      "relative_error": 0.11340206185567014,
+      "scope": "Old whole-input barrier/32KiB kernel, retained mismatch control"
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        2
+      ],
+      "case": "row_fifo_k",
+      "peak": 152,
+      "legacy_us": 0.324,
+      "native_us": 0.291,
+      "relative_error": 0.11340206185567014,
+      "scope": "Old whole-input barrier/32KiB kernel, retained mismatch control"
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        8
+      ],
+      "case": "row_fifo_k",
+      "peak": 128,
+      "legacy_us": 0.9255,
+      "native_us": 0.8245,
+      "relative_error": 0.12249848392965434,
+      "scope": "Old whole-input barrier/32KiB kernel, retained mismatch control"
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        8
+      ],
+      "case": "row_fifo_k",
+      "peak": 152,
+      "legacy_us": 0.86775,
+      "native_us": 0.779,
+      "relative_error": 0.11392811296534022,
+      "scope": "Old whole-input barrier/32KiB kernel, retained mismatch control"
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        16
+      ],
+      "case": "row_fifo_k",
+      "peak": 128,
+      "legacy_us": 1.846,
+      "native_us": 1.63975,
+      "relative_error": 0.12578136911114512,
+      "scope": "Old whole-input barrier/32KiB kernel, retained mismatch control"
+    },
+    {
+      "shape": [
+        2048,
+        1408,
+        16
+      ],
+      "case": "row_fifo_k",
+      "peak": 152,
+      "legacy_us": 1.7305,
+      "native_us": 1.54825,
+      "relative_error": 0.11771354755368968,
+      "scope": "Old whole-input barrier/32KiB kernel, retained mismatch control"
+    },
+    {
+      "shape": [
+        6144,
+        4096,
+        4
+      ],
+      "case": "row_fifo_k",
+      "peak": 128,
+      "legacy_us": 2.597,
+      "native_us": 2.16675,
+      "relative_error": 0.19856928579670008,
+      "scope": "Old whole-input barrier/32KiB kernel, retained mismatch control"
+    },
+    {
+      "shape": [
+        6144,
+        4096,
+        4
+      ],
+      "case": "row_fifo_k",
+      "peak": 152,
+      "legacy_us": 2.597,
+      "native_us": 2.16675,
+      "relative_error": 0.19856928579670008,
+      "scope": "Old whole-input barrier/32KiB kernel, retained mismatch control"
+    },
+    {
+      "shape": [
+        6144,
+        4096,
+        4
+      ],
+      "case": "row_fifo_m",
+      "peak": 128,
+      "legacy_us": 2.597,
+      "native_us": 2.37575,
+      "relative_error": 0.0931284857413448,
+      "scope": "Old whole-input barrier/32KiB kernel, retained mismatch control"
+    },
+    {
+      "shape": [
+        6144,
+        4096,
+        4
+      ],
+      "case": "row_fifo_m",
+      "peak": 152,
+      "legacy_us": 2.597,
+      "native_us": 2.37575,
+      "relative_error": 0.0931284857413448,
+      "scope": "Old whole-input barrier/32KiB kernel, retained mismatch control"
+    },
+    {
+      "shape": [
+        6144,
+        4096,
+        16
+      ],
+      "case": "row_fifo_k",
+      "peak": 128,
+      "legacy_us": 9.57875,
+      "native_us": 7.8825,
+      "relative_error": 0.21519188074849338,
+      "scope": "Old whole-input barrier/32KiB kernel, retained mismatch control"
+    },
+    {
+      "shape": [
+        6144,
+        4096,
+        16
+      ],
+      "case": "row_fifo_k",
+      "peak": 152,
+      "legacy_us": 8.57075,
+      "native_us": 7.012,
+      "relative_error": 0.22229749001711374,
+      "scope": "Old whole-input barrier/32KiB kernel, retained mismatch control"
+    }
+  ],
+  "targets": {
+    "absolute": 0.1,
+    "relative_speedup": 0.05
+  },
+  "scope": "Selected fast-tier tensors only; common flit/compute frontend isolates DRAM abstraction. Not independent frontend validation; not a certification of complete H3 or original12.92%/7.06% gains."
+}

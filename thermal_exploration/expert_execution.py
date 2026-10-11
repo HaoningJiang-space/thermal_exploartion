@@ -111,19 +111,22 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
     else:experts.sort(key=lambda e:(-counts[e]/len(layout['tensors'][f'layer{layer}.expert{e}.up']),e))
     descriptors=[(f'layer{layer}.expert{e}',[t for t,row in enumerate(routes) if e in row],h,e) for e in experts]
     descriptors.append((f'layer{layer}.shared',list(range(b)),hs,'shared'))
+    # The shared expert already needs every token on all16 tiles. Reuse this
+    # one legal input distribution instead of resending it once per expert.
+    common={t:[] for t in range(16)}
+    for source in range(16):
+        distributed=g.broadcast(source,list(range(16)),b*d*2//16,stage='dispatch')
+        for tile in range(16):common[tile].append(distributed[tile])
+    common_ready={t:g.join(deps,'resident_token_input') for t,deps in common.items()}
     dispatches=[]
     for prefix,tokens,width,expert in descriptors:
-        owners=sorted(layout['tensors'][prefix+'.up']);count=len(tokens);ready={t:[] for t in owners}
-        # Pack the same selected-token IDs, each canonically row-sharded.
-        for source in range(16):
-            r=g.broadcast(source,owners,count*d*2//16,stage='dispatch')
-            for t in owners:ready[t].append(r[t])
-        dispatch={t:g.join(ready[t],'expert_input_ready') for t in owners}
+        owners=sorted(layout['tensors'][prefix+'.up']);count=len(tokens)
+        dispatch={t:common_ready[t] for t in owners}
         dispatches.extend(dispatch.values())
         jobs.append(dict(prefix=prefix,tokens=tokens,count=count,width=width,expert=expert,owners=owners,dispatch=dispatch))
     barrier=g.join(dispatches,'dispatch_barrier') if schedule=='barrier' else None
     terminals=[];stage_done=[]
-    def kernel(tile,spans,count,useful,deps,stage):
+    def kernel(tile,spans,count,useful,deps,stage,memory_deps=()):
         # Bounded known prefetch. Identity is already known at time zero;
         # arithmetic never precedes both input and actual prefix arrival.
         pre=[];lead=0;prefix=min(sum(n for _,n in spans),262144) if schedule=='overlap' else 0
@@ -136,7 +139,7 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
                     rc=ceil((RCD_NS[effective]+27.5+4.77)/.25)
                     shared=profile.service_tb_s/16*1000*.25
                     rate=shared if isolation=='bank_cycle' else min(shared,16*4096/rc)
-                    mem=g.add('dram',tile,n,resource=('dram',tile),ticks=0 if isolation=='ideal_memory' else ceil(n/rate)+ceil((RCD_NS[effective]+4)/.25),stage='expert_prefetch',tier=tier)
+                    mem=g.add('dram',tile,n,memory_deps,resource=('dram',tile),ticks=0 if isolation=='ideal_memory' else ceil(n/rate)+ceil((RCD_NS[effective]+4)/.25),stage='expert_prefetch',tier=tier)
                     hb_time=0 if isolation in ('ideal_memory','hb_only') else n/(profile.hb_tb_s/16*1000*.25)
                     ingress=0 if isolation in ('ideal_memory','ingress_only') else n/profile.fifo_ingress_bytes_tick
                     hb=g.add('hb',tile,n,(mem,),('hb',tile),ceil(max(hb_time,ingress)),'expert_prefetch',tier)
@@ -151,13 +154,15 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
         ledger.append(dict(node=node,tile=tile,stage=stage,prefetch_prefix_bytes=prefix,**r))
         return node
     # Each expert forms grouped GEMM with its actual effective token count.
+    owner_last={}
     for job in jobs:
         prefix=job['prefix'];count=job['count'];owners=job['owners'];width=job['width']
         gate=[];silu={}
         for tile in owners:
             spans=merge_spans([layout['tensors'][prefix+'.gate'],layout['tensors'][prefix+'.up']])[tile]
-            deps=[barrier] if barrier is not None else [job['dispatch'][tile]]
-            node=kernel(tile,spans,count,4*d*width//len(owners),deps,'expert_gate_up')
+            admission=sorted({owner_last[t] for t in owners if t in owner_last})
+            deps=([barrier] if barrier is not None else [job['dispatch'][tile]])+admission
+            node=kernel(tile,spans,count,4*d*width//len(owners),deps,'expert_gate_up',admission)
             gate.append(node)
             size=count*width//len(owners);write=g.add('sram_write',tile,size*8,(node,),('write',tile),ceil(size*8/128),'gated_state')
             read=g.add('sram_read',tile,size*8,(write,),('read',tile),ceil(size*8/(128 if schedule=='overlap' else 256)),'gated_state')
@@ -170,7 +175,7 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
                 spans=slice_spans(layout['tensors'][prefix+'.down'][tile],row,row+rows,d)
                 deps=[prior[tile]]
                 if schedule=='barrier':deps+=gate
-                k=kernel(tile,spans,count,2*rows*width//len(owners),deps,'expert_down_rows');first_rows.append(k)
+                k=kernel(tile,spans,count,2*rows*width//len(owners),deps,'expert_down_rows',deps);first_rows.append(k)
                 size=rows*count*4;write=g.add('sram_write',tile,size,(k,),('write',tile),ceil(size/128),'partial_store')
                 read=g.add('sram_read',tile,size,(write,),('read',tile),ceil(size/(128 if schedule=='overlap' else 256)),'weighted_partial')
                 weight=g.add('vector',tile,rows*count,(read,),('vector',tile),ceil(rows*count/16),'weighted_partial')
@@ -187,6 +192,7 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
             for tile in owners:prior[tile]=g.join((prior[tile],end),'row_release')
             all_ends.append(end)
         finished=g.join(all_ends,'expert_finished');job['terminal']=finished;terminals.append(finished)
+        for tile in owners:owner_last[tile]=finished
         for tile in owners:
             # Registered gate/up state is bounded through its final down use.
             g.lease(gate[owners.index(tile)],finished,('workspace',tile),count*width*8//len(owners))

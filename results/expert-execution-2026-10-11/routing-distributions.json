@@ -1,0 +1,958 @@
+{
+  "distribution": {
+    "1": {
+      "active_expert_mean": 4.0,
+      "active_expert_min": 4,
+      "active_expert_max": 4,
+      "effective_expert_batch_histogram": {
+        "1": 12288
+      }
+    },
+    "8": {
+      "active_expert_mean": 10.662760416666666,
+      "active_expert_min": 4,
+      "active_expert_max": 23,
+      "effective_expert_batch_histogram": {
+        "5": 6125,
+        "3": 9314,
+        "1": 8823,
+        "4": 1965,
+        "2": 4668,
+        "7": 322,
+        "8": 1115,
+        "6": 424
+      }
+    },
+    "16": {
+      "active_expert_mean": 14.661783854166666,
+      "active_expert_min": 4,
+      "active_expert_max": 33,
+      "effective_expert_batch_histogram": {
+        "11": 4711,
+        "4": 7042,
+        "5": 2438,
+        "1": 15723,
+        "7": 900,
+        "9": 754,
+        "3": 3469,
+        "2": 4710,
+        "10": 931,
+        "13": 195,
+        "6": 1086,
+        "8": 856,
+        "14": 242,
+        "15": 744,
+        "12": 951,
+        "16": 289
+      }
+    },
+    "32": {
+      "active_expert_mean": 16.241861979166668,
+      "active_expert_min": 4,
+      "active_expert_max": 39,
+      "effective_expert_batch_histogram": {
+        "22": 4245,
+        "9": 5519,
+        "10": 1700,
+        "1": 14451,
+        "21": 658,
+        "13": 548,
+        "3": 2975,
+        "12": 520,
+        "7": 1511,
+        "2": 4621,
+        "16": 399,
+        "11": 653,
+        "18": 429,
+        "17": 359,
+        "6": 1559,
+        "4": 2225,
+        "25": 98,
+        "8": 1528,
+        "15": 369,
+        "5": 1870,
+        "30": 135,
+        "31": 639,
+        "19": 422,
+        "29": 101,
+        "24": 138,
+        "14": 423,
+        "23": 770,
+        "20": 469,
+        "27": 93,
+        "26": 100,
+        "32": 257,
+        "28": 111
+      }
+    }
+  },
+  "temporal": {
+    "1": {
+      "adjacent_step_active_set_jaccard_mean": 0.04896887889013873,
+      "samples": 3048
+    },
+    "8": {
+      "adjacent_step_active_set_jaccard_mean": 0.16812154495346238,
+      "samples": 3048
+    },
+    "16": {
+      "adjacent_step_active_set_jaccard_mean": 0.21821168056674597,
+      "samples": 3048
+    },
+    "32": {
+      "adjacent_step_active_set_jaccard_mean": 0.23316266474514616,
+      "samples": 3048
+    }
+  },
+  "coactivation": {
+    "1": [
+      {
+        "experts": [
+          4,
+          56
+        ],
+        "joint_occurrences": 70
+      },
+      {
+        "experts": [
+          18,
+          33
+        ],
+        "joint_occurrences": 68
+      },
+      {
+        "experts": [
+          4,
+          38
+        ],
+        "joint_occurrences": 59
+      },
+      {
+        "experts": [
+          33,
+          39
+        ],
+        "joint_occurrences": 58
+      },
+      {
+        "experts": [
+          20,
+          25
+        ],
+        "joint_occurrences": 56
+      },
+      {
+        "experts": [
+          40,
+          43
+        ],
+        "joint_occurrences": 54
+      },
+      {
+        "experts": [
+          4,
+          10
+        ],
+        "joint_occurrences": 50
+      },
+      {
+        "experts": [
+          8,
+          59
+        ],
+        "joint_occurrences": 50
+      },
+      {
+        "experts": [
+          14,
+          47
+        ],
+        "joint_occurrences": 49
+      },
+      {
+        "experts": [
+          38,
+          56
+        ],
+        "joint_occurrences": 49
+      },
+      {
+        "experts": [
+          16,
+          57
+        ],
+        "joint_occurrences": 49
+      },
+      {
+        "experts": [
+          18,
+          30
+        ],
+        "joint_occurrences": 49
+      },
+      {
+        "experts": [
+          25,
+          55
+        ],
+        "joint_occurrences": 47
+      },
+      {
+        "experts": [
+          12,
+          57
+        ],
+        "joint_occurrences": 45
+      },
+      {
+        "experts": [
+          40,
+          45
+        ],
+        "joint_occurrences": 45
+      },
+      {
+        "experts": [
+          13,
+          36
+        ],
+        "joint_occurrences": 44
+      },
+      {
+        "experts": [
+          24,
+          59
+        ],
+        "joint_occurrences": 42
+      },
+      {
+        "experts": [
+          42,
+          59
+        ],
+        "joint_occurrences": 41
+      },
+      {
+        "experts": [
+          8,
+          45
+        ],
+        "joint_occurrences": 41
+      },
+      {
+        "experts": [
+          14,
+          46
+        ],
+        "joint_occurrences": 41
+      },
+      {
+        "experts": [
+          3,
+          34
+        ],
+        "joint_occurrences": 41
+      },
+      {
+        "experts": [
+          7,
+          34
+        ],
+        "joint_occurrences": 40
+      },
+      {
+        "experts": [
+          4,
+          13
+        ],
+        "joint_occurrences": 40
+      },
+      {
+        "experts": [
+          10,
+          56
+        ],
+        "joint_occurrences": 40
+      },
+      {
+        "experts": [
+          18,
+          47
+        ],
+        "joint_occurrences": 40
+      },
+      {
+        "experts": [
+          3,
+          56
+        ],
+        "joint_occurrences": 40
+      },
+      {
+        "experts": [
+          3,
+          10
+        ],
+        "joint_occurrences": 40
+      },
+      {
+        "experts": [
+          52,
+          54
+        ],
+        "joint_occurrences": 40
+      },
+      {
+        "experts": [
+          13,
+          57
+        ],
+        "joint_occurrences": 40
+      },
+      {
+        "experts": [
+          38,
+          58
+        ],
+        "joint_occurrences": 40
+      }
+    ],
+    "8": [
+      {
+        "experts": [
+          18,
+          33
+        ],
+        "joint_occurrences": 224
+      },
+      {
+        "experts": [
+          8,
+          33
+        ],
+        "joint_occurrences": 201
+      },
+      {
+        "experts": [
+          4,
+          38
+        ],
+        "joint_occurrences": 198
+      },
+      {
+        "experts": [
+          42,
+          48
+        ],
+        "joint_occurrences": 196
+      },
+      {
+        "experts": [
+          18,
+          30
+        ],
+        "joint_occurrences": 194
+      },
+      {
+        "experts": [
+          8,
+          45
+        ],
+        "joint_occurrences": 188
+      },
+      {
+        "experts": [
+          14,
+          31
+        ],
+        "joint_occurrences": 188
+      },
+      {
+        "experts": [
+          20,
+          25
+        ],
+        "joint_occurrences": 187
+      },
+      {
+        "experts": [
+          16,
+          45
+        ],
+        "joint_occurrences": 187
+      },
+      {
+        "experts": [
+          8,
+          31
+        ],
+        "joint_occurrences": 187
+      },
+      {
+        "experts": [
+          13,
+          38
+        ],
+        "joint_occurrences": 186
+      },
+      {
+        "experts": [
+          48,
+          59
+        ],
+        "joint_occurrences": 185
+      },
+      {
+        "experts": [
+          33,
+          39
+        ],
+        "joint_occurrences": 185
+      },
+      {
+        "experts": [
+          4,
+          30
+        ],
+        "joint_occurrences": 183
+      },
+      {
+        "experts": [
+          31,
+          48
+        ],
+        "joint_occurrences": 182
+      },
+      {
+        "experts": [
+          6,
+          39
+        ],
+        "joint_occurrences": 181
+      },
+      {
+        "experts": [
+          8,
+          11
+        ],
+        "joint_occurrences": 181
+      },
+      {
+        "experts": [
+          6,
+          14
+        ],
+        "joint_occurrences": 180
+      },
+      {
+        "experts": [
+          14,
+          47
+        ],
+        "joint_occurrences": 180
+      },
+      {
+        "experts": [
+          25,
+          41
+        ],
+        "joint_occurrences": 179
+      },
+      {
+        "experts": [
+          16,
+          18
+        ],
+        "joint_occurrences": 179
+      },
+      {
+        "experts": [
+          29,
+          34
+        ],
+        "joint_occurrences": 178
+      },
+      {
+        "experts": [
+          7,
+          25
+        ],
+        "joint_occurrences": 178
+      },
+      {
+        "experts": [
+          8,
+          14
+        ],
+        "joint_occurrences": 178
+      },
+      {
+        "experts": [
+          30,
+          41
+        ],
+        "joint_occurrences": 177
+      },
+      {
+        "experts": [
+          8,
+          59
+        ],
+        "joint_occurrences": 177
+      },
+      {
+        "experts": [
+          31,
+          45
+        ],
+        "joint_occurrences": 177
+      },
+      {
+        "experts": [
+          30,
+          34
+        ],
+        "joint_occurrences": 176
+      },
+      {
+        "experts": [
+          3,
+          6
+        ],
+        "joint_occurrences": 175
+      },
+      {
+        "experts": [
+          14,
+          45
+        ],
+        "joint_occurrences": 175
+      }
+    ],
+    "16": [
+      {
+        "experts": [
+          18,
+          38
+        ],
+        "joint_occurrences": 347
+      },
+      {
+        "experts": [
+          18,
+          30
+        ],
+        "joint_occurrences": 346
+      },
+      {
+        "experts": [
+          35,
+          53
+        ],
+        "joint_occurrences": 343
+      },
+      {
+        "experts": [
+          18,
+          33
+        ],
+        "joint_occurrences": 340
+      },
+      {
+        "experts": [
+          27,
+          59
+        ],
+        "joint_occurrences": 338
+      },
+      {
+        "experts": [
+          41,
+          59
+        ],
+        "joint_occurrences": 337
+      },
+      {
+        "experts": [
+          18,
+          31
+        ],
+        "joint_occurrences": 336
+      },
+      {
+        "experts": [
+          31,
+          48
+        ],
+        "joint_occurrences": 325
+      },
+      {
+        "experts": [
+          31,
+          45
+        ],
+        "joint_occurrences": 325
+      },
+      {
+        "experts": [
+          4,
+          35
+        ],
+        "joint_occurrences": 323
+      },
+      {
+        "experts": [
+          4,
+          38
+        ],
+        "joint_occurrences": 323
+      },
+      {
+        "experts": [
+          4,
+          27
+        ],
+        "joint_occurrences": 323
+      },
+      {
+        "experts": [
+          14,
+          31
+        ],
+        "joint_occurrences": 321
+      },
+      {
+        "experts": [
+          31,
+          55
+        ],
+        "joint_occurrences": 318
+      },
+      {
+        "experts": [
+          8,
+          45
+        ],
+        "joint_occurrences": 318
+      },
+      {
+        "experts": [
+          38,
+          59
+        ],
+        "joint_occurrences": 317
+      },
+      {
+        "experts": [
+          30,
+          41
+        ],
+        "joint_occurrences": 316
+      },
+      {
+        "experts": [
+          42,
+          48
+        ],
+        "joint_occurrences": 316
+      },
+      {
+        "experts": [
+          31,
+          36
+        ],
+        "joint_occurrences": 313
+      },
+      {
+        "experts": [
+          25,
+          41
+        ],
+        "joint_occurrences": 313
+      },
+      {
+        "experts": [
+          45,
+          59
+        ],
+        "joint_occurrences": 312
+      },
+      {
+        "experts": [
+          8,
+          11
+        ],
+        "joint_occurrences": 312
+      },
+      {
+        "experts": [
+          1,
+          59
+        ],
+        "joint_occurrences": 310
+      },
+      {
+        "experts": [
+          31,
+          59
+        ],
+        "joint_occurrences": 309
+      },
+      {
+        "experts": [
+          4,
+          30
+        ],
+        "joint_occurrences": 309
+      },
+      {
+        "experts": [
+          8,
+          14
+        ],
+        "joint_occurrences": 309
+      },
+      {
+        "experts": [
+          33,
+          38
+        ],
+        "joint_occurrences": 307
+      },
+      {
+        "experts": [
+          8,
+          33
+        ],
+        "joint_occurrences": 306
+      },
+      {
+        "experts": [
+          16,
+          18
+        ],
+        "joint_occurrences": 306
+      },
+      {
+        "experts": [
+          25,
+          59
+        ],
+        "joint_occurrences": 305
+      }
+    ],
+    "32": [
+      {
+        "experts": [
+          27,
+          59
+        ],
+        "joint_occurrences": 443
+      },
+      {
+        "experts": [
+          35,
+          53
+        ],
+        "joint_occurrences": 429
+      },
+      {
+        "experts": [
+          41,
+          59
+        ],
+        "joint_occurrences": 420
+      },
+      {
+        "experts": [
+          31,
+          36
+        ],
+        "joint_occurrences": 420
+      },
+      {
+        "experts": [
+          18,
+          38
+        ],
+        "joint_occurrences": 416
+      },
+      {
+        "experts": [
+          31,
+          45
+        ],
+        "joint_occurrences": 415
+      },
+      {
+        "experts": [
+          18,
+          30
+        ],
+        "joint_occurrences": 412
+      },
+      {
+        "experts": [
+          18,
+          31
+        ],
+        "joint_occurrences": 410
+      },
+      {
+        "experts": [
+          31,
+          59
+        ],
+        "joint_occurrences": 408
+      },
+      {
+        "experts": [
+          14,
+          31
+        ],
+        "joint_occurrences": 408
+      },
+      {
+        "experts": [
+          31,
+          55
+        ],
+        "joint_occurrences": 403
+      },
+      {
+        "experts": [
+          38,
+          59
+        ],
+        "joint_occurrences": 403
+      },
+      {
+        "experts": [
+          8,
+          11
+        ],
+        "joint_occurrences": 401
+      },
+      {
+        "experts": [
+          45,
+          59
+        ],
+        "joint_occurrences": 400
+      },
+      {
+        "experts": [
+          33,
+          38
+        ],
+        "joint_occurrences": 397
+      },
+      {
+        "experts": [
+          4,
+          38
+        ],
+        "joint_occurrences": 397
+      },
+      {
+        "experts": [
+          31,
+          34
+        ],
+        "joint_occurrences": 396
+      },
+      {
+        "experts": [
+          18,
+          33
+        ],
+        "joint_occurrences": 395
+      },
+      {
+        "experts": [
+          8,
+          59
+        ],
+        "joint_occurrences": 394
+      },
+      {
+        "experts": [
+          33,
+          59
+        ],
+        "joint_occurrences": 394
+      },
+      {
+        "experts": [
+          4,
+          27
+        ],
+        "joint_occurrences": 391
+      },
+      {
+        "experts": [
+          31,
+          48
+        ],
+        "joint_occurrences": 391
+      },
+      {
+        "experts": [
+          8,
+          27
+        ],
+        "joint_occurrences": 389
+      },
+      {
+        "experts": [
+          27,
+          38
+        ],
+        "joint_occurrences": 389
+      },
+      {
+        "experts": [
+          8,
+          45
+        ],
+        "joint_occurrences": 387
+      },
+      {
+        "experts": [
+          30,
+          41
+        ],
+        "joint_occurrences": 383
+      },
+      {
+        "experts": [
+          27,
+          41
+        ],
+        "joint_occurrences": 381
+      },
+      {
+        "experts": [
+          33,
+          45
+        ],
+        "joint_occurrences": 381
+      },
+      {
+        "experts": [
+          6,
+          45
+        ],
+        "joint_occurrences": 379
+      },
+      {
+        "experts": [
+          27,
+          31
+        ],
+        "joint_occurrences": 377
+      }
+    ]
+  },
+  "scope": "All captured steps/layers; controlled prompts; no production generalization"
+}
