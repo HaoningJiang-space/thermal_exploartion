@@ -142,9 +142,9 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
                     rc=ceil((RCD_NS[effective]+27.5+4.77)/.25)
                     shared=profile.service_tb_s/16*1000*.25
                     rate=shared if isolation=='bank_cycle' else min(shared,16*4096/rc)
-                    mem=g.add('dram',tile,n,memory_deps,resource=('dram',tile),ticks=0 if isolation=='ideal_memory' else ceil(n/rate)+ceil((RCD_NS[effective]+4)/.25),stage='expert_prefetch',tier=tier)
-                    hb_time=0 if isolation in ('ideal_memory','hb_only') else n/(profile.hb_tb_s/16*1000*.25)
-                    ingress=0 if isolation in ('ideal_memory','ingress_only') else n/profile.fifo_ingress_bytes_tick
+                    mem=g.add('dram',tile,n,memory_deps,resource=('dram',tile),ticks=0 if isolation in ('ideal_memory','native_only') else ceil(n/rate)+ceil((RCD_NS[effective]+4)/.25),stage='expert_prefetch',tier=tier)
+                    hb_time=0 if isolation in ('ideal_memory','hb_only','hb_ingress_only') else n/(profile.hb_tb_s/16*1000*.25)
+                    ingress=0 if isolation in ('ideal_memory','ingress_only','hb_ingress_only') else n/profile.fifo_ingress_bytes_tick
                     hb=g.add('hb',tile,n,(mem,),('hb',tile),ceil(max(hb_time,ingress)),'expert_prefetch',tier)
                     g.lease(mem,hb,('return',tile),n);pre.append((mem,hb,n));left-=n
                     lead+=g.nodes[mem].ticks+g.nodes[hb].ticks

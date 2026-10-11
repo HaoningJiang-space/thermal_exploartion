@@ -2,13 +2,22 @@ import unittest,json
 from pathlib import Path
 from collections import Counter
 from thermal_exploration.expert_execution import RowBlockedExecution,slice_spans,expert_graph
-from thermal_exploration.crossover_execution import Profile,CrossoverExecution
+from thermal_exploration.crossover_execution import Profile,CrossoverExecution,pipeline
 from thermal_exploration.layer_execution import resident_layout
 from thermal_exploration.model_contract import load_model,capacity,expected_mac_flops
 from thermal_exploration.tensor_execution import hardware,CASES
 from thermal_exploration.decode_graph import execute,Graph
 
 class ExpertTests(unittest.TestCase):
+ def test_native_and_joint_ingress_probes_preserve_finite_work(self):
+  parts=((0,262144),(7,262144));base=pipeline(parts,8,Profile())
+  for isolation in ('native_only','hb_ingress_only'):
+   probe=pipeline(parts,8,Profile(isolation=isolation))
+   self.assertEqual(probe['activity'],base['activity'])
+   self.assertEqual(probe['dram_bytes'],base['dram_bytes'])
+   self.assertLessEqual(probe['max_response_bytes'],65536)
+   self.assertLessEqual(probe['max_live_weight_bytes'],262144)
+   self.assertLessEqual(probe['ticks'],base['ticks'])
  def test_paid_native_profiles_and_negative_storage(self):
   c=hardware(dict(CASES['row_fifo_k'],compute_tflops=152,sram_mib=18),6144,4096,4)
   self.assertEqual(c['mac_flops_per_tick'],2375);self.assertEqual(c['sram_per_tile'],1179648)

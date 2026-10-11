@@ -57,7 +57,7 @@ def pipeline(parts,batch,profile=Profile(),lead=0,collective_ports=False,useful_
     half. All128B/tick writes go to the collective/result engine. No extra port.
     """
     if min(profile.compute_tflops,profile.hb_tb_s,profile.fifo_bytes_tick,profile.fifo_ingress_bytes_tick)<=0 or lead<0:raise ValueError('Invalid resource profile')
-    if profile.isolation not in ('none','bank_cycle','uniform_fast_tier','hb_only','ingress_only','mac_only','ideal_memory','infinite_noc'):raise ValueError('Unknown isolation')
+    if profile.isolation not in ('none','bank_cycle','uniform_fast_tier','hb_only','ingress_only','hb_ingress_only','native_only','mac_only','ideal_memory','infinite_noc'):raise ValueError('Unknown isolation')
     mem_free=hb_free=-lead;mac_free=0;weights=defaultdict(lambda:-lead);returns=defaultdict(lambda:-lead)
     chunk=32768;packet=1024;slots=8;return_slots=64;index=packet_index=processed=0
     total=sum(n for _,n in parts);useful=total if useful_bytes is None else useful_bytes
@@ -69,6 +69,7 @@ def pipeline(parts,batch,profile=Profile(),lead=0,collective_ports=False,useful_
         shared=profile.service_tb_s/16*1000*TICK_NS
         rate=shared if profile.isolation=='bank_cycle' else min(shared,16*4096/rc)
         latency=ceil((RCD_NS[effective]+4)/TICK_NS)
+        if profile.isolation in ('ideal_memory','native_only'):latency=0
         for offset in range(0,size,chunk):
             count=min(chunk,size-offset);slot=index%slots
             flops=((processed+count)*useful*batch)//total-(processed*useful*batch)//total
@@ -81,11 +82,11 @@ def pipeline(parts,batch,profile=Profile(),lead=0,collective_ports=False,useful_
                 n=min(packet,count-po);rs=packet_index%return_slots
                 start=max(mem_free,weights[slot],returns[rs]);memory_start=start if memory_start is None else min(start,memory_start)
                 duration=ceil((cumulative+n)/rate)-ceil(cumulative/rate);cumulative+=n
-                if profile.isolation=='ideal_memory':duration=0
-                mem_free=start+duration;arrival=mem_free+(0 if profile.isolation=='ideal_memory' else latency)
+                if profile.isolation in ('ideal_memory','native_only'):duration=0
+                mem_free=start+duration;arrival=mem_free+(0 if profile.isolation in ('ideal_memory','native_only') else latency)
                 hb_start=max(arrival,hb_free)
-                hb_duration=0 if profile.isolation in ('hb_only','ideal_memory') else n/(profile.hb_tb_s/16*1000*TICK_NS)
-                ingress=0 if profile.isolation in ('ingress_only','ideal_memory') else n/profile.fifo_ingress_bytes_tick
+                hb_duration=0 if profile.isolation in ('hb_only','hb_ingress_only','ideal_memory') else n/(profile.hb_tb_s/16*1000*TICK_NS)
+                ingress=0 if profile.isolation in ('ingress_only','hb_ingress_only','ideal_memory') else n/profile.fifo_ingress_bytes_tick
                 hb_duration=max(hb_duration,ingress)
                 # Streaming uses the already paid dedicated ingress FIFO; the
                 # ordinary SRAM-copy limit is independently probed below.
