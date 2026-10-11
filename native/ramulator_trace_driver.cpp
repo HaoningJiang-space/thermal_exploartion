@@ -61,11 +61,13 @@ struct Work {
 
 int main(int argc,char** argv) {
  try {
-  if(argc!=6 && argc!=8)throw std::runtime_error("config.json requests.tsv out-prefix outstanding-limit consumer-FLOP/tile/tick [HB-bytes/channel/tick terminal-idle-ticks]");
+  if(argc!=6 && argc!=8 && argc!=9)throw std::runtime_error("config.json requests.tsv out-prefix outstanding-limit consumer-FLOP/tile/tick [HB-bytes/channel/tick terminal-idle-ticks [logic-ticks-per-DRAM-tick]]");
   const int limit=std::stoi(argv[4]);const double rate=std::stod(argv[5]);
   if(limit<=0||!std::isfinite(rate)||rate<=0)throw std::runtime_error("invalid integration controls");
-  const double hb_rate=argc==8?std::stod(argv[6]):0;
-  const long long idle=argc==8?std::stoll(argv[7]):0;
+  const double hb_rate=argc>=8?std::stod(argv[6]):0;
+  const long long idle=argc>=8?std::stoll(argv[7]):0;
+  const int dram_ratio=argc==9?std::stoi(argv[8]):1;
+  if(dram_ratio<1)throw std::runtime_error("Invalid clock-domain ratio");
   if(hb_rate<0||idle<0)throw std::runtime_error("invalid HB or idle budget");
   std::ifstream input(argv[2]);std::string line;std::vector<Work> works;
   while(std::getline(input,line)) {
@@ -132,7 +134,7 @@ int main(int argc,char** argv) {
       auto& x=works[rid];
       if(r.ingress_id!=rid)throw std::runtime_error("transaction identity changed in controller");
       if(x.completed>=0||x.accepted<0)throw std::runtime_error("duplicate or unaccepted completion");
-      x.completed=clk+1;x.depart=r.depart;
+      x.completed=clk+1;x.depart=r.depart*dram_ratio;
       if(x.depart>x.completed)throw std::runtime_error("callback precedes response readiness");
       if(hb_rate>0){
         int channel=x.vec[0];hb_finish[channel]=std::max(double(x.completed),hb_finish[channel])+x.bytes/hb_rate;
@@ -155,7 +157,7 @@ int main(int argc,char** argv) {
    else state="service_or_return_progress";
    states[state]++;queue_sum+=active;queue_max=std::max(queue_max,active);
    samples<<clk<<","<<active<<","<<waiting_consumer<<","<<eligible<<","<<state<<"\n";
-   memory->tick();
+   if(clk%dram_ratio==dram_ratio-1)memory->tick();
   }
   if(done!=int(works.size())||accepted!=done||returned!=done||active!=0)
    throw std::runtime_error("trace did not drain exactly once");
@@ -164,7 +166,7 @@ int main(int argc,char** argv) {
     for(int d:w.deps)if(w.accepted<works[d].consumed)throw std::runtime_error("dependency violated");
   }
   const auto execution_ticks=clk;
-  for(long long i=0;i<idle;i++)memory->tick();
+  for(long long i=0;i<idle;i++)if((execution_ticks+i)%dram_ratio==dram_ratio-1)memory->tick();
   memory->update_stats_recursive();std::ofstream stats(prefix+"-stats.yaml");memory->print_stats(stats);
   memory->finalize();frontend->finalize();
   std::ofstream ev(prefix+"-events.csv");ev<<"id,accepted,completed,depart,consumed,source,address,size,useful_flops\n";

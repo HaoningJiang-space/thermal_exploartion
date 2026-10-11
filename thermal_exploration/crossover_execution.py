@@ -23,6 +23,7 @@ class Profile:
     isolation:str='none'
     fifo_bytes_tick:float=500
     fifo_ingress_bytes_tick:float=500
+    service_tb_s:float=26.599
     def area(self):
         variable=MAC_AREA*self.compute_tflops/128+STORAGE_AREA*self.sram_mib/36
         fixed=85.75-MAC_AREA-STORAGE_AREA
@@ -61,7 +62,7 @@ def pipeline(parts,batch,profile=Profile(),lead=0,collective_ports=False,useful_
     for tier,size in parts:
         effective=0 if profile.isolation=='uniform_fast_tier' else tier
         rc=ceil((2.29+20.59*effective/7+27.5+4.77)/TICK_NS)
-        shared=26.599/16*1000*TICK_NS
+        shared=profile.service_tb_s/16*1000*TICK_NS
         rate=shared if profile.isolation=='bank_cycle' else min(shared,16*4096/rc)
         latency=ceil((2.29+20.59*effective/7+4)/TICK_NS)
         for offset in range(0,size,chunk):
@@ -158,6 +159,9 @@ class CrossoverExecution(LayerExecution):
     def kernel(self,parts,batch,stream,oracle='none',useful_bytes=None,**kwargs):
         return pipeline(parts,batch,self.profile,useful_bytes=useful_bytes)
     def phase(self,name,duration,activity,reason):
+        if name=='embedding_lookup' or name.endswith('norm_bias_weights'):
+            bytes_=sum(v.get('dram',0) for v in activity.values())
+            duration=max(duration,ceil(bytes_/(self.profile.service_tb_s*1000*TICK_NS)))
         super().phase(name,duration,activity,reason)
         if name.endswith('route_weights_distribution'):self.route_ready=self.clock
     def linear(self,names,batch,name):

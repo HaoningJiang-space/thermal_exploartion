@@ -18,7 +18,7 @@ from .thermal import response
 from .trace_generator import request,streaming,write_trace
 
 
-def check_commands(dram,req,events,commands):
+def check_commands(dram,req,events,commands,logic_ticks_per_dram_tick=1):
     from tests.device_timings.harness import DeviceUnderTest
     devices=[DeviceUnderTest(dram) for _ in range(16)]
     issued=set();counts=Counter();ev={int(e["id"]):e for e in events}
@@ -32,7 +32,7 @@ def check_commands(dram,req,events,commands):
             if rid in issued or not 0<=rid<len(req):raise ValueError("Duplicate/invalid physical transaction")
             original=[int(c[k]) for k in dut.level_names]
             if req[rid]["addr_vec"]!=original or req[rid]["source_tile"]!=int(c["source"]):raise ValueError("Transaction tag/placement mismatch")
-            if int(ev[rid]["accepted"])>=clock or int(ev[rid]["completed"])<=clock:raise ValueError("Noncausal command attribution")
+            if int(ev[rid]["accepted"])//logic_ticks_per_dram_tick>=clock or int(ev[rid]["completed"])//logic_ticks_per_dram_tick<=clock:raise ValueError("Noncausal command attribution")
             issued.add(rid)
     if issued!=set(range(len(req))):raise ValueError("Read requests not all attributed to physical commands")
     return dict(status="PASS",counts=dict(counts),commands=sum(counts.values()),logical_reads=len(issued),
@@ -50,13 +50,13 @@ def command_case(exe,root,out,name,paths,hb,kind="streaming",refresh=True,ideal=
     # 8 TFLOP/s/tile =2000 FLOP per 0.25ns tick; 512 inflight/tile,
     # 512KiB payload buffer/tile fits the same 2.25MiB private SRAM budget.
     with (case/"execution.log").open("w") as log:
-        subprocess.run([str(exe),str(case/"config.json"),str(case/"requests.tsv"),str(case/"run"),"8192","2000",str(hb/16*1000*.25),"0"],stdout=log,stderr=log,check=True)
+        subprocess.run([str(exe),str(case/"config.json"),str(case/"requests.tsv"),str(case/"run"),"8192","2000",str(hb/16*1000*.25),"0","2"],stdout=log,stderr=log,check=True)
     driver=json.loads((case/"run-driver.json").read_text());events=read_csv(case/"run-events.csv")
     work=validate_events(req,events,driver,validator)
     commands=[]
     for ch in range(16):commands.extend(read_csv(case/f"transaction-commands.ch{ch}.csv"))
     commands.sort(key=lambda c:int(c["clock"]))
-    validation=check_commands(dram,req,events,commands)
+    validation=check_commands(dram,req,events,commands,2)
     # Freeze the steady window rule before looking at rates: discard first and
     # last4096 completed transactions; report full execution separately.
     ordered=sorted(int(e["completed"]) for e in events)
@@ -66,7 +66,7 @@ def command_case(exe,root,out,name,paths,hb,kind="streaming",refresh=True,ideal=
         start=period*2;end=(driver["ticks"]//period-1)*period
         if end-start<period*5:raise ValueError("Steady interval must contain at least five refresh periods")
     count=sum(start<=int(e["completed"])<end for e in events)
-    steady=Counter(c["command"] for c in commands if start<=int(c["clock"])<end)
+    steady=Counter(c["command"] for c in commands if start<=2*int(c["clock"])<end)
     bytes_=count*hb_trace.TX;rate=bytes_/((end-start)*.25)/1000
     full_rate=work["read_bytes"]/(driver["ticks"]*.25)/1000
     if rate>hb*1.001:raise ValueError("Simulated delivery exceeds fixed HB budget")

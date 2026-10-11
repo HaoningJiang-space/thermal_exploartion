@@ -329,7 +329,10 @@ int main(int argc,char** argv){try {
     Ramulator::Request request(r.vec,Ramulator::Request::Type::Read);request.addr=r.address;request.source_id=tile;request.ingress_id=rid;request.size_bytes=1024;
     request.callback=[&,rid,tile](Ramulator::Request& response){auto& r=reads[rid];
      if(response.ingress_id!=rid||r.accepted<0||r.depart>=0)throw std::runtime_error("Duplicate/wrong DRAM response");
-     r.depart=response.depart;last_dram=std::max(last_dram,r.depart);hb[tile].push_back(rid);returned++;weight_bytes+=1024;
+     // Command/controller timestamps are0.5ns DRAM cycles; this driver uses
+     //0.25ns logic cycles. A callback at the end of a DRAM tick becomes visible
+     //at the corresponding logic boundary, never one clock-domain early.
+     r.depart=response.depart*2;last_dram=std::max(last_dram,r.depart);hb[tile].push_back(rid);returned++;weight_bytes+=1024;
     };
     if(ideal_memory||memory->send(request)){
      r.accepted=clk;accepted++;response_used[tile]+=1024;unsent[tile].erase(rid);rhigh[tile]=std::max(rhigh[tile],response_used[tile]);
@@ -343,7 +346,7 @@ int main(int argc,char** argv){try {
       fixed[tile]+65536+wused[tile]+response_used[tile]+redused[tile]>(wbudget>524288?16777216:2359296))throw std::runtime_error("Physical resource overflow");
    ports<<clk<<","<<tile<<","<<256-rb[tile]<<","<<128-wb[tile]<<","<<16-vb[tile]<<","<<wused[tile]<<","<<response_used[tile]<<","<<redused[tile]<<","<<queued<<","<<(stream_fifo?500-bandwidth:0)<<","<<fifo_read[tile]<<"\n";
   }
-  memory->tick();
+  if(clk%2==1)memory->tick();
  }
  if(mac_done!=int(tasks.size())||roots_done!=int(reductions.size())||accepted!=int(reads.size())||returned!=accepted||
     flops!=2LL*m*n*batch||adds!=1LL*(pc-1)*m*batch||casts!=1LL*m*batch)

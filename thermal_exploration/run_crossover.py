@@ -23,7 +23,7 @@ def routes_for(c,batch,step,route_data,mode):
     return [[rng.choice(60,4,False).tolist() for token in range(batch)] for layer in range(24)]
 
 def run_one(c,a,layout,profile,schedule,route_data,route_mode,out,scenario):
-    label=f'{int(profile.compute_tflops)}tf-{int(profile.sram_mib)}mib-hb{int(profile.hb_tb_s)}-fifo{int(profile.fifo_ingress_bytes_tick)}-{profile.isolation}-{schedule}-{route_mode}'
+    label=f'{int(profile.compute_tflops)}tf-{int(profile.sram_mib)}mib-hb{int(profile.hb_tb_s)}-fifo{int(profile.fifo_ingress_bytes_tick)}-svc{profile.service_tb_s:.6f}-{profile.isolation}-{schedule}-{route_mode}'
     folder=out/scenario;folder.mkdir(exist_ok=True);rows=[];activity=Counter();critical=Counter();ticks=0;prefetch=0;overlap=0;kernel_states=Counter();path=folder/(label+'.jsonl.gz')
     try:
         with gzip.open(path,'wt') as f:
@@ -48,8 +48,8 @@ def run_one(c,a,layout,profile,schedule,route_data,route_mode,out,scenario):
            time_us=ticks*.00025,tokens=a['batch']*a['decode_steps'],tokens_s=a['batch']*a['decode_steps']/(ticks*.25e-9),
            activity=dict(activity),critical_macro_path_ticks=dict(critical),kernel_states=dict(kernel_states),step_records=rows,
            prefetched_bytes=prefetch,collective_overlap_operators=overlap,area=profile.area(),sram_budget=storage,source_commit=revision(),
-           data_supply_lower_bound_us=activity['dram']/26.599e6,compute_lower_bound_us=activity['mac']/(profile.compute_tflops*1e6),
-           arithmetic_intensity=activity['mac']/activity['dram'],roofline_intensity=profile.compute_tflops/26.599,
+           data_supply_lower_bound_us=activity['dram']/(profile.service_tb_s*1e6),compute_lower_bound_us=activity['mac']/(profile.compute_tflops*1e6),
+           arithmetic_intensity=activity['mac']/activity['dram'],roofline_intensity=profile.compute_tflops/profile.service_tb_s,
            route_context_transfer=route_mode=='matched_capture' and a['context']!=route_data['capture_context'],
            route_source_sha256=route_data.get('_file_sha256'),scope='Conditional whole-model structural Decode; named finite known schedule, not optimal scheduler or measured accelerator')
     except ValueError as error:
@@ -61,7 +61,7 @@ def run_one(c,a,layout,profile,schedule,route_data,route_mode,out,scenario):
     return result
 
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument('--output',required=True);ap.add_argument('--routes');ap.add_argument('--cases',nargs='+');ap.add_argument('--steps',type=int,default=128);ap.add_argument('--mode',choices=('baseline','isolation','frontier','all'),default='all');ap.add_argument('--uniform-control',action='store_true');a=ap.parse_args()
+    ap=argparse.ArgumentParser();ap.add_argument('--output',required=True);ap.add_argument('--routes');ap.add_argument('--cases',nargs='+');ap.add_argument('--steps',type=int,default=128);ap.add_argument('--mode',choices=('baseline','isolation','frontier','all'),default='all');ap.add_argument('--service',type=float,default=26.599);ap.add_argument('--uniform-control',action='store_true');a=ap.parse_args()
     out=Path(a.output);out.mkdir(parents=True,exist_ok=False);contract=json.loads((ROOT/'configs/crossover/contract.json').read_text())
     source=Path(a.routes) if a.routes else None
     routes=json.loads(source.read_text()) if source else {};routes['_file_sha256']=hashlib.sha256(source.read_bytes()).hexdigest() if source else None
@@ -76,6 +76,8 @@ def main():
        'Same frozen32GiB regional/tier capacity; all128steps; QwenC8192 extension isolated as control'])
     (out/'contract.json').write_text(json.dumps(contract,indent=2)+'\n');summaries=[];admissions=[]
     def add(c,ad,layout,p,s,scenario):
+        from dataclasses import replace
+        p=replace(p,service_tb_s=a.service)
         r=run_one(c,ad,layout,p,s,routes,mode,out,scenario);summaries.append(r)
         (out/'partial.json').write_text(json.dumps(summaries,indent=2)+'\n')
     for scenario in a.cases or contract['scenarios']:

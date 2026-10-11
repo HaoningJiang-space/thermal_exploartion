@@ -24,13 +24,13 @@ def run_case(exe,root,out,name,partial=False):
     dram,config=hb_trace.ramulator_config(root,case,2,**settings)
     (case/'config.json').write_text(json.dumps(config,indent=2)+'\n')
     with (case/'execution.log').open('w') as log:
-        subprocess.run([str(exe),str(case/'config.json'),str(case/'requests.tsv'),str(case/'run'),'8192','2000','500','0'],stdout=log,stderr=log,check=True)
+        subprocess.run([str(exe),str(case/'config.json'),str(case/'requests.tsv'),str(case/'run'),'8192','2000','500','0','2'],stdout=log,stderr=log,check=True)
     driver=json.loads((case/'run-driver.json').read_text());events=read_csv(case/'run-events.csv')
     work=validate_events(req,events,driver,validator)
     commands=[]
     for ch in range(16):commands.extend(read_csv(case/f'transaction-commands.ch{ch}.csv'))
     commands.sort(key=lambda c:int(c['clock']))
-    replay=check_commands(dram,req,events,commands);audit=mechanism_audit(commands)
+    replay=check_commands(dram,req,events,commands,2);audit=mechanism_audit(commands)
     period=15600;start=period*2;end=(driver['ticks']//period-1)*period
     if end-start<5*period:raise ValueError('Not enough refresh periods')
     delivered=sum(start<=int(e['completed'])<end for e in events)*1024
