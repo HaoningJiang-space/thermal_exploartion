@@ -15,7 +15,7 @@ def main():
   selected=[r for r in data if r.get('status')=='PASS_ACCOUNTING' and r['profile']['compute_tflops']==128 and r['profile']['isolation']=='none' and r['profile']['hb_tb_s']==32 and r['profile']['fifo_ingress_bytes_tick']==500]
   for scenario in sorted({r['scenario'] for r in selected}):
    if scenario not in ('llama_b1_c2k','llama_b4_c8k','qwen_b8_c2k'):continue
-   ref=min((r for r in selected if r['scenario']==scenario),key=lambda r:r['time_us']);c=load_model(ref['model']);prior=routes['training_expected_activations'] if c['model_type']=='qwen_moe' else None
+   ref=min((r for r in selected if r['scenario']==scenario),key=lambda r:r['time_us']);c=load_model(ref['model']);prior=routes['training_expected_activations'] if c['model_type']!='llama' else None
    layout=dict(resident_layout(c,ref['admission'],ref['baseline'],prior),baseline=ref['baseline'])
    for isolation in ('infinite_noc','ideal_memory'):
     result=run_one(c,ref['admission'],layout,Profile(isolation=isolation),ref['schedule'],routes,ref['routing'],out,scenario)
