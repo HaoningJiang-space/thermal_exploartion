@@ -1,3 +1,5 @@
+> **October 11 clock erratum:** internal command-level runs used an inconsistent DRAM/Logic time conversion. See [scope and corrections](docs/clock-domain-erratum.md). Published records remain immutable; 26.599 TB/s is no longer a physical calibration anchor.
+
 # thermal_exploartion
 
 **Hybrid-Bonded 3D Accelerator Architecture Exploration**
