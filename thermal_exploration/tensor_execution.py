@@ -12,9 +12,11 @@ CASES={
 }
 CASES.update({
     'row_fifo_k':dict(rows=16,columns=1,layout='blocked',order='k',stream_fifo=True,weight_buffer=262144),
+    'row_fifo_m':dict(rows=16,columns=1,layout='blocked',order='m',stream_fifo=True,weight_buffer=262144),
     'column_fifo64':dict(rows=1,columns=16,layout='blocked',order='m',reduction_packet=64,stream_fifo=True,weight_buffer=262144),
     'column_fifo_barrier':dict(rows=1,columns=16,layout='blocked',order='m',reduction_packet=64,barrier=True,stream_fifo=True,weight_buffer=262144),
     'row_fifo_independent':dict(rows=16,columns=1,layout='blocked',order='k',stream_fifo=True,weight_buffer=262144,command_domains=2),
+    'row_fifo_m_independent':dict(rows=16,columns=1,layout='blocked',order='m',stream_fifo=True,weight_buffer=262144,command_domains=2),
     'column_fifo_independent':dict(rows=1,columns=16,layout='blocked',order='m',reduction_packet=64,stream_fifo=True,weight_buffer=262144,command_domains=2),
     'row_local_first':dict(rows=16,columns=1,layout='blocked',order='k',local_first=True),
     '2d_local_first':dict(rows=4,columns=4,layout='blocked',order='k',local_first=True),
