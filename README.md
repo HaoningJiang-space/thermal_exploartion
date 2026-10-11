@@ -1,4 +1,4 @@
-> **October 11 clock erratum:** internal command-level runs used an inconsistent DRAM/Logic time conversion. See [scope and corrections](docs/clock-domain-erratum.md). Published records remain immutable; 26.599 TB/s is no longer a physical calibration anchor.
+> **October 11 clock audit correction:** Ramulator serializes HBM3 CK into half-CK native ticks. The earlier claim that historical internal runs were twice too fast was incorrect and has been withdrawn. See [the generated-clock evidence and retained slow controls](docs/clock-domain-erratum.md). Historical artifacts remain immutable.
 
 # thermal_exploartion
 

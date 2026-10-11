@@ -71,7 +71,7 @@ def validate(case, model, dram):
     if c['ideal_memory']:
         command_validation=check_commands(dram, [], [], merged)
         command_validation['scope']='Oracle bypasses memory requests; emitted refresh commands only, no DRAM-performance claim'
-    else:command_validation = check_commands(dram, request_records, events, merged,2,channels)
+    else:command_validation = check_commands(dram, request_records, events, merged,c['logic_ticks_per_dram_tick'],channels)
     input_events = {(r['group'],r['tile']):r for r in rows(case/'run-inputs.csv')}
     for e, t in zip(model['tasks'],tasks):
         ready = input_events[e['input_group'],e['tile']]['last_tick']

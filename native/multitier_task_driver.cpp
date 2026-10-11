@@ -93,11 +93,11 @@ int main(int argc,char** argv){try{
    Ramulator::Request req(vec,Ramulator::Request::Type::Read);req.source_id=tile;req.ingress_id=rid;req.size_bytes=1024;
    req.addr=((static_cast<long long>(vec[5])*256+(vec[1]*8+vec[3]*2+vec[4])*16+tile)*4+vec[6]/8)*1024;
    req.callback=[&,rid,tile](Ramulator::Request& r){if(r.ingress_id!=rid||packets[rid].accepted<0||packets[rid].delivered>=0)throw std::runtime_error("Transaction identity or multiplicity error");
-    auto& p=packets[rid];p.depart=r.depart*2;hb_finish[tile]=std::max(double(clk+1),hb_finish[tile])+1024./500.;
+    auto& p=packets[rid];p.depart=r.depart;hb_finish[tile]=std::max(double(clk+1),hb_finish[tile])+1024./500.;
     p.delivered=std::ceil(hb_finish[tile]);delivery.emplace(p.delivered,rid);returned++;};
    if(memory->send(req)){packets[rid].accepted=clk;accepted++;supply[tile].pop_front();}else rejected++;
   }
-  if(clk%2==1)memory->tick();
+  memory->tick();
  }
  if(done!=int(tasks.size())||accepted!=packet_count||returned!=packet_count||!delivery.empty())throw std::runtime_error("Incomplete task/request execution");
  memory->update_stats_recursive();std::ofstream stats(prefix+"-stats.yaml");memory->print_stats(stats);memory->finalize();frontend->finalize();

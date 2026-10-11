@@ -1,26 +1,31 @@
-# Internal DRAM / Logic clock-domain erratum
+# Generated DRAM clock qualification and withdrawn diagnosis
 
-The October 11 crossover audit found a physical-time mismatch in the older
-internal HB surrogate executions: `hb_trace.py` quantized DRAM timing at 0.5 ns,
-but internal organization/D1, D2 and H2 drivers advanced that device once every
-reported 0.25 ns Logic tick. State/timing checks in DRAM cycles still passed.
-They did not check the physical time conversion. Timing parameters were thus
-too fast by a factor of two relative to Logic/HB/NoC resources.
+The initial October 11 diagnosis in commits 01009c4–1f28785 was **incorrect**.
+It inspected Python `resolve()['tCK_ps']=500` and assumed each native tick was
+0.5 ns. The pinned Ramulator HBM3 model has `tick_multiplier=2`. Its serializer
+doubles all timing counts and divides `tCK_ps` by two. Generated native ticks
+are 0.25 ns, matching the Logic driver. For example, Python RCD 5 CK and CK 500 ps
+become native RCD 10 ticks and tick 250 ps: both describe 2.5 ns.
 
-The corrected drivers advance DRAM after every two Logic ticks and translate
-DRAM response/command timestamps into Logic ticks at interfaces. Standard G4
-HBM3 uses the DRAM clock as its reporting domain and keeps the generic driver's
-default ratio of one; its existing reference checks are not this affected path.
+The previous internal organization/D1/D2/H2 drivers advanced the device once
+per 0.25 ns Logic tick. That conversion was already correct. The recent divide
+by two instead **stretched every DRAM timing by two**, relative to HB/Logic/NoC.
+The measured 13.21 TB/s is therefore a slow-DRAM control, not a corrected physical
+anchor. The original 26.599 TB/s remains an assumed-surrogate measurement, not
+device calibration. Historical artifacts are unchanged; their clock conversion
+is not invalidated by this withdrawn diagnosis.
 
-Published artifacts remain immutable. The old D1 26.599 TB/s is no longer an
-independently grounded physical service anchor. Old Stage 1–4 calculations can
-be read as conditional results under that assumed service budget, **not** as
-validated performance of the stated 0.5 ns device. Old H2–H3 latency agreements
-were agreements within the faulty clock contract and do not qualify the
-corrected physical-time model. D2/organization/D1 absolute rates and relative
-comparisons with fixed HB/Logic budgets require reruns before physical claims.
-G1/G2 analytical negative results retain their original assumption scope.
+The new `ClockContract` verifies the **serialized native configuration**, not
+the pre-conversion Python CK. Native drivers return to ratio 1; emitted commands
+are independently replayed under the same generated tick contract. Ratio 2 runs
+are retained as retired slow-timing controls and are excluded from the primary
+architecture results. No ratios or rates are silently multiplied to invent a
+new result; primary service and representative kernels are rerun.
 
-The new experiment preserves nominal-service controls, remeasures a bounded
-streaming service point, and reruns detailed QKV/FIFO cases. It does not silently
-edit historical numbers or extrapolate a corrected scalar to every access.
+The pinned upstream defines the conversion in
+[DRAMStandard.to_config](https://github.com/CMU-SAFARI/ramulator2/blob/c6c7a5de0cef35935d6fad7369e6271406798865/python/ramulator/dram/spec.py)
+and `HBM3.tick_multiplier=2`. Inspect the experiment's resolved and serialized
+timings together. The rising-edge-only Column slot occurs once per 0.5 ns CK in
+this contract, not once per 1 ns. A 1024 B payload therefore has a shared-command
+chip ceiling of 32.768 TB/s across 16 physical regions; HB remains fixed at
+32 TB/s. Independent command domains do not imply a free bandwidth gain.

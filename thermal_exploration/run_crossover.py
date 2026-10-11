@@ -67,7 +67,7 @@ def main():
     reference=Path(a.service_reference) if a.service_reference else None
     if reference:
         ref=json.loads(reference.read_text())
-        if ref.get('ratio')!=2:raise ValueError('Reference must use corrected clock domains')
+        if ref.get('ratio')!=1 or ref.get('dram_tick_ns')!=.25:raise ValueError('Reference must qualify serialized HBM half-CK ticks')
         a.service=max(r['steady']['useful_tb_s'] for r in ref['records'] if r['mechanism']=='baseline' and r.get('independent_commands',False)==(a.command_domains==2))
     out=Path(a.output);out.mkdir(parents=True,exist_ok=False);contract=json.loads((ROOT/'configs/crossover/contract.json').read_text())
     source=Path(a.routes) if a.routes else None

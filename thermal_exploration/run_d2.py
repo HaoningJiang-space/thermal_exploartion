@@ -72,7 +72,7 @@ def validate(case,dram,settings,rows):
             if not 0<=rid<c['requests'] or column[rid]>=0:raise ValueError('Duplicate/unattributed column')
             expected=request_identity(rid,settings['task_bytes'],settings['mapping'],rows)
             if vec!=expected['vec'] or int(command['source'])!=expected['tile']:raise ValueError('Command address/source differs')
-            column[rid]=clk*2;tier_columns[expected['tier']]+=1
+            column[rid]=clk;tier_columns[expected['tier']]+=1
     if np.any(column<0):raise ValueError('Request without physical command')
     actual_min=np.full(c['tasks'],np.iinfo(np.int64).max,dtype='i8');actual_max=np.zeros(c['tasks'],dtype='i8')
     latencies=Counter();tier_requests=Counter();frontier_bytes=0

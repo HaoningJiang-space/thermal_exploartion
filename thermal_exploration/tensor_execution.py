@@ -71,7 +71,7 @@ def hardware(settings,m=1024,n=16384,batch=32):
         static_sram_per_tile=static,sram_per_tile=sram,metadata_reserve=65536,
         weight_buffer=weight,response_buffer=response,reduce_buffer=red,prefetch_tasks=4096 if ideal_buffer else 32,
         packet_bytes=packet,flit_bytes=32,vc_depth_flits=8,virtual_channels=2,
-        tick_ns=.25,dram_tick_ns=.5,logic_ticks_per_dram_tick=2,mac_flops_per_tick=2000,vector_ops_per_tick=16,
+        tick_ns=.25,dram_CK_ns=.5,dram_tick_ns=.25,logic_ticks_per_dram_tick=1,mac_flops_per_tick=2000,vector_ops_per_tick=16,
         sram_read_bytes_per_tick=256,sram_write_bytes_per_tick=128,
         hb_bytes_per_tile_tick=500,link_serial_ticks=4,link_latency_ticks=8,
         ideal_noc=settings.get('ideal_noc',False),barrier=settings.get('barrier',False),

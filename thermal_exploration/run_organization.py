@@ -50,13 +50,13 @@ def command_case(exe,root,out,name,paths,hb,kind="streaming",refresh=True,ideal=
     # 8 TFLOP/s/tile =2000 FLOP per 0.25ns tick; 512 inflight/tile,
     # 512KiB payload buffer/tile fits the same 2.25MiB private SRAM budget.
     with (case/"execution.log").open("w") as log:
-        subprocess.run([str(exe),str(case/"config.json"),str(case/"requests.tsv"),str(case/"run"),"8192","2000",str(hb/16*1000*.25),"0","2"],stdout=log,stderr=log,check=True)
+        subprocess.run([str(exe),str(case/"config.json"),str(case/"requests.tsv"),str(case/"run"),"8192","2000",str(hb/16*1000*.25),"0","1"],stdout=log,stderr=log,check=True)
     driver=json.loads((case/"run-driver.json").read_text());events=read_csv(case/"run-events.csv")
     work=validate_events(req,events,driver,validator)
     commands=[]
     for ch in range(16):commands.extend(read_csv(case/f"transaction-commands.ch{ch}.csv"))
     commands.sort(key=lambda c:int(c["clock"]))
-    validation=check_commands(dram,req,events,commands,2)
+    validation=check_commands(dram,req,events,commands,1)
     # Freeze the steady window rule before looking at rates: discard first and
     # last4096 completed transactions; report full execution separately.
     ordered=sorted(int(e["completed"]) for e in events)
@@ -66,7 +66,7 @@ def command_case(exe,root,out,name,paths,hb,kind="streaming",refresh=True,ideal=
         start=period*2;end=(driver["ticks"]//period-1)*period
         if end-start<period*5:raise ValueError("Steady interval must contain at least five refresh periods")
     count=sum(start<=int(e["completed"])<end for e in events)
-    steady=Counter(c["command"] for c in commands if start<=2*int(c["clock"])<end)
+    steady=Counter(c["command"] for c in commands if start<=int(c["clock"])<end)
     bytes_=count*hb_trace.TX;rate=bytes_/((end-start)*.25)/1000
     full_rate=work["read_bytes"]/(driver["ticks"]*.25)/1000
     if rate>hb*1.001:raise ValueError("Simulated delivery exceeds fixed HB budget")
