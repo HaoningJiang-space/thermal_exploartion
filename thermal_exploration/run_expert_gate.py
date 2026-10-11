@@ -93,6 +93,8 @@ def main():
  ap.add_argument('--combine-scheme',choices=('fused','eager'),default='fused')
  ap.add_argument('--sample-steps',nargs='+',type=int);ap.add_argument('--sample-layers',nargs='+',type=int)
  ap.add_argument('--isolation-names',nargs='+',choices=ISOLATIONS+('native_only','hb_ingress_only'))
+ ap.add_argument('--probe-schedule',choices=('barrier','overlap'),default='overlap')
+ ap.add_argument('--probe-order',choices=('static','dynamic'),default='dynamic')
  a=ap.parse_args()
  r,sha=captured(a.routes);out=Path(a.output);out.mkdir(parents=True,exist_ok=False)
  write(out/'provenance.json',dict(source_commit=revision(),dirty=bool(subprocess.check_output(['git','status','--porcelain'],text=True).strip()),routing_sha256=sha,route_model=r['model'],dtype=r['execution_dtype'],params=vars(a),selected_steps=STEPS,selected_layers=LAYERS,scope='Fixed P0–P3; no RTL or thermal scan'))
@@ -109,7 +111,7 @@ def main():
  for step in steps:
   for l in layers:
    route=r['routes'][l][step*r['max_batch']:step*r['max_batch']+a.batch]
-   for schedule,order in SCHEDULERS if a.mode=='experts' else (('overlap','dynamic'),):
+   for schedule,order in SCHEDULERS if a.mode=='experts' else ((a.probe_schedule,a.probe_order),):
     for iso in ('none',) if a.mode=='experts' else a.isolation_names or ISOLATIONS:
      label=f'{a.baseline}-tp{tp}-b{a.batch}-l{l}-s{step}-{schedule}-{order}-{iso}'
      summaries.append(point(c,layout,l,route,Profile(),schedule,order,iso,out,label,full=(a.mode=='isolation' or step==0 and l==0),down_partition=a.down_partition,combine_scheme=a.combine_scheme))
