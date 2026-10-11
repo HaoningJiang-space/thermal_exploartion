@@ -7,7 +7,8 @@ class CrossoverTests(unittest.TestCase):
  def test_default_kernel_and_negative_resources(self):
   args=(((0,2**20),(7,2**20)),4)
   old=tile_pipeline(*args,True,keep_events=False);new=pipeline(*args)
-  self.assertEqual(old['ticks'],new['ticks']);self.assertEqual(old['activity'],new['activity'])
+  self.assertGreaterEqual(new['ticks'],old['ticks']);self.assertEqual(old['activity'],new['activity'])
+  narrow=pipeline(*args,Profile(fifo_bytes_tick=128));self.assertGreater(narrow['ticks'],new['ticks'])
   slow=pipeline(*args,Profile(hb_tb_s=8))
   self.assertGreater(slow['ticks'],new['ticks'])
   compute=pipeline(((0,2**20),),32)

@@ -40,11 +40,13 @@ int main(int argc,char** argv){try {
  if(argc!=4)throw std::runtime_error("config.json contract-directory output-prefix");
  std::string dir=argv[2],prefix=argv[3];
  int m,n,batch,pr,pc,mb,kb,wbudget,rbudget,redbudget,window,pbytes,ideal,barrier,ideal_memory;
+ int stream_fifo=0;
  std::array<int,16> fixed;
  {std::ifstream f(dir+"/resources.tsv");
   if(!(f>>m>>n>>batch>>pr>>pc>>mb>>kb>>wbudget>>rbudget>>redbudget>>window>>pbytes>>ideal>>barrier>>ideal_memory))
    throw std::runtime_error("Invalid resource contract");
   for(auto& x:fixed)if(!(f>>x))throw std::runtime_error("Missing private SRAM");
+  if(!(f>>stream_fifo))stream_fifo=0;
  }
  if(pr*pc!=16||wbudget<8192||wbudget>4194304||rbudget>wbudget||pbytes%32||window<1)
   throw std::runtime_error("Unsafe resource configuration");
@@ -83,7 +85,7 @@ int main(int argc,char** argv){try {
  std::vector<std::array<ReduceNode,16>> rn(reductions.size());
  std::array<std::set<int>,16> x_pending,out_pending,vec_ready;
  std::array<int,16> vrunning,mac_running;vrunning.fill(-1);mac_running.fill(-1);
- std::array<long long,16> mac_until{};std::array<int,16> mac_rleft{},mac_wleft{};
+ std::array<long long,16> mac_until{};std::array<int,16> mac_rleft{},mac_wleft{},fifo_rleft{};
  std::array<std::set<int>,16> admitted,unsent;
  std::array<std::deque<int>,16> hb;
  std::array<int,16> wused{},response_used{},redused{},whigh{},rhigh{},redhigh{};
@@ -119,7 +121,7 @@ int main(int argc,char** argv){try {
  noc<<"kind,group,flit,source,target,bytes,start,finish\n";
  inject<<"kind,group,flit,tile,tick\n";sink<<"kind,group,flit,child,tile,tick\n";
  jobs<<"group,tile,start,finish,read_bytes,ops,write_bytes,root\n";
- ports<<"tick,tile,read_bytes,write_bytes,vector_ops,weight_used,response_used,reduce_used,router_flits\n";
+ ports<<"tick,tile,read_bytes,write_bytes,vector_ops,weight_used,response_used,reduce_used,router_flits,fifo_ingress_bytes,fifo_operand_bytes\n";
  auto port_for=[](int node,int from){
   if(from==node)return 4;
   if(from==node-1&&node%4)return 0;
@@ -158,7 +160,7 @@ int main(int argc,char** argv){try {
   }
   for(int tile=0;tile<16;tile++)if(mac_running[tile]>=0&&mac_until[tile]<=clk){
    int id=mac_running[tile];auto& t=tasks[id];
-   if(mac_rleft[tile]||mac_wleft[tile])throw std::runtime_error("MAC finished before SRAM service");
+   if(mac_rleft[tile]||mac_wleft[tile]||fifo_rleft[tile])throw std::runtime_error("MAC finished before SRAM/FIFO service");
    t.done=true;t.finish=clk;mac_done++;flops+=t.flops;last_mac=clk;
    for(int rid:t.requests){auto& r=reads[rid];if(r.hb_done<0||--r.remaining<0)throw std::runtime_error("Weight use");
     r.last_use=clk;if(!r.remaining){wused[tile]-=1024;r.allocated=false;}}
@@ -172,6 +174,7 @@ int main(int argc,char** argv){try {
   }
   if(mac_done==int(tasks.size())&&roots_done==int(reductions.size()))break;
   std::array<int,16> rb,wb,vb;rb.fill(256);wb.fill(128);vb.fill(16);
+  std::array<int,16> fifo_read{};
   for(int tile=0;tile<16;tile++){
    // Admit complete task footprints atomically; never fill the cache with
    // unreachable fragments of a task that cannot fit.
@@ -196,9 +199,10 @@ int main(int argc,char** argv){try {
      chosen=id;break;
     }
     if(chosen>=0){auto& t=tasks[chosen];t.start=clk;
-     mac_rleft[tile]=t.mcount*t.kcount*2+t.kcount*batch*2+(t.parent>=0?t.mcount*batch*4:0);
+     mac_rleft[tile]=(stream_fifo?0:t.mcount*t.kcount*2)+t.kcount*batch*2+(t.parent>=0?t.mcount*batch*4:0);
      mac_wleft[tile]=t.mcount*batch*4;
-     long long duration=std::max<long long>({1LL,(t.flops+1999)/2000,(mac_rleft[tile]+255)/256,(mac_wleft[tile]+127)/128});
+     fifo_rleft[tile]=stream_fifo?t.mcount*t.kcount*2:0;
+     long long duration=std::max<long long>({1LL,(t.flops+1999)/2000,(mac_rleft[tile]+255)/256,(mac_wleft[tile]+127)/128,stream_fifo?(t.mcount*t.kcount*2+499)/500:0});
      mac_until[tile]=clk+duration;mac_running[tile]=chosen;
      if(first_mac<0)first_mac=clk;
     }else{if(why=="no_remaining_work"&&admit_index[tile]<local[tile].size())why="weight_cache_credit";
@@ -208,6 +212,8 @@ int main(int argc,char** argv){try {
     long long left=mac_until[tile]-clk;
     int read=(mac_rleft[tile]+left-1)/left,write=(mac_wleft[tile]+left-1)/left;
     rb[tile]-=read;wb[tile]-=write;mac_rleft[tile]-=read;mac_wleft[tile]-=write;
+    fifo_read[tile]=(fifo_rleft[tile]+left-1)/left;fifo_rleft[tile]-=fifo_read[tile];
+    if(fifo_read[tile]>500)throw std::runtime_error("FIFO operand port overrun");
     if(std::min(rb[tile],wb[tile])<0)throw std::runtime_error("MAC SRAM overrun");
     states["mac_occupied"]++;
    }
@@ -311,11 +317,11 @@ int main(int argc,char** argv){try {
   // HB and SRAM consume only returned bytes, bounded by reserved credits.
   for(int tile=0;tile<16;tile++){
    int bandwidth=500;
-   while(bandwidth>0&&wb[tile]>0&&!hb[tile].empty()){
+   while(bandwidth>0&&(stream_fifo||wb[tile]>0)&&!hb[tile].empty()){
     auto& r=reads[hb[tile].front()];if(r.depart>clk)break;
-    int transfer=std::min({bandwidth,wb[tile],1024-r.transferred});
+    int transfer=std::min({bandwidth,stream_fifo?500:wb[tile],1024-r.transferred});
     if(r.hb_first<0)r.hb_first=clk;
-    r.transferred+=transfer;bandwidth-=transfer;wb[tile]-=transfer;
+    r.transferred+=transfer;bandwidth-=transfer;if(!stream_fifo)wb[tile]-=transfer;
     if(r.transferred==1024){r.hb_done=clk+1;last_hb=clk+1;response_used[tile]-=1024;hb[tile].pop_front();}
    }
    if(!unsent[tile].empty()&&response_used[tile]+1024<=rbudget){
@@ -335,7 +341,7 @@ int main(int argc,char** argv){try {
     auto& q=fifo[tile][port][vc];if(q.data.size()+q.incoming>8)throw std::runtime_error("Router credit overflow");queued+=q.data.size()+q.incoming;}
    if(std::min({rb[tile],wb[tile],vb[tile],wused[tile],response_used[tile],redused[tile]})<0||wused[tile]>wbudget||response_used[tile]>rbudget||redused[tile]>redbudget||
       fixed[tile]+65536+wused[tile]+response_used[tile]+redused[tile]>(wbudget>524288?16777216:2359296))throw std::runtime_error("Physical resource overflow");
-   ports<<clk<<","<<tile<<","<<256-rb[tile]<<","<<128-wb[tile]<<","<<16-vb[tile]<<","<<wused[tile]<<","<<response_used[tile]<<","<<redused[tile]<<","<<queued<<"\n";
+   ports<<clk<<","<<tile<<","<<256-rb[tile]<<","<<128-wb[tile]<<","<<16-vb[tile]<<","<<wused[tile]<<","<<response_used[tile]<<","<<redused[tile]<<","<<queued<<","<<(stream_fifo?500-bandwidth:0)<<","<<fifo_read[tile]<<"\n";
   }
   memory->tick();
  }

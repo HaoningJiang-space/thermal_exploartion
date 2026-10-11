@@ -21,6 +21,8 @@ class Profile:
     sram_mib:float=36
     hb_tb_s:float=32
     isolation:str='none'
+    fifo_bytes_tick:float=500
+    fifo_ingress_bytes_tick:float=500
     def area(self):
         variable=MAC_AREA*self.compute_tflops/128+STORAGE_AREA*self.sram_mib/36
         fixed=85.75-MAC_AREA-STORAGE_AREA
@@ -49,7 +51,7 @@ def pipeline(parts,batch,profile=Profile(),lead=0,collective_ports=False,useful_
     MAC has128B/tick of the existing256B read port; collective has the other
     half. All128B/tick writes go to the collective/result engine. No extra port.
     """
-    if profile.compute_tflops<=0 or profile.hb_tb_s<=0 or lead<0:raise ValueError('Invalid resource profile')
+    if min(profile.compute_tflops,profile.hb_tb_s,profile.fifo_bytes_tick,profile.fifo_ingress_bytes_tick)<=0 or lead<0:raise ValueError('Invalid resource profile')
     if profile.isolation not in ('none','bank_cycle','uniform_fast_tier','hb_only','ingress_only','mac_only','ideal_memory'):raise ValueError('Unknown isolation')
     mem_free=hb_free=-lead;mac_free=0;weights=defaultdict(lambda:-lead);returns=defaultdict(lambda:-lead)
     chunk=32768;packet=1024;slots=8;return_slots=64;index=packet_index=processed=0
@@ -68,7 +70,7 @@ def pipeline(parts,batch,profile=Profile(),lead=0,collective_ports=False,useful_
             read=min(count,1024*batch)
             mac_rate=profile.compute_tflops/128*2000
             arithmetic=0 if profile.isolation=='mac_only' else ceil(flops/mac_rate)
-            compute=max(1,arithmetic,ceil(read/read_rate))
+            compute=max(1,arithmetic,ceil(read/read_rate),ceil(count/profile.fifo_bytes_tick))
             cumulative=0
             for po in range(0,count,packet):
                 n=min(packet,count-po);rs=packet_index%return_slots
@@ -78,6 +80,8 @@ def pipeline(parts,batch,profile=Profile(),lead=0,collective_ports=False,useful_
                 mem_free=start+duration;arrival=mem_free+(0 if profile.isolation=='ideal_memory' else latency)
                 hb_start=max(arrival,hb_free)
                 hb_duration=0 if profile.isolation in ('hb_only','ideal_memory') else n/(profile.hb_tb_s/16*1000*TICK_NS)
+                ingress=0 if profile.isolation in ('ingress_only','ideal_memory') else n/profile.fifo_ingress_bytes_tick
+                hb_duration=max(hb_duration,ingress)
                 # Streaming uses the already paid dedicated ingress FIFO; the
                 # ordinary SRAM-copy limit is independently probed below.
                 hb_free=hb_start+hb_duration;returns[rs]=hb_free

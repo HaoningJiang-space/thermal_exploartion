@@ -23,7 +23,7 @@ def routes_for(c,batch,step,route_data,mode):
     return [[rng.choice(60,4,False).tolist() for token in range(batch)] for layer in range(24)]
 
 def run_one(c,a,layout,profile,schedule,route_data,route_mode,out,scenario):
-    label=f'{int(profile.compute_tflops)}tf-{int(profile.sram_mib)}mib-hb{int(profile.hb_tb_s)}-{profile.isolation}-{schedule}-{route_mode}'
+    label=f'{int(profile.compute_tflops)}tf-{int(profile.sram_mib)}mib-hb{int(profile.hb_tb_s)}-fifo{int(profile.fifo_ingress_bytes_tick)}-{profile.isolation}-{schedule}-{route_mode}'
     folder=out/scenario;folder.mkdir(exist_ok=True);rows=[];activity=Counter();critical=Counter();ticks=0;prefetch=0;overlap=0;kernel_states=Counter();path=folder/(label+'.jsonl.gz')
     try:
         with gzip.open(path,'wt') as f:
@@ -70,7 +70,7 @@ def main():
     contract.update(source_commit=revision(),source_dirty=bool(subprocess.check_output(['git','status','--porcelain'],text=True).strip()),steps=a.steps,routing=mode,route_sha256=routes['_file_sha256'],frontier_cases=FRONTIER_CASES,isolation_cases=ISOLATION_CASES,
        assumptions=['35.25mm2 frozen as unavailable','MAC/read-port128+128 split for overlapped producer/reduction;128B writes shared by result/collective',
        'D1 guard is not theorematically attainable service for each operator','bank_cycle removes only tier bank-cycle ceiling; keeps shared D1 guard',
-       'ingress_only is a null probe on the paid dedicated streaming ingress; conventional SRAM copies already eliminated by baseline',
+       'ingress_only removes FIFO input serialization while preserving HB and FIFO output rate; conventional SRAM copies eliminated by baseline',
        'Prefetch only immediately preceding non-memory/non-MAC phase;256KiB FIFO; routed experts wait for actual routing',
        'GatedFFN pairing and bounded expert-cohort accumulation are known software mechanisms','Full materialized LM-head output retained; reduced SRAM may reject a case that known streaming Logit Selection could recover',
        'Same frozen32GiB regional/tier capacity; all128steps; QwenC8192 extension isolated as control'])
@@ -90,6 +90,7 @@ def main():
         if a.mode in ('isolation','all') and scenario in ISOLATION_CASES:
             for isolation in contract['isolation']:add(c,ad,layout,Profile(isolation=isolation),'prefetch_collective',scenario)
             add(c,ad,layout,Profile(hb_tb_s=16),'prefetch_collective',scenario)
+            add(c,ad,layout,Profile(fifo_ingress_bytes_tick=128),'prefetch_collective',scenario)
         if a.mode in ('frontier','all') and scenario in FRONTIER_CASES:
             for peak,sram in contract['profiles']:
                 if peak==128:continue

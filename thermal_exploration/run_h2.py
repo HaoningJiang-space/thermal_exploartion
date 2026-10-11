@@ -43,9 +43,10 @@ def validate(case, model, dram):
     for expected, actual in zip(model['tasks'], tasks):
         if any(actual[k] != expected[k] for k in ('id','tile','m_start','k_start','parent','flops','final')):
             raise ValueError('Task identity/work changed')
-        read=expected['m_count']*expected['k_count']*2+expected['k_count']*c['batch']*2+(expected['m_count']*c['batch']*4 if expected['parent']>=0 else 0)
+        read=(0 if c.get('stream_fifo') else expected['m_count']*expected['k_count']*2)+expected['k_count']*c['batch']*2+(expected['m_count']*c['batch']*4 if expected['parent']>=0 else 0)
         write=expected['m_count']*c['batch']*4
-        if actual['finish']-actual['start'] != max(1,(expected['flops']+1999)//2000,(read+255)//256,(write+127)//128):
+        fifo=(expected['m_count']*expected['k_count']*2+499)//500 if c.get('stream_fifo') else 0
+        if actual['finish']-actual['start'] != max(1,(expected['flops']+1999)//2000,(read+255)//256,(write+127)//128,fifo):
             raise ValueError('MAC service time')
         for rid in expected['requests']: uses[rid].append(actual)
     for expected, actual in zip(model['requests'], rd):
@@ -151,9 +152,15 @@ def validate(case, model, dram):
         if c['static_sram_per_tile'][r['tile']]+65536+r['weight_used']+r['response_used']+r['reduce_used']>c['sram_per_tile']:
             raise ValueError('Private SRAM exceeded')
         for k in ('read_bytes','write_bytes','vector_ops'):service[k]+=r[k]
-    mac_read=sum(e['m_count']*e['k_count']*2+e['k_count']*c['batch']*2+(e['m_count']*c['batch']*4 if e['parent']>=0 else 0) for e in model['tasks'])
+        for k in ('fifo_ingress_bytes','fifo_operand_bytes'):
+            if not 0<=r.get(k,0)<=500:raise ValueError('FIFO port exceeded')
+            service[k]+=r.get(k,0)
+    mac_read=sum((0 if c.get('stream_fifo') else e['m_count']*e['k_count']*2)+e['k_count']*c['batch']*2+(e['m_count']*c['batch']*4 if e['parent']>=0 else 0) for e in model['tasks'])
     mac_write=sum(e['m_count']*c['batch']*4 for e in model['tasks'])
-    if service['read_bytes']!=mac_read+totals['read_bytes']+len(injections)*32 or service['write_bytes']!=mac_write+totals['write_bytes']+len(sinks)*32+c['dram_bytes'] or service['vector_ops']!=c['reduction_adds']+c['output_casts']:
+    copies=0 if c.get('stream_fifo') else c['dram_bytes']
+    if c.get('stream_fifo') and (service['fifo_ingress_bytes']!=c['dram_bytes'] or service['fifo_operand_bytes']!=c['weight_bytes']):
+        raise ValueError('FIFO supply/consumption ledger does not close')
+    if service['read_bytes']!=mac_read+totals['read_bytes']+len(injections)*32 or service['write_bytes']!=mac_write+totals['write_bytes']+len(sinks)*32+copies or service['vector_ops']!=c['reduction_adds']+c['output_casts']:
         raise ValueError('SRAM/vector aggregate accounting does not close')
     if sum(d['mac_states'].values())!=port_count or d['mac_flops']!=c['mac_flops'] or d['dram_bytes']!=c['dram_bytes']:
         raise ValueError('Activity/work accounting does not close')
