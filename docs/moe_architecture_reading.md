@@ -56,3 +56,28 @@ model metric, not whole-LLM MBU/MFU or GPU measurement.
 Other suggested works (MoEA, MONET, DyNAMoE, MoE-Hub, DySHARP, ThAME, SIGMA,
 EIE, TETRIS) remain novelty checks before any hardware proposal. P0–P3 introduces
 no reconfigurable array, in-network computation, new NoC or new Fabric.
+
+## P0–P3 完成前的新增新意排查（2026-10-11）
+
+以下均使用原作者/会议/出版社的一手来源；摘要级核对和全文核对分开记录。
+这里是在限制我们可以声称的贡献，没有把这些论文的 speedup 当成本项目的性能数据，
+也没有声称已经复现其完整调度器或器件。
+
+| 工作 | 本次读取深度与已确认机制 | 对本项目的限制 |
+|---|---|---|
+| [MoEA, ASP-DAC 2026](https://ieeexplore.ieee.org/document/11420669/) | 出版社摘要：硬件 metadata queue 的 Direct Token Access、利用 token reuse 的动态 expert 顺序 | Direct token access 和 dynamic expert scheduling 本身已有先例；我们按 count 的 LPT 也不等价于其调度器 |
+| [MONET, DATE 2026](https://past.date-conference.com/proceedings-archive/2026/DATA/1442.pdf) | 官方 proceedings 可检索正文/摘要：两级计算/通信组织、multicast 与 output aggregation | “给 MoE 加 multicast/reduction NoC”不构成充分的新意；未核对完整成本实现，不能宣称同成本胜出 |
+| [DyNAMoE, DATE 2026](https://past.date-conference.com/proceedings-archive/2026/DATA/1217.pdf) | 官方摘要：动态可重构 NoC，token routing、input/weight distribution、result reduction | 动态 expert 通信已有硬件方案；不要与同名算法 DynaMoE 或 Apple inference 项目混淆 |
+| [MoE-Hub](https://arxiv.org/html/2605.05888) | 公开全文与作者摘要：logical destination 与地址管理解耦，hub 处理分配及数据流；作者注明 ISCA 2026 | 普通 address/control 解耦已不是空白；本模型没有测量此类地址管理开销，不能借 oracle 推导同类贡献 |
+| [DySHARP](https://arxiv.org/html/2605.05607) | 公开全文：dynamic multimem、token-centric fusion；GEMM epilogue 先乘 gate weight，再做 unweighted reduction | 本地 weighted accumulation + reduction 使用普通代数线性性；流量下降还需具体调度才能转成延迟收益，不能包装为独有机制 |
+| [ThAME v2](https://arxiv.org/abs/2607.17074) | 原作者摘要及版本元数据：FeFET/DRAM heterogeneous 3D chiplets、compute mapping、专用 MoE NoC；未精读器件实现 | 3D memory + MoE + tailored NoC 组合已有同期工作；其异构存储合同与我们的 DRAM-only、logic compute 不同 |
+| [SIGMA, HPCA 2020](https://doi.org/10.1109/HPCA47549.2020.00015) | 出版社摘要：irregular/sparse GEMM、flexible interconnect、Forwarding Adder Network | 灵活 shape/稀疏利用与 reduction tree 本身已有先例；没有把其工艺 PPA 移植进本项目 |
+| [EIE, ISCA 2016](https://hanlab.mit.edu/projects/eie) | 作者页面摘要：compressed weights、weight sharing、sparse matrix-vector engine | 低复用供数问题不能被概括为首次发现；当前固定 BF16 数据量也不能免费采用其压缩收益 |
+
+[HDA-MoE 的原作者摘要与版本说明](https://arxiv.org/abs/2609.08682)也再次核对：
+其 hybrid-bonded NMP、offline hybrid deployment、online adaptive scheduling 与当前问题直接相邻。
+本项目只实现 EP/TP4/TP16/固定 hybrid 与三种常规执行策略，不宣称完整复现 HDA-MoE。
+
+因此，本轮允许得到的是：在明确合同和固定真实路由下，已知软件机制可以恢复多少损失、
+剩余限制对哪些物理资源敏感。新硬件必须另有不可由这些机制等价实现的设计与成本证据；
+P0–P3 完成不自动产生 ISCA/MICRO/HPCA/ASPLOS Hardware Go。

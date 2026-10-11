@@ -1,0 +1,5 @@
+{
+  "prior_points_sha256": "0cb460852abf3ab61e3df9ccea23473a817239c6a43de1cd7181e58efd898ce8",
+  "prior_manifest_sha256": "6fc20afa7535894770be11583631f4a2310b15ad0ccca0a85fb8213d1ae216cc",
+  "scope": "Previously completed full raw audit; cached compact points are retained without a fidelity change"
+}

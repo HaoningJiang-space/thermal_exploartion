@@ -4,12 +4,22 @@
 
 **Hybrid-Bonded 3D Accelerator Architecture Exploration**
 
-[W2W cold 服务因果实验](results/w2w-cold-service-2026-10-11/findings.md)的报告、图表、
-审计证据与冻结复现代码现归档在本工作区。原执行使用 W2W V3 外部后端；
-其单 token cold 结果与本项目的 Stratum-inspired 模型结果采用不同硬件合同，分别解释。
-迁移检查与复现入口见 [reproduce.md](results/w2w-cold-service-2026-10-11/reproduce.md)。
+研究主线仅为本仓库的 **Hybrid-Bonded 3D DRAM-on-Logic Architecture**：
+真实 Dense/MoE LLM、Compute/Memory/NoC物理组织与Spatial Thermal；计算在logic，不做PIM或Power Delivery。
 
-最新交付为 **[Compute–Memory–Communication Architecture Crossover](results/crossover-2026-10-11/findings.md)**。
+最新交付为 **[P0–P3：真实路由下的传统 MoE 执行边界](results/expert-execution-2026-10-11/findings.md)**。
+P0原生/Fluid共享前端36点完成，18个绝对延迟对照最大误差2.80%；它只验证Memory abstraction，未独立认证完整H3。
+P1全部128步确认64-row软件累加能修复152TF/18MiB的Qwen B32调度失败。
+P2完成EP/TP4/TP16/固定Hybrid、已付费local token fusion、冻结row-down权重布局；
+P3在最强已测barrier/static策略下补齐DRAM-only与HB+ingress联合对照，保留有限容量与相同计算/权重字节。
+TP16 row-down的B8/B32理想Memory余量仅约8%/2%，NoC约32%；B32的MAC余量约58%，这些仍是未付费oracle。
+本轮3336个完整记录（3334成功、2个预期cohort失败）、1289个退役模型/调度控制和122项回归均有审计与归档。
+[合同](docs/expert_execution_gate.md)、[逐点摘要/判决](results/expert-execution-2026-10-11/decision-summary.json)、
+[复现入口](results/expert-execution-2026-10-11/reproduce.md)与
+[完整原始记录](https://github.com/HaoningJiang-space/thermal_exploartion/releases/tag/expert-execution-2026-10-11)可独立核对。
+Research Go保持；尚无新Hardware Go。本轮没有新增RTL或thermal扫描，也没有将MoE子图延迟称作完整Serving吞吐。
+
+**上一轮冻结记录：[Compute–Memory–Communication Architecture Crossover](results/crossover-2026-10-11/findings.md)。**
 十组完整模型场景跨越供数与计算Roofline，保留275个点（185个成功、90个有限调度/面积失败）、
 原始Qwen1.5路由、分项Memory/NoC反事实和固定121mm²面积前沿。
 152TF/18MiB在条件性模型内使Llama B16提高12.92%、Qwen B16提高7.06%；35.25mm²未识别面积没有被使用。
@@ -173,3 +183,9 @@ P1 审计修正见 [docs/audit_p1.md](docs/audit_p1.md)。旧归档保留原始�
 [HB–DRAM 小型必要上限审计](results/memory-audit-2026-10-09/findings.md) 已完成 192 点、384 个 LP，35 项回归通过。
 满行/充分 Bank 并行的示例主要受热预算限制；小粒度示例受已知 ACT/PRE/domain 速率限制。
 这些是未校准的解析上限，尚未发现普通 Mapping/Tracker/SALP 之后仍未解决的 HB 特有瓶颈。
+
+## 工作区迁移档案
+
+[W2W cold服务记录](results/w2w-cold-service-2026-10-11/findings.md)仅保留为先前迁移的外部机器档案；
+其硬件合同与本项目不同，不参与thermal_exploartion主线的实验、图表、性能结论或架构判决。
+迁移审计见[档案复现说明](results/w2w-cold-service-2026-10-11/reproduce.md)。

@@ -1,0 +1,128 @@
+{
+  "release": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/tag/expert-execution-2026-10-11",
+  "assets": [
+    {
+      "file": "expert-eager-b32.tar",
+      "bytes": 343644160,
+      "sha256": "bdf437f57a12de659d6cb934f84059b4e2ce98414115140c8b04f5492a3ef88b",
+      "github_asset_id": 631034184,
+      "manifest": "raw-manifests/eager-b32.json",
+      "manifest_sha256": "a86f1871c421d8435f5c8b9250ca10762601245c7407ed22fca21b0616fba252",
+      "run_archives": 8,
+      "entries": 544,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/expert-execution-2026-10-11/expert-eager-b32.tar",
+      "protected_content_scan": "PASS"
+    },
+    {
+      "file": "expert-eager-b8.tar",
+      "bytes": 147312640,
+      "sha256": "123963b5291e081eed576cdf19bb74e681b08faac1a5274438225ac2e91d69fc",
+      "github_asset_id": 631033364,
+      "manifest": "raw-manifests/eager-b8.json",
+      "manifest_sha256": "dc191f6a8f895ef0a651e2ffc75ea08843eb3aa5e4cf124c633dcd0f5ba12b31",
+      "run_archives": 8,
+      "entries": 544,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/expert-execution-2026-10-11/expert-eager-b8.tar",
+      "protected_content_scan": "PASS"
+    },
+    {
+      "file": "expert-eager-controls.tar",
+      "bytes": 445511680,
+      "sha256": "48a9414304c257b2697bed7654758891b103bea557aecac9534c17dcba8f91bd",
+      "github_asset_id": 631034535,
+      "manifest": "raw-manifests/eager-controls.json",
+      "manifest_sha256": "0f4c84486c67a08f993306fff36dab37cd9ad598a58f99ff08c0ef6a314c3150",
+      "run_archives": 24,
+      "entries": 600,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/expert-execution-2026-10-11/expert-eager-controls.tar",
+      "protected_content_scan": "PASS"
+    },
+    {
+      "file": "expert-fused-b32.tar",
+      "bytes": 399790080,
+      "sha256": "d099e1b15a1889ba7a58dee644a221f54e6cd331f1159c285614b0397e571bec",
+      "github_asset_id": 631064744,
+      "manifest": "raw-manifests/fused-b32.json",
+      "manifest_sha256": "df488af4ef0df6437ae374e2f87f9ece27c134b38e204794b9cc2eeeec40777f",
+      "run_archives": 20,
+      "entries": 816,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/expert-execution-2026-10-11/expert-fused-b32.tar",
+      "protected_content_scan": "PASS"
+    },
+    {
+      "file": "expert-fused-b8.tar",
+      "bytes": 156416000,
+      "sha256": "056958bedd8efc54982a33db606dfcb3dd3af8943ab32af2c6ac103c14dc6e23",
+      "github_asset_id": 631064323,
+      "manifest": "raw-manifests/fused-b8.json",
+      "manifest_sha256": "c0c31c8905a557cd77be70d7365dfa23260861dfc32c64dfb03bc796c40285c3",
+      "run_archives": 20,
+      "entries": 816,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/expert-execution-2026-10-11/expert-fused-b8.tar",
+      "protected_content_scan": "PASS"
+    },
+    {
+      "file": "expert-fused-prompts.tar",
+      "bytes": 103198720,
+      "sha256": "cf93e780c2f798e5f91f58d4a6bace038f85d1e45945164db78e8a8dec5c493d",
+      "github_asset_id": 631064226,
+      "manifest": "raw-manifests/fused-prompts.json",
+      "manifest_sha256": "b6812d70f55d3bf4fd9bed300c5103b5496aa22423ad170b5c41e3e69e7a1be5",
+      "run_archives": 32,
+      "entries": 864,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/expert-execution-2026-10-11/expert-fused-prompts.tar",
+      "protected_content_scan": "PASS"
+    },
+    {
+      "file": "expert-native-probes.tar",
+      "bytes": 104837120,
+      "sha256": "4030e0c4482f0ce118c82ffd6ca312bdab204c5f5c56509575433bd8515a7c13",
+      "github_asset_id": 631064224,
+      "manifest": "raw-manifests/native-probes.json",
+      "manifest_sha256": "0eb4657fc2da2dbb3c1448ca9fc2a82c91bdca6f45aeba4da2c3fed98c07188e",
+      "run_archives": 16,
+      "entries": 176,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/expert-execution-2026-10-11/expert-native-probes.tar",
+      "protected_content_scan": "PASS"
+    },
+    {
+      "file": "expert-p0-p1.tar",
+      "bytes": 275998720,
+      "sha256": "133005f4e8313ab44be809a32ec63fb34c92be807dedeaba5650c405becce5ba",
+      "github_asset_id": 631023771,
+      "manifest": "raw-manifests/p0-p1.json",
+      "manifest_sha256": "85ebdd3f150a8c0bdf017e790f3d1ca8417d5a0090bd5fbf7124fc36c825809d",
+      "run_archives": 23,
+      "entries": 1676,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/expert-execution-2026-10-11/expert-p0-p1.tar",
+      "protected_content_scan": "PASS"
+    },
+    {
+      "file": "expert-retired.tar",
+      "bytes": 472903680,
+      "sha256": "cadce297d8135e86355357feabde19bbc074655a71c8818cb1e3ffa17c63f23c",
+      "github_asset_id": 631034560,
+      "manifest": "raw-manifests/retired.json",
+      "manifest_sha256": "2fdcbd236ef8fec031acf3e605d9c12ba4283a8bdfb266d8c939261056058cc0",
+      "run_archives": 48,
+      "entries": 1688,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/expert-execution-2026-10-11/expert-retired.tar",
+      "protected_content_scan": "PASS"
+    },
+    {
+      "file": "expert-strong-probes.tar",
+      "bytes": 334059520,
+      "sha256": "dd69104f3c45fcf84bcec6b5fddb4046cf117a658e7d0632c0c55fc242c5027d",
+      "github_asset_id": 631075806,
+      "manifest": "raw-manifests/strong-probes.json",
+      "manifest_sha256": "e4ddb893a0487209730facd90560969800d8a9dbc2fa70a11f9a78e291072261",
+      "run_archives": 16,
+      "entries": 400,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/expert-execution-2026-10-11/expert-strong-probes.tar",
+      "protected_content_scan": "PASS"
+    }
+  ],
+  "total_archive_bytes": 2783672320,
+  "inspected_archive_and_decoded_bytes": 63548709296,
+  "validation": "PASS: inner entry hashes, outer archive hashes, protected-content scan and GitHub digest/size; single declared truncated retired gzip scanned through available prefix"
+}

@@ -1,6 +1,5 @@
 {
   "model": "Qwen/Qwen1.5-MoE-A2.7B",
-  "checkpoint": null,
   "source_routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
   "capture_context": 512,
   "batch": 32,
@@ -1689,5 +1688,6 @@
       0.15234375,
       0.0
     ]
-  ]
+  ],
+  "checkpoint_revision": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9"
 }

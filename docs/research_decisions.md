@@ -47,3 +47,19 @@ Hardware Go：未建立。当前结果不证明HB特有的新结构，也尚未�
 
 本轮初始“历史时钟快一倍”的审计判断已撤回：上游序列化将0.5ns CK变成0.25ns原生半周期。
 旧换算正确；新错误二分频及其衍生低service-guard模型归为retired controls。历史发布记录不改动。
+
+## 2026-10-11：P0–P3 真实路由执行门
+
+唯一主线是thermal_exploartion的hybrid-bonded DRAM-on-logic模型。
+[P0–P3正式报告](../results/expert-execution-2026-10-11/findings.md)和
+[新合同](expert_execution_gate.md)取代“cohort失败所以必须添加硬件”的推论。
+64-row accumulation与bounded gated cohorts修复了152/18在Qwen B32的有限调度失败。
+早期fused reduction的B32 deadlock来自输出credit使用顺序；普通local drain/row admission即可修复，
+原版本作为退役调度控制保留，不视为器件容量或新NoC的必要性证据。
+
+P0的共享前端Native/Fluid对照达到选定Memory abstraction目标，但未独立验证完整H3。
+P2采用已付费fusion与静态row-down强基线，P3区分native DRAM和HB/ingress联合速率；
+反事实收益重叠且不含新增硬件成本。现有数据支持不同weight reuse区域的资源敏感性研究，
+不支持据此批准新Fabric、Peripheral、Row-cycle或expert controller RTL。
+Research Go保持，新的Hardware Go尚未建立。
+本轮没有新thermal扫描；上一轮默认温度资格不得自动转授给新的执行方案。

@@ -1,0 +1,23 @@
+{
+  "tests": 122,
+  "command": "python -m unittest discover -s tests -v",
+  "status": "PASS",
+  "elapsed_s": 37.233,
+  "core_source": "4648f3ccdefdbdaa22feb642d775576b80f9aa73",
+  "captured_regression": {
+    "model": "Qwen/Qwen1.5-MoE-A2.7B",
+    "batch": 32,
+    "context": 512,
+    "layer": 0,
+    "step": 0,
+    "source_routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6"
+  },
+  "scope": "Regression and conservation checks, not independent silicon/complete-model fidelity",
+  "strong_policy_cli_source": "78908650979b468e789be197abca27e5657d9168",
+  "strong_policy_probe_cases": 160,
+  "raw_audited_runs": 146,
+  "raw_audited_points": 3336,
+  "strong_policy_none_replay": "PASS: same P2 captured case, ticks, normalized activity, MAC/DRAM bytes and causal chain",
+  "scientific_pdf_render_count": 10,
+  "figure_visual_review": "PASS: scientific PNGs and rendered PDFs; labels adjusted for nine-factor plots"
+}

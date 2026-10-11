@@ -1,0 +1,546 @@
+[
+  {
+    "directory": "expert-p2-b32-tp1-B2_stream_fusion-b468306",
+    "source": "b468306c3da4442872fd4574580bf43247421a13",
+    "point_count": 2,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 1,
+      "PASS_ACCOUNTING": 1
+    },
+    "summary_sha256": "70ae16f62e9c1bfecff730a623fb1e13fe35491aeab6d30e489a0dae79428fd5",
+    "reason": "Retired execution-model control: inconsistent tier/prefetch or incomplete expert-group admission / repeated dispatch; not a hardware infeasibility",
+    "process_complete": false
+  },
+  {
+    "directory": "expert-p2-b32-tp16-B2_stream_fusion-b468306",
+    "source": "b468306c3da4442872fd4574580bf43247421a13",
+    "point_count": 1,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 1
+    },
+    "summary_sha256": "75dd80deaafc53d9dd108dfedb875d522394c57020e47ba326b920be8b592ce1",
+    "reason": "Retired execution-model control: inconsistent tier/prefetch or incomplete expert-group admission / repeated dispatch; not a hardware infeasibility",
+    "process_complete": false
+  },
+  {
+    "directory": "expert-p2-b32-tp4-B2_stream_fusion-b468306",
+    "source": "b468306c3da4442872fd4574580bf43247421a13",
+    "point_count": 1,
+    "statuses": {
+      "PASS_ACCOUNTING": 1
+    },
+    "summary_sha256": "4078aca0e678294cee7a50e46cb61511b162d36a0fc0f912579967824bf611d9",
+    "reason": "Retired execution-model control: inconsistent tier/prefetch or incomplete expert-group admission / repeated dispatch; not a hardware infeasibility",
+    "process_complete": false
+  },
+  {
+    "directory": "expert-p2-b32-tphybrid-B2_stream_fusion-b468306",
+    "source": "b468306c3da4442872fd4574580bf43247421a13",
+    "point_count": 1,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 1
+    },
+    "summary_sha256": "cad7ab48000cc5b31c0b58aded20f210e326c44dc8fa62b656aab21ec9cb62d7",
+    "reason": "Retired execution-model control: inconsistent tier/prefetch or incomplete expert-group admission / repeated dispatch; not a hardware infeasibility",
+    "process_complete": false
+  },
+  {
+    "directory": "expert-p2-b8-tp1-B2_stream_fusion-b468306",
+    "source": "b468306c3da4442872fd4574580bf43247421a13",
+    "point_count": 13,
+    "statuses": {
+      "PASS_ACCOUNTING": 13
+    },
+    "summary_sha256": "ec16f451dabbd197830abd970e633ceca759e2ea1f87189575d4bfe92722cf25",
+    "reason": "Retired execution-model control: inconsistent tier/prefetch or incomplete expert-group admission / repeated dispatch; not a hardware infeasibility",
+    "process_complete": false
+  },
+  {
+    "directory": "expert-p2-b8-tp16-B2_stream_fusion-b468306",
+    "source": "b468306c3da4442872fd4574580bf43247421a13",
+    "point_count": 2,
+    "statuses": {
+      "PASS_ACCOUNTING": 2
+    },
+    "summary_sha256": "ed2aecfc9aaa927fb1945db4f8df975bebe3e1f1e9f357c841cb023905d069b7",
+    "reason": "Retired execution-model control: inconsistent tier/prefetch or incomplete expert-group admission / repeated dispatch; not a hardware infeasibility",
+    "process_complete": false
+  },
+  {
+    "directory": "expert-p2-b8-tp4-B2_stream_fusion-b468306",
+    "source": "b468306c3da4442872fd4574580bf43247421a13",
+    "point_count": 6,
+    "statuses": {
+      "PASS_ACCOUNTING": 6
+    },
+    "summary_sha256": "5db37e823dc4d291d163a3c22be4595885a7a5003e3314757f2308f566a44927",
+    "reason": "Retired execution-model control: inconsistent tier/prefetch or incomplete expert-group admission / repeated dispatch; not a hardware infeasibility",
+    "process_complete": false
+  },
+  {
+    "directory": "expert-p2-b8-tphybrid-B2_stream_fusion-b468306",
+    "source": "b468306c3da4442872fd4574580bf43247421a13",
+    "point_count": 5,
+    "statuses": {
+      "PASS_ACCOUNTING": 5
+    },
+    "summary_sha256": "2c1043bb720abaa751267d11effce96e8739e2aa03a42a01b0bd78eb9bce40de",
+    "reason": "Retired execution-model control: inconsistent tier/prefetch or incomplete expert-group admission / repeated dispatch; not a hardware infeasibility",
+    "process_complete": false
+  },
+  {
+    "directory": "expert-p2-b32-tp1-B2_stream_fusion-fb8bb82",
+    "source": "fb8bb8268186d24e4c73d30b50540c7aa00de4d8",
+    "point_count": 10,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 4,
+      "PASS_ACCOUNTING": 6
+    },
+    "summary_sha256": "46140fe1d709b7fc7d49d8bfb063f7ee43f5ca4b02a01870a303e61a1a4d8ff9",
+    "reason": "Retired execution-model control: inconsistent tier/prefetch or incomplete expert-group admission / repeated dispatch; not a hardware infeasibility",
+    "process_complete": false
+  },
+  {
+    "directory": "expert-p2-b32-tp16-B2_stream_fusion-fb8bb82",
+    "source": "fb8bb8268186d24e4c73d30b50540c7aa00de4d8",
+    "point_count": 2,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 1,
+      "PASS_ACCOUNTING": 1
+    },
+    "summary_sha256": "5e0f0199fee3ca3b49d19fc571741225a67cffc549e5aeb4c78d628ed78bb2fd",
+    "reason": "Retired execution-model control: inconsistent tier/prefetch or incomplete expert-group admission / repeated dispatch; not a hardware infeasibility",
+    "process_complete": false
+  },
+  {
+    "directory": "expert-p2-b32-tp4-B2_stream_fusion-fb8bb82",
+    "source": "fb8bb8268186d24e4c73d30b50540c7aa00de4d8",
+    "point_count": 2,
+    "statuses": {
+      "PASS_ACCOUNTING": 2
+    },
+    "summary_sha256": "a65505378f92db15b43594580d76e1d5e8be97b26dbc0392ad5ac6d05694a188",
+    "reason": "Retired execution-model control: inconsistent tier/prefetch or incomplete expert-group admission / repeated dispatch; not a hardware infeasibility",
+    "process_complete": false
+  },
+  {
+    "directory": "expert-p2-b32-tphybrid-B2_stream_fusion-fb8bb82",
+    "source": "fb8bb8268186d24e4c73d30b50540c7aa00de4d8",
+    "point_count": 4,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 1,
+      "PASS_ACCOUNTING": 3
+    },
+    "summary_sha256": "86e2efe10a22087cf8f51b5d9cc7f2d217c4b05c2478fc89183971363f50b7b4",
+    "reason": "Retired execution-model control: inconsistent tier/prefetch or incomplete expert-group admission / repeated dispatch; not a hardware infeasibility",
+    "process_complete": false
+  },
+  {
+    "directory": "expert-p2-b8-tp1-B2_stream_fusion-fb8bb82",
+    "source": "fb8bb8268186d24e4c73d30b50540c7aa00de4d8",
+    "point_count": 29,
+    "statuses": {
+      "PASS_ACCOUNTING": 29
+    },
+    "summary_sha256": "44b45ae403d6c5cb521c8d015a32f515d0fd91c05bdad61ed1ac82fe68dc435e",
+    "reason": "Retired execution-model control: inconsistent tier/prefetch or incomplete expert-group admission / repeated dispatch; not a hardware infeasibility",
+    "process_complete": false
+  },
+  {
+    "directory": "expert-p2-b8-tp16-B2_stream_fusion-fb8bb82",
+    "source": "fb8bb8268186d24e4c73d30b50540c7aa00de4d8",
+    "point_count": 9,
+    "statuses": {
+      "PASS_ACCOUNTING": 9
+    },
+    "summary_sha256": "380a52c3e6387ecc3e8e5925defaa8b1d9b0991c8c2ee54d1b2df3cfd7eda476",
+    "reason": "Retired execution-model control: inconsistent tier/prefetch or incomplete expert-group admission / repeated dispatch; not a hardware infeasibility",
+    "process_complete": false
+  },
+  {
+    "directory": "expert-p2-b8-tp4-B2_stream_fusion-fb8bb82",
+    "source": "fb8bb8268186d24e4c73d30b50540c7aa00de4d8",
+    "point_count": 18,
+    "statuses": {
+      "PASS_ACCOUNTING": 18
+    },
+    "summary_sha256": "45aa2c49667f26c739d2a269da2c28e5e025076d6c0d3f1ca5579716ee674b27",
+    "reason": "Retired execution-model control: inconsistent tier/prefetch or incomplete expert-group admission / repeated dispatch; not a hardware infeasibility",
+    "process_complete": false
+  },
+  {
+    "directory": "expert-p2-b8-tphybrid-B2_stream_fusion-fb8bb82",
+    "source": "fb8bb8268186d24e4c73d30b50540c7aa00de4d8",
+    "point_count": 16,
+    "statuses": {
+      "PASS_ACCOUNTING": 16
+    },
+    "summary_sha256": "b2f0c2af4ec1e32e41f0e5a3de7b737d96d9a4fd450c1985125c9d1bec913ddb",
+    "reason": "Retired execution-model control: inconsistent tier/prefetch or incomplete expert-group admission / repeated dispatch; not a hardware infeasibility",
+    "process_complete": false
+  },
+  {
+    "directory": "expert-p2fused-b32-tp1-B2_stream_fusion-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 60,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 20,
+      "PASS_ACCOUNTING": 40
+    },
+    "summary_sha256": "fd9edf08e68482eac69dd7e6b7902ab7fe4da1b6bf575af361c6119a01e564be",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2fused-b32-tp1-B3_3d_placement-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 60,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 20,
+      "PASS_ACCOUNTING": 40
+    },
+    "summary_sha256": "75cb6adbc180ffdb34a154e57c12e7803ea3a4af29b385e0992397886ec8d64c",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2fused-b32-tp16-B2_stream_fusion-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 60,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 20,
+      "PASS_ACCOUNTING": 40
+    },
+    "summary_sha256": "6bb992caa1fc15921eabf5b7a18411e707fd95b3d1eb26b10419d4c09395a657",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2fused-b32-tp16-B3_3d_placement-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 60,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 20,
+      "PASS_ACCOUNTING": 40
+    },
+    "summary_sha256": "f4d36fe90742e79ee07eedc7dea36b6585de765d829dae4fb811bfe0a09c1d65",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2fused-b32-tp4-B2_stream_fusion-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 60,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 20,
+      "PASS_ACCOUNTING": 40
+    },
+    "summary_sha256": "45eb5564c43f83d05dd2aeed534fb830deea2c5fde600d950c89b7c48307d2d0",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2fused-b32-tp4-B3_3d_placement-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 60,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 20,
+      "PASS_ACCOUNTING": 40
+    },
+    "summary_sha256": "c97dcb6bf46f920e1f424da3d083325eea1edec3c1dd150717c6fb5020a6d59e",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2fused-b32-tphybrid-B2_stream_fusion-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 60,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 20,
+      "PASS_ACCOUNTING": 40
+    },
+    "summary_sha256": "f64cf0e9c9928bb3401eeaaf60c3727917058b34ad0df13bf4c2e246b54b7c11",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2fused-b32-tphybrid-B3_3d_placement-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 60,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 20,
+      "PASS_ACCOUNTING": 40
+    },
+    "summary_sha256": "8f8c6fea7f8294559b758ee8d4a0e3e5c2033ad8f545fca23eed16b77bd77cfa",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2fused-b8-tp1-B2_stream_fusion-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 60,
+    "statuses": {
+      "PASS_ACCOUNTING": 60
+    },
+    "summary_sha256": "ac5685ecf395155547b12c781cc17e2d608b0dc0d7ad200bdfc6fcca9911f242",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2fused-b8-tp1-B3_3d_placement-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 60,
+    "statuses": {
+      "PASS_ACCOUNTING": 60
+    },
+    "summary_sha256": "f0bdc276d8ed18b49dd57303febde64f2e4abcdb1ecb24f5cf87f97004ef0e06",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2fused-b8-tp16-B2_stream_fusion-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 60,
+    "statuses": {
+      "PASS_ACCOUNTING": 60
+    },
+    "summary_sha256": "064256a308845ad93a45264d65c832847e71358de697e4a5317321ca25782b71",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2fused-b8-tp16-B3_3d_placement-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 60,
+    "statuses": {
+      "PASS_ACCOUNTING": 60
+    },
+    "summary_sha256": "2add36ad149f9d920e21de527cda52c35f402793545de1f15c4bd2cad607c96e",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2fused-b8-tp4-B2_stream_fusion-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 60,
+    "statuses": {
+      "PASS_ACCOUNTING": 60
+    },
+    "summary_sha256": "34e7c030d4ca22fa46e0f132bbf43b3231c77238b8d9642b69fafb3a92485a26",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2fused-b8-tp4-B3_3d_placement-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 60,
+    "statuses": {
+      "PASS_ACCOUNTING": 60
+    },
+    "summary_sha256": "8ac8f90476b79cc9828467a29c367e32c7100ba9ce20dc618c652b46037577c3",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2fused-b8-tphybrid-B2_stream_fusion-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 60,
+    "statuses": {
+      "PASS_ACCOUNTING": 60
+    },
+    "summary_sha256": "892db8b3590f2d487821921a55a6d619016801f72756963cb794b1e2dd1140e9",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2fused-b8-tphybrid-B3_3d_placement-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 60,
+    "statuses": {
+      "PASS_ACCOUNTING": 60
+    },
+    "summary_sha256": "dabc7f505285427544c473b3dce48e53560f32557875e530982c7eeb4f094426",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2row-b32-tp1-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 18,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 6,
+      "PASS_ACCOUNTING": 12
+    },
+    "summary_sha256": "f9e9fb99db5220cd79896883f9b92ecc304b39121a1dce4820de03e1d52514d1",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2row-b32-tp16-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 18,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 6,
+      "PASS_ACCOUNTING": 12
+    },
+    "summary_sha256": "20cfee5b8b7be93dd75ba29e41c01cd7f6bd0e6823d30100254115c658c10465",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2row-b32-tp4-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 18,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 6,
+      "PASS_ACCOUNTING": 12
+    },
+    "summary_sha256": "5afdbdb30f0ee52630b03b8a234223c3c0d47643dbbda575eb3fd6965c4dc796",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2row-b32-tphybrid-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 18,
+    "statuses": {
+      "INFEASIBLE_FINITE_SCHEDULE": 6,
+      "PASS_ACCOUNTING": 12
+    },
+    "summary_sha256": "92f4042ca7634b13bd7d75873e3b12b7d2ef67a5ffd2cb769d0f0a15d68ad87c",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2row-b8-tp1-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 18,
+    "statuses": {
+      "PASS_ACCOUNTING": 18
+    },
+    "summary_sha256": "90cadd898cf92d1c7fd17a96e77d940c8bacec7c207c6c24e1dba91f0a9ebf4c",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2row-b8-tp16-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 18,
+    "statuses": {
+      "PASS_ACCOUNTING": 18
+    },
+    "summary_sha256": "e90e4645800333c755fa79976f8222115ff06c6cfefca48b3a41139ac97f7c76",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2row-b8-tp4-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 18,
+    "statuses": {
+      "PASS_ACCOUNTING": 18
+    },
+    "summary_sha256": "509ec93773ab79bbbb3303ea84a02baad613d51f102eba98c267752bdf04e83a",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p2row-b8-tphybrid-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 18,
+    "statuses": {
+      "PASS_ACCOUNTING": 18
+    },
+    "summary_sha256": "514aca72a0afe8589ce04403ba89445736900aa697c38d21cd775b71684bcf57",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p3fused-b32-tp1-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 8,
+    "statuses": {
+      "PASS_ACCOUNTING": 8
+    },
+    "summary_sha256": "dac5d516f56564796178fb1f45550533331ecfbcd6ca39899b501cc75edb1d84",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p3fused-b32-tp16-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 8,
+    "statuses": {
+      "PASS_ACCOUNTING": 8
+    },
+    "summary_sha256": "100414a872de43e48d1d79f5082b1b4e7f21c5fb0ce7234959dadc843d3229f8",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p3fused-b32-tp4-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 8,
+    "statuses": {
+      "PASS_ACCOUNTING": 8
+    },
+    "summary_sha256": "dc8ab330916d32d1d7bfc04f8b839a348fe2db71daa485af2be664297a6844a7",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p3fused-b32-tphybrid-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 8,
+    "statuses": {
+      "PASS_ACCOUNTING": 8
+    },
+    "summary_sha256": "40a12219bedc2355977247ae6f2f76d5d4530c3f4e7ba868f3104970dbad7caa",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p3fused-b8-tp1-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 8,
+    "statuses": {
+      "PASS_ACCOUNTING": 8
+    },
+    "summary_sha256": "a1cea1a3e3e838b5ae1c55b7d747a66252a90c877c3b39df4d335dca29d53d5a",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p3fused-b8-tp16-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 8,
+    "statuses": {
+      "PASS_ACCOUNTING": 8
+    },
+    "summary_sha256": "b372856f3bbe038e0c0353d8ecc257971681ac8b6f14ebb50395cd3a564cf500",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p3fused-b8-tp4-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 8,
+    "statuses": {
+      "PASS_ACCOUNTING": 8
+    },
+    "summary_sha256": "b6ebf9844ef9aa0d9c1a55d865a9961330328079f06f939a9b1488705efa1391",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  },
+  {
+    "directory": "expert-p3fused-b8-tphybrid-2f63ce6",
+    "source": "2f63ce6e44e96784446f1fd9f00c38a0878af464",
+    "point_count": 8,
+    "statuses": {
+      "PASS_ACCOUNTING": 8
+    },
+    "summary_sha256": "22a5b0cfa5b6621545fc6634f961b4fce58eafd8dc51e60519fc72c755e63c63",
+    "reason": "Early concurrent fused reductions can deadlock bounded output credits; replaced by15ad39e conventional row-drain scheduling",
+    "process_complete": true
+  }
+]

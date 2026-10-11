@@ -98,7 +98,25 @@
     ],
     "prefetch_limit_bytes": 262144,
     "source": "Original Qwen1.5 captured router, not Qwen2 projection",
-    "scope": "Selected MoE subgraphs, not full tokens/s or global schedule optimality"
+    "scope": "Selected MoE subgraphs, not full tokens/s or global schedule optimality",
+    "local_combine": [
+      "eager per-expert",
+      "paid tile token accumulator + one final row reduction"
+    ],
+    "finite_fused_admission": "All local partials drained; one final output-row collective at a time; same64KiB output buffers, no new hardware",
+    "row_down_supplement": {
+      "steps": [
+        0,
+        127
+      ],
+      "layers": [
+        0,
+        15,
+        23
+      ],
+      "cases_per_fixed_policy": 6,
+      "layout": "Static output-row shards, same tier bytes and capacity; paid hidden allgather; compare matched column subset"
+    }
   },
   "p3": {
     "step": 0,
@@ -123,7 +141,32 @@
       "infinite_noc",
       "ideal_memory"
     ],
-    "no_thermal_scan": true
+    "no_thermal_scan": true,
+    "layouts": [
+      "column",
+      "row"
+    ],
+    "supplement": [
+      "none",
+      "native_only",
+      "hb_ingress_only"
+    ],
+    "supplement_reason": "HB and FIFO ingress both500B/tick; single-factor max-rate probes cannot isolate their joint cap",
+    "oracle_work_preserved": true,
+    "primary_schedule": "barrier/static; strongest measured frozen policy after P2 fusion",
+    "legacy_schedule": "overlap/dynamic retained as control",
+    "primary_isolations": [
+      "none",
+      "bank_cycle",
+      "uniform_fast_tier",
+      "native_only",
+      "hb_only",
+      "ingress_only",
+      "hb_ingress_only",
+      "mac_only",
+      "infinite_noc",
+      "ideal_memory"
+    ]
   },
   "precision": {
     "checkpoint": "1a758c50ecb6350748b9ce0a99d2352fd9fc11c9",
@@ -137,5 +180,15 @@
     "teacher_forced": true,
     "production_representative": false
   },
-  "decision": "Conditional research evidence; no RTL or new Fabric design from a packet-model oracle alone"
+  "decision": "Conditional research evidence; no RTL or new Fabric design from a packet-model oracle alone",
+  "execution_sources": {
+    "native_fluid": "83b1655",
+    "bounded_workspace": "b468306",
+    "eager_controls": "3dad8cd",
+    "prompt_eager": "5380b5d",
+    "finite_fused": "15ad39e",
+    "orthogonal_memory_probes": "4648f3c",
+    "strong_fixed_policy_probes": "7890865"
+  },
+  "mainline": "thermal_exploartion only; Stratum-inspired121mm2 accelerator, not a W2W performance contract"
 }

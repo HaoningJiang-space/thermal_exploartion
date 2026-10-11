@@ -1,8 +1,9 @@
 """H3 finite-resource packet DAG screening, explicitly below H2 fidelity.
 
 Memory uses a tier row-cycle service abstraction, not a new command simulator.
-All compute stays on logic. Traces are shape/probability generated, not model
-captures. This module cannot establish calibrated token/s or hardware novelty.
+All compute stays on logic. The legacy builders below generate shapes/routes;
+expert_execution also uses this executor with original-checkpoint captured
+routing. Neither path establishes calibrated token/s or numerical LLM outputs.
 """
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
