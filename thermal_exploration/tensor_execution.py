@@ -59,7 +59,9 @@ def hardware(settings,m=1024,n=16384,batch=32):
     weight=settings.get('weight_buffer',524288);response=min(65536,weight)
     ideal_buffer=settings.get('ideal_buffer',False)
     if ideal_buffer:weight=4*2**20;response=2*2**20
-    sram=16*2**20 if ideal_buffer else 36*2**20//16
+    peak=float(settings.get('compute_tflops',128));capacity=float(settings.get('sram_mib',36))
+    if min(peak,capacity)<=0:raise ValueError('Invalid paid compute/storage profile')
+    sram=16*2**20 if ideal_buffer else int(capacity*2**20/16)
     red=2**20 if ideal_buffer else 65536
     # Metadata, router FIFOs, fixed inputs/partials/output and all return
     # storage are charged separately. Unused private SRAM is not pooled.
@@ -71,13 +73,15 @@ def hardware(settings,m=1024,n=16384,batch=32):
         static_sram_per_tile=static,sram_per_tile=sram,metadata_reserve=65536,
         weight_buffer=weight,response_buffer=response,reduce_buffer=red,prefetch_tasks=4096 if ideal_buffer else 32,
         packet_bytes=packet,flit_bytes=32,vc_depth_flits=8,virtual_channels=2,
-        tick_ns=.25,dram_CK_ns=.5,dram_tick_ns=.25,logic_ticks_per_dram_tick=1,mac_flops_per_tick=2000,vector_ops_per_tick=16,
+        compute_tflops=peak,sram_mib=capacity,
+        tick_ns=.25,dram_CK_ns=.5,dram_tick_ns=.25,logic_ticks_per_dram_tick=1,mac_flops_per_tick=peak*1000*.25/16,vector_ops_per_tick=16,
         sram_read_bytes_per_tick=256,sram_write_bytes_per_tick=128,
         hb_bytes_per_tile_tick=500,link_serial_ticks=4,link_latency_ticks=8,
         ideal_noc=settings.get('ideal_noc',False),barrier=settings.get('barrier',False),
         ideal_memory=settings.get('ideal_memory',False),ideal_buffer=ideal_buffer,
         stream_fifo=settings.get('stream_fifo',False),fifo_bytes_per_tick=500,
         command_domains_per_tile=settings.get('command_domains',1),
+        fluid_memory=bool(settings.get('fluid_memory',False)),fluid_service_tb_s=float(settings.get('fluid_service_tb_s',26.599)),
         assumptions=['Fast-tier internal timing surrogate, not calibrated Mono3D',
           '128TF peak MAC service, operand/register reuse ideal within a MAC block',
           'Aggregate private-SRAM ports are assumed, explicitly arbitrated each tick',
@@ -160,6 +164,7 @@ def write_contract(model,out):
         f.write(' '.join(str(int(c[k])) for k in keys)+'\n')
         f.write(' '.join(map(str,c['static_sram_per_tile']))+'\n')
         f.write(str(int(c.get('stream_fifo',False)))+' '+str(c.get('command_domains_per_tile',1))+'\n')
+        f.write(f"{c['mac_flops_per_tick']} {c['sram_per_tile']} {int(c['fluid_memory'])} {c['fluid_service_tb_s']}\n")
     with (out/'tasks.tsv').open('w') as f:
         for t in model['tasks']:
             f.write(' '.join(map(str,[t[k] for k in ('id','tile','m_start','m_count','k_start','k_count','flops','parent','input_group','final')]+[len(t['requests'])]+t['requests']))+'\n')

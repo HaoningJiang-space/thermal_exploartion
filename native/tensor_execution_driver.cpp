@@ -5,6 +5,7 @@
 #include <array>
 #include <deque>
 #include <iomanip>
+#include <cmath>
 
 struct TensorTask {
  int id,tile,mstart,mcount,kstart,kcount,parent,group,final;
@@ -41,6 +42,7 @@ int main(int argc,char** argv){try {
  std::string dir=argv[2],prefix=argv[3];
  int m,n,batch,pr,pc,mb,kb,wbudget,rbudget,redbudget,window,pbytes,ideal,barrier,ideal_memory;
  int stream_fifo=0,command_domains=1;
+ double mac_rate=2000,fluid_service=26.599;int private_sram=2359296,fluid_memory=0;
  std::array<int,16> fixed;
  {std::ifstream f(dir+"/resources.tsv");
   if(!(f>>m>>n>>batch>>pr>>pc>>mb>>kb>>wbudget>>rbudget>>redbudget>>window>>pbytes>>ideal>>barrier>>ideal_memory))
@@ -48,6 +50,7 @@ int main(int argc,char** argv){try {
   for(auto& x:fixed)if(!(f>>x))throw std::runtime_error("Missing private SRAM");
   if(!(f>>stream_fifo))stream_fifo=0;
   if(!(f>>command_domains))command_domains=1;
+  if(!(f>>mac_rate>>private_sram>>fluid_memory>>fluid_service)){mac_rate=2000;private_sram=2359296;fluid_memory=0;fluid_service=26.599;}
  }
  if(pr*pc!=16||wbudget<8192||wbudget>4194304||rbudget>wbudget||pbytes%32||window<1)
   throw std::runtime_error("Unsafe resource configuration");
@@ -118,6 +121,8 @@ int main(int argc,char** argv){try {
  std::array<std::array<long long,16>,16> link_until{};
  std::priority_queue<ArrivingFlit,std::vector<ArrivingFlit>,LaterFlit> arrivals;
  std::map<std::string,long long> states,counters;
+ std::array<double,16> fluid_until{};
+ std::priority_queue<std::pair<long long,int>,std::vector<std::pair<long long,int>>,std::greater<std::pair<long long,int>>> fluid_returns;
  std::ofstream noc(prefix+"-noc.csv"),inject(prefix+"-inject.csv"),sink(prefix+"-sink.csv"),jobs(prefix+"-vector.csv"),ports(prefix+"-ports.csv");
  noc<<"kind,group,flit,source,target,bytes,start,finish\n";
  inject<<"kind,group,flit,tile,tick\n";sink<<"kind,group,flit,child,tile,tick\n";
@@ -154,6 +159,11 @@ int main(int argc,char** argv){try {
   else out_pending[tile].insert(gid);
  };
  for(;clk<2000000;clk++){
+  while(!fluid_returns.empty()&&fluid_returns.top().first<=clk){
+   auto [when,rid]=fluid_returns.top();fluid_returns.pop();auto& r=reads[rid];
+   if(r.depart>=0||r.accepted<0)throw std::runtime_error("Fluid response identity");
+   r.depart=when;last_dram=std::max(last_dram,when);hb[r.tile].push_back(rid);returned++;weight_bytes+=1024;
+  }
   while(!arrivals.empty()&&arrivals.top().time<=clk){
    auto f=arrivals.top();arrivals.pop();auto& q=fifo[f.node][f.port][f.vc];
    if(q.incoming<=0)throw std::runtime_error("Unreserved router FIFO");
@@ -203,7 +213,7 @@ int main(int argc,char** argv){try {
      mac_rleft[tile]=(stream_fifo?0:t.mcount*t.kcount*2)+t.kcount*batch*2+(t.parent>=0?t.mcount*batch*4:0);
      mac_wleft[tile]=t.mcount*batch*4;
      fifo_rleft[tile]=stream_fifo?t.mcount*t.kcount*2:0;
-     long long duration=std::max<long long>({1LL,(t.flops+1999)/2000,(mac_rleft[tile]+255)/256,(mac_wleft[tile]+127)/128,stream_fifo?(t.mcount*t.kcount*2+499)/500:0});
+     long long duration=std::max<long long>({1LL,(long long)std::ceil(t.flops/mac_rate),(mac_rleft[tile]+255)/256,(mac_wleft[tile]+127)/128,stream_fifo?(t.mcount*t.kcount*2+499)/500:0});
      mac_until[tile]=clk+duration;mac_running[tile]=chosen;
      if(first_mac<0)first_mac=clk;
     }else{if(why=="no_remaining_work"&&admit_index[tile]<local[tile].size())why="weight_cache_credit";
@@ -336,16 +346,23 @@ int main(int argc,char** argv){try {
      // timing and this driver's Logic period therefore use the SAME unit.
      r.depart=response.depart;last_dram=std::max(last_dram,r.depart);hb[tile].push_back(rid);returned++;weight_bytes+=1024;
     };
-    if(ideal_memory||memory->send(request)){
+    if(ideal_memory||fluid_memory||memory->send(request)){
      r.accepted=clk;accepted++;response_used[tile]+=1024;unsent[tile].erase(rid);rhigh[tile]=std::max(rhigh[tile],response_used[tile]);
      if(ideal_memory){r.depart=clk+1;last_dram=clk+1;hb[tile].push_back(rid);returned++;weight_bytes+=1024;}
+     else if(fluid_memory){
+      // Measured long-stream service guard, no parameter fitting. Shared
+      // executor intentionally keeps identical input groups, ports and MACs.
+      // This backend cannot validate any DRAM command or Bank/Tier behavior.
+      fluid_until[tile]=std::max(fluid_until[tile],double(clk))+1024/(fluid_service*1000*.25/16);
+      fluid_returns.push({(long long)std::ceil(fluid_until[tile])+26,rid});
+     }
     }
     else counters["controller_reject"]++;
    }else if(!unsent[tile].empty())counters["response_credit_stall"]++;
    int queued=0;for(int port=0;port<5;port++)for(int vc=0;vc<2;vc++){
     auto& q=fifo[tile][port][vc];if(q.data.size()+q.incoming>8)throw std::runtime_error("Router credit overflow");queued+=q.data.size()+q.incoming;}
    if(std::min({rb[tile],wb[tile],vb[tile],wused[tile],response_used[tile],redused[tile]})<0||wused[tile]>wbudget||response_used[tile]>rbudget||redused[tile]>redbudget||
-      fixed[tile]+65536+wused[tile]+response_used[tile]+redused[tile]>(wbudget>524288?16777216:2359296))throw std::runtime_error("Physical resource overflow");
+      fixed[tile]+65536+wused[tile]+response_used[tile]+redused[tile]>private_sram)throw std::runtime_error("Physical resource overflow");
    ports<<clk<<","<<tile<<","<<256-rb[tile]<<","<<128-wb[tile]<<","<<16-vb[tile]<<","<<wused[tile]<<","<<response_used[tile]<<","<<redused[tile]<<","<<queued<<","<<(stream_fifo?500-bandwidth:0)<<","<<fifo_read[tile]<<"\n";
   }
   memory->tick();

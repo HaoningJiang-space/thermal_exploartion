@@ -1,6 +1,7 @@
 """H2-A causal tensor execution and independent event replay."""
 import argparse
 from collections import Counter, defaultdict
+from math import ceil
 import csv
 from datetime import datetime, timezone
 import heapq
@@ -46,7 +47,7 @@ def validate(case, model, dram):
         read=(0 if c.get('stream_fifo') else expected['m_count']*expected['k_count']*2)+expected['k_count']*c['batch']*2+(expected['m_count']*c['batch']*4 if expected['parent']>=0 else 0)
         write=expected['m_count']*c['batch']*4
         fifo=(expected['m_count']*expected['k_count']*2+499)//500 if c.get('stream_fifo') else 0
-        if actual['finish']-actual['start'] != max(1,(expected['flops']+1999)//2000,(read+255)//256,(write+127)//128,fifo):
+        if actual['finish']-actual['start'] != max(1,ceil(expected['flops']/c['mac_flops_per_tick']),(read+255)//256,(write+127)//128,fifo):
             raise ValueError('MAC service time')
         for rid in expected['requests']: uses[rid].append(actual)
     for expected, actual in zip(model['requests'], rd):
@@ -68,9 +69,9 @@ def validate(case, model, dram):
     def commands(path):
         with path.open() as f: yield from csv.DictReader(f)
     merged = heapq.merge(*(commands(case/f'transaction-commands.ch{ch}.csv') for ch in range(channels)),key=lambda x:int(x['clock']))
-    if c['ideal_memory']:
+    if c['ideal_memory'] or c.get('fluid_memory'):
         command_validation=check_commands(dram, [], [], merged)
-        command_validation['scope']='Oracle bypasses memory requests; emitted refresh commands only, no DRAM-performance claim'
+        command_validation['scope']='No command execution for synthetic memory backend; shared transport/compute semantics only, not independent device validation'
     else:command_validation = check_commands(dram, request_records, events, merged,c['logic_ticks_per_dram_tick'],channels)
     input_events = {(r['group'],r['tile']):r for r in rows(case/'run-inputs.csv')}
     for e, t in zip(model['tasks'],tasks):
@@ -171,12 +172,12 @@ def validate(case, model, dram):
         raise ValueError('Activity/work accounting does not close')
     if port_count!=d['ticks']*16:raise ValueError('Missing resource ticks')
     duration=d['ticks']*.25
-    if c['mac_flops']/duration/1000>128.00001:raise ValueError('Compute upper bound violated')
+    if c['mac_flops']/duration/1000>c['compute_tflops']+.00001:raise ValueError('Compute upper bound violated')
     # Stage windows overlap; these values must not be added as a breakdown.
     result=dict(contract=c,driver=d,validation='PASS: command legality/transaction identity, operand joins, MAC/vector serialization, physical link serialization, traffic and port accounting',
         command_validation=command_validation,time_us=duration/1000,effective_tflops=c['mac_flops']/duration/1000,
         useful_dram_tb_s=c['weight_bytes']/duration/1000,physical_dram_tb_s=c['dram_bytes']/duration/1000,
-        mac_utilization=c['mac_flops']/duration/1000/128,byte_hops=dict(byte_hops),max_directed_link_bytes=max(hot.values(),default=0),
+        mac_utilization=c['mac_flops']/duration/1000/c['compute_tflops'],byte_hops=dict(byte_hops),max_directed_link_bytes=max(hot.values(),default=0),
         sram_activity=dict(service),stages_ns=dict(DRAM=max(r['depart'] for r in rd)-min(r['accepted'] for r in rd),
             HB=max(r['hb_done'] for r in rd)-min(r['hb_first'] for r in rd),
             NoC=(max(r['finish'] for r in links.values())-min(r['start'] for r in links.values()))*.25 if links else 0,
@@ -189,7 +190,9 @@ def validate(case, model, dram):
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--ramulator-root',required=True);ap.add_argument('--output',required=True)
-    ap.add_argument('--shape',nargs=3,type=int,metavar=('M','N','BATCH'));ap.add_argument('--smoke',action='store_true');ap.add_argument('--cases',nargs='+',choices=CASES,default=list(CASES));a=ap.parse_args()
+    ap.add_argument('--shape',nargs=3,type=int,metavar=('M','N','BATCH'));ap.add_argument('--smoke',action='store_true');ap.add_argument('--cases',nargs='+',choices=CASES,default=list(CASES))
+    ap.add_argument('--compute-tflops',type=float,default=128);ap.add_argument('--sram-mib',type=float,default=36)
+    ap.add_argument('--fluid-memory',action='store_true');ap.add_argument('--fluid-service',type=float,default=26.599);a=ap.parse_args()
     root=Path(a.ramulator_root).resolve();out=Path(a.output).resolve()
     if out.exists():raise ValueError('Never overwrite experimental evidence')
     if subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'],text=True).strip()!=RAMULATOR_COMMIT:raise ValueError('Wrong Ramulator snapshot')
@@ -198,7 +201,8 @@ def main():
         ramulator_commit=RAMULATOR_COMMIT,upstream=verified,started=datetime.now(timezone.utc).isoformat(),smoke=a.smoke),indent=2)+'\n')
     exe=native_build(root,out);results=[]
     for name in a.cases:
-        case=out/name;case.mkdir();model=build(CASES[name],*(a.shape or ((64,1024,8) if a.smoke else (1024,16384,32))))
+        case=out/name;case.mkdir();settings=dict(CASES[name],compute_tflops=a.compute_tflops,sram_mib=a.sram_mib,fluid_memory=a.fluid_memory,fluid_service_tb_s=a.fluid_service)
+        model=build(settings,*(a.shape or ((64,1024,8) if a.smoke else (1024,16384,32))))
         write_contract(model,case);dram,cfg=hb_trace.ramulator_config(root,case,2,refresh=True,independent_commands=model['contract']['command_domains_per_tile']==2)
         from .clock_contract import ClockContract
         (case/'clock-contract.json').write_text(json.dumps(ClockContract().validate_device(dram),indent=2)+'\n')
