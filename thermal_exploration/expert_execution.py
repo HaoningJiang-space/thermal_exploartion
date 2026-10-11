@@ -239,10 +239,21 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
     g.meta.update(fixed_sram_bytes=[budget['activation_reserved_bytes']+65536+accumulator]*16,
         private_sram_budget_bytes=budget['private_bytes'],buffer_caps={'workspace':budget['expert_workspace_bytes'],'output':65536})
     if combine_scheme=='fused':
-        final=[]
+        final=[];local_done=g.join(terminals,'all_local_token_accumulators_ready')
         for row in range(0,d,128):
             root=row//(d//16)
             producers={tile:g.join([accumulator_init[tile]]+token_rows.get((row,tile),[]),'all_local_expert_rows_ready') for tile in range(16)}
+            # Drain local weighted partials before the collective borrows the
+            # same finite output buffers. Early reduction arrivals otherwise
+            # fill those buffers and block a local producer needed by the
+            # reduction. This is an ordinary conservative schedule barrier;
+            # it adds no storage, arithmetic or network traffic.
+            # Keep one output-row cohort in the tree at a time. Concurrent
+            # roots can hold each other's bounded reduction buffers while
+            # waiting for sibling contributions; the eager baseline already
+            # serializes these row cohorts. Pay this same finite discipline.
+            admission=local_done if not final else final[-1]
+            producers={tile:g.join((node,admission),'token_reduce_admitted') for tile,node in producers.items()}
             final.append(g.collective(root,producers,min(128,d-row)*b*4,'combine',preallocated_sources=True))
         g.output=[g.join(final,'moe_output_ready')]
     else:g.output=[g.join(terminals,'moe_output_ready')]

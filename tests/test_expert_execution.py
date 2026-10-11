@@ -1,4 +1,5 @@
-import unittest
+import unittest,json
+from pathlib import Path
 from collections import Counter
 from thermal_exploration.expert_execution import RowBlockedExecution,slice_spans,expert_graph
 from thermal_exploration.crossover_execution import Profile,CrossoverExecution
@@ -60,5 +61,16 @@ class ExpertTests(unittest.TestCase):
   self.assertEqual(traffic(fused),15*2048*8*4);self.assertEqual(traffic(eager),5*traffic(fused))
   self.assertGreater(fused.meta['fixed_sram_bytes'][0],eager.meta['fixed_sram_bytes'][0])
   self.assertEqual(execute(row)['activity']['mac'],meta['mac_flops'])
+ def test_captured_b32_fused_reduction_drains_finite_row_cohorts(self):
+  capture=json.loads((Path(__file__).parent/'fixtures/qwen15_b32_layer0_step0.json').read_text())
+  c=load_model('qwen15_moe');a=capacity(c,32,512)
+  layout=resident_layout(c,a,'B3_3d_placement',capture['training_expected_activations'],16)
+  g,meta=expert_graph(c,layout,0,capture['routes'],Profile(),schedule='barrier')
+  result=execute(g);events={e['id']:e for e in result['events']}
+  self.assertEqual(result['activity']['mac'],meta['mac_flops'])
+  local_done=max(events[j['terminal']]['finish_tick'] for j in meta['jobs'])
+  self.assertGreaterEqual(min(e['start_tick'] for e in result['events'] if e['stage']=='combine'),local_done)
+  self.assertLessEqual(max(v for k,v in result['buffer_high'].items() if k.startswith("('output'")),65536)
+  self.assertEqual(sum(n.work for n in g.nodes if n.kind=='link' and n.stage=='combine'),15*32*2048*4)
 
 if __name__=='__main__':unittest.main()
