@@ -13,6 +13,8 @@ CASES={
 CASES.update({
     'row_fifo_k':dict(rows=16,columns=1,layout='blocked',order='k',stream_fifo=True,weight_buffer=262144),
     'row_fifo_m':dict(rows=16,columns=1,layout='blocked',order='m',stream_fifo=True,weight_buffer=262144),
+    'row_fifo32':dict(rows=16,columns=1,layout='blocked',order='k',reduction_packet=32,stream_fifo=True,weight_buffer=262144),
+    'column_fifo32':dict(rows=1,columns=16,layout='blocked',order='m',reduction_packet=32,stream_fifo=True,weight_buffer=262144),
     'column_fifo64':dict(rows=1,columns=16,layout='blocked',order='m',reduction_packet=64,stream_fifo=True,weight_buffer=262144),
     'column_fifo_barrier':dict(rows=1,columns=16,layout='blocked',order='m',reduction_packet=64,barrier=True,stream_fifo=True,weight_buffer=262144),
     'row_fifo_independent':dict(rows=16,columns=1,layout='blocked',order='k',stream_fifo=True,weight_buffer=262144,command_domains=2),
@@ -42,6 +44,9 @@ def hardware(settings,m=1024,n=16384,batch=32):
     if p*q!=16 or min(m,n,batch,p,q)<1 or m%16 or n%16 or (m//16*batch*4)%32:
         raise ValueError('Invalid tensor/hardware partition')
     ml,nl=m//p,n//q;mb,kb=min(32,ml),min(128,nl,n//16)
+    # Actual MoE row shards can be88 rows (1408/16). Use the largest legal
+    # block at the existing32-row maximum, rather than padding/inventing MACs.
+    while ml%mb:mb-=1
     # Input groups must be wholly owned by their canonical source shard.
     # Pick an aligned divisor; never invent a128-element source block when
     # a source owns only88 elements (e.g. Qwen expert1408/16).
@@ -49,7 +54,7 @@ def hardware(settings,m=1024,n=16384,batch=32):
     if not kb:raise ValueError('No canonically owned32B-aligned input block; padding unsupported')
     if ml%mb or nl%kb:raise ValueError('Nonintegral MAC blocks')
     packet=settings.get('reduction_packet',256)
-    if packet not in (64,256) or (m//16*batch*4)%min(packet,m//16*batch*4):raise ValueError('Unaligned output')
+    if packet not in (32,64,256) or (m//16*batch*4)%min(packet,m//16*batch*4):raise ValueError('Unaligned output')
     packet=min(packet,m//16*batch*4)
     static=[]
     for tile in range(16):
