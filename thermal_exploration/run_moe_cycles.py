@@ -31,6 +31,8 @@ def main():
     selected=None if a.scope=='moe' else {'cold':[12],'reused':[10],'contending':[10,34]}[a.scope];shared=a.scope=='moe';grain='fine_prefetch' if a.scope=='contending' else 'fine_fixed'
     layout=resident_layout(c,capacity(c,a.batch,512),'B3_3d_placement',r['training_expected_activations'],a.tp)
     p=program(c,layout,a.layer,routes,a.down,grain,selected,shared);write_program(p,out/'program')
+    from .moe_transport_semantics import check as transport_check
+    (out/'transport-numerical.json').write_text(json.dumps(transport_check(p),indent=2)+'\n')
     (out/'provenance.json').write_text(json.dumps(dict(source=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),routing_sha256=digest,params={k:str(v) if isinstance(v,Path) else v for k,v in vars(a).items()},ramulator=RAMULATOR_COMMIT,scope='Full true MoE shapes and real routing; shared builder, independent executors; no empirical fitting'),indent=2)+'\n')
     small=dict(c,hidden_size=512,moe_intermediate_size=256,shared_expert_intermediate_size=512)
     sl=resident_layout(small,capacity(small,a.batch,512),'B3_3d_placement',r['training_expected_activations'],a.tp)

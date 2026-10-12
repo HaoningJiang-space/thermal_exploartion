@@ -52,4 +52,10 @@ class FullMoECycleTests(unittest.TestCase):
   self.assertEqual(sum(n.work for n in g.nodes if n.kind=='link'),192*15)
   self.assertEqual(sum(g.meta['flit_valid_bytes'].values()),176*15)
   self.assertIn(16,g.meta['flit_valid_bytes'].values())
+  from thermal_exploration.moe_cycle_program import KINDS
+  from thermal_exploration.moe_transport_semantics import check
+  p=dict(nodes=[dict(id=n.id,kind=KINDS.index(n.kind),tile=n.tile,work=n.work,deps=n.deps,valid_bytes=g.meta.get('flit_valid_bytes',{}).get(n.id,32)) for n in g.nodes],hidden_copies=[dict(expert=12,tokens=[8],source=0,owners=list(range(16)),width=1408,first=0,last=len(g.nodes))])
+  self.assertEqual(check(p)['tail_copies'],1)
+  next(n for n in p['nodes'] if n['kind']==5 and n['valid_bytes']==16)['valid_bytes']=32
+  with self.assertRaisesRegex(ValueError,'mask'):check(p)
 if __name__=='__main__':unittest.main()

@@ -240,7 +240,9 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
             # Its output-row weights are packed locally from machine loading;
             # no runtime weight migration, replication or free layout switch.
             for source in owners:
+                first_copy=len(g.nodes)
                 copied=g.broadcast(source,owners,count*width*2//len(owners),(silu[source],),'hidden_allgather')
+                if getattr(g,'physical_padding',False):g.meta.setdefault('hidden_copies',[]).append(dict(expert=job['expert'],tokens=job['tokens'],source=source,owners=owners,width=width,first=first_copy,last=len(g.nodes)))
                 for tile in owners:gathered[tile].append(copied[tile])
             for tile in owners:
                 prior[tile]=g.join(gathered[tile],'row_down_input_ready');gather_starts.append(prior[tile])

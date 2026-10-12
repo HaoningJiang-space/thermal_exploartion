@@ -137,6 +137,7 @@ def program(c,layout,layer,routes,down='row',grain='fine_fixed',selected=None,sh
         if n['kind']==1 and links:router.append(dict(first=n['id'],users=links,key=[n['tile'],4,nodes[links[0]]['vc']]))
     result=dict(nodes=nodes,leases=leases,router=router,contexts=contexts,slaves=slaves,output=g.output,caps={str(k):v for k,v in caps.items()},resource_count=len(resources),fixed=g.meta['fixed_sram_bytes'],private_budget=g.meta['private_sram_budget_bytes'],meta=meta,contract=dict(tick_ns=.25,flit_bytes=32,vc_depth=8,vc_count=2,link_serial=4,flight=8,read=256,write=128,vector=16,hb=500,fifo=500,mac=2000,weight=262144,response=65536,one_vector_context=True,order='static',grain=grain,down=down,layer=layer,batch=len(routes),routing=routes,scope='Shared semantic builder, independent cycle executors; full MoE subgraph, not checkpoint numeric or silicon certification'))
     result['request_identity']=request_identity
+    result['hidden_copies']=g.meta.get('hidden_copies',[])
     return result
 
 
