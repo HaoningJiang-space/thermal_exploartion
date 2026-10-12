@@ -1,0 +1,3528 @@
+{
+  "status": "FRONTEND_REGRESSIONS_COMPLETE_ARCHITECTURE_G3_G4_NOT_ESTABLISHED",
+  "corrected_cases": [
+    {
+      "case": "s0-l0-b32-tp4-column-cold",
+      "source": "0d5b89b95cdb28c7823514d38f20ea3168395512",
+      "params": {
+        "batch": 32,
+        "tp": 4,
+        "down": "column",
+        "step": 0,
+        "layer": 0,
+        "scope": "cold"
+      },
+      "native_time_us": 13.83025,
+      "fluid_time_us": 13.514000000000001,
+      "python_native_time_us": 13.83025,
+      "python_fluid_time_us": 13.514000000000001,
+      "frontend_absolute_error": 0.0,
+      "fluid_absolute_error": -0.022866542542614776,
+      "native_traces": {
+        "nodes": {
+          "equal": true,
+          "rows_compared": 942551,
+          "first_divergence": null
+        },
+        "ports": {
+          "equal": true,
+          "rows_compared": 885136,
+          "first_divergence": null
+        },
+        "leases": {
+          "equal": true,
+          "rows_compared": 807176,
+          "first_divergence": null
+        },
+        "router": {
+          "equal": true,
+          "rows_compared": 622592,
+          "first_divergence": null
+        },
+        "requests": {
+          "equal": true,
+          "rows_compared": 16896,
+          "first_divergence": null
+        },
+        "service": {
+          "equal": true,
+          "rows_compared": 863437,
+          "first_divergence": null
+        }
+      },
+      "fluid_traces": {
+        "nodes": {
+          "equal": true,
+          "rows_compared": 942551,
+          "first_divergence": null
+        },
+        "ports": {
+          "equal": true,
+          "rows_compared": 864896,
+          "first_divergence": null
+        },
+        "leases": {
+          "equal": true,
+          "rows_compared": 807176,
+          "first_divergence": null
+        },
+        "router": {
+          "equal": true,
+          "rows_compared": 622592,
+          "first_divergence": null
+        },
+        "requests": {
+          "equal": true,
+          "rows_compared": 16896,
+          "first_divergence": null
+        },
+        "service": {
+          "equal": true,
+          "rows_compared": 862993,
+          "first_divergence": null
+        }
+      },
+      "native_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 311296,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 942551,
+        "requests": 16896,
+        "port_rows": 885136,
+        "private_peak": 813344,
+        "router_peak": 8,
+        "activity": {
+          "link": 5898240,
+          "mac": 17301504,
+          "sram_read": 12856320,
+          "sram_write": 14399232,
+          "vector": 1007872,
+          "hb": 17301504,
+          "fifo_read": 17301504,
+          "dram": 17301504
+        }
+      },
+      "fluid_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 311296,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 942551,
+        "requests": 16896,
+        "port_rows": 864896,
+        "private_peak": 780544,
+        "router_peak": 8,
+        "activity": {
+          "link": 5898240,
+          "mac": 17301504,
+          "sram_read": 12856320,
+          "sram_write": 14399232,
+          "vector": 1007872,
+          "hb": 17301504,
+          "fifo_read": 17301504,
+          "dram": 17301504
+        }
+      },
+      "python_native_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 311296,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 942551,
+        "requests": 16896,
+        "port_rows": 885136,
+        "private_peak": 813344,
+        "router_peak": 8,
+        "activity": {
+          "link": 5898240,
+          "mac": 17301504,
+          "sram_read": 12856320,
+          "sram_write": 14399232,
+          "vector": 1007872,
+          "hb": 17301504,
+          "fifo_read": 17301504,
+          "dram": 17301504
+        }
+      },
+      "python_fluid_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 311296,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 942551,
+        "requests": 16896,
+        "port_rows": 864896,
+        "private_peak": 780544,
+        "router_peak": 8,
+        "activity": {
+          "link": 5898240,
+          "mac": 17301504,
+          "sram_read": 12856320,
+          "sram_write": 14399232,
+          "vector": 1007872,
+          "hb": 17301504,
+          "fifo_read": 17301504,
+          "dram": 17301504
+        }
+      },
+      "native_commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 4248,
+          "RD": 16896,
+          "PREpb": 4120,
+          "REFab": 96,
+          "PREab": 16
+        },
+        "commands": 25376,
+        "logical_reads": 16896,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "python_native_commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 4248,
+          "RD": 16896,
+          "PREpb": 4120,
+          "REFab": 96,
+          "PREab": 16
+        },
+        "commands": 25376,
+        "logical_reads": 16896,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "numerical": [
+        {
+          "status": "PASS_NUMERICAL",
+          "dtype": "FP32",
+          "seed": 20261011,
+          "accumulation": "fixed_k",
+          "shape": {
+            "batch": 32,
+            "hidden": 512,
+            "intermediate": 256,
+            "shared": 512
+          },
+          "max_absolute_error": 1.862645149230957e-09,
+          "relative_l2_error": 1.8559431680387206e-07,
+          "tolerance": {
+            "rtol": 0.0002,
+            "atol": 2e-06
+          },
+          "captured_routing_probabilities": true,
+          "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance"
+        },
+        {
+          "status": "PASS_NUMERICAL",
+          "dtype": "BF16",
+          "seed": 20261011,
+          "accumulation": "fixed_k",
+          "shape": {
+            "batch": 32,
+            "hidden": 512,
+            "intermediate": 256,
+            "shared": 512
+          },
+          "max_absolute_error": 9.313225746154785e-10,
+          "relative_l2_error": 9.835135017510765e-08,
+          "tolerance": {
+            "rtol": 0.0002,
+            "atol": 2e-06
+          },
+          "captured_routing_probabilities": true,
+          "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance"
+        }
+      ],
+      "transport": {
+        "status": "PASS_REAL_SHAPE_HIDDEN_PACKING",
+        "copies": 0,
+        "tail_copies": 0,
+        "records": [],
+        "scope": "Real token IDs/counts and K widths; deterministic BF16 bit patterns, mask/physical padding and strided shard assembly, not checkpoint inference"
+      },
+      "physical_contract_status": "NOT_QUALIFIED_PHYSICAL_MAC_CONTRACT",
+      "retained_output_requirement_bytes_per_tile": 2816,
+      "architecture_g3_g4_qualified": false
+    },
+    {
+      "case": "s0-l0-b32-tp4-column-contending",
+      "source": "0d5b89b95cdb28c7823514d38f20ea3168395512",
+      "params": {
+        "batch": 32,
+        "tp": 4,
+        "down": "column",
+        "step": 0,
+        "layer": 0,
+        "scope": "contending"
+      },
+      "native_time_us": 38.745,
+      "fluid_time_us": 38.745,
+      "python_native_time_us": 38.745,
+      "python_fluid_time_us": 38.745,
+      "frontend_absolute_error": 0.0,
+      "fluid_absolute_error": 0.0,
+      "native_traces": {
+        "nodes": {
+          "equal": true,
+          "rows_compared": 995420,
+          "first_divergence": null
+        },
+        "ports": {
+          "equal": true,
+          "rows_compared": 2479680,
+          "first_divergence": null
+        },
+        "leases": {
+          "equal": true,
+          "rows_compared": 877072,
+          "first_divergence": null
+        },
+        "router": {
+          "equal": true,
+          "rows_compared": 622592,
+          "first_divergence": null
+        },
+        "requests": {
+          "equal": true,
+          "rows_compared": 33792,
+          "first_divergence": null
+        },
+        "service": {
+          "equal": true,
+          "rows_compared": 2075947,
+          "first_divergence": null
+        }
+      },
+      "fluid_traces": {
+        "nodes": {
+          "equal": true,
+          "rows_compared": 995420,
+          "first_divergence": null
+        },
+        "ports": {
+          "equal": true,
+          "rows_compared": 2479680,
+          "first_divergence": null
+        },
+        "leases": {
+          "equal": true,
+          "rows_compared": 877072,
+          "first_divergence": null
+        },
+        "router": {
+          "equal": true,
+          "rows_compared": 622592,
+          "first_divergence": null
+        },
+        "requests": {
+          "equal": true,
+          "rows_compared": 33792,
+          "first_divergence": null
+        },
+        "service": {
+          "equal": true,
+          "rows_compared": 2075795,
+          "first_divergence": null
+        }
+      },
+      "native_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 311296,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 995420,
+        "requests": 33792,
+        "port_rows": 2479680,
+        "private_peak": 968576,
+        "router_peak": 8,
+        "activity": {
+          "link": 5898240,
+          "mac": 761266176,
+          "sram_read": 41521152,
+          "sram_write": 19231744,
+          "vector": 2075648,
+          "hb": 34603008,
+          "fifo_read": 34603008,
+          "dram": 34603008
+        }
+      },
+      "fluid_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 311296,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 995420,
+        "requests": 33792,
+        "port_rows": 2479680,
+        "private_peak": 940416,
+        "router_peak": 8,
+        "activity": {
+          "link": 5898240,
+          "mac": 761266176,
+          "sram_read": 41521152,
+          "sram_write": 19231744,
+          "vector": 2075648,
+          "hb": 34603008,
+          "fifo_read": 34603008,
+          "dram": 34603008
+        }
+      },
+      "python_native_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 311296,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 995420,
+        "requests": 33792,
+        "port_rows": 2479680,
+        "private_peak": 968576,
+        "router_peak": 8,
+        "activity": {
+          "link": 5898240,
+          "mac": 761266176,
+          "sram_read": 41521152,
+          "sram_write": 19231744,
+          "vector": 2075648,
+          "hb": 34603008,
+          "fifo_read": 34603008,
+          "dram": 34603008
+        }
+      },
+      "python_fluid_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 311296,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 995420,
+        "requests": 33792,
+        "port_rows": 2479680,
+        "private_peak": 940416,
+        "router_peak": 8,
+        "activity": {
+          "link": 5898240,
+          "mac": 761266176,
+          "sram_read": 41521152,
+          "sram_write": 19231744,
+          "vector": 2075648,
+          "hb": 34603008,
+          "fifo_read": 34603008,
+          "dram": 34603008
+        }
+      },
+      "native_commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 8480,
+          "RD": 33792,
+          "PREpb": 7924,
+          "PREab": 72,
+          "REFab": 288
+        },
+        "commands": 50556,
+        "logical_reads": 33792,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "python_native_commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 8480,
+          "RD": 33792,
+          "PREpb": 7924,
+          "PREab": 72,
+          "REFab": 288
+        },
+        "commands": 50556,
+        "logical_reads": 33792,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "numerical": [
+        {
+          "status": "PASS_NUMERICAL",
+          "dtype": "FP32",
+          "seed": 20261011,
+          "accumulation": "fixed_k",
+          "shape": {
+            "batch": 32,
+            "hidden": 512,
+            "intermediate": 256,
+            "shared": 512
+          },
+          "max_absolute_error": 4.190951585769653e-09,
+          "relative_l2_error": 1.7792145001749304e-07,
+          "tolerance": {
+            "rtol": 0.0002,
+            "atol": 2e-06
+          },
+          "captured_routing_probabilities": true,
+          "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance"
+        },
+        {
+          "status": "PASS_NUMERICAL",
+          "dtype": "BF16",
+          "seed": 20261011,
+          "accumulation": "fixed_k",
+          "shape": {
+            "batch": 32,
+            "hidden": 512,
+            "intermediate": 256,
+            "shared": 512
+          },
+          "max_absolute_error": 2.7939677238464355e-09,
+          "relative_l2_error": 1.1188594584154998e-07,
+          "tolerance": {
+            "rtol": 0.0002,
+            "atol": 2e-06
+          },
+          "captured_routing_probabilities": true,
+          "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance"
+        }
+      ],
+      "transport": {
+        "status": "PASS_REAL_SHAPE_HIDDEN_PACKING",
+        "copies": 0,
+        "tail_copies": 0,
+        "records": [],
+        "scope": "Real token IDs/counts and K widths; deterministic BF16 bit patterns, mask/physical padding and strided shard assembly, not checkpoint inference"
+      },
+      "physical_contract_status": "NOT_QUALIFIED_PHYSICAL_MAC_CONTRACT",
+      "retained_output_requirement_bytes_per_tile": 61952,
+      "architecture_g3_g4_qualified": false
+    },
+    {
+      "case": "s0-l0-b32-tp4-column-reused",
+      "source": "0d5b89b95cdb28c7823514d38f20ea3168395512",
+      "params": {
+        "batch": 32,
+        "tp": 4,
+        "down": "column",
+        "step": 0,
+        "layer": 0,
+        "scope": "reused"
+      },
+      "native_time_us": 23.2535,
+      "fluid_time_us": 23.14125,
+      "python_native_time_us": 23.2535,
+      "python_fluid_time_us": 23.14125,
+      "frontend_absolute_error": 0.0,
+      "fluid_absolute_error": -0.0048272303094157865,
+      "native_traces": {
+        "nodes": {
+          "equal": true,
+          "rows_compared": 942551,
+          "first_divergence": null
+        },
+        "ports": {
+          "equal": true,
+          "rows_compared": 1488224,
+          "first_divergence": null
+        },
+        "leases": {
+          "equal": true,
+          "rows_compared": 807176,
+          "first_divergence": null
+        },
+        "router": {
+          "equal": true,
+          "rows_compared": 622592,
+          "first_divergence": null
+        },
+        "requests": {
+          "equal": true,
+          "rows_compared": 16896,
+          "first_divergence": null
+        },
+        "service": {
+          "equal": true,
+          "rows_compared": 1390519,
+          "first_divergence": null
+        }
+      },
+      "fluid_traces": {
+        "nodes": {
+          "equal": true,
+          "rows_compared": 942551,
+          "first_divergence": null
+        },
+        "ports": {
+          "equal": true,
+          "rows_compared": 1481040,
+          "first_divergence": null
+        },
+        "leases": {
+          "equal": true,
+          "rows_compared": 807176,
+          "first_divergence": null
+        },
+        "router": {
+          "equal": true,
+          "rows_compared": 622592,
+          "first_divergence": null
+        },
+        "requests": {
+          "equal": true,
+          "rows_compared": 16896,
+          "first_divergence": null
+        },
+        "service": {
+          "equal": true,
+          "rows_compared": 1390306,
+          "first_divergence": null
+        }
+      },
+      "native_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 311296,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 942551,
+        "requests": 16896,
+        "port_rows": 1488224,
+        "private_peak": 911744,
+        "router_peak": 8,
+        "activity": {
+          "link": 5898240,
+          "mac": 380633088,
+          "sram_read": 26855424,
+          "sram_write": 16759296,
+          "vector": 1529344,
+          "hb": 17301504,
+          "fifo_read": 17301504,
+          "dram": 17301504
+        }
+      },
+      "fluid_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 311296,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 942551,
+        "requests": 16896,
+        "port_rows": 1481040,
+        "private_peak": 911744,
+        "router_peak": 8,
+        "activity": {
+          "link": 5898240,
+          "mac": 380633088,
+          "sram_read": 26855424,
+          "sram_write": 16759296,
+          "vector": 1529344,
+          "hb": 17301504,
+          "fifo_read": 17301504,
+          "dram": 17301504
+        }
+      },
+      "python_native_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 311296,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 942551,
+        "requests": 16896,
+        "port_rows": 1488224,
+        "private_peak": 911744,
+        "router_peak": 8,
+        "activity": {
+          "link": 5898240,
+          "mac": 380633088,
+          "sram_read": 26855424,
+          "sram_write": 16759296,
+          "vector": 1529344,
+          "hb": 17301504,
+          "fifo_read": 17301504,
+          "dram": 17301504
+        }
+      },
+      "python_fluid_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 311296,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 942551,
+        "requests": 16896,
+        "port_rows": 1481040,
+        "private_peak": 911744,
+        "router_peak": 8,
+        "activity": {
+          "link": 5898240,
+          "mac": 380633088,
+          "sram_read": 26855424,
+          "sram_write": 16759296,
+          "vector": 1529344,
+          "hb": 17301504,
+          "fifo_read": 17301504,
+          "dram": 17301504
+        }
+      },
+      "native_commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 4224,
+          "RD": 16896,
+          "PREpb": 3904,
+          "REFab": 160,
+          "PREab": 40
+        },
+        "commands": 25224,
+        "logical_reads": 16896,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "python_native_commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 4224,
+          "RD": 16896,
+          "PREpb": 3904,
+          "REFab": 160,
+          "PREab": 40
+        },
+        "commands": 25224,
+        "logical_reads": 16896,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "numerical": [
+        {
+          "status": "PASS_NUMERICAL",
+          "dtype": "FP32",
+          "seed": 20261011,
+          "accumulation": "fixed_k",
+          "shape": {
+            "batch": 32,
+            "hidden": 512,
+            "intermediate": 256,
+            "shared": 512
+          },
+          "max_absolute_error": 1.7462298274040222e-09,
+          "relative_l2_error": 1.7135430141479446e-07,
+          "tolerance": {
+            "rtol": 0.0002,
+            "atol": 2e-06
+          },
+          "captured_routing_probabilities": true,
+          "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance"
+        },
+        {
+          "status": "PASS_NUMERICAL",
+          "dtype": "BF16",
+          "seed": 20261011,
+          "accumulation": "fixed_k",
+          "shape": {
+            "batch": 32,
+            "hidden": 512,
+            "intermediate": 256,
+            "shared": 512
+          },
+          "max_absolute_error": 9.313225746154785e-10,
+          "relative_l2_error": 1.0168986364078592e-07,
+          "tolerance": {
+            "rtol": 0.0002,
+            "atol": 2e-06
+          },
+          "captured_routing_probabilities": true,
+          "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance"
+        }
+      ],
+      "transport": {
+        "status": "PASS_REAL_SHAPE_HIDDEN_PACKING",
+        "copies": 0,
+        "tail_copies": 0,
+        "records": [],
+        "scope": "Real token IDs/counts and K widths; deterministic BF16 bit patterns, mask/physical padding and strided shard assembly, not checkpoint inference"
+      },
+      "physical_contract_status": "NOT_QUALIFIED_PHYSICAL_MAC_CONTRACT",
+      "retained_output_requirement_bytes_per_tile": 61952,
+      "architecture_g3_g4_qualified": false
+    },
+    {
+      "case": "s0-l0-b32-tp4-column-moe",
+      "source": "0d5b89b95cdb28c7823514d38f20ea3168395512",
+      "params": {
+        "batch": 32,
+        "tp": 4,
+        "down": "column",
+        "step": 0,
+        "layer": 0,
+        "scope": "moe"
+      },
+      "native_time_us": 68.71525,
+      "fluid_time_us": 66.05425,
+      "python_native_time_us": 68.71525,
+      "python_fluid_time_us": 66.05425,
+      "frontend_absolute_error": 0.0,
+      "fluid_absolute_error": -0.038725028287025065,
+      "native_traces": {
+        "nodes": {
+          "equal": true,
+          "rows_compared": 1683454,
+          "first_divergence": null
+        },
+        "ports": {
+          "equal": true,
+          "rows_compared": 4397776,
+          "first_divergence": null
+        },
+        "leases": {
+          "equal": true,
+          "rows_compared": 1786520,
+          "first_divergence": null
+        },
+        "router": {
+          "equal": true,
+          "rows_compared": 622960,
+          "first_divergence": null
+        },
+        "requests": {
+          "equal": true,
+          "rows_compared": 253504,
+          "first_divergence": null
+        },
+        "service": {
+          "equal": true,
+          "rows_compared": 9094383,
+          "first_divergence": null
+        }
+      },
+      "fluid_traces": {
+        "nodes": {
+          "equal": true,
+          "rows_compared": 1683454,
+          "first_divergence": null
+        },
+        "ports": {
+          "equal": true,
+          "rows_compared": 4227472,
+          "first_divergence": null
+        },
+        "leases": {
+          "equal": true,
+          "rows_compared": 1786520,
+          "first_divergence": null
+        },
+        "router": {
+          "equal": true,
+          "rows_compared": 622960,
+          "first_divergence": null
+        },
+        "requests": {
+          "equal": true,
+          "rows_compared": 253504,
+          "first_divergence": null
+        },
+        "service": {
+          "equal": true,
+          "rows_compared": 9091034,
+          "first_divergence": null
+        }
+      },
+      "native_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 311480,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 1683454,
+        "requests": 253504,
+        "port_rows": 4397776,
+        "private_peak": 911744,
+        "router_peak": 8,
+        "activity": {
+          "link": 5902080,
+          "mac": 4429316096,
+          "sram_read": 180885504,
+          "sram_write": 43065216,
+          "vector": 7340704,
+          "hb": 259588096,
+          "fifo_read": 259588096,
+          "dram": 259588096
+        }
+      },
+      "fluid_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 311480,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 1683454,
+        "requests": 253504,
+        "port_rows": 4227472,
+        "private_peak": 911744,
+        "router_peak": 8,
+        "activity": {
+          "link": 5902080,
+          "mac": 4429316096,
+          "sram_read": 180885504,
+          "sram_write": 43065216,
+          "vector": 7340704,
+          "hb": 259588096,
+          "fifo_read": 259588096,
+          "dram": 259588096
+        }
+      },
+      "python_native_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 311480,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 1683454,
+        "requests": 253504,
+        "port_rows": 4397776,
+        "private_peak": 911744,
+        "router_peak": 8,
+        "activity": {
+          "link": 5902080,
+          "mac": 4429316096,
+          "sram_read": 180885504,
+          "sram_write": 43065216,
+          "vector": 7340704,
+          "hb": 259588096,
+          "fifo_read": 259588096,
+          "dram": 259588096
+        }
+      },
+      "python_fluid_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 311480,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 1683454,
+        "requests": 253504,
+        "port_rows": 4227472,
+        "private_peak": 911744,
+        "router_peak": 8,
+        "activity": {
+          "link": 5902080,
+          "mac": 4429316096,
+          "sram_read": 180885504,
+          "sram_write": 43065216,
+          "vector": 7340704,
+          "hb": 259588096,
+          "fifo_read": 259588096,
+          "dram": 259588096
+        }
+      },
+      "native_commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 63544,
+          "RD": 253504,
+          "PREpb": 59884,
+          "PREab": 472,
+          "REFab": 544
+        },
+        "commands": 377948,
+        "logical_reads": 253504,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "python_native_commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 63544,
+          "RD": 253504,
+          "PREpb": 59884,
+          "PREab": 472,
+          "REFab": 544
+        },
+        "commands": 377948,
+        "logical_reads": 253504,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "numerical": [
+        {
+          "status": "PASS_NUMERICAL",
+          "dtype": "FP32",
+          "seed": 20261011,
+          "accumulation": "fixed_k",
+          "shape": {
+            "batch": 32,
+            "hidden": 512,
+            "intermediate": 256,
+            "shared": 512
+          },
+          "max_absolute_error": 1.30385160446167e-08,
+          "relative_l2_error": 2.2355844464527763e-07,
+          "tolerance": {
+            "rtol": 0.0002,
+            "atol": 2e-06
+          },
+          "captured_routing_probabilities": true,
+          "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance"
+        },
+        {
+          "status": "PASS_NUMERICAL",
+          "dtype": "BF16",
+          "seed": 20261011,
+          "accumulation": "fixed_k",
+          "shape": {
+            "batch": 32,
+            "hidden": 512,
+            "intermediate": 256,
+            "shared": 512
+          },
+          "max_absolute_error": 8.381903171539307e-09,
+          "relative_l2_error": 1.3857274439033063e-07,
+          "tolerance": {
+            "rtol": 0.0002,
+            "atol": 2e-06
+          },
+          "captured_routing_probabilities": true,
+          "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance"
+        }
+      ],
+      "transport": {
+        "status": "PASS_REAL_SHAPE_HIDDEN_PACKING",
+        "copies": 0,
+        "tail_copies": 0,
+        "records": [],
+        "scope": "Real token IDs/counts and K widths; deterministic BF16 bit patterns, mask/physical padding and strided shard assembly, not checkpoint inference"
+      },
+      "physical_contract_status": "NOT_QUALIFIED_PHYSICAL_MAC_CONTRACT",
+      "retained_output_requirement_bytes_per_tile": 90112,
+      "architecture_g3_g4_qualified": false
+    },
+    {
+      "case": "s0-l0-b8-tp16-row-moe",
+      "source": "0d5b89b95cdb28c7823514d38f20ea3168395512",
+      "params": {
+        "batch": 8,
+        "tp": 16,
+        "down": "row",
+        "step": 0,
+        "layer": 0,
+        "scope": "moe"
+      },
+      "native_time_us": 17.5665,
+      "fluid_time_us": 16.21275,
+      "python_native_time_us": 17.5665,
+      "python_fluid_time_us": 16.21275,
+      "frontend_absolute_error": 0.0,
+      "fluid_absolute_error": -0.07706429852275642,
+      "native_traces": {
+        "nodes": {
+          "equal": true,
+          "rows_compared": 946331,
+          "first_divergence": null
+        },
+        "ports": {
+          "equal": true,
+          "rows_compared": 1124256,
+          "first_divergence": null
+        },
+        "leases": {
+          "equal": true,
+          "rows_compared": 1022680,
+          "first_divergence": null
+        },
+        "router": {
+          "equal": true,
+          "rows_compared": 247900,
+          "first_divergence": null
+        },
+        "requests": {
+          "equal": true,
+          "rows_compared": 202816,
+          "first_divergence": null
+        },
+        "service": {
+          "equal": true,
+          "rows_compared": 2741237,
+          "first_divergence": null
+        }
+      },
+      "fluid_traces": {
+        "nodes": {
+          "equal": true,
+          "rows_compared": 946331,
+          "first_divergence": null
+        },
+        "ports": {
+          "equal": true,
+          "rows_compared": 1037616,
+          "first_divergence": null
+        },
+        "leases": {
+          "equal": true,
+          "rows_compared": 1022680,
+          "first_divergence": null
+        },
+        "router": {
+          "equal": true,
+          "rows_compared": 247900,
+          "first_divergence": null
+        },
+        "requests": {
+          "equal": true,
+          "rows_compared": 202816,
+          "first_divergence": null
+        },
+        "service": {
+          "equal": true,
+          "rows_compared": 2736499,
+          "first_divergence": null
+        }
+      },
+      "native_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 123950,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 946331,
+        "requests": 202816,
+        "port_rows": 1124256,
+        "private_peak": 548384,
+        "router_peak": 8,
+        "activity": {
+          "link": 2857920,
+          "mac": 1107329024,
+          "sram_read": 42954240,
+          "sram_write": 9791456,
+          "vector": 1441960,
+          "hb": 207683584,
+          "fifo_read": 207683584,
+          "dram": 207683584
+        }
+      },
+      "fluid_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 123950,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 946331,
+        "requests": 202816,
+        "port_rows": 1037616,
+        "private_peak": 548384,
+        "router_peak": 8,
+        "activity": {
+          "link": 2857920,
+          "mac": 1107329024,
+          "sram_read": 42954240,
+          "sram_write": 9791456,
+          "vector": 1441960,
+          "hb": 207683584,
+          "fifo_read": 207683584,
+          "dram": 207683584
+        }
+      },
+      "python_native_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 123950,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 946331,
+        "requests": 202816,
+        "port_rows": 1124256,
+        "private_peak": 548384,
+        "router_peak": 8,
+        "activity": {
+          "link": 2857920,
+          "mac": 1107329024,
+          "sram_read": 42954240,
+          "sram_write": 9791456,
+          "vector": 1441960,
+          "hb": 207683584,
+          "fifo_read": 207683584,
+          "dram": 207683584
+        }
+      },
+      "python_fluid_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "fifo_check": {
+          "status": "PASS_FIFO_HEAD_ORDER",
+          "queues": 128,
+          "entries": 123950,
+          "violations": 0,
+          "input_service_overruns": 0,
+          "examples": [],
+          "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+        },
+        "nodes": 946331,
+        "requests": 202816,
+        "port_rows": 1037616,
+        "private_peak": 548384,
+        "router_peak": 8,
+        "activity": {
+          "link": 2857920,
+          "mac": 1107329024,
+          "sram_read": 42954240,
+          "sram_write": 9791456,
+          "vector": 1441960,
+          "hb": 207683584,
+          "fifo_read": 207683584,
+          "dram": 207683584
+        }
+      },
+      "native_commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 50884,
+          "RD": 202816,
+          "PREpb": 49747,
+          "PREab": 128,
+          "REFab": 128
+        },
+        "commands": 303703,
+        "logical_reads": 202816,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "python_native_commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 50884,
+          "RD": 202816,
+          "PREpb": 49747,
+          "PREab": 128,
+          "REFab": 128
+        },
+        "commands": 303703,
+        "logical_reads": 202816,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "numerical": [
+        {
+          "status": "PASS_NUMERICAL",
+          "dtype": "FP32",
+          "seed": 20261011,
+          "accumulation": "fixed_k",
+          "shape": {
+            "batch": 8,
+            "hidden": 512,
+            "intermediate": 256,
+            "shared": 512
+          },
+          "max_absolute_error": 8.381903171539307e-09,
+          "relative_l2_error": 1.923536103731749e-07,
+          "tolerance": {
+            "rtol": 0.0002,
+            "atol": 2e-06
+          },
+          "captured_routing_probabilities": true,
+          "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance"
+        },
+        {
+          "status": "PASS_NUMERICAL",
+          "dtype": "BF16",
+          "seed": 20261011,
+          "accumulation": "fixed_k",
+          "shape": {
+            "batch": 8,
+            "hidden": 512,
+            "intermediate": 256,
+            "shared": 512
+          },
+          "max_absolute_error": 7.450580596923828e-09,
+          "relative_l2_error": 1.2431389961875539e-07,
+          "tolerance": {
+            "rtol": 0.0002,
+            "atol": 2e-06
+          },
+          "captured_routing_probabilities": true,
+          "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance"
+        }
+      ],
+      "transport": {
+        "status": "PASS_REAL_SHAPE_HIDDEN_PACKING",
+        "copies": 128,
+        "tail_copies": 128,
+        "records": [
+          {
+            "expert": 10,
+            "source": 0,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 10,
+            "source": 1,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 10,
+            "source": 2,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 10,
+            "source": 3,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 10,
+            "source": 4,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 10,
+            "source": 5,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 10,
+            "source": 6,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 10,
+            "source": 7,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 10,
+            "source": 8,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 10,
+            "source": 9,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 10,
+            "source": 10,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 10,
+            "source": 11,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 10,
+            "source": 12,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 10,
+            "source": 13,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 10,
+            "source": 14,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 10,
+            "source": 15,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 20,
+            "source": 0,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 20,
+            "source": 1,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 20,
+            "source": 2,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 20,
+            "source": 3,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 20,
+            "source": 4,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 20,
+            "source": 5,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 20,
+            "source": 6,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 20,
+            "source": 7,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 20,
+            "source": 8,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 20,
+            "source": 9,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 20,
+            "source": 10,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 20,
+            "source": 11,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 20,
+            "source": 12,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 20,
+            "source": 13,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 20,
+            "source": 14,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 20,
+            "source": 15,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 25,
+            "source": 0,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 25,
+            "source": 1,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 25,
+            "source": 2,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 25,
+            "source": 3,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 25,
+            "source": 4,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 25,
+            "source": 5,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 25,
+            "source": 6,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 25,
+            "source": 7,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 25,
+            "source": 8,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 25,
+            "source": 9,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 25,
+            "source": 10,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 25,
+            "source": 11,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 25,
+            "source": 12,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 25,
+            "source": 13,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 25,
+            "source": 14,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 25,
+            "source": 15,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 31,
+            "source": 0,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 31,
+            "source": 1,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 31,
+            "source": 2,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 31,
+            "source": 3,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 31,
+            "source": 4,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 31,
+            "source": 5,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 31,
+            "source": 6,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 31,
+            "source": 7,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 31,
+            "source": 8,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 31,
+            "source": 9,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 31,
+            "source": 10,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 31,
+            "source": 11,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 31,
+            "source": 12,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 31,
+            "source": 13,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 31,
+            "source": 14,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 31,
+            "source": 15,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 34,
+            "source": 0,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 34,
+            "source": 1,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 34,
+            "source": 2,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 34,
+            "source": 3,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 34,
+            "source": 4,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 34,
+            "source": 5,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 34,
+            "source": 6,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 34,
+            "source": 7,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 34,
+            "source": 8,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 34,
+            "source": 9,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 34,
+            "source": 10,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 34,
+            "source": 11,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 34,
+            "source": 12,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 34,
+            "source": 13,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 34,
+            "source": 14,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 34,
+            "source": 15,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 47,
+            "source": 0,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 47,
+            "source": 1,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 47,
+            "source": 2,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 47,
+            "source": 3,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 47,
+            "source": 4,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 47,
+            "source": 5,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 47,
+            "source": 6,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 47,
+            "source": 7,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 47,
+            "source": 8,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 47,
+            "source": 9,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 47,
+            "source": 10,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 47,
+            "source": 11,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 47,
+            "source": 12,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 47,
+            "source": 13,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 47,
+            "source": 14,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 47,
+            "source": 15,
+            "tokens": [
+              0,
+              3,
+              4,
+              6,
+              7
+            ],
+            "width": 1408,
+            "logical_bytes": 880,
+            "wire_bytes": 896,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 53,
+            "source": 0,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 53,
+            "source": 1,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 53,
+            "source": 2,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 53,
+            "source": 3,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 53,
+            "source": 4,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 53,
+            "source": 5,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 53,
+            "source": 6,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 53,
+            "source": 7,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 53,
+            "source": 8,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 53,
+            "source": 9,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 53,
+            "source": 10,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 53,
+            "source": 11,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 53,
+            "source": 12,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 53,
+            "source": 13,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 53,
+            "source": 14,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 53,
+            "source": 15,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 55,
+            "source": 0,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 55,
+            "source": 1,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 55,
+            "source": 2,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 55,
+            "source": 3,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 55,
+            "source": 4,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 55,
+            "source": 5,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 55,
+            "source": 6,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 55,
+            "source": 7,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 55,
+            "source": 8,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 55,
+            "source": 9,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 55,
+            "source": 10,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 55,
+            "source": 11,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 55,
+            "source": 12,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 55,
+            "source": 13,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 55,
+            "source": 14,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          },
+          {
+            "expert": 55,
+            "source": 15,
+            "tokens": [
+              1,
+              2,
+              5
+            ],
+            "width": 1408,
+            "logical_bytes": 528,
+            "wire_bytes": 544,
+            "padding_bytes": 16,
+            "status": "PASS_BITWISE_HIDDEN_SHARD"
+          }
+        ],
+        "scope": "Real token IDs/counts and K widths; deterministic BF16 bit patterns, mask/physical padding and strided shard assembly, not checkpoint inference"
+      },
+      "physical_contract_status": "NOT_QUALIFIED_PHYSICAL_MAC_CONTRACT",
+      "retained_output_requirement_bytes_per_tile": 22528,
+      "architecture_g3_g4_qualified": false
+    }
+  ],
+  "retired_fifo_control": [
+    {
+      "case": "s0-l0-b32-tp4-column-moe",
+      "source": "b2418754576b8a0fbd48dbf7be9a87b63d4945c2",
+      "params": {
+        "batch": 32,
+        "tp": 4,
+        "down": "column",
+        "step": 0,
+        "layer": 0,
+        "scope": "moe"
+      },
+      "native_time_us": 68.71525,
+      "fluid_time_us": 66.049,
+      "python_native_time_us": 68.71525,
+      "python_fluid_time_us": 66.049,
+      "frontend_absolute_error": 0.0,
+      "fluid_absolute_error": -0.03880143054125529,
+      "native_traces": {
+        "nodes": {
+          "equal": true,
+          "rows_compared": 1683454,
+          "first_divergence": null
+        },
+        "ports": {
+          "equal": true,
+          "rows_compared": 4397776,
+          "first_divergence": null
+        },
+        "leases": {
+          "equal": true,
+          "rows_compared": 1786520,
+          "first_divergence": null
+        },
+        "router": {
+          "equal": true,
+          "rows_compared": 622960,
+          "first_divergence": null
+        },
+        "requests": {
+          "equal": true,
+          "rows_compared": 253504,
+          "first_divergence": null
+        },
+        "service": {
+          "equal": true,
+          "rows_compared": 9094310,
+          "first_divergence": null
+        }
+      },
+      "fluid_traces": {
+        "nodes": {
+          "equal": true,
+          "rows_compared": 1683454,
+          "first_divergence": null
+        },
+        "ports": {
+          "equal": true,
+          "rows_compared": 4227136,
+          "first_divergence": null
+        },
+        "leases": {
+          "equal": true,
+          "rows_compared": 1786520,
+          "first_divergence": null
+        },
+        "router": {
+          "equal": true,
+          "rows_compared": 622960,
+          "first_divergence": null
+        },
+        "requests": {
+          "equal": true,
+          "rows_compared": 253504,
+          "first_divergence": null
+        },
+        "service": {
+          "equal": true,
+          "rows_compared": 9090961,
+          "first_divergence": null
+        }
+      },
+      "native_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "nodes": 1683454,
+        "requests": 253504,
+        "port_rows": 4397776,
+        "private_peak": 911744,
+        "router_peak": 8,
+        "activity": {
+          "link": 5902080,
+          "mac": 4429316096,
+          "sram_read": 180885504,
+          "sram_write": 43065216,
+          "vector": 7340704,
+          "hb": 259588096,
+          "fifo_read": 259588096,
+          "dram": 259588096
+        }
+      },
+      "fluid_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "nodes": 1683454,
+        "requests": 253504,
+        "port_rows": 4227136,
+        "private_peak": 911744,
+        "router_peak": 8,
+        "activity": {
+          "link": 5902080,
+          "mac": 4429316096,
+          "sram_read": 180885504,
+          "sram_write": 43065216,
+          "vector": 7340704,
+          "hb": 259588096,
+          "fifo_read": 259588096,
+          "dram": 259588096
+        }
+      },
+      "python_native_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "nodes": 1683454,
+        "requests": 253504,
+        "port_rows": 4397776,
+        "private_peak": 911744,
+        "router_peak": 8,
+        "activity": {
+          "link": 5902080,
+          "mac": 4429316096,
+          "sram_read": 180885504,
+          "sram_write": 43065216,
+          "vector": 7340704,
+          "hb": 259588096,
+          "fifo_read": 259588096,
+          "dram": 259588096
+        }
+      },
+      "python_fluid_replay": {
+        "status": "PASS_INDEPENDENT_FULL_PROGRAM_REPLAY",
+        "nodes": 1683454,
+        "requests": 253504,
+        "port_rows": 4227136,
+        "private_peak": 911744,
+        "router_peak": 8,
+        "activity": {
+          "link": 5902080,
+          "mac": 4429316096,
+          "sram_read": 180885504,
+          "sram_write": 43065216,
+          "vector": 7340704,
+          "hb": 259588096,
+          "fifo_read": 259588096,
+          "dram": 259588096
+        }
+      },
+      "native_commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 63544,
+          "RD": 253504,
+          "PREpb": 59876,
+          "PREab": 472,
+          "REFab": 544
+        },
+        "commands": 377940,
+        "logical_reads": 253504,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "python_native_commands": {
+        "status": "PASS",
+        "counts": {
+          "ACT": 63544,
+          "RD": 253504,
+          "PREpb": 59876,
+          "PREab": 472,
+          "REFab": 544
+        },
+        "commands": 377940,
+        "logical_reads": 253504,
+        "read_merging": "Pinned controller does not merge reads; two identical-address reads issue separately",
+        "evidence_level": "L1 software execution; assumed device parameters are not measured"
+      },
+      "numerical": [
+        {
+          "status": "PASS_NUMERICAL",
+          "dtype": "FP32",
+          "seed": 20261011,
+          "accumulation": "fixed_k",
+          "shape": {
+            "batch": 32,
+            "hidden": 512,
+            "intermediate": 256,
+            "shared": 512
+          },
+          "max_absolute_error": 1.30385160446167e-08,
+          "relative_l2_error": 2.2355844464527763e-07,
+          "tolerance": {
+            "rtol": 0.0002,
+            "atol": 2e-06
+          },
+          "captured_routing_probabilities": true,
+          "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance"
+        },
+        {
+          "status": "PASS_NUMERICAL",
+          "dtype": "BF16",
+          "seed": 20261011,
+          "accumulation": "fixed_k",
+          "shape": {
+            "batch": 32,
+            "hidden": 512,
+            "intermediate": 256,
+            "shared": 512
+          },
+          "max_absolute_error": 8.381903171539307e-09,
+          "relative_l2_error": 1.3857274439033063e-07,
+          "tolerance": {
+            "rtol": 0.0002,
+            "atol": 2e-06
+          },
+          "captured_routing_probabilities": true,
+          "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance"
+        }
+      ],
+      "transport": {
+        "status": "PASS_REAL_SHAPE_HIDDEN_PACKING",
+        "copies": 0,
+        "tail_copies": 0,
+        "records": [],
+        "scope": "Real token IDs/counts and K widths; deterministic BF16 bit patterns, mask/physical padding and strided shard assembly, not checkpoint inference"
+      },
+      "physical_contract_status": "RETIRED_NO_PHYSICAL_QUALIFICATION",
+      "retained_output_requirement_bytes_per_tile": null,
+      "architecture_g3_g4_qualified": false
+    }
+  ],
+  "pairing": {
+    "case": "s0-l0-b32-tp4-column-moe",
+    "retired_native_us": 68.71525,
+    "fixed_native_us": 68.71525,
+    "native_end_time_equal": true,
+    "retired_fluid_us": 66.049,
+    "fixed_fluid_us": 66.05425
+  },
+  "targets": {
+    "frontend_absolute": 0.1,
+    "architecture_relative": 0.05
+  },
+  "matrix_ranking_qualification_executed": false,
+  "architecture_g3_g4_qualified": false,
+  "hardware_go": false,
+  "boundary": "Same high-level builder and abstract registered MAC law; independent frontends, shared online native DRAM model; no finite Matrix RF or M/K proof. Real routing/full dimensions, small numeric tensors are semantic controls only."
+}

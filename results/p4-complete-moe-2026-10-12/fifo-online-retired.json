@@ -1,0 +1,634 @@
+{
+  "status": "FAIL_FIFO_HEAD_ORDER",
+  "queues": 128,
+  "entries": 311296,
+  "violations": 24314,
+  "input_service_overruns": 15626,
+  "examples": [
+    {
+      "queue": [
+        0,
+        1,
+        0
+      ],
+      "head": {
+        "credit": 3840,
+        "first": 7953,
+        "arrival": 9,
+        "consumers": [
+          7954,
+          7955
+        ],
+        "consumer_start": 9,
+        "release": 1025
+      },
+      "bypass": {
+        "credit": 3855,
+        "first": 7984,
+        "arrival": 13,
+        "consumers": [
+          7985,
+          7986
+        ],
+        "consumer_start": 13,
+        "release": 1029
+      }
+    },
+    {
+      "queue": [
+        1,
+        1,
+        0
+      ],
+      "head": {
+        "credit": 7680,
+        "first": 15905,
+        "arrival": 9,
+        "consumers": [
+          15906,
+          15907,
+          15915
+        ],
+        "consumer_start": 9,
+        "release": 2049
+      },
+      "bypass": {
+        "credit": 7695,
+        "first": 15936,
+        "arrival": 13,
+        "consumers": [
+          15937,
+          15938,
+          15946
+        ],
+        "consumer_start": 13,
+        "release": 2053
+      }
+    },
+    {
+      "queue": [
+        2,
+        1,
+        0
+      ],
+      "head": {
+        "credit": 11520,
+        "first": 23857,
+        "arrival": 9,
+        "consumers": [
+          23858,
+          23859,
+          23875
+        ],
+        "consumer_start": 9,
+        "release": 3073
+      },
+      "bypass": {
+        "credit": 11535,
+        "first": 23888,
+        "arrival": 13,
+        "consumers": [
+          23889,
+          23890,
+          23906
+        ],
+        "consumer_start": 13,
+        "release": 3077
+      }
+    },
+    {
+      "queue": [
+        5,
+        0,
+        0
+      ],
+      "head": {
+        "credit": 15361,
+        "first": 31811,
+        "arrival": 9,
+        "consumers": [
+          31812,
+          31813,
+          31815,
+          31831
+        ],
+        "consumer_start": 9,
+        "release": 4105
+      },
+      "bypass": {
+        "credit": 15376,
+        "first": 31842,
+        "arrival": 13,
+        "consumers": [
+          31843,
+          31844,
+          31846,
+          31862
+        ],
+        "consumer_start": 13,
+        "release": 4109
+      }
+    },
+    {
+      "queue": [
+        6,
+        0,
+        0
+      ],
+      "head": {
+        "credit": 19205,
+        "first": 39771,
+        "arrival": 9,
+        "consumers": [
+          39772,
+          39773,
+          39775,
+          39783
+        ],
+        "consumer_start": 9,
+        "release": 5129
+      },
+      "bypass": {
+        "credit": 19220,
+        "first": 39802,
+        "arrival": 13,
+        "consumers": [
+          39803,
+          39804,
+          39806,
+          39814
+        ],
+        "consumer_start": 13,
+        "release": 5133
+      }
+    },
+    {
+      "queue": [
+        7,
+        0,
+        0
+      ],
+      "head": {
+        "credit": 23049,
+        "first": 47731,
+        "arrival": 9,
+        "consumers": [
+          47732,
+          47733,
+          47735
+        ],
+        "consumer_start": 9,
+        "release": 6153
+      },
+      "bypass": {
+        "credit": 23064,
+        "first": 47762,
+        "arrival": 13,
+        "consumers": [
+          47763,
+          47764,
+          47766
+        ],
+        "consumer_start": 13,
+        "release": 6157
+      }
+    },
+    {
+      "queue": [
+        4,
+        1,
+        0
+      ],
+      "head": {
+        "credit": 19201,
+        "first": 39763,
+        "arrival": 9,
+        "consumers": [
+          39764,
+          39765,
+          39767
+        ],
+        "consumer_start": 9,
+        "release": 5121
+      },
+      "bypass": {
+        "credit": 19216,
+        "first": 39794,
+        "arrival": 13,
+        "consumers": [
+          39795,
+          39796,
+          39798
+        ],
+        "consumer_start": 13,
+        "release": 5125
+      }
+    },
+    {
+      "queue": [
+        5,
+        1,
+        0
+      ],
+      "head": {
+        "credit": 23041,
+        "first": 47715,
+        "arrival": 9,
+        "consumers": [
+          47716,
+          47717,
+          47719,
+          47727
+        ],
+        "consumer_start": 9,
+        "release": 6145
+      },
+      "bypass": {
+        "credit": 23056,
+        "first": 47746,
+        "arrival": 13,
+        "consumers": [
+          47747,
+          47748,
+          47750,
+          47758
+        ],
+        "consumer_start": 13,
+        "release": 6149
+      }
+    },
+    {
+      "queue": [
+        6,
+        1,
+        0
+      ],
+      "head": {
+        "credit": 26881,
+        "first": 55667,
+        "arrival": 9,
+        "consumers": [
+          55668,
+          55669,
+          55671,
+          55687
+        ],
+        "consumer_start": 9,
+        "release": 7169
+      },
+      "bypass": {
+        "credit": 26896,
+        "first": 55698,
+        "arrival": 13,
+        "consumers": [
+          55699,
+          55700,
+          55702,
+          55718
+        ],
+        "consumer_start": 13,
+        "release": 7173
+      }
+    },
+    {
+      "queue": [
+        4,
+        3,
+        0
+      ],
+      "head": {
+        "credit": 30720,
+        "first": 63617,
+        "arrival": 9,
+        "consumers": [
+          63618,
+          63619
+        ],
+        "consumer_start": 9,
+        "release": 73
+      },
+      "bypass": {
+        "credit": 30735,
+        "first": 63648,
+        "arrival": 13,
+        "consumers": [
+          63649,
+          63650
+        ],
+        "consumer_start": 13,
+        "release": 77
+      }
+    },
+    {
+      "queue": [
+        9,
+        0,
+        0
+      ],
+      "head": {
+        "credit": 30722,
+        "first": 63621,
+        "arrival": 9,
+        "consumers": [
+          63622,
+          63623,
+          63627,
+          63643
+        ],
+        "consumer_start": 9,
+        "release": 8201
+      },
+      "bypass": {
+        "credit": 30737,
+        "first": 63652,
+        "arrival": 13,
+        "consumers": [
+          63653,
+          63654,
+          63658,
+          63674
+        ],
+        "consumer_start": 13,
+        "release": 8205
+      }
+    },
+    {
+      "queue": [
+        5,
+        3,
+        0
+      ],
+      "head": {
+        "credit": 34560,
+        "first": 71569,
+        "arrival": 9,
+        "consumers": [
+          71570,
+          71571
+        ],
+        "consumer_start": 9,
+        "release": 137
+      },
+      "bypass": {
+        "credit": 34575,
+        "first": 71600,
+        "arrival": 13,
+        "consumers": [
+          71601,
+          71602
+        ],
+        "consumer_start": 13,
+        "release": 141
+      }
+    },
+    {
+      "queue": [
+        10,
+        0,
+        0
+      ],
+      "head": {
+        "credit": 34566,
+        "first": 71581,
+        "arrival": 9,
+        "consumers": [
+          71582,
+          71583,
+          71587,
+          71595
+        ],
+        "consumer_start": 9,
+        "release": 9225
+      },
+      "bypass": {
+        "credit": 34581,
+        "first": 71612,
+        "arrival": 13,
+        "consumers": [
+          71613,
+          71614,
+          71618,
+          71626
+        ],
+        "consumer_start": 13,
+        "release": 9229
+      }
+    },
+    {
+      "queue": [
+        6,
+        3,
+        0
+      ],
+      "head": {
+        "credit": 38400,
+        "first": 79521,
+        "arrival": 9,
+        "consumers": [
+          79522,
+          79523
+        ],
+        "consumer_start": 9,
+        "release": 137
+      },
+      "bypass": {
+        "credit": 38415,
+        "first": 79552,
+        "arrival": 13,
+        "consumers": [
+          79553,
+          79554
+        ],
+        "consumer_start": 13,
+        "release": 141
+      }
+    },
+    {
+      "queue": [
+        11,
+        0,
+        0
+      ],
+      "head": {
+        "credit": 38410,
+        "first": 79541,
+        "arrival": 9,
+        "consumers": [
+          79542,
+          79543,
+          79547
+        ],
+        "consumer_start": 9,
+        "release": 10249
+      },
+      "bypass": {
+        "credit": 38425,
+        "first": 79572,
+        "arrival": 13,
+        "consumers": [
+          79573,
+          79574,
+          79578
+        ],
+        "consumer_start": 13,
+        "release": 10253
+      }
+    },
+    {
+      "queue": [
+        7,
+        3,
+        0
+      ],
+      "head": {
+        "credit": 42240,
+        "first": 87473,
+        "arrival": 9,
+        "consumers": [
+          87474,
+          87475
+        ],
+        "consumer_start": 9,
+        "release": 105
+      },
+      "bypass": {
+        "credit": 42255,
+        "first": 87504,
+        "arrival": 13,
+        "consumers": [
+          87505,
+          87506
+        ],
+        "consumer_start": 13,
+        "release": 109
+      }
+    },
+    {
+      "queue": [
+        8,
+        1,
+        0
+      ],
+      "head": {
+        "credit": 34562,
+        "first": 71573,
+        "arrival": 9,
+        "consumers": [
+          71574,
+          71575,
+          71579
+        ],
+        "consumer_start": 9,
+        "release": 9217
+      },
+      "bypass": {
+        "credit": 34577,
+        "first": 71604,
+        "arrival": 13,
+        "consumers": [
+          71605,
+          71606,
+          71610
+        ],
+        "consumer_start": 13,
+        "release": 9221
+      }
+    },
+    {
+      "queue": [
+        9,
+        1,
+        0
+      ],
+      "head": {
+        "credit": 38402,
+        "first": 79525,
+        "arrival": 9,
+        "consumers": [
+          79526,
+          79527,
+          79531,
+          79539
+        ],
+        "consumer_start": 9,
+        "release": 10241
+      },
+      "bypass": {
+        "credit": 38417,
+        "first": 79556,
+        "arrival": 13,
+        "consumers": [
+          79557,
+          79558,
+          79562,
+          79570
+        ],
+        "consumer_start": 13,
+        "release": 10245
+      }
+    },
+    {
+      "queue": [
+        10,
+        1,
+        0
+      ],
+      "head": {
+        "credit": 42242,
+        "first": 87477,
+        "arrival": 9,
+        "consumers": [
+          87478,
+          87479,
+          87483,
+          87499
+        ],
+        "consumer_start": 9,
+        "release": 11265
+      },
+      "bypass": {
+        "credit": 42257,
+        "first": 87508,
+        "arrival": 13,
+        "consumers": [
+          87509,
+          87510,
+          87514,
+          87530
+        ],
+        "consumer_start": 13,
+        "release": 11269
+      }
+    },
+    {
+      "queue": [
+        8,
+        3,
+        0
+      ],
+      "head": {
+        "credit": 46080,
+        "first": 95425,
+        "arrival": 9,
+        "consumers": [
+          95426,
+          95427
+        ],
+        "consumer_start": 9,
+        "release": 113
+      },
+      "bypass": {
+        "credit": 46095,
+        "first": 95456,
+        "arrival": 13,
+        "consumers": [
+          95457,
+          95458
+        ],
+        "consumer_start": 13,
+        "release": 117
+      }
+    }
+  ],
+  "assumption": "One ordered FIFO per physical input port/VC, one head per tick; pending multicast branches retain the head until all consume"
+}

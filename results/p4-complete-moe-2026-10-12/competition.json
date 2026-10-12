@@ -1,0 +1,136 @@
+{
+  "source": "0d5b89b95cdb28c7823514d38f20ea3168395512",
+  "case": "s0-l0-b32-tp4-column-contending",
+  "experts": [
+    10,
+    34
+  ],
+  "tokens_each": 22,
+  "owners": [
+    8,
+    9,
+    10,
+    11
+  ],
+  "policy": "Existing fine_prefetch; expert/MAC ordering retained",
+  "per_tile": {
+    "8": {
+      "expert34_rd_commands": 4224,
+      "expert34_rd_during_expert10_mac": 160
+    },
+    "9": {
+      "expert34_rd_commands": 4224,
+      "expert34_rd_during_expert10_mac": 160
+    },
+    "10": {
+      "expert34_rd_commands": 4224,
+      "expert34_rd_during_expert10_mac": 160
+    },
+    "11": {
+      "expert34_rd_commands": 4224,
+      "expert34_rd_during_expert10_mac": 160
+    }
+  },
+  "expert34_rd_commands": 16896,
+  "rd_overlap_commands": 640,
+  "rd_overlap_fraction": 0.03787878787878788,
+  "examples": [
+    {
+      "tile": 8,
+      "tick": 71237,
+      "expert34_request": 180134,
+      "expert10_mac": 177028,
+      "mac_start": 71181,
+      "mac_finish": 71452
+    },
+    {
+      "tile": 8,
+      "tick": 71241,
+      "expert34_request": 180137,
+      "expert10_mac": 177028,
+      "mac_start": 71181,
+      "mac_finish": 71452
+    },
+    {
+      "tile": 8,
+      "tick": 71245,
+      "expert34_request": 180140,
+      "expert10_mac": 177028,
+      "mac_start": 71181,
+      "mac_finish": 71452
+    },
+    {
+      "tile": 8,
+      "tick": 71249,
+      "expert34_request": 180146,
+      "expert10_mac": 177028,
+      "mac_start": 71181,
+      "mac_finish": 71452
+    },
+    {
+      "tile": 8,
+      "tick": 71253,
+      "expert34_request": 180143,
+      "expert10_mac": 177028,
+      "mac_start": 71181,
+      "mac_finish": 71452
+    },
+    {
+      "tile": 8,
+      "tick": 71257,
+      "expert34_request": 180170,
+      "expert10_mac": 177028,
+      "mac_start": 71181,
+      "mac_finish": 71452
+    },
+    {
+      "tile": 8,
+      "tick": 71261,
+      "expert34_request": 180149,
+      "expert10_mac": 177028,
+      "mac_start": 71181,
+      "mac_finish": 71452
+    },
+    {
+      "tile": 8,
+      "tick": 71265,
+      "expert34_request": 180218,
+      "expert10_mac": 177028,
+      "mac_start": 71181,
+      "mac_finish": 71452
+    },
+    {
+      "tile": 8,
+      "tick": 71267,
+      "expert34_request": 180152,
+      "expert10_mac": 177028,
+      "mac_start": 71181,
+      "mac_finish": 71452
+    },
+    {
+      "tile": 8,
+      "tick": 71269,
+      "expert34_request": 180221,
+      "expert10_mac": 177028,
+      "mac_start": 71181,
+      "mac_finish": 71452
+    },
+    {
+      "tile": 8,
+      "tick": 71271,
+      "expert34_request": 180158,
+      "expert10_mac": 177028,
+      "mac_start": 71181,
+      "mac_finish": 71452
+    },
+    {
+      "tile": 8,
+      "tick": 71273,
+      "expert34_request": 180224,
+      "expert10_mac": 177028,
+      "mac_start": 71181,
+      "mac_finish": 71452
+    }
+  ],
+  "boundary": "RD issued inside actual MAC-service window. Not DRAM busy-time inferred from acceptance/return, not RF or silicon qualification."
+}

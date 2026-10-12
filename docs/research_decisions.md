@@ -89,3 +89,14 @@ f4fb4b7形状pilot因start-row-only packet绑定退役：Cold Row中Native/Fluid
 Research Go：把已核对的端口/网络/控制合同接入完整MoE，再保持同一Router trace、MAC/Expert顺序和macro精确回归验证TP4/TP16。
 完整MoE G3/G4及Hardware Go仍未建立；原Graph的27%/29% NoC数字不随组件资格自动转授为物理瓶颈。
 旧精度失败归档保持原样；不进入P4-C、新NoC/MAC或普通DSE。
+
+## 2026-10-12：完整MoE前端与第一性原理审计
+
+[报告](../results/p4-complete-moe-2026-10-12/findings.md)完成5个真实形状/路由前端回归和专门FIFO配对控制。
+旧Native/C++与Python前端完全一致，却共同允许pending multicast head之后的年轻flit先服务；有限slot计数不能证明有序FIFO。
+真实Experts10/34竞争记录24,314次bypass；修复实际arrival-order FIFO后独立历史检查为零。完整B32 Native最终时间相同，内部402,711个节点时间改变。
+byte-block MAC的留存容量/端口尚未能从已计面积的Matrix RF推导，与组件M/K partial SRAM合同不同。B32 Shared每tile至少需90,112B结果保留，容量/端口/寿命目前未知。
+
+Research Go：补实际M/K、原生字节范围/refs、有限RF或SRAM materialization及partial lifetime，再恢复原G3/G4矩阵。
+完整架构G3/G4及Hardware Go：未建立；不将在线共享Ramulator的零前端误差或旧NoC/MAC Oracle转化为新硬件机会。
+保留旧数值、尾包、Fluid误差和FIFO失败；不继续增加抽象DSE点、contexts、端口或拟合时延系数。

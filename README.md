@@ -7,7 +7,16 @@
 研究主线仅为本仓库的 **Hybrid-Bonded 3D DRAM-on-Logic Architecture**：
 真实 Dense/MoE LLM、Compute/Memory/NoC物理组织与Spatial Thermal；计算在logic，不做PIM或Power Delivery。
 
-最新交付为 **[P4-B组件校准：同合同执行精度](results/p4-calibration-2026-10-11/findings.md)**。
+最新交付为 **[完整MoE因果审计：FIFO修复与物理资格保留](results/p4-complete-moe-2026-10-12/findings.md)**。
+完成3个真实完整Expert/竞争场景和2个含Shared的完整MoE前端回归，Native/Fluid各六类trace逐行一致。
+但一致的旧前端仍允许FIFO队首绕过：真实竞争记录24,314次；已补实际arrival-order FIFO及独立历史检查。
+同一完整B32/TP4/Column程序修复前后Native仍是68.71525μs，402,711个node时间已改变，说明总延迟一致不能证明语义合法。
+32KiB registered-reuse law尚无实际M/K、有限Matrix RF容量/端口与partial生命周期证明；Shared B32每tile至少需保留90,112B输出状态。
+**完整架构G3/G4与Hardware Go仍未建立。** 原生前端的零误差共享DRAM与抽象builder，不能认证物理架构；批量排序资格矩阵因此暂不运行。
+[合同](docs/p4_complete_moe_contract.md)、[逐点审计](results/p4-complete-moe-2026-10-12/execution-audit.json)与
+[全部修复/退役原始记录](https://github.com/HaoningJiang-space/thermal_exploartion/releases/tag/p4-moe-causality-audit-2026-10-12)保留失败和模型边界，没有新NoC/MAC、P4-C或Thermal/微流道DSE。
+
+**上一轮：[P4-B组件校准：同合同执行精度](results/p4-calibration-2026-10-11/findings.md)**。
 独立Python有限flit/端口frontend复现所选C++参考合同，不使用记录中的到达时间或延迟拟合。
 复用16个归档参考点、新增8个真实1408×2048投影形状Native/Fluid点，完成24个Python执行对照；
 绝对10%门24/24、相对5%门6/6通过，最大Native误差2.54%、最大比值误差2.61%。

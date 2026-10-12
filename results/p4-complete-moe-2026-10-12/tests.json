@@ -1,0 +1,16 @@
+{
+  "full_regression": {
+    "count": 146,
+    "passed": true,
+    "elapsed_seconds": 55.44,
+    "source": "0d5b89b95cdb28c7823514d38f20ea3168395512",
+    "log_sha256": "f9dd134431da83048fbdd3474e54deed89413aa1f07998177d4c1e20fe862b72"
+  },
+  "packaging_preservation_test": {
+    "count": 1,
+    "passed": true,
+    "source": "c1d7530",
+    "purpose": "Same case under distinct source pins must not overwrite retired evidence"
+  },
+  "total_test_cases_checked": 147
+}

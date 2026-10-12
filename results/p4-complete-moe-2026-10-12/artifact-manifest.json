@@ -1,0 +1,74 @@
+{
+  "release": "p4-moe-causality-audit-2026-10-12",
+  "execution_source": "0d5b89b95cdb28c7823514d38f20ea3168395512",
+  "assets": [
+    {
+      "file": "p4-moe-retired-experts.tar",
+      "asset_id": 633281704,
+      "bytes": 581734400,
+      "sha256": "ce977f2714815e75df5a20798578ccf3133d8e213b55c974c7ee1553b33b0708",
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-moe-causality-audit-2026-10-12/p4-moe-retired-experts.tar",
+      "validity": "RETIRED",
+      "case_directories": 9,
+      "protected_scan": "PASS_INCLUDING_DECODED_GZIP",
+      "github_uploaded_digest_verified": true,
+      "entry_manifest": "raw-manifests/p4-moe-retired-experts.json",
+      "entry_manifest_sha256": "466606c38466a5a741a12899a923c5d4dd32cdad34f6e2fbbd1489df211b504c"
+    },
+    {
+      "file": "p4-moe-retired-full.tar",
+      "asset_id": 633283896,
+      "bytes": 554956800,
+      "sha256": "33a257e45475996245c8d7aabbd1ed6dca597696aa27dc2b85abc45de3792911",
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-moe-causality-audit-2026-10-12/p4-moe-retired-full.tar",
+      "validity": "RETIRED",
+      "case_directories": 8,
+      "protected_scan": "PASS_INCLUDING_DECODED_GZIP",
+      "github_uploaded_digest_verified": true,
+      "entry_manifest": "raw-manifests/p4-moe-retired-full.json",
+      "entry_manifest_sha256": "ae35f430f3b18bfd9018b05c492795f6bd65d897d906a4ae1452432a2a0c36e3"
+    },
+    {
+      "file": "p4-moe-fixed-experts.tar",
+      "asset_id": 633288485,
+      "bytes": 278446080,
+      "sha256": "41a51abb70e1e65554e48d958433ed2a8dc93047b2b53392c3c50ebcc31411dd",
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-moe-causality-audit-2026-10-12/p4-moe-fixed-experts.tar",
+      "validity": "FRONTEND_REGRESSION_ONLY",
+      "case_directories": 3,
+      "protected_scan": "PASS_INCLUDING_DECODED_GZIP",
+      "github_uploaded_digest_verified": true,
+      "entry_manifest": "raw-manifests/p4-moe-fixed-experts.json",
+      "entry_manifest_sha256": "df10be7464ea6fbc9b9462537ab0416ae9da8bd7e106be8856fca32443585270"
+    },
+    {
+      "file": "p4-moe-fixed-full.tar",
+      "asset_id": 633301260,
+      "bytes": 355205120,
+      "sha256": "53ff18cfe9c7ff2ea3ea27927b05b12836a307a526e9f506be4401518fbb4d19",
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-moe-causality-audit-2026-10-12/p4-moe-fixed-full.tar",
+      "validity": "FRONTEND_REGRESSION_ONLY",
+      "case_directories": 2,
+      "protected_scan": "PASS_INCLUDING_DECODED_GZIP",
+      "github_uploaded_digest_verified": true,
+      "entry_manifest": "raw-manifests/p4-moe-fixed-full.json",
+      "entry_manifest_sha256": "b8d4ac30506184f26f0334002e317810498b2214625aefe4c1ef927be1c6ff6a"
+    },
+    {
+      "file": "p4-moe-retired-fifo-control.tar",
+      "asset_id": 633301065,
+      "bytes": 244264960,
+      "sha256": "1750f128a198a52267d868b3325e1b80f02a9d10c4aa00e0708695ab96a6ade2",
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-moe-causality-audit-2026-10-12/p4-moe-retired-fifo-control.tar",
+      "validity": "RETIRED",
+      "case_directories": 1,
+      "protected_scan": "PASS_INCLUDING_DECODED_GZIP",
+      "github_uploaded_digest_verified": true,
+      "entry_manifest": "raw-manifests/p4-moe-retired-fifo-control.json",
+      "entry_manifest_sha256": "7d4676f730b53eb9d817b6a3b5d4d0f7ddae42defdcf10298d4597cce13bb266"
+    }
+  ],
+  "total_bytes": 2014607360,
+  "architecture_g3_g4_qualified": false,
+  "scope": "Preserves failed, retired, and corrected frontend evidence; no physical MAC/RF qualification"
+}
