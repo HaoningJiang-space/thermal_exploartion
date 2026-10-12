@@ -1,5 +1,5 @@
 """Independent Python interpreter of the full finite-resource MoE program."""
-from collections import Counter,defaultdict
+from collections import Counter,defaultdict,deque
 from heapq import heappush,heappop
 from math import ceil
 from .crossover_execution import RCD_NS
@@ -14,6 +14,7 @@ def execute(p,emit=lambda kind,row:None,max_ticks=2_000_000,oracle='none',memory
     busy=[0]*p['resource_count'];used=Counter();private=[0]*16;leases=defaultdict(list);releases=defaultdict(list)
     for l in p['leases']:leases[l['first']].append(l);releases[l['last']].append(l)
     router_for=defaultdict(list);router_users=defaultdict(list);router_used=Counter();router_left=[len(r['users']) for r in p['router']];router_reserved=[False]*len(p['router'])
+    router_fifo=defaultdict(deque);router_served={}
     for i,r in enumerate(p['router']):
         router_for[r['first']].append(i)
         for child in r['users']:router_users[child].append(i)
@@ -30,6 +31,11 @@ def execute(p,emit=lambda kind,row:None,max_ticks=2_000_000,oracle='none',memory
         nonlocal completed
         if state[i]==3:raise ValueError('Repeated completion')
         state[i]=3;done[i]=time;completed+=1;emit('nodes',[i,start[i],time])
+        # Reserved space includes flight, but the FIFO order is established
+        # only when the physical flit arrives (source read or incoming link).
+        for ri in router_for[i]:
+            if not router_reserved[ri]:raise ValueError('Arrival without reserved flit')
+            router_fifo[tuple(p['router'][ri]['key'])].append(ri)
         if nodes[i]['kind']==4:activity['mac']+=nodes[i]['work']
         for l in releases[i]:
             k=l['resource'];used[k]-=l['bytes'];private[l['tile']]-=l['bytes'];emit('leases',[time,k,l['tile'],-l['bytes']])
@@ -45,6 +51,11 @@ def execute(p,emit=lambda kind,row:None,max_ticks=2_000_000,oracle='none',memory
         for r in router_for[i]:
             key=tuple(p['router'][r]['key'])
             if router_used[key]>=8:wait['router_credit']+=1;return False
+        for ri in router_users[i]:
+            key=tuple(p['router'][ri]['key']);q=router_fifo[key]
+            if not q or q[0]!=ri:wait['router_head']+=1;return False
+            served=router_served.get(key)
+            if served and served[0]==clock and served[1]!=ri:wait['router_input_service']+=1;return False
         return True
     def begin(i):
         if state[i]:return
@@ -55,9 +66,12 @@ def execute(p,emit=lambda kind,row:None,max_ticks=2_000_000,oracle='none',memory
             key=tuple(p['router'][ri]['key']);router_used[key]+=1;router_high[key]=max(router_high[key],router_used[key]);router_reserved[ri]=True;emit('router',[clock,*key,1,ri])
         for ri in router_users[i]:
             if not router_reserved[ri]:raise ValueError('Consumer without router reservation')
+            key=tuple(p['router'][ri]['key'])
+            if not router_fifo[key] or router_fifo[key][0]!=ri:raise ValueError('Consumer bypassed FIFO head')
+            router_served[key]=(clock,ri)
             router_left[ri]-=1
             if router_left[ri]==0:
-                key=tuple(p['router'][ri]['key']);router_used[key]-=1;emit('router',[clock,*key,-1,ri])
+                router_fifo[key].popleft();router_used[key]-=1;emit('router',[clock,*key,-1,ri])
     def schedule(i,time):state[i]=2;heappush(events,(time,i))
     for clock in range(max_ticks):
         while events and events[0][0]<=clock:
@@ -134,7 +148,7 @@ def execute(p,emit=lambda kind,row:None,max_ticks=2_000_000,oracle='none',memory
                 if state[i]!=2 or start[i]<0:raise ValueError('Online memory completion identity')
                 schedule(i,depart);emit('requests',[i,start[i],depart,nodes[i]['address']])
     else:raise ValueError('Finite MoE executor failed to drain')
-    if any(used.values()) or any(router_used.values()):raise ValueError('Leases or router credits leaked')
+    if any(used.values()) or any(router_used.values()) or any(router_fifo.values()):raise ValueError('Leases or router credits leaked')
     if any(start[r['id']]<max((done[d] for d in r['deps']),default=0) for r in nodes):raise ValueError('Premature consumer')
     if memory_backend is not None:memory_backend.close()
     return dict(ticks=clock,time_us=clock*.00025,activity=dict(activity),private_peak=max(private_high),router_peak=max(router_high.values(),default=0),wait=dict(wait),nodes=n,oracle=oracle,memory_backend='online_native' if memory_backend else 'tier_fluid',source='Independent Python full MoE cycle execution; memory model stated explicitly, no measured arrival input')

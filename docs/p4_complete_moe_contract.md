@@ -15,12 +15,22 @@ G3-C/G4：s0/l0 B8/B32 × TP4/TP16 × Row/Column，8个全MoE点。随后同矩�
 每个点执行C++ Native和C++ Fluid参考，以及独立Python tier-fluid和Python online-Native两种预测，共四个执行。共享语义DAG builder、物理假设和固定仲裁合同，逻辑/网络/计算执行状态不共享。预测器无归档到达时间输入，无倍率拟合或逐点调参。
 online-Native是Python在当前virtual tick发射当前eligible请求，由另一个进程中的pinned Ramulator实例实时返回admission/response并持续更新bank/refresh/queue状态；不是预读原生execution记录。C++完整参考和Python Native预测共享DRAM模型，因而其资格验证的是独立完整执行前端，不是独立DRAM器件或silicon精度。tier-fluid在完整竞争下的超阈误差保留，不能用online-Native的通过认证fast mode。
 
+## 物理资格仍未建立
+
+完整程序的32KiB字节块沿用legacy registered-reuse读取规律，没有实际M/K坐标、Matrix RF容量/端口、partial-sum分配和存活期。
+组件参考却逐M/K块支付partial-sum SRAM读写；这两种dataflow不能仅凭相同峰值和端口速率视为同一物理合同。
+例如B32 Shared每tile352行Gate及352行Up的FP32结果直到整个局部kernel完成才写SRAM，需要至少90,112B结果保留空间；这还不含输入和权重RF。
+目前没有容量证据证明该保留方式可实现，也没有证明它不可实现。`physical-contract-audit.json`逐真实矩阵列出所需保留字节与组件策略的访问差异；组件策略访问量**不是所有dataflow的普适下界**。
+因此后续延迟/trace的成功只能记为`frontend_absolute_pass`，完整架构G3/G4与Hardware Go保持未建立，不能由共享抽象程序的一致性自动通过。
+
 ## 逐tick执行，而非 Joint Kernel 时间表
 
 原microtile生成器的32KiB registered-reuse blocks逐个进入有限weight slots；1024B requests→Native command/return或tier-fluid service→HB→FIFO→MAC。MAC按实际剩余周期均摊operand read，和Vector/NoC共享256B read、128B write；FIFO ingress/consume500B/tick，MAC2000FLOP/tick。
 
 单Vector Context从read开始保持到ops/write结束。32B flit，4-tick directed-link串行化，8-tick flight；两类VC，每个physical input port/VC和local injection port各8 slots。Flit从发送前reserve至直接消费者启动后释放，覆盖flight、queue和SRAM背压。
-网络是新完整程序的确定性DAG frontier仲裁扩展：MAC、单Vector、sink/source SRAM、links、HB、memory；同类按原ID顺序。Multicast保留共享前缀；本地接收与下游branch分别付费并保留credit。这**不是H2的逐port轮转实现**，不能沿用组件2.54%作为全MoE精度；完整C++/Python合同必须重新验证。没有为任一方案搜索仲裁策略。
+网络是新完整程序的确定性DAG frontier仲裁扩展：MAC、单Vector、sink/source SRAM、links、HB、memory；同类按原ID顺序。Multicast保留共享前缀；本地接收与下游branch分别付费并保留credit。这**不是H2的逐port轮转/原子multicast实现**，不能沿用组件2.54%作为全MoE精度；完整C++/Python合同必须重新验证。没有为任一方案搜索仲裁策略。
+每input-port/VC在实际arrival时入FIFO，consumer只能服务队首；multicast的pending branches全部启动后才弹出队首。每FIFO每tick最多服务一个head，允许同一head的分支在同tick服务；尚在flight的已reserve flit同样占8-slot容量。
+早期prototype只限制slot计数，没有队首约束，真实B32/TP4/Column Native记录发生24,314次bypass。该版本的执行一致与slot重放不能作为合法FIFO证据；旧记录退役保留，新增独立FIFO历史检查和负向测试。
 零ops阶段保持Vector context顺序，但不虚构额外执行周期；非零read/ops/write各自支付实际端口服务。
 TP16 routed Hidden shard为88个BF16元素，odd token count的尾包有16B有效数据。传输、SRAM读写、router credit和gather workspace均按完整32B付费；valid-byte mask保留逻辑Tensor范围，padding不得进入MAC、不得增加FLOPs/DRAM权重。Gated源存储按32B对齐，在已付费8B/element的in-place gated-state空间内；destination额外padding计入workspace lease。
 
@@ -40,7 +50,7 @@ G1：完整FP32/BF16小张量数值语义（非性能/非checkpoint），真实�
 数值验证固定FP32 K维累加顺序（非BLAS grouped GEMM的库相关顺序），以便Gate的GEMV/GEMM在BF16 gated-state舍入边界具有同一合同；容差仍为rtol2e-4/atol2e-6，不拟合或放宽。旧模式保持BLAS默认。首轮f0ee803 pilot的Reused/Competition在此合同差异处失败，全部原始失败记录保留，不混入新资格。
 G2：每tick端口、每个MAC/Vector Context、packet依赖、weight/response/output/private/router reserve/release独立重放。
 另记录每个node每tick实际read/write/vector/HB/FIFO/arithmetic服务；独立观察者要求完成前全部工作已服务，并与每tick aggregate ports逐项对应。不能只用全局byte/FLOP总数证明节点正确。
-G3：Python online-Native相对C++完整Native逐点绝对时间误差≤10%；Native和Fluid各六类完整node/request/port/lease/router/service traces逐行比较。两个Native执行都检查command/state/tag和tier-deadline。另独立报告tier-fluid绝对误差和失败。
-G4：每cohort同路由的TP4/TP16和Row/Column逐点比值误差≤5%，核对排序。不能靠均值掩盖失败。
+前端G3检查：Python online-Native相对C++完整Native逐点绝对时间误差≤10%；Native和Fluid各六类完整node/request/port/lease/router/service traces逐行比较。两个Native执行都检查command/state/tag和tier-deadline。另独立报告tier-fluid绝对误差和失败。此前macro component校准无法替代Matrix RF物理合同。
+架构G3/G4：必须先消除上述物理合同blockers，再完成每cohort同路由的TP4/TP16和Row/Column逐点比值误差≤5%，核对排序。不能靠均值掩盖失败，更不能将online共享DRAM与相同抽象builder的零误差充当独立物理精度。
 如有分歧，导出首次事件差异及依赖/资源/Memory归因；原始失败保留，禁止全局倍率拟合。
 只有完整G3/G4通过后才运行qualified link/flight诊断；仍不是可实现硬件净收益。组件或Fluid一致不等于silicon认证。

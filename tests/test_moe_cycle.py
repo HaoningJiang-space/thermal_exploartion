@@ -58,4 +58,24 @@ class FullMoECycleTests(unittest.TestCase):
   self.assertEqual(check(p)['tail_copies'],1)
   next(n for n in p['nodes'] if n['kind']==5 and n['valid_bytes']==16)['valid_bytes']=32
   with self.assertRaisesRegex(ValueError,'mask'):check(p)
+ def test_fifo_order_not_implied_by_finite_credit(self):
+  from thermal_exploration.moe_fifo_audit import check_fifo
+  p={'router':[dict(first=0,users=[1,2],key=[0,1,0]),dict(first=3,users=[4],key=[0,1,0])]}
+  # Just two occupied slots, but a younger flit passes the blocked multicast
+  # head. Byte capacity and producer dependencies alone both permit this.
+  t={0:dict(finish=9),1:dict(start=9),2:dict(start=1025),3:dict(finish=13),4:dict(start=13)}
+  self.assertEqual(check_fifo(p,t)['violations'],1)
+  t[4]['start']=1026
+  self.assertEqual(check_fifo(p,t)['status'],'PASS_FIFO_HEAD_ORDER')
+  t[4]['start']=1025
+  self.assertEqual(check_fifo(p,t)['input_service_overruns'],1)
+ def test_matching_frontends_do_not_qualify_unbounded_rf(self):
+  from thermal_exploration.moe_physical_audit import audit_registered_reuse
+  p=program(self.c,self.layout,0,self.routes)
+  r=audit_registered_reuse(p,self.c)
+  self.assertFalse(r['architecture_g3_g4_qualified'])
+  self.assertFalse(r['hardware_go'])
+  gate=next(x for x in r['component_policy_comparison'] if x['projection']=='gate_up')
+  self.assertGreater(gate['component_psum_read_bytes'],0)
+  self.assertGreater(gate['component_psum_write_bytes'],gate['final_output_bytes'])
 if __name__=='__main__':unittest.main()

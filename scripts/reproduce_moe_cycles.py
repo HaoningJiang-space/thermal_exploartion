@@ -4,7 +4,9 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--source',type=Path,required=True);ap.add_argument('--pin',required=True);ap.add_argument('--routes',type=Path,required=True);ap.add_argument('--ramulator-root',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--stage',choices=('experts','training','holdout'),required=True);ap.add_argument('--workers',type=int,default=4);a=ap.parse_args()
+ ap=argparse.ArgumentParser();ap.add_argument('--source',type=Path,required=True);ap.add_argument('--pin',required=True);ap.add_argument('--routes',type=Path,required=True);ap.add_argument('--ramulator-root',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--stage',choices=('experts','fifo_regression','training','holdout'),required=True);ap.add_argument('--workers',type=int,default=4);a=ap.parse_args()
+ if a.stage in ('training','holdout'):
+  raise ValueError('Architecture G3/G4 matrix blocked: close actual M/K and finite Matrix RF/partial lifetimes first; matching abstract frontends cannot qualify the architecture')
  source=a.source.resolve();out=a.output.resolve();root=a.ramulator_root.resolve();routes=a.routes.resolve();pin=subprocess.check_output(['git','-C',str(source),'rev-parse','HEAD'],text=True).strip()
  if not pin.startswith(a.pin) or subprocess.check_output(['git','-C',str(source),'status','--porcelain'],text=True).strip():raise ValueError('Clean frozen source required')
  digest=hashlib.sha256(routes.read_bytes()).hexdigest()
@@ -17,6 +19,7 @@ def main():
  (out/'compiler-version.log').write_text(subprocess.check_output(['g++','--version'],text=True))
  env=dict(os.environ,PYTHONPATH=str(source),OMP_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1');jobs=[]
  if a.stage=='experts':cases=[(0,0,32,4,'column',scope) for scope in ('cold','reused','contending')]
+ elif a.stage=='fifo_regression':cases=[(0,0,32,4,'column','moe'),(0,0,8,16,'row','moe')]
  else:
   cohorts=[(0,0)] if a.stage=='training' else [(32,7),(127,23)]
   cases=[(step,layer,b,tp,down,'moe') for step,layer in cohorts for b in (8,32) for tp in (4,16) for down in ('row','column')]

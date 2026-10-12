@@ -12,6 +12,7 @@ from .run_g4 import RAMULATOR_COMMIT,verify_upstream
 from .multitier import config,TierLegality
 from .run_organization import check_commands
 from .hb_trace import address_vector
+from .moe_physical_audit import audit_registered_reuse
 
 HEADERS={'nodes':['id','start','finish'],'ports':['tick','tile','read','write','vector','hb','fifo'],'leases':['tick','resource','tile','delta'],'router':['tick','tile','port','vc','delta','credit'],'requests':['id','accepted','depart','address'],'service':['tick','id','kind','amount']}
 
@@ -31,6 +32,8 @@ def main():
     selected=None if a.scope=='moe' else {'cold':[12],'reused':[10],'contending':[10,34]}[a.scope];shared=a.scope=='moe';grain='fine_prefetch' if a.scope=='contending' else 'fine_fixed'
     layout=resident_layout(c,capacity(c,a.batch,512),'B3_3d_placement',r['training_expected_activations'],a.tp)
     p=program(c,layout,a.layer,routes,a.down,grain,selected,shared);write_program(p,out/'program')
+    physical=audit_registered_reuse(p,c)
+    (out/'physical-contract-audit.json').write_text(json.dumps(physical,indent=2)+'\n')
     from .moe_transport_semantics import check as transport_check
     (out/'transport-numerical.json').write_text(json.dumps(transport_check(p),indent=2)+'\n')
     (out/'provenance.json').write_text(json.dumps(dict(source=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),routing_sha256=digest,params={k:str(v) if isinstance(v,Path) else v for k,v in vars(a).items()},ramulator=RAMULATOR_COMMIT,scope='Full true MoE shapes and real routing; shared builder, independent executors; no empirical fitting'),indent=2)+'\n')
@@ -106,6 +109,10 @@ def main():
     diffs=compare_traces('fluid','python');native_diffs=compare_traces('native','python-native')
     fast_error=z['time_us']/results[0]['time_us']-1;native_error=nz['time_us']/results[0]['time_us']-1
     qualification=dict(source=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),params={k:str(v) if isinstance(v,Path) else v for k,v in vars(a).items()},references=results,predictor=z,native_predictor=nz,absolute_native_error=fast_error,qualified_absolute_native_error=native_error,absolute_target=.1,absolute_pass=abs(native_error)<=.1,fast_fluid_absolute_pass=abs(fast_error)<=.1,fluid_trace_comparison=diffs,native_trace_comparison=native_diffs,full_moe=a.scope=='moe',shared_preserved=shared,selected_experts=selected,memory_model_shared=True,qualification_scope='Independent full logic/NoC/compute frontends using the same online pinned native DRAM model; not independent device or silicon accuracy')
+    qualification['frontend_absolute_pass']=qualification.pop('absolute_pass')
+    qualification['physical_contract_audit']=physical
+    qualification['architecture_g3_g4_qualified']=False
+    qualification['qualification_status']='FRONTEND_COMPARISON_ONLY_PHYSICAL_MAC_NOT_QUALIFIED'
     (out/'qualification.json').write_text(json.dumps(qualification,indent=2)+'\n')
     # Retain exact TSV, program and CSV bytes as gzip after interpreters finish.
     for path in (out/'program').iterdir():

@@ -3,6 +3,7 @@ from collections import Counter,defaultdict
 from math import ceil
 import csv,gzip,heapq
 from .moe_cycle_program import KINDS
+from .moe_fifo_audit import check_fifo
 
 
 def rows(path):
@@ -62,6 +63,8 @@ def replay(p,prefix,summary):
         key=r['tile'],r['port'],r['vc'];usage[key]+=r['delta'];router_peak=max(router_peak,usage[key]);observed[(r['tick'],*key,r['delta'],r['credit'])]+=1
         if not 0<=usage[key]<=8:raise ValueError('Extra port/VC flit credit')
     if any(usage.values()) or observed!=expected_router:raise ValueError('Lost flit credit')
+    fifo_check=check_fifo(p,actual)
+    if fifo_check['status']!='PASS_FIFO_HEAD_ORDER':raise ValueError('Illegal FIFO head bypass or input service overrun')
     requests={r['id']:r for r in rows(path('requests'))};expected={r['node']:r for r in p['request_identity']}
     if set(requests)!=set(expected):raise ValueError('Request identity changed')
     for i,n in expected.items():
@@ -89,4 +92,4 @@ def replay(p,prefix,summary):
     if current is not None or any(served[n['id']]!=n['work'] for n in nodes if n['kind'] in (1,2,3,4,6,8)):raise ValueError('Node finished without actual service')
     activity['dram']=1024*len(requests)
     if portrows!=summary['ticks']*16 or any(activity[k]!=v for k,v in expected_activity.items()) or dict(activity)!=summary['activity']:raise ValueError('Activity/port work not conserved')
-    return dict(status='PASS_INDEPENDENT_FULL_PROGRAM_REPLAY',nodes=len(actual),requests=len(requests),port_rows=portrows,private_peak=private_peak,router_peak=router_peak,activity=dict(activity))
+    return dict(status='PASS_INDEPENDENT_FULL_PROGRAM_REPLAY',fifo_check=fifo_check,nodes=len(actual),requests=len(requests),port_rows=portrows,private_peak=private_peak,router_peak=router_peak,activity=dict(activity))

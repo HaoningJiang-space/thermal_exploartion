@@ -28,6 +28,10 @@ int main(int argc,char** argv){try {
  std::vector<long long> busy(resources,0),used(resources,0);std::array<long long,16> private_used{},private_high{},mac_until{},mac_read{},mac_fifo{},mac_flops{};
  std::array<int,16> mac,vector;mac.fill(-1);vector.fill(-1);std::array<double,16> memory_until{};
  std::array<std::array<std::array<int,2>,5>,16> router_used{};int router_high=0;
+ std::array<std::array<std::array<std::deque<int>,2>,5>,16> router_fifo;
+ std::array<std::array<std::array<long long,2>,5>,16> router_service_tick{};
+ std::array<std::array<std::array<int,2>,5>,16> router_service_credit{};
+ for(auto& tile:router_service_tick)for(auto& port:tile)port.fill(-1);
  std::vector<std::vector<int>> slaves(nodes.size());for(auto& n:nodes)if(n.master>=0)slaves[n.master].push_back(n.id);
  std::priority_queue<std::pair<long long,int>,std::vector<std::pair<long long,int>>,std::greater<std::pair<long long,int>>> events;
  std::set<int> joins;long long clock=0,completed=0;std::map<std::string,long long> activity,wait;
@@ -36,6 +40,7 @@ int main(int argc,char** argv){try {
  auto enqueue=[&](int i){auto& n=nodes[i];if(n.master>=0)return;if(n.kind==0)joins.insert(i);else ready[n.kind][n.tile].insert(i);};
  for(auto& n:nodes){for(int d:n.deps)nodes[d].children.push_back(n.id);if(n.deps.empty())enqueue(n.id);}
  auto finish=[&](int i,long long time){auto& n=nodes[i];if(n.state==3)throw std::runtime_error("Duplicate completion");n.state=3;n.finish=time;completed++;nodeout<<i<<","<<n.start<<","<<time<<"\n";if(n.kind==4)activity["mac"]+=n.work;
+  for(int ri:credit_for[i]){auto& c=credits[ri];if(!c.reserved)throw std::runtime_error("Arrival without reserved flit");router_fifo[c.tile][c.port][c.vc].push_back(ri);}
   for(auto& l:releases[i]){used[l.rid]-=l.bytes;private_used[l.tile]-=l.bytes;leaseout<<time<<","<<l.rid<<","<<l.tile<<","<<-l.bytes<<"\n";if(used[l.rid]<0)throw std::runtime_error("Unbalanced private lease");}
   for(int child:n.children)if(--nodes[child].remain==0)enqueue(child);
  };
@@ -44,12 +49,16 @@ int main(int argc,char** argv){try {
   for(auto [key,value]:need)if(used[key]+value>caps.at(key)){wait["byte_credit"]++;return false;}
   for(int t=0;t<16;t++)if(private_used[t]+fixed[t]+bytile[t]>private_budget){wait["private_credit"]++;return false;}
   for(int ri:credit_for[i]){auto& c=credits[ri];if(router_used[c.tile][c.port][c.vc]>=8){wait["router_credit"]++;return false;}}
+  for(int ri:credit_users[i]){auto& c=credits[ri];auto& q=router_fifo[c.tile][c.port][c.vc];if(q.empty()||q.front()!=ri){wait["router_head"]++;return false;}
+   if(router_service_tick[c.tile][c.port][c.vc]==clock&&router_service_credit[c.tile][c.port][c.vc]!=ri){wait["router_input_service"]++;return false;}}
   return true;
  };
  auto begin=[&](int i){auto& n=nodes[i];if(n.state)return;n.state=1;n.start=clock;ready[n.kind][n.tile].erase(i);
   for(auto& l:leases[i]){used[l.rid]+=l.bytes;private_used[l.tile]+=l.bytes;private_high[l.tile]=std::max(private_high[l.tile],private_used[l.tile]+fixed[l.tile]);leaseout<<clock<<","<<l.rid<<","<<l.tile<<","<<l.bytes<<"\n";}
   for(int ri:credit_for[i]){auto& c=credits[ri];auto& u=router_used[c.tile][c.port][c.vc];u++;router_high=std::max(router_high,u);c.reserved=true;routerout<<clock<<","<<c.tile<<","<<c.port<<","<<c.vc<<",1,"<<ri<<"\n";}
-  for(int ri:credit_users[i]){auto& c=credits[ri];if(!c.reserved)throw std::runtime_error("Consumer without reserved flit");if(--c.left==0){router_used[c.tile][c.port][c.vc]--;routerout<<clock<<","<<c.tile<<","<<c.port<<","<<c.vc<<",-1,"<<ri<<"\n";}}
+  for(int ri:credit_users[i]){auto& c=credits[ri];if(!c.reserved)throw std::runtime_error("Consumer without reserved flit");auto& q=router_fifo[c.tile][c.port][c.vc];if(q.empty()||q.front()!=ri)throw std::runtime_error("Consumer bypassed FIFO head");
+   router_service_tick[c.tile][c.port][c.vc]=clock;router_service_credit[c.tile][c.port][c.vc]=ri;
+   if(--c.left==0){q.pop_front();router_used[c.tile][c.port][c.vc]--;routerout<<clock<<","<<c.tile<<","<<c.port<<","<<c.vc<<",-1,"<<ri<<"\n";}}
  };
  auto schedule=[&](int i,long long time){nodes[i].state=2;events.emplace(time,i);};
  auto cfg=Ramulator::Config::parse_config_file(argv[1]);auto* frontend=Ramulator::Factory::create_frontend(cfg);auto* memory=Ramulator::Factory::create_memory_system(cfg);frontend->connect_memory_system(memory);memory->connect_frontend(frontend);
@@ -85,6 +94,7 @@ int main(int argc,char** argv){try {
  }
  if(completed!=int(nodes.size()))throw std::runtime_error("Full MoE failed to drain");
  for(auto [key,cap]:caps)if(used[key])throw std::runtime_error("Leaked private bytes");for(auto& c:credits)if(c.left||!c.reserved)throw std::runtime_error("Leaked flit credit");
+ for(auto& tile:router_fifo)for(auto& port:tile)for(auto& q:port)if(!q.empty())throw std::runtime_error("Undrained router FIFO");
  for(auto& n:nodes){for(int d:n.deps)if(n.start<nodes[d].finish)throw std::runtime_error("Early operand consumption");}
  memory->update_stats_recursive();std::ofstream stats(prefix+"-stats.yaml");memory->print_stats(stats);memory->finalize();frontend->finalize();
  std::ofstream out(prefix+"-driver.json");out<<"{\"ticks\":"<<clock<<",\"nodes\":"<<nodes.size()<<",\"private_peak\":"<<*std::max_element(private_high.begin(),private_high.end())<<",\"router_peak\":"<<router_high<<",\"activity\":{";

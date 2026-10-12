@@ -124,7 +124,8 @@ def program(c,layout,layer,routes,down='row',grain='fine_fixed',selected=None,sh
             credit=resource(tuple(key));caps[credit]=cap;leases.append(dict(first=n.id,last=last,resource=credit,tile=key[1],bytes=amount,kind=key[0]))
     # Injection and physical input-port credits are distinct from long-lived
     # output/private SRAM leases. A flit retains its slot until all immediate
-    # consumers start, covering flight, queuing and SRAM backpressure.
+    # consumers start, covering flight, queuing and SRAM backpressure. Slots
+    # are ordered at physical arrival; capacity alone never permits bypass.
     router=[]
     for n in nodes:
         if n['kind']!=5:continue
