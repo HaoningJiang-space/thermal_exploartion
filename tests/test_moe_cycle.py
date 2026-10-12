@@ -14,12 +14,13 @@ class FullMoECycleTests(unittest.TestCase):
  @classmethod
  def setUpClass(cls):
   cls.c=dict(load_model('qwen15_moe'),hidden_size=512,moe_intermediate_size=256,shared_expert_intermediate_size=512,num_hidden_layers=1,num_experts=8,num_experts_per_tok=2)
-  cls.routes=[[0,4]];cls.layout=resident_layout(cls.c,capacity(cls.c,1,512),'B3_3d_placement',tp=4)
+  cls.routes=[[0,4]]*8;cls.layout=resident_layout(cls.c,capacity(cls.c,8,512),'B3_3d_placement',tp=4)
  def test_shared_full_chain_and_independent_replay(self):
   p=program(self.c,self.layout,0,self.routes)
   self.assertEqual([j['expert'] for j in p['meta']['jobs']],[0,4,'shared'])
+  self.assertEqual(len(p['meta']['shared_gate_ledger']),16)
   self.assertEqual(p['meta']['jobs'][0]['owners'],p['meta']['jobs'][1]['owners'])
-  self.assertEqual(compare(self.c,self.routes,[[.3,.7]],p['meta'])['status'],'PASS_NUMERICAL')
+  self.assertEqual(compare(self.c,self.routes,[[.3,.7]]*8,p['meta'],accumulation='fixed_k')['status'],'PASS_NUMERICAL')
   with tempfile.TemporaryDirectory() as temp:
    prefix=Path(temp)/'run';handles={k:open(str(prefix)+'-'+k+'.csv','w',newline='') for k in HEADERS};writers={k:csv.writer(f) for k,f in handles.items()}
    for k,h in HEADERS.items():writers[k].writerow(h)
@@ -35,7 +36,7 @@ class FullMoECycleTests(unittest.TestCase):
  def test_subset_is_explicit_and_weight_slots_unchanged(self):
   p=program(self.c,self.layout,0,self.routes,selected=[0,4],shared=False,grain='fine_prefetch')
   self.assertEqual([j['expert'] for j in p['meta']['jobs']],[0,4]);self.assertEqual(p['contract']['grain'],'fine_prefetch')
-  self.assertEqual(compare(self.c,self.routes,[[.3,.7]],p['meta'],'BF16')['status'],'PASS_NUMERICAL')
+  self.assertEqual(compare(self.c,self.routes,[[.3,.7]]*8,p['meta'],'BF16',accumulation='fixed_k')['status'],'PASS_NUMERICAL')
   self.assertEqual(len(set(r['address'] for r in p['request_identity'])),len(p['request_identity']))
   with self.assertRaisesRegex(ValueError,'absent'):program(self.c,self.layout,0,self.routes,selected=[7])
  def test_fixed_fp32_order_with_grouped_bf16_tokens(self):

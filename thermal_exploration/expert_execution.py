@@ -85,7 +85,7 @@ class RowBlockedExecution(CrossoverExecution):
         return r
 
 
-def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic',isolation='none',down_partition='column',combine_scheme='fused',dispatch_scheme='broadcast_all',reduction_scheme='drain_all',execution_grain='macro',graph_factory=None,selected_experts=None,include_shared=True):
+def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic',isolation='none',down_partition='column',combine_scheme='fused',dispatch_scheme='broadcast_all',reduction_scheme='drain_all',execution_grain='macro',graph_factory=None,selected_experts=None,include_shared=True,shared_gate_execution=False):
     """Conventional TP/EP, packed dispatch, paired SwiGLU and row reductions.
 
     A joint local kernel uses the existing finite streaming service model.
@@ -193,6 +193,28 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
         for mem,hb,n in pre:g.lease(mem,node,('weight_fifo',tile),n)
         ledger.append(dict(node=node,tile=tile,stage=stage,prefetch_prefix_bytes=prefix,**r))
         return node
+    shared_scale={};shared_gate_ledger=[]
+    if shared_gate_execution and include_shared:
+        if execution_grain=='macro' or graph_factory is None:raise ValueError('Shared gate requires explicit cycle resources')
+        partials={}
+        for tile in range(16):
+            lo=tile*d//16;hi=(tile+1)*d//16
+            deps=[barrier] if barrier is not None else [common_ready[tile]]
+            node=kernel(tile,layout['tensors'][f'layer{layer}.shared_router'][tile],b,2*(hi-lo),deps,'shared_gate_scores')
+            # A scalar projection cannot use the matrix registered-reuse
+            # read approximation: every local token operand is read once.
+            rec=ledger[-1];required=2*(hi-lo)*b
+            if len(rec['microtile_ledger'])!=1:raise ValueError('Shared scalar footprint changed')
+            block=rec['microtile_ledger'][0];block['operand_bytes']=required;block['operand_ticks']=ceil(required/256)
+            read=next(i for i in g.meta['coissued_nodes'][block['node']] if g.nodes[i].kind=='sram_read');g.nodes[read].work=required;g.nodes[read].ticks=ceil(required/256)
+            g.nodes[block['node']].ticks=max(g.nodes[block['node']].ticks,ceil(required/256));rec['activity']=dict(rec['activity'],sram_read=required)
+            shared_gate_ledger.append(dict(node=node,tile=tile,input_interval=[lo,hi],tokens=list(range(b)),tensor=f'layer{layer}.shared_router'))
+            partials[tile]=g.add('sram_write',tile,b*4,(node,),('write',tile),ceil(b*4/128),'shared_gate_partial_store')
+        scores=g.collective(0,partials,b*4,'shared_gate_reduce')
+        read=g.add('sram_read',0,b*4,(scores,),('read',0),ceil(b*4/256),'shared_gate_sigmoid')
+        sigmoid=g.add('vector',0,b*6,(read,),('vector',0),ceil(b*6/16),'shared_gate_sigmoid')
+        written=g.add('sram_write',0,b*4,(sigmoid,),('write',0),ceil(b*4/128),'shared_gate_sigmoid')
+        shared_scale=g.broadcast(0,list(range(16)),b*4,(written,),'shared_gate_broadcast')
     # Each expert forms grouped GEMM with its actual effective token count.
     owner_last={}
     for job in jobs:
@@ -233,7 +255,7 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
                 k=kernel(tile,spans,count,2*rows*width//(1 if row_down else len(owners)),deps,'expert_down_rows',deps);first_rows.append(k)
                 semantics.append(dict(kind='down',node=k,expert=job['expert'],tile=tile,tokens=job['tokens'],routing_slots=[None if job['expert']=='shared' else routes[token].index(job['expert']) for token in job['tokens']],rows=[row,row+rows],intermediate=[0,width] if row_down else [owners.index(tile)*width//len(owners),(owners.index(tile)+1)*width//len(owners)]))
                 size=rows*count*4;write=g.add('sram_write',tile,size,(k,),('write',tile),ceil(size/128),'partial_store')
-                read=g.add('sram_read',tile,size,(write,),('read',tile),ceil(size/(128 if schedule=='overlap' else 256)),'weighted_partial')
+                read=g.add('sram_read',tile,size,[write]+([shared_scale[tile]] if job['expert']=='shared' and shared_scale else []),('read',tile),ceil(size/(128 if schedule=='overlap' else 256)),'weighted_partial')
                 weight=g.add('vector',tile,rows*count,(read,),('vector',tile),ceil(rows*count/16),'weighted_partial')
                 partials[tile]=g.add('sram_write',tile,size,(weight,),('write',tile),ceil(size/128),'weighted_partial')
                 prior[tile]=partials[tile]
@@ -313,13 +335,14 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
             final.append(g.collective(root,producers,min(reduce_block,d-row)*b*4,'combine',preallocated_sources=True,output_credit='reduce_output' if early_reduction else 'output'))
         g.output=[g.join(final,'moe_output_ready')]
     else:g.output=[g.join(terminals,'moe_output_ready')]
-    expected=6*d*h*sum(counts.values())+(6*d*hs*b if include_shared else 0)
+    expected=6*d*h*sum(counts.values())+(6*d*hs*b if include_shared else 0)+(2*d*b if shared_gate_ledger else 0)
     if sum(x['mac_flops'] for x in ledger)!=expected or sum(n.work for n in g.nodes if n.kind=='mac')!=expected:raise ValueError('Expert MAC work changed')
-    unique=(len(counts)*6*d*h+(6*d*hs if include_shared else 0))
-    if sum(r['dram_bytes'] for r in ledger)!=sum(sum(n for _,n in parts) for name,owners in layout['tensors'].items() if name in [j['prefix']+'.'+suffix for j in jobs for suffix in ('gate','up','down')] for parts in owners.values()):
+    unique=(len(counts)*6*d*h+(6*d*hs if include_shared else 0)+(2*d if shared_gate_ledger else 0))
+    active_names=[j['prefix']+'.'+suffix for j in jobs for suffix in ('gate','up','down')]+([f'layer{layer}.shared_router'] if shared_gate_ledger else [])
+    if sum(r['dram_bytes'] for r in ledger)!=sum(sum(n for _,n in parts) for name,owners in layout['tensors'].items() if name in active_names for parts in owners.values()):
         raise ValueError('Expert weight reads changed')
     return g,dict(jobs=[{k:v for k,v in j.items() if k not in ('dispatch',)} for j in jobs],kernel_ledger=ledger,
         mac_flops=expected,active_weight_bytes=unique,actual_dram_bytes=sum(r['dram_bytes'] for r in ledger),
         all_expert_model_weight_bytes=c['num_experts']*6*d*h+6*d*hs,budget=budget,
-        token_expert_assignments=sum(counts.values()),counts=dict(counts),selected_experts=selected_experts,include_shared=include_shared,schedule=schedule,order=order,down_partition=down_partition,combine_scheme=combine_scheme,dispatch_scheme=dispatch_scheme,reduction_scheme=reduction_scheme,semantic_ledger=semantics,input_delivery=delivery,execution_grain=execution_grain,
+        token_expert_assignments=sum(counts.values()),counts=dict(counts),selected_experts=selected_experts,include_shared=include_shared,shared_gate_ledger=shared_gate_ledger,schedule=schedule,order=order,down_partition=down_partition,combine_scheme=combine_scheme,dispatch_scheme=dispatch_scheme,reduction_scheme=reduction_scheme,semantic_ledger=semantics,input_delivery=delivery,execution_grain=execution_grain,
         scope=('Captured routing, conventional static physical ownership, finite packed collectives and row buffering; joint service kernel serializes local experts conservatively; not complete LLM tokens/s' if execution_grain=='macro' else 'Captured routing, same static ownership and finite resources; separate native-return/HB/MAC/operand windows with eager port service; full MoE timing qualification not established; not complete LLM tokens/s'))

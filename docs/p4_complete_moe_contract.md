@@ -10,6 +10,7 @@
 G3-A：s0/l0/B32/TP4/Column，Cold12（1 token）、Reused10（22 tokens）分别执行完整 Gate/Up→SiLU/product→Down→weighted local token accumulation→writeback/Combine。
 G3-B：同条件 Experts10/34（各22 tokens，共享tiles8–11）。用已存在的 fine_prefetch 只放松已知地址的 memory admission；MAC/Expert顺序、全部有限credits不变。与G3-C的fine_fixed分开，不把调度收益归为reservation收益。
 G3-C/G4：s0/l0 B8/B32 × TP4/TP16 × Row/Column，8个全MoE点。随后同矩阵检验s32/l7、s127/l23，共16个迁移点。这些不是新Prompt盲测。完整MoE必须包含真实Shared Expert、Broadcast-all、Fused Combine、Row-ready128，routed Row-down时Shared仍Column-down。
+子图入口给定当前Top-4 IDs和routing probabilities；不含此前Routed Router/Top-k算子。Shared的scalar gate不免费：实际resident shared_router weights、16-way FP32 scores、Sigmoid（沿用6-op scalar/vector假设）和scale broadcast全部付费，Shared weighted-partial必须等待该scale。Scalar MAC读取实际local token operands，不能套用矩阵read-reuse近似。
 
 每个点执行独立C++ Native和C++ Fluid参考，以及独立Python tier-fluid预测。共享语义DAG builder、物理假设和固定仲裁合同，执行状态不共享。预测器无原生到达时间输入，无倍率拟合或逐点调参。
 

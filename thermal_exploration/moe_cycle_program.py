@@ -43,8 +43,9 @@ class FlitGraph(Graph):
 
 
 def program(c,layout,layer,routes,down='row',grain='fine_fixed',selected=None,shared=True):
-    g,meta=expert_graph(c,layout,layer,routes,Profile(),schedule='barrier',order='static',down_partition=down,reduction_scheme='row_ready_128',execution_grain=grain,graph_factory=FlitGraph,selected_experts=selected,include_shared=shared)
+    g,meta=expert_graph(c,layout,layer,routes,Profile(),schedule='barrier',order='static',down_partition=down,reduction_scheme='row_ready_128',execution_grain=grain,graph_factory=FlitGraph,selected_experts=selected,include_shared=shared,shared_gate_execution=shared)
     check_ledger(c,routes,meta)
+    meta['scope']='Conditional MoE FFN work/dependency contract with paid shared scalar gate; cycle timing qualification evaluated separately; not checkpoint/silicon/full LLM tokens per second'
     children=[[] for _ in g.nodes]
     for n in g.nodes:
         for d in n.deps:children[d].append(n.id)
@@ -61,6 +62,7 @@ def program(c,layout,layer,routes,down='row',grain='fine_fixed',selected=None,sh
     # Recover every persistent tensor's physical pages in the frozen resident
     # layout, including unused experts/layers. No active-only compact remap.
     active_names={j['prefix']+'.'+suffix for j in meta['jobs'] for suffix in ('gate','up','down')}
+    if meta['shared_gate_ledger']:active_names.add(f'layer{layer}.shared_router')
     alloc=defaultdict(int);pages={}
     for name,owners in layout['tensors'].items():
         for tile,spans in owners.items():
@@ -85,6 +87,12 @@ def program(c,layout,layer,routes,down='row',grain='fine_fixed',selected=None,sh
             tier,address=pools[key][cursor[key]];cursor[key]+=1
             if tier!=packet['tier']:raise ValueError('Frozen tier order changed')
             addresses[packet['dram']]=address;request_identity.append(dict(node=packet['dram'],address=address,tile=tile,tier=tier,expert=e,projection=kind))
+    for semantic in meta['shared_gate_ledger']:
+        rec=kernels[semantic['node']];tile=semantic['tile'];pool=pages[semantic['tensor'],tile]
+        if len(pool)!=len(rec['packet_ledger']):raise ValueError('Shared scalar physical coverage changed')
+        for (tier,address),packet in zip(pool,rec['packet_ledger'],strict=True):
+            if tier!=packet['tier']:raise ValueError('Shared scalar tier changed')
+            addresses[packet['dram']]=address;request_identity.append(dict(node=packet['dram'],address=address,tile=tile,tier=tier,expert='shared_gate',projection='shared_router'))
     if len(set(addresses.values()))!=len(addresses) or sum(1024 for _ in addresses)!=meta['actual_dram_bytes']:raise ValueError('Lost, duplicated or aliased weights')
     if any(cursor[k]!=len(v) for k,v in pools.items()):raise ValueError('Incomplete persistent weight coverage')
     resources={};caps={};nodes=[];slaves={};master={}
@@ -104,7 +112,7 @@ def program(c,layout,layer,routes,down='row',grain='fine_fixed',selected=None,sh
         if n.kind=='mac':
             read=sum(g.nodes[i].work for i in slaves[n.id] if g.nodes[i].kind=='sram_read');fifo=sum(g.nodes[i].work for i in slaves[n.id] if g.nodes[i].kind=='fifo_read')
             ticks=max(1,ceil(n.work/2000),ceil(read/256),ceil(fifo/500))
-        vc=int(n.stage=='combine');target=n.resource[2] if n.kind=='link' else -1
+        vc=int(n.stage in ('combine','shared_gate_reduce'));target=n.resource[2] if n.kind=='link' else -1
         nodes.append(dict(id=n.id,kind=KINDS.index(n.kind),tile=n.tile,work=n.work,deps=list(n.deps),ticks=ticks,resource=rid,tier=n.tier,address=addresses.get(n.id,-1),context=context_for.get(n.id,-1),phase=context_phase.get(n.id,-1),master=master.get(n.id,-1),read=read,fifo=fifo,target=target,vc=vc,stage=n.stage))
         for key,amount,last in n.leases:
             if key[0].startswith('router'):continue # Actual port/VC flit credits below.

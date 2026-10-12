@@ -23,6 +23,13 @@ def check_ledger(c,routes,meta):
     if meta.get('include_shared',True):expected['shared']=list(range(len(routes)))
     d=c['hidden_size'];actual=defaultdict(list)
     kernels={rec['node']:rec for rec in meta['kernel_ledger']}
+    if meta.get('shared_gate_ledger'):
+        cursor=0
+        for rec in sorted(meta['shared_gate_ledger'],key=lambda r:r['input_interval']):
+            lo,hi=rec['input_interval']
+            if lo!=cursor or rec['tokens']!=list(range(len(routes))) or kernels[rec['node']]['mac_flops']!=2*(hi-lo)*len(routes):raise ValueError('Shared scalar semantic coverage changed')
+            cursor=hi
+        if cursor!=d:raise ValueError('Shared scalar input coverage incomplete')
     for rec in meta['semantic_ledger']:
         e=rec['expert'];width=c['shared_expert_intermediate_size'] if e=='shared' else c['moe_intermediate_size']
         if rec['tokens']!=expected[e] or len(set(rec['tokens']))!=len(rec['tokens']):raise ValueError('Numerical token binding changed')
@@ -63,7 +70,14 @@ def compare(c,routes,probabilities,meta,dtype='FP32',seed=20261011,accumulation=
         width=hs if e=='shared' else h
         weights[e]=[q(rng.normal(0,.04,(width,d))),q(rng.normal(0,.04,(width,d))),q(rng.normal(0,.04,(d,width)))]
     shared_router=q(rng.normal(0,.04,(d,)))
-    shared_prob=q(1/(1+np.exp(-(x@shared_router))))
+    shared_scores=x@shared_router
+    shared_prob=q(1/(1+np.exp(-shared_scores)))
+    candidate_shared_prob=shared_prob
+    if meta.get('shared_gate_ledger'):
+        parts=[np.einsum('bk,k->b',x[:,r['input_interval'][0]:r['input_interval'][1]],shared_router[r['input_interval'][0]:r['input_interval'][1]],dtype=np.float32,optimize=False) for r in meta['shared_gate_ledger']]
+        candidate_scores=np.sum(parts,axis=0,dtype=np.float32)
+        np.testing.assert_allclose(candidate_scores,shared_scores,rtol=2e-4,atol=2e-6)
+        candidate_shared_prob=q(1/(1+np.exp(-candidate_scores)))
     def gated(g,u):return q((g/(1+np.exp(-g)))*u)
     def linear(x,w):
         # Freeze FP32 contraction order across token GEMV and grouped GEMM.
@@ -87,7 +101,7 @@ def compare(c,routes,probabilities,meta,dtype='FP32',seed=20261011,accumulation=
         if rec['kind']!='down':continue
         e=rec['expert'];tokens=rec['tokens'];lo,hi=rec['intermediate'];first,last=rec['rows']
         partial=linear(hidden[e][tokens,lo:hi],weights[e][2][first:last,lo:hi])
-        scales=shared_prob[tokens] if e=='shared' else np.array([prob[t,slot] for t,slot in zip(tokens,rec['routing_slots'])],np.float32)
+        scales=candidate_shared_prob[tokens] if e=='shared' else np.array([prob[t,slot] for t,slot in zip(tokens,rec['routing_slots'])],np.float32)
         local[rec['tile']][np.ix_(tokens,range(first,last))]+=partial*scales[:,None]
     candidate=np.sum(local,axis=0,dtype=np.float32)
     np.testing.assert_allclose(candidate,reference,rtol=2e-4,atol=2e-6)
