@@ -10,6 +10,7 @@ def main():
  env=dict(os.environ,PYTHONPATH=str(source),OMP_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1');jobs=[]
  if a.native_components:
   if not a.ramulator_root:raise ValueError('Pinned Ramulator required')
+  sys.path.insert(0,str(source))
   from thermal_exploration.run_p4_fine import selection
   r=json.loads(routes.read_text());sel=selection(r)
   for role in ('cold','reused'):
