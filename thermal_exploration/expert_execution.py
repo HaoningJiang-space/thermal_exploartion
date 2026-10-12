@@ -230,7 +230,8 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
             size=count*width//len(owners);write=g.add('sram_write',tile,size*8,(node,),('write',tile),ceil(size*8/128),'gated_state')
             read=g.add('sram_read',tile,size*8,(write,),('read',tile),ceil(size*8/(128 if schedule=='overlap' else 256)),'gated_state')
             v=g.add('vector',tile,size*6,(read,),('vector',tile),ceil(size*6/16),'silu_product')
-            silu[tile]=g.add('sram_write',tile,size*2,(v,),('write',tile),ceil(size*2/128),'gated_state')
+            stored=ceil(size*2/32)*32 if getattr(g,'physical_padding',False) else size*2
+            silu[tile]=g.add('sram_write',tile,stored,(v,),('write',tile),ceil(stored/128),'gated_state')
         prior={t:silu[t] for t in owners};all_ends=[];first_rows=[]
         row_down=down_partition=='row' and job['expert']!='shared'
         gathered={t:[] for t in owners};gather_starts=[]
@@ -292,7 +293,10 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
         for tile in owners:
             # Registered gate/up state is bounded through its final down use.
             g.lease(gate[owners.index(tile)],finished,('workspace',tile),count*width*8//len(owners))
-            if row_down:g.lease(gather_starts[owners.index(tile)],finished,('workspace',tile),count*width*2*(len(owners)-1)//len(owners))
+            if row_down:
+                shard=count*width*2//len(owners)
+                copied=ceil(shard/32)*32 if getattr(g,'physical_padding',False) else shard
+                g.lease(gather_starts[owners.index(tile)],finished,('workspace',tile),copied*(len(owners)-1))
         stage_done.append(finished)
     if schedule=='overlap':
         # MAC has half the read port, NoC/vector have the other half.

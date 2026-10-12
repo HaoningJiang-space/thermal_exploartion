@@ -20,6 +20,8 @@ G3-C/G4：s0/l0 B8/B32 × TP4/TP16 × Row/Column，8个全MoE点。随后同矩�
 
 单Vector Context从read开始保持到ops/write结束。32B flit，4-tick directed-link串行化，8-tick flight；两类VC，每个physical input port/VC和local injection port各8 slots。Flit从发送前reserve至直接消费者启动后释放，覆盖flight、queue和SRAM背压。
 网络是新完整程序的确定性DAG frontier仲裁扩展：MAC、单Vector、sink/source SRAM、links、HB、memory；同类按原ID顺序。Multicast保留共享前缀；本地接收与下游branch分别付费并保留credit。这**不是H2的逐port轮转实现**，不能沿用组件2.54%作为全MoE精度；完整C++/Python合同必须重新验证。没有为任一方案搜索仲裁策略。
+零ops阶段保持Vector context顺序，但不虚构额外执行周期；非零read/ops/write各自支付实际端口服务。
+TP16 routed Hidden shard为88个BF16元素，odd token count的尾包有16B有效数据。传输、SRAM读写、router credit和gather workspace均按完整32B付费；valid-byte mask保留逻辑Tensor范围，padding不得进入MAC、不得增加FLOPs/DRAM权重。Gated源存储按32B对齐，在已付费8B/element的in-place gated-state空间内；destination额外padding计入workspace lease。
 
 保留原P4-A/P4-B macro/fine模式；不静默替换旧性能。当前完整程序仍使用已知registered partial reuse、每个gate/up和down-row的语义完成点；不宣称新GEMM调度或完整checkpoint数值。
 

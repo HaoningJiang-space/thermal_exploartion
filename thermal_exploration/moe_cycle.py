@@ -95,6 +95,10 @@ def execute(p,emit=lambda kind,row:None,max_ticks=2_000_000,oracle='none'):
                     if not state[i]:
                         if not admissible(i):break
                         begin(i)
+                    if not left[i]:
+                        finish(i,clock)
+                        if nodes[i]['phase']==2:vector[tile]=-1
+                        continue
                     kind=nodes[i]['kind'];budget=rb if kind==1 else wb if kind==2 else vb;take=min(left[i],budget[tile]);left[i]-=take;budget[tile]-=take;activity[('sram_read' if kind==1 else 'sram_write' if kind==2 else 'vector')]+=take
                     if not left[i]:schedule(i,clock+1)
                     break

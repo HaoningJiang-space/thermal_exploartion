@@ -20,6 +20,7 @@ def replay(p,prefix,summary):
     for n in nodes:
         r=actual[n['id']]
         if r['start']<max((actual[d]['finish'] for d in n['deps']),default=0) or r['finish']<r['start']:raise ValueError('Consumer before producer')
+        if n['kind']==3 and not n['work'] and r['finish']!=r['start']:raise ValueError('Invented zero-operation vector delay')
         if n['kind']==4:
             if r['finish']-r['start']!=max(1,ceil(n['work']/2000),ceil(n['read']/256),ceil(n['fifo']/500)):raise ValueError('MAC arithmetic/operand floor changed')
             mac_intervals[n['tile']].append((r['start'],r['finish']));activity['mac']+=n['work']
@@ -27,6 +28,9 @@ def replay(p,prefix,summary):
             if (r['start'],r['finish'])!=(actual[n['master']]['start'],actual[n['master']]['finish']):raise ValueError('Coissued slave timing changed')
         if n['kind']==5:
             if r['finish']-r['start']!=8 or n['work']!=32:raise ValueError('Changed physical flit flight')
+            if not 0<n['valid_bytes']<=32:raise ValueError('Invalid logical flit byte mask')
+            parent=nodes[n['deps'][0]]
+            if parent['kind']==5 and n['valid_bytes']!=parent['valid_bytes']:raise ValueError('Forwarding changed payload mask')
             links[n['tile'],n['target']].append(r['start']);activity['link']+=32
     for ids in p['contexts']:
         tile=nodes[ids[0]]['tile'];a,b,c=[actual[i] for i in ids]

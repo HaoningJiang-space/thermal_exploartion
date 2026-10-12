@@ -5,6 +5,7 @@ from copy import deepcopy
 from thermal_exploration.model_contract import load_model,capacity
 from thermal_exploration.layer_execution import resident_layout
 from thermal_exploration.moe_cycle_program import program
+from thermal_exploration.moe_cycle_program import FlitGraph
 from thermal_exploration.moe_cycle import execute
 from thermal_exploration.moe_cycle_audit import replay
 from thermal_exploration.run_moe_cycles import HEADERS
@@ -44,4 +45,11 @@ class FullMoECycleTests(unittest.TestCase):
   p=program(self.c,l,0,routes,down='column')
   r=compare(self.c,routes,[[.3,.7]]*8,p['meta'],'BF16',accumulation='fixed_k')
   self.assertEqual(r['tolerance'],dict(rtol=2e-4,atol=2e-6));self.assertEqual(r['accumulation'],'fixed_k')
+ def test_real_88_element_shard_tail_is_paid(self):
+  g=FlitGraph();g.broadcast(0,list(range(16)),88*2,stage='hidden_allgather')
+  self.assertEqual(sum(n.work for n in g.nodes if n.kind=='sram_read'),192)
+  self.assertEqual(sum(n.work for n in g.nodes if n.kind=='sram_write'),192*15)
+  self.assertEqual(sum(n.work for n in g.nodes if n.kind=='link'),192*15)
+  self.assertEqual(sum(g.meta['flit_valid_bytes'].values()),176*15)
+  self.assertIn(16,g.meta['flit_valid_bytes'].values())
 if __name__=='__main__':unittest.main()

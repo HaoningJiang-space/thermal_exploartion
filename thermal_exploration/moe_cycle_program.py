@@ -18,24 +18,27 @@ KINDS=('join','sram_read','sram_write','vector','mac','link','hb','dram','fifo_r
 
 class FlitGraph(Graph):
     def __init__(self):
-        super().__init__(64,True);self.packet_bytes=32
+        super().__init__(64,True);self.packet_bytes=32;self.physical_padding=True
     def network_link(self,source,target,size,deps,stage):
         if size!=32:raise ValueError('Every transport operation must be one32B flit')
         node=self.add('link',source,size,deps,('link',source,target),8,stage)
         return node,node
     def broadcast(self,source,targets,bytes_,deps=(),stage='input'):
-        if bytes_%32:raise ValueError('No free network padding')
+        if bytes_<=0:raise ValueError('Empty tensor broadcast')
         children=defaultdict(list)
         for a,b in sorted({e for t in targets for e in route(source,t)}):children[a].append(b)
         output=defaultdict(list)
         for offset in range(0,bytes_,32):
+            valid=min(32,bytes_-offset)
             read=self.add('sram_read',source,32,deps,('read',source),1,stage)
             def visit(node,before):
                 if node in targets and node!=source:
                     write=self.add('sram_write',node,32,(before,),('write',node),1,stage)
                     output[node].append(write)
                 for target in children[node]:
-                    link,_=self.network_link(node,target,32,(before,),stage);visit(target,link)
+                    link,_=self.network_link(node,target,32,(before,),stage)
+                    self.meta.setdefault('flit_valid_bytes',{})[link]=valid
+                    visit(target,link)
             visit(source,read)
         result={t:self.join(output[t],stage) for t in targets if t!=source}
         if source in targets:result[source]=self.join(deps,stage)
@@ -113,7 +116,7 @@ def program(c,layout,layer,routes,down='row',grain='fine_fixed',selected=None,sh
             read=sum(g.nodes[i].work for i in slaves[n.id] if g.nodes[i].kind=='sram_read');fifo=sum(g.nodes[i].work for i in slaves[n.id] if g.nodes[i].kind=='fifo_read')
             ticks=max(1,ceil(n.work/2000),ceil(read/256),ceil(fifo/500))
         vc=int(n.stage in ('combine','shared_gate_reduce'));target=n.resource[2] if n.kind=='link' else -1
-        nodes.append(dict(id=n.id,kind=KINDS.index(n.kind),tile=n.tile,work=n.work,deps=list(n.deps),ticks=ticks,resource=rid,tier=n.tier,address=addresses.get(n.id,-1),context=context_for.get(n.id,-1),phase=context_phase.get(n.id,-1),master=master.get(n.id,-1),read=read,fifo=fifo,target=target,vc=vc,stage=n.stage))
+        nodes.append(dict(id=n.id,kind=KINDS.index(n.kind),tile=n.tile,work=n.work,deps=list(n.deps),ticks=ticks,resource=rid,tier=n.tier,address=addresses.get(n.id,-1),context=context_for.get(n.id,-1),phase=context_phase.get(n.id,-1),master=master.get(n.id,-1),read=read,fifo=fifo,target=target,vc=vc,valid_bytes=g.meta.get('flit_valid_bytes',{}).get(n.id,32) if n.kind=='link' else 0,stage=n.stage))
         for key,amount,last in n.leases:
             if key[0].startswith('router'):continue # Actual port/VC flit credits below.
             cap=defaults.get(key[0])
