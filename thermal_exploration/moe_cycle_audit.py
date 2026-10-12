@@ -70,13 +70,23 @@ def replay(p,prefix,summary):
     expected_activity=Counter()
     for n in nodes:
         if n['kind'] in (1,2,3,6,7,8):expected_activity[KINDS[n['kind']]]+=n['work']
+    service=iter(rows(path('service')));current=next(service,None);served=Counter()
     portrows=0;previous=(-1,15)
     for r in rows(path('ports')):
         if (r['tick'],r['tile'])!=((previous[0]+1,0) if previous[1]==15 else (previous[0],previous[1]+1)):raise ValueError('Missing or reordered port tick')
         previous=r['tick'],r['tile'];portrows+=1
+        allocated=Counter()
+        while current is not None and (current['tick'],nodes[current['id']]['tile'])<=(r['tick'],r['tile']):
+            n=nodes[current['id']];t=actual[current['id']]
+            if (current['tick'],n['tile'])!=(r['tick'],r['tile']) or current['kind']!=n['kind'] or not t['start']<=current['tick']<t['finish'] or current['amount']<0:raise ValueError('Noncausal per-node service')
+            served[n['id']]+=current['amount'];allocated[n['kind']]+=current['amount'];current=next(service,None)
+        if allocated[4]>2000:raise ValueError('Extra MAC arithmetic capacity')
         for key,cap,kind in (('read',256,'sram_read'),('write',128,'sram_write'),('vector',16,'vector'),('hb',500,'hb'),('fifo',500,'fifo_read')):
             if not 0<=r[key]<=cap:raise ValueError('Port service overrun')
+            code={'sram_read':1,'sram_write':2,'vector':3,'hb':6,'fifo_read':8}[kind]
+            if r[key]!=allocated[code]:raise ValueError('Port allocation not attributable to nodes')
             activity[kind]+=r[key]
+    if current is not None or any(served[n['id']]!=n['work'] for n in nodes if n['kind'] in (1,2,3,4,6,8)):raise ValueError('Node finished without actual service')
     activity['dram']=1024*len(requests)
     if portrows!=summary['ticks']*16 or any(activity[k]!=v for k,v in expected_activity.items()) or dict(activity)!=summary['activity']:raise ValueError('Activity/port work not conserved')
     return dict(status='PASS_INDEPENDENT_FULL_PROGRAM_REPLAY',nodes=len(actual),requests=len(requests),port_rows=portrows,private_peak=private_peak,router_peak=router_peak,activity=dict(activity))

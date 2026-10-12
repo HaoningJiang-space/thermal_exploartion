@@ -13,7 +13,7 @@ from .multitier import config,TierLegality
 from .run_organization import check_commands
 from .hb_trace import address_vector
 
-HEADERS={'nodes':['id','start','finish'],'ports':['tick','tile','read','write','vector','hb','fifo'],'leases':['tick','resource','tile','delta'],'router':['tick','tile','port','vc','delta','credit'],'requests':['id','accepted','depart','address']}
+HEADERS={'nodes':['id','start','finish'],'ports':['tick','tile','read','write','vector','hb','fifo'],'leases':['tick','resource','tile','delta'],'router':['tick','tile','port','vc','delta','credit'],'requests':['id','accepted','depart','address'],'service':['tick','id','kind','amount']}
 
 def compact(path):
     with path.open('rb') as f,gzip.open(str(path)+'.gz','wb',compresslevel=3) as out:shutil.copyfileobj(f,out)

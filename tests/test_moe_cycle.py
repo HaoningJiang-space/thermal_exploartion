@@ -31,7 +31,7 @@ class FullMoECycleTests(unittest.TestCase):
    self.assertEqual(z['activity']['mac'],p['meta']['mac_flops']);self.assertEqual(replay(p,prefix,z)['status'],'PASS_INDEPENDENT_FULL_PROGRAM_REPLAY')
    # A shared producer cannot be removed just because output timing matches.
    q=deepcopy(p);mac=next(n for n in q['nodes'] if n['kind']==4);mac['work']+=1
-   with self.assertRaisesRegex(ValueError,'Activity|MAC'):replay(q,prefix,z)
+   with self.assertRaisesRegex(ValueError,'Activity|MAC|actual service'):replay(q,prefix,z)
    q=deepcopy(p);q['private_budget']=1
    with self.assertRaisesRegex(ValueError,'capacity'):replay(q,prefix,z)
  def test_subset_is_explicit_and_weight_slots_unchanged(self):

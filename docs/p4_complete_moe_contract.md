@@ -38,7 +38,8 @@ Private SRAM、8×32KiB weight、64×1024B response、descriptor和output credit
 G1：完整FP32/BF16小张量数值语义（非性能/非checkpoint），真实形状的MAC、weight、token、routing slot、Gate/Up/Down覆盖闭合。
 数值验证固定FP32 K维累加顺序（非BLAS grouped GEMM的库相关顺序），以便Gate的GEMV/GEMM在BF16 gated-state舍入边界具有同一合同；容差仍为rtol2e-4/atol2e-6，不拟合或放宽。旧模式保持BLAS默认。首轮f0ee803 pilot的Reused/Competition在此合同差异处失败，全部原始失败记录保留，不混入新资格。
 G2：每tick端口、每个MAC/Vector Context、packet依赖、weight/response/output/private/router reserve/release独立重放。
-G3：完整MoE Native逐点绝对时间误差≤10%；Fluid五类完整节点/request/port/lease/router traces逐行比较。Native额外command/state/tag和tier-deadline检查。
+另记录每个node每tick实际read/write/vector/HB/FIFO/arithmetic服务；独立观察者要求完成前全部工作已服务，并与每tick aggregate ports逐项对应。不能只用全局byte/FLOP总数证明节点正确。
+G3：完整MoE Native逐点绝对时间误差≤10%；Fluid六类完整node/request/port/lease/router/service traces逐行比较。Native额外command/state/tag和tier-deadline检查。
 G4：每cohort同路由的TP4/TP16和Row/Column逐点比值误差≤5%，核对排序。不能靠均值掩盖失败。
 如有分歧，导出首次事件差异及依赖/资源/Memory归因；原始失败保留，禁止全局倍率拟合。
 只有完整G3/G4通过后才运行qualified link/flight诊断；仍不是可实现硬件净收益。组件或Fluid一致不等于silicon认证。

@@ -78,11 +78,13 @@ def execute(p,emit=lambda kind,row:None,max_ticks=2_000_000,oracle='none'):
             if mac[tile] is None:
                 for i in sorted(ready[4][tile]):
                     if not admissible(i):continue
-                    r=nodes[i];begin(i);mac[tile]=dict(id=i,until=clock+r['ticks'],read=r['read'],fifo=r['fifo']);schedule(i,clock+r['ticks']);break
+                    r=nodes[i];begin(i);mac[tile]=dict(id=i,until=clock+r['ticks'],read=r['read'],fifo=r['fifo'],flops=r['work']);schedule(i,clock+r['ticks']);break
             a=mac[tile]
             if a:
-                t=a['until']-clock;read=ceil(a['read']/t);fr=ceil(a['fifo']/t);a['read']-=read;a['fifo']-=fr;rb[tile]-=read;fifo[tile]=fr;activity['sram_read']+=read;activity['fifo_read']+=fr
+                t=a['until']-clock;read=ceil(a['read']/t);fr=ceil(a['fifo']/t);fma=ceil(a['flops']/t);a['read']-=read;a['fifo']-=fr;a['flops']-=fma;rb[tile]-=read;fifo[tile]=fr;activity['sram_read']+=read;activity['fifo_read']+=fr
                 if rb[tile]<0 or fr>500:raise ValueError('MAC invented a port')
+                emit('service',[clock,a['id'],4,fma])
+                for slave in slaves[a['id']]:emit('service',[clock,slave,nodes[slave]['kind'],read if nodes[slave]['kind']==1 else fr])
             if vector[tile]<0:
                 candidates=[i for i in ready[1][tile] if nodes[i]['context']>=0 and nodes[i]['phase']==0]
                 for i in sorted(candidates):
@@ -100,6 +102,7 @@ def execute(p,emit=lambda kind,row:None,max_ticks=2_000_000,oracle='none'):
                         if nodes[i]['phase']==2:vector[tile]=-1
                         continue
                     kind=nodes[i]['kind'];budget=rb if kind==1 else wb if kind==2 else vb;take=min(left[i],budget[tile]);left[i]-=take;budget[tile]-=take;activity[('sram_read' if kind==1 else 'sram_write' if kind==2 else 'vector')]+=take
+                    emit('service',[clock,i,kind,take])
                     if not left[i]:schedule(i,clock+1)
                     break
             # Drain sinks before source reads; all consumers share the residual
@@ -112,6 +115,7 @@ def execute(p,emit=lambda kind,row:None,max_ticks=2_000_000,oracle='none'):
                         if not admissible(i):continue
                         begin(i);ready[kind][tile].add(i)
                     take=min(left[i],budget[tile]);left[i]-=take;budget[tile]-=take;activity['hb' if kind==6 else 'sram_write' if kind==2 else 'sram_read']+=take
+                    emit('service',[clock,i,kind,take])
                     if not left[i]:ready[kind][tile].remove(i);schedule(i,clock+1)
             for i in sorted(ready[5][tile]):
                 r=nodes[i];rid=r['resource']
