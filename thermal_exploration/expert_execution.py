@@ -85,7 +85,7 @@ class RowBlockedExecution(CrossoverExecution):
         return r
 
 
-def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic',isolation='none',down_partition='column',combine_scheme='fused',dispatch_scheme='broadcast_all',reduction_scheme='drain_all'):
+def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic',isolation='none',down_partition='column',combine_scheme='fused',dispatch_scheme='broadcast_all',reduction_scheme='drain_all',execution_grain='macro'):
     """Conventional TP/EP, packed dispatch, paired SwiGLU and row reductions.
 
     A joint local kernel uses the existing finite streaming service model.
@@ -103,6 +103,8 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
     if dispatch_scheme not in ('broadcast_all','destination_only','decoupled'):raise ValueError('Unknown input delivery')
     if reduction_scheme not in ('drain_all','row_ready','row_ready_128'):raise ValueError('Unknown reduction admission')
     early_reduction=reduction_scheme!='drain_all'
+    if execution_grain not in ('macro','fine_fixed','fine_prefetch'):raise ValueError('Unknown service granularity')
+    if execution_grain!='macro' and (schedule!='barrier' or isolation not in ('none','infinite_noc','mac_only')):raise ValueError('P4-B freezes barrier port contract and supported probes')
     if early_reduction and combine_scheme!='fused':raise ValueError('Row-ready requires local token accumulation')
     if not profile.area()['area_feasible']:raise ValueError('Paid area infeasible')
     b=len(routes);d=c['hidden_size'];h=c['moe_intermediate_size'];hs=c['shared_expert_intermediate_size']
@@ -158,6 +160,9 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
     terminals=[];stage_done=[];token_rows={}
     accumulator_init={tile:g.add('sram_write',tile,b*d*4,resource=('write',tile),ticks=ceil(b*d*4/128),stage='token_accumulator_init') for tile in range(16)} if combine_scheme=='fused' else {}
     def kernel(tile,spans,count,useful,deps,stage,memory_deps=()):
+        if execution_grain!='macro':
+            from .expert_microtiles import microtile_kernel
+            node,r=microtile_kernel(g,tile,tuple(spans),count,p,useful,deps,stage,execution_grain=='fine_prefetch');ledger.append(r);return node
         # Bounded known prefetch. Identity is already known at time zero;
         # arithmetic never precedes both input and actual prefix arrival.
         pre=[];lead=0;prefix=min(sum(n for _,n in spans),262144) if schedule=='overlap' else 0
@@ -270,6 +275,7 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
     accumulator=b*d*4 if combine_scheme=='fused' else ceil(b*d*4/16)
     g.meta.update(fixed_sram_bytes=[budget['activation_reserved_bytes']+65536+accumulator]*16,
         private_sram_budget_bytes=budget['private_bytes'],buffer_caps={'workspace':budget['expert_workspace_bytes'],'output':65536})
+    if execution_grain!='macro':g.meta['buffer_caps'].update(weight_descriptor=8*32,return_descriptor=64*16)
     if combine_scheme=='fused':
         if early_reduction:
             # Two software credit classes in the SAME64KiB output storage.
@@ -304,12 +310,12 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
         g.output=[g.join(final,'moe_output_ready')]
     else:g.output=[g.join(terminals,'moe_output_ready')]
     expected=6*d*h*sum(counts.values())+6*d*hs*b
-    if sum(g.nodes[x['node']].work for x in ledger)!=expected:raise ValueError('Expert MAC work changed')
+    if sum(x['mac_flops'] for x in ledger)!=expected or sum(n.work for n in g.nodes if n.kind=='mac')!=expected:raise ValueError('Expert MAC work changed')
     unique=(len(counts)*6*d*h+6*d*hs)
     if sum(r['dram_bytes'] for r in ledger)!=sum(sum(n for _,n in parts) for name,owners in layout['tensors'].items() if name in [j['prefix']+'.'+suffix for j in jobs for suffix in ('gate','up','down')] for parts in owners.values()):
         raise ValueError('Expert weight reads changed')
     return g,dict(jobs=[{k:v for k,v in j.items() if k not in ('dispatch',)} for j in jobs],kernel_ledger=ledger,
         mac_flops=expected,active_weight_bytes=unique,actual_dram_bytes=sum(r['dram_bytes'] for r in ledger),
         all_expert_model_weight_bytes=c['num_experts']*6*d*h+6*d*hs,budget=budget,
-        token_expert_assignments=sum(counts.values()),counts=dict(counts),schedule=schedule,order=order,down_partition=down_partition,combine_scheme=combine_scheme,dispatch_scheme=dispatch_scheme,reduction_scheme=reduction_scheme,semantic_ledger=semantics,input_delivery=delivery,
+        token_expert_assignments=sum(counts.values()),counts=dict(counts),schedule=schedule,order=order,down_partition=down_partition,combine_scheme=combine_scheme,dispatch_scheme=dispatch_scheme,reduction_scheme=reduction_scheme,semantic_ledger=semantics,input_delivery=delivery,execution_grain=execution_grain,
         scope='Captured routing, conventional static physical ownership, finite packed collectives and row buffering; joint service kernel serializes local experts conservatively; not complete LLM tokens/s')

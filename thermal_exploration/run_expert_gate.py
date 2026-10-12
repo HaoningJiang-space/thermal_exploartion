@@ -58,11 +58,12 @@ def rows(r,out,baseline,steps):
   result=dict(label=label,baseline=baseline,profile=asdict(p),area=p.area(),status=status,reason=reason,completed_steps=len(perstep),time_us=ticks*.00025,tokens_s=32*len(perstep)/(ticks*.25e-9) if ticks else None,activity=dict(total),live_workspace_high_bytes=high,workspace_bytes=p.budget(32,2048,5632)['expert_workspace_bytes'],step_records=perstep,event_file=events.name,event_sha256=hashlib.sha256(events.read_bytes()).hexdigest(),scope='Complete24-layer conditional Decode; old cohort and known row-block schedule, not new hardware')
   write(out/(label+'.json'),result);summaries.append(result);write(out/'summary.json',summaries);print(label,status,result['tokens_s'],flush=True)
 
-def point(c,layout,layer,route,p,schedule,order,isolation,out,label,full=False,down_partition='column',combine_scheme='fused',dispatch_scheme='broadcast_all',reduction_scheme='drain_all'):
+def point(c,layout,layer,route,p,schedule,order,isolation,out,label,full=False,down_partition='column',combine_scheme='fused',dispatch_scheme='broadcast_all',reduction_scheme='drain_all',execution_grain='macro',noc_mode=None):
  started=time.time()
  try:
-  g,meta=expert_graph(c,layout,layer,route,p,schedule,order,isolation,down_partition,combine_scheme,dispatch_scheme,reduction_scheme)
-  z=execute(g,'infinite_noc' if isolation=='infinite_noc' else 'baseline')
+  g,meta=expert_graph(c,layout,layer,route,p,schedule,order,isolation,down_partition,combine_scheme,dispatch_scheme,reduction_scheme,execution_grain)
+  if execution_grain!='macro' or noc_mode is not None:g.meta['detailed_waits']=True
+  z=execute(g,noc_mode or ('infinite_noc' if isolation=='infinite_noc' else 'baseline'))
   if z['activity']['mac']!=meta['mac_flops']:raise ValueError('Independent expert work mismatch')
   events={e['id']:e for e in z['events']};latencies=[]
   for job in meta['jobs']:
@@ -70,12 +71,13 @@ def point(c,layout,layer,route,p,schedule,order,isolation,out,label,full=False,d
   chain=Counter()
   for ev in z['critical_path']:chain[ev['stage']]+=(ev['finish_tick']-ev['start_tick'])
   maxgap=sum(ev['unattributed_gap_ticks'] for ev in z['critical_path'])
-  if sum(chain.values())+maxgap!=z['ticks']:raise ValueError('Critical chain does not close')
+  if abs(sum(chain.values())+maxgap-z['ticks'])>1e-7:raise ValueError('Critical chain does not close')
   result={k:z[k] for k in ('time_us','ticks','activity','per_tile_activity','buffer_high','credit_stall_probes','validation','fidelity')}
   result['packet_dag_activity']=dict(result['activity'])
   result['activity']=dict(result['activity'],dram=meta['actual_dram_bytes'],hb=meta['actual_dram_bytes'])
-  result['activity']['sram_read']=result['activity'].get('sram_read',0)+sum(x['activity']['sram_read'] for x in meta['kernel_ledger'])
-  result['critical_attribution_note']='Gate/up and down-row MAC nodes are JOINT memory/MAC services, not pure compute durations; component oracles are nonadditive.'
+  if execution_grain=='macro':result['activity']['sram_read']=result['activity'].get('sram_read',0)+sum(x['activity']['sram_read'] for x in meta['kernel_ledger'])
+  result['execution_grain']=execution_grain
+  result['critical_attribution_note']='Gate/up and down-row MAC nodes are JOINT memory/MAC services, not pure compute durations; component oracles are nonadditive.' if execution_grain=='macro' else 'Fine MAC context includes arithmetic and operand/FIFO floor; arithmetic ticks are separately recorded; component oracles are nonadditive.'
   result.update(dispatch_scheme=dispatch_scheme,reduction_scheme=reduction_scheme,private_sram_high=z['private_sram_high'],credit_group_high=z['credit_group_high'])
   by_stage=defaultdict(Counter)
   for node in g.nodes:by_stage[node.stage][node.kind]+=node.work
@@ -90,7 +92,7 @@ def point(c,layout,layer,route,p,schedule,order,isolation,out,label,full=False,d
    result.update(event_file=path.name,event_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),full_events_retained=True)
   else:result['full_events_retained']=False
  except ValueError as error:result=dict(status='INFEASIBLE_FINITE_SCHEDULE',reason=str(error))
- result.update(label=label,layer=layer,batch=len(route),schedule=schedule,order=order,isolation=isolation,down_partition=down_partition,combine_scheme=combine_scheme,dispatch_scheme=dispatch_scheme,reduction_scheme=reduction_scheme,elapsed_host_s=time.time()-started)
+ result.update(label=label,layer=layer,batch=len(route),schedule=schedule,order=order,isolation=isolation,down_partition=down_partition,combine_scheme=combine_scheme,dispatch_scheme=dispatch_scheme,reduction_scheme=reduction_scheme,execution_grain=execution_grain,noc_mode=noc_mode,elapsed_host_s=time.time()-started)
  write(out/(label+'.json'),result);print(label,result['status'],result.get('time_us',result.get('reason')),flush=True)
  return result
 

@@ -31,7 +31,7 @@ class Graph:
     def __init__(self,network_packet_bytes=4096,decoupled_link_latency=False):
         self.nodes=[];self.meta={};self.output=[]
         self.packet_bytes=network_packet_bytes;self.decoupled_link_latency=decoupled_link_latency
-        if network_packet_bytes not in (64,256,4096):raise ValueError('Unsupported network packet')
+        if network_packet_bytes not in (64,128,256,4096):raise ValueError('Unsupported network packet')
 
     def add(self,kind,tile,work,deps=(),resource=None,ticks=0,stage='',tier=-1):
         id=len(self.nodes)
@@ -128,7 +128,7 @@ class Graph:
         if source in targets:result[source]=self.join(deps,stage)
         return result
 
-    def collective(self,root,producers,bytes_,stage='ffn_reduce',preallocated_sources=False,output_credit='output'):
+    def collective(self,root,producers,bytes_,stage='ffn_reduce',preallocated_sources=False,output_credit='output',root_cast=False,native_leaves=False):
         """FP32 tree partials, ordinary tile vectors and same SRAM/links."""
         edges={e for source in producers for e in route(root,source)};children=defaultdict(list)
         for a,b in sorted(edges):children[a].append(b)
@@ -136,6 +136,7 @@ class Graph:
         for offset in range(0,bytes_,self.packet_bytes):
             size=min(self.packet_bytes,bytes_-offset)
             def visit(node):
+                if native_leaves and node!=root and not children[node] and node in producers:return producers[node]
                 contributions=[];incoming=[]
                 if node in producers:contributions.append(producers[node])
                 for child in children[node]:
@@ -148,9 +149,10 @@ class Graph:
                     contributions.append(write);incoming.append(link)
                 read=self.add('sram_read',node,size*len(contributions),contributions,('read',node),ceil(size*len(contributions)/256),stage)
                 for link in incoming:self.lease(link,read,(output_credit,node),size)
-                ops=(len(contributions)-1)*size//4
+                ops=(len(contributions)-1)*size//4+(size//4 if root_cast and node==root else 0)
                 vector=self.add('vector',node,ops,(read,),('vector',node),ceil(ops/16),stage)
-                return self.add('sram_write',node,size,(vector,),('write',node),ceil(size/128),stage)
+                written=size//2 if root_cast and node==root else size
+                return self.add('sram_write',node,written,(vector,),('write',node),ceil(written/128),stage)
             outputs.append(visit(root))
         return self.join(outputs,stage)
 
@@ -161,14 +163,16 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
     The selected parent chain includes dependencies, resource predecessors and
     credit releases. Link packets use store-and-forward, not H2 flit routers.
     """
-    valid={'baseline','ideal_memory','infinite_noc','ideal_buffer','direct_stream','ideal_collective','known_fusion'}
+    valid={'baseline','ideal_memory','infinite_noc','link_only','flight_only','ideal_buffer','direct_stream','ideal_collective','known_fusion'}
     if mode not in valid:raise ValueError(mode)
     n=len(g.nodes);children=[[] for _ in range(n)];remaining=[]
     for node in g.nodes:
         remaining.append(len(node.deps))
         for dep in node.deps:children[dep].append(node.id)
     queues=defaultdict(list);events=[];busy={};used=Counter();private_used=Counter();high=Counter();owners=defaultdict(Counter)
-    release=defaultdict(list);last_release={};done=np.full(n,-1,dtype=np.int64);start=done.copy();parents=[None]*n
+    release=defaultdict(list);last_release={};fluid=bool(g.meta.get('fluid_ticks'));number=float if fluid else int
+    done=np.full(n,-1,dtype=np.float64 if fluid else np.int64);start=done.copy();parents=[None]*n
+    coissued=g.meta.get('coissued_nodes',{});slave={i for ids in coissued.values() for i in ids}
     wait=Counter();last_resource={};clock=0;completed=0;activity=Counter();per_tile=defaultdict(Counter);private_high=Counter();group_high=Counter()
     caps={'weight':524288,'weight_fifo':262144,'return':65536,'receive':65536,'workspace':1048576,
           'router0':4096,'router1':4096,'router2':4096,'router3':4096,'transmit':65536,'output':262144}
@@ -179,8 +183,11 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
     fixed=g.meta.get('fixed_sram_bytes',[262144]*16)
     private_budget=g.meta.get('private_sram_budget_bytes',2359296)
     def cap(key):return 2**50 if mode=='ideal_buffer' else caps[key[0]]
-    priority={'join':0,'sram_write':1,'sram_read':2,'vector':3,'mac':4,'link':5,'hb':6,'dram':7}
-    def enqueue(i):heapq.heappush(queues[g.nodes[i].resource],(priority[g.nodes[i].kind],i))
+    priority={'join':0,'sram_write':1,'sram_read':2,'vector':3,'mac':4,'link':5,'hb':6,'dram':7,'fifo_read':8}
+    ready_time={};head_time={};waiting=defaultdict(Counter);detailed=g.meta.get('detailed_waits',False)
+    def enqueue(i):
+        ready_time[i]=clock
+        if i not in slave:heapq.heappush(queues[g.nodes[i].resource],(priority[g.nodes[i].kind],i))
     for node in g.nodes:
         if not node.deps:enqueue(node.id)
     resource_order=sorted(queues,key=str)
@@ -201,7 +208,7 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
             for key in sorted(queues,key=lambda k:(priority[g.nodes[queues[k][0][1]].kind] if queues[k] else 99,str(k))):
                 if not queues[key] or busy.get(key,0)>clock:continue
                 candidate=queues[key][0][1]
-                coupled=[tuple(k) for k in g.meta.get('coupled_resources',{}).get(candidate,())]
+                coupled=[tuple(k) for k in g.meta.get('coupled_resources',{}).get(candidate,())]+[g.nodes[j].resource for j in coissued.get(candidate,())]
                 if any(busy.get(k,0)>clock for k in coupled):continue
                 _,i=queues[key][0];node=g.nodes[i]
                 if any(used[k]+a>cap(k) for k,a,_ in node.leases):
@@ -213,7 +220,7 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
                 heapq.heappop(queues[key])
                 if not queues[key]:del queues[key]
                 start[i]=clock;progress=True
-                candidates=[(int(done[j]),j,'dependency') for j in node.deps]
+                candidates=[(number(done[j]),j,'dependency') for j in node.deps]
                 if key in last_resource:candidates.append((busy[key],last_resource[key],'resource'))
                 for k in coupled:
                     if k in last_resource:candidates.append((busy[k],last_resource[k],'resource'))
@@ -226,7 +233,8 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
                 if node.kind in ('sram_read','sram_write'):duration=max(1,ceil(duration/sram_scale))
                 if node.kind=='link':duration=max(1,ceil(duration/link_scale))
                 if mode=='ideal_memory' and node.kind in ('dram','hb'):duration=0
-                if mode=='infinite_noc' and (node.kind=='link' or node.resource[0]=='flight'):duration=0
+                if mode in ('infinite_noc','link_only') and node.kind=='link':duration=0
+                if mode in ('infinite_noc','flight_only') and node.resource[0]=='flight':duration=0
                 if mode=='ideal_collective' and node.stage in ('combine','attention_reduce','ffn_reduce') and (node.kind=='link' or node.resource[0]=='flight'):duration=0
                 if mode in ('direct_stream','known_fusion') and node.stage in ('up','down','expert_up','expert_down','attention_local'):
                     # Existing fused kernels/registered accumulators avoid a
@@ -238,7 +246,14 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
                 # Direct streaming is a separate graph with a bounded FIFO;
                 # it is not implemented by secretly dropping compute work.
                 finish=clock+duration;busy[key]=finish;last_resource[key]=i
-                for k in coupled:busy[k]=finish;last_resource[k]=i
+                for k in g.meta.get('coupled_resources',{}).get(i,()):busy[tuple(k)]=finish;last_resource[tuple(k)]=i
+                for j in coissued.get(i,()):
+                    service=g.nodes[j]
+                    if remaining[j] or service.leases or service.ticks>duration:raise ValueError('Invalid co-issued service')
+                    start[j]=clock;parents[j]=latest;end_service=clock+service.ticks
+                    busy[service.resource]=end_service;last_resource[service.resource]=j
+                    activity[service.kind]+=service.work;per_tile[service.tile][service.kind]+=service.work
+                    heapq.heappush(events,(end_service,j))
                 for k,a,last in node.leases:
                     used[k]+=a;private_used[k[1]]+=a;high[k]=max(high[k],used[k]);owners[k][i]+=1;release[last].append((k,a,i))
                 for t in required:
@@ -253,7 +268,16 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
                 activity[node.kind]+=node.work;per_tile[node.tile][node.kind]+=node.work
                 if duration==0:break
             if events and events[0][0]<=clock:break
-        if events:clock=events[0][0]
+        if events:
+            until=events[0][0]
+            if detailed and until>clock:
+                for key,queue in queues.items():
+                    if not queue:continue
+                    i=queue[0][1];node=g.nodes[i];head_time.setdefault(i,clock)
+                    partners=[tuple(k) for k in g.meta.get('coupled_resources',{}).get(i,())]+[g.nodes[j].resource for j in coissued.get(i,())]
+                    reason='resource_wait' if busy.get(key,0)>clock else 'operand_port_wait' if any(busy.get(k,0)>clock for k in partners) else 'credit_wait' if any(used[k]+a>cap(k) for k,a,_ in node.leases) else 'private_credit_wait'
+                    waiting[i][reason]+=until-clock
+            clock=until
         elif completed<n:raise ValueError('Deadlock: finite credits/dependencies cannot progress')
     if np.any(done<start) or any(done[d]>start[node.id] for node in g.nodes for d in node.deps) or any(used.values()):
         raise ValueError('Noncausal execution or unreleased buffer')
@@ -261,7 +285,7 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
     intervals=defaultdict(list)
     for node in g.nodes:
         for resource in [node.resource]+[tuple(k) for k in g.meta.get('coupled_resources',{}).get(node.id,())]:
-            intervals[resource].append((int(start[node.id]),int(done[node.id]),node.id))
+            intervals[resource].append((number(start[node.id]),number(done[node.id]),node.id))
     for values in intervals.values():
         ordered=sorted(values)
         if any(a[1]>b[0] for a,b in zip(ordered,ordered[1:])):raise ValueError('Shared resource overcommitted')
@@ -270,14 +294,20 @@ def execute(g,mode='baseline',sram_scale=1.,link_scale=1.,energy_scale=1.):
         if frontier in seen:raise ValueError('Critical parent cycle')
         seen.add(frontier);node=g.nodes[frontier];before,parent,cause=parents[frontier]
         # The parent selection describes this scheduler, not all schedules.
-        path.append(dict(id=frontier,kind=node.kind,stage=node.stage,tile=node.tile,start_tick=int(start[frontier]),
-            finish_tick=int(done[frontier]),cause=cause,unattributed_gap_ticks=int(start[frontier]-before)))
+        path.append(dict(id=frontier,kind=node.kind,stage=node.stage,tile=node.tile,start_tick=number(start[frontier]),
+            finish_tick=number(done[frontier]),cause=cause,unattributed_gap_ticks=number(start[frontier]-before)))
         frontier=parent
     for node in g.nodes:
         before,parent,cause=parents[node.id]
-        records.append(dict(id=node.id,kind=node.kind,stage=node.stage,tile=node.tile,tier=node.tier,work=node.work,
-            start_tick=int(start[node.id]),finish_tick=int(done[node.id]),parent=parent,cause=cause))
-    return dict(mode=mode,ticks=int(done[end]),time_us=float(done[end])*.00025,activity=dict(activity),
+        record=dict(id=node.id,kind=node.kind,stage=node.stage,tile=node.tile,tier=node.tier,work=node.work,
+            start_tick=number(start[node.id]),finish_tick=number(done[node.id]),parent=parent,cause=cause)
+        if detailed:
+            ready=max((done[d] for d in node.deps),default=0);total_wait=start[node.id]-ready
+            observed=sum(waiting[node.id].values());queue_wait=total_wait-observed
+            if queue_wait < -1e-7:raise ValueError('Wait partition exceeds elapsed time')
+            record.update(ready_tick=number(ready),wait_ticks=dict(waiting[node.id],queue_wait=max(0,number(queue_wait))))
+        records.append(record)
+    return dict(mode=mode,ticks=number(done[end]),time_us=float(done[end])*.00025,activity=dict(activity),
         per_tile_activity={str(k):dict(v) for k,v in per_tile.items()},buffer_high={str(k):v for k,v in high.items()},
         credit_stall_probes=dict(wait),private_sram_high={str(k):v for k,v in private_high.items()},credit_group_high={str(k):v for k,v in group_high.items()},critical_path=list(reversed(path)),events=records,
         critical_path_scope='Resource/dependency/credit chain for the fixed packet scheduler; not an optimal-schedule lower bound',
