@@ -19,7 +19,9 @@ def bf16(x):
 def check_ledger(c,routes,meta):
     """Independent token/row/K coverage, weight slot and event binding audit."""
     expected={e:[t for t,row in enumerate(routes) if e in row] for e in set(e for row in routes for e in row)}
-    expected['shared']=list(range(len(routes)));d=c['hidden_size'];actual=defaultdict(list)
+    if meta.get('selected_experts') is not None:expected={e:t for e,t in expected.items() if e in meta['selected_experts']}
+    if meta.get('include_shared',True):expected['shared']=list(range(len(routes)))
+    d=c['hidden_size'];actual=defaultdict(list)
     kernels={rec['node']:rec for rec in meta['kernel_ledger']}
     for rec in meta['semantic_ledger']:
         e=rec['expert'];width=c['shared_expert_intermediate_size'] if e=='shared' else c['moe_intermediate_size']
@@ -56,7 +58,7 @@ def compare(c,routes,probabilities,meta,dtype='FP32',seed=20261011):
     x=q(rng.normal(0,.2,(b,d)));prob=q(probabilities)
     if prob.shape!=(b,c['num_experts_per_tok']):raise ValueError('Captured probability shape')
     weights={}
-    for e in sorted({e for row in routes for e in row})+['shared']:
+    for e in [j['expert'] for j in meta['jobs']]:
         width=hs if e=='shared' else h
         weights[e]=[q(rng.normal(0,.04,(width,d))),q(rng.normal(0,.04,(width,d))),q(rng.normal(0,.04,(d,width)))]
     shared_router=q(rng.normal(0,.04,(d,)))
@@ -65,6 +67,7 @@ def compare(c,routes,probabilities,meta,dtype='FP32',seed=20261011):
     reference=np.zeros((b,d),np.float32)
     for token,row in enumerate(routes):
         for slot,e in enumerate(row+['shared']):
+            if e not in weights:continue
             wg,wu,wd=weights[e]
             hidden=gated(wg@x[token],wu@x[token])
             scale=shared_prob[token] if e=='shared' else prob[token,slot]

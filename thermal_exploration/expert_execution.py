@@ -85,7 +85,7 @@ class RowBlockedExecution(CrossoverExecution):
         return r
 
 
-def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic',isolation='none',down_partition='column',combine_scheme='fused',dispatch_scheme='broadcast_all',reduction_scheme='drain_all',execution_grain='macro'):
+def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic',isolation='none',down_partition='column',combine_scheme='fused',dispatch_scheme='broadcast_all',reduction_scheme='drain_all',execution_grain='macro',graph_factory=None,selected_experts=None,include_shared=True):
     """Conventional TP/EP, packed dispatch, paired SwiGLU and row reductions.
 
     A joint local kernel uses the existing finite streaming service model.
@@ -110,17 +110,21 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
     b=len(routes);d=c['hidden_size'];h=c['moe_intermediate_size'];hs=c['shared_expert_intermediate_size']
     if any(len(r)!=c['num_experts_per_tok'] or len(set(r))!=len(r) or any(not 0<=e<c['num_experts'] for e in r) for r in routes):
         raise ValueError('Invalid captured expert selection')
-    counts=Counter(e for row in routes for e in row);budget=profile.budget(b,d,hs)
+    counts=Counter(e for row in routes for e in row)
+    if selected_experts is not None:
+        if not set(selected_experts)<=set(counts):raise ValueError('Selected experts absent from current routing')
+        counts=Counter({e:n for e,n in counts.items() if e in selected_experts})
+    budget=profile.budget(b,d,hs)
     if not budget['feasible']:raise ValueError('Fixed SRAM budget infeasible')
     p=replace(profile,isolation=isolation if isolation!='none' else profile.isolation)
-    g=Graph(256,True);g.meta['coupled_resources']={};jobs=[];ledger=[];semantics=[]
+    g=Graph(256,True) if graph_factory is None else graph_factory();g.meta['coupled_resources']={};jobs=[];ledger=[];semantics=[]
     experts=list(counts)
     if order=='static':experts.sort()
     else:experts.sort(key=lambda e:(-counts[e]/len(layout['tensors'][f'layer{layer}.expert{e}.up']),e))
     descriptors=[(f'layer{layer}.expert{e}',[t for t,row in enumerate(routes) if e in row],h,e) for e in experts]
-    descriptors.append((f'layer{layer}.shared',list(range(b)),hs,'shared'))
+    if include_shared:descriptors.append((f'layer{layer}.shared',list(range(b)),hs,'shared'))
     owners_by_expert={e:sorted(layout['tensors'][prefix+'.up']) for prefix,_,_,e in descriptors}
-    shared_owners=owners_by_expert['shared'];delivery=[]
+    shared_owners=owners_by_expert.get('shared',[]);delivery=[]
     def deliver(token,targets,stage):
         ready={t:[] for t in targets}
         for source in range(16):
@@ -309,13 +313,13 @@ def expert_graph(c,layout,layer,routes,profile,schedule='overlap',order='dynamic
             final.append(g.collective(root,producers,min(reduce_block,d-row)*b*4,'combine',preallocated_sources=True,output_credit='reduce_output' if early_reduction else 'output'))
         g.output=[g.join(final,'moe_output_ready')]
     else:g.output=[g.join(terminals,'moe_output_ready')]
-    expected=6*d*h*sum(counts.values())+6*d*hs*b
+    expected=6*d*h*sum(counts.values())+(6*d*hs*b if include_shared else 0)
     if sum(x['mac_flops'] for x in ledger)!=expected or sum(n.work for n in g.nodes if n.kind=='mac')!=expected:raise ValueError('Expert MAC work changed')
-    unique=(len(counts)*6*d*h+6*d*hs)
+    unique=(len(counts)*6*d*h+(6*d*hs if include_shared else 0))
     if sum(r['dram_bytes'] for r in ledger)!=sum(sum(n for _,n in parts) for name,owners in layout['tensors'].items() if name in [j['prefix']+'.'+suffix for j in jobs for suffix in ('gate','up','down')] for parts in owners.values()):
         raise ValueError('Expert weight reads changed')
     return g,dict(jobs=[{k:v for k,v in j.items() if k not in ('dispatch',)} for j in jobs],kernel_ledger=ledger,
         mac_flops=expected,active_weight_bytes=unique,actual_dram_bytes=sum(r['dram_bytes'] for r in ledger),
         all_expert_model_weight_bytes=c['num_experts']*6*d*h+6*d*hs,budget=budget,
-        token_expert_assignments=sum(counts.values()),counts=dict(counts),schedule=schedule,order=order,down_partition=down_partition,combine_scheme=combine_scheme,dispatch_scheme=dispatch_scheme,reduction_scheme=reduction_scheme,semantic_ledger=semantics,input_delivery=delivery,execution_grain=execution_grain,
+        token_expert_assignments=sum(counts.values()),counts=dict(counts),selected_experts=selected_experts,include_shared=include_shared,schedule=schedule,order=order,down_partition=down_partition,combine_scheme=combine_scheme,dispatch_scheme=dispatch_scheme,reduction_scheme=reduction_scheme,semantic_ledger=semantics,input_delivery=delivery,execution_grain=execution_grain,
         scope=('Captured routing, conventional static physical ownership, finite packed collectives and row buffering; joint service kernel serializes local experts conservatively; not complete LLM tokens/s' if execution_grain=='macro' else 'Captured routing, same static ownership and finite resources; separate native-return/HB/MAC/operand windows with eager port service; full MoE timing qualification not established; not complete LLM tokens/s'))
