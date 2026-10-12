@@ -1,0 +1,2743 @@
+{
+  "status": "RETIRED_START_ROW_ONLY_SHAPE_CONTRACT",
+  "retired_source": "f4fb4b7684342bca92f0eaa8086edd88df3aeec9",
+  "records": [
+    {
+      "run": "gate-full-cold-native",
+      "case": "row_fifo32",
+      "shape": [
+        1408,
+        2048,
+        1
+      ],
+      "native_reference": {
+        "straddled_packets": 48,
+        "early_packet_count": 28,
+        "early_packets": [
+          {
+            "group": 5,
+            "tile": 0,
+            "packet_bytes": [
+              160,
+              192
+            ],
+            "producer_tasks": [
+              976,
+              992
+            ],
+            "observed_start": 938,
+            "required_ready": 960,
+            "premature_ticks": 22
+          },
+          {
+            "group": 16,
+            "tile": 1,
+            "packet_bytes": [
+              512,
+              544
+            ],
+            "producer_tasks": [
+              977,
+              993
+            ],
+            "observed_start": 938,
+            "required_ready": 960,
+            "premature_ticks": 22
+          },
+          {
+            "group": 49,
+            "tile": 4,
+            "packet_bytes": [
+              1568,
+              1600
+            ],
+            "producer_tasks": [
+              980,
+              996
+            ],
+            "observed_start": 938,
+            "required_ready": 960,
+            "premature_ticks": 22
+          },
+          {
+            "group": 60,
+            "tile": 5,
+            "packet_bytes": [
+              1920,
+              1952
+            ],
+            "producer_tasks": [
+              981,
+              997
+            ],
+            "observed_start": 938,
+            "required_ready": 960,
+            "premature_ticks": 22
+          },
+          {
+            "group": 93,
+            "tile": 8,
+            "packet_bytes": [
+              2976,
+              3008
+            ],
+            "producer_tasks": [
+              984,
+              1000
+            ],
+            "observed_start": 938,
+            "required_ready": 960,
+            "premature_ticks": 22
+          },
+          {
+            "group": 137,
+            "tile": 12,
+            "packet_bytes": [
+              4384,
+              4416
+            ],
+            "producer_tasks": [
+              988,
+              1004
+            ],
+            "observed_start": 938,
+            "required_ready": 960,
+            "premature_ticks": 22
+          },
+          {
+            "group": 27,
+            "tile": 2,
+            "packet_bytes": [
+              864,
+              896
+            ],
+            "producer_tasks": [
+              978,
+              994
+            ],
+            "observed_start": 952,
+            "required_ready": 970,
+            "premature_ticks": 18
+          },
+          {
+            "group": 38,
+            "tile": 3,
+            "packet_bytes": [
+              1216,
+              1248
+            ],
+            "producer_tasks": [
+              979,
+              995
+            ],
+            "observed_start": 956,
+            "required_ready": 962,
+            "premature_ticks": 6
+          },
+          {
+            "group": 82,
+            "tile": 7,
+            "packet_bytes": [
+              2624,
+              2656
+            ],
+            "producer_tasks": [
+              983,
+              999
+            ],
+            "observed_start": 961,
+            "required_ready": 967,
+            "premature_ticks": 6
+          },
+          {
+            "group": 71,
+            "tile": 6,
+            "packet_bytes": [
+              2272,
+              2304
+            ],
+            "producer_tasks": [
+              982,
+              998
+            ],
+            "observed_start": 965,
+            "required_ready": 971,
+            "premature_ticks": 6
+          },
+          {
+            "group": 41,
+            "tile": 3,
+            "packet_bytes": [
+              1312,
+              1344
+            ],
+            "producer_tasks": [
+              995,
+              1011
+            ],
+            "observed_start": 968,
+            "required_ready": 974,
+            "premature_ticks": 6
+          },
+          {
+            "group": 104,
+            "tile": 9,
+            "packet_bytes": [
+              3328,
+              3360
+            ],
+            "producer_tasks": [
+              985,
+              1001
+            ],
+            "observed_start": 972,
+            "required_ready": 978,
+            "premature_ticks": 6
+          },
+          {
+            "group": 85,
+            "tile": 7,
+            "packet_bytes": [
+              2720,
+              2752
+            ],
+            "producer_tasks": [
+              999,
+              1015
+            ],
+            "observed_start": 973,
+            "required_ready": 979,
+            "premature_ticks": 6
+          },
+          {
+            "group": 74,
+            "tile": 6,
+            "packet_bytes": [
+              2368,
+              2400
+            ],
+            "producer_tasks": [
+              998,
+              1014
+            ],
+            "observed_start": 977,
+            "required_ready": 983,
+            "premature_ticks": 6
+          },
+          {
+            "group": 148,
+            "tile": 13,
+            "packet_bytes": [
+              4736,
+              4768
+            ],
+            "producer_tasks": [
+              989,
+              1005
+            ],
+            "observed_start": 980,
+            "required_ready": 986,
+            "premature_ticks": 6
+          },
+          {
+            "group": 107,
+            "tile": 9,
+            "packet_bytes": [
+              3424,
+              3456
+            ],
+            "producer_tasks": [
+              1001,
+              1017
+            ],
+            "observed_start": 984,
+            "required_ready": 990,
+            "premature_ticks": 6
+          },
+          {
+            "group": 151,
+            "tile": 13,
+            "packet_bytes": [
+              4832,
+              4864
+            ],
+            "producer_tasks": [
+              1005,
+              1021
+            ],
+            "observed_start": 992,
+            "required_ready": 1010,
+            "premature_ticks": 18
+          },
+          {
+            "group": 115,
+            "tile": 10,
+            "packet_bytes": [
+              3680,
+              3712
+            ],
+            "producer_tasks": [
+              986,
+              1002
+            ],
+            "observed_start": 1000,
+            "required_ready": 1018,
+            "premature_ticks": 18
+          },
+          {
+            "group": 156,
+            "tile": 14,
+            "packet_bytes": [
+              4992,
+              5024
+            ],
+            "producer_tasks": [
+              974,
+              990
+            ],
+            "observed_start": 1008,
+            "required_ready": 1014,
+            "premature_ticks": 6
+          },
+          {
+            "group": 159,
+            "tile": 14,
+            "packet_bytes": [
+              5088,
+              5120
+            ],
+            "producer_tasks": [
+              990,
+              1006
+            ],
+            "observed_start": 1020,
+            "required_ready": 1026,
+            "premature_ticks": 6
+          },
+          {
+            "group": 118,
+            "tile": 10,
+            "packet_bytes": [
+              3776,
+              3808
+            ],
+            "producer_tasks": [
+              1002,
+              1018
+            ],
+            "observed_start": 1024,
+            "required_ready": 1030,
+            "premature_ticks": 6
+          },
+          {
+            "group": 123,
+            "tile": 11,
+            "packet_bytes": [
+              3936,
+              3968
+            ],
+            "producer_tasks": [
+              971,
+              987
+            ],
+            "observed_start": 1024,
+            "required_ready": 1030,
+            "premature_ticks": 6
+          },
+          {
+            "group": 162,
+            "tile": 14,
+            "packet_bytes": [
+              5184,
+              5216
+            ],
+            "producer_tasks": [
+              1006,
+              1022
+            ],
+            "observed_start": 1032,
+            "required_ready": 1038,
+            "premature_ticks": 6
+          },
+          {
+            "group": 167,
+            "tile": 15,
+            "packet_bytes": [
+              5344,
+              5376
+            ],
+            "producer_tasks": [
+              975,
+              991
+            ],
+            "observed_start": 1032,
+            "required_ready": 1038,
+            "premature_ticks": 6
+          },
+          {
+            "group": 126,
+            "tile": 11,
+            "packet_bytes": [
+              4032,
+              4064
+            ],
+            "producer_tasks": [
+              987,
+              1003
+            ],
+            "observed_start": 1036,
+            "required_ready": 1042,
+            "premature_ticks": 6
+          },
+          {
+            "group": 170,
+            "tile": 15,
+            "packet_bytes": [
+              5440,
+              5472
+            ],
+            "producer_tasks": [
+              991,
+              1007
+            ],
+            "observed_start": 1044,
+            "required_ready": 1050,
+            "premature_ticks": 6
+          },
+          {
+            "group": 129,
+            "tile": 11,
+            "packet_bytes": [
+              4128,
+              4160
+            ],
+            "producer_tasks": [
+              1003,
+              1019
+            ],
+            "observed_start": 1048,
+            "required_ready": 1054,
+            "premature_ticks": 6
+          },
+          {
+            "group": 173,
+            "tile": 15,
+            "packet_bytes": [
+              5536,
+              5568
+            ],
+            "producer_tasks": [
+              1007,
+              1023
+            ],
+            "observed_start": 1056,
+            "required_ready": 1062,
+            "premature_ticks": 6
+          }
+        ]
+      },
+      "python_predictor": {
+        "straddled_packets": 48,
+        "early_packet_count": 48,
+        "early_packets": [
+          {
+            "group": 46,
+            "tile": 4,
+            "packet_bytes": [
+              1472,
+              1504
+            ],
+            "producer_tasks": [
+              964,
+              980
+            ],
+            "observed_start": 878,
+            "required_ready": 884,
+            "premature_ticks": 6
+          },
+          {
+            "group": 2,
+            "tile": 0,
+            "packet_bytes": [
+              64,
+              96
+            ],
+            "producer_tasks": [
+              960,
+              976
+            ],
+            "observed_start": 888,
+            "required_ready": 894,
+            "premature_ticks": 6
+          },
+          {
+            "group": 49,
+            "tile": 4,
+            "packet_bytes": [
+              1568,
+              1600
+            ],
+            "producer_tasks": [
+              980,
+              996
+            ],
+            "observed_start": 890,
+            "required_ready": 896,
+            "premature_ticks": 6
+          },
+          {
+            "group": 5,
+            "tile": 0,
+            "packet_bytes": [
+              160,
+              192
+            ],
+            "producer_tasks": [
+              976,
+              992
+            ],
+            "observed_start": 900,
+            "required_ready": 906,
+            "premature_ticks": 6
+          },
+          {
+            "group": 52,
+            "tile": 4,
+            "packet_bytes": [
+              1664,
+              1696
+            ],
+            "producer_tasks": [
+              996,
+              1012
+            ],
+            "observed_start": 902,
+            "required_ready": 909,
+            "premature_ticks": 7
+          },
+          {
+            "group": 13,
+            "tile": 1,
+            "packet_bytes": [
+              416,
+              448
+            ],
+            "producer_tasks": [
+              961,
+              977
+            ],
+            "observed_start": 904,
+            "required_ready": 910,
+            "premature_ticks": 6
+          },
+          {
+            "group": 8,
+            "tile": 0,
+            "packet_bytes": [
+              256,
+              288
+            ],
+            "producer_tasks": [
+              992,
+              1008
+            ],
+            "observed_start": 912,
+            "required_ready": 918,
+            "premature_ticks": 6
+          },
+          {
+            "group": 16,
+            "tile": 1,
+            "packet_bytes": [
+              512,
+              544
+            ],
+            "producer_tasks": [
+              977,
+              993
+            ],
+            "observed_start": 916,
+            "required_ready": 922,
+            "premature_ticks": 6
+          },
+          {
+            "group": 90,
+            "tile": 8,
+            "packet_bytes": [
+              2880,
+              2912
+            ],
+            "producer_tasks": [
+              968,
+              984
+            ],
+            "observed_start": 924,
+            "required_ready": 930,
+            "premature_ticks": 6
+          },
+          {
+            "group": 19,
+            "tile": 1,
+            "packet_bytes": [
+              608,
+              640
+            ],
+            "producer_tasks": [
+              993,
+              1009
+            ],
+            "observed_start": 928,
+            "required_ready": 934,
+            "premature_ticks": 6
+          },
+          {
+            "group": 134,
+            "tile": 12,
+            "packet_bytes": [
+              4288,
+              4320
+            ],
+            "producer_tasks": [
+              972,
+              988
+            ],
+            "observed_start": 932,
+            "required_ready": 938,
+            "premature_ticks": 6
+          },
+          {
+            "group": 57,
+            "tile": 5,
+            "packet_bytes": [
+              1824,
+              1856
+            ],
+            "producer_tasks": [
+              965,
+              981
+            ],
+            "observed_start": 933,
+            "required_ready": 939,
+            "premature_ticks": 6
+          },
+          {
+            "group": 24,
+            "tile": 2,
+            "packet_bytes": [
+              768,
+              800
+            ],
+            "producer_tasks": [
+              962,
+              978
+            ],
+            "observed_start": 936,
+            "required_ready": 942,
+            "premature_ticks": 6
+          },
+          {
+            "group": 93,
+            "tile": 8,
+            "packet_bytes": [
+              2976,
+              3008
+            ],
+            "producer_tasks": [
+              984,
+              1000
+            ],
+            "observed_start": 936,
+            "required_ready": 942,
+            "premature_ticks": 6
+          },
+          {
+            "group": 35,
+            "tile": 3,
+            "packet_bytes": [
+              1120,
+              1152
+            ],
+            "producer_tasks": [
+              963,
+              979
+            ],
+            "observed_start": 944,
+            "required_ready": 950,
+            "premature_ticks": 6
+          },
+          {
+            "group": 137,
+            "tile": 12,
+            "packet_bytes": [
+              4384,
+              4416
+            ],
+            "producer_tasks": [
+              988,
+              1004
+            ],
+            "observed_start": 944,
+            "required_ready": 950,
+            "premature_ticks": 6
+          },
+          {
+            "group": 60,
+            "tile": 5,
+            "packet_bytes": [
+              1920,
+              1952
+            ],
+            "producer_tasks": [
+              981,
+              997
+            ],
+            "observed_start": 945,
+            "required_ready": 951,
+            "premature_ticks": 6
+          },
+          {
+            "group": 27,
+            "tile": 2,
+            "packet_bytes": [
+              864,
+              896
+            ],
+            "producer_tasks": [
+              978,
+              994
+            ],
+            "observed_start": 948,
+            "required_ready": 954,
+            "premature_ticks": 6
+          },
+          {
+            "group": 96,
+            "tile": 8,
+            "packet_bytes": [
+              3072,
+              3104
+            ],
+            "producer_tasks": [
+              1000,
+              1016
+            ],
+            "observed_start": 948,
+            "required_ready": 954,
+            "premature_ticks": 6
+          },
+          {
+            "group": 38,
+            "tile": 3,
+            "packet_bytes": [
+              1216,
+              1248
+            ],
+            "producer_tasks": [
+              979,
+              995
+            ],
+            "observed_start": 956,
+            "required_ready": 962,
+            "premature_ticks": 6
+          },
+          {
+            "group": 140,
+            "tile": 12,
+            "packet_bytes": [
+              4480,
+              4512
+            ],
+            "producer_tasks": [
+              1004,
+              1020
+            ],
+            "observed_start": 956,
+            "required_ready": 962,
+            "premature_ticks": 6
+          },
+          {
+            "group": 63,
+            "tile": 5,
+            "packet_bytes": [
+              2016,
+              2048
+            ],
+            "producer_tasks": [
+              997,
+              1013
+            ],
+            "observed_start": 957,
+            "required_ready": 963,
+            "premature_ticks": 6
+          },
+          {
+            "group": 30,
+            "tile": 2,
+            "packet_bytes": [
+              960,
+              992
+            ],
+            "producer_tasks": [
+              994,
+              1010
+            ],
+            "observed_start": 960,
+            "required_ready": 966,
+            "premature_ticks": 6
+          },
+          {
+            "group": 79,
+            "tile": 7,
+            "packet_bytes": [
+              2528,
+              2560
+            ],
+            "producer_tasks": [
+              967,
+              983
+            ],
+            "observed_start": 961,
+            "required_ready": 967,
+            "premature_ticks": 6
+          },
+          {
+            "group": 68,
+            "tile": 6,
+            "packet_bytes": [
+              2176,
+              2208
+            ],
+            "producer_tasks": [
+              966,
+              982
+            ],
+            "observed_start": 965,
+            "required_ready": 971,
+            "premature_ticks": 6
+          },
+          {
+            "group": 41,
+            "tile": 3,
+            "packet_bytes": [
+              1312,
+              1344
+            ],
+            "producer_tasks": [
+              995,
+              1011
+            ],
+            "observed_start": 968,
+            "required_ready": 974,
+            "premature_ticks": 6
+          },
+          {
+            "group": 101,
+            "tile": 9,
+            "packet_bytes": [
+              3232,
+              3264
+            ],
+            "producer_tasks": [
+              969,
+              985
+            ],
+            "observed_start": 972,
+            "required_ready": 978,
+            "premature_ticks": 6
+          },
+          {
+            "group": 82,
+            "tile": 7,
+            "packet_bytes": [
+              2624,
+              2656
+            ],
+            "producer_tasks": [
+              983,
+              999
+            ],
+            "observed_start": 973,
+            "required_ready": 979,
+            "premature_ticks": 6
+          },
+          {
+            "group": 71,
+            "tile": 6,
+            "packet_bytes": [
+              2272,
+              2304
+            ],
+            "producer_tasks": [
+              982,
+              998
+            ],
+            "observed_start": 977,
+            "required_ready": 983,
+            "premature_ticks": 6
+          },
+          {
+            "group": 145,
+            "tile": 13,
+            "packet_bytes": [
+              4640,
+              4672
+            ],
+            "producer_tasks": [
+              973,
+              989
+            ],
+            "observed_start": 980,
+            "required_ready": 986,
+            "premature_ticks": 6
+          },
+          {
+            "group": 104,
+            "tile": 9,
+            "packet_bytes": [
+              3328,
+              3360
+            ],
+            "producer_tasks": [
+              985,
+              1001
+            ],
+            "observed_start": 984,
+            "required_ready": 990,
+            "premature_ticks": 6
+          },
+          {
+            "group": 85,
+            "tile": 7,
+            "packet_bytes": [
+              2720,
+              2752
+            ],
+            "producer_tasks": [
+              999,
+              1015
+            ],
+            "observed_start": 985,
+            "required_ready": 991,
+            "premature_ticks": 6
+          },
+          {
+            "group": 74,
+            "tile": 6,
+            "packet_bytes": [
+              2368,
+              2400
+            ],
+            "producer_tasks": [
+              998,
+              1014
+            ],
+            "observed_start": 989,
+            "required_ready": 995,
+            "premature_ticks": 6
+          },
+          {
+            "group": 148,
+            "tile": 13,
+            "packet_bytes": [
+              4736,
+              4768
+            ],
+            "producer_tasks": [
+              989,
+              1005
+            ],
+            "observed_start": 992,
+            "required_ready": 998,
+            "premature_ticks": 6
+          },
+          {
+            "group": 107,
+            "tile": 9,
+            "packet_bytes": [
+              3424,
+              3456
+            ],
+            "producer_tasks": [
+              1001,
+              1017
+            ],
+            "observed_start": 996,
+            "required_ready": 1002,
+            "premature_ticks": 6
+          },
+          {
+            "group": 112,
+            "tile": 10,
+            "packet_bytes": [
+              3584,
+              3616
+            ],
+            "producer_tasks": [
+              970,
+              986
+            ],
+            "observed_start": 1000,
+            "required_ready": 1006,
+            "premature_ticks": 6
+          },
+          {
+            "group": 151,
+            "tile": 13,
+            "packet_bytes": [
+              4832,
+              4864
+            ],
+            "producer_tasks": [
+              1005,
+              1021
+            ],
+            "observed_start": 1004,
+            "required_ready": 1010,
+            "premature_ticks": 6
+          },
+          {
+            "group": 156,
+            "tile": 14,
+            "packet_bytes": [
+              4992,
+              5024
+            ],
+            "producer_tasks": [
+              974,
+              990
+            ],
+            "observed_start": 1008,
+            "required_ready": 1014,
+            "premature_ticks": 6
+          },
+          {
+            "group": 115,
+            "tile": 10,
+            "packet_bytes": [
+              3680,
+              3712
+            ],
+            "producer_tasks": [
+              986,
+              1002
+            ],
+            "observed_start": 1012,
+            "required_ready": 1018,
+            "premature_ticks": 6
+          },
+          {
+            "group": 159,
+            "tile": 14,
+            "packet_bytes": [
+              5088,
+              5120
+            ],
+            "producer_tasks": [
+              990,
+              1006
+            ],
+            "observed_start": 1020,
+            "required_ready": 1026,
+            "premature_ticks": 6
+          },
+          {
+            "group": 118,
+            "tile": 10,
+            "packet_bytes": [
+              3776,
+              3808
+            ],
+            "producer_tasks": [
+              1002,
+              1018
+            ],
+            "observed_start": 1024,
+            "required_ready": 1030,
+            "premature_ticks": 6
+          },
+          {
+            "group": 123,
+            "tile": 11,
+            "packet_bytes": [
+              3936,
+              3968
+            ],
+            "producer_tasks": [
+              971,
+              987
+            ],
+            "observed_start": 1024,
+            "required_ready": 1030,
+            "premature_ticks": 6
+          },
+          {
+            "group": 162,
+            "tile": 14,
+            "packet_bytes": [
+              5184,
+              5216
+            ],
+            "producer_tasks": [
+              1006,
+              1022
+            ],
+            "observed_start": 1032,
+            "required_ready": 1038,
+            "premature_ticks": 6
+          },
+          {
+            "group": 167,
+            "tile": 15,
+            "packet_bytes": [
+              5344,
+              5376
+            ],
+            "producer_tasks": [
+              975,
+              991
+            ],
+            "observed_start": 1032,
+            "required_ready": 1038,
+            "premature_ticks": 6
+          },
+          {
+            "group": 126,
+            "tile": 11,
+            "packet_bytes": [
+              4032,
+              4064
+            ],
+            "producer_tasks": [
+              987,
+              1003
+            ],
+            "observed_start": 1036,
+            "required_ready": 1042,
+            "premature_ticks": 6
+          },
+          {
+            "group": 170,
+            "tile": 15,
+            "packet_bytes": [
+              5440,
+              5472
+            ],
+            "producer_tasks": [
+              991,
+              1007
+            ],
+            "observed_start": 1044,
+            "required_ready": 1050,
+            "premature_ticks": 6
+          },
+          {
+            "group": 129,
+            "tile": 11,
+            "packet_bytes": [
+              4128,
+              4160
+            ],
+            "producer_tasks": [
+              1003,
+              1019
+            ],
+            "observed_start": 1048,
+            "required_ready": 1054,
+            "premature_ticks": 6
+          },
+          {
+            "group": 173,
+            "tile": 15,
+            "packet_bytes": [
+              5536,
+              5568
+            ],
+            "producer_tasks": [
+              1007,
+              1023
+            ],
+            "observed_start": 1056,
+            "required_ready": 1062,
+            "premature_ticks": 6
+          }
+        ]
+      }
+    },
+    {
+      "run": "gate-full-cold-native",
+      "case": "column_fifo32",
+      "shape": [
+        1408,
+        2048,
+        1
+      ],
+      "native_reference": {
+        "straddled_packets": 0,
+        "early_packet_count": 0,
+        "early_packets": []
+      },
+      "python_predictor": {
+        "straddled_packets": 0,
+        "early_packet_count": 0,
+        "early_packets": []
+      }
+    },
+    {
+      "run": "gate-full-cold-fluid",
+      "case": "row_fifo32",
+      "shape": [
+        1408,
+        2048,
+        1
+      ],
+      "native_reference": {
+        "straddled_packets": 48,
+        "early_packet_count": 48,
+        "early_packets": [
+          {
+            "group": 46,
+            "tile": 4,
+            "packet_bytes": [
+              1472,
+              1504
+            ],
+            "producer_tasks": [
+              964,
+              980
+            ],
+            "observed_start": 878,
+            "required_ready": 884,
+            "premature_ticks": 6
+          },
+          {
+            "group": 2,
+            "tile": 0,
+            "packet_bytes": [
+              64,
+              96
+            ],
+            "producer_tasks": [
+              960,
+              976
+            ],
+            "observed_start": 888,
+            "required_ready": 894,
+            "premature_ticks": 6
+          },
+          {
+            "group": 49,
+            "tile": 4,
+            "packet_bytes": [
+              1568,
+              1600
+            ],
+            "producer_tasks": [
+              980,
+              996
+            ],
+            "observed_start": 890,
+            "required_ready": 896,
+            "premature_ticks": 6
+          },
+          {
+            "group": 5,
+            "tile": 0,
+            "packet_bytes": [
+              160,
+              192
+            ],
+            "producer_tasks": [
+              976,
+              992
+            ],
+            "observed_start": 900,
+            "required_ready": 906,
+            "premature_ticks": 6
+          },
+          {
+            "group": 52,
+            "tile": 4,
+            "packet_bytes": [
+              1664,
+              1696
+            ],
+            "producer_tasks": [
+              996,
+              1012
+            ],
+            "observed_start": 902,
+            "required_ready": 909,
+            "premature_ticks": 7
+          },
+          {
+            "group": 13,
+            "tile": 1,
+            "packet_bytes": [
+              416,
+              448
+            ],
+            "producer_tasks": [
+              961,
+              977
+            ],
+            "observed_start": 904,
+            "required_ready": 910,
+            "premature_ticks": 6
+          },
+          {
+            "group": 8,
+            "tile": 0,
+            "packet_bytes": [
+              256,
+              288
+            ],
+            "producer_tasks": [
+              992,
+              1008
+            ],
+            "observed_start": 912,
+            "required_ready": 918,
+            "premature_ticks": 6
+          },
+          {
+            "group": 16,
+            "tile": 1,
+            "packet_bytes": [
+              512,
+              544
+            ],
+            "producer_tasks": [
+              977,
+              993
+            ],
+            "observed_start": 916,
+            "required_ready": 922,
+            "premature_ticks": 6
+          },
+          {
+            "group": 90,
+            "tile": 8,
+            "packet_bytes": [
+              2880,
+              2912
+            ],
+            "producer_tasks": [
+              968,
+              984
+            ],
+            "observed_start": 924,
+            "required_ready": 930,
+            "premature_ticks": 6
+          },
+          {
+            "group": 19,
+            "tile": 1,
+            "packet_bytes": [
+              608,
+              640
+            ],
+            "producer_tasks": [
+              993,
+              1009
+            ],
+            "observed_start": 928,
+            "required_ready": 934,
+            "premature_ticks": 6
+          },
+          {
+            "group": 134,
+            "tile": 12,
+            "packet_bytes": [
+              4288,
+              4320
+            ],
+            "producer_tasks": [
+              972,
+              988
+            ],
+            "observed_start": 932,
+            "required_ready": 938,
+            "premature_ticks": 6
+          },
+          {
+            "group": 57,
+            "tile": 5,
+            "packet_bytes": [
+              1824,
+              1856
+            ],
+            "producer_tasks": [
+              965,
+              981
+            ],
+            "observed_start": 933,
+            "required_ready": 939,
+            "premature_ticks": 6
+          },
+          {
+            "group": 24,
+            "tile": 2,
+            "packet_bytes": [
+              768,
+              800
+            ],
+            "producer_tasks": [
+              962,
+              978
+            ],
+            "observed_start": 936,
+            "required_ready": 942,
+            "premature_ticks": 6
+          },
+          {
+            "group": 93,
+            "tile": 8,
+            "packet_bytes": [
+              2976,
+              3008
+            ],
+            "producer_tasks": [
+              984,
+              1000
+            ],
+            "observed_start": 936,
+            "required_ready": 942,
+            "premature_ticks": 6
+          },
+          {
+            "group": 35,
+            "tile": 3,
+            "packet_bytes": [
+              1120,
+              1152
+            ],
+            "producer_tasks": [
+              963,
+              979
+            ],
+            "observed_start": 944,
+            "required_ready": 950,
+            "premature_ticks": 6
+          },
+          {
+            "group": 137,
+            "tile": 12,
+            "packet_bytes": [
+              4384,
+              4416
+            ],
+            "producer_tasks": [
+              988,
+              1004
+            ],
+            "observed_start": 944,
+            "required_ready": 950,
+            "premature_ticks": 6
+          },
+          {
+            "group": 60,
+            "tile": 5,
+            "packet_bytes": [
+              1920,
+              1952
+            ],
+            "producer_tasks": [
+              981,
+              997
+            ],
+            "observed_start": 945,
+            "required_ready": 951,
+            "premature_ticks": 6
+          },
+          {
+            "group": 27,
+            "tile": 2,
+            "packet_bytes": [
+              864,
+              896
+            ],
+            "producer_tasks": [
+              978,
+              994
+            ],
+            "observed_start": 948,
+            "required_ready": 954,
+            "premature_ticks": 6
+          },
+          {
+            "group": 96,
+            "tile": 8,
+            "packet_bytes": [
+              3072,
+              3104
+            ],
+            "producer_tasks": [
+              1000,
+              1016
+            ],
+            "observed_start": 948,
+            "required_ready": 954,
+            "premature_ticks": 6
+          },
+          {
+            "group": 38,
+            "tile": 3,
+            "packet_bytes": [
+              1216,
+              1248
+            ],
+            "producer_tasks": [
+              979,
+              995
+            ],
+            "observed_start": 956,
+            "required_ready": 962,
+            "premature_ticks": 6
+          },
+          {
+            "group": 140,
+            "tile": 12,
+            "packet_bytes": [
+              4480,
+              4512
+            ],
+            "producer_tasks": [
+              1004,
+              1020
+            ],
+            "observed_start": 956,
+            "required_ready": 962,
+            "premature_ticks": 6
+          },
+          {
+            "group": 63,
+            "tile": 5,
+            "packet_bytes": [
+              2016,
+              2048
+            ],
+            "producer_tasks": [
+              997,
+              1013
+            ],
+            "observed_start": 957,
+            "required_ready": 963,
+            "premature_ticks": 6
+          },
+          {
+            "group": 30,
+            "tile": 2,
+            "packet_bytes": [
+              960,
+              992
+            ],
+            "producer_tasks": [
+              994,
+              1010
+            ],
+            "observed_start": 960,
+            "required_ready": 966,
+            "premature_ticks": 6
+          },
+          {
+            "group": 79,
+            "tile": 7,
+            "packet_bytes": [
+              2528,
+              2560
+            ],
+            "producer_tasks": [
+              967,
+              983
+            ],
+            "observed_start": 961,
+            "required_ready": 967,
+            "premature_ticks": 6
+          },
+          {
+            "group": 68,
+            "tile": 6,
+            "packet_bytes": [
+              2176,
+              2208
+            ],
+            "producer_tasks": [
+              966,
+              982
+            ],
+            "observed_start": 965,
+            "required_ready": 971,
+            "premature_ticks": 6
+          },
+          {
+            "group": 41,
+            "tile": 3,
+            "packet_bytes": [
+              1312,
+              1344
+            ],
+            "producer_tasks": [
+              995,
+              1011
+            ],
+            "observed_start": 968,
+            "required_ready": 974,
+            "premature_ticks": 6
+          },
+          {
+            "group": 101,
+            "tile": 9,
+            "packet_bytes": [
+              3232,
+              3264
+            ],
+            "producer_tasks": [
+              969,
+              985
+            ],
+            "observed_start": 972,
+            "required_ready": 978,
+            "premature_ticks": 6
+          },
+          {
+            "group": 82,
+            "tile": 7,
+            "packet_bytes": [
+              2624,
+              2656
+            ],
+            "producer_tasks": [
+              983,
+              999
+            ],
+            "observed_start": 973,
+            "required_ready": 979,
+            "premature_ticks": 6
+          },
+          {
+            "group": 71,
+            "tile": 6,
+            "packet_bytes": [
+              2272,
+              2304
+            ],
+            "producer_tasks": [
+              982,
+              998
+            ],
+            "observed_start": 977,
+            "required_ready": 983,
+            "premature_ticks": 6
+          },
+          {
+            "group": 145,
+            "tile": 13,
+            "packet_bytes": [
+              4640,
+              4672
+            ],
+            "producer_tasks": [
+              973,
+              989
+            ],
+            "observed_start": 980,
+            "required_ready": 986,
+            "premature_ticks": 6
+          },
+          {
+            "group": 104,
+            "tile": 9,
+            "packet_bytes": [
+              3328,
+              3360
+            ],
+            "producer_tasks": [
+              985,
+              1001
+            ],
+            "observed_start": 984,
+            "required_ready": 990,
+            "premature_ticks": 6
+          },
+          {
+            "group": 85,
+            "tile": 7,
+            "packet_bytes": [
+              2720,
+              2752
+            ],
+            "producer_tasks": [
+              999,
+              1015
+            ],
+            "observed_start": 985,
+            "required_ready": 991,
+            "premature_ticks": 6
+          },
+          {
+            "group": 74,
+            "tile": 6,
+            "packet_bytes": [
+              2368,
+              2400
+            ],
+            "producer_tasks": [
+              998,
+              1014
+            ],
+            "observed_start": 989,
+            "required_ready": 995,
+            "premature_ticks": 6
+          },
+          {
+            "group": 148,
+            "tile": 13,
+            "packet_bytes": [
+              4736,
+              4768
+            ],
+            "producer_tasks": [
+              989,
+              1005
+            ],
+            "observed_start": 992,
+            "required_ready": 998,
+            "premature_ticks": 6
+          },
+          {
+            "group": 107,
+            "tile": 9,
+            "packet_bytes": [
+              3424,
+              3456
+            ],
+            "producer_tasks": [
+              1001,
+              1017
+            ],
+            "observed_start": 996,
+            "required_ready": 1002,
+            "premature_ticks": 6
+          },
+          {
+            "group": 112,
+            "tile": 10,
+            "packet_bytes": [
+              3584,
+              3616
+            ],
+            "producer_tasks": [
+              970,
+              986
+            ],
+            "observed_start": 1000,
+            "required_ready": 1006,
+            "premature_ticks": 6
+          },
+          {
+            "group": 151,
+            "tile": 13,
+            "packet_bytes": [
+              4832,
+              4864
+            ],
+            "producer_tasks": [
+              1005,
+              1021
+            ],
+            "observed_start": 1004,
+            "required_ready": 1010,
+            "premature_ticks": 6
+          },
+          {
+            "group": 156,
+            "tile": 14,
+            "packet_bytes": [
+              4992,
+              5024
+            ],
+            "producer_tasks": [
+              974,
+              990
+            ],
+            "observed_start": 1008,
+            "required_ready": 1014,
+            "premature_ticks": 6
+          },
+          {
+            "group": 115,
+            "tile": 10,
+            "packet_bytes": [
+              3680,
+              3712
+            ],
+            "producer_tasks": [
+              986,
+              1002
+            ],
+            "observed_start": 1012,
+            "required_ready": 1018,
+            "premature_ticks": 6
+          },
+          {
+            "group": 159,
+            "tile": 14,
+            "packet_bytes": [
+              5088,
+              5120
+            ],
+            "producer_tasks": [
+              990,
+              1006
+            ],
+            "observed_start": 1020,
+            "required_ready": 1026,
+            "premature_ticks": 6
+          },
+          {
+            "group": 118,
+            "tile": 10,
+            "packet_bytes": [
+              3776,
+              3808
+            ],
+            "producer_tasks": [
+              1002,
+              1018
+            ],
+            "observed_start": 1024,
+            "required_ready": 1030,
+            "premature_ticks": 6
+          },
+          {
+            "group": 123,
+            "tile": 11,
+            "packet_bytes": [
+              3936,
+              3968
+            ],
+            "producer_tasks": [
+              971,
+              987
+            ],
+            "observed_start": 1024,
+            "required_ready": 1030,
+            "premature_ticks": 6
+          },
+          {
+            "group": 162,
+            "tile": 14,
+            "packet_bytes": [
+              5184,
+              5216
+            ],
+            "producer_tasks": [
+              1006,
+              1022
+            ],
+            "observed_start": 1032,
+            "required_ready": 1038,
+            "premature_ticks": 6
+          },
+          {
+            "group": 167,
+            "tile": 15,
+            "packet_bytes": [
+              5344,
+              5376
+            ],
+            "producer_tasks": [
+              975,
+              991
+            ],
+            "observed_start": 1032,
+            "required_ready": 1038,
+            "premature_ticks": 6
+          },
+          {
+            "group": 126,
+            "tile": 11,
+            "packet_bytes": [
+              4032,
+              4064
+            ],
+            "producer_tasks": [
+              987,
+              1003
+            ],
+            "observed_start": 1036,
+            "required_ready": 1042,
+            "premature_ticks": 6
+          },
+          {
+            "group": 170,
+            "tile": 15,
+            "packet_bytes": [
+              5440,
+              5472
+            ],
+            "producer_tasks": [
+              991,
+              1007
+            ],
+            "observed_start": 1044,
+            "required_ready": 1050,
+            "premature_ticks": 6
+          },
+          {
+            "group": 129,
+            "tile": 11,
+            "packet_bytes": [
+              4128,
+              4160
+            ],
+            "producer_tasks": [
+              1003,
+              1019
+            ],
+            "observed_start": 1048,
+            "required_ready": 1054,
+            "premature_ticks": 6
+          },
+          {
+            "group": 173,
+            "tile": 15,
+            "packet_bytes": [
+              5536,
+              5568
+            ],
+            "producer_tasks": [
+              1007,
+              1023
+            ],
+            "observed_start": 1056,
+            "required_ready": 1062,
+            "premature_ticks": 6
+          }
+        ]
+      },
+      "python_predictor": {
+        "straddled_packets": 48,
+        "early_packet_count": 48,
+        "early_packets": [
+          {
+            "group": 46,
+            "tile": 4,
+            "packet_bytes": [
+              1472,
+              1504
+            ],
+            "producer_tasks": [
+              964,
+              980
+            ],
+            "observed_start": 878,
+            "required_ready": 884,
+            "premature_ticks": 6
+          },
+          {
+            "group": 2,
+            "tile": 0,
+            "packet_bytes": [
+              64,
+              96
+            ],
+            "producer_tasks": [
+              960,
+              976
+            ],
+            "observed_start": 888,
+            "required_ready": 894,
+            "premature_ticks": 6
+          },
+          {
+            "group": 49,
+            "tile": 4,
+            "packet_bytes": [
+              1568,
+              1600
+            ],
+            "producer_tasks": [
+              980,
+              996
+            ],
+            "observed_start": 890,
+            "required_ready": 896,
+            "premature_ticks": 6
+          },
+          {
+            "group": 5,
+            "tile": 0,
+            "packet_bytes": [
+              160,
+              192
+            ],
+            "producer_tasks": [
+              976,
+              992
+            ],
+            "observed_start": 900,
+            "required_ready": 906,
+            "premature_ticks": 6
+          },
+          {
+            "group": 52,
+            "tile": 4,
+            "packet_bytes": [
+              1664,
+              1696
+            ],
+            "producer_tasks": [
+              996,
+              1012
+            ],
+            "observed_start": 902,
+            "required_ready": 909,
+            "premature_ticks": 7
+          },
+          {
+            "group": 13,
+            "tile": 1,
+            "packet_bytes": [
+              416,
+              448
+            ],
+            "producer_tasks": [
+              961,
+              977
+            ],
+            "observed_start": 904,
+            "required_ready": 910,
+            "premature_ticks": 6
+          },
+          {
+            "group": 8,
+            "tile": 0,
+            "packet_bytes": [
+              256,
+              288
+            ],
+            "producer_tasks": [
+              992,
+              1008
+            ],
+            "observed_start": 912,
+            "required_ready": 918,
+            "premature_ticks": 6
+          },
+          {
+            "group": 16,
+            "tile": 1,
+            "packet_bytes": [
+              512,
+              544
+            ],
+            "producer_tasks": [
+              977,
+              993
+            ],
+            "observed_start": 916,
+            "required_ready": 922,
+            "premature_ticks": 6
+          },
+          {
+            "group": 90,
+            "tile": 8,
+            "packet_bytes": [
+              2880,
+              2912
+            ],
+            "producer_tasks": [
+              968,
+              984
+            ],
+            "observed_start": 924,
+            "required_ready": 930,
+            "premature_ticks": 6
+          },
+          {
+            "group": 19,
+            "tile": 1,
+            "packet_bytes": [
+              608,
+              640
+            ],
+            "producer_tasks": [
+              993,
+              1009
+            ],
+            "observed_start": 928,
+            "required_ready": 934,
+            "premature_ticks": 6
+          },
+          {
+            "group": 134,
+            "tile": 12,
+            "packet_bytes": [
+              4288,
+              4320
+            ],
+            "producer_tasks": [
+              972,
+              988
+            ],
+            "observed_start": 932,
+            "required_ready": 938,
+            "premature_ticks": 6
+          },
+          {
+            "group": 57,
+            "tile": 5,
+            "packet_bytes": [
+              1824,
+              1856
+            ],
+            "producer_tasks": [
+              965,
+              981
+            ],
+            "observed_start": 933,
+            "required_ready": 939,
+            "premature_ticks": 6
+          },
+          {
+            "group": 24,
+            "tile": 2,
+            "packet_bytes": [
+              768,
+              800
+            ],
+            "producer_tasks": [
+              962,
+              978
+            ],
+            "observed_start": 936,
+            "required_ready": 942,
+            "premature_ticks": 6
+          },
+          {
+            "group": 93,
+            "tile": 8,
+            "packet_bytes": [
+              2976,
+              3008
+            ],
+            "producer_tasks": [
+              984,
+              1000
+            ],
+            "observed_start": 936,
+            "required_ready": 942,
+            "premature_ticks": 6
+          },
+          {
+            "group": 35,
+            "tile": 3,
+            "packet_bytes": [
+              1120,
+              1152
+            ],
+            "producer_tasks": [
+              963,
+              979
+            ],
+            "observed_start": 944,
+            "required_ready": 950,
+            "premature_ticks": 6
+          },
+          {
+            "group": 137,
+            "tile": 12,
+            "packet_bytes": [
+              4384,
+              4416
+            ],
+            "producer_tasks": [
+              988,
+              1004
+            ],
+            "observed_start": 944,
+            "required_ready": 950,
+            "premature_ticks": 6
+          },
+          {
+            "group": 60,
+            "tile": 5,
+            "packet_bytes": [
+              1920,
+              1952
+            ],
+            "producer_tasks": [
+              981,
+              997
+            ],
+            "observed_start": 945,
+            "required_ready": 951,
+            "premature_ticks": 6
+          },
+          {
+            "group": 27,
+            "tile": 2,
+            "packet_bytes": [
+              864,
+              896
+            ],
+            "producer_tasks": [
+              978,
+              994
+            ],
+            "observed_start": 948,
+            "required_ready": 954,
+            "premature_ticks": 6
+          },
+          {
+            "group": 96,
+            "tile": 8,
+            "packet_bytes": [
+              3072,
+              3104
+            ],
+            "producer_tasks": [
+              1000,
+              1016
+            ],
+            "observed_start": 948,
+            "required_ready": 954,
+            "premature_ticks": 6
+          },
+          {
+            "group": 38,
+            "tile": 3,
+            "packet_bytes": [
+              1216,
+              1248
+            ],
+            "producer_tasks": [
+              979,
+              995
+            ],
+            "observed_start": 956,
+            "required_ready": 962,
+            "premature_ticks": 6
+          },
+          {
+            "group": 140,
+            "tile": 12,
+            "packet_bytes": [
+              4480,
+              4512
+            ],
+            "producer_tasks": [
+              1004,
+              1020
+            ],
+            "observed_start": 956,
+            "required_ready": 962,
+            "premature_ticks": 6
+          },
+          {
+            "group": 63,
+            "tile": 5,
+            "packet_bytes": [
+              2016,
+              2048
+            ],
+            "producer_tasks": [
+              997,
+              1013
+            ],
+            "observed_start": 957,
+            "required_ready": 963,
+            "premature_ticks": 6
+          },
+          {
+            "group": 30,
+            "tile": 2,
+            "packet_bytes": [
+              960,
+              992
+            ],
+            "producer_tasks": [
+              994,
+              1010
+            ],
+            "observed_start": 960,
+            "required_ready": 966,
+            "premature_ticks": 6
+          },
+          {
+            "group": 79,
+            "tile": 7,
+            "packet_bytes": [
+              2528,
+              2560
+            ],
+            "producer_tasks": [
+              967,
+              983
+            ],
+            "observed_start": 961,
+            "required_ready": 967,
+            "premature_ticks": 6
+          },
+          {
+            "group": 68,
+            "tile": 6,
+            "packet_bytes": [
+              2176,
+              2208
+            ],
+            "producer_tasks": [
+              966,
+              982
+            ],
+            "observed_start": 965,
+            "required_ready": 971,
+            "premature_ticks": 6
+          },
+          {
+            "group": 41,
+            "tile": 3,
+            "packet_bytes": [
+              1312,
+              1344
+            ],
+            "producer_tasks": [
+              995,
+              1011
+            ],
+            "observed_start": 968,
+            "required_ready": 974,
+            "premature_ticks": 6
+          },
+          {
+            "group": 101,
+            "tile": 9,
+            "packet_bytes": [
+              3232,
+              3264
+            ],
+            "producer_tasks": [
+              969,
+              985
+            ],
+            "observed_start": 972,
+            "required_ready": 978,
+            "premature_ticks": 6
+          },
+          {
+            "group": 82,
+            "tile": 7,
+            "packet_bytes": [
+              2624,
+              2656
+            ],
+            "producer_tasks": [
+              983,
+              999
+            ],
+            "observed_start": 973,
+            "required_ready": 979,
+            "premature_ticks": 6
+          },
+          {
+            "group": 71,
+            "tile": 6,
+            "packet_bytes": [
+              2272,
+              2304
+            ],
+            "producer_tasks": [
+              982,
+              998
+            ],
+            "observed_start": 977,
+            "required_ready": 983,
+            "premature_ticks": 6
+          },
+          {
+            "group": 145,
+            "tile": 13,
+            "packet_bytes": [
+              4640,
+              4672
+            ],
+            "producer_tasks": [
+              973,
+              989
+            ],
+            "observed_start": 980,
+            "required_ready": 986,
+            "premature_ticks": 6
+          },
+          {
+            "group": 104,
+            "tile": 9,
+            "packet_bytes": [
+              3328,
+              3360
+            ],
+            "producer_tasks": [
+              985,
+              1001
+            ],
+            "observed_start": 984,
+            "required_ready": 990,
+            "premature_ticks": 6
+          },
+          {
+            "group": 85,
+            "tile": 7,
+            "packet_bytes": [
+              2720,
+              2752
+            ],
+            "producer_tasks": [
+              999,
+              1015
+            ],
+            "observed_start": 985,
+            "required_ready": 991,
+            "premature_ticks": 6
+          },
+          {
+            "group": 74,
+            "tile": 6,
+            "packet_bytes": [
+              2368,
+              2400
+            ],
+            "producer_tasks": [
+              998,
+              1014
+            ],
+            "observed_start": 989,
+            "required_ready": 995,
+            "premature_ticks": 6
+          },
+          {
+            "group": 148,
+            "tile": 13,
+            "packet_bytes": [
+              4736,
+              4768
+            ],
+            "producer_tasks": [
+              989,
+              1005
+            ],
+            "observed_start": 992,
+            "required_ready": 998,
+            "premature_ticks": 6
+          },
+          {
+            "group": 107,
+            "tile": 9,
+            "packet_bytes": [
+              3424,
+              3456
+            ],
+            "producer_tasks": [
+              1001,
+              1017
+            ],
+            "observed_start": 996,
+            "required_ready": 1002,
+            "premature_ticks": 6
+          },
+          {
+            "group": 112,
+            "tile": 10,
+            "packet_bytes": [
+              3584,
+              3616
+            ],
+            "producer_tasks": [
+              970,
+              986
+            ],
+            "observed_start": 1000,
+            "required_ready": 1006,
+            "premature_ticks": 6
+          },
+          {
+            "group": 151,
+            "tile": 13,
+            "packet_bytes": [
+              4832,
+              4864
+            ],
+            "producer_tasks": [
+              1005,
+              1021
+            ],
+            "observed_start": 1004,
+            "required_ready": 1010,
+            "premature_ticks": 6
+          },
+          {
+            "group": 156,
+            "tile": 14,
+            "packet_bytes": [
+              4992,
+              5024
+            ],
+            "producer_tasks": [
+              974,
+              990
+            ],
+            "observed_start": 1008,
+            "required_ready": 1014,
+            "premature_ticks": 6
+          },
+          {
+            "group": 115,
+            "tile": 10,
+            "packet_bytes": [
+              3680,
+              3712
+            ],
+            "producer_tasks": [
+              986,
+              1002
+            ],
+            "observed_start": 1012,
+            "required_ready": 1018,
+            "premature_ticks": 6
+          },
+          {
+            "group": 159,
+            "tile": 14,
+            "packet_bytes": [
+              5088,
+              5120
+            ],
+            "producer_tasks": [
+              990,
+              1006
+            ],
+            "observed_start": 1020,
+            "required_ready": 1026,
+            "premature_ticks": 6
+          },
+          {
+            "group": 118,
+            "tile": 10,
+            "packet_bytes": [
+              3776,
+              3808
+            ],
+            "producer_tasks": [
+              1002,
+              1018
+            ],
+            "observed_start": 1024,
+            "required_ready": 1030,
+            "premature_ticks": 6
+          },
+          {
+            "group": 123,
+            "tile": 11,
+            "packet_bytes": [
+              3936,
+              3968
+            ],
+            "producer_tasks": [
+              971,
+              987
+            ],
+            "observed_start": 1024,
+            "required_ready": 1030,
+            "premature_ticks": 6
+          },
+          {
+            "group": 162,
+            "tile": 14,
+            "packet_bytes": [
+              5184,
+              5216
+            ],
+            "producer_tasks": [
+              1006,
+              1022
+            ],
+            "observed_start": 1032,
+            "required_ready": 1038,
+            "premature_ticks": 6
+          },
+          {
+            "group": 167,
+            "tile": 15,
+            "packet_bytes": [
+              5344,
+              5376
+            ],
+            "producer_tasks": [
+              975,
+              991
+            ],
+            "observed_start": 1032,
+            "required_ready": 1038,
+            "premature_ticks": 6
+          },
+          {
+            "group": 126,
+            "tile": 11,
+            "packet_bytes": [
+              4032,
+              4064
+            ],
+            "producer_tasks": [
+              987,
+              1003
+            ],
+            "observed_start": 1036,
+            "required_ready": 1042,
+            "premature_ticks": 6
+          },
+          {
+            "group": 170,
+            "tile": 15,
+            "packet_bytes": [
+              5440,
+              5472
+            ],
+            "producer_tasks": [
+              991,
+              1007
+            ],
+            "observed_start": 1044,
+            "required_ready": 1050,
+            "premature_ticks": 6
+          },
+          {
+            "group": 129,
+            "tile": 11,
+            "packet_bytes": [
+              4128,
+              4160
+            ],
+            "producer_tasks": [
+              1003,
+              1019
+            ],
+            "observed_start": 1048,
+            "required_ready": 1054,
+            "premature_ticks": 6
+          },
+          {
+            "group": 173,
+            "tile": 15,
+            "packet_bytes": [
+              5536,
+              5568
+            ],
+            "producer_tasks": [
+              1007,
+              1023
+            ],
+            "observed_start": 1056,
+            "required_ready": 1062,
+            "premature_ticks": 6
+          }
+        ]
+      }
+    },
+    {
+      "run": "gate-full-cold-fluid",
+      "case": "column_fifo32",
+      "shape": [
+        1408,
+        2048,
+        1
+      ],
+      "native_reference": {
+        "straddled_packets": 0,
+        "early_packet_count": 0,
+        "early_packets": []
+      },
+      "python_predictor": {
+        "straddled_packets": 0,
+        "early_packet_count": 0,
+        "early_packets": []
+      }
+    },
+    {
+      "run": "gate-full-reused-native",
+      "case": "row_fifo32",
+      "shape": [
+        1408,
+        2048,
+        22
+      ],
+      "native_reference": {
+        "straddled_packets": 32,
+        "early_packet_count": 0,
+        "early_packets": []
+      },
+      "python_predictor": {
+        "straddled_packets": 32,
+        "early_packet_count": 0,
+        "early_packets": []
+      }
+    },
+    {
+      "run": "gate-full-reused-native",
+      "case": "column_fifo32",
+      "shape": [
+        1408,
+        2048,
+        22
+      ],
+      "native_reference": {
+        "straddled_packets": 0,
+        "early_packet_count": 0,
+        "early_packets": []
+      },
+      "python_predictor": {
+        "straddled_packets": 0,
+        "early_packet_count": 0,
+        "early_packets": []
+      }
+    },
+    {
+      "run": "gate-full-reused-fluid",
+      "case": "row_fifo32",
+      "shape": [
+        1408,
+        2048,
+        22
+      ],
+      "native_reference": {
+        "straddled_packets": 32,
+        "early_packet_count": 0,
+        "early_packets": []
+      },
+      "python_predictor": {
+        "straddled_packets": 32,
+        "early_packet_count": 0,
+        "early_packets": []
+      }
+    },
+    {
+      "run": "gate-full-reused-fluid",
+      "case": "column_fifo32",
+      "shape": [
+        1408,
+        2048,
+        22
+      ],
+      "native_reference": {
+        "straddled_packets": 0,
+        "early_packet_count": 0,
+        "early_packets": []
+      },
+      "python_predictor": {
+        "straddled_packets": 0,
+        "early_packet_count": 0,
+        "early_packets": []
+      }
+    }
+  ],
+  "scope": "Whole eight-point shape pilot retired; actual early reads occur in cold row cases. Aligned column cases and oldM512 references are not asserted to have this bug. Timing/byte/trace agreement does not prove full packet readiness."
+}

@@ -1,0 +1,57 @@
+{
+  "release": "p4-component-calibration-2026-10-11",
+  "release_id": 410217236,
+  "source": "ffdbe29ef0a0fb3f93c8f1dbac61bf5b1538bd67",
+  "legacy_reference_source": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+  "legacy_reference_release": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/tag/p4-fine-execution-2026-10-11",
+  "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+  "total_bytes": 38850560,
+  "assets": [
+    {
+      "file": "p4-component-full-shape-f4fb4b7-retired.tar",
+      "bytes": 7567360,
+      "sha256": "e8b5d9eba8a373f2e26599b7c9ea459e16a2b09edd237258b2a817730741c089",
+      "asset_id": 632800464,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-component-calibration-2026-10-11/p4-component-full-shape-f4fb4b7-retired.tar",
+      "validity": "RETIRED_SHAPE_PILOT",
+      "scope": "All eight M1408 shape points retired for incomplete full-packet producer dependency. Actual cold row early reads are diagnosed in packet-retirement.json.",
+      "protected_content_scan": "PASS_INCLUDING_DECODED_GZIP",
+      "inspected_bytes": 53401133
+    },
+    {
+      "file": "p4-component-cycle-f4fb4b7-control.tar",
+      "bytes": 11048960,
+      "sha256": "9781a4dd34b288b80997e2fe960e7af1df27972cd388f05bd31527bb5533b390",
+      "asset_id": 632800486,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-component-calibration-2026-10-11/p4-component-cycle-f4fb4b7-control.tar",
+      "validity": "MIXED_VALID_LEGACY_RETIRED_SHAPE_CONTROL",
+      "scope": "Sixteen aligned M512 reference predictions remain valid controls; eight M1408 predictions are retired and excluded from corrected qualification.",
+      "protected_content_scan": "PASS_INCLUDING_DECODED_GZIP",
+      "inspected_bytes": 538571846
+    },
+    {
+      "file": "p4-component-full-shape-ffdbe29.tar",
+      "bytes": 7567360,
+      "sha256": "3717a09d7cb35107e67e4f22047fdea61f6e3867096b1e2e47eed11791779a55",
+      "asset_id": 632870050,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-component-calibration-2026-10-11/p4-component-full-shape-ffdbe29.tar",
+      "validity": "VALID_CORRECTED_SHAPE_REFERENCE",
+      "scope": "Eight corrected Native/Fluid full projection shape points. Standalone H2 contract, not fused/full MoE.",
+      "protected_content_scan": "PASS_INCLUDING_DECODED_GZIP",
+      "inspected_bytes": 53403610
+    },
+    {
+      "file": "p4-component-cycle-ffdbe29.tar",
+      "bytes": 12666880,
+      "sha256": "ac177aa162287c4dc7c52033ac0e21edbb5370839ed911d0b1a14226128b22f6",
+      "asset_id": 632870092,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-component-calibration-2026-10-11/p4-component-cycle-ffdbe29.tar",
+      "validity": "VALID_CORRECTED_COMPONENT_QUALIFICATION",
+      "scope": "Twenty-four corrected Python execution comparisons: sixteen immutable legacy references plus eight corrected shape references. Does not qualify full MoE Graph.",
+      "protected_content_scan": "PASS_INCLUDING_DECODED_GZIP",
+      "inspected_bytes": 575477141
+    }
+  ],
+  "retired_pilot_source": "f4fb4b7684342bca92f0eaa8086edd88df3aeec9",
+  "qualification_scope": "Selected standalone tensor component execution contract only. Original full MoE Graph G3/G4 failures and NoC diagnostics remain unchanged."
+}

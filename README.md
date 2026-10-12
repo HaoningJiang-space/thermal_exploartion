@@ -7,7 +7,20 @@
 研究主线仅为本仓库的 **Hybrid-Bonded 3D DRAM-on-Logic Architecture**：
 真实 Dense/MoE LLM、Compute/Memory/NoC物理组织与Spatial Thermal；计算在logic，不做PIM或Power Delivery。
 
-最新交付为 **[P4-B：细粒度资源占用与关键路径验证](results/p4-fine-2026-10-11/findings.md)**。
+最新交付为 **[P4-B组件校准：同合同执行精度](results/p4-calibration-2026-10-11/findings.md)**。
+独立Python有限flit/端口frontend复现所选C++参考合同，不使用记录中的到达时间或延迟拟合。
+复用16个归档参考点、新增8个真实1408×2048投影形状Native/Fluid点，完成24个Python执行对照；
+绝对10%门24/24、相对5%门6/6通过，最大Native误差2.54%、最大比值误差2.61%。
+12个Fluid案例八类完整trace逐行一致，24点完整packet依赖/资源重放和140项回归通过。
+退役f4fb4b7实际形状pilot：只绑定packet起始行会漏掉跨22-row块的producer；Cold Row中Native/Fluid分别提前读28/48个packet，最终延迟却不变。
+有效ffdbe29重跑依赖全部相交MAC输出块；首次pilot和共享语义错误的原记录完整保留。
+**资格只覆盖所选tensor组件合同：完整MoE Graph仍未接入校准frontend，原NoC Oracle与Hardware Go未获新认证。**
+单Vector context是参考控制假设，不是物理必然性；没有新scheduler/network、DSE、RTL或Thermal扫描。
+[合同](docs/p4_component_calibration.md)、[资格](results/p4-calibration-2026-10-11/qualification.json)、
+[复现](results/p4-calibration-2026-10-11/reproduce.md)与
+[原始记录](https://github.com/HaoningJiang-space/thermal_exploartion/releases/tag/p4-component-calibration-2026-10-11)明确独立实现与共享模型假设的边界。
+
+**上一轮：[P4-B：细粒度资源占用与关键路径验证](results/p4-fine-2026-10-11/findings.md)**。
 48个原始Qwen路由性能点、16个Native/Fluid组件点、48次小张量数值比较完成；
 48点独立资源/事件重放、10个P4-A精确回归及134项测试通过。
 TP16 row-down仅改变预留粒度的模型内延迟减少B8/B32为8.03%/6.33%；联合NoC诊断增益仍为27.27%/29.23%。

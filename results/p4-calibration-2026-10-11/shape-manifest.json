@@ -1,0 +1,88 @@
+{
+  "source": "ffdbe29ef0a0fb3f93c8f1dbac61bf5b1538bd67",
+  "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+  "selected_experts": {
+    "cold": {
+      "expert": 12,
+      "tokens": [
+        8
+      ],
+      "count": 1
+    },
+    "reused": {
+      "expert": 10,
+      "tokens": [
+        0,
+        3,
+        4,
+        6,
+        7,
+        9,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        20,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "count": 22
+    },
+    "contending": {
+      "expert": 34,
+      "tokens": [
+        0,
+        3,
+        4,
+        6,
+        7,
+        9,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        20,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "count": 22
+    }
+  },
+  "runs": [
+    {
+      "directory": "gate-full-cold-native",
+      "exit_code": 0
+    },
+    {
+      "directory": "gate-full-cold-fluid",
+      "exit_code": 0
+    },
+    {
+      "directory": "gate-full-reused-native",
+      "exit_code": 0
+    },
+    {
+      "directory": "gate-full-reused-fluid",
+      "exit_code": 0
+    }
+  ],
+  "scope": "Real routed Gate/Up full projection dimensions and captured counts;16-way tensor contract; not fullMoE or TP4/TP16 fidelity"
+}

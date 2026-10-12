@@ -34,7 +34,7 @@ this does not validate all memory tiers or full-MoE refresh/dependency phases.
 Replay the16 archived M512/K1024-or2048/B1-or22 Native/Fluid comparisons.
 Targets remain absolute10% and Row/Column latency-ratio error5%, per case.
 For Fluid reference cases additionally compare every task, input arrival,
-memory/HB transaction, vector window, injection, directed-link flit and port
+memory/HB transaction, vector window, injection, directed-link flit, sink and port
 trace, not only final latency. Original Graph results/failures stay public.
 
 Before running new native cases, freeze8 shape-validation points:

@@ -75,3 +75,17 @@ Macro精确回归；Fine-fixed拆开权重服务和实际operand/FIFO占用；Fi
 Research Go：保留宏预留的敏感性与逐事件诊断，先校准packet/flit、端口服务和结果阶段竞争的同合同执行。
 Hardware Go：未建立。当前NoC/MAC Oracle与模型内6%–8% reservation收益不能用于批准新的网络、阵列或P4-C物理架构。
 不扩大普通DSE，不重启已关闭RTL，不通过经验倍率或平均误差覆盖资格失败。
+
+## 2026-10-11：P4-B组件执行合同校准
+
+[报告](../results/p4-calibration-2026-10-11/findings.md)复用16个归档tensor参考点并新增8个真实Qwen投影形状Native/Fluid点。
+独立Python finite-flit interpreter与已有C++参考采用相同端口预算、有限credit、MAC prorated需求及一个Vector context；无到达时间输入或延迟拟合。
+有效ffdbe29的24个组件比较通过10%绝对时间门，6组通过5%相对预测门；12个Fluid案例八类trace完整逐行一致。
+f4fb4b7形状pilot因start-row-only packet绑定退役：Cold Row中Native/Fluid分别实际提前消费28/48个packet，但最终时间与工作量仍一致。
+修复完整byte范围的全部producer依赖并独立重放；这证明共享前端一致与计数闭合不能代替合同语义验证。
+这解决所选组件执行合同的一致性，不构成silicon认证；共享tensor builder、物理假设与Memory guard均继续披露。
+单Vector context是参考模型的控制选择，不能据此断言更多显式付费contexts非法或无价值。
+
+Research Go：把已核对的端口/网络/控制合同接入完整MoE，再保持同一Router trace、MAC/Expert顺序和macro精确回归验证TP4/TP16。
+完整MoE G3/G4及Hardware Go仍未建立；原Graph的27%/29% NoC数字不随组件资格自动转授为物理瓶颈。
+旧精度失败归档保持原样；不进入P4-C、新NoC/MAC或普通DSE。

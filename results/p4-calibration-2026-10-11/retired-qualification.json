@@ -1,0 +1,1136 @@
+{
+  "source": "f4fb4b7684342bca92f0eaa8086edd88df3aeec9",
+  "records": [
+    {
+      "role": "legacy",
+      "run": "cold-k1024-native",
+      "case": "row_fifo_k",
+      "shape": [
+        512,
+        1024,
+        1
+      ],
+      "backend": "native",
+      "reference_us": 0.0815,
+      "cycle_us": 0.0815,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+      "reference_summary_sha256": "791d0714fb626514323423d33f1e33f007087ef8f79031da04d5600d1282c373",
+      "event_file": "legacy-cold-k1024-native-row_fifo_k-cycle.json.gz",
+      "event_sha256": "d8b91a01651ec4119200aba93bd2cb5b86611e44647bba88d1c394525101e9b5",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 187072,
+        "router_queue_peak_flits": 8,
+        "tasks": 256,
+        "reads": 1024,
+        "port_rows": 5216,
+        "link_flits": 960
+      },
+      "fluid_trace_comparison": {}
+    },
+    {
+      "role": "legacy",
+      "run": "cold-k1024-native",
+      "case": "column_fifo64",
+      "shape": [
+        512,
+        1024,
+        1
+      ],
+      "backend": "native",
+      "reference_us": 0.10825,
+      "cycle_us": 0.1055,
+      "relative_error": -0.025404157043879882,
+      "absolute_target_met": true,
+      "source_reference": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+      "reference_summary_sha256": "791d0714fb626514323423d33f1e33f007087ef8f79031da04d5600d1282c373",
+      "event_file": "legacy-cold-k1024-native-column_fifo64-cycle.json.gz",
+      "event_sha256": "65b3036af4daf77eec28f8abc24168dae6ec8afb6f915cd03caf3fdcb0633d9d",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 180160,
+        "router_queue_peak_flits": 8,
+        "tasks": 256,
+        "reads": 1024,
+        "port_rows": 6752,
+        "link_flits": 960
+      },
+      "fluid_trace_comparison": {}
+    },
+    {
+      "role": "legacy",
+      "run": "cold-k1024-fluid",
+      "case": "row_fifo_k",
+      "shape": [
+        512,
+        1024,
+        1
+      ],
+      "backend": "fluid",
+      "reference_us": 0.0815,
+      "cycle_us": 0.0815,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+      "reference_summary_sha256": "f976de161bc962556e28965fa5dc3ec606d4d5038bd125f17f6c3666fc0421ad",
+      "event_file": "legacy-cold-k1024-fluid-row_fifo_k-cycle.json.gz",
+      "event_sha256": "330c5fc2d49d6a928328006db300496c63c3550ef6575cc3ed10d947c588e2ff",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 187072,
+        "router_queue_peak_flits": 8,
+        "tasks": 256,
+        "reads": 1024,
+        "port_rows": 5216,
+        "link_flits": 960
+      },
+      "fluid_trace_comparison": {
+        "tasks": {
+          "equal": true,
+          "rows": 256
+        },
+        "inputs": {
+          "equal": true,
+          "rows": 256
+        },
+        "reads": {
+          "equal": true,
+          "rows": 1024
+        },
+        "vector": {
+          "equal": true,
+          "rows": 16
+        },
+        "inject": {
+          "equal": true,
+          "rows": 64
+        },
+        "noc": {
+          "equal": true,
+          "rows": 960
+        },
+        "ports": {
+          "equal": true,
+          "rows": 5216
+        }
+      }
+    },
+    {
+      "role": "legacy",
+      "run": "cold-k1024-fluid",
+      "case": "column_fifo64",
+      "shape": [
+        512,
+        1024,
+        1
+      ],
+      "backend": "fluid",
+      "reference_us": 0.1055,
+      "cycle_us": 0.1055,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+      "reference_summary_sha256": "f976de161bc962556e28965fa5dc3ec606d4d5038bd125f17f6c3666fc0421ad",
+      "event_file": "legacy-cold-k1024-fluid-column_fifo64-cycle.json.gz",
+      "event_sha256": "56a187d89c3a0685b8046832b9f2b1d3851072835f7190abff8ca7ef563d9cf9",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 180160,
+        "router_queue_peak_flits": 8,
+        "tasks": 256,
+        "reads": 1024,
+        "port_rows": 6752,
+        "link_flits": 960
+      },
+      "fluid_trace_comparison": {
+        "tasks": {
+          "equal": true,
+          "rows": 256
+        },
+        "inputs": {
+          "equal": true,
+          "rows": 16
+        },
+        "reads": {
+          "equal": true,
+          "rows": 1024
+        },
+        "vector": {
+          "equal": true,
+          "rows": 320
+        },
+        "inject": {
+          "equal": true,
+          "rows": 960
+        },
+        "noc": {
+          "equal": true,
+          "rows": 960
+        },
+        "ports": {
+          "equal": true,
+          "rows": 6752
+        }
+      }
+    },
+    {
+      "role": "legacy",
+      "run": "cold-k2048-native",
+      "case": "row_fifo_k",
+      "shape": [
+        512,
+        2048,
+        1
+      ],
+      "backend": "native",
+      "reference_us": 0.1535,
+      "cycle_us": 0.1535,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+      "reference_summary_sha256": "1a6a453431d1bb06648cdc4b85a22b21f3c458fb68cc55e72152e8c0e2d4fad8",
+      "event_file": "legacy-cold-k2048-native-row_fifo_k-cycle.json.gz",
+      "event_sha256": "099f5fe45ffa65e3efc501899f7071211493501255e0b72dc4f5afbeb4ba0fec",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 268992,
+        "router_queue_peak_flits": 8,
+        "tasks": 256,
+        "reads": 2048,
+        "port_rows": 9824,
+        "link_flits": 1920
+      },
+      "fluid_trace_comparison": {}
+    },
+    {
+      "role": "legacy",
+      "run": "cold-k2048-native",
+      "case": "column_fifo64",
+      "shape": [
+        512,
+        2048,
+        1
+      ],
+      "backend": "native",
+      "reference_us": 0.11875,
+      "cycle_us": 0.11875000000000001,
+      "relative_error": 2.220446049250313e-16,
+      "absolute_target_met": true,
+      "source_reference": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+      "reference_summary_sha256": "1a6a453431d1bb06648cdc4b85a22b21f3c458fb68cc55e72152e8c0e2d4fad8",
+      "event_file": "legacy-cold-k2048-native-column_fifo64-cycle.json.gz",
+      "event_sha256": "18378fc2ef59a456ad430caab670c961894287093af20f6b09fb68337116c582",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 257984,
+        "router_queue_peak_flits": 8,
+        "tasks": 256,
+        "reads": 2048,
+        "port_rows": 7600,
+        "link_flits": 960
+      },
+      "fluid_trace_comparison": {}
+    },
+    {
+      "role": "legacy",
+      "run": "cold-k2048-fluid",
+      "case": "row_fifo_k",
+      "shape": [
+        512,
+        2048,
+        1
+      ],
+      "backend": "fluid",
+      "reference_us": 0.1535,
+      "cycle_us": 0.1535,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+      "reference_summary_sha256": "54062b1fbbaeaba3b968c2fef3b5ea11ed020f5dfc7e7e2e4395d3b2d2fbb6ea",
+      "event_file": "legacy-cold-k2048-fluid-row_fifo_k-cycle.json.gz",
+      "event_sha256": "e06be6d8369353e8adccfd641f7504c618942d38564076c3fdc615e3b38beb53",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 268992,
+        "router_queue_peak_flits": 8,
+        "tasks": 256,
+        "reads": 2048,
+        "port_rows": 9824,
+        "link_flits": 1920
+      },
+      "fluid_trace_comparison": {
+        "tasks": {
+          "equal": true,
+          "rows": 256
+        },
+        "inputs": {
+          "equal": true,
+          "rows": 256
+        },
+        "reads": {
+          "equal": true,
+          "rows": 2048
+        },
+        "vector": {
+          "equal": true,
+          "rows": 16
+        },
+        "inject": {
+          "equal": true,
+          "rows": 128
+        },
+        "noc": {
+          "equal": true,
+          "rows": 1920
+        },
+        "ports": {
+          "equal": true,
+          "rows": 9824
+        }
+      }
+    },
+    {
+      "role": "legacy",
+      "run": "cold-k2048-fluid",
+      "case": "column_fifo64",
+      "shape": [
+        512,
+        2048,
+        1
+      ],
+      "backend": "fluid",
+      "reference_us": 0.11875,
+      "cycle_us": 0.11875000000000001,
+      "relative_error": 2.220446049250313e-16,
+      "absolute_target_met": true,
+      "source_reference": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+      "reference_summary_sha256": "54062b1fbbaeaba3b968c2fef3b5ea11ed020f5dfc7e7e2e4395d3b2d2fbb6ea",
+      "event_file": "legacy-cold-k2048-fluid-column_fifo64-cycle.json.gz",
+      "event_sha256": "47560937084726241be5bb085db58476968a0af38fc19606ef31d6624573a0f6",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 257984,
+        "router_queue_peak_flits": 8,
+        "tasks": 256,
+        "reads": 2048,
+        "port_rows": 7600,
+        "link_flits": 960
+      },
+      "fluid_trace_comparison": {
+        "tasks": {
+          "equal": true,
+          "rows": 256
+        },
+        "inputs": {
+          "equal": true,
+          "rows": 16
+        },
+        "reads": {
+          "equal": true,
+          "rows": 2048
+        },
+        "vector": {
+          "equal": true,
+          "rows": 320
+        },
+        "inject": {
+          "equal": true,
+          "rows": 960
+        },
+        "noc": {
+          "equal": true,
+          "rows": 960
+        },
+        "ports": {
+          "equal": true,
+          "rows": 7600
+        }
+      }
+    },
+    {
+      "role": "legacy",
+      "run": "reused-k1024-native",
+      "case": "row_fifo_k",
+      "shape": [
+        512,
+        1024,
+        22
+      ],
+      "backend": "native",
+      "reference_us": 1.22,
+      "cycle_us": 1.22,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+      "reference_summary_sha256": "d9055a93042dd444d700f974e17e99a10095d24eeed3ce62b48b402a049c2ead",
+      "event_file": "legacy-reused-k1024-native-row_fifo_k-cycle.json.gz",
+      "event_sha256": "6f69ca02b2023b190687484129b81d47ff1b3a28d5a55fb2272c0affd26bfac8",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 234112,
+        "router_queue_peak_flits": 8,
+        "tasks": 256,
+        "reads": 1024,
+        "port_rows": 78080,
+        "link_flits": 21120
+      },
+      "fluid_trace_comparison": {}
+    },
+    {
+      "role": "legacy",
+      "run": "reused-k1024-native",
+      "case": "column_fifo64",
+      "shape": [
+        512,
+        1024,
+        22
+      ],
+      "backend": "native",
+      "reference_us": 1.4605,
+      "cycle_us": 1.45725,
+      "relative_error": -0.002225265320095815,
+      "absolute_target_met": true,
+      "source_reference": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+      "reference_summary_sha256": "d9055a93042dd444d700f974e17e99a10095d24eeed3ce62b48b402a049c2ead",
+      "event_file": "legacy-reused-k1024-native-column_fifo64-cycle.json.gz",
+      "event_sha256": "2637a3531532389644ac96df244cf6ad80562a8a7c9b236b0316b4b8af70f49e",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 234112,
+        "router_queue_peak_flits": 8,
+        "tasks": 256,
+        "reads": 1024,
+        "port_rows": 93264,
+        "link_flits": 21120
+      },
+      "fluid_trace_comparison": {}
+    },
+    {
+      "role": "legacy",
+      "run": "reused-k1024-fluid",
+      "case": "row_fifo_k",
+      "shape": [
+        512,
+        1024,
+        22
+      ],
+      "backend": "fluid",
+      "reference_us": 1.22,
+      "cycle_us": 1.22,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+      "reference_summary_sha256": "6ed3a746a02086e1501ad90b95a9f058bb21e38a0ca67c6b9fb130999949db68",
+      "event_file": "legacy-reused-k1024-fluid-row_fifo_k-cycle.json.gz",
+      "event_sha256": "79fbdd11933665d2bca4a5a3c85a6249e8d723f799a4f1eb2f8997558f33660d",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 234112,
+        "router_queue_peak_flits": 8,
+        "tasks": 256,
+        "reads": 1024,
+        "port_rows": 78080,
+        "link_flits": 21120
+      },
+      "fluid_trace_comparison": {
+        "tasks": {
+          "equal": true,
+          "rows": 256
+        },
+        "inputs": {
+          "equal": true,
+          "rows": 256
+        },
+        "reads": {
+          "equal": true,
+          "rows": 1024
+        },
+        "vector": {
+          "equal": true,
+          "rows": 176
+        },
+        "inject": {
+          "equal": true,
+          "rows": 1408
+        },
+        "noc": {
+          "equal": true,
+          "rows": 21120
+        },
+        "ports": {
+          "equal": true,
+          "rows": 78080
+        }
+      }
+    },
+    {
+      "role": "legacy",
+      "run": "reused-k1024-fluid",
+      "case": "column_fifo64",
+      "shape": [
+        512,
+        1024,
+        22
+      ],
+      "backend": "fluid",
+      "reference_us": 1.45725,
+      "cycle_us": 1.45725,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+      "reference_summary_sha256": "6ed3a746a02086e1501ad90b95a9f058bb21e38a0ca67c6b9fb130999949db68",
+      "event_file": "legacy-reused-k1024-fluid-column_fifo64-cycle.json.gz",
+      "event_sha256": "d72959e2746a5b01471c7181eb142dbfa7334f0e6e70d9c4a983338c1417c2ec",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 234112,
+        "router_queue_peak_flits": 8,
+        "tasks": 256,
+        "reads": 1024,
+        "port_rows": 93264,
+        "link_flits": 21120
+      },
+      "fluid_trace_comparison": {
+        "tasks": {
+          "equal": true,
+          "rows": 256
+        },
+        "inputs": {
+          "equal": true,
+          "rows": 16
+        },
+        "reads": {
+          "equal": true,
+          "rows": 1024
+        },
+        "vector": {
+          "equal": true,
+          "rows": 7040
+        },
+        "inject": {
+          "equal": true,
+          "rows": 21120
+        },
+        "noc": {
+          "equal": true,
+          "rows": 21120
+        },
+        "ports": {
+          "equal": true,
+          "rows": 93264
+        }
+      }
+    },
+    {
+      "role": "legacy",
+      "run": "reused-k2048-native",
+      "case": "row_fifo_k",
+      "shape": [
+        512,
+        2048,
+        22
+      ],
+      "backend": "native",
+      "reference_us": 2.411,
+      "cycle_us": 2.411,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+      "reference_summary_sha256": "74618a992cc67892d4c70e38cd86bc0414a51b0a8bd792270c9dd121038fee4a",
+      "event_file": "legacy-reused-k2048-native-row_fifo_k-cycle.json.gz",
+      "event_sha256": "24b6061ced27ad26ca463e4daa076f68ea6bf4fd1ec377396305a46007332a17",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 359040,
+        "router_queue_peak_flits": 8,
+        "tasks": 256,
+        "reads": 2048,
+        "port_rows": 154304,
+        "link_flits": 42240
+      },
+      "fluid_trace_comparison": {}
+    },
+    {
+      "role": "legacy",
+      "run": "reused-k2048-native",
+      "case": "column_fifo64",
+      "shape": [
+        512,
+        2048,
+        22
+      ],
+      "backend": "native",
+      "reference_us": 1.4785,
+      "cycle_us": 1.47275,
+      "relative_error": -0.003889076766993571,
+      "absolute_target_met": true,
+      "source_reference": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+      "reference_summary_sha256": "74618a992cc67892d4c70e38cd86bc0414a51b0a8bd792270c9dd121038fee4a",
+      "event_file": "legacy-reused-k2048-native-column_fifo64-cycle.json.gz",
+      "event_sha256": "25f2e6ae832a07f4dcad572a70e826aabac8b7cc1c2e2fb65b08d4497ac4a390",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 316800,
+        "router_queue_peak_flits": 8,
+        "tasks": 256,
+        "reads": 2048,
+        "port_rows": 94256,
+        "link_flits": 21120
+      },
+      "fluid_trace_comparison": {}
+    },
+    {
+      "role": "legacy",
+      "run": "reused-k2048-fluid",
+      "case": "row_fifo_k",
+      "shape": [
+        512,
+        2048,
+        22
+      ],
+      "backend": "fluid",
+      "reference_us": 2.411,
+      "cycle_us": 2.411,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+      "reference_summary_sha256": "988ef5eae83ba8de16fd3ba83ba08af4babf310b2497cd3b8d090775d718abee",
+      "event_file": "legacy-reused-k2048-fluid-row_fifo_k-cycle.json.gz",
+      "event_sha256": "2a6d88727c2b25a9118039961831157936c2f6280d060311fa7c788f6d25b209",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 359040,
+        "router_queue_peak_flits": 8,
+        "tasks": 256,
+        "reads": 2048,
+        "port_rows": 154304,
+        "link_flits": 42240
+      },
+      "fluid_trace_comparison": {
+        "tasks": {
+          "equal": true,
+          "rows": 256
+        },
+        "inputs": {
+          "equal": true,
+          "rows": 256
+        },
+        "reads": {
+          "equal": true,
+          "rows": 2048
+        },
+        "vector": {
+          "equal": true,
+          "rows": 176
+        },
+        "inject": {
+          "equal": true,
+          "rows": 2816
+        },
+        "noc": {
+          "equal": true,
+          "rows": 42240
+        },
+        "ports": {
+          "equal": true,
+          "rows": 154304
+        }
+      }
+    },
+    {
+      "role": "legacy",
+      "run": "reused-k2048-fluid",
+      "case": "column_fifo64",
+      "shape": [
+        512,
+        2048,
+        22
+      ],
+      "backend": "fluid",
+      "reference_us": 1.47275,
+      "cycle_us": 1.47275,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+      "reference_summary_sha256": "988ef5eae83ba8de16fd3ba83ba08af4babf310b2497cd3b8d090775d718abee",
+      "event_file": "legacy-reused-k2048-fluid-column_fifo64-cycle.json.gz",
+      "event_sha256": "1573a44a47d2a6511ceff5dfabae70c4e87c4d2b4cb0ebf880e43e3541455f52",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 316800,
+        "router_queue_peak_flits": 8,
+        "tasks": 256,
+        "reads": 2048,
+        "port_rows": 94256,
+        "link_flits": 21120
+      },
+      "fluid_trace_comparison": {
+        "tasks": {
+          "equal": true,
+          "rows": 256
+        },
+        "inputs": {
+          "equal": true,
+          "rows": 16
+        },
+        "reads": {
+          "equal": true,
+          "rows": 2048
+        },
+        "vector": {
+          "equal": true,
+          "rows": 7040
+        },
+        "inject": {
+          "equal": true,
+          "rows": 21120
+        },
+        "noc": {
+          "equal": true,
+          "rows": 21120
+        },
+        "ports": {
+          "equal": true,
+          "rows": 94256
+        }
+      }
+    },
+    {
+      "role": "shape_validation",
+      "run": "gate-full-cold-native",
+      "case": "row_fifo32",
+      "shape": [
+        1408,
+        2048,
+        1
+      ],
+      "backend": "native",
+      "reference_us": 0.267,
+      "cycle_us": 0.267,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "f4fb4b7684342bca92f0eaa8086edd88df3aeec9",
+      "reference_summary_sha256": "4b450f1d6f483a074565cbf09b96f6ca60d10a9ba67508b7f36fdf0d15c6faa6",
+      "event_file": "shape_validation-gate-full-cold-native-row_fifo32-cycle.json.gz",
+      "event_sha256": "6d7f2c9352855b569ba51ca9e30833126972872503b77600a102b565254bec3c",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 322576,
+        "router_queue_peak_flits": 8,
+        "tasks": 1024,
+        "reads": 5632,
+        "port_rows": 17088,
+        "link_flits": 1920
+      },
+      "fluid_trace_comparison": {}
+    },
+    {
+      "role": "shape_validation",
+      "run": "gate-full-cold-native",
+      "case": "column_fifo32",
+      "shape": [
+        1408,
+        2048,
+        1
+      ],
+      "backend": "native",
+      "reference_us": 0.25525,
+      "cycle_us": 0.257,
+      "relative_error": 0.006856023506366382,
+      "absolute_target_met": true,
+      "source_reference": "f4fb4b7684342bca92f0eaa8086edd88df3aeec9",
+      "reference_summary_sha256": "4b450f1d6f483a074565cbf09b96f6ca60d10a9ba67508b7f36fdf0d15c6faa6",
+      "event_file": "shape_validation-gate-full-cold-native-column_fifo32-cycle.json.gz",
+      "event_sha256": "a8ba6b59b02270c5038ccbd2d3b83a9b5e7595fbb1b9639dbe2708a8648c283d",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 403120,
+        "router_queue_peak_flits": 8,
+        "tasks": 704,
+        "reads": 5632,
+        "port_rows": 16448,
+        "link_flits": 2640
+      },
+      "fluid_trace_comparison": {}
+    },
+    {
+      "role": "shape_validation",
+      "run": "gate-full-cold-fluid",
+      "case": "row_fifo32",
+      "shape": [
+        1408,
+        2048,
+        1
+      ],
+      "backend": "fluid",
+      "reference_us": 0.267,
+      "cycle_us": 0.267,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "f4fb4b7684342bca92f0eaa8086edd88df3aeec9",
+      "reference_summary_sha256": "db4298bbbb3fcbffdc1e4f30eb4491f36397944d9fd379a79bf42fe76b514de6",
+      "event_file": "shape_validation-gate-full-cold-fluid-row_fifo32-cycle.json.gz",
+      "event_sha256": "0fb3ef056108286d01849020910504b151cd5261c7c9f5e143e157a555d2e538",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 322576,
+        "router_queue_peak_flits": 8,
+        "tasks": 1024,
+        "reads": 5632,
+        "port_rows": 17088,
+        "link_flits": 1920
+      },
+      "fluid_trace_comparison": {
+        "tasks": {
+          "equal": true,
+          "rows": 1024
+        },
+        "inputs": {
+          "equal": true,
+          "rows": 256
+        },
+        "reads": {
+          "equal": true,
+          "rows": 5632
+        },
+        "vector": {
+          "equal": true,
+          "rows": 176
+        },
+        "inject": {
+          "equal": true,
+          "rows": 128
+        },
+        "noc": {
+          "equal": true,
+          "rows": 1920
+        },
+        "ports": {
+          "equal": true,
+          "rows": 17088
+        }
+      }
+    },
+    {
+      "role": "shape_validation",
+      "run": "gate-full-cold-fluid",
+      "case": "column_fifo32",
+      "shape": [
+        1408,
+        2048,
+        1
+      ],
+      "backend": "fluid",
+      "reference_us": 0.257,
+      "cycle_us": 0.257,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "f4fb4b7684342bca92f0eaa8086edd88df3aeec9",
+      "reference_summary_sha256": "db4298bbbb3fcbffdc1e4f30eb4491f36397944d9fd379a79bf42fe76b514de6",
+      "event_file": "shape_validation-gate-full-cold-fluid-column_fifo32-cycle.json.gz",
+      "event_sha256": "496660943494a3cc85bb533d24a33189d3ff23a07155f12d355f2ff154580383",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 403120,
+        "router_queue_peak_flits": 8,
+        "tasks": 704,
+        "reads": 5632,
+        "port_rows": 16448,
+        "link_flits": 2640
+      },
+      "fluid_trace_comparison": {
+        "tasks": {
+          "equal": true,
+          "rows": 704
+        },
+        "inputs": {
+          "equal": true,
+          "rows": 16
+        },
+        "reads": {
+          "equal": true,
+          "rows": 5632
+        },
+        "vector": {
+          "equal": true,
+          "rows": 1760
+        },
+        "inject": {
+          "equal": true,
+          "rows": 2640
+        },
+        "noc": {
+          "equal": true,
+          "rows": 2640
+        },
+        "ports": {
+          "equal": true,
+          "rows": 16448
+        }
+      }
+    },
+    {
+      "role": "shape_validation",
+      "run": "gate-full-reused-native",
+      "case": "row_fifo32",
+      "shape": [
+        1408,
+        2048,
+        22
+      ],
+      "backend": "native",
+      "reference_us": 3.0005,
+      "cycle_us": 3.0005,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "f4fb4b7684342bca92f0eaa8086edd88df3aeec9",
+      "reference_summary_sha256": "6188c9bb03cf550c13b673cb98aee41b46ecef2b38b17258e412cbe3f62a3852",
+      "event_file": "shape_validation-gate-full-reused-native-row_fifo32-cycle.json.gz",
+      "event_sha256": "488275ab814beff0b787bd92579bc138e4069b1597503cb3886c00ec8efe70b3",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 419680,
+        "router_queue_peak_flits": 8,
+        "tasks": 1024,
+        "reads": 5632,
+        "port_rows": 192032,
+        "link_flits": 42240
+      },
+      "fluid_trace_comparison": {}
+    },
+    {
+      "role": "shape_validation",
+      "run": "gate-full-reused-native",
+      "case": "column_fifo32",
+      "shape": [
+        1408,
+        2048,
+        22
+      ],
+      "backend": "native",
+      "reference_us": 4.2095,
+      "cycle_us": 4.20375,
+      "relative_error": -0.001365957952250807,
+      "absolute_target_met": true,
+      "source_reference": "f4fb4b7684342bca92f0eaa8086edd88df3aeec9",
+      "reference_summary_sha256": "6188c9bb03cf550c13b673cb98aee41b46ecef2b38b17258e412cbe3f62a3852",
+      "event_file": "shape_validation-gate-full-reused-native-column_fifo32-cycle.json.gz",
+      "event_sha256": "744c192c7395c710827e7e94f675ee057bdc57e81c518f3441074ac7d5179608",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 530336,
+        "router_queue_peak_flits": 8,
+        "tasks": 704,
+        "reads": 5632,
+        "port_rows": 269040,
+        "link_flits": 58080
+      },
+      "fluid_trace_comparison": {}
+    },
+    {
+      "role": "shape_validation",
+      "run": "gate-full-reused-fluid",
+      "case": "row_fifo32",
+      "shape": [
+        1408,
+        2048,
+        22
+      ],
+      "backend": "fluid",
+      "reference_us": 3.0005,
+      "cycle_us": 3.0005,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "f4fb4b7684342bca92f0eaa8086edd88df3aeec9",
+      "reference_summary_sha256": "9aa857b54f360045340d6f81d6a9f410966a4dd63dc2b22a64bdf56030c43e34",
+      "event_file": "shape_validation-gate-full-reused-fluid-row_fifo32-cycle.json.gz",
+      "event_sha256": "d53e3a6d6d5409dae3a73c6c27feac8fe55d94e5987d860560d3f1c2d79e30f8",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 419680,
+        "router_queue_peak_flits": 8,
+        "tasks": 1024,
+        "reads": 5632,
+        "port_rows": 192032,
+        "link_flits": 42240
+      },
+      "fluid_trace_comparison": {
+        "tasks": {
+          "equal": true,
+          "rows": 1024
+        },
+        "inputs": {
+          "equal": true,
+          "rows": 256
+        },
+        "reads": {
+          "equal": true,
+          "rows": 5632
+        },
+        "vector": {
+          "equal": true,
+          "rows": 3872
+        },
+        "inject": {
+          "equal": true,
+          "rows": 2816
+        },
+        "noc": {
+          "equal": true,
+          "rows": 42240
+        },
+        "ports": {
+          "equal": true,
+          "rows": 192032
+        }
+      }
+    },
+    {
+      "role": "shape_validation",
+      "run": "gate-full-reused-fluid",
+      "case": "column_fifo32",
+      "shape": [
+        1408,
+        2048,
+        22
+      ],
+      "backend": "fluid",
+      "reference_us": 4.20375,
+      "cycle_us": 4.20375,
+      "relative_error": 0.0,
+      "absolute_target_met": true,
+      "source_reference": "f4fb4b7684342bca92f0eaa8086edd88df3aeec9",
+      "reference_summary_sha256": "9aa857b54f360045340d6f81d6a9f410966a4dd63dc2b22a64bdf56030c43e34",
+      "event_file": "shape_validation-gate-full-reused-fluid-column_fifo32-cycle.json.gz",
+      "event_sha256": "1600514033888a40d813a8920515070e290e1df6acd54d398e8e0237a84aa023",
+      "event_replay": {
+        "status": "PASS_INDEPENDENT_COMPONENT_REPLAY",
+        "private_peak_bytes": 530336,
+        "router_queue_peak_flits": 8,
+        "tasks": 704,
+        "reads": 5632,
+        "port_rows": 269040,
+        "link_flits": 58080
+      },
+      "fluid_trace_comparison": {
+        "tasks": {
+          "equal": true,
+          "rows": 704
+        },
+        "inputs": {
+          "equal": true,
+          "rows": 16
+        },
+        "reads": {
+          "equal": true,
+          "rows": 5632
+        },
+        "vector": {
+          "equal": true,
+          "rows": 38720
+        },
+        "inject": {
+          "equal": true,
+          "rows": 58080
+        },
+        "noc": {
+          "equal": true,
+          "rows": 58080
+        },
+        "ports": {
+          "equal": true,
+          "rows": 269040
+        }
+      }
+    }
+  ],
+  "pairs": [
+    {
+      "role": "legacy",
+      "shape": [
+        512,
+        1024,
+        1
+      ],
+      "native_ratio": 0.7528868360277137,
+      "cycle_ratio": 0.7725118483412323,
+      "relative_prediction_error": 0.026066350710900466,
+      "relative_target_met": true,
+      "rank_agrees": true
+    },
+    {
+      "role": "legacy",
+      "shape": [
+        512,
+        1024,
+        22
+      ],
+      "native_ratio": 0.8353303663129066,
+      "cycle_ratio": 0.8371933436266942,
+      "relative_prediction_error": 0.0022302281694974724,
+      "relative_target_met": true,
+      "rank_agrees": true
+    },
+    {
+      "role": "legacy",
+      "shape": [
+        512,
+        2048,
+        1
+      ],
+      "native_ratio": 1.2926315789473684,
+      "cycle_ratio": 1.2926315789473684,
+      "relative_prediction_error": 0.0,
+      "relative_target_met": true,
+      "rank_agrees": true
+    },
+    {
+      "role": "legacy",
+      "shape": [
+        512,
+        2048,
+        22
+      ],
+      "native_ratio": 1.6307067974298277,
+      "cycle_ratio": 1.6370735019521303,
+      "relative_prediction_error": 0.0039042607367167914,
+      "relative_target_met": true,
+      "rank_agrees": true
+    },
+    {
+      "role": "shape_validation",
+      "shape": [
+        1408,
+        2048,
+        1
+      ],
+      "native_ratio": 1.0460333006856024,
+      "cycle_ratio": 1.038910505836576,
+      "relative_prediction_error": -0.006809338521400754,
+      "relative_target_met": true,
+      "rank_agrees": true
+    },
+    {
+      "role": "shape_validation",
+      "shape": [
+        1408,
+        2048,
+        22
+      ],
+      "native_ratio": 0.7127924931702102,
+      "cycle_ratio": 0.7137674695212608,
+      "relative_prediction_error": 0.001367826345525014,
+      "relative_target_met": true,
+      "rank_agrees": true
+    }
+  ],
+  "absolute_target": 0.1,
+  "relative_target": 0.05,
+  "absolute_pass": 24,
+  "relative_pass": 6,
+  "scope": "Independent tensor execution frontend, shared contract/physical assumptions, fixed fluid memory; does not qualify fullMoE Graph timing or silicon",
+  "all_fluid_traces_exact": true,
+  "retirement_note": "f4fb4b7 shape_validation records retired: output packet readiness bound only by start row; cold row cases actually consumed incomplete output packets. Legacy alignedM512 comparisons remain valid."
+}
