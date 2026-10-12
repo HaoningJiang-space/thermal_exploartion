@@ -5,7 +5,7 @@ from math import ceil
 from .crossover_execution import RCD_NS
 
 
-def execute(p,emit=lambda kind,row:None,max_ticks=2_000_000,oracle='none'):
+def execute(p,emit=lambda kind,row:None,max_ticks=2_000_000,oracle='none',memory_backend=None):
     if oracle not in ('none','link_only','flight_only','infinite_noc'):raise ValueError('Unsupported diagnostic')
     nodes=p['nodes'];n=len(nodes);children=[[] for _ in nodes];remaining=[len(r['deps']) for r in nodes]
     for r in nodes:
@@ -124,9 +124,17 @@ def execute(p,emit=lambda kind,row:None,max_ticks=2_000_000,oracle='none'):
                 begin(i);busy[rid]=clock+(0 if oracle in ('link_only','infinite_noc') else 4);schedule(i,clock+(0 if oracle in ('flight_only','infinite_noc') else 8));activity['link']+=32
             for i in sorted(ready[7][tile]):
                 if not admissible(i):break
+                if memory_backend is not None and not memory_backend.send(i,nodes[i]['address'],tile):wait['native_controller_reject']+=1;break
+                if memory_backend is not None:
+                    begin(i);state[i]=2;activity['dram']+=nodes[i]['work'];break
                 r=nodes[i];begin(i);tier=r['tier'];rate=min(26.599/16*1000*.25,16*4096/ceil((RCD_NS[tier]+27.5+4.77)/.25));memory_until[tile]=max(clock,memory_until[tile])+r['work']/rate;depart=ceil(memory_until[tile])+ceil((RCD_NS[tier]+4)/.25);schedule(i,depart);activity['dram']+=r['work'];emit('requests',[i,clock,depart,r['address']]);break
             emit('ports',[clock,tile,256-rb[tile],128-wb[tile],16-vb[tile],500-hb[tile],fifo[tile]])
+        if memory_backend is not None:
+            for i,depart in memory_backend.tick(clock):
+                if state[i]!=2 or start[i]<0:raise ValueError('Online memory completion identity')
+                schedule(i,depart);emit('requests',[i,start[i],depart,nodes[i]['address']])
     else:raise ValueError('Finite MoE executor failed to drain')
     if any(used.values()) or any(router_used.values()):raise ValueError('Leases or router credits leaked')
     if any(start[r['id']]<max((done[d] for d in r['deps']),default=0) for r in nodes):raise ValueError('Premature consumer')
-    return dict(ticks=clock,time_us=clock*.00025,activity=dict(activity),private_peak=max(private_high),router_peak=max(router_high.values(),default=0),wait=dict(wait),nodes=n,oracle=oracle,source='Independent Python full MoE cycle execution, fixed tier-fluid memory, not measured timing input')
+    if memory_backend is not None:memory_backend.close()
+    return dict(ticks=clock,time_us=clock*.00025,activity=dict(activity),private_peak=max(private_high),router_peak=max(router_high.values(),default=0),wait=dict(wait),nodes=n,oracle=oracle,memory_backend='online_native' if memory_backend else 'tier_fluid',source='Independent Python full MoE cycle execution; memory model stated explicitly, no measured arrival input')

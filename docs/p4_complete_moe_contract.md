@@ -12,7 +12,8 @@ G3-B：同条件 Experts10/34（各22 tokens，共享tiles8–11）。用已存�
 G3-C/G4：s0/l0 B8/B32 × TP4/TP16 × Row/Column，8个全MoE点。随后同矩阵检验s32/l7、s127/l23，共16个迁移点。这些不是新Prompt盲测。完整MoE必须包含真实Shared Expert、Broadcast-all、Fused Combine、Row-ready128，routed Row-down时Shared仍Column-down。
 子图入口给定当前Top-4 IDs和routing probabilities；不含此前Routed Router/Top-k算子。Shared的scalar gate不免费：实际resident shared_router weights、16-way FP32 scores、Sigmoid（沿用6-op scalar/vector假设）和scale broadcast全部付费，Shared weighted-partial必须等待该scale。Scalar MAC读取实际local token operands，不能套用矩阵read-reuse近似。
 
-每个点执行独立C++ Native和C++ Fluid参考，以及独立Python tier-fluid预测。共享语义DAG builder、物理假设和固定仲裁合同，执行状态不共享。预测器无原生到达时间输入，无倍率拟合或逐点调参。
+每个点执行C++ Native和C++ Fluid参考，以及独立Python tier-fluid和Python online-Native两种预测，共四个执行。共享语义DAG builder、物理假设和固定仲裁合同，逻辑/网络/计算执行状态不共享。预测器无归档到达时间输入，无倍率拟合或逐点调参。
+online-Native是Python在当前virtual tick发射当前eligible请求，由另一个进程中的pinned Ramulator实例实时返回admission/response并持续更新bank/refresh/queue状态；不是预读原生execution记录。C++完整参考和Python Native预测共享DRAM模型，因而其资格验证的是独立完整执行前端，不是独立DRAM器件或silicon精度。tier-fluid在完整竞争下的超阈误差保留，不能用online-Native的通过认证fast mode。
 
 ## 逐tick执行，而非 Joint Kernel 时间表
 
@@ -39,7 +40,7 @@ G1：完整FP32/BF16小张量数值语义（非性能/非checkpoint），真实�
 数值验证固定FP32 K维累加顺序（非BLAS grouped GEMM的库相关顺序），以便Gate的GEMV/GEMM在BF16 gated-state舍入边界具有同一合同；容差仍为rtol2e-4/atol2e-6，不拟合或放宽。旧模式保持BLAS默认。首轮f0ee803 pilot的Reused/Competition在此合同差异处失败，全部原始失败记录保留，不混入新资格。
 G2：每tick端口、每个MAC/Vector Context、packet依赖、weight/response/output/private/router reserve/release独立重放。
 另记录每个node每tick实际read/write/vector/HB/FIFO/arithmetic服务；独立观察者要求完成前全部工作已服务，并与每tick aggregate ports逐项对应。不能只用全局byte/FLOP总数证明节点正确。
-G3：完整MoE Native逐点绝对时间误差≤10%；Fluid六类完整node/request/port/lease/router/service traces逐行比较。Native额外command/state/tag和tier-deadline检查。
+G3：Python online-Native相对C++完整Native逐点绝对时间误差≤10%；Native和Fluid各六类完整node/request/port/lease/router/service traces逐行比较。两个Native执行都检查command/state/tag和tier-deadline。另独立报告tier-fluid绝对误差和失败。
 G4：每cohort同路由的TP4/TP16和Row/Column逐点比值误差≤5%，核对排序。不能靠均值掩盖失败。
 如有分歧，导出首次事件差异及依赖/资源/Memory归因；原始失败保留，禁止全局倍率拟合。
 只有完整G3/G4通过后才运行qualified link/flight诊断；仍不是可实现硬件净收益。组件或Fluid一致不等于silicon认证。

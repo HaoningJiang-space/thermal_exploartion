@@ -10,7 +10,11 @@ def main():
  digest=hashlib.sha256(routes.read_bytes()).hexdigest()
  if digest!='24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6':raise ValueError('Original capture required')
  out.mkdir(parents=True,exist_ok=False);exe=out/'moe-driver';cmd=['g++','-std=c++20','-O2','-I'+str(root/'src'),'-I'+str(root/'ext/fmt/include'),'-I'+str(root/'ext/yaml-cpp/include'),str(source/'native/moe_execution_driver.cpp'),'-L'+str(root),'-lramulator','-Wl,-rpath,'+str(root),'-o',str(exe)]
- with (out/'build.log').open('w') as log:subprocess.run(cmd,stdout=log,stderr=log,check=True)
+ bridge=out/'memory-bridge'
+ with (out/'build.log').open('w') as log:
+  subprocess.run(cmd,stdout=log,stderr=log,check=True)
+  bridge_cmd=list(cmd);bridge_cmd[bridge_cmd.index(str(source/'native/moe_execution_driver.cpp'))]=str(source/'native/moe_memory_bridge.cpp');bridge_cmd[-1]=str(bridge);subprocess.run(bridge_cmd,stdout=log,stderr=log,check=True)
+ (out/'compiler-version.log').write_text(subprocess.check_output(['g++','--version'],text=True))
  env=dict(os.environ,PYTHONPATH=str(source),OMP_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1');jobs=[]
  if a.stage=='experts':cases=[(0,0,32,4,'column',scope) for scope in ('cold','reused','contending')]
  else:
@@ -18,7 +22,7 @@ def main():
   cases=[(step,layer,b,tp,down,'moe') for step,layer in cohorts for b in (8,32) for tp in (4,16) for down in ('row','column')]
  for step,layer,b,tp,down,scope in cases:
   label=f's{step}-l{layer}-b{b}-tp{tp}-{down}-{scope}'
-  args=[sys.executable,'-m','thermal_exploration.run_moe_cycles','--routes',str(routes),'--batch',str(b),'--tp',str(tp),'--down',down,'--step',str(step),'--layer',str(layer),'--scope',scope,'--ramulator-root',str(root),'--exe',str(exe)]
+  args=[sys.executable,'-m','thermal_exploration.run_moe_cycles','--routes',str(routes),'--batch',str(b),'--tp',str(tp),'--down',down,'--step',str(step),'--layer',str(layer),'--scope',scope,'--ramulator-root',str(root),'--exe',str(exe),'--bridge',str(bridge)]
   jobs.append((label,args))
  (out/'frozen-plan.json').write_text(json.dumps(dict(source=pin,stage=a.stage,cases=cases,routing_sha256=digest,targets=dict(absolute=.1,relative=.05),independent_blind_prompts=False),indent=2)+'\n')
  def run(job):

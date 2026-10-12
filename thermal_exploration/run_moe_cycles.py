@@ -20,7 +20,7 @@ def compact(path):
     path.unlink()
 
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument('--routes',required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--ramulator-root',type=Path,required=True);ap.add_argument('--exe',type=Path,required=True);ap.add_argument('--batch',type=int,choices=(8,32),required=True);ap.add_argument('--tp',type=int,choices=(4,16),required=True);ap.add_argument('--down',choices=('row','column'),required=True);ap.add_argument('--step',type=int,choices=(0,32,127),required=True);ap.add_argument('--layer',type=int,choices=(0,7,23),required=True);ap.add_argument('--scope',choices=('cold','reused','contending','moe'),required=True);a=ap.parse_args()
+    ap=argparse.ArgumentParser();ap.add_argument('--routes',required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--ramulator-root',type=Path,required=True);ap.add_argument('--exe',type=Path,required=True);ap.add_argument('--bridge',type=Path,required=True);ap.add_argument('--batch',type=int,choices=(8,32),required=True);ap.add_argument('--tp',type=int,choices=(4,16),required=True);ap.add_argument('--down',choices=('row','column'),required=True);ap.add_argument('--step',type=int,choices=(0,32,127),required=True);ap.add_argument('--layer',type=int,choices=(0,7,23),required=True);ap.add_argument('--scope',choices=('cold','reused','contending','moe'),required=True);a=ap.parse_args()
     if subprocess.check_output(['git','status','--porcelain'],text=True).strip():raise ValueError('Frozen clean source required')
     r,digest=captured(a.routes)
     if digest!='24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6':raise ValueError('Original decompressed trace required')
@@ -60,27 +60,56 @@ def main():
         (case/'result.json').write_text(json.dumps(z,indent=2)+'\n');results.append(z)
         for path in case.glob('*.csv'):compact(path)
         print(backend,z['time_us'],z['replay']['status'],flush=True)
-    handles={};writers={}
-    for name,header in HEADERS.items():
-        handles[name]=gzip.open(out/('python-'+name+'.csv.gz'),'wt',compresslevel=3,newline='');writers[name]=csv.writer(handles[name]);writers[name].writerow(header)
-    try:z=execute(p,lambda kind,row:writers[kind].writerow(row))
-    finally:
-        for f in handles.values():f.close()
-    z['replay']=replay(p,out/'python',z);(out/'python-result.json').write_text(json.dumps(z,indent=2)+'\n')
-    # Trace checks locate first divergence; raw evidence is not substituted
-    # into predictions. Native memory timing may legitimately differ.
-    diffs={}
-    for name in HEADERS:
-        first=None;count=0
-        native=rows(out/'fluid'/('run-'+name+'.csv.gz'));candidate=rows(out/('python-'+name+'.csv.gz'))
-        for i,(aa,bb) in enumerate(__import__('itertools').zip_longest(native,candidate)):
-            count=i+1
-            if aa!=bb:first=dict(row=i,reference=aa,prediction=bb);break
-        diffs[name]=dict(equal=first is None,rows_compared=count,first_divergence=first)
-    qualification=dict(source=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),params={k:str(v) if isinstance(v,Path) else v for k,v in vars(a).items()},references=results,predictor=z,absolute_native_error=z['time_us']/results[0]['time_us']-1,absolute_target=.1,absolute_pass=abs(z['time_us']/results[0]['time_us']-1)<=.1,fluid_trace_comparison=diffs,full_moe=a.scope=='moe',shared_preserved=shared,selected_experts=selected)
+    def prediction(prefix,memory=None):
+        handles={};writers={}
+        for name,header in HEADERS.items():
+            handles[name]=gzip.open(out/(prefix+'-'+name+'.csv.gz'),'wt',compresslevel=3,newline='');writers[name]=csv.writer(handles[name]);writers[name].writerow(header)
+        try:result=execute(p,lambda kind,row:writers[kind].writerow(row),memory_backend=memory)
+        finally:
+            for f in handles.values():f.close()
+            if memory is not None and not memory.closed:memory.abort()
+        result['replay']=replay(p,out/prefix,result);(out/(prefix+'-result.json')).write_text(json.dumps(result,indent=2)+'\n')
+        return result
+    z=prediction('python')
+    from .moe_memory_bridge import NativeMemory
+    native_case=out/'python-native-memory';native_case.mkdir();native_dram,native_cfg=config(root,native_case,refresh=True);(native_case/'config.json').write_text(json.dumps(native_cfg,indent=2)+'\n')
+    online=NativeMemory(a.bridge.resolve(),native_case/'config.json',native_case/'run')
+    nz=prediction('python-native',online)
+    # Native device state/commands are shared, frontend states are independent.
+    # No archived memory event enters the predictor: online admission/returns
+    # respond to its current requests, including counterfactual scheduling.
+    rd={x['id']:x for x in rows(out/'python-native-requests.csv.gz')};ids=sorted(rd);index={node:i for i,node in enumerate(ids)}
+    req=[dict(id=i,addr_vec=address_vector(rd[node]['address'],2),source_tile=p['nodes'][node]['tile']) for i,node in enumerate(ids)]
+    reqevents=[dict(id=i,accepted=rd[node]['accepted'],completed=rd[node]['depart']) for i,node in enumerate(ids)]
+    def native_commands(path):
+        with path.open() as f:yield from csv.DictReader(f)
+    merged=heapq.merge(*(native_commands(native_case/f'transaction-commands.ch{ch}.csv') for ch in range(16)),key=lambda x:int(x['clock']));extra=TierLegality()
+    from tests.device_timings.harness import DeviceUnderTest
+    levels=DeviceUnderTest(native_dram).level_names
+    def native_remapped():
+        for row in merged:
+            extra.issue(row['command'],[int(row[k]) for k in levels],int(row['clock']))
+            if row['command'] in ('RD','RDA'):row['transaction_id']=str(index[int(row['transaction_id'])])
+            yield row
+    nz['commands']=check_commands(native_dram,req,reqevents,native_remapped());(out/'python-native-result.json').write_text(json.dumps(nz,indent=2)+'\n')
+    for path in native_case.glob('*.csv'):compact(path)
+    def compare_traces(backend,prefix):
+        diffs={}
+        for name in HEADERS:
+            first=None;count=0
+            reference=rows(out/backend/('run-'+name+'.csv.gz'));candidate=rows(out/(prefix+'-'+name+'.csv.gz'))
+            for i,(aa,bb) in enumerate(__import__('itertools').zip_longest(reference,candidate)):
+                count=i+1
+                if aa!=bb:first=dict(row=i,reference=aa,prediction=bb);break
+            diffs[name]=dict(equal=first is None,rows_compared=count,first_divergence=first)
+        return diffs
+    diffs=compare_traces('fluid','python');native_diffs=compare_traces('native','python-native')
+    fast_error=z['time_us']/results[0]['time_us']-1;native_error=nz['time_us']/results[0]['time_us']-1
+    qualification=dict(source=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),params={k:str(v) if isinstance(v,Path) else v for k,v in vars(a).items()},references=results,predictor=z,native_predictor=nz,absolute_native_error=fast_error,qualified_absolute_native_error=native_error,absolute_target=.1,absolute_pass=abs(native_error)<=.1,fast_fluid_absolute_pass=abs(fast_error)<=.1,fluid_trace_comparison=diffs,native_trace_comparison=native_diffs,full_moe=a.scope=='moe',shared_preserved=shared,selected_experts=selected,memory_model_shared=True,qualification_scope='Independent full logic/NoC/compute frontends using the same online pinned native DRAM model; not independent device or silicon accuracy')
     (out/'qualification.json').write_text(json.dumps(qualification,indent=2)+'\n')
     # Retain exact TSV, program and CSV bytes as gzip after interpreters finish.
     for path in (out/'program').iterdir():
         if path.suffix in ('.json','.tsv'):compact(path)
-    print('Python',z['time_us'],'native_error',qualification['absolute_native_error'],'fluid_exact',all(x['equal'] for x in diffs.values()),flush=True)
+    print('Python-fluid',z['time_us'],'native_error',fast_error,'fluid_exact',all(x['equal'] for x in diffs.values()),flush=True)
+    print('Python-native',nz['time_us'],'native_error',native_error,'native_exact',all(x['equal'] for x in native_diffs.values()),flush=True)
 if __name__=='__main__':main()
