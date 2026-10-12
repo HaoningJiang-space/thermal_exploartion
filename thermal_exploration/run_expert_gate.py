@@ -77,6 +77,17 @@ def point(c,layout,layer,route,p,schedule,order,isolation,out,label,full=False,d
   result['activity']=dict(result['activity'],dram=meta['actual_dram_bytes'],hb=meta['actual_dram_bytes'])
   if execution_grain=='macro':result['activity']['sram_read']=result['activity'].get('sram_read',0)+sum(x['activity']['sram_read'] for x in meta['kernel_ledger'])
   result['execution_grain']=execution_grain
+  if execution_grain!='macro' or noc_mode is not None:
+   from math import ceil
+   by_wait=defaultdict(Counter);busy=defaultdict(Counter);links=Counter()
+   for event in z['events']:
+    by_wait[event['kind']].update(event.get('wait_ticks',{}))
+    busy[str(event['tile'])][event['kind']]+=event['finish_tick']-event['start_tick']
+    if event['kind']=='link':links[str(g.nodes[event['id']].resource)]+=event['finish_tick']-event['start_tick']
+   arithmetic=Counter()
+   for rec in meta['kernel_ledger']:
+    arithmetic[str(rec['tile'])]+=sum(x['arithmetic_ticks'] for x in rec['microtile_ledger']) if 'microtile_ledger' in rec else (0 if isolation=='mac_only' else sum(ceil(x[3]/(p.compute_tflops/128*2000)) for x in rec['mac_blocks']))
+   result['service_diagnostics']=dict(wait_by_kind={k:dict(v) for k,v in by_wait.items()},explicit_busy_ticks={k:dict(v) for k,v in busy.items()},arithmetic_ticks=dict(arithmetic),directed_link_busy_ticks=dict(links),scope='Per-resource and per-node sums overlap across tiles; not an additive critical-path decomposition')
   result['critical_attribution_note']='Gate/up and down-row MAC nodes are JOINT memory/MAC services, not pure compute durations; component oracles are nonadditive.' if execution_grain=='macro' else 'Fine MAC context includes arithmetic and operand/FIFO floor; arithmetic ticks are separately recorded; component oracles are nonadditive.'
   result.update(dispatch_scheme=dispatch_scheme,reduction_scheme=reduction_scheme,private_sram_high=z['private_sram_high'],credit_group_high=z['credit_group_high'])
   by_stage=defaultdict(Counter)
@@ -88,7 +99,9 @@ def point(c,layout,layer,route,p,schedule,order,isolation,out,label,full=False,d
   result.update(status='PASS_ACCOUNTING',critical_path=z['critical_path'],critical_chain_ticks=dict(chain),critical_gap_ticks=maxgap,expert_service_latency=latencies,tail_expert=max(latencies,key=lambda x:x['finish_us']),mac_flops=meta['mac_flops'],actual_dram_bytes=meta['actual_dram_bytes'],active_weight_bytes=meta['active_weight_bytes'],all_expert_model_weight_bytes=meta['all_expert_model_weight_bytes'],counts=meta['counts'],effective_s_mfu=meta['mac_flops']/(z['ticks']*.25e-9*p.compute_tflops*1e12),effective_s_mbu=meta['active_weight_bytes']/(z['ticks']*.25e-9*p.service_tb_s*1e12),actual_read_utilization=meta['actual_dram_bytes']/(z['ticks']*.25e-9*p.service_tb_s*1e12),kernel_service_windows=[{k:v for k,v in rec.items() if k not in ('byte_completion','mac_blocks')} for rec in meta['kernel_ledger']],scope=meta['scope'])
   if full:
    path=out/(label+'-events.json.gz')
-   with gzip.open(path,'wt') as f:json.dump(dict(nodes=[dict(id=n.id,kind=n.kind,tile=n.tile,work=n.work,deps=n.deps,resource=n.resource,ticks=n.ticks,stage=n.stage,tier=n.tier,leases=n.leases) for n in g.nodes],meta=g.meta,events=z['events']),f,separators=(',',':'))
+   payload=dict(nodes=[dict(id=n.id,kind=n.kind,tile=n.tile,work=n.work,deps=n.deps,resource=n.resource,ticks=n.ticks,stage=n.stage,tier=n.tier,leases=n.leases) for n in g.nodes],meta=g.meta,events=z['events'])
+   if execution_grain!='macro' or noc_mode is not None:payload['kernels']=meta['kernel_ledger']
+   with gzip.open(path,'wt') as f:json.dump(payload,f,separators=(',',':'))
    result.update(event_file=path.name,event_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),full_events_retained=True)
   else:result['full_events_retained']=False
  except ValueError as error:result=dict(status='INFEASIBLE_FINITE_SCHEDULE',reason=str(error))
