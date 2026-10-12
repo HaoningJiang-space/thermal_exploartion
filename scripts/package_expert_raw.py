@@ -1,24 +1,28 @@
 """Bundle immutable P0-P3 evidence, including exits and explicitly retired controls."""
 import argparse,hashlib,io,json,re,tarfile,gzip
+from collections import Counter
 from pathlib import Path
 
 def sha(data):return hashlib.sha256(data).hexdigest()
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--sources',nargs='+',required=True);ap.add_argument('--output',required=True);ap.add_argument('--name',required=True);ap.add_argument('--retired',action='store_true');a=ap.parse_args()
+ sources=list(map(Path,a.sources));counts=Counter(p.name for p in sources)
+ labels=[p.name if counts[p.name]==1 else p.parent.name+'-'+p.name for p in sources]
+ if len(labels)!=len(set(labels)):raise ValueError('Evidence source labels must be unique')
  out=Path(a.output);out.mkdir(parents=True,exist_ok=False);parts=out/'entries';parts.mkdir();manifest=[]
- for source in map(Path,a.sources):
+ for source,label in zip(sources,labels):
   if not source.is_dir():raise ValueError('Missing source')
   files=[(p,p.name) for p in sorted(source.rglob('*')) if p.is_file() and p.suffix in ('.gz','.json','.csv','.tsv','.log','.md','.yaml')]
   files=[(p,str(p.relative_to(source))) for p,_ in files]
   for suffix in ('.exit','.log'):
    path=Path(str(source)+suffix)
    if path.exists():files.append((path,'process'+suffix))
-  target=parts/(source.name+'.tar.gz');entries=[]
+  target=parts/(label+'.tar.gz');entries=[]
   with tarfile.open(target,'w:gz',compresslevel=6) as archive:
    for file,name in files:
     original=file.read_bytes();data=original
     if file.suffix!='.gz':data=re.sub(rb'/[^\s"<>]*thermal-exploration-runs',b'<run-root>',data)
-    entry=tarfile.TarInfo(source.name+'/'+name);entry.size=len(data);entry.mtime=0;archive.addfile(entry,io.BytesIO(data))
+    entry=tarfile.TarInfo(label+'/'+name);entry.size=len(data);entry.mtime=0;archive.addfile(entry,io.BytesIO(data))
     record=dict(name=entry.name,bytes=len(data),sha256=sha(data),original_sha256=sha(original))
     if name.endswith('.gz'):
      try:
