@@ -1,0 +1,356 @@
+{
+  "source_commit": "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4",
+  "records": [
+    {
+      "graph_us": 0.0775,
+      "detailed_us": 0.0815,
+      "relative_error": -0.049079754601227044,
+      "absolute_target_met": true,
+      "validation": "PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation",
+      "byte_hops": 30720,
+      "scope": "Same tensor task/work; different packet/flit and eager/spread port scheduling; no full MoE qualification",
+      "run": "cold-k1024-native",
+      "case": "row_fifo_k",
+      "shape": [
+        512,
+        1024,
+        1
+      ],
+      "backend": "native",
+      "event_file": "cold-k1024-native-row_fifo_k-graph.json.gz",
+      "event_sha256": "86d3b0211828d317af6d1478843a542c1371b0058374ef57e617e4f6f4a35efb"
+    },
+    {
+      "graph_us": 0.101512,
+      "detailed_us": 0.10825,
+      "relative_error": -0.062244803695150064,
+      "absolute_target_met": true,
+      "validation": "PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation",
+      "byte_hops": 30720,
+      "scope": "Same tensor task/work; different packet/flit and eager/spread port scheduling; no full MoE qualification",
+      "run": "cold-k1024-native",
+      "case": "column_fifo64",
+      "shape": [
+        512,
+        1024,
+        1
+      ],
+      "backend": "native",
+      "event_file": "cold-k1024-native-column_fifo64-graph.json.gz",
+      "event_sha256": "18303e37d7ece6669d195c0c45242478a304a60446210bf9405cbef043a94cb1"
+    },
+    {
+      "graph_us": 0.0775,
+      "detailed_us": 0.0815,
+      "relative_error": -0.049079754601227044,
+      "absolute_target_met": true,
+      "validation": "PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation",
+      "byte_hops": 30720,
+      "scope": "Same tensor task/work; different packet/flit and eager/spread port scheduling; no full MoE qualification",
+      "run": "cold-k1024-fluid",
+      "case": "row_fifo_k",
+      "shape": [
+        512,
+        1024,
+        1
+      ],
+      "backend": "fluid",
+      "event_file": "cold-k1024-fluid-row_fifo_k-graph.json.gz",
+      "event_sha256": "761a984be2f8beb4557c4d28b1b5e03bf68be020350f926440bed17aa24a148c"
+    },
+    {
+      "graph_us": 0.101512,
+      "detailed_us": 0.1055,
+      "relative_error": -0.037800947867298484,
+      "absolute_target_met": true,
+      "validation": "PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation",
+      "byte_hops": 30720,
+      "scope": "Same tensor task/work; different packet/flit and eager/spread port scheduling; no full MoE qualification",
+      "run": "cold-k1024-fluid",
+      "case": "column_fifo64",
+      "shape": [
+        512,
+        1024,
+        1
+      ],
+      "backend": "fluid",
+      "event_file": "cold-k1024-fluid-column_fifo64-graph.json.gz",
+      "event_sha256": "bc1c0b78c992ef5a6e9a736c2e2b271dba7e9831bb8df6b13fd3232df1a45738"
+    },
+    {
+      "graph_us": 0.125,
+      "detailed_us": 0.1535,
+      "relative_error": -0.18566775244299671,
+      "absolute_target_met": false,
+      "validation": "PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation",
+      "byte_hops": 61440,
+      "scope": "Same tensor task/work; different packet/flit and eager/spread port scheduling; no full MoE qualification",
+      "run": "cold-k2048-native",
+      "case": "row_fifo_k",
+      "shape": [
+        512,
+        2048,
+        1
+      ],
+      "backend": "native",
+      "event_file": "cold-k2048-native-row_fifo_k-graph.json.gz",
+      "event_sha256": "434d3f0cabbbf539bec00b8ca5ea180587209b7af54e68720eb825e4fa1e2128"
+    },
+    {
+      "graph_us": 0.124762,
+      "detailed_us": 0.11875,
+      "relative_error": 0.050627368421052754,
+      "absolute_target_met": true,
+      "validation": "PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation",
+      "byte_hops": 30720,
+      "scope": "Same tensor task/work; different packet/flit and eager/spread port scheduling; no full MoE qualification",
+      "run": "cold-k2048-native",
+      "case": "column_fifo64",
+      "shape": [
+        512,
+        2048,
+        1
+      ],
+      "backend": "native",
+      "event_file": "cold-k2048-native-column_fifo64-graph.json.gz",
+      "event_sha256": "c1abf7ab0afa1686485a827b7904e7afc7edf1d57e784c318a21c5e88a130000"
+    },
+    {
+      "graph_us": 0.125,
+      "detailed_us": 0.1535,
+      "relative_error": -0.18566775244299671,
+      "absolute_target_met": false,
+      "validation": "PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation",
+      "byte_hops": 61440,
+      "scope": "Same tensor task/work; different packet/flit and eager/spread port scheduling; no full MoE qualification",
+      "run": "cold-k2048-fluid",
+      "case": "row_fifo_k",
+      "shape": [
+        512,
+        2048,
+        1
+      ],
+      "backend": "fluid",
+      "event_file": "cold-k2048-fluid-row_fifo_k-graph.json.gz",
+      "event_sha256": "c013368f1e2f37ab6cbf8f8a62773985f16d496e9f146bb7d11ef5f24cf9c2c1"
+    },
+    {
+      "graph_us": 0.124762,
+      "detailed_us": 0.11875,
+      "relative_error": 0.050627368421052754,
+      "absolute_target_met": true,
+      "validation": "PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation",
+      "byte_hops": 30720,
+      "scope": "Same tensor task/work; different packet/flit and eager/spread port scheduling; no full MoE qualification",
+      "run": "cold-k2048-fluid",
+      "case": "column_fifo64",
+      "shape": [
+        512,
+        2048,
+        1
+      ],
+      "backend": "fluid",
+      "event_file": "cold-k2048-fluid-column_fifo64-graph.json.gz",
+      "event_sha256": "dcb625617e12df043a4c5faceb6773e4fc0b88d9a956aef9a12b5c69a6e9235c"
+    },
+    {
+      "graph_us": 1.12775,
+      "detailed_us": 1.22,
+      "relative_error": -0.0756147540983606,
+      "absolute_target_met": true,
+      "validation": "PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation",
+      "byte_hops": 675840,
+      "scope": "Same tensor task/work; different packet/flit and eager/spread port scheduling; no full MoE qualification",
+      "run": "reused-k1024-native",
+      "case": "row_fifo_k",
+      "shape": [
+        512,
+        1024,
+        22
+      ],
+      "backend": "native",
+      "event_file": "reused-k1024-native-row_fifo_k-graph.json.gz",
+      "event_sha256": "a5752052558062405149390e02592192826f22f653874a1f1310de82558b9dcf"
+    },
+    {
+      "graph_us": 1.161524,
+      "detailed_us": 1.4605,
+      "relative_error": -0.20470797672030117,
+      "absolute_target_met": false,
+      "validation": "PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation",
+      "byte_hops": 675840,
+      "scope": "Same tensor task/work; different packet/flit and eager/spread port scheduling; no full MoE qualification",
+      "run": "reused-k1024-native",
+      "case": "column_fifo64",
+      "shape": [
+        512,
+        1024,
+        22
+      ],
+      "backend": "native",
+      "event_file": "reused-k1024-native-column_fifo64-graph.json.gz",
+      "event_sha256": "35e424823fccd2051df17c3403d8fa6e85c6a62e14a0d58cfca64a2ec6a480ae"
+    },
+    {
+      "graph_us": 1.12775,
+      "detailed_us": 1.22,
+      "relative_error": -0.0756147540983606,
+      "absolute_target_met": true,
+      "validation": "PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation",
+      "byte_hops": 675840,
+      "scope": "Same tensor task/work; different packet/flit and eager/spread port scheduling; no full MoE qualification",
+      "run": "reused-k1024-fluid",
+      "case": "row_fifo_k",
+      "shape": [
+        512,
+        1024,
+        22
+      ],
+      "backend": "fluid",
+      "event_file": "reused-k1024-fluid-row_fifo_k-graph.json.gz",
+      "event_sha256": "d2edaf1d404a2954e1101348eaf443ce71b28ed671b141f2ef4381d4843615e7"
+    },
+    {
+      "graph_us": 1.161524,
+      "detailed_us": 1.45725,
+      "relative_error": -0.20293429404700636,
+      "absolute_target_met": false,
+      "validation": "PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation",
+      "byte_hops": 675840,
+      "scope": "Same tensor task/work; different packet/flit and eager/spread port scheduling; no full MoE qualification",
+      "run": "reused-k1024-fluid",
+      "case": "column_fifo64",
+      "shape": [
+        512,
+        1024,
+        22
+      ],
+      "backend": "fluid",
+      "event_file": "reused-k1024-fluid-column_fifo64-graph.json.gz",
+      "event_sha256": "43687201f5114b622f3af3ea59b496c3a7f4892fa970092b2ac373748bd966ed"
+    },
+    {
+      "graph_us": 2.24,
+      "detailed_us": 2.411,
+      "relative_error": -0.07092492741600986,
+      "absolute_target_met": true,
+      "validation": "PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation",
+      "byte_hops": 1351680,
+      "scope": "Same tensor task/work; different packet/flit and eager/spread port scheduling; no full MoE qualification",
+      "run": "reused-k2048-native",
+      "case": "row_fifo_k",
+      "shape": [
+        512,
+        2048,
+        22
+      ],
+      "backend": "native",
+      "event_file": "reused-k2048-native-row_fifo_k-graph.json.gz",
+      "event_sha256": "a55c43602eca2ccf5036307a96c47b6cf98fb22db89bbf98f8c7c65e4619a070"
+    },
+    {
+      "graph_us": 1.219274,
+      "detailed_us": 1.4785,
+      "relative_error": -0.17533040243490017,
+      "absolute_target_met": false,
+      "validation": "PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation",
+      "byte_hops": 675840,
+      "scope": "Same tensor task/work; different packet/flit and eager/spread port scheduling; no full MoE qualification",
+      "run": "reused-k2048-native",
+      "case": "column_fifo64",
+      "shape": [
+        512,
+        2048,
+        22
+      ],
+      "backend": "native",
+      "event_file": "reused-k2048-native-column_fifo64-graph.json.gz",
+      "event_sha256": "1650ccf413a925e9d18ef9af94f6bceedd21364452be9de2163ef088a179b20a"
+    },
+    {
+      "graph_us": 2.24,
+      "detailed_us": 2.411,
+      "relative_error": -0.07092492741600986,
+      "absolute_target_met": true,
+      "validation": "PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation",
+      "byte_hops": 1351680,
+      "scope": "Same tensor task/work; different packet/flit and eager/spread port scheduling; no full MoE qualification",
+      "run": "reused-k2048-fluid",
+      "case": "row_fifo_k",
+      "shape": [
+        512,
+        2048,
+        22
+      ],
+      "backend": "fluid",
+      "event_file": "reused-k2048-fluid-row_fifo_k-graph.json.gz",
+      "event_sha256": "36de6881ba8cdc53f27239d9811a454bc766fa55d04423a70d2665bce75fb088"
+    },
+    {
+      "graph_us": 1.219274,
+      "detailed_us": 1.47275,
+      "relative_error": -0.17211067730436258,
+      "absolute_target_met": false,
+      "validation": "PASS: dependency joins, resource nonoverlap, finite buffer lifetimes and work conservation",
+      "byte_hops": 675840,
+      "scope": "Same tensor task/work; different packet/flit and eager/spread port scheduling; no full MoE qualification",
+      "run": "reused-k2048-fluid",
+      "case": "column_fifo64",
+      "shape": [
+        512,
+        2048,
+        22
+      ],
+      "backend": "fluid",
+      "event_file": "reused-k2048-fluid-column_fifo64-graph.json.gz",
+      "event_sha256": "a6b890fcbc1802376133686991a4f0fe1a181dc223dceefa71eaa71431fd0f72"
+    }
+  ],
+  "pairs": [
+    {
+      "k": 1024,
+      "batch": 1,
+      "native_row_over_column": 0.7528868360277137,
+      "graph_row_over_column": 0.7634565371581684,
+      "relative_prediction_error": 0.014038897513763526,
+      "relative_target_met": true,
+      "rank_agrees": true,
+      "native_fluid_max_error": 0.025404157043879882
+    },
+    {
+      "k": 1024,
+      "batch": 22,
+      "native_row_over_column": 0.8353303663129066,
+      "graph_row_over_column": 0.9709226843354076,
+      "relative_prediction_error": 0.16232178727201863,
+      "relative_target_met": false,
+      "rank_agrees": true,
+      "native_fluid_max_error": 0.002225265320095815
+    },
+    {
+      "k": 2048,
+      "batch": 1,
+      "native_row_over_column": 1.2926315789473684,
+      "graph_row_over_column": 1.0019076321315785,
+      "relative_prediction_error": -0.22490859077768754,
+      "relative_target_met": false,
+      "rank_agrees": true,
+      "native_fluid_max_error": 0.0
+    },
+    {
+      "k": 2048,
+      "batch": 22,
+      "native_row_over_column": 1.6307067974298277,
+      "graph_row_over_column": 1.8371588338634304,
+      "relative_prediction_error": 0.12660279380633832,
+      "relative_target_met": false,
+      "rank_agrees": true,
+      "native_fluid_max_error": 0.003889076766993571
+    }
+  ],
+  "absolute_target": 0.1,
+  "relative_target": 0.05,
+  "absolute_pass": 10,
+  "relative_pass": 1,
+  "scope": "Same detailed tensor task/work; packet/flit and eager/spread service differences; fullMoE TP4/16 independent fidelity not established"
+}

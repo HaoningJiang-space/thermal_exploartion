@@ -63,3 +63,15 @@ P2采用已付费fusion与静态row-down强基线，P3区分native DRAM和HB/ing
 不支持据此批准新Fabric、Peripheral、Row-cycle或expert controller RTL。
 Research Go保持，新的Hardware Go尚未建立。
 本轮没有新thermal扫描；上一轮默认温度资格不得自动转授给新的执行方案。
+
+## 2026-10-11：P4-B 资源粒度与原生精度门
+
+[正式报告](../results/p4-fine-2026-10-11/findings.md)与[合同](p4_fine_execution_contract.md)冻结真实路由、权重布局、Expert/MAC顺序与有限资源。
+Macro精确回归；Fine-fixed拆开权重服务和实际operand/FIFO占用；Fine-prefetch单独衡量已知的当前路由提前请求。
+48个性能点独立重放通过，10个P4-A点精确回归；没有工作量、端口或容量超用。
+但16个Native/Fluid组件配对中仅10个通过10%绝对时间门，4组Row/Column相对预测仅1组通过5%门。
+完整MoE TP4/TP16独立时间资格仍未建立。快慢排序一致不能掩盖收益幅度误差。
+
+Research Go：保留宏预留的敏感性与逐事件诊断，先校准packet/flit、端口服务和结果阶段竞争的同合同执行。
+Hardware Go：未建立。当前NoC/MAC Oracle与模型内6%–8% reservation收益不能用于批准新的网络、阵列或P4-C物理架构。
+不扩大普通DSE，不重启已关闭RTL，不通过经验倍率或平均误差覆盖资格失败。

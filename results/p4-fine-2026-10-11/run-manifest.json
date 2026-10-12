@@ -1,0 +1,1946 @@
+[
+  {
+    "directory": "b8-tp4-row-macro",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b8-tp4-row-macro",
+      "batch": 8,
+      "tp": 4,
+      "down": "row",
+      "grain": "macro"
+    },
+    "summary_sha256": "8c8530798beae17debcf4d2f24558107f9890f4e6482869ba83b872625522a86",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-row-fine_fixed",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b8-tp4-row-fine_fixed",
+      "batch": 8,
+      "tp": 4,
+      "down": "row",
+      "grain": "fine_fixed"
+    },
+    "summary_sha256": "5df43040108fcdfc3e683b4b44f2c49a24fafe5837a6de1e417925ee1d2b1a31",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-row-fine_prefetch",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b8-tp4-row-fine_prefetch",
+      "batch": 8,
+      "tp": 4,
+      "down": "row",
+      "grain": "fine_prefetch"
+    },
+    "summary_sha256": "54d23f1f629282d649ebdd6a5e3983fd079cbad3eaaf753f4a50cdae48dcba3f",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-column-macro",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b8-tp4-column-macro",
+      "batch": 8,
+      "tp": 4,
+      "down": "column",
+      "grain": "macro"
+    },
+    "summary_sha256": "4b4c05ec73de6cf001aba0730921be5867eb0b4661348500075c17867400e3c7",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-column-fine_fixed",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b8-tp4-column-fine_fixed",
+      "batch": 8,
+      "tp": 4,
+      "down": "column",
+      "grain": "fine_fixed"
+    },
+    "summary_sha256": "74e22bddae7a4c4729e08ebf92626a348f7e5272b8e1efce7265fc214d2f4565",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp4-column-fine_prefetch",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b8-tp4-column-fine_prefetch",
+      "batch": 8,
+      "tp": 4,
+      "down": "column",
+      "grain": "fine_prefetch"
+    },
+    "summary_sha256": "f7b12f5286828cec30f2576a672c922679c2b355a79e7ef88e71ec3bc2f9c152",
+    "layout_sha256": "4ceaf134329402cfbe95b0a7d085438a5588708d6cb334c196c5ee43251d17ce"
+  },
+  {
+    "directory": "b8-tp16-row-macro",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b8-tp16-row-macro",
+      "batch": 8,
+      "tp": 16,
+      "down": "row",
+      "grain": "macro"
+    },
+    "summary_sha256": "c7ef29c254e8502143ae40b6f01e4dcaf0464902e845f79eab56560c4b204ead",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-row-fine_fixed",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b8-tp16-row-fine_fixed",
+      "batch": 8,
+      "tp": 16,
+      "down": "row",
+      "grain": "fine_fixed"
+    },
+    "summary_sha256": "0fcd7b520e5a5ed51415bcea7eca2f93bbcba4c077dbfdaf2ba6767d50c5a9e8",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-row-fine_prefetch",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b8-tp16-row-fine_prefetch",
+      "batch": 8,
+      "tp": 16,
+      "down": "row",
+      "grain": "fine_prefetch"
+    },
+    "summary_sha256": "e724ab4e59fc0e6162925256eae31a14eadead149b57a9a4ae1626620e28b126",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-column-macro",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b8-tp16-column-macro",
+      "batch": 8,
+      "tp": 16,
+      "down": "column",
+      "grain": "macro"
+    },
+    "summary_sha256": "0341aff10e9112f42cb2418b5f045e8c8da9a27ec0d4ad6e569a300a9ca4020e",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-column-fine_fixed",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b8-tp16-column-fine_fixed",
+      "batch": 8,
+      "tp": 16,
+      "down": "column",
+      "grain": "fine_fixed"
+    },
+    "summary_sha256": "3b5dee3e960c745ce2d83d07c32f9a4d4623374d07f34c3f0de024fee9ae7c3f",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b8-tp16-column-fine_prefetch",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b8-tp16-column-fine_prefetch",
+      "batch": 8,
+      "tp": 16,
+      "down": "column",
+      "grain": "fine_prefetch"
+    },
+    "summary_sha256": "c55abb0e2c47dd1ac2c6201a918ff5b37a27683c57a52fc2104ad1ca27e3b5b3",
+    "layout_sha256": "753af14eb75ffcfb76e5f50b8012cc5763dca891520a07d4df77b5aa629b054b"
+  },
+  {
+    "directory": "b32-tp4-row-macro",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b32-tp4-row-macro",
+      "batch": 32,
+      "tp": 4,
+      "down": "row",
+      "grain": "macro"
+    },
+    "summary_sha256": "b7bfc47ef97b133bf978d02ff376dece931c25b3daba24fe6dd94546d265a91a",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-row-fine_fixed",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b32-tp4-row-fine_fixed",
+      "batch": 32,
+      "tp": 4,
+      "down": "row",
+      "grain": "fine_fixed"
+    },
+    "summary_sha256": "571212a4403802ee82d210681332623d04e4fe066e5e89fd17efe3eb3e96f4d3",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-row-fine_prefetch",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b32-tp4-row-fine_prefetch",
+      "batch": 32,
+      "tp": 4,
+      "down": "row",
+      "grain": "fine_prefetch"
+    },
+    "summary_sha256": "896bcb5c1ccf1b0df019bed63a386fe9c3fa65631fc191b894974aa1c5b3e288",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-column-macro",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b32-tp4-column-macro",
+      "batch": 32,
+      "tp": 4,
+      "down": "column",
+      "grain": "macro"
+    },
+    "summary_sha256": "2b52325a1ce2adbedb05f1b1ed46037b3b235545a73b2515aa268766e378e472",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-column-fine_fixed",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b32-tp4-column-fine_fixed",
+      "batch": 32,
+      "tp": 4,
+      "down": "column",
+      "grain": "fine_fixed"
+    },
+    "summary_sha256": "2d5f487f37f17919db1f1411b15e321bc9489264362781ef4e501494d9d77fc7",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp4-column-fine_prefetch",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b32-tp4-column-fine_prefetch",
+      "batch": 32,
+      "tp": 4,
+      "down": "column",
+      "grain": "fine_prefetch"
+    },
+    "summary_sha256": "a4a9f973f38fff988aab9aea3a7c6b390051c68c209835be42c959255c757be4",
+    "layout_sha256": "a060f220bd329a35ee427a7392fb9ad43a17f59c623095838d909eb6c11b558e"
+  },
+  {
+    "directory": "b32-tp16-row-macro",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b32-tp16-row-macro",
+      "batch": 32,
+      "tp": 16,
+      "down": "row",
+      "grain": "macro"
+    },
+    "summary_sha256": "43384aecb92f36443adc3bcc55566bc5bd36f996702d80b10fcf6b02950f5e92",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-row-fine_fixed",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b32-tp16-row-fine_fixed",
+      "batch": 32,
+      "tp": 16,
+      "down": "row",
+      "grain": "fine_fixed"
+    },
+    "summary_sha256": "b804a63f2c74a121744f78091ae877ddf62a0bad447a843aebe0ed3dcdc84305",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-row-fine_prefetch",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b32-tp16-row-fine_prefetch",
+      "batch": 32,
+      "tp": 16,
+      "down": "row",
+      "grain": "fine_prefetch"
+    },
+    "summary_sha256": "08d5351083a8be8b63fa2d5bd2de9cbe141ee322fe57a8c9a0086d4ac0a8ca9e",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-column-macro",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b32-tp16-column-macro",
+      "batch": 32,
+      "tp": 16,
+      "down": "column",
+      "grain": "macro"
+    },
+    "summary_sha256": "0e12a2675e0f770086cbb48b68b1977c83ab46e0c76842c4a6031726ec2489cb",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-column-fine_fixed",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b32-tp16-column-fine_fixed",
+      "batch": 32,
+      "tp": 16,
+      "down": "column",
+      "grain": "fine_fixed"
+    },
+    "summary_sha256": "d138ae64b62b3557dea959bf66ae10b4adbfc8ecf2e0bc77e029a83e64d48a24",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  },
+  {
+    "directory": "b32-tp16-column-fine_prefetch",
+    "exit_code": 0,
+    "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+    "selected_experts": {
+      "cold": {
+        "expert": 12,
+        "tokens": [
+          8
+        ],
+        "count": 1
+      },
+      "reused": {
+        "expert": 10,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      },
+      "contending": {
+        "expert": 34,
+        "tokens": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          20,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "count": 22
+      }
+    },
+    "params": {
+      "routes": "routes.json",
+      "output": "b32-tp16-column-fine_prefetch",
+      "batch": 32,
+      "tp": 16,
+      "down": "column",
+      "grain": "fine_prefetch"
+    },
+    "summary_sha256": "cc673f6843b1c6aa27fbdb6a38b242e4e0c0b753a53ccbc487bbce8921bdf5a0",
+    "layout_sha256": "c3564659e1ac34df5dacf5b308eba63d3e29356eadd3fb40f45ccd1cdb02086b"
+  }
+]

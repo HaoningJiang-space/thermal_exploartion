@@ -7,7 +7,18 @@
 研究主线仅为本仓库的 **Hybrid-Bonded 3D DRAM-on-Logic Architecture**：
 真实 Dense/MoE LLM、Compute/Memory/NoC物理组织与Spatial Thermal；计算在logic，不做PIM或Power Delivery。
 
-最新交付为 **[P4-A：通信语义与有界 Row-ready Reduction](results/p4-communication-2026-10-11/findings.md)**。
+最新交付为 **[P4-B：细粒度资源占用与关键路径验证](results/p4-fine-2026-10-11/findings.md)**。
+48个原始Qwen路由性能点、16个Native/Fluid组件点、48次小张量数值比较完成；
+48点独立资源/事件重放、10个P4-A精确回归及134项测试通过。
+TP16 row-down仅改变预留粒度的模型内延迟减少B8/B32为8.03%/6.33%；联合NoC诊断增益仍为27.27%/29.23%。
+**原生时间资格未通过**：绝对10%门槛10/16（Native-only5/8），相对5%门槛1/4，完整MoE独立精度未建立。
+保留所有精度失败与零实验点的launcher失败；不据此进入新NoC/MAC或P4-C硬件设计，先校准同合同执行。
+[冻结合同](docs/p4_fine_execution_contract.md)、[审计](results/p4-fine-2026-10-11/audit.json)、
+[原生资格](results/p4-fine-2026-10-11/component-qualification.json)、[复现](results/p4-fine-2026-10-11/reproduce.md)与
+[完整原始记录](https://github.com/HaoningJiang-space/thermal_exploartion/releases/tag/p4-fine-execution-2026-10-11)分别保留资源正确性和时间精度边界。
+本轮没有新scheduler/network、DSE、RTL或thermal扫描。
+
+**上一轮：[P4-A：通信语义与有界 Row-ready Reduction](results/p4-communication-2026-10-11/findings.md)**。
 336个真实路由性能点、48个小张量数值对照、64个进程全部完成；所有性能点通过独立事件/资源重放，28个旧案例精确重放。
 固定Shared权重布局下，Destination-only仍需覆盖全部16个Tile；独立Shared/Routed交付的重复通信全部付费。
 保留输入复用的128-row Row-ready在相同64KiB输出空间内取得1.0243×主案例、1.0209×验证案例几何平均加速。

@@ -1,0 +1,962 @@
+[
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.958120942115784e-09,
+    "relative_l2_error": 3.8828261494927574e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp4-row-macro"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 9.313225746154785e-10,
+    "relative_l2_error": 1.0351302393019068e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp4-row-macro"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.958120942115784e-09,
+    "relative_l2_error": 3.8828261494927574e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp4-row-fine_fixed"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 9.313225746154785e-10,
+    "relative_l2_error": 1.0351302393019068e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp4-row-fine_fixed"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.958120942115784e-09,
+    "relative_l2_error": 3.8828261494927574e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp4-row-fine_prefetch"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 9.313225746154785e-10,
+    "relative_l2_error": 1.0351302393019068e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp4-row-fine_prefetch"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 4.0745362639427185e-09,
+    "relative_l2_error": 3.8810708247183356e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp4-column-macro"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 9.313225746154785e-10,
+    "relative_l2_error": 1.0397333483069815e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp4-column-macro"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 4.0745362639427185e-09,
+    "relative_l2_error": 3.8810708247183356e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp4-column-fine_fixed"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 9.313225746154785e-10,
+    "relative_l2_error": 1.0397333483069815e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp4-column-fine_fixed"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 4.0745362639427185e-09,
+    "relative_l2_error": 3.8810708247183356e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp4-column-fine_prefetch"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 9.313225746154785e-10,
+    "relative_l2_error": 1.0397333483069815e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp4-column-fine_prefetch"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 4.190951585769653e-09,
+    "relative_l2_error": 3.9777074789526523e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp16-row-macro"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 9.313225746154785e-10,
+    "relative_l2_error": 1.0463028132789987e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp16-row-macro"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 4.190951585769653e-09,
+    "relative_l2_error": 3.9777074789526523e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp16-row-fine_fixed"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 9.313225746154785e-10,
+    "relative_l2_error": 1.0463028132789987e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp16-row-fine_fixed"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 4.190951585769653e-09,
+    "relative_l2_error": 3.9777074789526523e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp16-row-fine_prefetch"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 9.313225746154785e-10,
+    "relative_l2_error": 1.0463028132789987e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp16-row-fine_prefetch"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 4.249159246683121e-09,
+    "relative_l2_error": 4.0124933775587124e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp16-column-macro"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 1.3969838619232178e-09,
+    "relative_l2_error": 1.1190189042054044e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp16-column-macro"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 4.249159246683121e-09,
+    "relative_l2_error": 4.0124933775587124e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp16-column-fine_fixed"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 1.3969838619232178e-09,
+    "relative_l2_error": 1.1190189042054044e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp16-column-fine_fixed"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 4.249159246683121e-09,
+    "relative_l2_error": 4.0124933775587124e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp16-column-fine_prefetch"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 8,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 1.3969838619232178e-09,
+    "relative_l2_error": 1.1190189042054044e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b8-tp16-column-fine_prefetch"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.725290298461914e-09,
+    "relative_l2_error": 4.2768022012751317e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp4-row-macro"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.2014213502407074e-09,
+    "relative_l2_error": 1.4779840284973034e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp4-row-macro"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.725290298461914e-09,
+    "relative_l2_error": 4.2768022012751317e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp4-row-fine_fixed"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.2014213502407074e-09,
+    "relative_l2_error": 1.4779840284973034e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp4-row-fine_fixed"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.725290298461914e-09,
+    "relative_l2_error": 4.2768022012751317e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp4-row-fine_prefetch"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.2014213502407074e-09,
+    "relative_l2_error": 1.4779840284973034e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp4-row-fine_prefetch"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.725290298461914e-09,
+    "relative_l2_error": 4.2865565319516463e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp4-column-macro"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.14321368932724e-09,
+    "relative_l2_error": 1.5024004085262277e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp4-column-macro"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.725290298461914e-09,
+    "relative_l2_error": 4.2865565319516463e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp4-column-fine_fixed"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.14321368932724e-09,
+    "relative_l2_error": 1.5024004085262277e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp4-column-fine_fixed"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.725290298461914e-09,
+    "relative_l2_error": 4.2865565319516463e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp4-column-fine_prefetch"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.14321368932724e-09,
+    "relative_l2_error": 1.5024004085262277e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp4-column-fine_prefetch"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.841705620288849e-09,
+    "relative_l2_error": 4.424793758062151e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp16-row-macro"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.2014213502407074e-09,
+    "relative_l2_error": 1.495031654030754e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp16-row-macro"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.841705620288849e-09,
+    "relative_l2_error": 4.424793758062151e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp16-row-fine_fixed"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.2014213502407074e-09,
+    "relative_l2_error": 1.495031654030754e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp16-row-fine_fixed"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.841705620288849e-09,
+    "relative_l2_error": 4.424793758062151e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp16-row-fine_prefetch"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.2014213502407074e-09,
+    "relative_l2_error": 1.495031654030754e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp16-row-fine_prefetch"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 4.6566128730773926e-09,
+    "relative_l2_error": 4.418022001573263e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp16-column-macro"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.14321368932724e-09,
+    "relative_l2_error": 1.507498126329665e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp16-column-macro"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 4.6566128730773926e-09,
+    "relative_l2_error": 4.418022001573263e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp16-column-fine_fixed"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.14321368932724e-09,
+    "relative_l2_error": 1.507498126329665e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp16-column-fine_fixed"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "FP32",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 4.6566128730773926e-09,
+    "relative_l2_error": 4.418022001573263e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp16-column-fine_prefetch"
+  },
+  {
+    "status": "PASS_NUMERICAL",
+    "dtype": "BF16",
+    "seed": 20261011,
+    "shape": {
+      "batch": 32,
+      "hidden": 256,
+      "intermediate": 32,
+      "shared": 128
+    },
+    "max_absolute_error": 3.14321368932724e-09,
+    "relative_l2_error": 1.507498126329665e-07,
+    "tolerance": {
+      "rtol": 0.0002,
+      "atol": 2e-06
+    },
+    "captured_routing_probabilities": true,
+    "scope": "Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance",
+    "experiment": "b32-tp16-column-fine_prefetch"
+  }
+]

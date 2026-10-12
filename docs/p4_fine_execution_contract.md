@@ -44,7 +44,7 @@ Native/Fluid详细frontend选定来自真实cold/reused专家的合法tensor sub
 这些是实际d2048和Gate/Up维度内的子矩阵；不作为主性能或生产工作负载，也不将其16-way partition结果替代全MoE TP4/16排序。
 采用原有Ramulator pin、refresh、actual physical addresses、32B flits、共享SRAM/FIFO与MAC frontend，保留原生command/transaction审计。
 Native与Fluid共享详细frontend，最多验证memory abstraction；其结果不能独立认证Python fine executor。
-另用Python Graph重建同一详细tensor task/input/reduction合同，与两个backend逐case比较，预设absolute10%、relative5个百分点；失败公开保留，不通过调参/平均抹去。
+另用Python Graph重建同一详细tensor task/input/reduction合同，与两个backend逐case比较，预设absolute10%、Row/Column延迟比值的相对预测误差5%；失败公开保留，不通过调参/平均抹去。
 完整MoE的TP4/TP16及row/column排序比较是粒度敏感性结果；若没有同合同独立详细MoE frontend，G4不得写成独立精度通过。
 
 G1 work/token/weight/semantic一致；G2 ports、credits、lease有限；G3 component native交叉验证；G4报告误差和排序资格；G5 causal/等待闭合；G6超用、早消费、非法co-issue负控制。

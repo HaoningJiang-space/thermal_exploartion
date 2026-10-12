@@ -1,0 +1,121 @@
+{
+  "release": "p4-fine-execution-2026-10-11",
+  "release_id": 410122481,
+  "source_commits": [
+    "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+    "c95c2d7c7c48ef7b72bbacac93eddeb60c7e92f4"
+  ],
+  "routing_sha256": "24aba0d1337106563e6b05f4f54ea6d5861838a930a376d99ae5feac9bcdb9e6",
+  "total_bytes": 774574080,
+  "assets": [
+    {
+      "file": "p4-b-b8.tar",
+      "bytes": 305766400,
+      "sha256": "6cdfd63193cd07f114d8c91ca5bfafd35a20dc99153551ce7f63342280da2c0c",
+      "directory": "p4-b-b8",
+      "source_directories": [
+        "b8-tp4-row-macro",
+        "b8-tp4-row-fine_fixed",
+        "b8-tp4-row-fine_prefetch",
+        "b8-tp4-column-macro",
+        "b8-tp4-column-fine_fixed",
+        "b8-tp4-column-fine_prefetch",
+        "b8-tp16-row-macro",
+        "b8-tp16-row-fine_fixed",
+        "b8-tp16-row-fine_prefetch",
+        "b8-tp16-column-macro",
+        "b8-tp16-column-fine_fixed",
+        "b8-tp16-column-fine_prefetch"
+      ],
+      "asset_id": 632548500,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-fine-execution-2026-10-11/p4-b-b8.tar",
+      "protected_content_scan": "PASS_INCLUDING_DECODED_GZIP",
+      "inspected_bytes": 6813192123
+    },
+    {
+      "file": "p4-b-b32-tp4.tar",
+      "bytes": 103843840,
+      "sha256": "f6e25bba75f029ec2b2acbe8004b9e858443b582a0ceccb1b9d3960ceb4ef55b",
+      "directory": "p4-b-b32-tp4",
+      "source_directories": [
+        "b32-tp4-row-macro",
+        "b32-tp4-row-fine_fixed",
+        "b32-tp4-row-fine_prefetch",
+        "b32-tp4-column-macro",
+        "b32-tp4-column-fine_fixed",
+        "b32-tp4-column-fine_prefetch"
+      ],
+      "asset_id": 632548005,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-fine-execution-2026-10-11/p4-b-b32-tp4.tar",
+      "protected_content_scan": "PASS_INCLUDING_DECODED_GZIP",
+      "inspected_bytes": 2337566349
+    },
+    {
+      "file": "p4-b-b32-tp16-fixed.tar",
+      "bytes": 158873600,
+      "sha256": "f657bcb5461c9d956876975a891bd585c8f33ba5dfb2c8dd81f014be8374071b",
+      "directory": "p4-b-b32-tp16-fixed",
+      "source_directories": [
+        "b32-tp16-row-fine_fixed",
+        "b32-tp16-column-fine_fixed"
+      ],
+      "asset_id": 632548100,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-fine-execution-2026-10-11/p4-b-b32-tp16-fixed.tar",
+      "protected_content_scan": "PASS_INCLUDING_DECODED_GZIP",
+      "inspected_bytes": 3590460441
+    },
+    {
+      "file": "p4-b-b32-tp16-prefetch.tar",
+      "bytes": 159662080,
+      "sha256": "92e0abdf811019690561fb26face447b6009d800e1a5f444c6cf69b110ef2219",
+      "directory": "p4-b-b32-tp16-prefetch",
+      "source_directories": [
+        "b32-tp16-row-fine_prefetch",
+        "b32-tp16-column-fine_prefetch"
+      ],
+      "asset_id": 632548083,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-fine-execution-2026-10-11/p4-b-b32-tp16-prefetch.tar",
+      "protected_content_scan": "PASS_INCLUDING_DECODED_GZIP",
+      "inspected_bytes": 3344059608
+    },
+    {
+      "file": "p4-b-native-and-controls.tar",
+      "bytes": 46417920,
+      "sha256": "de984e8a3e6fcc81abcaf4b08d81419f41a8ab43b0f4c1a4e3191ed9d924f17e",
+      "directory": "p4-b-native-and-controls",
+      "source_directories": [
+        "b32-tp16-row-macro",
+        "b32-tp16-column-macro",
+        "cold-k1024-native",
+        "cold-k1024-fluid",
+        "cold-k2048-native",
+        "cold-k2048-fluid",
+        "reused-k1024-native",
+        "reused-k1024-fluid",
+        "reused-k2048-native",
+        "reused-k2048-fluid",
+        "p4-b-component-qualification",
+        "p4-b-component-phases",
+        "launch-metadata"
+      ],
+      "asset_id": 632547847,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-fine-execution-2026-10-11/p4-b-native-and-controls.tar",
+      "protected_content_scan": "PASS_INCLUDING_DECODED_GZIP",
+      "inspected_bytes": 823285013
+    },
+    {
+      "file": "p4-b-retired-launch.tar",
+      "bytes": 10240,
+      "sha256": "586a8d4eccc54bc10073c4361f4ae7191f2f02623155ced50fe6958e0317c0d8",
+      "directory": "p4-b-retired-launch",
+      "source_directories": [
+        "launcher-import-failure"
+      ],
+      "asset_id": 632547719,
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-fine-execution-2026-10-11/p4-b-retired-launch.tar",
+      "protected_content_scan": "PASS_INCLUDING_DECODED_GZIP",
+      "inspected_bytes": 1370
+    }
+  ],
+  "scope": "Full immutable primary/native/Graph component evidence; retained launcher failure, qualification failures preserved; upload sizes and SHA256 independently matched"
+}

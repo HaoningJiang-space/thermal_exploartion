@@ -1,0 +1,154 @@
+[
+  {
+    "batch": 8,
+    "tp": 4,
+    "down_partition": "row",
+    "macro_us": 19.69625,
+    "fine_fixed_us": 18.242470000000008,
+    "fine_prefetch_us": 17.205048,
+    "reservation_delta_us": 1.4537799999999912,
+    "prefetch_delta_us": 1.0374220000000065,
+    "common_activity": {
+      "mac": 1107296256,
+      "dram": 207618048,
+      "hb": 207618048,
+      "sram_read": 42917888,
+      "sram_write": 8675328,
+      "vector": 1441792,
+      "link": 1744896
+    }
+  },
+  {
+    "batch": 8,
+    "tp": 4,
+    "down_partition": "column",
+    "macro_us": 21.0745,
+    "fine_fixed_us": 19.612584000000002,
+    "fine_prefetch_us": 17.599298000000005,
+    "reservation_delta_us": 1.4619159999999987,
+    "prefetch_delta_us": 2.0132859999999972,
+    "common_activity": {
+      "mac": 1107296256,
+      "dram": 207618048,
+      "hb": 207618048,
+      "sram_read": 45711360,
+      "sram_write": 10764288,
+      "vector": 1835008,
+      "link": 1474560
+    }
+  },
+  {
+    "batch": 8,
+    "tp": 16,
+    "down_partition": "row",
+    "macro_us": 18.109,
+    "fine_fixed_us": 16.65499400000002,
+    "fine_prefetch_us": 15.73,
+    "reservation_delta_us": 1.454005999999982,
+    "prefetch_delta_us": 0.9249940000000194,
+    "common_activity": {
+      "mac": 1107296256,
+      "dram": 207618048,
+      "hb": 207618048,
+      "sram_read": 42917888,
+      "sram_write": 9756672,
+      "vector": 1441792,
+      "link": 2826240
+    }
+  },
+  {
+    "batch": 8,
+    "tp": 16,
+    "down_partition": "column",
+    "macro_us": 22.90575,
+    "fine_fixed_us": 21.423088,
+    "fine_prefetch_us": 17.698,
+    "reservation_delta_us": 1.4826620000000013,
+    "prefetch_delta_us": 3.7250879999999995,
+    "common_activity": {
+      "mac": 1107296256,
+      "dram": 207618048,
+      "hb": 207618048,
+      "sram_read": 57245696,
+      "sram_write": 20201472,
+      "vector": 3407872,
+      "link": 1474560
+    }
+  },
+  {
+    "batch": 32,
+    "tp": 4,
+    "down_partition": "row",
+    "macro_us": 68.205,
+    "fine_fixed_us": 64.0904840000001,
+    "fine_prefetch_us": 63.00108400000001,
+    "reservation_delta_us": 4.114515999999895,
+    "prefetch_delta_us": 1.08940000000009,
+    "common_activity": {
+      "mac": 4429185024,
+      "dram": 259522560,
+      "hb": 259522560,
+      "sram_read": 169574400,
+      "sram_write": 34701312,
+      "vector": 5767168,
+      "link": 6979584
+    }
+  },
+  {
+    "batch": 32,
+    "tp": 4,
+    "down_partition": "column",
+    "macro_us": 71.41250000000001,
+    "fine_fixed_us": 67.2844240000002,
+    "fine_prefetch_us": 64.492298,
+    "reservation_delta_us": 4.128075999999808,
+    "prefetch_delta_us": 2.792126000000195,
+    "common_activity": {
+      "mac": 4429185024,
+      "dram": 259522560,
+      "hb": 259522560,
+      "sram_read": 180748288,
+      "sram_write": 43057152,
+      "vector": 7340032,
+      "link": 5898240
+    }
+  },
+  {
+    "batch": 32,
+    "tp": 16,
+    "down_partition": "row",
+    "macro_us": 65.0365,
+    "fine_fixed_us": 60.922662000000074,
+    "fine_prefetch_us": 60.109,
+    "reservation_delta_us": 4.11383799999993,
+    "prefetch_delta_us": 0.8136620000000718,
+    "common_activity": {
+      "mac": 4429185024,
+      "dram": 259522560,
+      "hb": 259522560,
+      "sram_read": 169574400,
+      "sram_write": 39026688,
+      "vector": 5767168,
+      "link": 11304960
+    }
+  },
+  {
+    "batch": 32,
+    "tp": 16,
+    "down_partition": "column",
+    "macro_us": 76.74575,
+    "fine_fixed_us": 72.59251000000019,
+    "fine_prefetch_us": 67.955,
+    "reservation_delta_us": 4.153239999999812,
+    "prefetch_delta_us": 4.637510000000191,
+    "common_activity": {
+      "mac": 4429185024,
+      "dram": 259522560,
+      "hb": 259522560,
+      "sram_read": 226885632,
+      "sram_write": 80805888,
+      "vector": 13631488,
+      "link": 5898240
+    }
+  }
+]

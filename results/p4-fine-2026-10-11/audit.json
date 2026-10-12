@@ -1,0 +1,144 @@
+{
+  "status": "PASS_ACCOUNTING_NOT_FULL_FIDELITY",
+  "source": "3e1557afe319cc8bb87f5d2a3f69380f4a36992b",
+  "performance_points": 48,
+  "numerical_comparisons": 48,
+  "runs": 24,
+  "exact_legacy_replays": [
+    {
+      "label": "b8-tp4-row-macro-none-baseline",
+      "old_label": "b8-tp4-row-s0-l0-broadcast_all-row_ready_128-none",
+      "fields": [
+        "ticks",
+        "activity",
+        "mac_flops",
+        "actual_dram_bytes",
+        "critical_chain_ticks",
+        "critical_gap_ticks"
+      ],
+      "status": "EXACT_P4_A_REPLAY"
+    },
+    {
+      "label": "b8-tp4-column-macro-none-baseline",
+      "old_label": "b8-tp4-column-s0-l0-broadcast_all-row_ready_128-none",
+      "fields": [
+        "ticks",
+        "activity",
+        "mac_flops",
+        "actual_dram_bytes",
+        "critical_chain_ticks",
+        "critical_gap_ticks"
+      ],
+      "status": "EXACT_P4_A_REPLAY"
+    },
+    {
+      "label": "b8-tp16-row-macro-none-baseline",
+      "old_label": "b8-tp16-row-s0-l0-broadcast_all-row_ready_128-none",
+      "fields": [
+        "ticks",
+        "activity",
+        "mac_flops",
+        "actual_dram_bytes",
+        "critical_chain_ticks",
+        "critical_gap_ticks"
+      ],
+      "status": "EXACT_P4_A_REPLAY"
+    },
+    {
+      "label": "b8-tp16-row-macro-none-infinite_noc",
+      "old_label": "b8-tp16-row-s0-l0-broadcast_all-row_ready_128-infinite_noc",
+      "fields": [
+        "ticks",
+        "activity",
+        "mac_flops",
+        "actual_dram_bytes",
+        "critical_chain_ticks",
+        "critical_gap_ticks"
+      ],
+      "status": "EXACT_P4_A_REPLAY"
+    },
+    {
+      "label": "b8-tp16-column-macro-none-baseline",
+      "old_label": "b8-tp16-column-s0-l0-broadcast_all-row_ready_128-none",
+      "fields": [
+        "ticks",
+        "activity",
+        "mac_flops",
+        "actual_dram_bytes",
+        "critical_chain_ticks",
+        "critical_gap_ticks"
+      ],
+      "status": "EXACT_P4_A_REPLAY"
+    },
+    {
+      "label": "b32-tp4-row-macro-none-baseline",
+      "old_label": "b32-tp4-row-s0-l0-broadcast_all-row_ready_128-none",
+      "fields": [
+        "ticks",
+        "activity",
+        "mac_flops",
+        "actual_dram_bytes",
+        "critical_chain_ticks",
+        "critical_gap_ticks"
+      ],
+      "status": "EXACT_P4_A_REPLAY"
+    },
+    {
+      "label": "b32-tp4-column-macro-none-baseline",
+      "old_label": "b32-tp4-column-s0-l0-broadcast_all-row_ready_128-none",
+      "fields": [
+        "ticks",
+        "activity",
+        "mac_flops",
+        "actual_dram_bytes",
+        "critical_chain_ticks",
+        "critical_gap_ticks"
+      ],
+      "status": "EXACT_P4_A_REPLAY"
+    },
+    {
+      "label": "b32-tp16-row-macro-none-baseline",
+      "old_label": "b32-tp16-row-s0-l0-broadcast_all-row_ready_128-none",
+      "fields": [
+        "ticks",
+        "activity",
+        "mac_flops",
+        "actual_dram_bytes",
+        "critical_chain_ticks",
+        "critical_gap_ticks"
+      ],
+      "status": "EXACT_P4_A_REPLAY"
+    },
+    {
+      "label": "b32-tp16-row-macro-none-infinite_noc",
+      "old_label": "b32-tp16-row-s0-l0-broadcast_all-row_ready_128-infinite_noc",
+      "fields": [
+        "ticks",
+        "activity",
+        "mac_flops",
+        "actual_dram_bytes",
+        "critical_chain_ticks",
+        "critical_gap_ticks"
+      ],
+      "status": "EXACT_P4_A_REPLAY"
+    },
+    {
+      "label": "b32-tp16-column-macro-none-baseline",
+      "old_label": "b32-tp16-column-s0-l0-broadcast_all-row_ready_128-none",
+      "fields": [
+        "ticks",
+        "activity",
+        "mac_flops",
+        "actual_dram_bytes",
+        "critical_chain_ticks",
+        "critical_gap_ticks"
+      ],
+      "status": "EXACT_P4_A_REPLAY"
+    }
+  ],
+  "independent_event_replays": 48,
+  "max_numerical_absolute_error": 4.6566128730773926e-09,
+  "max_numerical_relative_l2_error": 4.424793758062151e-07,
+  "scope": "One actual s0/l0 route, B8 subset of B32; finite accounting does not independently qualify fullMoE timing",
+  "report_compaction": "Per-physical-resource totals retained; unique virtual propagation-delay IDs omitted from compact summaries only. Full original events preserved; replay checks unchanged."
+}
