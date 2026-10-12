@@ -36,4 +36,6 @@ The [release](https://github.com/HaoningJiang-space/thermal_exploartion/releases
 
 Use `artifact-manifest.json` and `raw-manifests/` to verify every asset and inner entry. Each archive includes program JSON/TSV, numeric/transport/physical checks, all six event classes for available executions, native transaction commands/state, driver output, process logs and exits. Failed prototypes retain only the evidence actually produced; a zero process exit alone does not certify architecture accuracy.
 
+All five public assets (2,014,607,360B) were downloaded in full without authentication and their SHA256 matched the protected-scanned upload manifests and GitHub digests. See [public-verification.json](public-verification.json). Repeat with `python scripts/verify_moe_release.py --manifest results/p4-complete-moe-2026-10-12/artifact-manifest.json --output /tmp/moe-public-verification.json`.
+
 146 full regression tests plus the new packaging preservation test passed. Numerical matrices are reduced semantic controls (same true routing/probabilities, fixed FP32 K order, unchanged tolerances); timing dimensions remain2048/1408/5632. No smoke benchmark or full checkpoint numerical qualification is claimed.

@@ -13,7 +13,8 @@
       "protected_scan": "PASS_INCLUDING_DECODED_GZIP",
       "github_uploaded_digest_verified": true,
       "entry_manifest": "raw-manifests/p4-moe-retired-experts.json",
-      "entry_manifest_sha256": "466606c38466a5a741a12899a923c5d4dd32cdad34f6e2fbbd1489df211b504c"
+      "entry_manifest_sha256": "466606c38466a5a741a12899a923c5d4dd32cdad34f6e2fbbd1489df211b504c",
+      "anonymous_complete_download_sha256_verified": true
     },
     {
       "file": "p4-moe-retired-full.tar",
@@ -26,7 +27,8 @@
       "protected_scan": "PASS_INCLUDING_DECODED_GZIP",
       "github_uploaded_digest_verified": true,
       "entry_manifest": "raw-manifests/p4-moe-retired-full.json",
-      "entry_manifest_sha256": "ae35f430f3b18bfd9018b05c492795f6bd65d897d906a4ae1452432a2a0c36e3"
+      "entry_manifest_sha256": "ae35f430f3b18bfd9018b05c492795f6bd65d897d906a4ae1452432a2a0c36e3",
+      "anonymous_complete_download_sha256_verified": true
     },
     {
       "file": "p4-moe-fixed-experts.tar",
@@ -39,7 +41,8 @@
       "protected_scan": "PASS_INCLUDING_DECODED_GZIP",
       "github_uploaded_digest_verified": true,
       "entry_manifest": "raw-manifests/p4-moe-fixed-experts.json",
-      "entry_manifest_sha256": "df10be7464ea6fbc9b9462537ab0416ae9da8bd7e106be8856fca32443585270"
+      "entry_manifest_sha256": "df10be7464ea6fbc9b9462537ab0416ae9da8bd7e106be8856fca32443585270",
+      "anonymous_complete_download_sha256_verified": true
     },
     {
       "file": "p4-moe-fixed-full.tar",
@@ -52,7 +55,8 @@
       "protected_scan": "PASS_INCLUDING_DECODED_GZIP",
       "github_uploaded_digest_verified": true,
       "entry_manifest": "raw-manifests/p4-moe-fixed-full.json",
-      "entry_manifest_sha256": "b8d4ac30506184f26f0334002e317810498b2214625aefe4c1ef927be1c6ff6a"
+      "entry_manifest_sha256": "b8d4ac30506184f26f0334002e317810498b2214625aefe4c1ef927be1c6ff6a",
+      "anonymous_complete_download_sha256_verified": true
     },
     {
       "file": "p4-moe-retired-fifo-control.tar",
@@ -65,10 +69,12 @@
       "protected_scan": "PASS_INCLUDING_DECODED_GZIP",
       "github_uploaded_digest_verified": true,
       "entry_manifest": "raw-manifests/p4-moe-retired-fifo-control.json",
-      "entry_manifest_sha256": "7d4676f730b53eb9d817b6a3b5d4d0f7ddae42defdcf10298d4597cce13bb266"
+      "entry_manifest_sha256": "7d4676f730b53eb9d817b6a3b5d4d0f7ddae42defdcf10298d4597cce13bb266",
+      "anonymous_complete_download_sha256_verified": true
     }
   ],
   "total_bytes": 2014607360,
   "architecture_g3_g4_qualified": false,
-  "scope": "Preserves failed, retired, and corrected frontend evidence; no physical MAC/RF qualification"
+  "scope": "Preserves failed, retired, and corrected frontend evidence; no physical MAC/RF qualification",
+  "public_verification": "public-verification.json"
 }

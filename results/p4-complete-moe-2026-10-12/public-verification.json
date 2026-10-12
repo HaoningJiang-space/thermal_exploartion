@@ -1,0 +1,43 @@
+{
+  "release": "p4-moe-causality-audit-2026-10-12",
+  "status": "PASS_PUBLIC_RELEASE_AND_COMPLETE_ANONYMOUS_DOWNLOADS",
+  "authenticated": false,
+  "total_bytes": 2014607360,
+  "assets": [
+    {
+      "file": "p4-moe-retired-experts.tar",
+      "bytes": 581734400,
+      "sha256": "ce977f2714815e75df5a20798578ccf3133d8e213b55c974c7ee1553b33b0708",
+      "status": "PASS_ANONYMOUS_COMPLETE_DOWNLOAD_SHA256",
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-moe-causality-audit-2026-10-12/p4-moe-retired-experts.tar"
+    },
+    {
+      "file": "p4-moe-retired-full.tar",
+      "bytes": 554956800,
+      "sha256": "33a257e45475996245c8d7aabbd1ed6dca597696aa27dc2b85abc45de3792911",
+      "status": "PASS_ANONYMOUS_COMPLETE_DOWNLOAD_SHA256",
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-moe-causality-audit-2026-10-12/p4-moe-retired-full.tar"
+    },
+    {
+      "file": "p4-moe-fixed-experts.tar",
+      "bytes": 278446080,
+      "sha256": "41a51abb70e1e65554e48d958433ed2a8dc93047b2b53392c3c50ebcc31411dd",
+      "status": "PASS_ANONYMOUS_COMPLETE_DOWNLOAD_SHA256",
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-moe-causality-audit-2026-10-12/p4-moe-fixed-experts.tar"
+    },
+    {
+      "file": "p4-moe-fixed-full.tar",
+      "bytes": 355205120,
+      "sha256": "53ff18cfe9c7ff2ea3ea27927b05b12836a307a526e9f506be4401518fbb4d19",
+      "status": "PASS_ANONYMOUS_COMPLETE_DOWNLOAD_SHA256",
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-moe-causality-audit-2026-10-12/p4-moe-fixed-full.tar"
+    },
+    {
+      "file": "p4-moe-retired-fifo-control.tar",
+      "bytes": 244264960,
+      "sha256": "1750f128a198a52267d868b3325e1b80f02a9d10c4aa00e0708695ab96a6ade2",
+      "status": "PASS_ANONYMOUS_COMPLETE_DOWNLOAD_SHA256",
+      "url": "https://github.com/HaoningJiang-space/thermal_exploartion/releases/download/p4-moe-causality-audit-2026-10-12/p4-moe-retired-fifo-control.tar"
+    }
+  ]
+}

@@ -82,3 +82,4 @@ Competition中Expert34的16,896条RD命令有640条（3.7879%）发生于Expert1
 随后才恢复原冻结s0/l0的8点及s32/l7、s127/l23的16点G3/G4矩阵；这些仍不是新Prompt盲测。现在不运行link/flight Oracle，不进入P4-C或硬件设计。
 
 全部修复和退役原始记录发布于 [本轮release](https://github.com/HaoningJiang-space/thermal_exploartion/releases/tag/p4-moe-causality-audit-2026-10-12)，资产与逐entry原始/打包SHA256见 [artifact-manifest.json](artifact-manifest.json)。复现方式见 [reproduce.md](reproduce.md)，合同见 [p4_complete_moe_contract.md](../../docs/p4_complete_moe_contract.md)。
+五个资产总计2,014,607,360B；原始压缩及解压内容扫描通过，匿名完整下载SHA256全部一致，见 [public-verification.json](public-verification.json)。
