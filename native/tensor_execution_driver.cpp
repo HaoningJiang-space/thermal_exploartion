@@ -87,6 +87,15 @@ int main(int argc,char** argv){try {
  };
  auto inputs=read_trees("inputs");auto reductions=read_trees("reductions");
  std::vector<std::array<ReduceNode,16>> rn(reductions.size());
+ std::vector<std::array<int,16>> local_remaining(reductions.size());
+ for(auto& g:reductions)for(int tile=0;tile<16;tile++)if(g.mask&(1<<tile)){
+  long long lo=1LL*g.id*pbytes,hi=lo+g.bytes,coverage=0;
+  for(auto& t:tasks)if(t.tile==tile&&t.final){
+   long long a=1LL*t.mstart*batch*4,b=1LL*(t.mstart+t.mcount)*batch*4;
+   if(a<hi&&b>lo){local_remaining[g.id][tile]++;coverage+=std::min(b,hi)-std::max(a,lo);}
+  }
+  if(coverage!=g.bytes)throw std::runtime_error("Incomplete output packet coverage");
+ }
  std::array<std::set<int>,16> x_pending,out_pending,vec_ready;
  std::array<int,16> vrunning,mac_running;vrunning.fill(-1);mac_running.fill(-1);
  std::array<long long,16> mac_until{};std::array<int,16> mac_rleft{},mac_wleft{},fifo_rleft{};
@@ -176,7 +185,9 @@ int main(int argc,char** argv){try {
    for(int rid:t.requests){auto& r=reads[rid];if(r.hb_done<0||--r.remaining<0)throw std::runtime_error("Weight use");
     r.last_use=clk;if(!r.remaining){wused[tile]-=1024;r.allocated=false;}}
    admitted[tile].erase(id);mac_running[tile]=-1;
-   if(t.final)for(auto& g:reductions)if(g.row>=t.mstart&&g.row<t.mstart+t.mcount&&(g.mask&(1<<tile))){
+   if(t.final)for(auto& g:reductions)if(1LL*g.id*pbytes<1LL*(t.mstart+t.mcount)*batch*4&&1LL*g.id*pbytes+g.bytes>1LL*t.mstart*batch*4&&(g.mask&(1<<tile))){
+    if(--local_remaining[g.id][tile]<0)throw std::runtime_error("Repeated packet microtile completion");
+    if(local_remaining[g.id][tile])continue;
     auto& a=rn[g.id][tile];if(a.local)throw std::runtime_error("Duplicate output block");
     a.local=true;a.ready=clk;
     if(g.children[tile].empty()&&tile!=g.root){a.complete=true;a.finish=clk;release_output(g.id,tile);}

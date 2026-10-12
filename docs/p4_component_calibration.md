@@ -20,10 +20,16 @@ It is not a newly selected scheduling optimization. Native/Fluid continue
 sharing the C++ frontend; the Python implementation is a separate executor
 but shares the tensor contract builder and physical assumptions. No silicon
 or independent device calibration is claimed.
+One Vector context is the selected reference's control assumption, not a
+proven universal hardware requirement. The old Graph's pipelined phases are
+a different execution contract; their mismatch alone does not prove that
+legal, explicitly paid multiple contexts are impossible or unnecessary.
 
 Memory uses the existing26.599TB/s guard and26-tick fixed return offset.
 No measured per-request/operand/network arrival time enters the predictor,
 and there is no empirical latency multiplier, fitting or parameter search.
+The detailed reference uses the existing fast-tier internal timing surrogate;
+this does not validate all memory tiers or full-MoE refresh/dependency phases.
 
 Replay the16 archived M512/K1024-or2048/B1-or22 Native/Fluid comparisons.
 Targets remain absolute10% and Row/Column latency-ratio error5%, per case.
@@ -36,8 +42,18 @@ real Qwen routed Gate/Up M1408/K2048, batch1/22 (captured cold/reused counts),
 row/column and Native/Fluid. Use32B reduction packets and the largest legal
 row microtile no greater than32 rows (22 for1408/16=88). No padding, extra
 MACs, replicated weights, changed total SRAM, ports or memory domains.
-These are full projection shapes, not full MoE or independent routing prompts.
+These are full projection shapes under the standalone H2 canonical-input /
+canonical-output / BF16-cast contract, not the fused Gate/Up/SiLU protocol,
+full MoE or independent routing prompts.
 They are shape-transfer validation, not an independent blind holdout.
+
+Every result packet depends on all final MAC microtiles intersecting its
+complete flat FP32 byte interval. A packet can straddle two22-row blocks;
+matching only its starting row is invalid. The f4fb4b7 shape pilot used that
+shortcut and is retained as a retired contract control, even where final
+latency/byte counts still matched. Old M512 cases have aligned packets and
+remain valid references. Corrected C++/Python frontends and an independent
+byte-range checker must reject early packet consumption before qualification.
 
 G2 independently replays per-cycle port budgets, MAC/Vector exclusivity,
 readiness, FIFO/HB references, link serialization and all router-credit

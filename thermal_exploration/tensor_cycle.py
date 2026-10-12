@@ -8,6 +8,7 @@ No recorded arrival times or empirical latency factors are inputs.
 from collections import Counter,deque
 from heapq import heappush,heappop
 from math import ceil
+from .tensor_execution import reduction_tasks
 
 
 class Arrival:
@@ -23,6 +24,7 @@ def execute_tensor(model,max_ticks=2_000_000,record=True):
         raise ValueError('Qualification requires the finite streaming contract')
     if c['flit_bytes']!=32 or c['vc_depth_flits']!=8 or c['virtual_channels']!=2:
         raise ValueError('Changed finite flit contract')
+    if c['command_domains_per_tile']!=1:raise ValueError('Unsupported memory domain contract')
     fixed_rates={'sram_read_bytes_per_tick':256,'sram_write_bytes_per_tick':128,'vector_ops_per_tick':16,'hb_bytes_per_tile_tick':500,'fifo_bytes_per_tick':500,'link_serial_ticks':4,'link_latency_ticks':8}
     if any(c[k]!=v for k,v in fixed_rates.items()):raise ValueError('Unsupported physical rate change')
     local=[[] for _ in range(16)]
@@ -36,11 +38,13 @@ def execute_tensor(model,max_ticks=2_000_000,record=True):
         if root in g['targets']:xreceived[gid][root]=g['bytes'];xseen[gid][root]=set(range(g['bytes']//32));xlast[gid][root]=0
         if g['children'][root]:xp[root].add(gid)
     red=[[dict(local=False,slot=False,queued=False,complete=False,next_flit=0,finish=-1,start=-1,read=0,ops=0,write=0,reserved=0,received=[0]*16,seen={}) for _ in range(16)] for _ in reductions]
+    output_dependencies={(g['id'],tile):reduction_tasks(model,g,tile) for g in reductions for tile in g['producers']}
+    local_pending={key:set(ids) for key,ids in output_dependencies.items()}
     fifo=[[[deque() for _ in range(2)] for _ in range(5)] for _ in range(16)];incoming=[[[0]*2 for _ in range(5)] for _ in range(16)];link_until=[[0]*16 for _ in range(16)];arrivals=[]
     mac=[None]*16;vec=[None]*16;admitted=[set() for _ in range(16)];unsent=[set() for _ in range(16)];admit_index=[0]*16
     hb=[deque() for _ in range(16)];wused=[0]*16;rused=[0]*16;redused=[0]*16;fluid_until=[0.]*16;fluid_returns=[]
     whigh=[0]*16;rhigh=[0]*16;redhigh=[0]*16;activity=Counter();bytehops=Counter();counters=Counter();mac_done=roots_done=returned=accepted=0
-    port_records=[];noc_records=[];inject_records=[];vector_records=[];queue_records=[];lease_records=[];last_vector=0;clock=0
+    port_records=[];noc_records=[];inject_records=[];vector_records=[];queue_records=[];lease_records=[];sink_records=[];last_vector=0;clock=0
     def queue_change(tile,port,vc,delta):
         if record:queue_records.append(dict(tick=clock,tile=tile,port=port,vc=vc,delta=delta))
     def lease_change(tile,kind,delta):
@@ -75,6 +79,7 @@ def execute_tensor(model,max_ticks=2_000_000,record=True):
             if index in seen:raise ValueError('Repeated partial flit')
             seen.add(index);a['received'][child]+=32
             if ready(gid,tile):vr[tile].add(gid)
+        if record:sink_records.append(dict(kind=kind,group=gid,flit=index,child=child,tile=tile,tick=clock))
     def release_output(gid,tile):
         nonlocal roots_done
         a=red[gid][tile]
@@ -109,7 +114,9 @@ def execute_tensor(model,max_ticks=2_000_000,record=True):
             admitted[tile].remove(tid);mac[tile]=None
             if t['final']:
                 for g in reductions:
-                    if not (t['m_start']<=g['row']<t['m_start']+t['m_count'] and tile in g['producers']):continue
+                    if tid not in local_pending.get((g['id'],tile),set()):continue
+                    local_pending[g['id'],tile].remove(tid)
+                    if local_pending[g['id'],tile]:continue
                     gid=g['id'];a=red[gid][tile]
                     if a['local']:raise ValueError('Duplicate output block')
                     a['local']=True
@@ -223,4 +230,4 @@ def execute_tensor(model,max_ticks=2_000_000,record=True):
     else:raise ValueError('Incomplete finite execution')
     clock=max(clock,last_vector)
     if mac_done!=len(tasks) or roots_done!=len(reductions) or accepted!=len(requests) or returned!=accepted or activity['mac']!=c['mac_flops'] or activity['fifo_operand']!=c['dram_bytes'] or any(wused+rused+redused):raise ValueError('Incomplete work or unreleased lease')
-    return dict(ticks=clock,time_us=clock*.00025,activity=dict(activity),byte_hops=dict(bytehops),counters=dict(counters),weight_high=max(whigh),response_high=max(rhigh),reduce_high=max(redhigh),tasks=[dict(t,**task_state[t['id']]) for t in tasks],reads=[dict(r,**read_state[r['id']]) for r in requests],inputs=[dict(group=g['id'],tile=t,bytes=g['bytes'],last_tick=xlast[g['id']][t]) for g in inputs for t in g['targets']],ports=port_records,noc=noc_records,injections=inject_records,vectors=vector_records,queue_events=queue_records,lease_events=lease_records,validation='PASS_FINITE_COMPONENT',scope='Independent Python interpreter, same tensor contract and reference arbitration; fixed fluid memory surrogate; not full MoE or independent silicon validation')
+    return dict(ticks=clock,time_us=clock*.00025,activity=dict(activity),byte_hops=dict(bytehops),counters=dict(counters),weight_high=max(whigh),response_high=max(rhigh),reduce_high=max(redhigh),tasks=[dict(t,**task_state[t['id']]) for t in tasks],reads=[dict(r,**read_state[r['id']]) for r in requests],inputs=[dict(group=g['id'],tile=t,bytes=g['bytes'],last_tick=xlast[g['id']][t]) for g in inputs for t in g['targets']],ports=port_records,noc=noc_records,injections=inject_records,vectors=vector_records,sinks=sink_records,queue_events=queue_records,lease_events=lease_records,output_dependencies=[dict(group=k[0],tile=k[1],tasks=v) for k,v in output_dependencies.items()],validation='PASS_FINITE_COMPONENT',scope='Independent Python interpreter, same tensor contract and reference arbitration; fixed fluid memory surrogate; not full MoE or independent silicon validation')

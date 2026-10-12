@@ -6,6 +6,7 @@ transport and eager vs spread operand service remain explicit differences.
 from collections import Counter,defaultdict
 from math import ceil
 from .decode_graph import Graph,execute
+from .tensor_execution import reduction_tasks
 
 
 def tensor_graph(model):
@@ -41,9 +42,8 @@ def tensor_graph(model):
     for reduction in model['reductions']:
         producers={}
         for tile in reduction['producers']:
-            hits=[t for t in model['tasks'] if t['tile']==tile and t['final'] and t['m_start']<=reduction['row']<t['m_start']+t['m_count']]
-            if len(hits)!=1:raise ValueError('Tensor output binding')
-            producers[tile]=terminals[hits[0]['id']]
+            hits=reduction_tasks(model,reduction,tile)
+            producers[tile]=terminals[hits[0]] if len(hits)==1 else g.join([terminals[i] for i in hits],'packet_all_microtiles_ready')
         outputs.append(g.collective(reduction['root'],producers,reduction['bytes'],'tensor_reduce',preallocated_sources=True,root_cast=True,native_leaves=True))
     g.output=outputs;g.meta.update(fixed_sram_bytes=[v+c['metadata_reserve'] for v in c['static_sram_per_tile']],private_sram_budget_bytes=c['sram_per_tile'],buffer_caps={'weight_fifo':c['weight_buffer'],'return':c['response_buffer'],'output':c['reduce_buffer']})
     return g

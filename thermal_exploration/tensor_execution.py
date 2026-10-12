@@ -152,13 +152,22 @@ def build(settings,m=1024,n=16384,batch=32):
         row=start//(batch*4);root=row//(m//16);rpart=row//ml
         producers=[rpart*q+col for col in range(q)];children,parent=trees(root,producers)
         nodes=sorted(set(producers)|{root}|{a for a in range(16) if children[a]})
-        reductions.append(dict(id=gid,root=root,bytes=c['packet_bytes'],row=row,producers=producers,
+        reductions.append(dict(id=gid,root=root,bytes=c['packet_bytes'],row=row,start_byte=start,end_byte=start+c['packet_bytes'],producers=producers,
             children=children,parent=parent,nodes=nodes))
     c.update(tasks=len(tasks),requests=len(requests),dram_bytes=len(requests)*1024,
              allocated_weight_bytes=sum(ceil(x/4096)*4096 for x in allocated),layout=layout,order=settings['order'])
     if max(allocated)>2*2**30 or sum(t['flops'] for t in tasks)!=c['mac_flops']:
         raise ValueError('Capacity/work violation')
     return dict(contract=c,tasks=tasks,requests=requests,inputs=groups,reductions=reductions)
+
+
+def reduction_tasks(model,group,tile):
+    """Every final microtile touching a packet, including straddled rows."""
+    c=model['contract'];lo=group.get('start_byte',group['id']*c['packet_bytes']);hi=lo+group['bytes'];rowbytes=c['batch']*4
+    hits=[t['id'] for t in model['tasks'] if t['tile']==tile and t['final'] and t['m_start']*rowbytes<hi and (t['m_start']+t['m_count'])*rowbytes>lo]
+    coverage=sum(min(hi,(model['tasks'][i]['m_start']+model['tasks'][i]['m_count'])*rowbytes)-max(lo,model['tasks'][i]['m_start']*rowbytes) for i in hits)
+    if tile not in group['producers'] or coverage!=group['bytes']:raise ValueError('Incomplete packet output coverage')
+    return hits
 
 
 def write_contract(model,out):

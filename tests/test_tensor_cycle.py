@@ -1,5 +1,5 @@
 import unittest
-from thermal_exploration.tensor_execution import build,CASES
+from thermal_exploration.tensor_execution import build,CASES,reduction_tasks
 from thermal_exploration.tensor_cycle import execute_tensor
 
 class TensorCycleTests(unittest.TestCase):
@@ -20,11 +20,15 @@ class TensorCycleTests(unittest.TestCase):
   with self.assertRaisesRegex(ValueError,'physical rate'):execute_tensor(model)
   model=build(CASES['row_fifo_k'],512,1024,1);model['contract']['sram_per_tile']=1
   with self.assertRaisesRegex(ValueError,'Physical resource'):execute_tensor(model)
+  model=build(CASES['row_fifo_k'],512,1024,1);model['contract']['command_domains_per_tile']=2
+  with self.assertRaisesRegex(ValueError,'memory domain'):execute_tensor(model)
  def test_true_qwen_dimension_without_padding(self):
   model=build(CASES['row_fifo32'],1408,2048,1)
   self.assertEqual(model['contract']['m_block'],22);self.assertEqual(model['contract']['packet_bytes'],32)
   self.assertEqual(model['contract']['mac_flops'],2*1408*2048)
   self.assertEqual(model['contract']['dram_bytes'],2*1408*2048)
   self.assertTrue(all(t['m_count']==22 for t in model['tasks']))
+  g=next(g for g in model['reductions'] if g['start_byte']==64)
+  self.assertEqual(len(reduction_tasks(model,g,0)),2) # rows16..23 straddle22
 
 if __name__=='__main__':unittest.main()

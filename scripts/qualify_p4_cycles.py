@@ -27,6 +27,29 @@ def audit(result,contract):
   refs.update(task['requests']);activity['mac']+=task['flops']
  for r in reads.values():
   if refs[r['id']]!=r['refs'] or r['remaining']!=0 or r['allocated'] or not (0<=r['accepted']<=r['depart']<=r['hb_first']<r['hb_done']<=r['last_use']):raise ValueError('Weight identity/lifetime mismatch')
+ # Independently bind complete flat FP32 packet ranges, rather than sharing
+ # the predictor's row-start shortcut or packet-dependency helper.
+ finals=defaultdict(list)
+ for t in tasks.values():
+  if t['final']:finals[t['tile']].append(t)
+ local_ready={};bindings={};rowbytes=contract['batch']*4
+ for gid,lo in enumerate(range(0,contract['m']*rowbytes,contract['packet_bytes'])):
+  hi=lo+contract['packet_bytes'];part=(lo//rowbytes)//(contract['m']//contract['row_parts']);owners=range(part*contract['column_parts'],(part+1)*contract['column_parts'])
+  for tile in owners:
+   hits=[t for t in finals[tile] if t['m_start']*rowbytes<hi and (t['m_start']+t['m_count'])*rowbytes>lo]
+   coverage=sum(min(hi,(t['m_start']+t['m_count'])*rowbytes)-max(lo,t['m_start']*rowbytes) for t in hits)
+   if coverage!=contract['packet_bytes']:raise ValueError('Missing packet byte coverage')
+   bindings[gid,tile]=sorted(t['id'] for t in hits);local_ready[gid,tile]=max(t['finish'] for t in hits)
+ if 'output_dependencies' in result and {(b['group'],b['tile']):sorted(b['tasks']) for b in result['output_dependencies']}!=bindings:raise ValueError('Incomplete packet dependencies')
+ vectors={(v['group'],v['tile']):v for v in result['vectors']};sink_ready=defaultdict(int)
+ for s in result.get('sinks',[]):
+  if s['kind']==1:sink_ready[s['group'],s['tile']]=max(sink_ready[s['group'],s['tile']],s['tick'])
+ for key,v in vectors.items():
+  if v['start']<max(local_ready.get(key,0),sink_ready[key]):raise ValueError('Early output packet consumption')
+ for item in result['injections']:
+  if item['kind']!=1:continue
+  key=item['group'],item['tile'];ready=vectors[key]['finish'] if key in vectors else local_ready.get(key,0)
+  if item['tick']<ready:raise ValueError('Early output packet injection')
  for name,key in (('sram_read','read_bytes'),('sram_write','write_bytes'),('vector','vector_ops'),('fifo_operand','fifo_operand_bytes'),('fifo_ingress','fifo_ingress_bytes')):
   for row in result['ports']:
    limit={'read_bytes':256,'write_bytes':128,'vector_ops':16,'fifo_operand_bytes':500,'fifo_ingress_bytes':500}[key]
@@ -73,8 +96,8 @@ def main():
     replay=audit(result,c);trace={}
     if c['fluid_memory']:
      path=directory/native['name']
-     grids=(('tasks',result['tasks'],('id','tile','start','finish')),('inputs',result['inputs'],('group','tile','bytes','last_tick')),('reads',result['reads'],('id','tile','accepted','depart','hb_first','hb_done','last_use','refs')),('vector',result['vectors'],('group','tile','start','finish')),('inject',result['injections'],('kind','group','flit','tile','tick')),('noc',result['noc'],('kind','group','flit','source','target','bytes','start','finish')),('ports',result['ports'],tuple(result['ports'][0])))
-     for name,rows,keys in grids:trace[name]=equal_csv(path/('run-'+name+'.csv'),rows,keys,kind=name in ('inject','noc'))
+     grids=(('tasks',result['tasks'],('id','tile','start','finish')),('inputs',result['inputs'],('group','tile','bytes','last_tick')),('reads',result['reads'],('id','tile','accepted','depart','hb_first','hb_done','last_use','refs')),('vector',result['vectors'],('group','tile','start','finish')),('inject',result['injections'],('kind','group','flit','tile','tick')),('noc',result['noc'],('kind','group','flit','source','target','bytes','start','finish')),('sink',result['sinks'],('kind','group','flit','child','tile','tick')),('ports',result['ports'],tuple(result['ports'][0])))
+     for name,rows,keys in grids:trace[name]=equal_csv(path/('run-'+name+'.csv'),rows,keys,kind=name in ('inject','noc','sink'))
     path=a.output/(role+'-'+run['directory']+'-'+native['name']+'-cycle.json.gz')
     with gzip.open(path,'wt') as f:json.dump(dict(contract=c,result=result),f,separators=(',',':'))
     error=result['time_us']/native['time_us']-1

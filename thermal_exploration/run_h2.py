@@ -14,7 +14,7 @@ from . import hb_trace
 from .run import revision
 from .run_g4 import RAMULATOR_COMMIT, verify_upstream
 from .run_organization import check_commands
-from .tensor_execution import CASES, build, write_contract
+from .tensor_execution import CASES, build, write_contract, reduction_tasks
 
 
 def rows(path):
@@ -120,9 +120,8 @@ def validate(case, model, dram):
     local_ready={}
     for g in model['reductions']:
         for tile in g['producers']:
-            hits=[t for e,t in zip(model['tasks'],tasks) if e['tile']==tile and e['final'] and e['m_start']<=g['row']<e['m_start']+e['m_count']]
-            if len(hits)!=1:raise ValueError('Wrong local partial owner')
-            local_ready[g['id'],tile]=hits[0]['finish']
+            hits=reduction_tasks(model,g,tile)
+            local_ready[g['id'],tile]=max(tasks[i]['finish'] for i in hits)
         for tile in g['nodes']:
             count=len(g['children'][tile])+int(tile in g['producers'])
             if g['children'][tile] or tile==g['root']:
@@ -190,7 +189,7 @@ def validate(case, model, dram):
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--ramulator-root',required=True);ap.add_argument('--output',required=True)
-    ap.add_argument('--shape',nargs=3,type=int,metavar=('M','N','BATCH'));ap.add_argument('--smoke',action='store_true');ap.add_argument('--cases',nargs='+',choices=CASES,default=list(CASES))
+    ap.add_argument('--shape',nargs=3,type=int,metavar=('M','N','BATCH'));ap.add_argument('--smoke',action='store_true');ap.add_argument('--cases',nargs='+',choices=CASES,default=[name for name in CASES if name not in ('row_fifo32','column_fifo32')])
     ap.add_argument('--compute-tflops',type=float,default=128);ap.add_argument('--sram-mib',type=float,default=36)
     ap.add_argument('--fluid-memory',action='store_true');ap.add_argument('--fluid-service',type=float,default=26.599);a=ap.parse_args()
     root=Path(a.ramulator_root).resolve();out=Path(a.output).resolve()
