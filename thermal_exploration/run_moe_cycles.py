@@ -35,7 +35,7 @@ def main():
     small=dict(c,hidden_size=512,moe_intermediate_size=256,shared_expert_intermediate_size=512)
     sl=resident_layout(small,capacity(small,a.batch,512),'B3_3d_placement',r['training_expected_activations'],a.tp)
     sp=program(small,sl,a.layer,routes,a.down,grain,selected,shared)
-    numerical=[compare(small,routes,probs,sp['meta'],dtype) for dtype in ('FP32','BF16')];(out/'numerical.json').write_text(json.dumps(numerical,indent=2)+'\n');del sp
+    numerical=[compare(small,routes,probs,sp['meta'],dtype,accumulation='fixed_k') for dtype in ('FP32','BF16')];(out/'numerical.json').write_text(json.dumps(numerical,indent=2)+'\n');del sp
     results=[]
     for backend in ('native','fluid'):
         case=out/backend;case.mkdir();dram,cfg=config(root,case,refresh=True);(case/'config.json').write_text(json.dumps(cfg,indent=2)+'\n')

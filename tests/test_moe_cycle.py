@@ -38,4 +38,9 @@ class FullMoECycleTests(unittest.TestCase):
   self.assertEqual(compare(self.c,self.routes,[[.3,.7]],p['meta'],'BF16')['status'],'PASS_NUMERICAL')
   self.assertEqual(len(set(r['address'] for r in p['request_identity'])),len(p['request_identity']))
   with self.assertRaisesRegex(ValueError,'absent'):program(self.c,self.layout,0,self.routes,selected=[7])
+ def test_fixed_fp32_order_with_grouped_bf16_tokens(self):
+  routes=[[0,4]]*8;l=resident_layout(self.c,capacity(self.c,8,512),'B3_3d_placement',tp=4)
+  p=program(self.c,l,0,routes,down='column')
+  r=compare(self.c,routes,[[.3,.7]]*8,p['meta'],'BF16',accumulation='fixed_k')
+  self.assertEqual(r['tolerance'],dict(rtol=2e-4,atol=2e-6));self.assertEqual(r['accumulation'],'fixed_k')
 if __name__=='__main__':unittest.main()

@@ -50,9 +50,10 @@ def check_ledger(c,routes,meta):
             if cursor!=width:raise ValueError('Numerical shard coverage missing or duplicated')
 
 
-def compare(c,routes,probabilities,meta,dtype='FP32',seed=20261011):
+def compare(c,routes,probabilities,meta,dtype='FP32',seed=20261011,accumulation='blas'):
     check_ledger(c,routes,meta)
     if dtype not in ('FP32','BF16'):raise ValueError('Unknown numerical precision')
+    if accumulation not in ('blas','fixed_k'):raise ValueError('Unknown numerical accumulation contract')
     q=bf16 if dtype=='BF16' else lambda x:np.asarray(x,np.float32)
     rng=np.random.default_rng(seed);b=len(routes);d=c['hidden_size'];h=c['moe_intermediate_size'];hs=c['shared_expert_intermediate_size']
     x=q(rng.normal(0,.2,(b,d)));prob=q(probabilities)
@@ -64,29 +65,33 @@ def compare(c,routes,probabilities,meta,dtype='FP32',seed=20261011):
     shared_router=q(rng.normal(0,.04,(d,)))
     shared_prob=q(1/(1+np.exp(-(x@shared_router))))
     def gated(g,u):return q((g/(1+np.exp(-g)))*u)
+    def linear(x,w):
+        # Freeze FP32 contraction order across token GEMV and grouped GEMM.
+        # BLAS remains the exact legacy default; no tolerance is relaxed.
+        return np.einsum('bk,mk->bm',np.atleast_2d(x),w,dtype=np.float32,optimize=False) if accumulation=='fixed_k' else np.atleast_2d(x)@w.T
     reference=np.zeros((b,d),np.float32)
     for token,row in enumerate(routes):
         for slot,e in enumerate(row+['shared']):
             if e not in weights:continue
             wg,wu,wd=weights[e]
-            hidden=gated(wg@x[token],wu@x[token])
+            hidden=gated(linear(x[token],wg)[0],linear(x[token],wu)[0]) if accumulation=='fixed_k' else gated(wg@x[token],wu@x[token])
             scale=shared_prob[token] if e=='shared' else prob[token,slot]
-            reference[token]+=scale*(wd@hidden)
+            reference[token]+=scale*(linear(hidden,wd)[0] if accumulation=='fixed_k' else wd@hidden)
     hidden={e:np.zeros((b,hs if e=='shared' else h),np.float32) for e in weights}
     for rec in meta['semantic_ledger']:
         if rec['kind']!='gate_up':continue
         e=rec['expert'];tokens=rec['tokens'];lo,hi=rec['intermediate'];wg,wu,_=weights[e]
-        hidden[e][np.ix_(tokens,range(lo,hi))]=gated(x[tokens]@wg[lo:hi].T,x[tokens]@wu[lo:hi].T)
+        hidden[e][np.ix_(tokens,range(lo,hi))]=gated(linear(x[tokens],wg[lo:hi]),linear(x[tokens],wu[lo:hi]))
     local=np.zeros((16,b,d),np.float32)
     for rec in meta['semantic_ledger']:
         if rec['kind']!='down':continue
         e=rec['expert'];tokens=rec['tokens'];lo,hi=rec['intermediate'];first,last=rec['rows']
-        partial=hidden[e][tokens,lo:hi]@weights[e][2][first:last,lo:hi].T
+        partial=linear(hidden[e][tokens,lo:hi],weights[e][2][first:last,lo:hi])
         scales=shared_prob[tokens] if e=='shared' else np.array([prob[t,slot] for t,slot in zip(tokens,rec['routing_slots'])],np.float32)
         local[rec['tile']][np.ix_(tokens,range(first,last))]+=partial*scales[:,None]
     candidate=np.sum(local,axis=0,dtype=np.float32)
     np.testing.assert_allclose(candidate,reference,rtol=2e-4,atol=2e-6)
-    return dict(status='PASS_NUMERICAL',dtype=dtype,seed=seed,shape=dict(batch=b,hidden=d,intermediate=h,shared=hs),
+    return dict(status='PASS_NUMERICAL',dtype=dtype,seed=seed,accumulation=accumulation,shape=dict(batch=b,hidden=d,intermediate=h,shared=hs),
         max_absolute_error=float(np.max(np.abs(candidate-reference))),relative_l2_error=float(np.linalg.norm(candidate-reference)/max(np.linalg.norm(reference),1e-30)),
         tolerance=dict(rtol=2e-4,atol=2e-6),captured_routing_probabilities=True,
         scope='Deterministic small tensors; graph shard/token/weight-slot semantics, FP32 accumulation and BF16 storage; not checkpoint numerical inference or performance')

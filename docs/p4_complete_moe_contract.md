@@ -33,6 +33,7 @@ Private SRAM、8×32KiB weight、64×1024B response、descriptor和output credit
 ## 验收与失败处理
 
 G1：完整FP32/BF16小张量数值语义（非性能/非checkpoint），真实形状的MAC、weight、token、routing slot、Gate/Up/Down覆盖闭合。
+数值验证固定FP32 K维累加顺序（非BLAS grouped GEMM的库相关顺序），以便Gate的GEMV/GEMM在BF16 gated-state舍入边界具有同一合同；容差仍为rtol2e-4/atol2e-6，不拟合或放宽。旧模式保持BLAS默认。首轮f0ee803 pilot的Reused/Competition在此合同差异处失败，全部原始失败记录保留，不混入新资格。
 G2：每tick端口、每个MAC/Vector Context、packet依赖、weight/response/output/private/router reserve/release独立重放。
 G3：完整MoE Native逐点绝对时间误差≤10%；Fluid五类完整节点/request/port/lease/router traces逐行比较。Native额外command/state/tag和tier-deadline检查。
 G4：每cohort同路由的TP4/TP16和Row/Column逐点比值误差≤5%，核对排序。不能靠均值掩盖失败。
